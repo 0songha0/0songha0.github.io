@@ -1,5 +1,5 @@
 ---
-title: "하영👋🏻"
+title: "개발자 하영👋🏻"
 permalink: /about/
 layout: single
 comments: false
@@ -25,12 +25,12 @@ comments: false
             <meta itemprop="email" content="suj6757@gmail.com" />
             <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">  suj6757@naver.com</span>
           </a>
-        </li> -->
+        </li>
         <li>
           <a href="tel:010-7752-5233">
             <meta itemprop="tel" content="010-7752-5233" />
             <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">  010-7752-5233</span>
           </a>
-        </li>
+        </li> -->
     </ul>
   </div>
