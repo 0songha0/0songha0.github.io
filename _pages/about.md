@@ -1,5 +1,5 @@
 ---
-title: "Hi all! I'm songha0👋🏻"
+title: "하영👋🏻"
 permalink: /about/
 layout: single
 comments: false
@@ -12,7 +12,7 @@ comments: false
 
 <div style="border-left: 2px solid rgba(199, 198, 198, 0.7); margin: 0.5em 0 0 0.5em; padding-left: 1.5em; font-weight: 500;">
     <ul class="author__urls social-icons">
-        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+        <!-- <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
           <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">  Seoul, Korea</span>
         </li>
         <li>
@@ -23,7 +23,13 @@ comments: false
         <li>
           <a href="mailto:suj6757@gmail.com">
             <meta itemprop="email" content="suj6757@gmail.com" />
-            <i class="fa-solid fa-phone" aria-hidden="true"></i><span class="label">  suj6757@naver.com</span>
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">  suj6757@naver.com</span>
+          </a>
+        </li> -->
+        <li>
+          <a href="tel:010-7752-5233">
+            <meta itemprop="tel" content="010-7752-5233" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">  010-7752-5233</span>
           </a>
         </li>
     </ul>
