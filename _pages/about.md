@@ -9,9 +9,15 @@ comments: false
     <img src="/assets/images/avthm.jpg" alt="about_meee" width="70%" min-width="700px" itemprop="image">
 </div> -->
 
-<object type="application/pdf" data="/assets/pdf/송하영_입사지원서.pdf#toolbar=0" width="100%" height="100%">
-    <embed type="application/pdf" data="/assets/pdf/송하영_입사지원서.pdf#toolbar=0" width="100%" height="100%"/>
-</object>
+<img src="assets/resume/image001.png"/>
+<img src="assets/resume/image002.png"/>
+<img src="assets/resume/image003.png"/>
+<img src="assets/resume/image004.png"/>
+<img src="assets/resume/image005.png"/>
+<img src="assets/resume/image006.png"/>
+<img src="assets/resume/image007.png"/>
+<img src="assets/resume/image008.png"/>
+
 
 <div style="border-left: 2px solid rgba(199, 198, 198, 0.7); margin: 0.5em 0 0 0.5em; padding-left: 1.5em; font-weight: 500;">
     <ul class="author__urls social-icons">
