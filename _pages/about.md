@@ -9,8 +9,8 @@ comments: false
     <img src="/assets/images/avthm.jpg" alt="about_meee" width="70%" min-width="700px" itemprop="image">
 </div> -->
 
-<object type="application/pdf" data="/assets/pdf/송하영_입사지원서.pdf#toolbar=0" width="100%" height="500">
-    <embed type="application/pdf" data="/assets/pdf/송하영_입사지원서.pdf#toolbar=0" width="100%" height="500"/>
+<object type="application/pdf" data="/assets/pdf/송하영_입사지원서.pdf#toolbar=0" width="100%" height="100%">
+    <embed type="application/pdf" data="/assets/pdf/송하영_입사지원서.pdf#toolbar=0" width="100%" height="100%"/>
 </object>
 
 <div style="border-left: 2px solid rgba(199, 198, 198, 0.7); margin: 0.5em 0 0 0.5em; padding-left: 1.5em; font-weight: 500;">
