@@ -1,8 +1,8 @@
-## 🦥 `choiiis Devlog`
+## 🦥 `songha0 Devlog`
 
 📎 **블로그 바로 가기**
 
-[`https://choiiis.github.io/`](https://choiiis.github.io/)
+[`https://songha0.github.io/`](https://songha0.github.io/)
 
 ---
 
@@ -11,7 +11,7 @@
 fork 하시는 분들이 점점 많아져서, 템플릿 형식으로 변경해서 새로 repo를 생성했습니다!  
 좀더 편하게 수정해서 사용하실 수 있게 만들어놓았으니 이 repo 말고 아래 링크를 클릭하셔서 해당 repo를 fork 해주세요!
 
-[https://github.com/choiiis/minimal-mistakes-choiiis-customized](https://github.com/choiiis/minimal-mistakes-choiiis-customized)
+[https://github.com/songha0/minimal-mistakes-songha0-customized](https://github.com/songha0/minimal-mistakes-songha0-customized)
 
 README.md에 세팅 관련 내용도 함께 올려놓았으니 참고하세용
 
@@ -19,7 +19,7 @@ README.md에 세팅 관련 내용도 함께 올려놓았으니 참고하세용
 
 ### fork 주의사항 ★
 
-[minimal-mistakes-choiiis-customized](minimal-mistakes-choiiis-customized) repo를 fork 하시는 것을 매우 권장합니다...... (제가 불편해요😂)
+[minimal-mistakes-songha0-customized](minimal-mistakes-songha0-customized) repo를 fork 하시는 것을 매우 권장합니다...... (제가 불편해요😂)
 
 하지만 꼭 이 repo를 fork 하시고 싶으시다면 **아래 사항들을 변경해주셔야 저의 analytics에 반영이 되지 않습니다!!!**  
 (제 블로그 구글 analytics에 다른 분들 게시물이 가끔 보이는데... 서로 민망하잖아요ㅎㅎ)
@@ -90,10 +90,10 @@ var script = document.createElement('script'); script.setAttribute('src',
 #### 개발 기록
 
 [VER1.0]
-![choiiis github blog main](/assets/images/posts_img/readme/blog-main-ver1.png)
+![songha0 github blog main](/assets/images/posts_img/readme/blog-main-ver1.png)
 
 [VER2.0]
-![choiiis github blog main](/assets/images/posts_img/readme/blog-main-ver2.png)
+![songha0 github blog main](/assets/images/posts_img/readme/blog-main-ver2.png)
 
 - logo 변경
 - 카테고리 디자인 변경
@@ -101,7 +101,7 @@ var script = document.createElement('script'); script.setAttribute('src',
 - 메인 컬러 변경
 
 [VER2.1]
-![choiiis github blog main](/assets/images/posts_img/readme/ver2_1_main.png)
+![songha0 github blog main](/assets/images/posts_img/readme/ver2_1_main.png)
 
 - 카테고리 정리
 - favicon 변경

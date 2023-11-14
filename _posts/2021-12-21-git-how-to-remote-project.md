@@ -61,7 +61,7 @@ $ git remote
 당연하다. 아직 연결한 원격 저장소가 없기 때문이다.
 
 ```bash
-$ git remote add test https://github.com/choiiis/balanchew.git
+$ git remote add test https://github.com/songha0/balanchew.git
 
 $ git remote
 test
@@ -80,14 +80,14 @@ test
 
 ```bash
 $ git remote -v
-test    https://github.com/choiiis/balanchew.git (fetch)
-test    https://github.com/choiiis/balanchew.git (push)
+test    https://github.com/songha0/balanchew.git (fetch)
+test    https://github.com/songha0/balanchew.git (push)
 ```
 
 위에서 test라는 이름의 원격 저장소로 설정한 balanchew 프로젝트와 연결된 것을 볼 수 있다.
 
 ```bash
-$ git remote add test2 https://github.com/choiiis/Selfit.git
+$ git remote add test2 https://github.com/songha0/Selfit.git
 ```
 
 디렉토리를 여러 개의 원격 저장소와 연결하는 것도 가능하다.<br>
@@ -99,10 +99,10 @@ test
 test2
 
 $ git remote -v
-test    https://github.com/choiiis/balanchew.git (fetch)
-test    https://github.com/choiiis/balanchew.git (push)
-test2   https://github.com/choiiis/Selfit.git (fetch)
-test2   https://github.com/choiiis/Selfit.git (push)
+test    https://github.com/songha0/balanchew.git (fetch)
+test    https://github.com/songha0/balanchew.git (push)
+test2   https://github.com/songha0/Selfit.git (fetch)
+test2   https://github.com/songha0/Selfit.git (push)
 ```
 
 `git remote`를 입력하면 2개의 원격 저장소에 연결된 것을 확인할 수 있고,<br>
@@ -138,8 +138,8 @@ $ git remote
 testtt
 
 $ git remote -v
-testtt  https://github.com/choiiis/balanchew.git (fetch)
-testtt  https://github.com/choiiis/balanchew.git (push)
+testtt  https://github.com/songha0/balanchew.git (fetch)
+testtt  https://github.com/songha0/balanchew.git (push)
 ```
 
 원격 저장소 이름을 변경하는 것도 쉽다.<br>

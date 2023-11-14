@@ -34,13 +34,13 @@ last_modified_at: 2022-07-27
 ![repo-capture](/assets/images/posts_img/github-blog-minimal-mistakes-customized-repo/repo-capture.png)
 
 블로그 템플릿 repo 업로드 완료!!!  
-[https://github.com/choiiis/minimal-mistakes-choiiis-customized](https://github.com/choiiis/minimal-mistakes-choiiis-customized)
+[https://github.com/songha0/minimal-mistakes-songha0-customized](https://github.com/songha0/minimal-mistakes-songha0-customized)
 
 생각보다 오래 걸리지 않았다. 너무 오래 전에 세팅한 것들이라 기억이 안나는 부분들도 있어서 구글링 해가면서 만들었다ㅎㅎ 이 블로그 테마를 사용하고 싶다면 위 링크의 repo를 fork 해서 사용하면 된다.
 
 ---
 
-## 블로그 repo(choiiis.github.io)와의 차이?
+## 블로그 repo(songha0.github.io)와의 차이?
 
 `_config.yml`
 
@@ -67,7 +67,7 @@ author:
   # email            : "youremailhere@xxxxxx.com"
 ```
 
-choiiis.github.io와 디자인은 동일하지만, 필요 없는 파일들을 삭제하고 세팅이 필요한 부분들은 초기화 하여 정리해놓았다!
+songha0.github.io와 디자인은 동일하지만, 필요 없는 파일들을 삭제하고 세팅이 필요한 부분들은 초기화 하여 정리해놓았다!
 
 - 개인 별로 세팅해야 하는 부분 초기화 (위 파일 예시)
 - 추가 혹은 변경이 필요한 부분들 README.md에 정리

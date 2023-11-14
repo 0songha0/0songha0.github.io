@@ -34,9 +34,9 @@ html과 body의 width와 height를 100%로 했기 때문에, body의 크기는 �
 
 <br>
 
-<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="XWVpedV" data-user="choiiis" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/choiiis/pen/XWVpedV">
-  ball</a> by choiiis (<a href="https://codepen.io/choiiis">@choiiis</a>)
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="XWVpedV" data-user="songha0" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/songha0/pen/XWVpedV">
+  ball</a> by songha0 (<a href="https://codepen.io/songha0">@songha0</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
@@ -51,9 +51,9 @@ Canvas를 이용하지 않아서 원형 요소를 div로 생성을 했기 떄문
 
 <br>
 
-<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="xxpgroE" data-user="choiiis" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/choiiis/pen/xxpgroE">
-  ball : not inside the browser</a> by choiiis (<a href="https://codepen.io/choiiis">@choiiis</a>)
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="xxpgroE" data-user="songha0" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/songha0/pen/xxpgroE">
+  ball : not inside the browser</a> by songha0 (<a href="https://codepen.io/songha0">@songha0</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
@@ -76,9 +76,9 @@ focusEl.style.top = getPos(focusEl.clientWidth)['h'] + "px"
 
 <br>
 
-<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="ZEvLJJW" data-user="choiiis" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/choiiis/pen/ZEvLJJW">
-  ball : inside the browser</a> by choiiis (<a href="https://codepen.io/choiiis">@choiiis</a>)
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="ZEvLJJW" data-user="songha0" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/songha0/pen/ZEvLJJW">
+  ball : inside the browser</a> by songha0 (<a href="https://codepen.io/songha0">@songha0</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>

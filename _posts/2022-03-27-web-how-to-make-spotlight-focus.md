@@ -42,9 +42,9 @@ last_modified_at: 2022-03-27
 
 <br>
 
-<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="XWVMzjy" data-editable="true" data-user="choiiis" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/choiiis/pen/XWVMzjy">
-  spotlight</a> by choiiis (<a href="https://codepen.io/choiiis">@choiiis</a>)
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="XWVMzjy" data-editable="true" data-user="songha0" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/songha0/pen/XWVMzjy">
+  spotlight</a> by songha0 (<a href="https://codepen.io/songha0">@songha0</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
@@ -75,9 +75,9 @@ document.addEventListener("mousemove", trackMouse = (event) => {
 
 <br>
 
-<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="XWVMEjy" data-user="choiiis" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/choiiis/pen/XWVMEjy">
-  theater spotlight</a> by choiiis (<a href="https://codepen.io/choiiis">@choiiis</a>)
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="XWVMEjy" data-user="songha0" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/songha0/pen/XWVMEjy">
+  theater spotlight</a> by songha0 (<a href="https://codepen.io/songha0">@songha0</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
@@ -143,9 +143,9 @@ zoomIn = setInterval(() => {
 
 <br>
 
-<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="rNpyqYG" data-editable="true" data-user="choiiis" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/choiiis/pen/rNpyqYG">
-  Theater Spotlight Follows the Mouse Pointer</a> by choiiis (<a href="https://codepen.io/choiiis">@choiiis</a>)
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="rNpyqYG" data-editable="true" data-user="songha0" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/songha0/pen/rNpyqYG">
+  Theater Spotlight Follows the Mouse Pointer</a> by songha0 (<a href="https://codepen.io/songha0">@songha0</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
@@ -199,8 +199,8 @@ document.addEventListener("click", clickFocus = (event) => {
 
 ## 전체 소스 코드
 
-GitHub에서 확인하기 : [https://github.com/choiiis/html-css-toy-projects/tree/main/spotlight-focus](https://github.com/choiiis/html-css-toy-projects/tree/main/spotlight-focus)
+GitHub에서 확인하기 : [https://github.com/songha0/html-css-toy-projects/tree/main/spotlight-focus](https://github.com/songha0/html-css-toy-projects/tree/main/spotlight-focus)
 
-CodePen에서 확인하기 : [https://codepen.io/choiiis/pen/rNpyqYG](https://codepen.io/choiiis/pen/rNpyqYG)
+CodePen에서 확인하기 : [https://codepen.io/songha0/pen/rNpyqYG](https://codepen.io/songha0/pen/rNpyqYG)
 
 ---

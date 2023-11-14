@@ -17,7 +17,7 @@ last_modified_at: 2021-12-24
 ---
 
 이전에 Local 변경 사항을 commit 하는 방법까지 다뤘다.  
-**Commit 방법을 모른다면 >> [[Git] local 변경 사항 commit하기](https://choiiis.github.io/git/how-to-commit-local-change/)**  
+**Commit 방법을 모른다면 >> [[Git] local 변경 사항 commit하기](https://songha0.github.io/git/how-to-commit-local-change/)**  
 
 이번 포스팅에서는 commit한 내역을 push하는 방법과,  
 commit과 push의 차이에 대해서 알아보자.
@@ -33,7 +33,7 @@ commit과 push의 차이에 대해서 알아보자.
 ```bash
 $ git log
 commit f6------17 (HEAD -> master)
-Author: choiiis <id@email>
+Author: songha0 <id@email>
 Date:   Wed Dec 22 22:29:36 2021 +0900
 
     Dec 21 post updated

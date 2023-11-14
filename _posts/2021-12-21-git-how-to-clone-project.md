@@ -20,7 +20,7 @@ GitHub에 있는 프로젝트를 로컬에 복제하고 싶다면 clone을 활�
 Git의 기본 중의 기본인 clone 방법에 대해서 알아보자.
 
 본 포스트는 Git Bash 기준으로 정리되어 있습니다. GitHub Desktop을 이용한 방법은 아래 링크로!<br>
-[GitHub Desktop으로 git 시작하기 - Repository 생성, clone, commit, push](https://choiiis.github.io/git/basics-of-clone-commit-push/)
+[GitHub Desktop으로 git 시작하기 - Repository 생성, clone, commit, push](https://songha0.github.io/git/basics-of-clone-commit-push/)
 
 ---
 
@@ -52,13 +52,13 @@ GitHub에 가서 프로젝트에 들어가보면 이런 화면이 나온다.
 경로가 맞는지 다시 한번 확인을 하고,
 
 ```bash
-$ git clone https://github.com/choiiis/balanchew.git
+$ git clone https://github.com/songha0/balanchew.git
 ```
 
 git clone "URL"을 터미널에 입력한다. Ctrl+V가 안된다면 마우스 오른쪽 버튼 > Paste로 붙여넣자.
 
 ```bash
-$ git clone https://github.com/choiiis/balanchew.git
+$ git clone https://github.com/songha0/balanchew.git
 Cloning into 'balanchew'...
 remote: Enumerating objects: 328, done.
 remote: Counting objects: 100% (56/56), done.

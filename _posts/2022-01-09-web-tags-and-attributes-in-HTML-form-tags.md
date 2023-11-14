@@ -175,10 +175,10 @@ file 업로드 컨트롤
 <br>
 
 ▶ **`<input type="hidden">`**<br>
-눈에 보이지 않는 정보를 서버쪽으로 보낼 때 사용. 서버로 choiiis라는 값 전송
+눈에 보이지 않는 정보를 서버쪽으로 보낼 때 사용. 서버로 songha0라는 값 전송
 
 ```html
-  <input type="hidden" name="hide" value="choiiis">
+  <input type="hidden" name="hide" value="songha0">
 ```
 
 ---

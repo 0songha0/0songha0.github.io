@@ -52,7 +52,7 @@ Markup Language는 마크로 둘러싸인 언어라는 뜻이다. 문서의 골�
   - **author** : 문서 작성자 정보
 
     ```html
-    <meta name="author" content="choiiis">
+    <meta name="author" content="songha0">
     ```
 
   - **keyword** : 문서의 키워드
@@ -97,8 +97,8 @@ Markup Language는 마크로 둘러싸인 언어라는 뜻이다. 문서의 골�
   - `title` : 마우스를 대면 나오는 타이틀
   
   ```html
-  <a href="https://choiiis.github.io/" 
-    target="_block" title="choiiis의 devlog">
+  <a href="https://songha0.github.io/" 
+    target="_block" title="songha0의 devlog">
   ```
 
 <br>
@@ -177,7 +177,7 @@ Markup Language는 마크로 둘러싸인 언어라는 뜻이다. 문서의 골�
   </form>
   ```
 
-  ✅ form 태그 추가 정리는 여기로 >> [[HTML] <form> 태그 정리](https://choiiis.github.io/web/basics-of-html-form-tags/)
+  ✅ form 태그 추가 정리는 여기로 >> [[HTML] <form> 태그 정리](https://songha0.github.io/web/basics-of-html-form-tags/)
 
 <br>
 
@@ -188,7 +188,7 @@ Markup Language는 마크로 둘러싸인 언어라는 뜻이다. 문서의 골�
   - 유튜브 동영상 추가하려면 '공유 - 퍼가기'에서 복사
 
   ```html
-  <iframe src="https://choiiis.github.io" 
+  <iframe src="https://songha0.github.io" 
     width="100%" height="auto"></iframe>
 
   <!-- 유튜브 주소 추가할 때-->
@@ -204,7 +204,7 @@ Markup Language는 마크로 둘러싸인 언어라는 뜻이다. 문서의 골�
   
   **[실행 결과]**
 
-  <iframe src="https://choiiis.github.io/" width="100%" height="auto"></iframe>
+  <iframe src="https://songha0.github.io/" width="100%" height="auto"></iframe>
   <br>
   <iframe width="560" height="315" src="https://www.youtube.com/embed/NAi690rUpMk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; >gyroscope; picture-in-picture" allowfullscreen></iframe>
 
