@@ -9,14 +9,14 @@ comments: false
     <img src="/assets/images/avthm.jpg" alt="about_meee" width="70%" min-width="700px" itemprop="image">
 </div> -->
 
-<img src="/assets/resume/image001.png" style="border: 1px solid black" />
-<img src="/assets/resume/image002.png" style="border: 1px solid black" />
-<img src="/assets/resume/image003.png" style="border: 1px solid black" />
-<img src="/assets/resume/image004.png" style="border: 1px solid black" />
-<img src="/assets/resume/image005.png" style="border: 1px solid black" />
-<img src="/assets/resume/image006.png" style="border: 1px solid black" />
-<img src="/assets/resume/image007.png" style="border: 1px solid black" />
-<img src="/assets/resume/image008.png" style="border: 1px solid black" />
+<img src="/assets/resume/image001.png" style="border: 1px solid black; pointer-events: none;" />
+<img src="/assets/resume/image002.png" style="border: 1px solid black" pointer-events: none;" />
+<img src="/assets/resume/image003.png" style="border: 1px solid black" pointer-events: none;" />
+<img src="/assets/resume/image004.png" style="border: 1px solid black" pointer-events: none;" />
+<img src="/assets/resume/image005.png" style="border: 1px solid black" pointer-events: none;" />
+<img src="/assets/resume/image006.png" style="border: 1px solid black" pointer-events: none;" />
+<img src="/assets/resume/image007.png" style="border: 1px solid black" pointer-events: none;" />
+<img src="/assets/resume/image008.png" style="border: 1px solid black" pointer-events: none;" />
 
 
 <div style="border-left: 2px solid rgba(199, 198, 198, 0.7); margin: 0.5em 0 0 0.5em; padding-left: 1.5em; font-weight: 500;">
