@@ -1,5 +1,5 @@
 ---
-title: "풀스택 웹 개발자 하영👋🏻"
+title: "풀스택 웹 개발자 하영 👋🏻"
 permalink: /about/
 layout: single
 comments: false
