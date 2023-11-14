@@ -5,8 +5,16 @@ layout: single
 comments: false
 ---
 
-<div>
+<!-- <div>
     <img src="/assets/images/avthm.jpg" alt="about_meee" width="70%" min-width="700px" itemprop="image">
+</div> -->
+
+<div class="pdf-container" data-file="https://raw.githubusercontent.com/songha0/songha0.github.io/dbb6d280d6e439993b045d5dfc0e78cb18f99d55/assets/pdf/%EC%86%A1%ED%95%98%EC%98%81_%EC%9E%85%EC%82%AC%EC%A7%80%EC%9B%90%EC%84%9C.pdf" data-bcmap-dir="//viewscreen.githubusercontent.com/static/pdf" data-pdf-worker-js-path="/static/assets/pdf.worker-524b2bd61dab9d5ac768.js">
+    <canvas class="pdf-page" data-page="0" height="2830" width="2000"></canvas>
+    <canvas class="pdf-page" data-page="1" height="2830" width="2000"></canvas>
+    <canvas class="pdf-page" data-page="2" height="2830" width="2000"></canvas>
+    <canvas class="pdf-page" data-page="3" height="2830" width="2000"></canvas>
+    <canvas class="pdf-page" data-page="4" height="2830" width="2000"></canvas>
 </div>
 
 
