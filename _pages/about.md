@@ -21,14 +21,9 @@ comments: false
           </a>
         </li>
         <li>
-          <a href="mailto:bemysongha0@gmail.com">
-            <meta itemprop="email" content="bemysongha0@gmail.com" />
-            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">  bemysongha0@gmail.com</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://www.instagram.com/songha0.dev/" itemprop="sameAs" rel="nofollow noopener noreferrer">
-            <i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">  https://www.instagram.com/songha0.dev/</span>
+          <a href="mailto:suj6757@gmail.com">
+            <meta itemprop="email" content="suj6757@gmail.com" />
+            <i class="fa-solid fa-phone" aria-hidden="true"></i><span class="label">  suj6757@naver.com</span>
           </a>
         </li>
     </ul>
