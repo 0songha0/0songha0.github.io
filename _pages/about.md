@@ -9,7 +9,7 @@ comments: false
     <img src="/assets/images/avthm.jpg" alt="about_meee" width="70%" min-width="700px" itemprop="image">
 </div> -->
 
-<embed src="/assets/pdf/송하영_입사지원서.pdf" width="500" height="375" type="application/pdf">
+<object data="/assets/pdf/송하영_입사지원서.pdf" type="application/pdf" width="100%" height="600px"/>
 
 
 <div style="border-left: 2px solid rgba(199, 198, 198, 0.7); margin: 0.5em 0 0 0.5em; padding-left: 1.5em; font-weight: 500;">
