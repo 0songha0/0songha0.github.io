@@ -23,7 +23,7 @@ name: "songha0"
 description: "songha0 DevLog"
 url: "https://songha0.github.io"
 baseurl: # the subpath of your site, e.g. "/blog"
-repository: "suj6757/songha0.github.io"
+repository: "songha0/songha0.github.io"
 teaser: #
 # logo                     : "/assets/images/meee.svg"
 #"/assets/images/monster.png"
