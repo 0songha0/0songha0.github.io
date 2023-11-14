@@ -31,7 +31,7 @@
     }
   }
 
-  @include breakpoint($xxx-large) {
+  @include breakpoint($xx-large) {
     width: calc(#{$left-sidebar-width} - 1em);
 
   }
@@ -95,7 +95,7 @@
     }
   }
 
-  @include breakpoint($xxx-large) {
+  @include breakpoint($xx-large) {
     width: $right-sidebar-width;
     margin-right: -1 * $right-sidebar-width;
   }
@@ -108,7 +108,7 @@
     margin-right: 0;
   }
 
-  @include breakpoint($xxx-large) {
+  @include breakpoint($xx-large) {
     margin-right: 0;
   }
 }
@@ -356,7 +356,7 @@
     }
   }
 
-  @include breakpoint($xxx-large) {
+  @include breakpoint($xx-large) {
     width: initial;
     margin-right: initial;
   }
