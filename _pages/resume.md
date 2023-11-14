@@ -5,9 +5,6 @@ layout: single
 comments: false
 ---
 <p style="margin-top: 0px;">
-    <img src="/assets/resume/송하영_입사지원서.jpg" style="border: 1px solid black; pointer-events: none;" />
-</p>
-<!-- <p style="margin-top: 0px;">
     <img src="/assets/resume/송하영_입사지원서_1.jpg" style="border: 1px solid black; pointer-events: none;" />
     <img src="/assets/resume/송하영_입사지원서_2.jpg" style="border: 1px solid black; pointer-events: none;" />
     <img src="/assets/resume/송하영_입사지원서_3.jpg" style="border: 1px solid black; pointer-events: none;" />
@@ -16,7 +13,7 @@ comments: false
     <img src="/assets/resume/송하영_입사지원서_6.jpg" style="border: 1px solid black; pointer-events: none;" />
     <img src="/assets/resume/송하영_입사지원서_7.jpg" style="border: 1px solid black; pointer-events: none;" />
     <img src="/assets/resume/송하영_입사지원서_8.jpg" style="border: 1px solid black; pointer-events: none;" />
-</p> -->
+</p>
 
 <div style="border-left: 2px solid rgba(199, 198, 198, 0.7); margin: 0.5em 0 0 0.5em; padding-left: 1.5em; font-weight: 500;">
     <ul class="author__urls social-icons">
