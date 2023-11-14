@@ -98,11 +98,11 @@ social:
 
 # Site Author
 author:
-  name: "choiiis"
+  name: "songha0"
   avatar: "/assets/images/meee.svg"
   #   bio              : "Hamppiness!"
   # location         : "Seoul, Korea"
-  # email            : "bemychoiiis@gmail.com"
+  # email            : "suj6757@gmail.com"
   links:
 #     - label: "Email"
 #       icon: "fas fa-fw fa-envelope-square"
@@ -118,10 +118,7 @@ author:
 #       # url: "https://facebook.com/"
 # - label: "GitHub"
 #   icon: "fab fa-fw fa-github"
-#   url: "https://github.com/choiiis"
-# - label: "Instagram"
-#   icon: "fab fa-fw fa-instagram"
-#   url: "https://www.instagram.com/choiiis.dev/"
+#   url: "https://github.com/songha0"
 
 # Site Footer
 footer:
