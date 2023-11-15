@@ -6,14 +6,17 @@ main:
   - title: "Resume"
     url: /resume/
 
+  - title: "Search"
+    url: /search/
+
 #  - title: "GitHub"
 #    url: https://github.com/songha0
 
   # - title: "Projects"
   #   url: /projects/
 
-  # - title: "Categories"
-  #   url: /categories/
+   - title: "Categories"
+     url: /categories/
 
 # sidebar navigation (categories)
 # 2022.02.15 sidebar update : simple ver.
