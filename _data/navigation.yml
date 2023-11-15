@@ -3,11 +3,11 @@ main:
 #  - title: "Home"
 #    url: https://songha0.github.io/
 
-  - title: "Resume"
-    url: /resume/
-
   - title: "Search"
     url: /search/
+    
+  - title: "Resume"
+    url: /resume/
 
 #  - title: "GitHub"
 #    url: https://github.com/songha0
