@@ -1,7 +1,7 @@
 ---
 title: "기획 / 설계"
 layout: category
-permalink: /categories/planning-design/
+permalink: /planning-design/
 author_profile: true
 taxonomy: 기획 / 설계
 sidebar:
