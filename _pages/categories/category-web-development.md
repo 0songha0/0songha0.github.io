@@ -1,7 +1,7 @@
 ---
 title: "Web 개발"
 layout: category
-permalink: /categories/web-development/
+permalink: /web-development/
 author_profile: true
 taxonomy: Web 개발
 sidebar:
