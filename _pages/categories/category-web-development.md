@@ -3,7 +3,7 @@ title: "Web 개발"
 layout: category
 permalink: /categories/web-development/
 author_profile: true
-taxonomy: Web-Development
+taxonomy: Web 개발
 sidebar:
   nav: "categories"
 ---
