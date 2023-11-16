@@ -21,19 +21,19 @@ main:
 # sidebar navigation (categories)
 # 2022.02.15 sidebar update : simple ver.
 categories:
-  - title: "기획/설계"
+  - title: "기획 / 설계"
     url: /categories/planning-design/
   - title: "Web 개발"
     url: /categories/web-development/
   - title: "App 개발"
     url: /categories/app-development/
-  - title: "운영/테스트"
+  - title: "운영 / 테스트"
     url: /categories/operational/
   - title: "운영체제"
     url: /categories/os/
-  - title: "네트워크/보안"
+  - title: "네트워크 / 보안"
     url: /categories/network-security/
-  - title: "파이썬/코테"
+  - title: "파이썬 / 코테"
     url: /categories/python/
   - title: "엘라스틱서치"
     url: /categories/elasticsearch/

@@ -1,5 +1,5 @@
 ---
-title: "파이썬"
+title: "파이썬 / 코테"
 layout: category
 permalink: /categories/python/
 author_profile: true
