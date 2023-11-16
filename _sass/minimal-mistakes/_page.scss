@@ -388,11 +388,12 @@ body {
   grid-column-gap: 2em;
   grid-template-columns: repeat(2, 1fr);
   margin: 1.414em 0;
-  padding: 0;
+  padding-left: 0;
   font-size: 1em;
   list-style: none;
   padding-top: 15px;
   padding-bottom: 50px;
+  padding-right: 10px;
 
   @include breakpoint($large) {
     grid-template-columns: repeat(3, 1fr);
