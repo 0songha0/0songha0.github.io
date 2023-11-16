@@ -331,6 +331,12 @@ body {
   }
 }
 
+.page__date {
+  strong {
+	  margin-right: 10px;
+  }
+}
+
 .page__taxonomy-item {
   display: inline-block;
   margin-right: 5px;
