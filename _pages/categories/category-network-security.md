@@ -1,5 +1,5 @@
 ---
-title: "Network-Security"
+title: "네트워크/보안"
 layout: category
 permalink: /categories/network-security/
 author_profile: true

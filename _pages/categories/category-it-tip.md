@@ -1,5 +1,5 @@
 ---
-title: "IT-Tip"
+title: "IT Tip"
 layout: category
 permalink: /categories/it-tip/
 author_profile: true
