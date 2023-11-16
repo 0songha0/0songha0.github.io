@@ -1,7 +1,7 @@
 ---
 title: "App 개발"
 layout: category
-permalink: /app-development/
+permalink: /categories/app-development/
 author_profile: true
 taxonomy: App 개발
 sidebar:

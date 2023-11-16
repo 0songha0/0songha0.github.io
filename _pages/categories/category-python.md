@@ -1,7 +1,7 @@
 ---
 title: "파이썬 / 코테"
 layout: category
-permalink: /python/
+permalink: /categories/python/
 author_profile: true
 taxonomy: 파이썬 / 코테
 sidebar:
