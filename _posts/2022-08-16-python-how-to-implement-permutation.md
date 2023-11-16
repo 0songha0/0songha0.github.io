@@ -14,8 +14,6 @@ toc_sticky: true
 
 date: 2022-08-16
 last_modified_at: 2022-08-16
-
-published : false
 ---
 
 Python으로 재귀함수를 이용해서 n개 원소의 순열을 구해보자.  
