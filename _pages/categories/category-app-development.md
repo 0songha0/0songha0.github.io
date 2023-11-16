@@ -1,5 +1,5 @@
 ---
-title: "앱 개발"
+title: "App 개발"
 layout: category
 permalink: /categories/app-development/
 author_profile: true

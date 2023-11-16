@@ -23,9 +23,9 @@ main:
 categories:
   - title: "기획/설계"
     url: /categories/planning-design/
-  - title: "웹 개발"
+  - title: "Web 개발"
     url: /categories/web-development/
-  - title: "앱 개발"
+  - title: "App 개발"
     url: /categories/app-development/
   - title: "운영/테스트"
     url: /categories/operational/
