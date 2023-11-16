@@ -21,17 +21,19 @@ main:
 # sidebar navigation (categories)
 # 2022.02.15 sidebar update : simple ver.
 categories:
-  - title: "C/C++"
-    url: /categories/c-cpp/
-  - title: "Python"
+  - title: "기획/설계"
+    url: /categories/planning-design/
+  - title: "앱/웹 개발"
+    url: /categories/web-development/
+  - title: "운영/테스트"
+    url: /categories/operational/
+  - title: "운영체제"
+    url: /categories/os/
+  - title: "네트워크/보안"
+    url: /categories/network-security/
+  - title: "파이썬/코테"
     url: /categories/python/
-  - title: "Algorithm"
-    url: /categories/algorithm/
-  - title: "Web"
-    url: /categories/web/
-  - title: "Git"
-    url: /categories/git/
-  - title: "GitHub Blog"
-    url: /categories/github-blog/
-  - title: "Machine Learning"
-    url: /categories/machine-learning/
+  - title: "엘라스틱서치"
+    url: /categories/elasticsearch/
+  - title: "IT Tip"
+    url: /categories/it-tip/

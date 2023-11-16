@@ -1,9 +1,9 @@
 ---
-title: "Web"
+title: "IT-Tip"
 layout: category
-permalink: /categories/web/
+permalink: /categories/it-tip/
 author_profile: true
-taxonomy: Web
+taxonomy: IT-Tip
 sidebar:
   nav: "categories"
 ---
