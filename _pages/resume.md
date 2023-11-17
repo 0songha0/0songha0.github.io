@@ -1,7 +1,7 @@
 ---
 title: "풀스택 웹 개발자 하영 👋🏻"
 permalink: /resume/
-layout: single
+layout: resume
 comments: false
 ---
 <p style="margin-top: 0px;">
