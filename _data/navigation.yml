@@ -22,20 +22,20 @@ main:
 # 2022.02.15 sidebar update : simple ver.
 categories:
   - title: "기획 / 설계"
-    url: /planning-design/
+    url: /plan-design
   - title: "Web 개발"
-    url: /web-development/
+    url: /web-dev
   - title: "App 개발"
-    url: /app-development/
+    url: /app-dev
   - title: "운영 / 테스트"
-    url: /operational/
+    url: /op
   - title: "운영체제"
-    url: /os/
+    url: /os
   - title: "네트워크 / 보안"
-    url: /network-security/
+    url: /network
   - title: "파이썬 / 코테"
-    url: /python/
+    url: /python
   - title: "엘라스틱서치"
-    url: /elasticsearch/
+    url: /elasticsearch
   - title: "IT Tip"
-    url: /it-tip/
+    url: /it-tip
