@@ -217,10 +217,14 @@ hr {
 
 /* lists */
 
+.page__content ul li {
+  font-weight: 500;
+  padding-top: 1em;
+}
+
 ul li,
 ol li {
   margin-bottom: 0.3em;
-  font-weight: 500;
 
   p {
     margin-top: 0em;
