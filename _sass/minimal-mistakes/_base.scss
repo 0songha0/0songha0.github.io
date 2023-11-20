@@ -217,7 +217,7 @@ hr {
 
 /* lists */
 
-.page__content ul li:not(.toc) {
+.page__content ul:not(.toc__menu) li {
   font-weight: 500;
   padding-top: 1em;
 }
