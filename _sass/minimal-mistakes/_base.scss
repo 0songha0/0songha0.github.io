@@ -103,7 +103,7 @@ abbr[data-original-title] {
 }
 
 /* mark */
-mark:has() {
+p:has(mark) {
   margin-top: 2em;
 }
 
