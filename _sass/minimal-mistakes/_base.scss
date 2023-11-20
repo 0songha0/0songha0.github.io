@@ -103,6 +103,10 @@ abbr[data-original-title] {
 }
 
 /* mark */
+mark.parent() {
+  margin-top: 2em;
+}
+
 mark {
   background-color: $mark-highlight-color;
   color: rgb(27, 26, 26);
