@@ -33,7 +33,7 @@ categories:
     url: /os
   - title: "네트워크 / 보안"
     url: /network
-  - title: "파이썬 / 코테"
+  - title: "파이썬 / 알고리즘"
     url: /python
   - title: "엘라스틱서치"
     url: /elasticsearch
