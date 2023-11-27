@@ -4,10 +4,10 @@ main:
 #    url: https://songha0.github.io/
 
   - title: "Search"
-    url: /search/
+    url: /search
     
   - title: "Resume"
-    url: /resume/
+    url: /resume
 
 #  - title: "GitHub"
 #    url: https://github.com/songha0
@@ -16,7 +16,7 @@ main:
   #   url: /projects/
 
   # - title: "Categories"
-  #   url: /categories/
+  #   url: /categories
 
 # sidebar navigation (categories)
 # 2022.02.15 sidebar update : simple ver.

@@ -238,7 +238,7 @@ whitelist:
 # category broken link : temporary commented out
 category_archive:
   type: liquid
-  path: /categories/
+  path: /categories
 # tag_archive:
 #   type: liquid
 #   path: /tags/
