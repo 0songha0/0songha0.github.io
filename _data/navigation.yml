@@ -27,10 +27,8 @@ categories:
     url: /web-dev
   - title: "앱 개발"
     url: /app-dev
-  - title: "운영 / 테스트"
+  - title: "운영 / 리눅스"
     url: /op
-  - title: "운영체제"
-    url: /os
   - title: "네트워크 / 보안"
     url: /network
   - title: "파이썬 / 알고리즘"
