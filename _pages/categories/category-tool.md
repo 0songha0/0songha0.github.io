@@ -1,9 +1,9 @@
 ---
-title: "유용한 툴"
+title: "윈도우 / 툴"
 layout: category
 permalink: /tool
 author_profile: true
-taxonomy: 유용한 툴
+taxonomy: 윈도우 / 툴
 sidebar:
   nav: "categories"
 ---
