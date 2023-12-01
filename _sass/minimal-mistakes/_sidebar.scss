@@ -81,8 +81,10 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: $right-sidebar-width-narrow;
-    margin-right: -1 * $right-sidebar-width-narrow;
+    /* width: $right-sidebar-width-narrow;
+    margin-right: -1 * $right-sidebar-width-narrow; */
+    width: 280px;
+    margin-right: -240px;
     padding-left: 5em;
     z-index: 10;
 
@@ -96,8 +98,10 @@
   }
 
   @include breakpoint($xx-large) {
-    /* width: $right-sidebar-width; */
-    margin-right: -1 * $right-sidebar-width;
+    /* width: $right-sidebar-width;
+    margin-right: -1 * $right-sidebar-width; */
+    width: 320px;
+    margin-right: -320px;
   }
 }
 
