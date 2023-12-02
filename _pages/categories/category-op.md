@@ -1,9 +1,9 @@
 ---
-title: "운영 / 리눅스"
+title: "리눅스 / 운영"
 layout: category
 permalink: /op
 author_profile: true
-taxonomy: 운영 / 리눅스
+taxonomy: 리눅스 / 운영
 sidebar:
   nav: "categories"
 ---
