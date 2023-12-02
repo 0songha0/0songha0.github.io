@@ -31,13 +31,13 @@ categories:
     url: /aws
   - title: "리눅스 / 운영"
     url: /op
-  - title: "네트워크 / 보안"
-    url: /network
-  - title: "파이썬 / 알고리즘"
-    url: /python
-  - title: "엘라스틱서치"
-    url: /elasticsearch
   - title: "윈도우 / 툴"
     url: /tool
+  - title: "파이썬 / 알고리즘"
+    url: /python
+  - title: "네트워크 / 보안"
+    url: /network
+  - title: "엘라스틱서치"
+    url: /elasticsearch
   - title: "IT Tip"
     url: /it-tip
