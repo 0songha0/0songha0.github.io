@@ -27,6 +27,8 @@ categories:
     url: /web-dev
   - title: "앱 개발"
     url: /app-dev
+  - title: "AWS"
+    url: /aws
   - title: "운영 / 리눅스"
     url: /op
   - title: "네트워크 / 보안"
