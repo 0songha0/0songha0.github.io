@@ -38,6 +38,6 @@ categories:
   - title: "네트워크 / 보안"
     url: /network
   - title: "엘라스틱서치"
-    url: /elasticsearch
+    url: /elk
   - title: "IT Tip"
     url: /it-tip
