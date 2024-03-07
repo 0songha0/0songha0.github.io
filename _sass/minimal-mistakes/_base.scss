@@ -114,6 +114,10 @@ mark {
   border-radius: 0.3em;
 }
 
+mark + br {
+  margin-top: 10px;
+}
+
 strong {
   font-weight: 600;
 }
