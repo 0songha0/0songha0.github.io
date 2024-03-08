@@ -121,7 +121,7 @@ p:has(mark) + div {
   margin-top: -0.7em;
 }
 
-p:has(mark) + ol {
+p:has(mark) + ol, ul {
   margin-top: -0.9em;
 }
 
