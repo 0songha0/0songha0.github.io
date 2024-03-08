@@ -129,6 +129,10 @@ p:has(mark) + ul {
   margin-top: -1.1em;
 }
 
+p:has(mark) + table {
+  margin-top: -0.5em;
+}
+
 strong {
   font-weight: 600;
 }
