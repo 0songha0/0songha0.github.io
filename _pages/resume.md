@@ -11,7 +11,6 @@ comments: false
     <img src="/assets/resume/송하영_입사지원서_4.jpg" style="border: 1px solid black; pointer-events: none;" />
     <img src="/assets/resume/송하영_입사지원서_5.jpg" style="border: 1px solid black; pointer-events: none;" />
     <img src="/assets/resume/송하영_입사지원서_6.jpg" style="border: 1px solid black; pointer-events: none;" />
-    <img src="/assets/resume/송하영_입사지원서_7.jpg" style="border: 1px solid black; pointer-events: none;" />
 </p>
 <div style="border-left: 2px solid rgba(199, 198, 198, 0.7); margin: 0.5em 0 0 0.5em; padding-left: 1.5em; font-weight: 500;">
     <ul class="author__urls social-icons">
