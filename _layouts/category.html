@@ -6,5 +6,12 @@ layout: home_archive
 
 {% assign entries_layout = page.entries_layout | default: 'list' %}
 <div class="entries-{{ entries_layout }}">
-  {% include posts-category.html taxonomy=page.taxonomy type=entries_layout %}
+  {% if paginator %}
+    {% for post in paginator.posts %}
+      {% include archive-single.html %}
+    {% endfor %}
+    {% include post_pagination.html %}
+  {% else %}
+    {% include posts-category.html taxonomy=page.taxonomy type=entries_layout %}
+  {% endif %}
 </div>
