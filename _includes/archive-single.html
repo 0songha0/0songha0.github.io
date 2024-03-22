@@ -29,18 +29,17 @@
   </article>
 </div>
 
-<!-- 페이징 네비게이션 -->
-<div class="pagination">
-  {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path }}" class="prev">이전 페이지</a>
-  {% else %}
-    <span class="prev">이전 페이지</span>
-  {% endif %}
-  {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path }}" class="next">다음 페이지</a>
-  {% else %}
-    <span class="next">다음 페이지</span>
-  {% endif %}
+{% if paginator %}
+  {% assign posts = paginator.posts %}
+{% else %}
+  {% assign posts = site.posts %}
+{% endif %}
+
+{% assign entries_layout = page.entries_layout | default: 'list' %}
+<div class="entries-{{ entries_layout }}">
+  {% for post in posts %}
+    {% include archive-single.html type=entries_layout %}
+  {% endfor %}
 </div>
 
 {% include paginator.html %}
