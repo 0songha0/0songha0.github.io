@@ -25,19 +25,19 @@ categories:
     url: /plan-design-db
   - title: "웹 개발"
     url: /web-dev
-  - title: "앱 개발"
-    url: /app-dev
   - title: "AWS"
     url: /aws
   - title: "리눅스 / 운영"
     url: /op
   - title: "윈도우 / Tool"
     url: /tool
+  - title: "엘라스틱서치"
+    url: /elk
   - title: "파이썬 / 알고리즘"
     url: /python
   - title: "네트워크 / 보안"
     url: /network
-  - title: "엘라스틱서치"
-    url: /elk
+  - title: "앱 개발"
+    url: /app-dev
   - title: "IT Tip"
     url: /it-tip
