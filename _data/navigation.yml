@@ -23,9 +23,9 @@ main:
 categories:
   - title: "기획 / 설계 / DB"
     url: /plan-design-db
-  - title: "웹 개발"
+  - title: "Web 개발"
     url: /web-dev
-  - title: "앱 개발"
+  - title: "App 개발"
     url: /app-dev
   - title: "AWS"
     url: /aws

@@ -3,7 +3,7 @@ title: "제목"
 excerpt: ""
 
 categories:
-  - 웹 개발
+  - Web 개발
 tags:
   - []
 
