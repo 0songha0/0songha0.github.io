@@ -1,7 +1,7 @@
 # main links
 main:
 #  - title: "Home"
-#    url: https://songha0.github.io/
+#    url: https://0songha0.github.io/
 
   - title: "Search"
     url: /search
@@ -10,7 +10,7 @@ main:
     url: /resume
 
 #  - title: "GitHub"
-#    url: https://github.com/songha0
+#    url: https://github.com/0songha0
 
   # - title: "Projects"
   #   url: /projects/
