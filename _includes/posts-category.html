@@ -1,6 +1,9 @@
-{%- for posts in site.categories[include.taxonomy] -%}
-  {%- unless posts.hidden -%}
+{% assign posts = site.categories[include.taxonomy] %}
+
+{%- for post in site.categories[include.taxonomy] -%}
+  {%- unless post.hidden -%}
     {% include archive-single.html %}
   {%- endunless -%}
 {%- endfor -%}
 
+{% include paginator.html %}
