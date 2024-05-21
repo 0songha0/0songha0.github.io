@@ -16,7 +16,9 @@ layout: archive
     {% for category in site.categories %}
       {% if category[1].size == i %}
         <li>
-          <a href="#{{ category[0] | slugify }}">
+          {% assign url_parts = category[1] | split: '/' %}
+          
+          <a href="/{{ url_parts[3] }}">
             <strong>{{ category[0] }}</strong> <span class="taxonomy__count">{{ i }}</span>
           </a>
         </li>
