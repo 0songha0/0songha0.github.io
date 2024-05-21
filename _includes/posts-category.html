@@ -1,5 +1,7 @@
 {% assign posts = site.categories[include.taxonomy] %}
 
+{{ paginator }}
+
 {% for post in posts %}
   {% include archive-single.html type=entries_layout %}
 {% endfor %}
