@@ -31,16 +31,14 @@ layout: archive
   {% for category in site.categories %}
     {% if category[1].size == i %}
       <section id="{{ category[0] | slugify | downcase }}" class="taxonomy__section">
-        {% assign url_parts = category[1] | split: '/' %}
-        <a href="/{{ url_parts[3] }}">
-          <h2 class="archive__subtitle">{{ category[0] }}</h2>
-        </a>
+        <h2 class="archive__subtitle">{{ category[0] }}</h2>
         <div class="entries-{{ entries_layout }}">
           {% for post in category.last limit:10 %}
             {% include archive-single.html type=entries_layout %}
           {% endfor %}
         </div>
-        <a href="#page-title" class="back-to-top">{{ site.data.ui-text[site.locale].back_to_top | default: 'Back to Top' }} &uarr;</a>
+        {% assign url_parts = category[1] | split: '/' %}
+        <a href="/{{ url_parts[3] }}" class="back-to-top">{{ 'View More' }} &uarr;</a>
       </section>
     {% endif %}
   {% endfor %}
