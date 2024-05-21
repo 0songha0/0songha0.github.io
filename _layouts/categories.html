@@ -16,11 +16,7 @@ layout: archive
     {% for category in site.categories %}
       {% if category[1].size == i %}
         <li>
-            {% for nav in navigation %}
-              {% if nav.title == category[0] %}
-                <a href="{{ '/' | append: nav.url }}">
-              {% endif %}
-            {% endfor %}
+          <a href="#{{ category[0] | slugify }}">
             <strong>{{ category[0] }}</strong> <span class="taxonomy__count">{{ i }}</span>
           </a>
         </li>
