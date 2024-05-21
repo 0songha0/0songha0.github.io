@@ -17,7 +17,6 @@ layout: archive
       {% if category[1].size == i %}
         <li>
           {% assign url_parts = category[1] | split: '/' %}
-          
           <a href="/{{ url_parts[3] }}">
             <strong>{{ category[0] }}</strong> <span class="taxonomy__count">{{ i }}</span>
           </a>
@@ -32,7 +31,10 @@ layout: archive
   {% for category in site.categories %}
     {% if category[1].size == i %}
       <section id="{{ category[0] | slugify | downcase }}" class="taxonomy__section">
-        <h2 class="archive__subtitle">{{ category[0] }}</h2>
+        {% assign url_parts = category[1] | split: '/' %}
+        <a href="/{{ url_parts[3] }}">
+          <h2 class="archive__subtitle">{{ category[0] }}</h2>
+        </a>
         <div class="entries-{{ entries_layout }}">
           {% for post in category.last limit:10 %}
             {% include archive-single.html type=entries_layout %}
