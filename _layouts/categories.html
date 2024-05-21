@@ -33,12 +33,12 @@ layout: archive
       <section id="{{ category[0] | slugify | downcase }}" class="taxonomy__section">
         <h2 class="archive__subtitle">{{ category[0] }}</h2>
         <div class="entries-{{ entries_layout }}">
-          {% for post in category.last limit:10 %}
+          {% for post in category.last limit:5 %}
             {% include archive-single.html type=entries_layout %}
           {% endfor %}
         </div>
         {% assign url_parts = category[1] | split: '/' %}
-        <a href="/{{ url_parts[3] }}" class="back-to-top">{{ 'View More' }} &uarr;</a>
+        <a href="/{{ url_parts[3] }}" class="back-to-top">{{ 'View More' }} &rarr;</a>
       </section>
     {% endif %}
   {% endfor %}
