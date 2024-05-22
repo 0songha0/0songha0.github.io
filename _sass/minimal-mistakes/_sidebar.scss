@@ -37,6 +37,10 @@
 
   }
 
+  @include breakpoint(max-width $medium) {
+    display: none;
+  }
+
   > * {
     /* sidebar left top & right margin */
     // margin-top:1.2em;
