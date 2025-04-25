@@ -39,5 +39,7 @@ categories:
     url: /network
   - title: "엘라스틱서치"
     url: /elk
+  - title: "카프카"
+    url: /kafka
   - title: "IT Tip"
     url: /it-tip
