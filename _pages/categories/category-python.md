@@ -1,9 +1,9 @@
 ---
-title: "파이썬 / 코딩테스트"
+title: "파이썬 / Java"
 layout: category
-permalink: /python
+permalink: /python-java
 author_profile: true
-taxonomy: 파이썬 / 코딩테스트
+taxonomy: 파이썬 / Java
 sidebar:
   nav: "categories"
 ---

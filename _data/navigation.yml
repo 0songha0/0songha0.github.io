@@ -33,8 +33,8 @@ categories:
     url: /op
   - title: "윈도우 / Tool"
     url: /tool
-  - title: "파이썬 / 코딩테스트"
-    url: /python
+  - title: "파이썬 / Java"
+    url: /python-java
   - title: "네트워크 / 보안"
     url: /network
   - title: "엘라스틱서치"
