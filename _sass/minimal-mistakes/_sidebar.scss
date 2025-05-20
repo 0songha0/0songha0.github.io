@@ -89,6 +89,7 @@
     margin-right: -300px;
     padding-left: 5em;
     z-index: 10;
+    margin-top: -5em;
 
     &.sticky {
       @include clearfix();

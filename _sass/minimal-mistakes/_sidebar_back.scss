@@ -83,6 +83,7 @@
     margin-right: -1 * $right-sidebar-width-narrow;
     padding-left: 5em;
     z-index: 10;
+    margin-top: -5em;
 
     &.sticky {
       @include clearfix();
