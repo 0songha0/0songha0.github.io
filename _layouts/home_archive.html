@@ -17,9 +17,14 @@ layout: default
 <div id="main" role="main">
   {% include sidebar.html %}
 
+  {% assign title = page.title %}
+  {% if page.url == "/index.html" %}
+    {% assign title = "" %}
+  {% endif %}
+
   <div class="archive home_archive">
-    {% unless page.header.overlay_color or page.header.overlay_image or page.url == "/index.html" %}
-      <h3 class="archive__subtitle">{{ page.title }}</h3>
+    {% unless page.header.overlay_color or page.header.overlay_image %}
+      <h3 class="archive__subtitle">{{ title }}</h3>
     {% endunless %}
     {{ content }}
   </div>
