@@ -6,4 +6,10 @@ author_profile: true
 taxonomy: 윈도우 / Tool
 sidebar:
   nav: "categories"
+pagination:
+  enabled: true
+  category: tool
+  permalink: /:num/
+  per_page: 5
+  sort_reverse: true
 ---

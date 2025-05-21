@@ -6,4 +6,10 @@ author_profile: true
 taxonomy: IT Tip
 sidebar:
   nav: "categories"
+pagination:
+  enabled: true
+  category: it-tip
+  permalink: /:num/
+  per_page: 5
+  sort_reverse: true
 ---

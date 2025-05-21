@@ -6,4 +6,10 @@ author_profile: true
 taxonomy: 네트워크 / 보안
 sidebar:
   nav: "categories"
+pagination:
+  enabled: true
+  category: network
+  permalink: /:num/
+  per_page: 5
+  sort_reverse: true
 ---
