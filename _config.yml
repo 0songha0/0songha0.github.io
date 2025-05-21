@@ -229,8 +229,8 @@ pagination:
   per_page: 5
   sort_field: 'date'
   sort_reverse: true
-  permalink: "/page/:num/"
-  title: ""
+  permalink: '/page/:num/'
+  title: ''
 
 # Archives
 #  Type
