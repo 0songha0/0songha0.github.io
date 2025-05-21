@@ -38,6 +38,24 @@ layout: default
 {% assign nav_item = site.data.navigation.categories | where: "url", "/" | append: slug | first %}
 <h1>{{ nav_item.title | default: slug }}  444</h1>
 
+
+
+{% assign current_path = page.url | split: '/' %}
+{% assign current_category_slug = current_path[1] %} {# 'plan-design-db' 추출 #}
+
+{% assign category_title = nil %}
+
+{% for category in site.data.navigation.categories %}
+  {% assign cat_url = category.url | remove: '/' %}
+  {% if cat_url == current_category_slug %}
+    {% assign category_title = category.title %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+<h1>{{ category_title | default: "카테고리" }}   555</h1>
+
+
   <div class="archive home_archive">
     {% unless page.header.overlay_color or page.header.overlay_image %}
       <h3 class="archive__subtitle">{{ title }}</h3>
