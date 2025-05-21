@@ -9,7 +9,7 @@ sidebar:
 pagination:
   enabled: true
   category: app-dev
-  permalink: /app-dev/:num/
+  permalink: /:num/
   per_page: 5
   sort_reverse: true
 ---
