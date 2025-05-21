@@ -17,10 +17,10 @@ layout: default
 <div id="main" role="main">
   {% include sidebar.html %}
 
-  {{ page.url }} 머지
+  {{ permalink }} 값 있나요
 
   <div class="archive home_archive">
-    {% unless page.header.overlay_color or page.header.overlay_image %}
+    {% unless page.header.overlay_color or page.header.overlay_image or page.url == "/index.html" %}
       <h3 class="archive__subtitle">{{ page.title }}</h3>
     {% endunless %}
     {{ content }}
