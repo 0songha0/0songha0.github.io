@@ -1,7 +1,7 @@
 ---
 title: "App 개발"
 layout: category
-permalink: /app-dev
+permalink: /app-dev/
 author_profile: true
 taxonomy: App 개발
 sidebar:
@@ -9,7 +9,7 @@ sidebar:
 pagination:
   enabled: true
   category: app-dev
-  permalink: /:num/
+  permalink: /app-dev/:num/
   per_page: 5
   sort_reverse: true
 ---
