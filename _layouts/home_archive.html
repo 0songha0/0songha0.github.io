@@ -21,24 +21,18 @@ layout: default
 
   {% if page.url == "/index.html" %}
     {% assign title = "" %}
-  {% elsif page.url %}
 
+  {% else %}
     {% assign current_path = page.url | split: '/' %}
     {% assign current_category_slug = current_path[1] %}
-    
-    {% assign category_title = nil %}
     
     {% for category in site.data.navigation.categories %}
       {% assign cat_url = category.url | remove: '/' %}
       {% if cat_url == current_category_slug %}
-        {% assign category_title = category.title %}
+        {% assign title = category.title %}
         {% break %}
       {% endif %}
     {% endfor %}
-    
-    {% if category_title %}
-      {% assign title = category_title %}
-    {% endif %}
 
   {% endif %}
 
