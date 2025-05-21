@@ -18,7 +18,7 @@ layout: default
   {% include sidebar.html %}
 
   <div class="archive home_archive">
-    {% unless page.header.overlay_color or page.header.overlay_image or page.permalink == "" %}
+    {% unless page.header.overlay_color or page.header.overlay_image or page.url == "/index.html" %}
       <h3 class="archive__subtitle">{{ page.title }}</h3>
     {% endunless %}
     {{ content }}
