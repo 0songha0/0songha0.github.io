@@ -1,0 +1,3075 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>프로그래머스 코딩테스트 고득점 Kit 47문제 Java 풀이 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="프로그래머스 코딩테스트 고득점 Kit 47문제 Java 풀이">
+<meta property="og:url" content="https://0songha0.github.io/python-java/2024-03-15-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-03-15T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2024-03-15T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/python-java/2024-03-15-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="프로그래머스 코딩테스트 고득점 Kit 47문제 Java 풀이">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2024-03-15T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2024-03-15T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">프로그래머스 코딩테스트 고득점 Kit 47문제 Java 풀이
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2024-03-15T00:00:00+00:00">2024-03-15</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 프로그래머스 코딩테스트 고득점 Kit 47문제 Java 풀이</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#프로그래머스-코딩테스트-고득점-kit-47문제">프로그래머스 코딩테스트 고득점 Kit 47문제</a><ul><li><a href="#해시-문제-풀이">해시 문제 풀이</a></li><li><a href="#스택큐-문제-풀이">스택/큐 문제 풀이</a></li><li><a href="#힙heap-문제-풀이">힙(Heap) 문제 풀이</a></li><li><a href="#정렬-문제-풀이">정렬 문제 풀이</a></li><li><a href="#완전탐색-문제-풀이">완전탐색 문제 풀이</a></li><li><a href="#탐욕법greedy-문제-풀이">탐욕법(Greedy) 문제 풀이</a></li><li><a href="#동적계획법dynamic-programming-문제-풀이">동적계획법(Dynamic Programming) 문제 풀이</a></li><li><a href="#깊이너비-우선-탐색dfsbfs-문제-풀이">깊이/너비 우선 탐색(DFS/BFS) 문제 풀이</a></li><li><a href="#이분탐색-문제-풀이">이분탐색 문제 풀이</a></li><li><a href="#그래프-문제-풀이">그래프 문제 풀이</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="프로그래머스-코딩테스트-고득점-kit-47문제">프로그래머스 코딩테스트 고득점 Kit 47문제</h2>
+
+<p><a href="https://school.programmers.co.kr/learn/challenges?tab=algorithm_practice_kit" target="_blank">https://school.programmers.co.kr/learn/challenges?tab=algorithm_practice_kit</a><br />
+LV.1 ~ LV.3 43문제를 순서대로 익히고, 취업 시즌에 문법 복습 후 시간 제한을 두고 다시 풀어보면 좋습니다.</p>
+
+<p><mark>난이도 낮은 순서</mark><br />
+정렬, 스택/큐, 완전탐색 &gt; 힙, 해시, 깊이/너비 우선 탐색(DFS/BFS), 탐욕법(Greedy) &gt; 동적계획법(DP), 이분탐색, 그래프<br />
+코테 준비 기간이 여유롭다면, 쉬운 유형부터 천천히 풀어나가는 것이 좋습니다.</p>
+
+<p><mark>출제 빈도 높은 순서</mark><br />
+깊이/너비 우선 탐색(DFS/BFS), 완전탐색, 정렬, 해시 &gt; 스택/큐, 힙 &gt; 동적계획법(DP), 그래프, 탐욕법(Greedy), 이분탐색<br />
+코테를 준비할 시간이 없다면, 가장 출제 빈도가 높은 DFS/BFS를 우선 공부해야 합니다.</p>
+
+<h3 id="해시-문제-풀이">해시 문제 풀이</h3>
+<p><mark>LV.1 폰켓몬</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashSet;
+
+class Solution {
+  public int solution(int[] nums) {
+
+    HashSet&lt;Integer&gt; hs = new HashSet&lt;&gt;();
+
+    for(int i =0; i&lt;nums.length;i++) {
+      hs.add(nums[i]);
+    }
+
+    if(hs.size()&gt;nums.length/2)
+      return nums.length/2;
+
+    return hs.size();
+  }
+}
+</code></pre></div></div>
+<p>HashSet은 중복된 요소를 없애줍니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int solution(int[] nums) {
+    Set&lt;Integer&gt; numSet = new HashSet&lt;&gt;();
+    
+    for (int num : nums) {
+      numSet.add(num);
+    }
+    
+    int maxPeek = nums.length / 2;
+    
+    return maxPeek &lt; numSet.size() ? maxPeek : numSet.size();
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.1 완주하지 못한 선수</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashMap;
+
+public class Solution {
+  public String solution(String[] participant, String[] completion) {
+    // 해시맵 생성
+    HashMap&lt;String, Integer&gt; hashMap = new HashMap&lt;&gt;();
+    
+    // 완주한 선수들의 이름을 해시맵에 저장
+    for (String string : completion) {
+      hashMap.put(string, hashMap.getOrDefault(string, 0) + 1);
+    }
+
+    // 참가한 선수들의 이름을 키로 하는 값을 1씩 감소
+    for (String string : participant) {
+      // 완주하지 못한 선수를 찾으면 반환
+      if (hashMap.getOrDefault(string, 0) == 0) {
+        return string;
+      }
+      hashMap.put(string, hashMap.get(string) - 1);
+    }
+
+    return null;
+  }
+}
+</code></pre></div></div>
+<p>아래는 전체 참가자 수에서 완주한 참가자 수를 빼고, 완주하지 못한 선수를 찾는 풀이입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public String solution(String[] participant, String[] completion) {
+    String answer = "";
+    
+    HashMap&lt;String, Integer&gt; notCompCntMap = new HashMap&lt;&gt;();
+    
+    for (int i = 0; i &lt; participant.length; i++) {
+      notCompCntMap.put(participant[i], notCompCntMap.getOrDefault(participant[i], 0) +1);
+    }
+    
+    for (int i = 0; i &lt; completion.length; i++) {
+      notCompCntMap.put(completion[i], notCompCntMap.get(completion[i]) -1);
+    }
+    
+    for (String name : notCompCntMap.keySet()) {
+      if (notCompCntMap.get(name) == 1) {
+        answer = name;
+        break;
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.2 전화번호 목록</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+
+public class Solution {
+  public boolean solution(String[] phone_book) {
+    // 전화번호부 정렬
+    Arrays.sort(phone_book);
+
+    // 전화번호부에서 연속된 두 개의 전화번호 비교
+    for (int i = 0; i &lt; phone_book.length - 1; i++) {
+      if (phone_book[i + 1].startsWith(phone_book[i]))
+        return false;
+    }
+
+    // 모든 전화번호를 비교한 후에도 반환되지 않았다면, 접두어가 없는 경우이므로 true 반환
+    return true;
+  }
+}
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashMap;
+
+class Solution {
+  public boolean solution(String[] phoneBook) {
+    boolean answer = true;
+
+    HashMap&lt;String, Integer&gt; map = new HashMap&lt;&gt;();
+
+    for(int i = 0; i &lt; phoneBook.length; i++) {
+      map.put(phoneBook[i], i);
+    }
+
+    for(int i = 0; i &lt; phoneBook.length; i++) {
+      for(int j = 0; j &lt; phoneBook[i].length(); j++) {
+        if(map.containsKey(phoneBook[i].substring(0,j))) {
+          answer = false;
+          return answer;
+        }
+      }
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.2 의상</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashMap;
+import java.util.Iterator;
+
+class Solution {
+  public int solution(String[][] clothes) {
+    int answer = 1;
+    HashMap&lt;String, Integer&gt; map = new HashMap&lt;&gt;();
+    
+    for(int i = 0; i &lt; clothes.length; i++){
+      String key = clothes[i][1];
+      if(!map.containsKey(key)) {
+        map.put(key, 1);
+      } else {
+        map.put(key, map.get(key) + 1);
+      }
+    }
+    
+    Iterator&lt;Integer&gt; it = map.values().iterator();
+    
+    while(it.hasNext()) {
+      answer *= it.next().intValue()+1;
+    }
+    
+    return answer-1;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.3 베스트앨범</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Collections;
+
+class Solution {
+  public int[] solution(String[] genres, int[] plays) {
+    // 장르, 곡 정보
+    HashMap&lt;String, Object&gt; genresMap = new HashMap&lt;String, Object&gt;();
+    // 장르, 총 장르 재생수
+    HashMap&lt;String, Integer&gt; playMap = new HashMap&lt;String, Integer&gt;();
+    ArrayList&lt;Integer&gt; resultAL = new ArrayList&lt;Integer&gt;();
+
+    for(int i = 0; i &lt; genres.length; i++){
+      String key = genres[i];
+      // 곡 정보 : 곡 고유번호, 재생횟수
+      HashMap&lt;Integer, Integer&gt; infoMap;
+
+      if(genresMap.containsKey(key)){
+        infoMap = (HashMap&lt;Integer, Integer&gt;)genresMap.get(key);
+      } else {
+        infoMap = new HashMap&lt;Integer, Integer&gt;();
+      }
+
+      infoMap.put(i, plays[i]);
+      genresMap.put(key, infoMap);
+
+      // 재생수
+      if(playMap.containsKey(key)){
+        playMap.put(key, playMap.get(key) + plays[i]);
+      } else {
+        playMap.put(key, plays[i]);
+      }
+    }
+
+    int mCnt = 0;
+    Iterator it = sortByValue(playMap).iterator();
+
+    while(it.hasNext()){
+      String key = (String)it.next();
+      Iterator indexIt = sortByValue((HashMap&lt;Integer, Integer&gt;)genresMap.get(key)).iterator();
+      int playsCnt = 0;
+
+      while(indexIt.hasNext()){
+        resultAL.add((int)indexIt.next());
+        mCnt++;
+        playsCnt++;
+        if(playsCnt &gt; 1) break;
+      }
+    }
+
+    int[] answer = new int[resultAL.size()];
+
+    for(int i = 0; i &lt; resultAL.size(); i++){
+      answer[i] = resultAL.get(i).intValue();
+    }
+
+    return answer;
+  }
+
+  private ArrayList sortByValue(final Map map){
+    ArrayList&lt;Object&gt; keyList = new ArrayList();
+    keyList.addAll(map.keySet());
+
+    Collections.sort(keyList, new Comparator(){
+      public int compare(Object o1, Object o2){
+        Object v1 = map.get(o1);
+        Object v2 = map.get(o2);
+
+        return ((Comparable) v2).compareTo(v1);
+      }
+    });
+
+    return keyList;
+  }
+}
+</code></pre></div></div>
+
+<h3 id="스택큐-문제-풀이">스택/큐 문제 풀이</h3>
+<p><mark>LV.1 같은 숫자는 싫어</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+public class Solution {
+  public int[] solution(int []arr) {
+    ArrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
+    
+    // 초기값 추가
+    list.add(arr[0]);
+    
+    // 가변형 ArrayList에 연속 중복 제거하여 추가
+    for (int i = 1; i &lt; arr.length; i++) {
+      if (arr[i] != arr[i-1]) {
+        list.add(arr[i]);
+      }
+    }
+    
+    // ArrayList를 int 배열로 변경하여 반환
+    int[] intArr = new int[list.size()];
+    
+    for (int i = 0; i &lt; list.size(); i++) {
+      intArr[i] = list.get(i);
+    }
+
+    return intArr;
+  }
+}
+</code></pre></div></div>
+<p>아래는 ArrayDeque를 이용한 풀이입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+public class Solution {
+  public int[] solution(int []arr) {
+    ArrayDeque&lt;Integer&gt; stack = new ArrayDeque&lt;Integer&gt;();
+    
+    for (int i = 0; i &lt; arr.length; i++) {
+      if (!stack.isEmpty() &amp;&amp; stack.peekLast() == arr[i]) {
+        continue;
+      }
+      
+      stack.addLast(arr[i]);
+    }
+    
+    int[] answer = new int[stack.size()];
+    
+    for (int i = 0; i &lt; answer.length; i++) {
+      answer[i] = stack.pollFirst();
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>stack 뒤쪽에 원소를 쌓고, 앞에서부터 꺼내는 풀이입니다.</p>
+
+<p><mark>LV.2 기능개발</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] progresses, int[] speeds) {
+    // 각 작업의 남은 작업일수를 담기 위한 큐 선언
+    Queue&lt;Integer&gt; q = new ArrayDeque&lt;&gt;();
+    List&lt;Integer&gt; answerList = new ArrayList&lt;&gt;();
+
+    for (int i = 0; i &lt; speeds.length; i++) {
+      // 현재 작업의 남은 작업일수 계산
+      // 정수 나눗셈이 아닌, 부동소수점 연산을 하도록 둘 중 하나 (double) 형변환
+      double remain = ((double) 100 - progresses[i]) / speeds[i];
+      int date = (int) Math.ceil(remain);
+        
+      // 큐가 비어있지 않고, 큐 첫번째 작업의 남은 일수보다 현재 작업의 남은 일수가 크면
+      if (!q.isEmpty() &amp;&amp; q.peek() &lt; date) {
+        // 정답 리스트에 큐에 쌓인 작업 수 추가 후 큐 초기화
+        answerList.add(q.size());
+        q.clear();
+      }
+
+      // 큐에 현재 작업의 남은 작업일수 추가
+      q.offer(date);
+    }
+
+    // 마지막으로 큐에 남은 작업 수 추가
+    answerList.add(q.size());
+
+    // ArrayList를 int 배열로 변환하여 리턴
+    int[] answer = new int[answerList.size()];
+
+    for (int i = 0; i &lt; answer.length; i++) {
+      answer[i] = answerList.get(i);
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.2 올바른 괄호</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  boolean solution(String s) {
+    Deque&lt;Character&gt; stack = new ArrayDeque&lt;&gt;();
+    
+    for (char c : s.toCharArray()) {
+      if (c == '(') {
+        // 괄호 열기 시 스택에 추가
+        stack.push(c);
+
+      } else {
+        if (stack.isEmpty()) {
+            return false;
+        }
+        
+        // 올바른 괄호이면 스택에서 꺼내기
+        stack.pop();
+      }
+    }
+    
+    // 반복문 종료 후 스택이 비어있지 않으면 올바르지 않은 괄호
+    return stack.isEmpty();
+  }
+}
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  boolean solution(String s) {
+    boolean answer = false;
+    int count = 0;
+    
+    for (int i = 0; i &lt; s.length(); i++) {
+        if (s.charAt(i) == '(') {
+          // 현재 문자열이 괄호 열기면 +1
+          count++;
+        } else {
+          // 현재 문자열이 괄호 닫기면 -1
+          count--;
+        }
+        
+        // 괄호 닫기가 더 많은 경우
+        if (count &lt; 0) {
+          break;
+        }
+    }
+    
+    // 괄호 열기, 닫기 횟수가 짝이 맞으면 true
+    if (count == 0) {
+      answer = true;
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.2 프로세스</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int solution(int[] priorities, int location) {
+    int answer = 1;
+    
+    // 숫자가 클수록 우선순위가 높으므로, 내림차순 정렬 세팅
+    PriorityQueue&lt;Integer&gt; pq = new PriorityQueue&lt;&gt;(Collections.reverseOrder());
+    
+    // 우선순위 큐에 원소 삽입
+    for (int v : priorities) {
+      pq.add(v);
+    }
+    
+    // 큐가 비어있을 때까지 반복
+    while (!pq.isEmpty()) {
+      // 현재 우선순위 원소 인덱스 확인
+      for (int i = 0; i &lt; priorities.length; i++) {
+        if (pq.peek() == priorities[i]) {
+          // location과 같으면 현재 순번 반환
+          if (i == location) {
+            return answer;
+          }
+          
+          // 큐에서 원소 꺼내기
+          pq.poll();
+          answer++;
+        }
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.2 다리를 지나는 트럭</mark><br />
+트럭은 1초에 1칸씩 전진할 수 있다고 가정하고 풀어야 합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  // 트럭 객체 생성
+  class Truck {
+    int weight;
+    int move;
+    
+    public Truck(int weight) {
+      this.weight = weight;
+      this.move = 1;
+    }
+    
+    public void moving() {
+      move++;
+    }
+  }
+  
+  public int solution(int bridge_length, int weight, int[] truck_weights) {
+    int answer = 0;
+    int cur_weight = 0;
+    
+    Queue&lt;Truck&gt; waitQ = new ArrayDeque&lt;&gt;();
+    Queue&lt;Truck&gt; moveQ = new ArrayDeque&lt;&gt;();
+    
+    // 대기 중인 트럭을 대기 트럭 큐에 추가
+    for (int t_w : truck_weights) {
+      waitQ.offer(new Truck(t_w));
+    }
+    
+    // 대기 트럭 큐, 다리를 건너는 트럭 큐 모두 비어있지 않을 때까지 반복
+    while (!waitQ.isEmpty() || !moveQ.isEmpty()) {
+      // 반복할 때마다 1초 경과
+      answer++;
+      
+      // 다리를 건너는 트럭이 없으면
+      if (moveQ.isEmpty()) {
+        // 대기 중인 트럭을 꺼내서 다리에 올림
+        Truck t = waitQ.poll();
+        cur_weight += t.weight;
+        moveQ.offer(t);
+        continue;
+      }
+      
+      // 다리를 건너는 트럭들을 한 칸씩 이동시킴
+      for (Truck t : moveQ) {
+        t.moving();
+      }
+      
+      // 다리를 건너는 첫 번째 트럭이 다리를 다 건넜는지 확인
+      if (moveQ.peek().move &gt; bridge_length) {
+        // 다리를 다 건넌 트럭을 다리에서 제거하고 현재 다리 위의 무게에서 빼줌
+        Truck t = moveQ.poll();
+        cur_weight -= t.weight;
+      }
+      
+      // 대기 중인 트럭이 있고, 다음 대기 중인 트럭을 다리에 올려도 다리의 최대 무게를 초과하지 않는 경우
+      if (!waitQ.isEmpty() &amp;&amp; cur_weight + waitQ.peek().weight &lt;= weight) {
+        // 대기 중인 다음 트럭을 꺼내서 다리에 올리고 현재 다리 위의 무게에 더해줌
+        Truck t = waitQ.poll();
+        cur_weight += t.weight;
+        moveQ.offer(t);
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.2 주식 가격</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[] solution(int[] prices) {
+    int[] answer = new int[prices.length];
+    
+    // i번째와 i+1번째 원소 값 비교
+    for (int i = 0; i &lt; prices.length; i++) {
+      for (int j = i+1; j &lt; prices.length; j++) {
+        // 답안 배열 i번째에 +1
+        answer[i]++;
+        
+        // i번째 원소 값이 더 크면 안쪽 반복문 탈출
+        if (prices[i] &gt; prices[j]) {
+          break;
+        }
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Stack;
+
+class Solution {
+  public static int[] solution(int[] prices) {
+    int n = prices.length;
+
+    // 가격이 떨어지지 않은 기간을 저장할 배열
+    int[] answer = new int[n];
+
+    // 스택(stack)을 사용해 이전 가격과 현재 가격 비교
+    Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();
+    stack.push(0);
+
+    for (int i = 1; i &lt; n; i++) {
+      while (!stack.isEmpty() &amp;&amp; prices[i] &lt; prices[stack.peek()]) {
+        // 가격이 떨어졌으므로 이전 가격의 기간 계산
+        int j = stack.pop();
+        answer[j] = i - j;
+      }
+      stack.push(i);
+    }
+
+    // 스택에 남아 있는 가격들은 가격이 떨어지지 않은 경우
+    while (!stack.isEmpty()) {
+      int j = stack.pop();
+      answer[j] = n - 1 - j;
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<h3 id="힙heap-문제-풀이">힙(Heap) 문제 풀이</h3>
+<p><mark>LV.2 더 맵게</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int solution(int[] scoville, int K) {
+    int answer = 0;
+        
+    PriorityQueue&lt;Integer&gt; pq = new PriorityQueue&lt;&gt;();
+    
+    for (int i = 0; i &lt; scoville.length; i++) {
+      pq.offer(scoville[i]);
+    }
+    
+    while (pq.size() &gt;= 2) {
+      int poodScoville = pq.poll();
+      
+      if (poodScoville &gt;= K) {
+        break;
+      }
+      
+      pq.offer(poodScoville + (pq.poll() * 2));
+      
+      answer++;
+    }
+    
+    if (pq.peek() &lt; K) {
+      answer = -1;
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>힙(완전이진트리)을 이용해서 우선순위 큐를 구현할 수 있습니다.<br />
+위보다 아래 코드가 간결하지만 동일하게 동작합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int solution(int[] scoville, int K) {
+    int answer = 0;
+        
+    PriorityQueue&lt;Integer&gt; pq = new PriorityQueue&lt;&gt;();
+    
+    for (int v : scoville) {
+      pq.offer(v);
+    }
+    
+    while (pq.size() &gt;= 2 &amp;&amp; pq.peek() &lt; K) {
+      int poodScoville = pq.poll();
+      
+      pq.offer(poodScoville + (pq.poll() * 2));
+      
+      answer++;
+    }
+    
+    if (pq.peek() &lt; K) {
+      answer = -1;
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.3 디스크 컨트롤러</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+import java.util.PriorityQueue;
+
+class Solution {
+  public int solution(int[][] jobs) {
+    int answer = 0;
+
+    // 작업이 요청되는 시점 기준으로 오름차순 정렬
+    Arrays.sort(jobs, (o1, o2) -&gt; o1[0] - o2[0]);
+
+    // 작업의 소요시간 기준으로 오름차순 정렬
+    PriorityQueue&lt;int[]&gt; pq = new PriorityQueue&lt;&gt;((o1, o2) -&gt; o1[1] - o2[1]);
+
+    int jobs_index = 0; // 작업 배열 인덱스
+    int finish_job = 0; // 처리 완료된 작업 개수
+    int end_time = 0; // 작업 처리 완료 시간
+
+    while(true) {
+      if(finish_job == jobs.length) break; // 모든 작업을 처리했다면 종료
+
+      // 이전 작업 처리 중 요청된 작업 add
+      while(jobs_index &lt; jobs.length &amp;&amp; jobs[jobs_index][0] &lt;= end_time) {
+        pq.add(jobs[jobs_index++]);
+      }
+
+      if(!pq.isEmpty()) { // 이전 작업 처리 중 요청된 작업이 있는 경우
+        int[] job = pq.poll();
+        answer += end_time - job[0] + job[1]; // 작업 요청부터 종료까지 걸린 시간 추가
+        end_time += job[1]; // 작업 처리 완료 시간 갱신
+        finish_job++; // 처리 완료된 작업 개수 1 증가
+      } else { // 이전 작업 처리 중 요청된 작업이 없는 경우
+        end_time = jobs[jobs_index][0]; // 다음 작업 요청 시점으로 갱신
+      }
+    }
+
+    return answer / jobs.length;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.3 이중우선순위큐</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(String[] operations) {
+    Queue&lt;Integer&gt; minpq = new PriorityQueue&lt;&gt;();
+    Queue&lt;Integer&gt; maxpq = new PriorityQueue&lt;&gt;(Collections.reverseOrder());
+
+    for (String operation : operations) {
+      if (operation.startsWith("I ")) {
+        int n = Integer.parseInt(operation.substring(2));
+        minpq.offer(n);
+        maxpq.offer(n);
+
+      } else if (!minpq.isEmpty() &amp;&amp; operation.equals("D -1")) {
+        maxpq.remove(minpq.poll());
+
+      } else if (!maxpq.isEmpty() &amp;&amp; operation.equals("D 1")) {
+        minpq.remove(maxpq.poll());
+      }
+    }
+
+    if (minpq.isEmpty() &amp;&amp; maxpq.isEmpty()) {
+      return new int[]{0, 0};
+    }
+
+    return new int[]{maxpq.poll(), minpq.poll()};
+  }
+}
+</code></pre></div></div>
+
+<h3 id="정렬-문제-풀이">정렬 문제 풀이</h3>
+<p><mark>LV.1 K번째수</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] array, int[][] commands) {
+    int[] answer = new int[commands.length];
+    
+    for(int i = 0; i &lt; commands.length; i++) {
+      // 이차원 배열에서 배열 추출
+      int[] command = Arrays.copyOfRange(array, commands[i][0]-1, commands[i][1]);
+      
+      // 오름차순 정렬
+      Arrays.sort(command);
+      
+      // K번째 수
+      answer[i] = command[commands[i][2]-1];
+      
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, command[i]를 변수에 할당해서 풀면 더 가독성이 좋은 풀이가 됩니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] array, int[][] commands) {
+    int[] answer = new int[commands.length];
+    
+    for (int i = 0; i &lt; commands.length; i++) {
+      int[] command = commands[i];
+      int[] tempArr = Arrays.copyOfRange(array, command[0]-1, command[1]);
+      
+      Arrays.sort(tempArr);
+      
+      answer[i] = tempArr[command[2]-1];
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>Arrays.toString, Arrays.deepToString 함수로 배열, 이차원배열 출력이 가능합니다.</p>
+
+<p>내림차순 정렬은 Arrays.sort(command, Collections.reverseOrder()); 으로 할 수 있습니다.<br />
+int 배열에서는 Comparator를 사용할 수 없으므로, Integer 배열 변환이 필요합니다.</p>
+
+<p><mark>LV.2 가장 큰 수</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public String solution(int[] numbers) {
+    ArrayList&lt;String&gt; strList = new ArrayList&lt;String&gt;();
+    
+    // 각 int 원소를 String으로 변환
+    for (int i = 0; i &lt; numbers.length; i++) {
+        strList.add(String.valueOf(numbers[i]));
+    }
+    
+    // 앞뒤 원소 문자열 조합을 비교하며 오름차순 정렬
+    Collections.sort(strList, (o1, o2) -&gt; (o2 + o1).compareTo(o1 + o2));
+    
+    // 결과 String 연결
+    StringBuilder sb = new StringBuilder();
+    
+    for (String str : strList) {
+        sb.append(str);
+    }
+    
+    String answer = sb.toString();
+    
+    // 원소가 [0, 0, 0]이면 0 반환, 외에는 그대로 반환
+    return answer.charAt(0) == '0'? "0" : answer;
+  }
+}
+</code></pre></div></div>
+<p>compareTo 함수는 현재 객체가 다른 객체보다 작으면 크면 1, 음수, 같으면 0을 반환합니다.<br />
+(o2 + o1).compareTo(o1 + o2)은 반환값이 1이면 순서를 바꿔서, 내림차순 정렬됩니다.<br />
+(o1 + o2).compareTo(o2 + o1)은 반환값이 1이면 순서를 바꿔서, 오름차순 정렬됩니다.</p>
+
+<p>문자열을 반복하여 더할 때 String += 대신 StringBuilder를 사용하면 메모리 효율적입니다.</p>
+
+<p>answer.charAt(0) == ‘0’ 대신 answer.startsWith(“0”)를 사용해도 됩니다.</p>
+
+<p><mark>LV.2 H-Index</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int solution(int[] citations) {
+    int answer = 0;
+    
+    // 오름차순 정렬
+    Arrays.sort(citations);
+    
+    for (int i = 0; i &lt; citations.length; i++) {
+      // 남은 논문의 개수
+      int remainCnt = citations.length - i;
+      
+      // 현재 논문의 인용된 횟수가 남은 논문의 개수보다 크거나 같으면 반환
+      if (citations[i] &gt;= remainCnt) {
+        answer = remainCnt;
+        break;
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<h3 id="완전탐색-문제-풀이">완전탐색 문제 풀이</h3>
+<p><mark>LV.1 최소직사각형</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int[][] sizes) {
+    int w = 0, h = 0;
+
+    // 모든 명함 반복
+    for (int[] card : sizes) {
+      // 명함의 가로, 세로를 비교해 큰 값 중 가장 큰 값이 지갑의 세로 길이가 됨
+      w = Math.max(w, Math.max(card[0], card[1]));
+
+      // 명함의 가로, 세로를 비교해 작은 값 중 가장 큰 값이 지갑의 세로 길이가 됨
+      h = Math.max(h, Math.min(card[0], card[1]));
+    }
+    
+    int answer = w * h;
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래는 명함마다 긴 부분을 w list, 작은 부분을 h list로 모은 뒤<br />
+가장 큰 w와 가장 큰 h를 곱해서 반환하는 풀이입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int solution(int[][] sizes) {
+    int answer = 0;
+    
+    ArrayList&lt;Integer&gt; w_list = new ArrayList&lt;&gt;();
+    ArrayList&lt;Integer&gt; h_list = new ArrayList&lt;&gt;();
+    
+    for (int[] nameCard : sizes) {
+      if (nameCard[0] &gt; nameCard[1])  {
+        w_list.add(nameCard[0]);
+        h_list.add(nameCard[1]);
+      } else {
+        w_list.add(nameCard[1]);
+        h_list.add(nameCard[0]);
+      }
+    }
+    
+    Collections.sort(w_list, Collections.reverseOrder());
+    Collections.sort(h_list, Collections.reverseOrder());
+    
+    return w_list.get(0) * h_list.get(0);
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.1 모의고사 ★</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] answers) {
+      
+    // 수포자 1, 2, 3 패턴 정의
+    int[][] patterns = {
+      {1, 2, 3, 4, 5},
+      {2, 1, 2, 3, 2, 4, 2, 5},
+      {3, 3, 1, 1, 2, 2, 4, 4, 5, 5}
+    };
+        
+    // 각 수포자들의 정답 개수를 저장할 배열 초기화
+    int[] hit = new int[3];
+        
+    // 각 수포자들의 패턴에 따라 정답을 비교하며 맞은 개수 계산
+    for (int i = 0; i &lt; hit.length; i++) {
+      for (int j = 0; j &lt; answers.length; j++) {
+        if (patterns[i][j % patterns[i].length] == answers[j]) {
+          hit[i]++;
+        }
+      }
+    }
+        
+    // 가장 많은 정답을 맞은 수포자의 정답 개수 확인
+    int max = Math.max(hit[0], Math.max(hit[1], hit[2]));
+        
+    // 가장 많은 정답을 맞은 수포자의 번호를 리스트에 저장
+    ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+    
+    for (int i = 0; i &lt; hit.length; i++) {
+      if (hit[i] == max) {
+        list.add(i+1);
+      }
+    }
+        
+    // 리스트에 저장된 수포자 번호를 배열로 변환하여 반환
+    int[] answer = new int[list.size()];
+    
+    for (int i = 0; i &lt; list.size(); i++) {
+      answer[i] = list.get(i);
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.2 소수 찾기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashSet;
+class Solution {
+  public int solution(String numbers) {
+    HashSet&lt;Integer&gt; set = new HashSet&lt;&gt;();
+    permutation("", numbers, set);
+    int count = 0;
+    while(set.iterator().hasNext()){
+      int a = set.iterator().next();
+      set.remove(a);
+      if(a==2) count++;
+      if(a%2!=0 &amp;&amp; isPrime(a)){
+        count++;
+      }
+    }
+    return count;
+  }
+
+  public boolean isPrime(int n){
+    if(n==0 || n==1) return false;
+    for(int i=3; i&lt;=(int)Math.sqrt(n); i+=2){
+      if(n%i==0) return false;
+    }
+    return true;
+  }
+
+  public void permutation(String prefix, String str, HashSet&lt;Integer&gt; set) {
+    int n = str.length();
+
+    if(!prefix.equals("")) set.add(Integer.valueOf(prefix));
+
+    for (int i = 0; i &lt; n; i++) {
+      permutation(prefix + str.charAt(i), str.substring(0, i) + str.substring(i+1, n), set);
+    }
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.2 카펫</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Solution {
+  public int[] solution(int brown, int yellow) {
+    // 격자의 총 개수 (파란색 격자 + 흰색 격자)
+    int totalSize = brown + yellow;
+
+    // 세로 길이의 범위는 3부터 (갈색 격자 + 노란색 격자)의 제곱근
+    int sqrt = (int)Math.sqrt(totalSize);
+
+    for (int vertical = 3; vertical &lt;= sqrt; vertical++) {
+      // 사격형 구성이 되는지 확인
+      if (totalSize % vertical == 0) {
+        // 사각형의 가로 길이
+        int horizontal = (int)(totalSize / vertical);
+
+        // 카펫 형태로 만들 수 있는지 확인
+        if (brown == (horizontal + vertical - 2) * 2) {
+          // [가로 길이, 세로 길이]
+          return new int[]{horizontal, vertical};
+        }
+      }
+    }
+
+    // 만약 답을 찾지 못했다면 빈 리스트를 반환
+    return new int[]{};
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.2 피로도</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public static boolean check[];
+  public static int ans = 0;
+
+  public int solution(int k, int[][] dungeons) {
+    check = new boolean[dungeons.length];
+
+    dfs(k, dungeons, 0);
+
+    return ans;
+  }
+
+  public static void dfs(int tired, int[][] dungeons, int cnt){
+    for (int i=0; i &lt; dungeons.length; i++) {
+      if (!check[i] &amp;&amp; dungeons[i][0] &lt;= tired) {
+        check[i] = true;
+        dfs(tired-dungeons[i][1], dungeons, cnt+1);
+        check[i] = false;
+      }
+    }
+    ans = Math.max(ans, cnt);
+  }
+}
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Solution {
+  private static int answer;
+  private static int[][] Dungeons;
+  private static boolean[] visited;
+
+  // 백트래킹을 위한 DFS
+  private static void backtrack(int k, int cnt) {
+    for (int i = 0; i &lt; Dungeons.length; i++) {
+      // 현재 피로도(k)가 i번째 던전의 최소 필요 피로도보다 크거나 같고,
+      // i번째 던전을 방문한 적이 없다면
+      if (!visited[i] &amp;&amp; k &gt;= Dungeons[i][0]) {
+        visited[i] = true; // i번째 던전을 방문 처리
+        // 현재까지의 최대 탐험 가능 던전 수와
+        // i번째 던전에서 이동할 수 있는 최대 탐험 가능 던전 수 중 큰 값을 선택하여 업데이트
+        backtrack(k - Dungeons[i][1], cnt + 1);
+        answer = Math.max(answer, cnt + 1);
+        visited[i] = false; // i번째 던전을 다시 방문 취소
+      }
+    }
+  }
+
+  public int solution(int k, int[][] dungeons) {
+    answer = 0;
+    Dungeons = dungeons;
+
+    // 던전 방문 여부를 저장할 배열
+    visited = new boolean[dungeons.length];
+
+    // DFS 메소드 수행
+    backtrack(k, 0);
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.2 전력망을 둘로 나누기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  int N, min;
+  int[][] map;
+  int[] vst;
+
+  int dfs(int n){
+    vst[n] = 1;
+    int child = 1;
+    for(int i = 1; i &lt;= N; i++) {
+      if(vst[i] == 0 &amp;&amp; map[n][i] == 1) {
+        child += dfs(i);
+      }
+    }
+    min = Math.min(min, Math.abs(child - (N - child)));
+    return child;
+  }
+
+  public int solution(int n, int[][] wires) {
+    N = n;
+    min = n;
+    map = new int[n+1][n+1];
+    vst = new int[n+1];
+    for(int[] wire : wires) {
+      int a = wire[0], b = wire[1];
+      map[a][b] = map[b][a] = 1;
+    }
+    dfs(1);
+    return min;
+  }
+}
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.ArrayList;
+
+public class Solution {
+  private static boolean[] visited;
+  private static ArrayList&lt;Integer&gt;[] adjList;
+  private static int N, answer;
+
+  public static int solution(int n, int[][] wires) {
+    N = n;
+    answer = n - 1;
+
+    // 전선의 연결 정보를 저장할 인접 리스트 초기화
+    adjList = new ArrayList[n + 1];
+    for (int i = 1; i &lt;= n; i++) {
+      adjList[i] = new ArrayList&lt;&gt;();
+    }
+
+    // 전선의 연결 정보를 인접 리스트에 저장
+    for (int[] wire : wires) {
+      adjList[wire[0]].add(wire[1]);
+      adjList[wire[1]].add(wire[0]);
+    }
+
+    visited = new boolean[n + 1];
+
+    // 깊이 우선 탐색 시작
+    dfs(1);
+
+    return answer;
+  }
+
+  private static int dfs(int now) {
+    visited[now] = true;
+
+    // 자식 노드의 수를 저장하고 반환할 변수 선언
+    int sum = 0;
+
+    // 연결된 모든 전선을 확인
+    for (int next : adjList[now]) {
+      if (!visited[next]) {
+        // (전체 노드 - 자식 트리의 노드 수) - (자식 트리의 노드 수) 의 절대값이 가장 작은 값을 구함
+        int cnt = dfs(next); // 자식 트리가 가진 노드의 수
+        answer = Math.min(answer, Math.abs(N - cnt * 2));
+
+        // 자식 노드의 수를 더함
+        sum += cnt;
+      }
+    }
+
+    // 전체 자식 노드의 수에 1(현재 now 노드)을 더해서 반환
+    return sum + 1;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.2 모음사전</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+class Solution {
+  List&lt;String&gt; list = new ArrayList&lt;&gt;();
+  
+  void dfs(String str, int len) {
+    if(len &gt; 5) return;
+    list.add(str);
+    for(int i = 0; i &lt; 5; i++) dfs(str + "AEIOU".charAt(i), len + 1);
+  }
+  
+  public int solution(String word) {
+    dfs("", 0);
+    return list.indexOf(word);
+  }
+}
+</code></pre></div></div>
+<p>DFS를 이용한 완전탐색 방법입니다.<br />
+찾는 word 값 이후의 값도 탐색되지 않게 개선하면 좋을 것 같습니다.</p>
+
+<h3 id="탐욕법greedy-문제-풀이">탐욕법(Greedy) 문제 풀이</h3>
+<p><mark>LV.1 체육복</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int n, int[] lost, int[] reserve) {
+    int[] people = new int[n];
+    int answer = n;
+
+    for (int l : lost) 
+      people[l-1]--;
+      
+    for (int r : reserve) 
+      people[r-1]++;
+
+    for (int i = 0; i &lt; people.length; i++) {
+      if(people[i] == -1) {
+        if(i-1 &gt;= 0 &amp;&amp; people[i-1] == 1) {
+          people[i]++;
+          people[i-1]--;
+        }else if(i+1 &lt; people.length &amp;&amp; people[i+1] == 1) {
+          people[i]++;
+          people[i+1]--;
+        }else 
+          answer--;
+      }
+    }
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>배열 크기를 n+2로 선언하면  0과 마지막 인덱스를 더 잡을 수 있어서 if문 조건 하나씩 없앨 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int solution(int n, int[] lost, int[] reserve) {
+    Set&lt;Integer&gt; lostSet = new HashSet&lt;Integer&gt;();
+    Set&lt;Integer&gt; reserveSet = new HashSet&lt;Integer&gt;();
+    
+    for (int v : lost) {
+      lostSet.add(v);
+    }
+    
+    for (int v : reserve) {
+      reserveSet.add(v);
+    }
+    
+    // 여벌 체육복 가져온 학생이 체육복 도난당한 경우 제거
+    Set interSet = new HashSet&lt;&gt;(lostSet);
+    interSet.retainAll(reserveSet); // 교집합 만들기
+    
+    lostSet.removeAll(interSet); // 체육복 도난당한 학생에서 교집합 제거
+    reserveSet.removeAll(interSet); // 여벌 체육복 가져온 학생에서 교집합 제거
+    
+    // 체육복 빌려주면서 체육복 도난당한 학생, 여벌 체육복 제거
+    for (int v : new HashSet&lt;&gt;(lostSet)) {
+      if (reserveSet.contains(v - 1)) {
+        lostSet.remove(v);
+        reserveSet.remove(v - 1);
+      } else if (reserveSet.contains(v + 1)) {
+        lostSet.remove(v);
+        reserveSet.remove(v + 1);
+      }
+    }
+    
+    return n - lostSet.size();
+  }
+}
+</code></pre></div></div>
+<p>HashSet retainAll 함수로 교집합 생성 후 removeAll으로 교집합을 제거하는 풀이입니다.</p>
+
+<p><mark>LV.2 조이스틱</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(String name) {
+    int answer = 0;
+    int[] diff={0,1,2,3,4,5,6,7,8,9,10,11,12,13,12,11,10,9,8,7,6,5,4,3,2,1};
+    for(char c:name.toCharArray())
+      answer+=diff[c-'A'];
+
+    int length=name.length();
+    int min=length-1;
+
+    for(int i=0;i&lt;length;i++){
+      int next=i+1;
+      while(next&lt;length &amp;&amp; name.charAt(next)=='A'){
+        next++;
+      }      
+
+      min=Math.min(min,i+length-next+Math.min(i,length-next));
+    }
+
+    return answer+min;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.2 큰 수 만들기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Stack;
+
+class Solution {
+  public String solution(String number, int k) {
+    char[] result = new char[number.length() - k];
+    Stack&lt;Character&gt; stack = new Stack&lt;&gt;();
+
+    for (int i=0; i&lt;number.length(); i++) {
+      char c = number.charAt(i);
+      while (!stack.isEmpty() &amp;&amp; stack.peek() &lt; c &amp;&amp; k-- &gt; 0) {
+        stack.pop();
+      }
+      stack.push(c);
+    }
+    for (int i=0; i&lt;result.length; i++) {
+      result[i] = stack.get(i);
+    }
+    return new String(result);
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.2 구명보트</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+
+public class Solution {
+  public int solution(int[] people, int limit) {
+    // 몸무게를 오름차순으로 정렬
+    Arrays.sort(people);
+    
+    // 필요한 보트 개수
+    int count = 0;
+    
+    // 가장 가벼운 사람을 가리키는 인덱스
+    int i = 0;
+
+    // 가장 무거운 사람을 가르키는 인덱스
+    int j = people.length - 1; 
+
+    while (i &lt;= j) {
+      // 가장 무거운 사람과 가장 가벼운 사람을 같이 태울 수 있으면 두 사람 모두 보트에 태움
+      if (people[i] + people[j] &lt;= limit) {
+        i += 1;
+      }
+
+      // 무거운 사람만 태울 수 있으면 무거운 사람만 보트에 태움
+      j -= 1;
+      count += 1;
+    }
+
+    return count;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.3 섬 연결하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+
+public class Solution {
+  private static int[] parent;
+
+  private static int find(int x) {
+    // x가 속한 집합의 루트 노드 찾기
+    if (parent[x] == x)
+      return x;
+
+    // 경로 압축: x의 부모를 루트로 설정
+    return parent[x] = find(parent[x]);
+  }
+
+  private static void union(int x, int y) {
+    // 두 집합을 하나의 집합으로 합치기
+    int root1 = find(x);
+    int root2 = find(y);
+    parent[root2] = root1;
+  }
+
+  public int solution(int n, int[][] costs) {
+    // 비용을 기준으로 다리를 오름차순 정렬
+    Arrays.sort(costs, (o1, o2) -&gt; Integer.compare(o1[2], o2[2]));
+
+    // parent 배열 초기화
+    parent = new int[n];
+    for (int i = 0; i &lt; n; i++) {
+      parent[i] = i;
+    }
+
+    int answer = 0; // 최소 신장 트리의 총 비용
+    int edges = 0; // 연결된 다리의 수
+
+    for (int[] edge : costs) {
+      // n - 1개의 다리가 연결된 경우 모든 섬이 연결됨
+      if (edges == n - 1)
+        break;
+
+      // 현재 다리가 연결하는 두 섬이 이미 연결되어 있는지 확인
+      if (find(edge[0]) != find(edge[1])) {
+        // 두 섬을 하나의 집합으로 연결함
+        union(edge[0], edge[1]);
+        
+        // 현재 다리의 건설 비용을 비용에 추가
+        answer += edge[2];
+
+        // 사용된 다리의 수 1증가
+        edges++;
+      }
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.3 단속카메라</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+
+class Solution {
+  public int solution(int[][] routes) {
+    Arrays.sort(routes, (a, b) -&gt; Integer.compare(a[1], b[1]));
+    int ans = 0;
+    int last_camera = Integer.MIN_VALUE;
+    for (int[] a : routes) {
+      if (last_camera &lt; a[0]) {
+        ++ans;
+        last_camera = a[1];
+      }
+    }
+    return ans;
+  }
+}
+</code></pre></div></div>
+
+<h3 id="동적계획법dynamic-programming-문제-풀이">동적계획법(Dynamic Programming) 문제 풀이</h3>
+<p><mark>LV.3 N으로 표현</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashSet;
+import java.util.Set;
+
+class Solution {
+  public int solution(int N, int number) {
+    int answer = -1;
+    Set&lt;Integer&gt;[] setArr = new Set[9];
+    int t = N;
+
+    for(int i = 1; i &lt; 9; i++) {
+      setArr[i] = new HashSet&lt;&gt;();
+      setArr[i].add(t);
+      t = t * 10 + N;
+    }
+
+    for(int i = 1; i &lt; 9; i++) {
+      for(int j = 1; j &lt; i; j++) {
+        for(Integer a : setArr[j]) {
+          for(Integer b : setArr[i - j]) {
+            setArr[i].add(a + b);
+            setArr[i].add(a - b);
+            setArr[i].add(b - a);
+            setArr[i].add(a * b);
+            if(b != 0) {
+              setArr[i].add(a / b);
+            }
+            if(a != 0) {
+              setArr[i].add(b / a);
+            }
+          }
+        }
+      }
+    }
+
+    for(int i = 1; i &lt; 9; i++) {
+      if(setArr[i].contains(number)) {
+        answer = i;
+        break;
+      }
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.3 정수 삼각형</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int solution(int[][] triangle) {
+    for (int i = 1; i &lt; triangle.length; i++) {
+      triangle[i][0] += triangle[i-1][0];
+      triangle[i][i] += triangle[i-1][i-1];
+
+      for (int j = 1; j &lt; i; j++) 
+        triangle[i][j] += Math.max(triangle[i-1][j-1], triangle[i-1][j]);
+    }
+
+    return Arrays.stream(triangle[triangle.length-1]).max().getAsInt();
+  }
+}
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Solution {
+  public int solution(int[][] triangle) {
+    int n = triangle.length;
+
+    // dp 배열 초기화
+    int[][] dp = new int[n][n];
+
+    // dp 배열의 맨 아래쪽 라인 초기화
+    for (int i = 0; i &lt; n; i++) {
+      dp[n - 1][i] = triangle[n - 1][i];
+    }
+
+    // 아래쪽 라인부터 올라가면서 dp 배열 채우기
+    for (int i = n - 2; i &gt;= 0; i--) {
+      for (int j = 0; j &lt;= i; j++) {
+        dp[i][j] = Math.max(dp[i + 1][j], dp[i + 1][j + 1]) + triangle[i][j];
+      }
+    }
+
+    // 꼭대기에서의 최댓값 반환
+    return dp[0][0];
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.3 등굣길</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int m, int n, int[][] puddles) {
+    int[][] dp = new int[m+1][n+1];
+
+    for(int i=0;i&lt;puddles.length;i++){
+        dp[puddles[i][0]][puddles[i][1]]=-1;
+    }
+
+    dp[1][1]=1; 
+    for(int i=1;i&lt;=m;i++){
+      for(int j=1;j&lt;=n;j++){
+        if(dp[i][j]==-1){
+          dp[i][j]=0;
+          continue;
+        }
+        if(i!=1) dp[i][j]+=dp[i-1][j]%1000000007;
+        if(j!=1) dp[i][j]+=dp[i][j-1]%1000000007;
+      }
+    }
+
+    return dp[m][n]%1000000007;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.4 사칙연산</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  int[][] minMem = new int[210][210];
+  boolean[][] minVisited = new boolean[210][210];
+  int[][] maxMem = new int[210][210];
+  boolean[][] maxVisited = new boolean[210][210];
+
+  public int solution(String arr[]) {
+    return computeMax(arr, 0, arr.length-1);
+  }
+
+  int computeMax(String[] arr, int s, int e) {
+    if(s == e) return Integer.parseInt(arr[s]);
+    if(maxVisited[s][e]) return maxMem[s][e];
+    int r = Integer.MIN_VALUE;
+    for(int i = s; i &lt;= e-2; i += 2) {
+      if(arr[i+1].equals("+")) {
+        r = Math.max(r, computeMax(arr, s, i) + computeMax(arr, i+2, e));
+      } else {
+        r = Math.max(r, computeMax(arr, s, i) - computeMin(arr, i+2, e));
+      }
+    }
+    maxVisited[s][e] = true;
+    maxMem[s][e] = r;
+    return r;
+  }
+
+  int computeMin(String[] arr, int s, int e) {
+    if(s == e) return Integer.parseInt(arr[s]);
+    if(minVisited[s][e]) return minMem[s][e];
+    int r = Integer.MAX_VALUE;
+    for(int i = s; i &lt;= e-2; i += 2) {
+      if(arr[i+1].equals("+")) {
+        r = Math.min(r, computeMin(arr, s, i) + computeMin(arr, i+2, e));
+      } else {
+        r = Math.min(r, computeMin(arr, s, i) - computeMax(arr, i+2, e));
+      }
+    }
+    minVisited[s][e] = true;
+    minMem[s][e] = r;
+    return r;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.4 도둑질</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int[] money) {        
+    int[][] pick = new int[2][money.length];
+
+    pick[0][0] = money[0];
+    pick[0][1] = money[0];
+    pick[1][0] = 0;
+    pick[1][1] = money[1];
+
+    for(int i=2; i&lt;money.length; i++) {
+      pick[0][i] = Math.max(pick[0][i-2] + money[i], pick[0][i-1]);
+      pick[1][i] = Math.max(pick[1][i-2] + money[i], pick[1][i-1]);
+    }
+
+    return Math.max(pick[0][pick[0].length-2], pick[1][pick[1].length-1]);
+  }
+}
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Solution {
+  public int solution(int[] money) {
+    // 점화식에 필요한 변수를 초기화
+    int n = money.length;
+    int[] dp1 = new int[n];
+    int[] dp2 = new int[n];
+
+    // 첫 번째 집을 도둑질하는 경우
+    dp1[0] = money[0];
+    dp1[1] = money[0];
+    for (int i = 2; i &lt; n - 1; i++) {
+      dp1[i] = Math.max(dp1[i - 1], dp1[i - 2] + money[i]);
+    }
+
+    // 첫 번째 집을 도둑질하지 않는 경우
+    dp2[1] = money[1];
+    for (int i = 2; i &lt; n; i++) {
+      dp2[i] = Math.max(dp2[i - 1], dp2[i - 2] + money[i]);
+    }
+
+    // 두 경우 중 최댓값 찾기
+    return Math.max(dp1[n - 2], dp2[n - 1]);
+  }
+}
+</code></pre></div></div>
+
+<h3 id="깊이너비-우선-탐색dfsbfs-문제-풀이">깊이/너비 우선 탐색(DFS/BFS) 문제 풀이</h3>
+<p><mark>LV.2 타겟 넘버</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int[] numbers, int target) {
+    // DFS로 타겟 숫자를 만들 수 있는 경우의 수 리턴
+    return dfs(numbers, target, 0, 0);
+  }
+  
+  public int dfs(int[] numbers, int target, int sum, int n) {
+    // 숫자 배열을 모두 탐색한 경우
+    if (n == numbers.length) {
+      // 합이 타겟 숫자와 같으면 경우의 수 1 반환
+      if (sum == target) {
+        return 1;
+      }
+
+      // 합이 타겟 숫자와 다르면 경우의 수 0 반환
+      return 0;
+    }
+    
+    // 현재 숫자를 빼거나 더하고, 다음 숫자 탐색을 반복하여 경우의 수 합산
+    return dfs(numbers, target, sum - numbers[n], n + 1)
+         + dfs(numbers, target, sum + numbers[n], n + 1);
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.3 네트워크</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int n, int[][] computers) {
+    // 네트워크 개수
+    int answer = 0;
+    
+    // 컴퓨터 방문 여부 체크 배열
+    boolean[] visited = new boolean[n];
+    
+    // 모든 컴퓨터를 순회하면서 방문하지 않은 컴퓨터에 DFS 수행
+    for (int i = 0; i &lt; n; i++) {
+      if (!visited[i]) {
+        dfs(n, computers, i, visited);
+        
+        // 새로운 네트워크 발견
+        answer++;
+      }
+    }
+    
+    // 전체 네트워크 개수 반환
+    return answer;
+  }
+  
+  public void dfs(int n, int[][] computers, int i, boolean[] visited) {
+    // 현재 컴퓨터 방문 표시
+    visited[i] = true;
+    
+    for (int j = 0; j &lt; n; j++) {
+      // 현재 컴퓨터와 연결된 컴퓨터 중 방문하지 않은 컴퓨터에 재귀적 DFS 수행
+      if (computers[i][j] == 1 &amp;&amp; !visited[j]) {
+        dfs(n, computers, j, visited);
+      }
+    }
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.2 게임 맵 최단거리</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int solution(int[][] maps) {
+    // 지도의 행과 열의 개수
+    int rows = maps.length;
+    int cols = maps[0].length;
+    
+    // 이동할 수 있는 방향 (상, 하, 좌, 우)
+    int[][] moves = new int[][] { {0, -1}, {0, 1}, {-1, 0}, {1, 0} };
+    
+    // BFS를 위한 큐 선언
+    Queue&lt;int[]&gt; queue = new ArrayDeque&lt;&gt;();
+    
+    // 시작 위치와 이동 거리(칸 수)를 큐에 넣음
+    queue.offer(new int[] {0, 0, 1});
+    
+    // BFS 탐색
+    while(!queue.isEmpty()) {
+      // 큐에서 현재 위치와 거리 정보를 꺼냄
+      int[] cur_node = queue.poll();
+      
+      int row = cur_node[0];
+      int col = cur_node[1];
+      int move_cnt = cur_node[2];
+      
+      // 목적지에 도달한 경우 현재까지의 최단거리 반환
+      if (row == rows-1 &amp;&amp; col == cols-1) {
+        return move_cnt;
+      }
+      
+      // 네 방향을 방문하여 갈 수 있는 위치면 큐에 추가
+      for (int[] move : moves) {
+        int next_row = row + move[1];
+        int next_col = col + move[0];
+          
+        // 새로운 위치가 지도 내에 있는 경우
+        if (next_row &gt;= 0 &amp;&amp; next_row &lt; rows &amp;&amp; next_col &gt;= 0 &amp;&amp; next_col &lt; cols) {
+          // 갈 수 없는 곳이거나 방문한 곳이면 건너띄움
+          if (maps[next_row][next_col] == 0) {
+            continue;
+          }
+
+          // 처음 방문하여, 재방문하지 않도록 방문 처리
+          maps[next_row][next_col] = 0;
+          
+          // 새로운 위치와 이동 거리를 큐에 추가
+          queue.offer(new int[] {next_row, next_col, move_cnt + 1});
+        }
+      }
+    }
+    
+    // 목적지에 도달할 수 없는 경우
+    return -1;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.3 단어 변환</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+
+  // 내부 클래스로 노드 정의
+  public class Node {
+    String cur_word; // 현재 단어
+    int change_cnt; // 변환 횟수
+
+    public Node(String cur_word, int change_cnt) {
+      this.cur_word = cur_word;
+      this.change_cnt = change_cnt;
+    }
+  }
+
+  public int solution(String begin, String target, String[] words) {
+    // BFS 탐색을 위한 큐 생성
+    Queue&lt;Node&gt; queue = new ArrayDeque&lt;&gt;();
+
+    // 방문 여부를 나타내는 배열 생성
+    boolean[] visited = new boolean[words.length];
+	
+    // 큐에 시작 단어 추가, 변환 횟수는 0으로 초기화
+    queue.add(new Node(begin, 0));
+
+    // BFS 탐색 시작
+    while (!queue.isEmpty()) {
+      Node node = queue.poll();
+	  
+      // 현재 단어가 목표 단어와 같으면
+      if (node.cur_word.equals(target)) {
+        // 현재까지의 변환 횟수 반환
+        return node.change_cnt;
+      }
+
+      // 단어 리스트 순회하며 변환 가능한 다음 단어 탐색
+      for (int i = 0; i &lt; words.length; i++) {
+        // 방문하지 않은 단어이고, 현재 단어에서 다음 단어를 한 글자만 바꿔서 만들 수 있다면
+        if (!visited[i] &amp;&amp; isNext(node.cur_word, words[i])) { 
+          // 다음 단어 방문 표시
+          visited[i] = true;
+		  
+          // 큐에 다음 단어 추가, 변환 횟수 1 증가
+          queue.add(new Node(words[i], node.change_cnt + 1));
+        }
+      }
+    }
+    
+    // target 단어가 없는 경우
+    return 0;
+  }
+
+  // 두 단어가 한 글자만 다른지 확인하는 함수
+  static boolean isNext(String cur_str, String next_str) {
+    int diff_cnt = 0;
+	
+    for (int i = 0; i &lt; next_str.length(); i++) {
+      if (cur_str.charAt(i) != next_str.charAt(i)) {
+        // 두 단어의 같은 인덱스 비교 후 다르면 카운트 증가
+        diff_cnt++;
+      
+        // 한 글자만 다른 경우가 아니라면 false 반환
+        if (diff_cnt &gt; 1) {
+          return false;
+        }
+      }
+    }
+
+    // 한 글자만 다른 경우 true 반환
+    return true;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.3 아이템 줍기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  // 상하좌우 이동을 위한 배열
+  int[][] moves = { {0, 1}, {0, -1}, {-1, 0}, {1, 0} };
+
+  public int solution(int[][] rectangle, int characterX, int characterY, int itemX, int itemY) {
+    int answer = 0;
+
+    // 경계면 이동 시 최단거리 정확도를 높이기 위해 모든 좌표를 2배로 확장
+    characterX *= 2;
+    characterY *= 2;
+    itemX *= 2;
+    itemY *= 2;
+
+    for(int i = 0; i &lt; rectangle.length; i++) {
+      var rec = rectangle[i];
+      rectangle[i] = new int[] { rec[0] * 2, rec[1] * 2, rec[2] * 2, rec[3] * 2};
+    }
+
+    // 사각형 영역을 표시하는 맵 생성
+    boolean[][] map = new boolean[102][102], vst = new boolean[102][102];
+
+    // 사각형 좌표를 이용하여 맵에 사각형 표시
+    for(int[] rec : rectangle) {
+      for(int i = rec[0]; i &lt;= rec[2]; i++) {
+        for(int j = rec[1]; j &lt;= rec[3]; j++) {
+          map[i][j] = true;
+        }
+      }
+    }
+    
+    // 사각형 내부에 있는 픽셀을 제거하여 테두리만 남김
+    Queue&lt;int[]&gt; q = new LinkedList&lt;&gt;();
+    for(int i = 1; i &lt;= 100; i++) {
+      for(int j = 1; j &lt;= 100; j++) {
+        int inner = 0;
+
+        for(int[] rec : rectangle) {
+            if(rec[0] &lt; i &amp;&amp; i &lt; rec[2] &amp;&amp; rec[1] &lt; j &amp;&amp; j &lt; rec[3]) inner++;
+        }
+        
+        if(inner != 0) q.add(new int[] { i, j });
+      }
+    }
+
+    // 테두리 좌표를 이용하여 맵에서 내부 제거
+    for(int[] p : q) map[p[0]][p[1]] = false;
+    
+    // BFS를 사용하여 최단 경로 계산
+    q = new LinkedList&lt;&gt;();
+    q.add(new int[] { characterX, characterY, 0 });
+    vst[characterX][characterY] = true;
+    
+    while(!q.isEmpty()) {
+      int[] p = q.poll();
+
+      // 아이템에 도달하면 이동 횟수를 저장
+      if(p[0] == itemX &amp;&amp; p[1] == itemY) {
+        answer = p[2] / 2;
+        break;
+      }
+      
+      // 상하좌우 이동을 시도하며, 이동 가능한 경우 큐에 추가
+      for(int i = 0; i &lt; moves.length; i++) {
+        int x = p[0] + moves[i][0];
+        int y = p[1] + moves[i][1];
+
+        if(0 &lt;= x &amp;&amp; 0 &lt;= y &amp;&amp; x &lt; 102 &amp;&amp; y &lt; 102 &amp;&amp; !vst[x][y] &amp;&amp; map[x][y]) {
+          q.add(new int[] {x, y, p[2] + 1});
+
+          // 큐에 추가 후 방문 처리
+          vst[x][y] = true;
+        }
+      }
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.3 여행경로</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  List&lt;Stack&lt;String&gt;&gt; result;
+  String[][] tickets;
+
+  public String[] solution(String[][] tickets) {
+    result = new ArrayList&lt;&gt;();
+    this.tickets = tickets;
+
+    boolean[] visited = new boolean[tickets.length];
+    Stack&lt;String&gt; st = new Stack&lt;&gt;();
+    st.push("ICN");
+
+    dfs(visited, st, 0);
+
+    if (result.size() &gt; 1) {
+      Collections.sort(result, new Comparator&lt;Stack&lt;String&gt;&gt;() {
+        @Override
+        public int compare(Stack&lt;String&gt; o1, Stack&lt;String&gt; o2) {
+          for (int i = 0; i &lt; o1.size(); i++) {
+            String s1 = o1.get(i);
+            String s2 = o2.get(i);
+
+            if (!s1.equals(s2)) {
+              return s1.compareTo(s2);
+            }
+          }
+
+          return 0;
+        }
+      });
+    }
+
+    Stack&lt;String&gt; res = result.remove(0);
+    String[] answer = new String[res.size()];
+
+    for (int i = 0; i &lt; answer.length; i++) {
+      answer[i] = res.get(i);
+    }
+
+    return answer;
+  }
+
+  public void dfs(boolean[] visited, Stack&lt;String&gt; st, int len) {
+    if (len == tickets.length) {
+      Stack&lt;String&gt; res = new Stack&lt;&gt;();
+      for (String s : st) {
+        res.push(s);
+      }
+
+      result.add(res);
+      return;
+    }
+
+    String arrive = st.peek();
+
+    for (int i = 0; i &lt; tickets.length; i++) {
+      String[] tic = tickets[i];
+
+      if (!visited[i] &amp;&amp; arrive.equals(tic[0])) {
+        st.push(tic[1]);
+        visited[i] = true;
+
+        dfs(visited, st, len + 1);
+
+        visited[i] = false;
+        st.pop();
+      }
+    }
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.3 퍼즐 조각 채우기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public class Node {
+      int x, y;
+
+      Node(int x, int y) {
+          this.x = x;
+          this.y = y;
+      }
+  }
+  public ArrayList&lt;String&gt; emptyList = new ArrayList&lt;&gt;();
+  public int N;
+  public int[] dx = {0, 0, -1, 1};
+  public int[] dy = {-1, 1, 0, 0};
+
+  public int solution(int[][] game_board, int[][] table) {
+      N = game_board.length;
+      int answer = 0;
+
+      for(int i = 0; i &lt; N; i++) {
+          for(int j = 0; j &lt; N ; j++) {
+              if(game_board[i][j] == 0) {
+                  emptyList.add(bfs(game_board, i, j, 0));
+              }
+          }
+      }
+
+      for(int i = 0; i &lt; N; i++) {
+          for(int j = 0; j &lt; N ; j++) {
+              if(table[i][j] == 1) {
+                  answer += find(bfs(table, i, j, 1));
+              }
+          }
+      }
+
+      return answer;
+  }
+
+  public int find(String s) {
+      int point = 0;
+
+      for(int i = 0; i &lt; s.length(); i++) {
+          if(s.charAt(i) == '1') point++;
+      }
+
+      for(int i = 0; i &lt; emptyList.size(); i++) {
+          String str = emptyList.get(i);
+
+          for(int j = 0; j &lt; 4; j++) {
+              str = rotate(str);
+              // System.out.println(str);
+              if(s.equals(str)) {
+                  emptyList.remove(i);
+                  return point;
+              }
+          }
+      }
+
+      return 0;
+  }
+
+  public String rotate(String s) {
+    String str = "";
+    int x = 0;
+    int y = 0;
+
+    for(int i = 0; i &lt; s.length(); i++) {
+      if(x == 0) {
+        if(s.charAt(i) != ' ') {
+          y++;
+        }
+      }
+      if(s.charAt(i) == ' ') {
+        x++;
+      }
+    }
+
+    char[][] arr = new char[x][y];
+    StringTokenizer st = new StringTokenizer(s);
+
+    for(int i = 0; i &lt; x; i++) {
+      arr[i] = st.nextToken().toCharArray();
+    }
+
+    for(int j = 0; j &lt; y; j++) {
+      for(int i = x - 1; i &gt;= 0; i--) {
+        str += arr[i][j];
+      }
+      str += " ";
+    }
+
+    return str;
+  }
+
+  public String bfs(int[][] arr, int i, int j, int mode) {
+    // mode 0 : game_board, mode 1 : table
+    String s = "";
+    ArrayDeque&lt;Node&gt; q = new ArrayDeque&lt;&gt;();
+    boolean[][] tmp = new boolean[N][N];
+
+    int x_min = i;
+    int x_max = i;
+    int y_min = j;
+    int y_max = j;
+
+    tmp[i][j] = true;
+    arr[i][j] = (mode + 1) % 2;
+    q.add(new Node(i, j));
+
+    while(!q.isEmpty()) {
+      Node cur = q.poll();
+      int x = cur.x;
+      int y = cur.y;
+
+      x_min = Math.min(x_min, x);
+      x_max = Math.max(x_max, x);
+      y_min = Math.min(y_min, y);
+      y_max = Math.max(y_max, y);
+
+      for(int k = 0; k &lt; 4; k++) {
+        int nx = x + dx[k];
+        int ny = y + dy[k];
+
+        if(!isBoundary(nx, ny)) continue;
+
+        if(arr[nx][ny] == mode) {
+          tmp[nx][ny] = true;
+          arr[nx][ny] = (mode + 1) % 2;
+          q.add(new Node(nx, ny));
+        }
+      }
+    }
+
+    for(int x = x_min; x &lt;= x_max; x++) {
+      for(int y = y_min; y &lt;= y_max; y++) {
+        s += tmp[x][y] ? "1" : "0";
+      }
+      s += " ";
+    }
+
+    return s;
+  }
+
+  public boolean isBoundary(int x, int y) {
+    return x &gt;= 0 &amp;&amp; x &lt; N &amp;&amp; y &gt;= 0 &amp;&amp; y &lt; N;
+  }
+}
+</code></pre></div></div>
+
+<h3 id="이분탐색-문제-풀이">이분탐색 문제 풀이</h3>
+<p><mark>LV.3 입국심사</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+class Solution {
+  public long solution(int n, int[] times) {
+    long answer = 0;
+    Arrays.sort(times);
+    long left = 0;
+    long right = times[times.length-1] * (long)n; //모든 사람이 가장 느리게 심사받음
+    
+    while(left &lt;= right) {
+      long mid = (left + right) / 2;
+      long complete = 0;
+      for (int i = 0; i &lt; times.length; i++)
+        complete += mid / times[i];
+      if (complete &lt; n) // 해당 시간에는 모든 사람이 검사받을 수 없다.
+        left = mid + 1;
+      else {
+        right = mid - 1;
+        answer = mid; // 모두 검사받았으나, 더 최솟값이 있을 수 있다.
+      }
+    }  
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.4 징검다리</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int solution(int distance, int[] rocks, int n) {
+    int answer = 0;
+
+    Arrays.sort(rocks);
+    
+    int left = 1;
+    int right = distance;
+
+    while(left &lt;= right){
+      int mid = (left + right)/2;
+      if(getRemovedRockCnt(rocks, mid, distance) &lt;= n){
+        answer = mid;
+        left = mid + 1;
+      } else {
+        right = mid - 1; 
+      }
+    }
+    
+    return answer;
+  }
+  
+  public int getRemovedRockCnt(int[] rocks, int mid, int distance){
+    // mid가 바위(지점) 간 최소 거리가 되어야 함
+    // 그렇게 하기 위해 제거 해야할 바위의 개수를 리턴한다. 
+    int before = 0; 
+    int end = distance;
+    
+    int removeCnt = 0;
+
+    for(int i = 0; i &lt; rocks.length; i++){
+      if(rocks[i] - before &lt; mid) {
+        removeCnt++;
+        continue;
+      }
+
+      before = rocks[i];
+    }
+
+    if(end - before &lt; mid) removeCnt++;
+
+    return removeCnt;
+  }
+}
+</code></pre></div></div>
+
+<h3 id="그래프-문제-풀이">그래프 문제 풀이</h3>
+<p><mark>LV.3 가장 먼 노드</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.ArrayList;
+
+class Solution {
+  public int solution(int n, int[][] edge) {
+    ArrayList&lt;Integer&gt;[] path = new ArrayList[n];
+    ArrayList&lt;Integer&gt; bfs = new ArrayList&lt;Integer&gt;();
+    int answer = 0;
+    int[] dist = new int[n];
+    dist[0] = 1;
+    int max = 0;
+
+    for(int i = 0; i &lt; edge.length; i++) {
+      int num1 = edge[i][0] - 1;
+      int num2 = edge[i][1] - 1;
+
+      if(path[num1] == null)
+        path[num1] = new ArrayList&lt;Integer&gt;();
+
+      if(path[num2] == null)
+        path[num2] = new ArrayList&lt;Integer&gt;();
+
+      path[num1].add(num2);
+      path[num2].add(num1);
+    }
+
+    bfs.add(0);
+
+    while(!bfs.isEmpty()) {
+      int idx = bfs.get(0);
+      bfs.remove(0);
+      while(!path[idx].isEmpty()) {
+        int num = path[idx].get(0);
+        path[idx].remove(0);
+        bfs.add(num);
+
+        if(dist[num] == 0) {
+          dist[num] = dist[idx] + 1;
+          max = dist[num];
+        }
+      }
+    }
+
+    for(int i = 0; i &lt; n; i++) {
+      if(dist[i] == max)
+        answer++;
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.3 순위</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int n, int[][] results) {
+    int answer = 0;
+
+    boolean[][] chk = new boolean[n + 1][n + 1];
+
+    for(int i = 0; i &lt; results.length; i++) {
+      chk[results[i][0]][results[i][1]] = true;
+    }
+
+    for(int k = 1; k &lt; n + 1; k++) {
+      for(int i = 1; i &lt; n + 1; i++) {
+        for(int j = 1; j &lt; n + 1; j++) {
+          if(i != j &amp;&amp; chk[i][k] &amp;&amp; chk[k][j]) {
+            chk[i][j] = true;
+          }
+        }
+      }
+    }
+
+    for(int i = 1; i &lt; n + 1; i++) {
+      boolean pass = true;
+
+      for(int j = 1; j &lt; n + 1; j++) {
+        if(i != j &amp;&amp; !(chk[i][j] || chk[j][i])) {
+          pass = false;
+          break;
+        }
+      }
+
+      if(pass) {
+        answer++;
+      }
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>LV.5 방의 개수</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashSet;
+import java.util.Set;
+
+class Solution {
+  public int solution(int[] arrows) {
+      int answer = 0;
+      Set&lt;String&gt; lineSet = new HashSet&lt;String&gt;();
+      Set&lt;String&gt; pointSet = new HashSet&lt;String&gt;();
+      int x = 0;
+      int y = 0;
+      pointSet.add("" + x+"|"+y);
+      for (int i = 0; i &lt; arrows.length; i++) {
+        for(int j = 0; j &lt; 2; j++){
+          int vect = arrows[i];
+          String start = ""+ x+"|"+y;
+
+          if(vect&lt;=1 || vect==7) y++;
+          if(1&lt;=vect &amp;&amp; vect&lt;=3) x++;
+          if(3&lt;=vect &amp;&amp; vect&lt;=5) y--;
+          if(5&lt;=vect &amp;&amp; vect&lt;=7) x--;
+
+          String point = "" + x+"|"+y;
+          String normalLine = start +"|" + point; 
+          String backLine =  point + "|" + start; 
+
+          if(pointSet.contains(point)){
+            if(!lineSet.contains(normalLine)){
+              answer++;
+            }
+          }
+
+          pointSet.add(point);
+          lineSet.add(normalLine);
+          lineSet.add(backLine);
+        }
+      }
+
+      return answer;
+  }
+}
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%ED%8C%8C%EC%9D%B4%EC%8D%AC-java" class="page__taxonomy-item" rel="tag">파이썬 / Java</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2024-03-15">2024-03-15</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/web-dev/2024-03-13-1" class="pagination--pager" title="자주 쓰는 Jquery 정리 / Jquery 문법
+">Prev</a>
+    
+    
+      <a href="/it-tip/2024-03-16-1" class="pagination--pager" title="바탕화면에 특정 URL 웹 페이지 바로가기 만들기
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

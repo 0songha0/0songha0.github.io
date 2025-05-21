@@ -1,0 +1,1000 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Elastisearch 개념 및 장단점 / 엘라스틱서치 기초 공부 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="Elastisearch 개념 및 장단점 / 엘라스틱서치 기초 공부">
+<meta property="og:url" content="https://0songha0.github.io/elk/2022-08-01-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-08-01T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2022-08-01T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/elk/2022-08-01-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Elastisearch 개념 및 장단점 / 엘라스틱서치 기초 공부">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2022-08-01T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2022-08-01T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Elastisearch 개념 및 장단점 / 엘라스틱서치 기초 공부
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2022-08-01T00:00:00+00:00">2022-08-01</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Elastisearch 개념 및 장단점 / 엘라스틱서치 기초 공부</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#엘라스틱서치란">엘라스틱서치란?</a><ul><li><a href="#elastisearch-활용-범위">Elastisearch 활용 범위</a></li><li><a href="#elastisearch-장점">Elastisearch 장점</a></li><li><a href="#elastisearch-단점">Elastisearch 단점</a></li></ul></li><li><a href="#elastic-stack-구성">Elastic Stack 구성</a><ul><li><a href="#beats">Beats</a></li><li><a href="#logstash">Logstash</a></li><li><a href="#elasticsearch">Elasticsearch</a></li><li><a href="#kibana">Kibana</a></li></ul></li><li><a href="#elastic-stack-설치-순서">Elastic Stack 설치 순서</a></li><li><a href="#elk-권장-하드웨어-사양">ELK 권장 하드웨어 사양</a></li><li><a href="#elasticsearch-용어-정리">Elasticsearch 용어 정리</a><ul><li><a href="#cluster-시스템">Cluster (=시스템)</a></li><li><a href="#node-서버">Node (=서버)</a></li><li><a href="#shard-partition">Shard (=Partition)</a></li><li><a href="#index-dbtable">Index (=DB=Table)</a></li><li><a href="#type-table">Type (=Table)</a></li><li><a href="#document-row-행">Document (=Row, 행)</a></li><li><a href="#field-column-열">Field (=Column, 열)</a></li><li><a href="#mapping-schema">Mapping (=Schema)</a></li><li><a href="#query-dsl-sql">Query DSL (=SQL)</a></li></ul></li><li><a href="#elasticsearch-api-분류">Elasticsearch API 분류</a></li><li><a href="#elasticsearch-http-메소드-종류">Elasticsearch HTTP 메소드 종류</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="엘라스틱서치란">엘라스틱서치란?</h2>
+
+<p>엘라스틱에서 java로 개발한 오픈소스 Restful 검색엔진입니다.<br />
+대량의 데이터를 빠르게 수집, 분석, 시각화, 분산 검색, 집계할 수 있습니다.</p>
+
+<h3 id="elastisearch-활용-범위">Elastisearch 활용 범위</h3>
+<ul>
+  <li>역 인덱스 구현으로 전체 텍스트를 색인해서 특정 단어가 포함된 문서의 위치를 빠르게 검색</li>
+  <li>로그 등 다양한 데이터 수집 및 통계 분석</li>
+</ul>
+
+<p><mark>역 인덱스 (=역 색인)</mark><br />
+문서 위치에 대한 인덱스를 만드는 DB 색인과 달리, 문서 내 단어들의 매핑 정보를 색인하여 저장합니다.<br />
+역 인덱스를 사용하면 특정 단어가 포함된 문서를 효율적으로 찾을 수 있습니다.</p>
+
+<h3 id="elastisearch-장점">Elastisearch 장점</h3>
+<ul>
+  <li>위치정보, 정형, 비정형 등 모든 유형의 텍스트 데이터 수집이 가능합니다.</li>
+  <li>모든 필드에 색인(indexing) 처리를 해서 검색 시간이 짧습니다.</li>
+  <li>검색어와 필드의 형태소를 분리해서 검색어가 포함된 도큐먼트를 유사도 높은 순으로 검색할 수 있습니다.</li>
+  <li>HTTP 프로토콜로 통신하는 Restful API를 지원하여 다양한 플랫폼에서 사용할 수 있습니다.</li>
+  <li>Elastic Cluster에 Elastic Node를 1개씩 추가하여 노드의 수평적 확장이 가능합니다.</li>
+  <li>데이터를 조각(shard) 단위로 복제하고 각 노드에 분산 저장하여 특정 노드 다운에도 데이터 유실이 없습니다.</li>
+  <li>여러 노드에 분산 검색하여 노드가 많을수록 검색 속도가 향상됩니다.</li>
+  <li>SQL의 like와 달리, 대소문자 구분 없이 검색 가능합니다.</li>
+  <li>Kibana에 연결해 시각화하여 실시간 로그 분석 및 모니터링이 가능합니다.</li>
+  <li>관계형 데이터베이스로 처리하기 어려운 집계도 빠르게 처리 가능합니다.</li>
+  <li>데이터 색인 뒤 Refresh 시점부터 거의 실시간으로 검색 결과가 반영됩니다.</li>
+</ul>
+
+<h3 id="elastisearch-단점">Elastisearch 단점</h3>
+<ul>
+  <li>복잡한 관계형 데이터 모델링에 적합하지 않아, RDBMS를 완전히 대체할 수 없습니다.</li>
+  <li>NoSQL 구조이므로 Join 쿼리는 어렵고 검색 성능이 좋지 않아 역 정규화 모델링이 권장됩니다.</li>
+  <li>원본 데이터를 엘라스틱서치에도 저장하여, 데이터 무결성 관리 포인트가 늘어납니다.</li>
+  <li>트랜잭션, 롤백은 지원하지 않아 불가합니다.</li>
+  <li>인덱싱 부하로 인해 완전 실시간 처리는 불가할 수 있습니다.</li>
+</ul>
+
+<hr />
+
+<h2 id="elastic-stack-구성">Elastic Stack 구성</h2>
+
+<p>Elastic Stack은 과거 ELK Stack에 Beats가 추가된 것입니다.</p>
+
+<h3 id="beats">Beats</h3>
+<p>장비와 시스템에서 수집한 데이터를 Logstash 또는 Elasticsearch에 전송합니다.<br />
+고 언어(golang)로 작성되었고, 데이터 변환 기능이 없어 Logstash보다 가벼운 경량 수집기입니다.<br />
+수집할 데이터 종류에 맞게 설치해야 하고, 모든 장비에 설치하지 않아도 됩니다.<br />
+Beats는 Elastic Stack 필수 요소가 아닙니다.</p>
+
+<p><mark>Beats 종류</mark></p>
+<table>
+  <tbody>
+    <tr>
+      <td>fileBeat</td>
+      <td>파일 위주의 대용량 데이터 수집 (로그, CSV 파일 등)</td>
+    </tr>
+    <tr>
+      <td>MetricBeat</td>
+      <td>실행 중인 프로세스 정보, 자원 정보 등 실시간 수집</td>
+    </tr>
+    <tr>
+      <td>WinLogBeat</td>
+      <td>윈도우 로그 데이터 수집</td>
+    </tr>
+    <tr>
+      <td>HeartBeat</td>
+      <td>각 프로세스 가동 시간 수집</td>
+    </tr>
+    <tr>
+      <td>PacketBeat</td>
+      <td>네트워크 데이터 수집</td>
+    </tr>
+    <tr>
+      <td>AuditBeat</td>
+      <td>리눅스 이벤트 로그 데이터 수집 (보안 분석 활용)</td>
+    </tr>
+  </tbody>
+</table>
+<p>커스텀 Beat도 있어서 종류가 많지만, DB 데이터를 수집하는 Beat는 없는 것 같아 사용하지 않았습니다.</p>
+
+<h3 id="logstash">Logstash</h3>
+<p>파일, DB, Beats 등에서 데이터를 수집하고 변환(전처리) 후 Elasticsearch로 전송하는 ETL 도구입니다.<br />
+데이터 소스가 있는 모든 장비들에 설치해야 합니다.</p>
+
+<p>영속성 큐 사용으로 이벤트 최소 1회 전송을 보장해 주고, 부하 상황에서도 안정성을 보장해줍니다.<br />
+<code class="language-plaintext highlighter-rouge">로그스태시 기본 포트</code> : 5000 / 9600</p>
+
+<h3 id="elasticsearch">Elasticsearch</h3>
+<p>엘라스틱서치에 데이터를 색인(인덱싱) 후 저장하고, 검색 및 분석이 가능합니다.<br />
+<code class="language-plaintext highlighter-rouge">엘라스틱서치 기본 포트</code> : 9200~ (외부 HTTP 통신) / 9300~ (내부 노드 간 전송 통신)</p>
+
+<h3 id="kibana">Kibana</h3>
+<p>저장된 엘라스틱서치 데이터를 시각화, 모니터링 및 관리하기 위한 웹 기반 플랫폼입니다.<br />
+<code class="language-plaintext highlighter-rouge">키바나 기본 포트</code> : 5601</p>
+
+<hr />
+
+<h2 id="elastic-stack-설치-순서">Elastic Stack 설치 순서</h2>
+
+<p>elasticsearch → kibana → logstash → beats</p>
+
+<hr />
+
+<h2 id="elk-권장-하드웨어-사양">ELK 권장 하드웨어 사양</h2>
+
+<ul>
+  <li>RAM : 64GB</li>
+  <li>CPU : 2 ~ 8 core</li>
+  <li>SSD : 200GB</li>
+  <li>RAID 0</li>
+</ul>
+
+<hr />
+
+<h2 id="elasticsearch-용어-정리">Elasticsearch 용어 정리</h2>
+
+<h3 id="cluster-시스템">Cluster (=시스템)</h3>
+<p>클러스터는 시스템의 최대 단위이며, 여러 Node의 묶음입니다.<br />
+시스템 장애를 대비하고 시스템 성능을 높이기 위해 여러 노드를 결합하여 무한 확장 가능합니다.</p>
+
+<h3 id="node-서버">Node (=서버)</h3>
+<p>노드는 클러스터 내에서 실시간 추가/제거 가능한 단일 Elasticsearch 프로세스입니다.<br />
+일반적으로 하나의 컴퓨터에 하나의 노드를 구성합니다.</p>
+
+<p>엘라스틱서치 설치 후 노드는 기본적으로 모든 역할을 수행합니다.<br />
+부하 분산, 검색 효율, 안정성을 위해 마스터 후보 전용 노드, 데이터 전용 노드, 코디네이터 전용 노드를 나누면 좋습니다.</p>
+
+<p><mark>마스터 노드 [ master ]</mark><br />
+클러스터 설정 정보, 인덱스 설정/매핑 정보, 인덱스 템플릿 정보 등을 관리하는 노드입니다.<br />
+반드시 하나 존재해야 하며, 사용자가 홀수 개로 지정한 마스터 후보 노드 중 투표를 통해 선출됩니다.<br />
+마스터 후보 노드들은 마스터 노드 정보를 공유하고 있어 선출 즉시 마스터 노드의 역할을 할 수 있습니다.</p>
+
+<p><mark>투표 전용 노드 [ voting_only ]</mark><br />
+마스터 후보 노드가 아니지만 마스터 노드 투표 권한을 가진 노드입니다.<br />
+마스터 노드에 장애 발생 시 새로운 마스터 노드 선출에 투표하여 시스템이 멈추지 않고 동작하게 해줍니다.<br />
+모든 노드가 수행할 수 있는 기본적인 역할이며, 별도의 설정이 필요하지 않습니다.</p>
+
+<p><mark>데이터 노드 [ data ]</mark><br />
+샤드가 저장되는 노드입니다. 데이터 CRUD, 검색, 집계 작업을 하며 가장 많은 부하를 받습니다.</p>
+
+<p><mark>인제스트 노드 [ ingest ]</mark><br />
+로그스태시 필터처럼 데이터 전처리를 수행하는 노드입니다.<br />
+간단한 데이터 가공에만 사용됩니다.</p>
+
+<p><mark>머신러닝 노드 [ ml ]</mark><br />
+유료 라이선스의 기능입니다.</p>
+
+<p><mark>코디네이터 노드 [ coordinating_only ]</mark><br />
+REST API 요청을 받아 데이터 노드에 로드밸런싱하고 결과를 취합하여 HTTP 응답하는 노드입니다.<br />
+모든 노드가 수행할 수 있는 기본적인 역할이며, 별도의 설정이 필요하지 않습니다.</p>
+
+<h3 id="shard-partition">Shard (=Partition)</h3>
+<p>샤드는 색인된 인덱스 도큐먼트 데이터 조각이며, 여러 개의 노드에 분산 저장됩니다.<br />
+다수의 샤드로 병렬 처리되어 검색 성능이 증가합니다.</p>
+
+<p>인덱스 생성 시 세팅 값으로 샤드 개수를 미설정하면 프라이머리 샤드, 레플리카 샤드가 1개씩 생성됩니다.</p>
+
+<p>샤드 수는 노드 수, 인덱스 크기에 따라 조정하는 것이 좋습니다. (정답이 없습니다.)<br />
+노드 수에 비해 샤드가 적으면 검색 성능에 좋지 않고, 샤드가 너무 많으면 시스템 성능에 좋지 않습니다.<br />
+샤드는 CPU, 메모리, 리소스를 개별적으로 소비하니 필요 이상의 리소스를 사용하는 오버샤딩 문제가 생길 수 있습니다.</p>
+
+<p>샤드 1개 크기는 20~40GB가 권장됩니다.<br />
+너무 작은 샤드는 오버헤드를, 너무 큰 샤드는 검색 성능 문제를 발생시킬 수 있습니다.</p>
+
+<p><mark>Primary Shard</mark><br />
+CRUD를 제공하는 샤드입니다.
+프라이머리 샤드 수는 인덱스 생성 시에만 설정 가능하고 변경 불가합니다.</p>
+
+<p><mark>Replica Shard</mark><br />
+장애 복구 및 읽기 분산을 위한 복제본 샤드입니다.</p>
+
+<p>프라이머리 샤드에 장애 발생 시 프라이머리 샤드로 변경되고 다른 노드에 새 레플리카 샤드를 할당합니다.<br />
+운영 중 레플리카 샤드 수 변경이 가능하고, 장애 대응을 위해 최소 1개 이상 두는 것이 좋습니다.</p>
+
+<p>단일 노드의 경우, 레플리카 샤드는 UNASSIGNED 되어있습니다.</p>
+
+<h3 id="index-dbtable">Index (=DB=Table)</h3>
+<p>최상위 데이터 계층으로, 비슷한 특성을 가진 문서의 모음입니다. (고객/제품/주문 색인)<br />
+검색 성능 최적화를 위해 특정 시간이나 인덱스 크기를 기준으로 인덱스를 분리하여 사용합니다.</p>
+
+<h3 id="type-table">Type (=Table)</h3>
+<p>Elastic Stack 7.0 이후로 Index와 Type은 1:1이기 때문에 Type 개념이 폐지되었습니다.</p>
+
+<h3 id="document-row-행">Document (=Row, 행)</h3>
+<p>데이터 검색을 위한 최소 단위이며, JSON으로 저장됩니다.</p>
+
+<h3 id="field-column-열">Field (=Column, 열)</h3>
+<p>JSON으로 이루어진 데이터 속성입니다.</p>
+
+<h3 id="mapping-schema">Mapping (=Schema)</h3>
+<p>문서의 Field, 필드 타입 및 색인 방법이 정의된 Document 저장 규칙입니다.<br />
+단순 문자열 저장 시 keyword 타입, 형태소 분석 검색을 원할 시 text 타입을 사용합니다.<br />
+매핑 정보는 인덱스 생성 시 자동 설정되며, 변경하려면 데이터 삭제 후 다시 색인해야 합니다.</p>
+
+<h3 id="query-dsl-sql">Query DSL (=SQL)</h3>
+<p>엘라스틱서치에 질의를 요청할 수 있는 JSON 기반 쿼리입니다.</p>
+
+<hr />
+
+<h2 id="elasticsearch-api-분류">Elasticsearch API 분류</h2>
+
+<p><mark>인덱스 관리 API</mark><br />
+인덱스 생성/삭제, 인덱스 설정 업데이트를 할 수 있습니다.</p>
+
+<p><mark>문서 관리 API</mark><br />
+Document를 조회/수정/삭제/색인 합니다.</p>
+
+<p><mark>검색 API</mark><br />
+URL을 사용하는 RESTful Request 방식보다, Query DSL 방식이 더 복잡한 검색 쿼리를 작성할 수 있습니다.</p>
+
+<p><mark>집계 API</mark><br />
+다양한 집계 유형을 결합/중첩/조합할 수 있습니다.</p>
+
+<hr />
+
+<h2 id="elasticsearch-http-메소드-종류">Elasticsearch HTTP 메소드 종류</h2>
+<table>
+  <tbody>
+    <tr>
+      <td>GET</td>
+      <td>문서 검색</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td>문서 생성 (수정 시 에러)</td>
+    </tr>
+    <tr>
+      <td>PUT</td>
+      <td>문서 생성 또는 수정</td>
+    </tr>
+    <tr>
+      <td>DELETE</td>
+      <td>문서 삭제</td>
+    </tr>
+  </tbody>
+</table>
+<p>HTTP 기반의 엘라스틱서치 API에 JSON으로 요청하고, 결과에 대한 응답을 JSON으로 받을 수 있습니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%EC%97%98%EB%9D%BC%EC%8A%A4%ED%8B%B1%EC%84%9C%EC%B9%98" class="page__taxonomy-item" rel="tag">엘라스틱서치</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-08-01">2022-08-01</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/tool/2022-07-25-1" class="pagination--pager" title="윈도우 잠금화면 배경이미지 저장 방법
+">Prev</a>
+    
+    
+      <a href="/it-tip/2022-08-01-1" class="pagination--pager" title="무선이어폰 PC 연결 방법 / 갤럭시 버즈 동굴소리 없애기
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

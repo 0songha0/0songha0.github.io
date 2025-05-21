@@ -1,0 +1,899 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>SourceTree 설치 / GUI 툴 소스트리에서 Git 사용법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="SourceTree 설치 / GUI 툴 소스트리에서 Git 사용법">
+<meta property="og:url" content="https://0songha0.github.io/tool/2023-10-31-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-10-31T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2023-10-31T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/tool/2023-10-31-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="SourceTree 설치 / GUI 툴 소스트리에서 Git 사용법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2023-10-31T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2023-10-31T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">SourceTree 설치 / GUI 툴 소스트리에서 Git 사용법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2023-10-31T00:00:00+00:00">2023-10-31</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> SourceTree 설치 / GUI 툴 소스트리에서 Git 사용법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#sourcetree-설치">SourceTree 설치</a></li><li><a href="#소스트리-사용법">소스트리 사용법</a><ul><li><a href="#프로젝트에-git-저장소-생성-방법">프로젝트에 Git 저장소 생성 방법</a></li><li><a href="#프로젝트-git-연결-불러오기">프로젝트 Git 연결 불러오기</a></li><li><a href="#git-연결-탭-이름-변경">Git 연결 탭 이름 변경</a></li><li><a href="#git-fetch-방법">Git Fetch 방법</a></li><li><a href="#git-pull-방법">Git Pull 방법</a></li><li><a href="#git-stash-방법">Git Stash 방법</a></li><li><a href="#git-unstash-방법">Git Unstash 방법</a></li><li><a href="#git-commit-방법">Git Commit 방법</a></li><li><a href="#git-브랜치-복제-방법">Git 브랜치 복제 방법</a></li><li><a href="#git-브랜치-체크아웃-방법">Git 브랜치 체크아웃 방법</a></li><li><a href="#git-커밋-체리픽-방법">Git 커밋 체리픽 방법</a></li><li><a href="#git-브랜치-병합-방법">Git 브랜치 병합 방법</a></li><li><a href="#git-원격-브랜치-가져오기">Git 원격 브랜치 가져오기</a></li><li><a href="#특정-커밋-시점으로-git-원격-브랜치-커밋-되돌리기">특정 커밋 시점으로 Git 원격 브랜치 커밋 되돌리기</a></li><li><a href="#git-원격-브랜치-일부-커밋-취소">Git 원격 브랜치 일부 커밋 취소</a></li><li><a href="#git-원격-브랜치-다시-받기">Git 원격 브랜치 다시 받기</a></li><li><a href="#원격-브랜치명-변경-방법">원격 브랜치명 변경 방법</a></li><li><a href="#작업중-소스-폐기">작업중 소스 폐기</a></li><li><a href="#일부-코드-폐기">일부 코드 폐기</a></li><li><a href="#폴더-및-파일-경로-확인">폴더 및 파일 경로 확인</a></li><li><a href="#퍼블리싱-html-파일-브라우저로-열기">퍼블리싱 html 파일 브라우저로 열기</a></li><li><a href="#커밋-히스토리-검색">커밋 히스토리 검색</a></li><li><a href="#길어서-안나오는-파일-소스-비교">길어서 안나오는 파일 소스 비교</a></li></ul></li><li><a href="#소스트리-에러-해결">소스트리 에러 해결</a><ul><li><a href="#소스트리-실행이-안-되는-경우">소스트리 실행이 안 되는 경우</a></li><li><a href="#소스트리-실행-시-에러-팝업-해결">소스트리 실행 시 에러 팝업 해결</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="sourcetree-설치">SourceTree 설치</h2>
+
+<p><a href="https://www.sourcetreeapp.com" target="_blank">https://www.sourcetreeapp.com</a><br />
+소스트리 설치 시 Bitbucket 선택 창에서 건너뛰기를 누르고, Mercurial 체크를 해제해야 합니다.<br />
+Git에 Push 할 사용자명, 이메일주소 입력 후 SSH 키 선택 창에서 아니오를 선택합니다.</p>
+
+<hr />
+
+<h2 id="소스트리-사용법">소스트리 사용법</h2>
+
+<h3 id="프로젝트에-git-저장소-생성-방법">프로젝트에 Git 저장소 생성 방법</h3>
+<p>상단 + 탭 &gt; Create &gt; 목적지 경로: 탐색하여 프로젝트 폴더 선택 &gt; 저장소명 입력 &gt; 생성<br />
+Git 연결 정보가 없는 프로젝트에 .git 폴더를 생성하는 방법입니다.</p>
+
+<h3 id="프로젝트-git-연결-불러오기">프로젝트 Git 연결 불러오기</h3>
+<p>상단 + 탭 &gt; Add &gt; 작업 경로: 탐색하여 프로젝트 폴더 선택 &gt; 추가<br />
+프로젝트에 연결되어 있는 Git 저장소 탭을 생성하는 방법입니다.</p>
+
+<h3 id="git-연결-탭-이름-변경">Git 연결 탭 이름 변경</h3>
+<p>상단 + 탭 &gt; Local &gt; Git 로컬 저장소 선택 후 F2 &gt; 이름 변경 후 엔터</p>
+
+<h3 id="git-fetch-방법">Git Fetch 방법</h3>
+<p>패치 &gt; 모든 원격 저장소에서 가져오기 체크 후 확인</p>
+
+<h3 id="git-pull-방법">Git Pull 방법</h3>
+<p>Fetch &gt; 내려받을 커밋이 있는 브랜치로 체크아웃 &gt; Pull &gt; 가져오기 위한 원격 브랜치 선택 &gt; 충돌이 없으면 묶어서 바로 커밋 체크 &gt; Pull</p>
+
+<p><mark>Pull 충돌 시 해결 방법</mark><br />
+Git Stash 후 Pull 받고 Unstash 하면 됩니다.</p>
+
+<h3 id="git-stash-방법">Git Stash 방법</h3>
+<p>커밋하지 않은 변경사항 확인 &gt; 상단 스태시 버튼 클릭 &gt; stash명 입력 &gt; 확인</p>
+
+<h3 id="git-unstash-방법">Git Unstash 방법</h3>
+<p>좌측 스태시 메뉴 선택 &gt; stash명 우클릭 &gt; 스태시 적용 &gt; 확인</p>
+
+<h3 id="git-commit-방법">Git Commit 방법</h3>
+<p>좌측 브랜치 선택 &gt; 커밋하지 않은 변경사항 Row 선택 &gt; 하단 스테이지에 올라가지 않은 파일 중 커밋할 파일 선택 &gt; 선택 내용 스테이지에 올리기 &gt; 스테이지에 올라간 파일 목록 확인 &gt; 커밋 &gt; Push</p>
+
+<h3 id="git-브랜치-복제-방법">Git 브랜치 복제 방법</h3>
+<p>복제하려는 브랜치로 체크아웃 &gt; 상단 브랜치 메뉴 선택 &gt; 새 브랜치 &gt; 브랜치명 입력 &gt; 브랜치 생성</p>
+
+<h3 id="git-브랜치-체크아웃-방법">Git 브랜치 체크아웃 방법</h3>
+<p>좌측 브랜치 메뉴 선택 &gt; 브랜치명 우클릭 &gt; 체크아웃 &gt; 확인</p>
+
+<p><mark>현재 브랜치 확인</mark><br />
+좌측 브랜치 메뉴에서 브랜치명 왼쪽에 활성화된 아이콘이 있으면 현재 체크아웃하여 위치한 브랜치입니다.</p>
+
+<h3 id="git-커밋-체리픽-방법">Git 커밋 체리픽 방법</h3>
+<p>패치 &gt; Pull &gt; 체리픽 받을 브랜치로 체크아웃 &gt; 좌측 브랜치 메뉴에서 다른 브랜치 선택 &gt; 체리픽 할 커밋 우클릭 &gt; 체리픽 &gt; 확인 &gt; Push</p>
+
+<p><mark>Git 체리픽 사용 이유</mark><br />
+개발서버 반영용 dev 브랜치에 커밋한 작업을 운영서버 반영용 main 브랜치에 반영할 때,<br />
+Merge 기능을 써버리면 운영서버에 반영되면 안 되는 커밋까지 전부 반영되기 때문에 운영서버에 반영할 커밋만 하나씩 선별하여 체리픽으로 반영해야 합니다.</p>
+
+<p><mark>체리픽 시 충돌 해결</mark><br />
+다른 사람이 올려둔 HEAD 소스는 최대한 그대로 유지하고, 본인이 수정한 코드를 통합하여 커밋해야 합니다.</p>
+
+<h3 id="git-브랜치-병합-방법">Git 브랜치 병합 방법</h3>
+<p>병합 받으려는 브랜치로 체크아웃 &gt; 병합 하려는 브랜치 우클릭 &gt; 현재 브랜치로 ‘브랜치명’ 병합<br />
+충돌이 발생하면, 직접 수정하여 충돌을 해결하고 커밋해야 병합이 완료됩니다.</p>
+
+<p><mark>브랜치 merge 충돌 이유</mark><br />
+같은 파일, 같은 부분을 다르게 변경하고 merge 하는 경우, 충돌이 발생합니다.</p>
+
+<h3 id="git-원격-브랜치-가져오기">Git 원격 브랜치 가져오기</h3>
+<p>저장소 &gt; 체크아웃 &gt; 새 브랜치 체크아웃 &gt; 체크아웃할 원격 브랜치 선택 &gt; 확인<br />
+원격 브랜치가 추가되어도 자동으로 pull 받지 않기 때문에 로컬 소스트리에 직접 추가해야 합니다.</p>
+
+<h3 id="특정-커밋-시점으로-git-원격-브랜치-커밋-되돌리기">특정 커밋 시점으로 Git 원격 브랜치 커밋 되돌리기</h3>
+<p>작업중이던 소스 스태시 &gt; 되돌리려는 브랜치 체크아웃 &gt; 되돌아가고 싶은 커밋 시점 우클릭 &gt; 이 커밋까지 현재 브랜치를 초기화 &gt; 사용 중인 모드 : Mixed - 작업 상태는 그대로 두지만 인덱스는 리셋 선택 &gt; 확인 &gt; (새로 생긴 변경된 소스 폐기하고, Pull 개수 무시하고) Push &gt; 푸시할 브랜치 체크 &gt; 강제 푸시 체크 &gt; Push &gt; 예</p>
+
+<p><mark>강제 푸시 중 에러나는 경우</mark><br />
+상단 도구 메뉴 &gt; 옵션 &gt; Git &gt; 강제 푸시 기능 체크 &gt; 확인</p>
+
+<p><mark>강제 Push 된 브랜치 받는 방법</mark><br />
+기존 로컬 브랜치 삭제 후 원격 브랜치를 다시 받으면 됩니다.</p>
+
+<h3 id="git-원격-브랜치-일부-커밋-취소">Git 원격 브랜치 일부 커밋 취소</h3>
+<p>작업중이던 소스 스태시 &gt; 되돌리려는 브랜치 체크아웃 &gt; 되돌리고 싶은 커밋 우클릭 &gt; 커밋 되돌리기 &gt; 충돌 수동으로 잡고 커밋 &gt; Revert 커밋 Push</p>
+
+<h3 id="git-원격-브랜치-다시-받기">Git 원격 브랜치 다시 받기</h3>
+<p>좌측 브랜치 메뉴 &gt; 다른 로컬 브랜치로 체크아웃 &gt; 로컬 브랜치 우클릭 &gt; 브랜치명 삭제 &gt; 좌측 원격 메뉴 &gt; origin &gt; 원격 브랜치 우클릭 &gt; 체크아웃 origin/브랜치명 &gt; 확인</p>
+
+<p><mark>로컬 브랜치 강제 삭제 방법</mark><br />
+cmd 창에서 프로젝트 폴더로 이동 후 아래 명령어를 실행하면 됩니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch -D 로컬브랜치명
+</code></pre></div></div>
+
+<h3 id="원격-브랜치명-변경-방법">원격 브랜치명 변경 방법</h3>
+<p>로컬 브랜치명 변경 &gt; 신규 브랜치 push &gt; 원격 저장소에서 기존 브랜치 삭제</p>
+
+<h3 id="작업중-소스-폐기">작업중 소스 폐기</h3>
+<p>상단 폐기 메뉴 &gt; 파일 변경사항 폐기 &gt; 폐기하려는 파일 체크 &gt; 변경사항 폐기</p>
+
+<h3 id="일부-코드-폐기">일부 코드 폐기</h3>
+<p>커밋 메뉴 또는 커밋하지 않은 변경사항 클릭 &gt; 우측 변경된 코드 줄 다중 클릭 &gt; 줄 버리기</p>
+
+<h3 id="폴더-및-파일-경로-확인">폴더 및 파일 경로 확인</h3>
+<p>커밋 메뉴 또는 커밋하지 않은 변경사항 클릭 &gt; 하단 파일 목록에서 파일명 우클릭 &gt; 프로젝트 URL을 클립보드로 복사</p>
+
+<h3 id="퍼블리싱-html-파일-브라우저로-열기">퍼블리싱 html 파일 브라우저로 열기</h3>
+<p>커밋 히스토리 클릭 &gt; 하단 html 파일 더블 클릭</p>
+
+<h3 id="커밋-히스토리-검색">커밋 히스토리 검색</h3>
+<p>커밋 히스토리를 검색할 브랜치로 이동 &gt; 좌측 Search 메뉴 &gt; 상단 인풋에 ‘커밋 메시지’ 검색 &gt; 커밋 더블클릭 시 전체 로그에서 포커싱<br />
+상단 인풋 오른쪽 selectbox를 ‘작성자’로 변경하면, 커밋한 사람 ID로도 검색 가능합니다.<br />
+‘파일 변경사항’으로 변경하면, 파일 내 소스 텍스트로 커밋을 검색할 수 있습니다.</p>
+
+<h3 id="길어서-안나오는-파일-소스-비교">길어서 안나오는 파일 소스 비교</h3>
+<p>소스비교 창 우측 상단 톱니바퀴 아이콘 &gt; 외부 비교도구</p>
+
+<p><mark>소스트리 외부 비교도구 설정 방법</mark><br />
+상단 도구 &gt; 옵션 &gt; 비교 &gt; 외부 비교 도구 : 윈도우에 설치된 WinMerge 선택 &gt; 확인</p>
+
+<hr />
+
+<h2 id="소스트리-에러-해결">소스트리 에러 해결</h2>
+
+<h3 id="소스트리-실행이-안-되는-경우">소스트리 실행이 안 되는 경우</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:\Users\사용자명\AppData\Local\Atlassian\SourceTree.exe_Url_암호화폴더명\버전명
+</code></pre></div></div>
+<p>위 폴더의 Composition.cache 파일 삭제 후 재실행하면 됩니다.<br />
+암호화 폴더가 여러개라면, 하나씩 삭제하면서 실행이 되는지 확인하면 됩니다.</p>
+
+<h3 id="소스트리-실행-시-에러-팝업-해결">소스트리 실행 시 에러 팝업 해결</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatal: detected dubious ownership in repository at 'D:/Git프로젝트경로'
+'D:/Git프로젝트경로' is owned by:
+          'S-1-5-32-544'
+but the current user is:
+          'S-1-5-21-1534336769-1475436762-3714419067-1001'
+To add an exception for this directory, call:
+git config --global --add safe.directory D:/Git프로젝트경로
+</code></pre></div></div>
+<p>위와 같은 에러가 뜨는 경우, 소스트리 종료 후 cmd 아무 경로에서 아래의 명령어를 입력하면 해결됩니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config --global --add safe.directory D:/Git프로젝트경로
+</code></pre></div></div>
+<p>본인의 프로젝트 경로를 안전한 경로로 등록하는 명령어입니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%EC%9C%88%EB%8F%84%EC%9A%B0-tool" class="page__taxonomy-item" rel="tag">윈도우 / Tool</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-10-31">2023-10-31</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/tool/2023-10-29-1" class="pagination--pager" title="이클립스 테마 변경 방법 / 이클립스 다크 테마 설정 방법
+">Prev</a>
+    
+    
+      <a href="/tool/2023-11-01-1" class="pagination--pager" title="이클립스에서 Git 사용하는 방법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

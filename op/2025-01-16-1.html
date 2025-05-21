@@ -1,0 +1,789 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>디딤365 DidimNow 콘솔 사용법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="디딤365 DidimNow 콘솔 사용법">
+<meta property="og:url" content="https://0songha0.github.io/op/2025-01-16-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-01-16T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2025-01-16T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/op/2025-01-16-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="디딤365 DidimNow 콘솔 사용법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2025-01-16T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-01-16T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">디딤365 DidimNow 콘솔 사용법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-01-16T00:00:00+00:00">2025-01-16</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 디딤365 DidimNow 콘솔 사용법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#didimnow-사용법">DidimNow 사용법</a><ul><li><a href="#디딤-문의-방법">디딤 문의 방법</a></li></ul></li><li><a href="#didimnow-콘솔-사용법">DidimNow 콘솔 사용법</a><ul><li><a href="#didim-관리-서버-정보-확인-방법">Didim 관리 서버 정보 확인 방법</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="didimnow-사용법">DidimNow 사용법</h2>
+
+<h3 id="디딤-문의-방법">디딤 문의 방법</h3>
+<p>DidimNow 로그인 &gt; 고객지원 &gt; AS 요청 &gt; 글쓰기<br />
+운영서버 장애 원인 확인 요청, WAS 서버 또는 DB 커넥션 풀 설정 확인 및 변경 요청, VM 서버 ACG 인바운드 방화벽 정책 하용 요청 등이 가능합니다.</p>
+
+<p><mark>DB 커넥션 설정 값</mark><br />
+maxTotal : WAS 서버 커넥션 풀 최대 연결 수 (변경 시 톰캣 재기동 필요)<br />
+max_connection : DB 커넥션 풀 최대 연결 수<br />
+Max_used_connections : DB 활성 커넥션 수 (현재 실시간 연결 수)</p>
+
+<p><mark>방화벽 허용 요청 시</mark><br />
+네이버 클라우드 서버에 접근하려면 출발지 공인 IP를 허용해야 합니다.<br />
+사설IP가 아니라, 공인IP로 허용해서 같은 망의 팀원들도 모두 접근 가능합니다.<br />
+서버 ACG 방화벽 허용 이후에도 SFTP 접근이 불가하면, 22 포트 사내 아웃바운드 방화벽을 허용해야 합니다.</p>
+
+<p><mark>사내 방화벽 허용 요청 시 참고사항</mark><br />
+현재 사내 방화벽에서 외부 통신에 대해 80, 8080, 443 포트가 가본적으로 열려있고 22 포트는 신청해서 열어야 합니다.<br />
+사용자망에서는 80, 443 등 기본 포트가 열려있어 접근이 가능하지만 서버 간 통신에서는 막혀있다고 합니다.<br />
+그래서 서버 간 통신에서는 80, 443 등도 따로 방화벽 허용 요청을 해야 연결 가능합니다.</p>
+
+<hr />
+
+<h2 id="didimnow-콘솔-사용법">DidimNow 콘솔 사용법</h2>
+
+<h3 id="didim-관리-서버-정보-확인-방법">Didim 관리 서버 정보 확인 방법</h3>
+<p>DidimNow 로그인 &gt; 상단 콘솔 바로가기 버튼 &gt; 인프라 메뉴 &gt; 시스템 구성도 탭 &gt; 보기 설정 : 사용자정의(표) 선택 &gt; 문서 선택 : VM &gt; 서버 IP, Admin ID, PW 확인 가능<br />
+PW는 마스킹 되어 있어서, 우클릭 &gt; 암호복사 &gt; 문자 OTP 인증 시 확인이 가능합니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%9A%B4%EC%98%81" class="page__taxonomy-item" rel="tag">리눅스 / 운영</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-01-16">2025-01-16</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/web-dev/2025-01-08-1" class="pagination--pager" title="프로그래밍 명명 규칙 정리
+">Prev</a>
+    
+    
+      <a href="/op/2025-01-23-1" class="pagination--pager" title="시큐어코딩 점검툴 사용법 / 보안 취약점 보완 조치 방법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

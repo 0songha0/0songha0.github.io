@@ -1,0 +1,914 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>운영 WAS 서버 모니터링 방법 / WhaTap 사용 방법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="운영 WAS 서버 모니터링 방법 / WhaTap 사용 방법">
+<meta property="og:url" content="https://0songha0.github.io/op/2024-03-11-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-03-11T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2024-03-11T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/op/2024-03-11-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="운영 WAS 서버 모니터링 방법 / WhaTap 사용 방법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2024-03-11T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2024-03-11T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">운영 WAS 서버 모니터링 방법 / WhaTap 사용 방법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2024-03-11T00:00:00+00:00">2024-03-11</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 운영 WAS 서버 모니터링 방법 / WhaTap 사용 방법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#whatap-모니터링">WhaTap 모니터링</a></li><li><a href="#whatap에서-운영-에러-원인-분석-방법-트러블-슈팅">WhaTap에서 운영 에러 원인 분석 방법 (트러블 슈팅)</a><ul><li><a href="#트랜잭션-지연-원인-파악-방법">트랜잭션 지연 원인 파악 방법</a></li><li><a href="#db-연결이-안-되는-경우">DB 연결이 안 되는 경우</a></li><li><a href="#실시간-에러-히트맵-확인">실시간 에러 히트맵 확인</a></li><li><a href="#히트맵-분석으로-요청-지연-원인-파악">히트맵 분석으로 요청 지연 원인 파악</a></li><li><a href="#트랜잭션-검색으로-에러-원인-파악">트랜잭션 검색으로 에러 원인 파악</a></li><li><a href="#동시접속-사용자-수-급증-원인-분석">동시접속 사용자 수 급증 원인 분석</a></li></ul></li><li><a href="#whatap-외에서-운영-에러-원인-분석-방법">WhaTap 외에서 운영 에러 원인 분석 방법</a><ul><li><a href="#리눅스-톰캣-로그-다운">리눅스 톰캣 로그 다운</a></li></ul></li><li><a href="#whatap에서-운영서버-다운-원인-분석-방법">WhaTap에서 운영서버 다운 원인 분석 방법</a><ul><li><a href="#톰캣-서버-다운-여부-파악">톰캣 서버 다운 여부 파악</a></li><li><a href="#톰캣-서버-다운-원인-분석">톰캣 서버 다운 원인 분석</a></li></ul></li><li><a href="#whatap-외에서-운영서버-다운-원인-분석-방법">WhaTap 외에서 운영서버 다운 원인 분석 방법</a><ul><li><a href="#네이버-클라우드-콘솔에서-슬로우-쿼리-확인-방법">네이버 클라우드 콘솔에서 슬로우 쿼리 확인 방법</a></li></ul></li><li><a href="#whatap-모니터링-데이터-백업">WhaTap 모니터링 데이터 백업</a><ul><li><a href="#설치형-whatap-백업-방법">설치형 WhaTap 백업 방법</a></li><li><a href="#saas-whatap-백업-방법">Saas WhaTap 백업 방법</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="whatap-모니터링">WhaTap 모니터링</h2>
+
+<p>WhaTap 서버 설치형은 웹 was 내 프로젝트 환경 정보를 엑셀에 작성하여 메일로 전달하면,<br />
+WhaTap에서 웹 was 트래픽을 수집하는 모니터링 서버 구축 후 웹 was에 에이전트를 설치해 주십니다.<br />
+허용된 공인 IP에서 WhaTap URL으로 접속하면 사용자 트래픽 정보를 볼 수 있습니다.</p>
+
+<p>WhaTap SaaS형은 클라우드에서 제공하는 구독형 모니터링 서비스로, IT 인프라 관리 부담이 적습니다.<br />
+WhaTap 서버 설치형 대신 WhaTap SaaS형 사용 시, 서버 및 LB 비용을 절감할 수 있습니다.</p>
+
+<p><mark>WhaTap 모니터링 기능 요약</mark></p>
+<ul>
+  <li>애플리케이션 대시보드 : 전체 또는 일부 was에 대한 실시간 트래픽 지연 확인</li>
+  <li>히트맵 : 최근 응답 완료 된 트래픽 및 경과 시간 확인</li>
+  <li>트레이스 분석 : 히트맵 영역 드래그 시 확인 가능</li>
+  <li>어떤 URL으로 들어온 트래픽이 얼마나 오래 걸렸는지 기록</li>
+  <li>지연 쿼리 및 액티브 스택 (에러 메시지) 확인</li>
+  <li>대시보드 &gt; 트랜잭션 맵 : 요청이 많은 트랜잭션 Top 30 요청 건수 확인</li>
+  <li>분석 &gt; 일자별 애플리케이션 현황 : 금일 사용자 수, 시간당 사용자 수 등 확인 가능</li>
+  <li>분석 &gt; 성능 추이 : 동시접속 사용자 수, CPU 사용량, 힙 메모리 사용량 등 간결하게 확인 가능</li>
+  <li>분석 &gt; 매트릭스 차트★ : 동시접속 사용자 수, 특정 시간대 메모리 사용량, CPU 사용량, Thread 수, DB Pool 개수, TPS 등 다양한 정보 확인 가능</li>
+  <li>분석 &gt; 트랜잭션 검색 : 트랜잭션 URL 및 경과시간으로 트랜잭션 검색, 트레이스 분석 확인</li>
+</ul>
+
+<p><mark>WhaTap 단점</mark></p>
+<ul>
+  <li>쿼리 복호화에 실패하여 select $ 형태로 나오는 경우도 간혹 있습니다.</li>
+</ul>
+
+<p><mark>액티브 트랜잭션</mark><br />
+오래 걸리는 트랜잭션은 15분 경과 시 자동으로 타임아웃 종료됩니다.</p>
+
+<hr />
+
+<h2 id="whatap에서-운영-에러-원인-분석-방법-트러블-슈팅">WhaTap에서 운영 에러 원인 분석 방법 (트러블 슈팅)</h2>
+
+<h3 id="트랜잭션-지연-원인-파악-방법">트랜잭션 지연 원인 파악 방법</h3>
+<ol>
+  <li>지연되어 빨갛거나 노란 히트맵을 드래그해서 트레이스 분석 팝업을 엽니다.</li>
+  <li>트랜잭션 테이블 뷰에서 ‘경과’ 시간이 오래걸린 항목의 에러 메시지를 확인합니다.</li>
+  <li>API URL이면 API 제공처에 문제가 발생했을 수 있고, 쿼리면 인덱스 튜닝이 필요할 수 있습니다.</li>
+</ol>
+
+<h3 id="db-연결이-안-되는-경우">DB 연결이 안 되는 경우</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Communications link failure The last packet successfully received from the server was 6,827,031 milliseconds ago. The last packet sent successfully to the server was 6,827,157 milliseconds ago.
+</code></pre></div></div>
+<p>트랜잭션의 트레이스 분석에서 DB 연결 부분에 경과시간이 오래 걸리고, 아래 select $이 나오는 경우<br />
+커넥션 풀이 부족하여 DB 연결을 하지 못하고 대기한 것일 수 있습니다.<br />
+운영 DB 설정에서 커넥션 풀 개수를 400개로 상향 조정하여 해결하였습니다.</p>
+
+<h3 id="실시간-에러-히트맵-확인">실시간 에러 히트맵 확인</h3>
+<p>와탭 좌측 대시보드 : 애플리케이션 대시보드 메뉴 &gt; 히트맵 우측 ‘에러’ 클릭<br />
+파란색 정상 히트맵을 제외하고, 노란색 및 빨간색 에러 히트맵만 볼 수 있습니다.</p>
+
+<h3 id="히트맵-분석으로-요청-지연-원인-파악">히트맵 분석으로 요청 지연 원인 파악</h3>
+<p>와탭 좌측 대시보드 : 애플리케이션 대시보드 메뉴 &gt; 히트맵 우측 ‘&gt;’ 클릭 &gt; 시간 설정 (최근 5분, 금일 가능) &gt; 문제 히트맵 드래그 &gt; 문제 트랜잭션 URL 검색 (예시 : /user/evlTrgt/resetStdTest.do) &gt; 하단 TX트레이스 표에서 트랜잭션 선택하여 레코드 요약 에러메시지 및 테이블 뷰에서 원인 확인</p>
+
+<h3 id="트랜잭션-검색으로-에러-원인-파악">트랜잭션 검색으로 에러 원인 파악</h3>
+<p>운영 에러 발생시키고 &gt; 와탭 좌측 분석 : 트랜잭션 검색 메뉴 &gt; 시간 설정 (최근 5분 가능) &gt; 필터 : 트랜잭션 인풋에 URL 입력 &gt; 파란색 돋보기 버튼 클릭 &gt; 검색된 트랜잭션 선택하여 레코드 요약 에러메시지 및 테이블 뷰에서 원인 확인</p>
+
+<h3 id="동시접속-사용자-수-급증-원인-분석">동시접속 사용자 수 급증 원인 분석</h3>
+<p>와탭 좌측 대시보드 : 트랜잭션 맵 &gt; 실시간 5분 검색 &gt; TOP 30 탭 &gt; 트랜잭션 리스트에서 요청 건수가 많은 URL 1개 선택 후 우측 히트맵 영역 길게 드래그 &gt; 트레이스 분석 팝업 우측 끝에서 유저 에이전트가 모두 동일한지 확인<br />
+같은 유저 에이전트로 클라이언트 IP가 모두 다르게 지속적으로 오면, 봇일 확률이 높습니다.<br />
+서비스 운영에 필요한 봇이 아니라면 차단하는 것이 좋습니다.</p>
+
+<p><mark>아마존 봇 유저 에이전트 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Amazonbot/0.1; +https://developer.amazon.com/support/amazonbot) Chrome/119.0.6045.214 Safari/537.36
+</code></pre></div></div>
+
+<p><mark>아마존 봇 유저 에이전트 차단 방법</mark></p>
+<ul>
+  <li>VPC 앞에 NCP WAF가 있는 경우 : NCP에 요청하여 WAF에서 특정 문자열이 포함된 유저 에이전트 차단 가능합니다.</li>
+  <li>WAS 서버 앞에 WEB 서버가 있는 경우 : 웹사이트 루트 디렉터리 (apache WEB 서버의 경우, httpd.conf 파일에 설정된 DocumentRoot)에 robots.txt 파일을 만들고 크롤러명, 접근하면 안 되는 URL (/)을 명시하면 됩니다. 웹사이트URL/robots.txt에 해당 파일이 위치해야 하며, 웹 서버를 재기동할 필요는 없습니다.</li>
+</ul>
+
+<hr />
+
+<h2 id="whatap-외에서-운영-에러-원인-분석-방법">WhaTap 외에서 운영 에러 원인 분석 방법</h2>
+
+<h3 id="리눅스-톰캣-로그-다운">리눅스 톰캣 로그 다운</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd 톰캣경로/logs
+cp *년-월-일* /home1/유저명/log_down/년월일_1
+</code></pre></div></div>
+<p>파일질라로 폴더 생성 후 cp 명령어로 톰캣 로그를 옮기고, 로컬에 다운하여 백업하고 확인합니다.<br />
+운영서버 VPN 연결을 오래 지속하기보다는, 로컬에서 원인 파악하는 것이 좋습니다.</p>
+
+<p><mark>파일질라 파일 다운이 안 되는 경우</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /home1/유저명/log_down
+chown -R 유저명:유저명 년월일_1
+</code></pre></div></div>
+<p>해당 폴더의 소유자를 root가 아닌, 현재 파일질라로 연결한 유저로 변경하면 됩니다.</p>
+
+<hr />
+
+<h2 id="whatap에서-운영서버-다운-원인-분석-방법">WhaTap에서 운영서버 다운 원인 분석 방법</h2>
+
+<h3 id="톰캣-서버-다운-여부-파악">톰캣 서버 다운 여부 파악</h3>
+<p>와탭 좌측 대시보드 : 애플리케이션 대시보드 메뉴 &gt; LIVE 활성화 중 &gt; 상단 was1, was2 등에서 확인할 서버만 선택 &gt; 히트맵에 요청이 계속 들어오고 있으면 서버 작동중 상태<br />
+서버가 다운된 시간이 몇 분인지도 히트맵에서 요청이 비어있는 구간으로 파악 가능합니다.</p>
+
+<h3 id="톰캣-서버-다운-원인-분석">톰캣 서버 다운 원인 분석</h3>
+<ul>
+  <li>와탭 좌측 대시보드 : 애플리케이션 대시보드 메뉴 &gt; 톰캣 서버 다운 직후 시간으로 설정 &gt; 히트맵 상단 트랜잭션 로그 확인, 시스템 CPU 사용률 확인 (100% 지속 시 톰캣 다운 가능)</li>
+  <li>와탭 좌측 대시보드 : 분석 메뉴 &gt; 스택 &gt; 액티브 스택 탭 &gt; 날짜 및 애플리케이션 설정 후 검색 &gt; Active Transaction 차트에서 서버 다운 시점 막대 선택 &gt; 하단 트랜잭션 리스트에서 경과시간이 오래 걸린 요청 확인</li>
+</ul>
+
+<p><mark>CPU 임계치 도달 문제</mark><br />
+서버 CPU 임계치 70% 이상 도달 시 JAVA에서 타 API 호출, JDDB 연결, SQL 쿼리 등이 모두 지연될 수 있습니다.<br />
+지연되는 트랜잭션들이 쌓일 수록 서버 성능 저하로 인해 아래의 관련 에러들이 발생할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SLOW_HTTPC
+# HTTP 요청 지연 및 타임아웃과 관련된 어플리케이션 레벨 에러
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>org.apache.catalina.connector.ClientAbortException
+java.io.IOException: Connection reset by peer
+# 클라이언트가 응답을 기다리다 연결을 강제로 종료함
+</code></pre></div></div>
+<p>CPU 임계치 100% 도달 시에는 서버 과부하로 인해 톰캣 서버가 죽을 수 있습니다.<br />
+CPU 임계치가 잠시 내려갈 수 있으나, 지연 스레드들이 해소되지 않으면 다시 100%로 빠르게 높아집니다.</p>
+
+<p><mark>쓰레드 Full 톰캣 로그</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>26-Nov-2024 20:16:06.911 WARNING [NioReceiver[Catalina-Channel]] org.apache.catalina.tribes.transport.nio.NioReceiver.socketTimeouts Channel key is registered, but has had no interest ops for the last [3,000] ms. (cancelled: [false]):[sun.nio.ch.SelectionKeyImpl@3f11ede4] last access:[11/26/24 8:15 PM] Possible cause: all threads used, perform thread dump
+</code></pre></div></div>
+<p>톰캣 catalina.out에 위와 같은 로그가 나오고 톰캣 서버가 다운되었다면, 경과 시간이 긴 트랜잭션이 누적되어 쓰레드가 스택 상태에 쌓이면서 네트워크 지연 문제가 발생하고, NeoReciver (Clustering Member interface 역할)에서 실시간 Clustering Member Sync Task를 진행할 때에는 모든 Thread가 대기 상태에 빠져 쓰레드 풀 고갈이 발생하여 Tomcat이 응답하지 못하고 Down 된 것으로 의심할 수 있습니다.<br />
+서버 다운 직전에는 쓰레드 풀 고갈 및 네트워크 지연으로 인해 JDBC 연결을 가져오는데 실패하면서 Got timeout reading communication packets 에러도 발생할 수 있습니다.</p>
+
+<hr />
+
+<h2 id="whatap-외에서-운영서버-다운-원인-분석-방법">WhaTap 외에서 운영서버 다운 원인 분석 방법</h2>
+
+<h3 id="네이버-클라우드-콘솔에서-슬로우-쿼리-확인-방법">네이버 클라우드 콘솔에서 슬로우 쿼리 확인 방법</h3>
+<p><a href="https://0songha0.github.io/op/2024-12-18-1#서버-요청-중-슬로우-쿼리-확인-방법" target="_blank">https://0songha0.github.io/op/2024-12-18-1#서버-요청-중-슬로우-쿼리-확인-방법</a></p>
+
+<hr />
+
+<h2 id="whatap-모니터링-데이터-백업">WhaTap 모니터링 데이터 백업</h2>
+
+<p>WhaTap 콘솔에서는 데이터 백업 기능을 별도로 제공하고 있지 않습니다.</p>
+
+<h3 id="설치형-whatap-백업-방법">설치형 WhaTap 백업 방법</h3>
+<p>Whatap 수집서버 접속하여 Whatap이 설치된 디렉터리를 백업해야 한다고 합니다.</p>
+
+<p><mark>Whatap 설치 경로 확인</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ps -ef | grep whatap
+</code></pre></div></div>
+<p>-Dwhatap.server.home=/whatab/whatap으로 나온다면, /whatab에 진입하여 whatap 폴더를 cp 명령어로 백업하면 됩니다.</p>
+
+<p><mark>Whatap 설치 폴더 백업 명령어</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp -r /whatab/whatap /backup/whatap_$(date +%Y%m%d)_bak
+</code></pre></div></div>
+<p>/backup 폴더에 whatap_20250108_bak 폴더명으로 whatap 폴더를 백업하는 명령어 예시입니다.</p>
+
+<h3 id="saas-whatap-백업-방법">Saas WhaTap 백업 방법</h3>
+<p>Whatap Cloud Infra에서 5초 프로파일 데이터는 1달, 5분/1시간 통계데이터는 1년 보관하고 있습니다.<br />
+보관기간이 지나면 백업본과 함께 삭제되며, 백업 데이터는 별도로 제공되지 않는다고 합니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%9A%B4%EC%98%81" class="page__taxonomy-item" rel="tag">리눅스 / 운영</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2024-03-11">2024-03-11</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/it-tip/2024-03-08-1" class="pagination--pager" title="구축 프로젝트, 유지보수 프로젝트 장단점
+">Prev</a>
+    
+    
+      <a href="/web-dev/2024-03-13-1" class="pagination--pager" title="자주 쓰는 Jquery 정리 / Jquery 문법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

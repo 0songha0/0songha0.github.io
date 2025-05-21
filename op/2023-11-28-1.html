@@ -1,0 +1,917 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>리눅스 운영서버 톰캣 WAR 수동 배포 방법 / 소스 복구 방법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="리눅스 운영서버 톰캣 WAR 수동 배포 방법 / 소스 복구 방법">
+<meta property="og:url" content="https://0songha0.github.io/op/2023-11-28-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-11-28T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2023-11-28T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/op/2023-11-28-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="리눅스 운영서버 톰캣 WAR 수동 배포 방법 / 소스 복구 방법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2023-11-28T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2023-11-28T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">리눅스 운영서버 톰캣 WAR 수동 배포 방법 / 소스 복구 방법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2023-11-28T00:00:00+00:00">2023-11-28</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 리눅스 운영서버 톰캣 WAR 수동 배포 방법 / 소스 복구 방법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#운영서버-war-반영-전-필수-작업">운영서버 WAR 반영 전 필수 작업</a><ul><li><a href="#root-계정으로-전환">ROOT 계정으로 전환</a></li><li><a href="#기존-소스-백업">기존 소스 백업</a></li><li><a href="#파일질라로-war-업로드">파일질라로 war 업로드</a></li><li><a href="#톰캣-실시간-로그-확인">톰캣 실시간 로그 확인</a></li></ul></li><li><a href="#운영서버-war-수동-배포-방법-정석">운영서버 WAR 수동 배포 방법 (정석)</a><ul><li><a href="#톰캣-종료">톰캣 종료</a></li><li><a href="#톰캣-폴더에-war-복사">톰캣 폴더에 war 복사</a></li><li><a href="#war-압축-해제">war 압축 해제</a></li><li><a href="#톰캣-실행">톰캣 실행</a></li></ul></li><li><a href="#운영서버-war-수동-배포-방법-편법">운영서버 WAR 수동 배포 방법 (편법)</a><ul><li><a href="#기존-프로젝트-폴더-안에-war-복사">기존 프로젝트 폴더 안에 war 복사</a></li><li><a href="#톰캣-종료-1">톰캣 종료</a></li><li><a href="#war-압축-해제-1">war 압축 해제</a></li><li><a href="#톰캣-실행-1">톰캣 실행</a></li></ul></li><li><a href="#백업한-프로젝트-소스-복구-방법">백업한 프로젝트 소스 복구 방법</a><ul><li><a href="#프로젝트-war-복구">프로젝트 war 복구</a></li><li><a href="#프로젝트-폴더-복구">프로젝트 폴더 복구</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p>운영서버는 root 계정이 아니면 /톰캣경로/webapps 폴더에 접근할 수 없어서 개발서버 배포와 절차가 다릅니다.</p>
+
+<p><mark>이미 운영 중인 프로젝트에 참여한 경우</mark><br />
+서버 반영 방법이 다르면 기존 방법을 따르는 것이 가장 좋습니다.</p>
+
+<p>기존 프로젝트 소스 삭제하고 다시 war 풀면 정상 동작하지 않아서 다시 복구해야 하는 경우도 있는데,<br />
+운영은 오래 중단되면 안되기 때문에 삭제하지 않고 안전한 방법으로 배포해야 합니다.</p>
+
+<p><mark>Git 프로젝트 운영서버 반영 절차</mark><br />
+<a href="https://0songha0.github.io/op/2023-12-05-1" target="_blank">https://0songha0.github.io/op/2023-12-05-1</a></p>
+
+<hr />
+
+<h2 id="운영서버-war-반영-전-필수-작업">운영서버 WAR 반영 전 필수 작업</h2>
+
+<h3 id="root-계정으로-전환">ROOT 계정으로 전환</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo su -
+</code></pre></div></div>
+<p>대부분의 권한이 root에 있기 때문에 계정을 전환합니다.</p>
+
+<h3 id="기존-소스-백업">기존 소스 백업</h3>
+<p><mark>백업용 폴더, 반영용 폴더 생성</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/home/유저명/bak/날짜_순번
+/home/유저명/deploy/날짜_순번
+</code></pre></div></div>
+<p>root 계정이 아니면 /톰캣경로/webapps 폴더에 접근할 수 없어서 유저 home에 폴더를 생성합니다.<br />
+파일질라로 디렉터리 만들기 하면 됩니다.</p>
+
+<p><mark>기존 프로젝트 소스 백업</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /톰캣경로/webapps/ROOT또는프로젝트명
+cp -r ./* /home/유저명/bak/날짜_순번
+</code></pre></div></div>
+<p>프로젝트 크기가 크면 멈춘 것처럼 보일 수 있으나, 기다리면 정상적으로 복사 완료됩니다.<br />
+로컬에 날짜 폴더 생성 후 내려받아서 이중 백업해도 좋습니다.<br />
+톰캣은 war 압축 해제 후 단건 반영이 없었다면, war 파일만 백업해도 됩니다.</p>
+
+<h3 id="파일질라로-war-업로드">파일질라로 war 업로드</h3>
+<p>빌드한 war 파일을 /home/유저명/deploy/날짜_순번 폴더에 업로드합니다.</p>
+
+<h3 id="톰캣-실시간-로그-확인">톰캣 실시간 로그 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tail -1000f /톰캣경로/logs/catalina.out
+</code></pre></div></div>
+<p>대부분의 운영서버는 was 서버가 이중화되어 있기 때문에, 모든 was 서버의 톰캣에 동일하게 배포해야 합니다.<br />
+각 서버별로 PuTTY를 하나씩 더 띄워서 로그 열고, URL로 접속하여 어떤 톰캣에 붙었는지 확인 후 그 서버 먼저 반영해서 운영 접속 테스트 시 사용자 요청이 정상적으로 들어오면 다른 서버들에도 반영하는 것이 안전합니다.</p>
+
+<p>하나의 톰캣으로만 요청을 유도하려면, 다른 was 서버의 톰캣들을 죽이는 방법이 있습니다.</p>
+
+<hr />
+
+<h2 id="운영서버-war-수동-배포-방법-정석">운영서버 WAR 수동 배포 방법 (정석)</h2>
+
+<p>운영서버는 관리자, 사용자 서비스가 한 프로젝트에 있어도 두 개의 톰캣에 분리하여 각각의 war로 배포하는 것이 좋습니다.<br />
+관리자 서비스에 문제가 있어도 사용자 서비스에 영향을 미치지 않게 하기 위함입니다.</p>
+
+<h3 id="톰캣-종료">톰캣 종료</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/톰캣경로/bin/shutdown.sh
+</code></pre></div></div>
+<p>톰캣 실행 중 webapps 폴더 안에 war를 올리면 자동으로 압축 해제되니 기존 실행중이던 톰캣 서비스를 종료합니다.<br />
+첫 번째 was에 반영 후 정상 로그 확인 전까지는 두 번째 was를 내리면 절대 안 됩니다.</p>
+
+<h3 id="톰캣-폴더에-war-복사">톰캣 폴더에 war 복사</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /톰캣경로/webapps
+cp -r /home/유저명/deploy/날짜_순번/ROOT또는프로젝트명.war ./
+</code></pre></div></div>
+<p>ll 명령어로 war 사이즈를 보고 정상 교체되었는지 확인합니다.</p>
+
+<h3 id="war-압축-해제">war 압축 해제</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jar -xvf ROOT또는프로젝트명.war
+</code></pre></div></div>
+<p>기존 프로젝트 파일들을 지우지 않고 덮어씌우기 때문에, 삭제된 파일은 직접 삭제해야 합니다.</p>
+
+<h3 id="톰캣-실행">톰캣 실행</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /톰캣경로/bin
+./startup.sh
+</code></pre></div></div>
+<p>톰캣 실행 시 war 파일이 압축 해제된 ROOT또는프로젝트 폴더 소스가 반영됩니다.</p>
+
+<p><mark>단건 반영이 필요한 경우</mark><br />
+/톰캣경로/webapps 폴더에 war 파일이 있으면 단건 반영이 안 되니까 war 파일 반영하고 정상 구동 확인 후 war 파일은 백업하고 지운다 합니다.</p>
+
+<hr />
+
+<h2 id="운영서버-war-수동-배포-방법-편법">운영서버 WAR 수동 배포 방법 (편법)</h2>
+
+<p>톰캣 실행 중 /톰캣경로/webapps 폴더에 war 파일이 올라오면 바로 같은 이름의 폴더로 풀리기 때문에,<br />
+톰캣을 종료하고 war 파일을 옮기는데 시간이 소요되어 사용자가 503 페이지를 오래 볼 수 있습니다.</p>
+
+<p>그래서인지 /톰캣경로/webapps/ROOT또는프로젝트폴더명 폴더 안에 war 파일을 올리는 편법이 있습니다.<br />
+이 방법은 war 배포 절차가 좀 더 간소화되며, 압축 해제 명령어도 약간 달라집니다.</p>
+
+<h3 id="기존-프로젝트-폴더-안에-war-복사">기존 프로젝트 폴더 안에 war 복사</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /톰캣경로/webapps/ROOT또는프로젝트명
+cp -r /home/유저명/deploy/날짜_순번/ROOT또는프로젝트명.war ./
+</code></pre></div></div>
+<p>ll 명령어로 war 사이즈를 보고 정상 교체되었는지 확인합니다.</p>
+
+<h3 id="톰캣-종료-1">톰캣 종료</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /톰캣경로/bin
+./shutdown.sh
+</code></pre></div></div>
+<p>첫 번째 was에 반영 후 정상 로그 확인 전까지는 두 번째 was를 내리면 절대 안 됩니다.</p>
+
+<h3 id="war-압축-해제-1">war 압축 해제</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /톰캣경로/webapps/ROOT또는프로젝트명
+jar -xvf ROOT또는프로젝트명.war
+</code></pre></div></div>
+<p>현재 경로에 war 압축을 해제합니다.<br />
+기존 프로젝트 파일들을 지우지 않고 덮어씌우기 때문에, 삭제된 파일은 직접 삭제해야 합니다.</p>
+
+<h3 id="톰캣-실행-1">톰캣 실행</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /톰캣경로/bin
+./startup.sh
+</code></pre></div></div>
+<p>톰캣 실행 시 war 파일이 압축 해제된 ROOT또는프로젝트 폴더 소스가 반영됩니다.</p>
+
+<hr />
+
+<h2 id="백업한-프로젝트-소스-복구-방법">백업한 프로젝트 소스 복구 방법</h2>
+
+<h3 id="프로젝트-war-복구">프로젝트 war 복구</h3>
+
+<p>톰캣 종료 후 유저 Home에 백업했던 war를 복사하여 압축 풀고 재실행 합니다.</p>
+
+<p><mark>정석 방법 war 복구</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /톰캣경로/webapps
+cp -r /home/유저명/bak/날짜_순번/ROOT또는프로젝트명.war ./
+jar -xvf ROOT또는프로젝트명.war
+</code></pre></div></div>
+
+<p><mark>편법 방법 war 복구</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /톰캣경로/webapps/ROOT또는프로젝트폴더명
+cp -r /home/유저명/bak/날짜_순번/ROOT또는프로젝트명.war ./
+jar -xvf ROOT또는프로젝트명.war
+</code></pre></div></div>
+
+<h3 id="프로젝트-폴더-복구">프로젝트 폴더 복구</h3>
+
+<p>톰캣이 종료된 상태에서 프로젝트 폴더 내 파일들을 지우고, 백업했던 파일들을 옮겨옵니다.<br />
+별도의 단건 반영이 없었다면, war 파일만 가져와서 다시 압축해제해도 됩니다.</p>
+
+<p><mark>정석 방법 프로젝트 폴더 복구</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /톰캣경로/webapps
+cp -r /home/유저명/bak/날짜_순번/* ./
+</code></pre></div></div>
+
+<p><mark>편법 방법 프로젝트 폴더 복구</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /톰캣경로/webapps/ROOT또는프로젝트폴더명
+cp -r /home/유저명/bak/날짜_순번/* ./
+</code></pre></div></div>
+
+<p><mark>로컬에 백업했던 프로젝트 폴더 복구</mark><br />
+파일질라로 대용량 폴더를 업로드하면 너무 오래 걸리기 때문에 반디집으로 tar 압축 후 올리고,<br />
+/톰캣경로/webapps 폴더에 옮긴 뒤 아래 명령어로 압축을 푸는 것이 좋습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir ROOT또는프로젝트폴더명
+tar -xvf ROOT또는프로젝트폴더명.tar -C ./ROOT또는프로젝트폴더명
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%9A%B4%EC%98%81" class="page__taxonomy-item" rel="tag">리눅스 / 운영</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-11-28">2023-11-28</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/op/2023-11-27-1" class="pagination--pager" title="리눅스 개발서버 톰캣 WAR 수동 배포 방법
+">Prev</a>
+    
+    
+      <a href="/tool/2023-11-30-1" class="pagination--pager" title="개발 툴 종류 및 장단점
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

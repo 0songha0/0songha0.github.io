@@ -1,0 +1,1267 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>eGovframework 세션 로그인 분석 / 통합 SSO 로그인 연동 기능 개발 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="eGovframework 세션 로그인 분석 / 통합 SSO 로그인 연동 기능 개발">
+<meta property="og:url" content="https://0songha0.github.io/web-dev/2023-12-07-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-12-07T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2023-12-07T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/web-dev/2023-12-07-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="eGovframework 세션 로그인 분석 / 통합 SSO 로그인 연동 기능 개발">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2023-12-07T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2023-12-07T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">eGovframework 세션 로그인 분석 / 통합 SSO 로그인 연동 기능 개발
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2023-12-07T00:00:00+00:00">2023-12-07</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> eGovframework 세션 로그인 분석 / 통합 SSO 로그인 연동 기능 개발</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#egovframework-세션-로그인-분석">eGovframework 세션 로그인 분석</a><ul><li><a href="#jsp에서-로그인-요청">jsp에서 로그인 요청</a></li><li><a href="#서버에서-세션-로그인-처리">서버에서 세션 로그인 처리</a></li><li><a href="#jsp-콜백-함수에서-후처리">jsp 콜백 함수에서 후처리</a></li></ul></li><li><a href="#기존-sso-로그인-유지-처리-분석">기존 SSO 로그인 유지 처리 분석</a><ul><li><a href="#interceptior에서-각-화면-로그인-여부-체크">Interceptior에서 각 화면 로그인 여부 체크</a></li><li><a href="#jsp에서-로그인-유지-처리">jsp에서 로그인 유지 처리</a></li></ul></li><li><a href="#sso-로그인-기능-개발">SSO 로그인 기능 개발</a><ul><li><a href="#controller-코드">Controller 코드</a></li><li><a href="#loginapiutil-코드">loginAPIUtil 코드</a></li><li><a href="#urlconnectionutil-코드">URLConnectionUtil 코드</a></li></ul></li><li><a href="#동시접속-로그인-불가-처리">동시접속 로그인 불가 처리</a><ul><li><a href="#동시접속-시-로그아웃-예시">동시접속 시 로그아웃 예시</a></li></ul></li><li><a href="#sso-api-방화벽-허용">SSO API 방화벽 허용</a><ul><li><a href="#sso-api-java-요청-예시">SSO API Java 요청 예시</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="egovframework-세션-로그인-분석">eGovframework 세션 로그인 분석</h2>
+
+<h3 id="jsp에서-로그인-요청">jsp에서 로그인 요청</h3>
+<p>유저가 입력한 아이디, 비밀번호가 담긴 Form을 파라미터로 ajax 호출하여 서버에 요청합니다.<br />
+‘아이디 저장’ 체크박스 값이 checked이면 쿠키에 아이디를 30일 간 저장합니다.</p>
+
+<h3 id="서버에서-세션-로그인-처리">서버에서 세션 로그인 처리</h3>
+<p><mark>SSO 로그인 API 호출</mark><br />
+Controller에서 ajax 요청을 받고, LoginAPIUtil의 login 함수를 호출합니다.<br />
+SSO 로그인 API URL에 get 방식으로 아이디, 비밀번호를 담고 HttpURLConnection을 통해 요청합니다.<br />
+json 형태로 받은 결과 값을 BufferedReader로 읽고 JSONParser로 파싱해서 리턴합니다.<br />
+Controller에서 LoginAPIUtil 리턴 값으로 정상 로그인 체크 후 공통 함수를 호출합니다.</p>
+
+<p><mark>세션 로그인 처리</mark><br />
+공통 함수에서 유저 테이블에서 유저 아이디로 유저 고유 ID를 조회합니다.<br />
+조회 결과가 없으면 유저 고유 ID와 암호화 패스워드를 생성하고, 유저 테이블과 유저 권한 테이블(COMTNEMPLYRSCRTYESTBS)에 각각 insert 합니다.<br />
+마지막으로, 유저 테이블에서 유저 고유 ID로 유저 정보들을 조회하여 LoginVO에 담아 리턴합니다.</p>
+
+<p>Controller에서 LoginVO를 받아 세션에 저장합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>req.getSession().setAttribute("loginVO", loginVO);
+</code></pre></div></div>
+
+<p>ModelAndView에 유저 아이디, 유저 token, 로그인 여부를 담아 JsonView로 리턴합니다.</p>
+
+<h3 id="jsp-콜백-함수에서-후처리">jsp 콜백 함수에서 후처리</h3>
+<p><mark>로그인 성공 시</mark><br />
+쿠키를 생성하고 로그인 처리하는 SSO URL에 get 방식으로 사이트명과 유저 토큰 값을 담습니다.<br />
+IE11이면 SSO URL을 script 태그의 src 값으로 설정한 뒤 head에 append 합니다.<br />
+IE11이 아니면 SSO URL을 Jquery getScript 함수를 통해 실행한 뒤 해당 유저 메인으로 URL을 이동합니다.</p>
+
+<p><mark>로그인 실패 시</mark><br />
+‘아이디/비밀번호를 다시 입력해 주세요.’ 팝업을 띄웁니다.</p>
+
+<hr />
+
+<h2 id="기존-sso-로그인-유지-처리-분석">기존 SSO 로그인 유지 처리 분석</h2>
+
+<h3 id="interceptior에서-각-화면-로그인-여부-체크">Interceptior에서 각 화면 로그인 여부 체크</h3>
+<p>HandlerInterceptorAdapter를 상속해서 구현한 Interceptor의 preHandle 함수에서 로그인 여부와 권한을 체크하고 데이터를 담아줍니다.</p>
+
+<p><mark>egov-com-interceptor.xml 설정 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd"&gt;
+	&lt;!-- 세션(Session) 방식 인증시에만 AuthenticInterceptor 동작  --&gt;
+    &lt;beans profile="session"&gt;  
+	    &lt;mvc:interceptors&gt;
+	        &lt;!-- IP 정보 기록 인터셉터를 등록한다. --&gt;
+	        &lt;bean class="egovframework.com.cmm.interceptor.IpObtainInterceptor" /&gt;       
+	    &lt;/mvc:interceptors&gt; 
+	&lt;/beans&gt;
+	
+	&lt;!-- 세션(Session) 방식 인증시에만 AuthenticInterceptor 동작  --&gt;
+	&lt;!-- 동작모드(프로파일명) : dummy, session, security --&gt;
+    &lt;beans profile="session"&gt;
+	    &lt;mvc:interceptors&gt;
+	        &lt;!--
+	        	* 로그인 체크가 필요한 URL과 로그인 여부를 체크해줄 인터셉터 등록에 대한 간단한 기능 예시이다.
+	        	* 실무에 사용시 시큐리티 간소화 서비스 또는 세션모드 접근제어를 사용한다.
+	        --&gt;
+	        &lt;mvc:interceptor&gt;
+	            &lt;mvc:mapping path="/**/*.do" /&gt;
+	            &lt;mvc:exclude-mapping path="/uat/uia/**" /&gt;
+	            &lt;mvc:exclude-mapping path="/index.do" /&gt;
+	            &lt;mvc:exclude-mapping path="/cmm/fms/getImage.do" /&gt; &lt;!-- 로그인화면이미지 --&gt;
+	            &lt;mvc:exclude-mapping path="/utl/web/imageSrc.do**" /&gt; &lt;!-- 로그인화면이미지 --&gt;
+	            &lt;mvc:exclude-mapping path="/cmm/fms/FileDown.do**" /&gt; &lt;!-- 파일다운로드 --&gt;
+	            &lt;mvc:exclude-mapping path="/cmm/fms/guideDown/**" /&gt; &lt;!-- 파일다운로드 --&gt;
+	            &lt;mvc:exclude-mapping path="/cmmn/**" /&gt;
+	            &lt;mvc:exclude-mapping path="/user/**" /&gt;
+	            &lt;mvc:exclude-mapping path="/mng/**" /&gt;
+	            &lt;mvc:exclude-mapping path="/im/**" /&gt;
+	            
+	            &lt;bean class="egovframework.com.cmm.interceptor.AuthenticInterceptor"&gt;
+	            	&lt;!-- 관리자 권한 Ant style Pattern List --&gt;				
+                &lt;property name="adminAuthPatternList"&gt;
+                  &lt;list&gt;
+                    &lt;!-- 보안 &gt; 권한관리 --&gt;
+                    &lt;value&gt;/sec/ram/*.do&lt;/value&gt;
+                  &lt;/list&gt;
+                &lt;/property&gt;
+	            &lt;/bean&gt;
+	        &lt;/mvc:interceptor&gt;
+	         &lt;mvc:interceptor&gt;
+	            &lt;mvc:mapping path="/mng/**" /&gt;
+	            &lt;mvc:mapping path="/mng/**" /&gt;
+	            &lt;mvc:mapping path="/uss/**" /&gt;
+	            &lt;mvc:mapping path="/sym/**" /&gt;
+	            &lt;mvc:mapping path="/sec/**" /&gt;
+	            &lt;mvc:mapping path="/cop/**" /&gt;
+	            &lt;mvc:mapping path="/sym/**" /&gt;
+	            &lt;mvc:mapping path="/com/**" /&gt;
+	            &lt;mvc:mapping path="/dam/**" /&gt;
+	            &lt;mvc:mapping path="/ssi/**" /&gt;
+	            &lt;mvc:mapping path="/utl/**" /&gt;
+	            &lt;mvc:mapping path="/cmm/**" /&gt;
+	            &lt;mvc:exclude-mapping path="/im/**" /&gt;
+	            &lt;mvc:exclude-mapping path="/cmm/fms/FileDown.do**" /&gt; &lt;!-- 파일다운로드 --&gt;
+	            &lt;mvc:exclude-mapping path="/cmm/fms/guideDown/**" /&gt; &lt;!-- 파일다운로드 --&gt;
+	            &lt;mvc:exclude-mapping path="/utl/web/imageSrc.do**" /&gt; &lt;!-- 로그인화면이미지 --&gt;
+	            &lt;bean class="com.intermorph.cmmn.interceptor.IMAuthenticMngInterceptor"&gt;
+	            &lt;/bean&gt;
+	        &lt;/mvc:interceptor&gt;
+	        &lt;mvc:interceptor&gt;
+	            &lt;mvc:mapping path="/cmmn/**" /&gt;
+	            &lt;mvc:mapping path="/user/**" /&gt;
+	            &lt;mvc:mapping path="/uat/uia/actionLogin**" /&gt;
+	            &lt;mvc:exclude-mapping path="/cmm/fms/FileDown.do**" /&gt; &lt;!-- 파일다운로드 --&gt;
+	            &lt;mvc:exclude-mapping path="/cmm/fms/guideDown/**" /&gt; &lt;!-- 파일다운로드 --&gt;
+	            &lt;mvc:exclude-mapping path="/im/**" /&gt;
+	            &lt;bean class="com.intermorph.cmmn.interceptor.IMAuthenticUserInterceptor"&gt;
+	            &lt;property name="adminAuthPatternList"&gt;
+					&lt;list&gt;
+						&lt;value&gt;/user/common/file/**&lt;/value&gt;
+						&lt;value&gt;/cmmn/common/FileDown.do**&lt;/value&gt;
+						&lt;value&gt;/cmmn/common/FileDownEnc.do**&lt;/value&gt;
+						&lt;value&gt;/user/common/file/**&lt;/value&gt;
+						&lt;value&gt;/cmmn/cmmnFile/**&lt;/value&gt;
+						&lt;value&gt;/cmmn/chek/**&lt;/value&gt;
+						&lt;value&gt;/cmmn/cnts/**&lt;/value&gt;
+						&lt;value&gt;/cmmn/ussMngr/overchek.do**&lt;/value&gt;
+						&lt;value&gt;/user/study/cnts/**&lt;/value&gt;
+						&lt;value&gt;/cmmn/study/cnts/**&lt;/value&gt;
+						&lt;value&gt;/user/srvyp/selectListQstnPreview.do**&lt;/value&gt;
+						&lt;value&gt;/user/tstp/preview.do**&lt;/value&gt;
+					&lt;/list&gt;
+				&lt;/property&gt;
+            	&lt;property name="fullLayoutPatternList"&gt;
+					&lt;list&gt;
+						&lt;value&gt;/cmmn/login.do**&lt;/value&gt;
+						&lt;value&gt;/cmmn/ussMngr/regist**&lt;/value&gt;
+						&lt;value&gt;/cmmn/ussMngr/find**&lt;/value&gt;
+						&lt;value&gt;/uat/uia/actionLogin**&lt;/value&gt;
+					&lt;/list&gt;
+				&lt;/property&gt;
+	            &lt;/bean&gt;
+	        &lt;/mvc:interceptor&gt;
+	        &lt;mvc:interceptor&gt;&lt;!-- 세션이 있는 경우 접근 불가 페이지 정의 --&gt;
+	            &lt;mvc:mapping path="/cmmn/login.do" /&gt;
+	            &lt;bean class="com.intermorph.cmmn.interceptor.IMAnonymousInterceptor"&gt;
+	            &lt;/bean&gt;
+	        &lt;/mvc:interceptor&gt;
+	    &lt;/mvc:interceptors&gt; 
+	&lt;/beans&gt;
+&lt;/beans&gt;
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">mvc:mapping</code> : 인터셉터가 적용될 URL 패턴 설정<br />
+<code class="language-plaintext highlighter-rouge">mvc:exclude-mapping</code> : 인터셉터를 적용하지 않을 특정 URL 패턴 설정<br />
+<code class="language-plaintext highlighter-rouge">property</code> : 인터셉터에서 private 변수에 저장하고 사용할 속성</p>
+
+<p><mark>Interceptor에서 로그인 여부 체크 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+
+if(isAuthenticated) {
+  // 인증된 사용자 : 권한 체크 후 세션에 저장했던 LoginVO를 반환 받아 request에 담아줍니다.
+  LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+  request.setAttribute("LoginUser", user);
+} else {
+  // 미인증 사용자 : request에 세션ID를 암호화하여 담고 ModelAndView를 통해 로그인 화면 URL으로 redirect 합니다.
+  // 세션ID는 7CF30592B6FFCB7A4070A7F3BB598C19 같은 형태이며, 같은 브라우저 내에서는 다른 탭에서도 같은 세션ID를 가집니다.
+  // _sessid는 현재 세션 ID에 특정 문자열과 난수를 더해서 AES256 암호화한 값입니다.
+  request.setAttribute("_sessid", LoginAPIUtil.authorizeKey(request.getSession().getId()));
+  ModelAndView modelAndView = new ModelAndView("redirect:/로그인페이지.do");
+  throw new ModelAndViewDefiningException(modelAndView);
+}
+</code></pre></div></div>
+
+<p><mark>로그인 정보 확인 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LoginVO loginVO = (LoginVO) req.getSession().getAttribute("loginVO");
+</code></pre></div></div>
+
+<h3 id="jsp에서-로그인-유지-처리">jsp에서 로그인 유지 처리</h3>
+<p><mark>유저 정보 저장</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;c:if test="${!empty LoginUser}"&gt;
+  &lt;c:set var="login_key" value="${LoginUser.유저고유ID}"/&gt;
+  &lt;c:set var="login_id" value="${LoginUser.유저아이디}"/&gt;
+  &lt;c:set var="login_name" value="${LoginUser.유저명}"/&gt;
+  &lt;c:set var="login_dateTime" value="${LoginUser.로그인시간}"/&gt;
+  &lt;c:set var="login_userType" value="${LoginUser.유저타입}"/&gt;
+&lt;/c:if&gt;
+</code></pre></div></div>
+<p>모든 페이지에 include 되는 공통 JSP 안에, 서버에서 받아온 유저 정보들을 JSTL 변수에 담아줍니다.</p>
+
+<p><mark>기존 로그인 유지 처리</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;c:if test="${empty login_key &amp;&amp; 로그인페이지여부 eq 'N'}"&gt;
+  $.ajax({
+      url: "https://SSOAPI주소:446/api/auth/API1",
+      data: { sessionData: "${_sessid}" },
+      dataType: 'json',
+      cache : false,
+      success: function (data) {
+          if (data &amp;&amp; data.Result) {
+              let Items = data.Result.Items;
+              $.ajax({
+                  url: "https://SSOAPI주소:446/api/auth/API2?Token=" + Items.Token,
+                  dataType: 'text',
+                  xhrFields: {
+                      withCredentials: true
+                  },
+                  cache : false,
+                  success: function (data) {
+                      let reg = /_ChunjaeSSOEncData = '(.*)';/
+                      let ssoData = reg.exec(data)[1];
+                      if (ssoData) {
+                          $.ajax({
+                              url: "&lt;c:url value="/세션로그인처리.do" /&gt;",
+                              data: {
+                                  ssoData: ssoData
+                              },
+                              type: "post",
+                              success: function (res) {
+                                const obj = JSON.parse(res);
+                                if(obj.result==1){
+                                    location.reload();
+                                }
+                              }
+                          })
+                      }
+                  }
+              });
+          }
+      }
+  });
+&lt;/c:if&gt;
+</code></pre></div></div>
+<p>유저고유ID가 변수에 저장되어 있지 않고, 로그인 페이지가 아니면 로그인 유지 SSO API를 호출합니다.<br />
+첫 번째 API에 _sessid를 파라미터로 넘기고, 유효성 검증을 위한 유저 토큰을 받고 SSO 쿠키도 생성 받습니다.<br />
+두 번째 API에서 유저 토큰을 파라미터로 넘기고, 유저 ID가 암호화된 SSO 쿠키 값이 인증되면 유저 정보가 암호화된 SSO 데이터를 받을 수 있습니다.<br />
+SSO 데이터가 있으면 신규 세션 로그인 처리 Controller URL에 파라미터로 넘기면서 ajax로 호출합니다.<br />
+Controller에서 SSO 데이터의 유저 정보를 복호화하고 LoginVO에 담아 세션에 저장하여 로그인 처리 합니다.</p>
+
+<p>기존에는 Javascript에서 사내 SSO 서버 API를 호출하여 로그인 유지하게 되어 있었는데,<br />
+Javascript에서 호출하면 크로스도메인 및 보안 문제가 발생하니 JAVA에서 호출하는 것이 좋습니다.</p>
+
+<hr />
+
+<h2 id="sso-로그인-기능-개발">SSO 로그인 기능 개발</h2>
+
+<p>타 팀 앱에서 우리 웹으로 이동 시 SSO 로그인 유지되는 처리를 개발하게 되었습니다.<br />
+앱에서 우리 웹의 신규 API로 암호화된 userkey를 보내주면,<br />
+첫 번째 SSO API에 userkey를 넘기고, 두 번째 SSO API에서 토큰과 쿠키를 넘기면 유저 정보를 응답해주기로 했습니다.<br />
+그런데, 첫 번째 SSO API에서 생성해준 쿠키는 타 사이트 URL 쿠키라 우리 사이트에서 활용할 수 없었습니다.</p>
+
+<p><mark>원인 분석 및 해결방안</mark><br />
+안드로이드:삼성 인터넷 브라우저, iOS:사파리 등 모바일 기본 브라우저에서는 보안상 타 사이트 쿠키가 차단되어,<br />
+도메인이 다른 Cross site 쿠키 공유가 되지 않아 쿠키 확인을 통한 로그인이 되지 않습니다.<br />
+결국 유저 쿠키 없이 유저 토큰만 받고도 사용자 정보를 응답하는 신규 SSO API를 생성 요청하여 받았고,<br />
+두 번째 SSO API 주소를 변경하여 해결하였습니다.</p>
+
+<p><mark>SSO 로그인 장점</mark><br />
+한 번의 로그인으로 여러 사이트 로그인 연동이 가능해서, 각각의 서비스마다 로그인하는 불편함이 해소됩니다.</p>
+
+<h3 id="controller-코드">Controller 코드</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@RequestMapping(value = "/SSO로그인.do")
+  public String actionLoginAppProfSso(@RequestParam("userkey") String userkey, HttpServletRequest request, ModelMap model, HttpServletResponse res) throws Exception {
+    try {
+      // userkey로 SSO API 인증하여 유저 정보 받아오기
+      LoginSso result = loginAPIUtil.loginAppProf(userkey);
+      
+      if (result.getUserID() != null &amp;&amp; !result.getUserID().equals("")) {
+
+        // 로그인 해도 되는 유저인지 체크 (생략)
+
+        // User 테이블 조회 후 없으면 Insert
+        LoginVO resultData = ssoUserInsertSelect(result);
+
+        // 세션 로그인 처리
+        request.getSession().setAttribute("loginVO", resultData);
+        
+        // 로그인 성공 시
+        return "redirect:/메인화면.do";
+      }
+    } catch (Exception e) {
+			// 에러 시
+			return "view/로그인화면jsp명";
+		}
+		
+  // 로그인 실패 시
+  return "view/로그인화면jsp명";
+}
+</code></pre></div></div>
+
+<h3 id="loginapiutil-코드">loginAPIUtil 코드</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public static LoginSso loginAppProf(String userkey) throws Exception {
+  LoginSso loginSso = new LoginSso();
+  
+  // 앱에서 보내준 암호화 userkey 복호화
+  AES256Util aes256Util = new AES256Util(프로퍼티유틸.SSOAESKEY);
+  String userkeyDecode = aes256Util.aesDecode(userkey);
+  
+  // 원본 userkey 암호화
+  String userkeyEncode = URLEncoder.encode(AES256암호화함수(userkeyDecode), "UTF-8");
+  
+  URLConnectionUtil urlConnectionUtil = new URLConnectionUtil();
+
+  // API1 호출 : 유저 key로 유저 토큰 생성
+  String api1ResultStr = urlConnectionUtil.requestGetURL("https://SSOAPI주소/api/auth/API1?sessionData=" + userkeyEncode, "application/json");
+  
+  JSONParser parser = new JSONParser();
+  JSONObject jsonObj = (JSONObject) parser.parse(api1ResultStr);
+  
+  if (jsonObj.get("StatusCode") != null) {
+    String StatusCode = (String) jsonObj.get("StatusCode");
+    if ("AUTH_OK".equals(StatusCode)) {
+
+      JSONObject result = (JSONObject) jsonObj.get("Result");
+      JSONObject items = (JSONObject) result.get("Items");
+      String token = (String) items.get("Token");
+      
+      // API2 호출 : 유저 토큰으로 유저 데이터 받음
+      String api2ResultStr = urlConnectionUtil.requestGetURL("https://SSOAPI주소/api/auth/API2?Token=" + token, "text/html");
+      
+      // API2 결과에서 암호화 유저 데이터만 추출
+      Pattern pattern = Pattern.compile("_ChunjaeSSOEncData = '(.*)';");
+      Matcher matcher = pattern.matcher(api2ResultStr);
+      String ssoEncData = "";
+      
+      while (matcher.find()) {
+        ssoEncData = matcher.group(1);
+      }
+
+      // 유저 데이터 복호화
+      loginSso = AES256복호화함수(ssoEncData);
+      
+    }
+    
+    loginSso.setStatusCode(StatusCode);
+  }
+    
+  return loginSso;
+}
+
+public static String AES256암호화함수(String userkeyDecode) {
+
+  String ssoFormat = MessageFormat.format("{0}^{1}^{2}", userkeyDecode, "특정문자열", new Date().getTime());
+
+  AES256Util aes = new AES256Util(프로퍼티유틸.SSOAESKEY);
+  String ssoStr = aes.aesEncode(ssoFormat);
+
+  return ssoStr;
+}
+
+public static LoginSso AES256복호화함수(String SSOEncData) {
+
+  LoginSso result = null;
+
+  AES256Util aes256Util = new AES256Util(프로퍼티유틸.SSOAESKEY);
+
+  String decodeString = URLDecoder.decode(SSOEncData, StandardCharsets.UTF_8.name());
+  String SSODesData = aes256Util.aesDecode(decodeString);
+
+  Gson gson = new Gson();
+
+  result = gson.fromJson(SSODesData, LoginSso.class);
+  result.setUsertype("T");
+
+  return result;
+}
+</code></pre></div></div>
+
+<h3 id="urlconnectionutil-코드">URLConnectionUtil 코드</h3>
+<p><a href="https://0songha0.github.io/web-dev/2023-12-13-1" target="_blank">https://0songha0.github.io/web-dev/2023-12-13-1</a><br />
+Java API 호출을 위해 생성한 객체입니다.</p>
+
+<hr />
+
+<h2 id="동시접속-로그인-불가-처리">동시접속 로그인 불가 처리</h2>
+
+<h3 id="동시접속-시-로그아웃-예시">동시접속 시 로그아웃 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;c:if test="${!empty LoginUser.userId}"&gt;
+&lt;script type="text/javaScript" language="javascript"&gt;
+  chekLoginOver = function(){
+    $.ajax({
+        url:'${pageContext.request.contextPath}/cmmn/chek/session.do',
+        type:'post',
+        data:{userId: '${LoginUser.userId}'},
+        dataType: "json" ,
+        success: function(data) {
+          if(data.result == -3){
+            alert('※동시접속 종료안내 \n다른 시스템에서 같은 아이디로 동시 로그인 되어 종료됩니다.');
+            logout();
+          }
+        },
+        error: function(err) {
+        }
+    });
+    return false;
+  }
+
+  chekLoginOver();
+&lt;/script&gt;
+&lt;/c:if&gt;
+</code></pre></div></div>
+<p>로그인 성공 시 이동하는 화면에 위와 같은 스크립트를 추가하면 동시접속을 막을 수 있습니다.<br />
+세션 로그인 유저 정보가 있다면, 마지막 로그인 세션 ID를 유저 로그인 상태 테이블에서 조회합니다.<br />
+현재 세션 ID와 동일하다면 동시접속 종료 팝업 표출 후 로그아웃 함수를 호출합니다.</p>
+
+<p><mark>세션 체크 Controller 참고</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@RequestMapping ("/cmmn/chek/session.do")
+public ModelAndView chekSession(HttpServletRequest req, HttpServletResponse res) throws Exception {
+  ModelAndView mav = new ModelAndView();
+
+  String userId = req.getParameter("userId");
+  String sesinId = req.getSession().getId();
+  int result = 0;
+  
+  // 인증된 사용자 여부
+  boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+  
+  // DB에서 마지막 로그인 세션 ID 조회 
+  IMLgnSttsVO lgnStts = lgnSttsService.selectDetailLgnStts(userId);
+  
+  if (isAuthenticated &amp;&amp; lgnStts != null) {
+    if (!sesinId.equals(lgnStts.getLastSesinId())) {
+      LoginVO loginVO = (LoginVO) req.getSession().getAttribute("loginVO");
+			
+      // 일부 계정을 제외하고 동시접속 차단
+      switch (loginVO.getId()) {
+        case "tsherpagt006":
+          result = 1;
+          break;
+        default:
+          result = -3;
+          break;
+      }
+    }
+  }
+
+  mav.addObject("result", result);
+  mav.setViewName("jsonView");
+
+  return mav;
+}
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="sso-api-방화벽-허용">SSO API 방화벽 허용</h2>
+
+<h3 id="sso-api-java-요청-예시">SSO API Java 요청 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 클래스 리스트 요청
+URL url = new URL("http://SSOAPI주소/api/userClassSearch?UserID=" + UserID);
+
+HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+conn.setRequestMethod("GET");
+conn.setRequestProperty("Content-Type", "application/json");
+conn.setDoOutput(true);
+BufferedReader in = null;
+String returnString = "";
+
+try {
+  in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+
+  String inputLine;
+  while ((inputLine = in.readLine()) != null) {
+    returnString = returnString.concat(inputLine);
+  }
+
+} finally {
+  if (in != null) {
+    in.close();
+  }
+}
+
+// 응답 JSON 파싱
+JSONParser parser = new JSONParser();
+Object obj;
+obj = parser.parse(returnString);
+JSONObject jsonObj = (JSONObject) obj;
+if (jsonObj.get("status") != null) {
+  String status = (String) jsonObj.get("status");
+  if ("200".equals(status)) {
+
+    Gson gson = new Gson();
+
+    ClassSso cls = gson.fromJson(returnString, ClassSso.class);
+
+    if (cls != null &amp;&amp; !cls.getData().isEmpty()) {
+      List&lt;ClassInfo&gt; list = cls.getData();
+      if (list != null &amp;&amp; !list.isEmpty()) {
+        List&lt;ClassInfo&gt; sortlist = new ArrayList&lt;ClassInfo&gt;();
+        for (ClassInfo info : list) {
+          if ("Y".equals(info.getIsMain())) {
+            sortlist.add(info);
+          }
+        }
+        return sortlist;
+      } else {
+        return list;
+      }
+    } else {
+      return null;
+    }
+
+  }
+}
+</code></pre></div></div>
+<p>유저가 속한 클래스 리스트를 받아오는 SSO API 예시입니다.<br />
+http로 호출하므로, 개발서버에서 SSO 서버로 나가는 80 포트 방화벽을 허용해야 데이터를 받을 수 있습니다.<br />
+만약, https로 호출한다면 443 기본 포트 방화벽을 허용하면 됩니다.<br />
+:포트 번호가 명시되어 있으면 기본 포트 대신 해당 서비스 포트 번호만 허용하면 됩니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#web-%EA%B0%9C%EB%B0%9C" class="page__taxonomy-item" rel="tag">Web 개발</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-12-07">2023-12-07</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/op/2023-12-06-1" class="pagination--pager" title="리눅스 서버 톰캣 파일 단건 반영 방법
+">Prev</a>
+    
+    
+      <a href="/tool/2023-12-08-1" class="pagination--pager" title="윈도우 다크모드 설정 / 크롬 다크모드 설정 및 해제 방법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

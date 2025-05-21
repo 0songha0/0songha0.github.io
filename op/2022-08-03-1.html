@@ -1,0 +1,1076 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>리눅스 네트워크 연결 테스트 명령어 / 네트워크 상태 확인 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="리눅스 네트워크 연결 테스트 명령어 / 네트워크 상태 확인">
+<meta property="og:url" content="https://0songha0.github.io/op/2022-08-03-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-08-03T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2022-08-03T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/op/2022-08-03-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="리눅스 네트워크 연결 테스트 명령어 / 네트워크 상태 확인">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2022-08-03T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2022-08-03T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">리눅스 네트워크 연결 테스트 명령어 / 네트워크 상태 확인
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2022-08-03T00:00:00+00:00">2022-08-03</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 리눅스 네트워크 연결 테스트 명령어 / 네트워크 상태 확인</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#서버-ip-및-도메인-확인">서버 IP 및 도메인 확인</a><ul><li><a href="#서버-비공인-ip-확인">서버 비공인 IP 확인</a></li><li><a href="#서버-공인-ip-확인">서버 공인 IP 확인</a></li><li><a href="#ip로-도메인-확인">ip로 도메인 확인</a></li><li><a href="#도메인으로-ip-확인">도메인으로 ip 확인</a></li></ul></li><li><a href="#서버-통신-확인">서버 통신 확인</a><ul><li><a href="#ping">ping</a></li><li><a href="#tcping">tcping</a></li><li><a href="#telnet">telnet</a></li><li><a href="#curl-">curl ★</a></li><li><a href="#패킷-덤프-뜨는-방법">패킷 덤프 뜨는 방법</a></li></ul></li><li><a href="#네트워크-상태-확인">네트워크 상태 확인</a><ul><li><a href="#열려있는-모든-포트-확인">열려있는 모든 포트 확인</a></li><li><a href="#열려있는-특정-포트-확인">열려있는 특정 포트 확인</a></li><li><a href="#열려있는-포트-중-listen-상태만-확인">열려있는 포트 중 LISTEN 상태만 확인</a></li></ul></li><li><a href="#hosts-파일-수정">hosts 파일 수정</a><ul><li><a href="#hosts-파일-수정-명령어">hosts 파일 수정 명령어</a></li><li><a href="#도메인에-대한-ip-변경">도메인에 대한 IP 변경</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="서버-ip-및-도메인-확인">서버 IP 및 도메인 확인</h2>
+
+<h3 id="서버-비공인-ip-확인">서버 비공인 IP 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ifconfig
+또는
+ip addr
+</code></pre></div></div>
+<p>eth0:의 inet 오른쪽에 내부 IP가 나옵니다.</p>
+
+<h3 id="서버-공인-ip-확인">서버 공인 IP 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl ifconfig.me
+</code></pre></div></div>
+<p>인터넷 연결이 안 되는 서버에서는 Unknown Error가 나올 수 있습니다.</p>
+
+<p><mark>정상 응답 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>211.188.35.IP[root@서버명 ~]#
+</code></pre></div></div>
+<p>해당 IP가 현재 서버의 공인 IP입니다.<br />
+보통 운영서버는 Private 망 (Private 서브넷)에 위치하고 있어, 공인 IP (Public IP) 할당이 불가합니다.<br />
+공인 IP가 없는 경우, 응답이 오지 않는 것이 정상입니다.</p>
+
+<h3 id="ip로-도메인-확인">ip로 도메인 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nslookup ip
+</code></pre></div></div>
+<p>ip에 연결된 도메인이 있는데 찾을 수 없는 경우도 있습니다.</p>
+
+<h3 id="도메인으로-ip-확인">도메인으로 ip 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nslookup 도메인명
+</code></pre></div></div>
+<p>http://를 제외하고, com 또는 co.kr까지의 도메인만 입력해야 나옵니다.</p>
+
+<p><mark>nslookup 응답 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Server:         169.254.169.IP
+Address:        169.254.169.IP#IP
+
+Non-authoritative answer:
+Name:   도메인
+Address: 211.47.4.IP
+</code></pre></div></div>
+<p>가장 하단의 Address가 해당 도메인의 최상단 공인 IP입니다.</p>
+
+<p><mark>API 서버 통신 시 참고사항</mark><br />
+네이버클라우드 운영 서버에서 WAF Security 상품을 이용하는 경우, WAF LB ↔ LB ↔ 운영서버 구조로 구성됩니다.<br />
+이 운영서버에서 API 서버와 통신할 때는 운영서버 최상단 WAF LB IP (nslookup 도메인 시 나오는 공인 IP)로 통신해야 합니다.<br />
+운영서버의 요청을 받는 API 서버에서는 인바운드 방화벽 허용 시 이 공인 IP를 허용해야 합니다.<br />
+ALB에 연결되지 않은 단독 서버는 서버 공인IP 그대로 통신하면 됩니다.</p>
+
+<hr />
+
+<h2 id="서버-통신-확인">서버 통신 확인</h2>
+
+<h3 id="ping">ping</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ping IP또는도메인
+또는
+ping IP또는도메인 -p 포트번호
+</code></pre></div></div>
+<p>연결 받는 쪽에서 ping을 막아둔 경우 ping이 안 나갈 수 있습니다.<br />
+ping 명령어도 http://를 제외하고, com 또는 co.kr까지의 도메인만 입력해야 나옵니다.</p>
+
+<h3 id="tcping">tcping</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tcping ip
+또는
+tcping ip port
+</code></pre></div></div>
+<p>서버 IP 자체에 ping이나 telnet(23포트) 날렸는데 신호가 안 오는 경우 사용합니다.<br />
+리눅스에서는 yum으로 설치, 윈도우에서는 cmd 경로에 exe 위치시킨 후 명령어 실행 가능합니다.<br />
+응답 성공 시 Port is open, 실패 시 No response라고 나옵니다.</p>
+
+<p><mark>tcping 설치 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install tcping
+</code></pre></div></div>
+
+<p><mark>PC에서 서버 URL 연결이 안 되고 서버 IP로 tcping이 가는데, 서버 port로는 안가는 경우</mark><br />
+모바일에서 와이파이 말고 데이터로 서버 URL 연결했는데 접속이 되면 서버에서는 인바운드 0.0.0.0(모든 접속) 또는 해당 PC IP:포트 대상으로 방화벽 허용(AWS EC2 서버는 보안규칙 인바운드 설정 + 리눅스 firewall-cmd 설정)이 정상적으로 되었고 문제가 없는 것입니다.<br />
+접속을 시도하는 PC가 속한 네트워크 망에서 해당 서버 IP:포트 대상으로 아웃바운드 보안을 해제해야 합니다.</p>
+
+<h3 id="telnet">telnet</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>telnet IP또는도메인 포트
+</code></pre></div></div>
+<p>telnet은 yum으로 설치해야 사용할 수 있는 명령어입니다.</p>
+
+<p><mark>telnet 미설치 시 에러</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash: telnet: command not found
+</code></pre></div></div>
+
+<p><mark>telnet 연결 성공 메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Trying IP또는도메인...
+Connected to IP또는도메인.
+Escape character is '^]'.
+</code></pre></div></div>
+
+<h3 id="curl-">curl ★</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v https://IP또는도메인:포트
+</code></pre></div></div>
+<p>yum으로 telnet을 설치할 수 없는 인터넷 사용 불가 환경에서 사용할 수 있는 명령어입니다.<br />
+-v는 자세한 디버깅 정보를 출력하고, -I는 응답 헤더만 출력합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -I https://IP또는도메인:포트
+</code></pre></div></div>
+<p>서버에서 호출하는 API로 curl를 날렸을 때 Connection refused가 나오면 방화벽 허용이 필요합니다.<br />
+목적지 URL이 http이면 80포트, https이면 443 기본 포트 허용이 필요합니다.<br />
+:포트 번호가 명시되어 있으면 기본 포트 대신 해당 서비스 포트 번호만 허용하면 됩니다.</p>
+
+<p>만약, 방화벽 허용이 되어있는데도 Connection refused가 나오면?<br />
+내부IP로 접근해야 하는 사이트에 도메인으로 접근 시 외부IP로 접근되기 때문일 수 있습니다.<br />
+리눅스 호스트 파일에 ‘서버내부IP 서버도메인’ 형태로 저장하면 정상 연결 됩니다.</p>
+
+<p>로드밸런싱 해주는 VIP 서버 IP로 curl 날렸을 때 간헐적으로 성공/실패(타임아웃) 하는 경우,<br />
+로드밸런싱 되는 대상 서버 IP 또는 도메인으로 직접 curl 날렸을 때, 연결이 된다면 서버 내부 방화벽은 허용된 것입니다.<br />
+VIP 서버에서 외부 통신을 받을 수 있도록 인프라팀에서 설정을 해주셔야 정상적으로 통신이 가능했습니다.<br />
+(VIP 서버 아웃바운드 방화벽 설정을 변경하여 통신이 원활하도록 하용해주신 것 같습니다.)</p>
+
+<p><mark>-v 연결 성공 메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*   Trying IP:포트...
+* Connected to IP또는도메인 (IP) port 포트
+Warning: Binary output can mess up your terminal. Use "--output -" to tell
+Warning: curl to output it to your terminal anyway, or consider "--output
+Warning: &lt;FILE&gt;" to save to a file.
+* Failure writing output to destination
+* Closing connection
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Rebuilt URL to: https://IP또는도메인:포트
+*   Trying 211.47.4.169...
+* TCP_NODELAY set
+* Connected to IP또는도메인 (211.47.4.IP) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+* successfully set certificate verify locations:
+*   CAfile: /etc/pki/tls/certs/ca-bundle.crt
+  CApath: none
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+* TLSv1.3 (IN), TLS handshake, [no content] (0):
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+* TLSv1.3 (IN), TLS handshake, [no content] (0):
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+* TLSv1.3 (IN), TLS handshake, [no content] (0):
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+* TLSv1.3 (IN), TLS handshake, [no content] (0):
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+* TLSv1.3 (OUT), TLS handshake, [no content] (0):
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN, server accepted to use http/1.1
+* Server certificate:
+*  subject: C=KR; ST=Seoul; L=Geumcheon-gu; O=Chunjae Education Inc.; CN=*.메인도메인
+*  start date: Jun  7 04:56:05 2024 GMT
+*  expire date: Jul  9 04:56:04 2025 GMT
+*  subjectAltName: host "도메인" matched cert's "*.메인도메인"
+*  issuer: C=BE; O=GlobalSign nv-sa; CN=GlobalSign RSA OV SSL CA 2018
+*  SSL certificate verify ok.
+* TLSv1.3 (OUT), TLS app data, [no content] (0):
+&gt; GET / HTTP/1.1
+&gt; Host: gpt.chunjae.co.kr
+&gt; User-Agent: curl/7.61.1
+&gt; Accept: */*
+&gt; 
+* TLSv1.3 (IN), TLS handshake, [no content] (0):
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+* TLSv1.3 (IN), TLS handshake, [no content] (0):
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+* TLSv1.3 (IN), TLS app data, [no content] (0):
+&lt; HTTP/1.1 404 Not Found
+&lt; Server: nginx/1.27.2
+&lt; Date: Tue, 04 Mar 2025 03:10:40 GMT
+&lt; Content-Type: application/json
+&lt; Content-Length: 22
+&lt; Connection: keep-alive
+&lt; 
+* Connection #0 to host gpt.chunjae.co.kr left intact
+</code></pre></div></div>
+<p>서버에서 응답을 정상적으로 받을 수 있는 경우의 메시지입니다.</p>
+
+<p><mark>-v 연결 실패 메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Rebuilt URL to: https://IP또는도메인:포트
+*   Trying IP...
+* TCP_NODELAY set
+* connect to IP port 포트 failed: 연결이 거부됨
+* Failed to connect to IP또는도메인 port 포트: 연결이 거부됨
+* Closing connection 0
+curl: (7) Failed to connect to IP또는도메인 port 포트: 연결이 거부됨
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Rebuilt URL to: https://IP또는도메인:포트
+*   Trying 211.47.4.IP...
+* TCP_NODELAY set
+* connect to 211.47.4.IP port 443 failed: Connection timed out
+* Failed to connect to IP또는도메인 port 443: Connection timed out
+* Closing connection 0
+curl: (7) Failed to connect to IP또는도메인 port 443: Connection timed out
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*   Trying 211.47.4.IP...
+* TCP_NODELAY set
+* connect to 211.47.4.IP port 443 failed: Connection refused
+* Failed to connect to IP또는도메인 port 443: Connection refused
+* Closing connection 0
+curl: (7) Failed to connect to IP또는도메인 port 443: Connection refused
+</code></pre></div></div>
+<p>서버에서 응답을 받을 수 없는 경우의 메시지들입니다.<br />
+연결 거부 메시지는 바로 오지만, timed out 메시지는 시간이 경과되어야 옵니다.</p>
+
+<p><mark>서버 인증서 만료 메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl: (60) SSL certificate problem: certificate has expired
+More details here: https://curl.haxx.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+</code></pre></div></div>
+<p>요청받는 서버 SSL 인증서가 만료되어 https 연결을 받을 수 없는 상태라서 인증서 갱신이 필요합니다.</p>
+
+<p><mark>HTTP 응답 코드만 확인</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -o /dev/null -s -w "%{http_code}"\n https://IP또는도메인:포트
+</code></pre></div></div>
+<p>해당 주소에서 응답하는 HTTP 코드만 반환합니다.<br />
+200n 같은 문자열이 나오면 정상이고, 응답이 없으면 서버에 연결할 수 없는 것입니다.</p>
+
+<h3 id="패킷-덤프-뜨는-방법">패킷 덤프 뜨는 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tcpdump host 대상서버공인IP -c 100
+(기본 인터페이스에서 100개의 패킷만 캡처하고 종료)
+또는
+tcpdump -i eho0 host 대상서버공인IP -nn
+(지정한 인터페이스 eho0에서 사용자가 중단할 때까지 계속 캡처)
+</code></pre></div></div>
+<p>현재 서버에서 연결하려는 대상 서버 공인 IP를 넣고 위 명령어를 입력하면, 패킷 대기 상태가 됩니다.</p>
+
+<p><mark>정상 대기 상태 메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dropped privs to tcpdump
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+listening on eth0, link-type EN10MB (Ethernet), capture size 262144 bytes
+</code></pre></div></div>
+<p>위 메시지가 나온 상태에서, 현재 서버에서 대상 서버로 요청을 날리면 해당 요청에 대한 패킷을 확인할 수 있습니다.<br />
+(현재 SFTP 연결은 패킷을 봐야하므로, 다른 컴퓨터에서 SFTP 연결하여 curl 요청 시도하였습니다.)</p>
+
+<p><mark>서버 요청 성공 시 정상 패킷 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>16:13:14.842107 IP 현재서버명.35774 &gt; 대상서버공인IP.https: Flags [S], seq 2876837968, win 26730, options [mss 8910,sackOK,TS val 83482796 ecr 0,nop,wscale 7], length 0
+16:13:14.845517 IP 대상서버공인IP.https &gt; 현재서버명.35774: Flags [S.], seq 3892165661, ack 2876837969, win 65160, options [mss 1460,sackOK,TS val 2268557382 ecr 83482796,nop,wscale 7], length 0
+16:13:14.845537 IP 현재서버명.35774 &gt; 대상서버공인IP.https: Flags [.], ack 1, win 209, options [nop,nop,TS val 83482800 ecr 2268557382], length 0
+16:13:14.853126 IP 현재서버명.35774 &gt; 대상서버공인IP.https: Flags [P.], seq 1:518, ack 1, win 209, options [nop,nop,TS val 83482807 ecr 2268557382], length 517
+16:13:14.855903 IP 대상서버공인IP.https &gt; 현재서버명.35774: Flags [.], ack 518, win 506, options [nop,nop,TS val 2268557392 ecr 83482807], length 0
+16:13:14.857031 IP 대상서버공인IP.https &gt; 현재서버명.35774: Flags [.], seq 1:1449, ack 518, win 506, options [nop,nop,TS val 2268557393 ecr 83482807], length 1448
+16:13:14.857057 IP 현재서버명.35774 &gt; 대상서버공인IP.https: Flags [.], ack 1449, win 232, options [nop,nop,TS val 83482811 ecr 2268557393], length 0
+16:13:14.857074 IP 대상서버공인IP.https &gt; 현재서버명.35774: Flags [P.], seq 1449:4097, ack 518, win 506, options [nop,nop,TS val 2268557393 ecr 83482807], length 2648
+16:13:14.857087 IP 현재서버명.35774 &gt; 대상서버공인IP.https: Flags [.], ack 4097, win 273, options [nop,nop,TS val 83482811 ecr 2268557393], length 0
+16:13:14.857091 IP 대상서버공인IP.https &gt; 현재서버명.35774: Flags [P.], seq 4097:4397, ack 518, win 506, options [nop,nop,TS val 2268557393 ecr 83482807], length 300
+16:13:14.857094 IP 현재서버명.35774 &gt; 대상서버공인IP.https: Flags [.], ack 4397, win 296, options [nop,nop,TS val 83482811 ecr 2268557393], length 0
+16:13:14.857999 IP 현재서버명.35774 &gt; 대상서버공인IP.https: Flags [P.], seq 518:598, ack 4397, win 296, options [nop,nop,TS val 83482812 ecr 2268557393], length 80
+16:13:14.858343 IP 현재서버명.35774 &gt; 대상서버공인IP.https: Flags [P.], seq 598:701, ack 4397, win 296, options [nop,nop,TS val 83482813 ecr 2268557393], length 103
+16:13:14.860781 IP 대상서버공인IP.https &gt; 현재서버명.35774: Flags [P.], seq 4397:4700, ack 598, win 506, options [nop,nop,TS val 2268557397 ecr 83482812], length 303
+16:13:14.860835 IP 대상서버공인IP.https &gt; 현재서버명.35774: Flags [P.], seq 4700:5003, ack 598, win 506, options [nop,nop,TS val 2268557397 ecr 83482812], length 303
+16:13:14.860942 IP 현재서버명.35774 &gt; 대상서버공인IP.https: Flags [.], ack 5003, win 341, options [nop,nop,TS val 83482815 ecr 2268557397], length 0
+16:13:14.862426 IP 대상서버공인IP.https &gt; 현재서버명.35774: Flags [P.], seq 5003:5208, ack 701, win 506, options [nop,nop,TS val 2268557399 ecr 83482813], length 205
+16:13:14.862608 IP 현재서버명.35774 &gt; 대상서버공인IP.https: Flags [P.], seq 701:725, ack 5208, win 364, options [nop,nop,TS val 83482817 ecr 2268557399], length 24
+16:13:14.863328 IP 현재서버명.35774 &gt; 대상서버공인IP.https: Flags [F.], seq 725, ack 5208, win 364, options [nop,nop,TS val 83482818 ecr 2268557399], length 0
+16:13:14.865321 IP 대상서버공인IP.https &gt; 현재서버명.35774: Flags [F.], seq 5208, ack 725, win 506, options [nop,nop,TS val 2268557401 ecr 83482817], length 0
+16:13:14.865348 IP 현재서버명.35774 &gt; 대상서버공인IP.https: Flags [.], ack 5209, win 364, options [nop,nop,TS val 83482820 ecr 2268557401], length 0
+16:13:14.865968 IP 대상서버공인IP.https &gt; 현재서버명.35774: Flags [.], ack 726, win 506, options [nop,nop,TS val 2268557402 ecr 83482818], length 0
+</code></pre></div></div>
+<p>위와 같이, S (SYN) 요청 패킷 이후로 ACK 응답 패킷이 나오면 정상적으로 통신이 되는 상태입니다.</p>
+
+<p><mark>서버 요청 실패 (타임아웃) 시 비정상 패킷 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>16:13:14.823256 IP 현재서버명.36148 &gt; 대상서버공인IP.https: Flags [S], seq 79488809, win 26730, options [mss 8910,sackOK,TS val 73009778], length 0
+16:13:14.871243 IP 현재서버명.36148 &gt; 대상서버공인IP.https: Flags [S], seq 79488809, win 26730, options [mss 8910,sackOK,TS val 73011826], length 0
+16:13:14.903305 IP 현재서버명.36148 &gt; 대상서버공인IP.https: Flags [S], seq 79488809, win 26730, options [mss 8910,sackOK,TS val 73015856], length 0
+16:13:14.095260 IP 현재서버명.36148 &gt; 대상서버공인IP.https: Flags [S], seq 79488809, win 26730, options [mss 8910,sackOK,TS val 73024050], length 0
+16:13:14.479239 IP 현재서버명.36148 &gt; 대상서버공인IP.https: Flags [S], seq 79488809, win 26730, options [mss 8910,sackOK,TS val 73040434], length 0
+16:13:14.735254 IP 현재서버명.36148 &gt; 대상서버공인IP.https: Flags [S], seq 79488809, win 26730, options [mss 8910,sackOK,TS val 73072690], length 0
+16:13:14.909668 IP 현재서버명.36148 &gt; 대상서버공인IP.https: Flags [S], seq 2596734840, win 26730, options [mss 8910,sackOK,TS val 74726827], length 0
+16:13:14.967265 IP 현재서버명.36148 &gt; 대상서버공인IP.https: Flags [S], seq 2596734840, win 26730, options [mss 8910,sackOK,TS val 74727927], length 0
+16:13:14.015260 IP 현재서버명.36148 &gt; 대상서버공인IP.https: Flags [S], seq 2596734840, win 26730, options [mss 8910,sackOK,TS val 73009527], length 0
+</code></pre></div></div>
+<p>위와 같이, S (SYN) 패킷을 여러번 보내지만 응답이 없어 중간에 Drop 되는 경우에는<br />
+curl 날렸을 때 연결 거부되지 않지만 응답이 오지 않다가 타임아웃 됩니다.</p>
+
+<p>API 요청을 받는 VIP 서버 도메인에 curl 명령어 시 간헐적으로 성공/실패(타임아웃) 하는 경우,<br />
+VIP 서버 (로드밸런서)의 로드밸런싱 대상 Real 서버 IP에는 curl 연결이 정상적으로 된다면<br />
+현재 서버와 대상 서버 방화벽은 정상적으로 열려있으나, VIP 아웃바운드 방화벽이 닫혀 있을 수 있습니다.<br />
+VIP가 있는 IDC-Forti 방화벽에서 통신 차단 시에는 차단 로그가 확인된다고 합니다.</p>
+
+<hr />
+
+<h2 id="네트워크-상태-확인">네트워크 상태 확인</h2>
+
+<h3 id="열려있는-모든-포트-확인">열려있는 모든 포트 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netstat -nap
+</code></pre></div></div>
+<p>netstat -na에 p 옵션 추가 시 포트를 사용하는 프로세스 정보가 포함됩니다.<br />
+LISTEN 상태이면 포트가 사용중인 것이며, 외부 요청을 받을 준비가 된 상태입니다.</p>
+
+<h3 id="열려있는-특정-포트-확인">열려있는 특정 포트 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netstat -nap | grep 포트번호
+</code></pre></div></div>
+
+<h3 id="열려있는-포트-중-listen-상태만-확인">열려있는 포트 중 LISTEN 상태만 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netstat -nap | grep LISTEN
+</code></pre></div></div>
+<p>톰캣 포트는 IPv4(0.0.0.0:8080) 또는 IPv6(:::8080) 형태로 나옵니다.</p>
+
+<hr />
+
+<h2 id="hosts-파일-수정">hosts 파일 수정</h2>
+
+<h3 id="hosts-파일-수정-명령어">hosts 파일 수정 명령어</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo vi /etc/hosts
+</code></pre></div></div>
+
+<h3 id="도메인에-대한-ip-변경">도메인에 대한 IP 변경</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10.10.100.IP 도메인.co.kr
+</code></pre></div></div>
+<p>현재 호스트에서 도메인으로 요청 시, 연결하는 IP 주소를 지정하도록 설정합니다.<br />
+리눅스 서버 호스트 파일은 저장 시 자동으로 적용됩니다.</p>
+
+<p><mark>로컬호스트 도메인 설정 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1 도메인명
+</code></pre></div></div>
+<p>로컬에서 도메인명으로 들어오는 요청을 로컬 IP로 연결하도록 설정합니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%9A%B4%EC%98%81" class="page__taxonomy-item" rel="tag">리눅스 / 운영</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-08-03">2022-08-03</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/elk/2022-08-03-1" class="pagination--pager" title="VirtualBox CentOS7에 엘라스틱스택 설치 방법
+">Prev</a>
+    
+    
+      <a href="/elk/2022-08-06-1" class="pagination--pager" title="Logstash로 MariaDB 데이터 수집 후 엘라스틱서치 저장 방법 / 로그스태시 사용법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

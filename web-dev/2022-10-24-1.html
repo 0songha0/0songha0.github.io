@@ -1,0 +1,1345 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>SpringBoot에서 Interceptor 활용 세션 로그인 구현 방법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="SpringBoot에서 Interceptor 활용 세션 로그인 구현 방법">
+<meta property="og:url" content="https://0songha0.github.io/web-dev/2022-10-24-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-10-24T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2022-10-24T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/web-dev/2022-10-24-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="SpringBoot에서 Interceptor 활용 세션 로그인 구현 방법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2022-10-24T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2022-10-24T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">SpringBoot에서 Interceptor 활용 세션 로그인 구현 방법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2022-10-24T00:00:00+00:00">2022-10-24</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> SpringBoot에서 Interceptor 활용 세션 로그인 구현 방법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#spring-세션-로그인-개발">Spring 세션 로그인 개발</a><ul><li><a href="#logininterceptorjava-생성">LoginInterceptor.java 생성</a></li><li><a href="#webconfigjava-생성">WebConfig.java 생성</a></li><li><a href="#sessionutiljava-생성-필수x">SessionUtil.java 생성 (필수X)</a></li><li><a href="#controller-예시">Controller 예시</a></li><li><a href="#service-예시">Service 예시</a></li><li><a href="#mapper-예시">Mapper 예시</a></li><li><a href="#mybatis-쿼리-예시">Mybatis 쿼리 예시</a></li><li><a href="#로그인-화면-예시">로그인 화면 예시</a></li><li><a href="#cookieutiljs-예시">CookieUtil.js 예시</a></li><li><a href="#비밀번호-변경-화면-예시">비밀번호 변경 화면 예시</a></li><li><a href="#메뉴-헤더-예시">메뉴 헤더 예시</a></li><li><a href="#세션-만료-시간-설정">세션 만료 시간 설정</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="spring-세션-로그인-개발">Spring 세션 로그인 개발</h2>
+
+<h3 id="logininterceptorjava-생성">LoginInterceptor.java 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import com.chunjae.archive_cms.common.util.SessionUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@Slf4j
+public class LoginInterceptor implements HandlerInterceptor {
+
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
+        if (SessionUtil.isLogin()) {
+            return true;
+
+        } else {
+            // 로그인이 되어있지 않은 경우 보여줄 페이지
+            response.sendRedirect("/user/login");
+            return false;
+        }
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        // 로그아웃 후 뒤로가기 시 로그인했던 상태가 남아있지 않게 no-cache 설정
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+        response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+        response.setDateHeader("Expires", 0); // Proxy
+    }
+}
+</code></pre></div></div>
+<p>HandlerInterceptor를 구현하고, preHandle 함수를 오버라이딩 해서 로그인 여부 체크를 체크합니다.<br />
+<code class="language-plaintext highlighter-rouge">preHandle</code> :  모든 컨트롤러 호출 전 실행되는 함수입니다.<br />
+<code class="language-plaintext highlighter-rouge">postHandle</code> : 컨트롤러 실행 후 호출되는 함수입니다.</p>
+
+<h3 id="webconfigjava-생성">WebConfig.java 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LoginInterceptor())
+                .addPathPatterns("/**") // 인터셉트를 적용할 페이지
+                .excludePathPatterns("/", "/user/login", "/user/loginProc", "/user/logout") // 인터셉트를 제외할 페이지들
+                .excludePathPatterns("/images/**", "/inc/**", "/html/**"); // 인터셉트를 제외할 webapp 이하 폴더들
+    }
+}
+</code></pre></div></div>
+<p>WebMvcConfigurer를 구현하여 인터셉터를 등록하면서, 인터셉터 적용/미적용 페이지를 설정합니다.</p>
+
+<h3 id="sessionutiljava-생성-필수x">SessionUtil.java 생성 (필수X)</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.RequestContextListener;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpSession;
+import java.util.Map;
+
+@Slf4j
+@Component
+public class SessionUtil {
+
+    @Bean
+    public RequestContextListener requestContextListener() {
+        return new RequestContextListener();
+    }
+
+    public static HttpSession getSession() {
+        ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        return servletRequestAttribute.getRequest().getSession();
+    }
+
+    public static void setAttribute(String key, Object attribute) {
+        SessionUtil.getSession().setAttribute(key, attribute);
+    }
+
+    public static Map&lt;String,Object&gt; getLoginedUser() {
+        HttpSession session = SessionUtil.getSession();
+        return (Map&lt;String, Object&gt;) session.getAttribute("loginUser");
+    }
+
+    public static boolean isLogin () {
+        return SessionUtil.getLoginedUser() != null;
+    }
+
+}
+</code></pre></div></div>
+<p>로그인 세션을 쉽게 관리하기 위한 유틸입니다.</p>
+
+<h3 id="controller-예시">Controller 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import com.chunjae.archive_cms.common.util.SessionUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Slf4j
+@Controller
+@RequestMapping("/user")
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private SessionUtil sessionUtil;
+
+    @GetMapping("/login")
+    public String getLoginPage() throws Exception {
+        return "user/login";
+    }
+
+    @ResponseBody
+    @PostMapping("/loginProc")
+    public Map&lt;String, Object&gt; login(@RequestParam("id") String id, @RequestParam("pw") String pw) throws Exception {
+        Map&lt;String, Object&gt; resultMap = new HashMap&lt;&gt;();
+
+        Boolean loginSuccess = false;
+
+        try {
+            // 유저 정보 조회
+            Map&lt;String, Object&gt; loginUser = userService.login(id, pw);
+
+            if(loginUser != null) {
+                sessionUtil.setAttribute("loginUser", loginUser);
+
+                loginSuccess = true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            resultMap.put("success", loginSuccess);
+        }
+
+        return resultMap;
+    }
+
+    @ResponseBody
+    @PostMapping("/logout")
+    public Map&lt;String, Object&gt; logout() {
+        Map&lt;String, Object&gt; resultMap = new HashMap&lt;&gt;();
+
+        try {
+            // 세션 무효화, 세션의 모든 속성 삭제
+            SessionUtil.getSession().invalidate();
+            resultMap.put("success", true);
+        } catch (Exception e){
+            resultMap.put("success", false);
+        }
+
+        return resultMap;
+    }
+
+    @GetMapping("/pwChange")
+    public String getPwChangePage() throws Exception {
+        return "user/pwChange";
+    }
+
+    @ResponseBody
+    @PostMapping("/pwCheck")
+    public Map&lt;String, Object&gt; pwCheck(@RequestParam("id") String id, @RequestParam("pw") String pw) {
+        Map&lt;String, Object&gt; resultMap = new HashMap&lt;&gt;();
+
+        Boolean success = false;
+
+        try {
+            // 기존 비밀번호 체크
+            Map&lt;String, Object&gt; userName = userService.pwCheck(id, pw);
+
+            if(userName != null) {
+                success = true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            resultMap.put("success", success);
+        }
+
+        return resultMap;
+    }
+
+    @ResponseBody
+    @PostMapping("/pwChangeProc")
+    public Map&lt;String, Object&gt; pwChangeProc(@RequestParam("id") String id, @RequestParam("new_pw") String new_pw) {
+        Map&lt;String, Object&gt; resultMap = new HashMap&lt;&gt;();
+
+        Boolean success = false;
+
+        try {
+            // 비밀번호 변경
+            Integer updateResult = userService.pwChange(id, new_pw);
+
+            if(updateResult &gt; 0) {
+                success = true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            resultMap.put("success", success);
+        }
+
+        return resultMap;
+    }
+}
+</code></pre></div></div>
+<p>세션 로그인, 로그아웃, 비밀번호 변경 등의 기능을 구현하는 컨트롤러 예시입니다.</p>
+
+<p><mark>SessionUtil 없이 세션에 값 저장하는 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@ResponseBody
+@PostMapping("/saveSessionData")
+public Map&lt;String, Object&gt; saveSessionData(HttpSession httpSession, @RequestParam HashMap&lt;String, String&gt; param) {
+    Map&lt;String, Object&gt; resultMap = new HashMap&lt;&gt;();
+
+    try {
+        // 세션에 파라미터 값 저장
+        httpSession.setAttribute("키", param.get("값"));
+        resultMap.put("success", true);
+    } catch (Exception e){
+        resultMap.put("success", false);
+    }
+
+    return resultMap;
+}
+</code></pre></div></div>
+<p>HttpSession 객체를 사용하여 직접 세션에 값을 저장해도 됩니다.</p>
+
+<h3 id="service-예시">Service 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import com.chunjae.archive_cms.common.util.EncryptUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Map;
+
+@Slf4j
+@Service
+public class UserService {
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private EncryptUtil encryptUtil;
+
+    public Map&lt;String, Object&gt; login(String id, String pw) throws Exception {
+        pw = encryptUtil.getSHA512(pw);
+        return userMapper.login(id, pw);
+    }
+
+    public Map&lt;String, Object&gt; pwCheck(String id, String pw) throws Exception {
+        pw = encryptUtil.getSHA512(pw);
+        return userMapper.pwCheck(id, pw);
+    }
+
+    public Integer pwChange(String id, String new_pw) throws Exception {
+        new_pw = encryptUtil.getSHA512(new_pw);
+        return userMapper.pwChange(id, new_pw);
+    }
+
+}
+</code></pre></div></div>
+
+<h3 id="mapper-예시">Mapper 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import org.apache.ibatis.annotations.Mapper;
+
+import java.util.Map;
+
+@Mapper
+public interface UserMapper {
+    Map&lt;String, Object&gt; login(String id, String pw) throws Exception;
+
+    Map&lt;String, Object&gt; pwCheck(String id, String pw) throws Exception;
+
+    Integer pwChange(String id, String new_pw) throws Exception;
+}
+</code></pre></div></div>
+
+<h3 id="mybatis-쿼리-예시">Mybatis 쿼리 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;mapper namespace="com.chunjae.archive_cms.user.UserMapper"&gt;
+
+    &lt;select id="login" parameterType="java.util.HashMap" resultType="java.util.HashMap"&gt;
+        SELECT
+             id
+            ,name
+            ,role_cd
+            ,dept_name
+        FROM
+            유저테이블명
+        WHERE
+            id = #{id}
+          AND
+            pw = #{pw}
+          AND
+            delete_yn = 'N'
+    &lt;/select&gt;
+
+    &lt;select id="pwCheck" parameterType="java.util.HashMap" resultType="java.util.HashMap"&gt;
+        SELECT
+            name
+        FROM
+            유저테이블명
+        WHERE
+            id = #{id}
+          AND
+            pw = #{pw}
+    &lt;/select&gt;
+
+    &lt;update id="pwChange" parameterType="java.util.HashMap"&gt;
+        UPDATE
+            유저테이블명
+        SET
+            pw = #{new_pw}
+        WHERE
+            id = #{id}
+    &lt;/update&gt;
+&lt;/mapper&gt;
+</code></pre></div></div>
+
+<h3 id="로그인-화면-예시">로그인 화면 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %&gt;
+&lt;%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %&gt;
+&lt;%@ page contentType="text/html;charset=UTF-8" language="java" %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;body&gt;
+  &lt;div class="wrap bg-gray h100"&gt;
+    &lt;jsp:include page="../common/layout/loginHeader.jsp"/&gt;
+    &lt;div class="container"&gt;
+      &lt;div class="inner"&gt;
+        &lt;div class="login"&gt;
+          &lt;div class="box-login"&gt;
+            &lt;span class="title"&gt;로그인&lt;/span&gt;
+              &lt;div class="form-input"&gt;
+                &lt;form id="loginForm" name="loginForm"&gt;
+                &lt;input id="id" name="id" type="text" placeholder="아이디" value="${cookie.userId.value}"&gt;
+                &lt;input id="pw" name="pw" type="password" placeholder="비밀번호"&gt;
+                &lt;input id="idSaveYn" name="idSaveYn" type="checkbox" name="" &lt;c:if test="${cookie.idSaveYn.value eq 'Y'}"&gt;checked="true"&lt;/c:if&gt;&gt;
+                &lt;label for="idSaveYn"&gt;아이디 저장&lt;/label&gt;
+                &lt;/form&gt;
+              &lt;/div&gt;
+              &lt;button class="btn size01" onclick="login();"&gt;로그인&lt;/button&gt;
+          &lt;/div&gt;
+          &lt;em&gt;※ 아이디/비밀번호가 기억나지 않을 경우, 담당자에게 문의하시길 바랍니다.&lt;br&gt;담당자: 고길동 (02-0000-0000)&lt;/em&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+
+&lt;script&gt;
+  // 엔터 키 이벤트 발생 시 로그인
+  document.addEventListener("keyup", function(event) {
+    if (event.key === 'Enter') {
+      login();
+    }
+  });
+
+  function login() {
+    const formData = new FormData(document.getElementById("loginForm"));
+
+    if(!document.getElementById('id').value) {
+      alert("아이디를 입력해주세요.");
+      return;
+    }
+
+    if(!document.getElementById('pw').value) {
+      alert("비밀번호를 입력해주세요.");
+      return;
+    }
+
+    // 로그인 처리
+    fetch('/user/loginProc', {
+      method: 'POST',
+      body: formData
+    }).then((response) =&gt; response.json())
+      .then((data) =&gt; {
+        if(data.success == true) {
+
+          // CookieUtil.js 사용하여 365일간 쿠키 저장
+          if ($("#idSaveYn").prop("checked") === true) {
+            setCookie("userId", $("#id").val().trim(), 365);
+            setCookie("idSaveYn", "Y", 365);
+          } else {
+            deleteCookie("userId");
+            deleteCookie("idSaveYn");
+          }
+
+          // 메인으로 이동
+          location.href = "/";
+
+        }else {
+          alert("아이디/비밀번호를 다시 한번 입력해주세요.");
+        }
+
+      })
+      .catch((error) =&gt; {
+        alert("로그인 할 수 없습니다. 관리자에게 문의해주세요.");
+      })
+  }
+&lt;/script&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+<p>로그인 화면 JSP 예시입니다.</p>
+
+<h3 id="cookieutiljs-예시">CookieUtil.js 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function setCookie(name, value, exp) {
+    const date = new Date();
+    date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
+    document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+}
+
+function getCookie(name) {
+    var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    return value? value[2] : null;
+}
+
+function deleteCookie(name) {
+    // 만료일을 과거로 변경하여 쿠키 삭제
+    document.cookie = name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;path=/;';
+}
+</code></pre></div></div>
+<p>아이디 저장 기능 구현 시 사용하는 Javascript 쿠키 저장 유틸 예시입니다.</p>
+
+<h3 id="비밀번호-변경-화면-예시">비밀번호 변경 화면 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %&gt;
+&lt;%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %&gt;
+&lt;%@ page contentType="text/html;charset=UTF-8" language="java" %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;body&gt;
+&lt;div class="wrap bg-gray h100"&gt;
+  &lt;jsp:include page="../common/layout/simpleHeader.jsp"/&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="inner"&gt;
+      &lt;div class="inquiry"&gt;
+        &lt;div class="title-wrap"&gt;
+          &lt;span class="title"&gt;비밀번호 수정&lt;/span&gt;
+          &lt;span class="txt"&gt;새로운 비밀번호를 입력해주세요.&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="box-pwinquiry"&gt;
+          &lt;div class="form-input"&gt;
+            &lt;form id="pwForm" name="pwForm"&gt;
+            &lt;div&gt;
+              &lt;span class="sub-tit"&gt;기존 비밀번호&lt;/span&gt;
+              &lt;input id="pw" name="pw" type="password"&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;span class="sub-tit"&gt;새 비밀번호&lt;/span&gt;
+              &lt;input id="new_pw" name="new_pw" type="password" onchange="pwSameCheck();"&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;span class="sub-tit"&gt;비밀번호 확인&lt;/span&gt;
+              &lt;input id="new_pw_check" name="new_pw_check" type="password" onchange="pwSameCheck();"&gt;
+              &lt;em class="error" style="display:none;"&gt;＊ 비밀번호를 다시 한번 입력해주세요.&lt;/em&gt;
+            &lt;/div&gt;
+            &lt;/form&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;button class="btn size01" onclick="pwChange();"&gt;확인&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+
+  function pwSameCheck() {
+    const pw = document.getElementById('new_pw').value;
+    const new_pw = document.getElementById('new_pw_check').value;
+
+    if(pw === new_pw) {
+      $('.error').attr("style", "display:none;");
+    }else {
+      $('.error').attr("style", "display:inline-block;");
+    }
+  }
+
+  function pwChange() {
+    const formData = new FormData(document.getElementById("pwForm"));
+
+    if(!document.getElementById('pw').value) {
+      alert("기존 비밀번호를 입력해주세요.");
+      return;
+    }
+
+    const new_pw = document.getElementById('new_pw').value;
+    const new_pw_check = document.getElementById('new_pw_check').value;
+
+    if(!new_pw) {
+      alert("새 비밀번호를 입력해주세요.");
+      return;
+    }
+
+    if(!new_pw_check) {
+      alert("비밀번호 확인을 입력해주세요.");
+      return;
+    }
+
+    formData.append("id", "${sessionScope.loginUser.id}");
+
+    let errMsg = "비밀번호를 수정할 수 없습니다. 관리자에게 문의해주세요.";
+
+    // 기존 비밀번호 확인
+    fetch('/user/pwCheck', {
+      method: 'POST',
+      body: formData
+    }).then((response) =&gt; response.json())
+      .then((data) =&gt; {
+
+        // 기존 비밀번호로 유저 조회되면
+        if(data.success == true) {
+
+          if(new_pw !== new_pw_check) {
+            alert("새 비밀번호, 비밀번호 확인이 다릅니다.");
+            return;
+          }
+
+          // 비밀번호 변경 처리
+          fetch('/user/pwChangeProc', {
+            method: 'POST',
+            body: formData
+          }).then((response) =&gt; response.json())
+            .then((data) =&gt; {
+
+              // 비밀번호 변경 완료
+              if(data.success == true) {
+                alert("비밀번호가 변경되었습니다.");
+
+                // 메인으로 이동
+                location.href = "/";
+
+              }else {
+                alert(errMsg);
+              }
+
+            })
+            .catch((error) =&gt; {
+              alert(errMsg);
+            })
+
+        }else {
+          alert("기존 비밀번호를 다시 확인해주세요.");
+        }
+
+      })
+      .catch((error) =&gt; {
+        alert(errMsg);
+      })
+  }
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+<p>비밀번호 변경 화면 JSP 예시입니다.</p>
+
+<h3 id="메뉴-헤더-예시">메뉴 헤더 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;c:if test="${sessionScope.loginUser.role_cd eq 0}"&gt;
+&lt;li&gt;
+    &lt;a href="/user"&gt;사용자 관리&lt;/a&gt;
+&lt;/li&gt;
+&lt;/c:if&gt;
+</code></pre></div></div>
+<p>로그인 유저 권한에 따라 헤더 메뉴를 비활성화하는 예시입니다.</p>
+
+<h3 id="세션-만료-시간-설정">세션 만료 시간 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server.servlet.session.timeout=10800 #3시간 (초단위)
+</code></pre></div></div>
+<p>SpringBoot는 application.properties 파일에 세션 만료 시간을 설정할 수 있습니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#web-%EA%B0%9C%EB%B0%9C" class="page__taxonomy-item" rel="tag">Web 개발</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-10-24">2022-10-24</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/web-dev/2022-10-23-1" class="pagination--pager" title="스프링 시큐리티 사용 방법
+">Prev</a>
+    
+    
+      <a href="/web-dev/2022-12-07-1" class="pagination--pager" title="JAVA 이미지 리사이징 유틸 개발 / 썸네일 및 워터마크 이미지 생성 방법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

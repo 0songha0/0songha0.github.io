@@ -1,0 +1,938 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Git 블로그 카테고리 목록 페이징 기능 구현 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="Git 블로그 카테고리 목록 페이징 기능 구현">
+<meta property="og:url" content="https://0songha0.github.io/categories/web-dev/2025-05-21-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-05-21T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2025-05-21T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/categories/web-dev/2025-05-21-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Git 블로그 카테고리 목록 페이징 기능 구현">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2025-05-21T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-05-21T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Git 블로그 카테고리 목록 페이징 기능 구현
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Git 블로그 카테고리 목록 페이징 기능 구현</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#jekyll-paginate-v2-플러그인-추가">jekyll-paginate-v2 플러그인 추가</a><ul><li><a href="#gemfile-파일-수정">Gemfile 파일 수정</a></li><li><a href="#_configyml-설정-수정">_config.yml 설정 수정</a></li></ul></li><li><a href="#github-actions로-블로그-빌드">GitHub Actions로 블로그 빌드</a><ul><li><a href="#ruby-설치">Ruby 설치</a></li><li><a href="#bundler-설치">Bundler 설치</a></li><li><a href="#gemfilelock-생성">Gemfile.lock 생성</a></li><li><a href="#github-actions-워크플로우-생성">GitHub Actions 워크플로우 생성</a></li><li><a href="#archive-taxonomyhtml-파일-수정">archive-taxonomy.html 파일 수정</a></li><li><a href="#github-pages-빌드-설정-변경">GitHub Pages 빌드 설정 변경</a></li><li><a href="#github-actions-푸시-권한-설정">GitHub Actions 푸시 권한 설정</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p>★ 추후 다시 작성 예정입니다 ★</p>
+
+<hr />
+
+<p>현재 Git 블로그는 GitHub Pages를 통해 자동 빌드 및 배포가 되고 있습니다.<br />
+*.github.io 리포지토리에 push 시 GitHub가 Jekyll로 빌드해서 정적 웹사이트로 배포합니다.</p>
+
+<p>GitHub Pages는 글 카테고리 목록 페이징 및 커스텀 플러그인을 지원하지 않습니다.<br />
+GitHub Actions로 jekyll-paginate-v2 플러그인을 사용하면 카테고리별 페이징이 가능합니다.</p>
+
+<p>수동 페이징 구현은 반복 작업이 많고 번거로우므로 권장하지 않습니다.</p>
+
+<p><mark>GitHub Actions 페이징 플러그인 사용 원리</mark><br />
+main 브랜치 push 시 .github/workflows/jekyll.yml 워크플로우가 실행되어,<br />
+bundle exec jekyll build로 생성된 _site 폴더가 gh-pages 브랜치에 push 됩니다.<br />
+gh-pages 브랜치를 배포하므로, 기본 빌드 환경에서 지원하지 않는 커스텀 플러그인도 동작 가능합니다.</p>
+
+<hr />
+
+<h2 id="jekyll-paginate-v2-플러그인-추가">jekyll-paginate-v2 플러그인 추가</h2>
+
+<h3 id="gemfile-파일-수정">Gemfile 파일 수정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>source "https://rubygems.org"
+gemspec
+
+gem 'jekyll-admin', group: :jekyll_plugins
+gem 'jekyll-sitemap'
+gem 'jekyll-paginate-v2' // 추가
+</code></pre></div></div>
+<p>Gemfile 파일에 카테고리 목록 페이징을 위한 jekyll-paginate-v2 플러그인을 추가합니다.<br />
+GitHub Pages 기본 빌드에서는 동작하지 않으므로, GitHub Actions로 직접 빌드해야 합니다.</p>
+
+<h3 id="_configyml-설정-수정">_config.yml 설정 수정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 기존 jekyll-paginate 페이징 주석
+# paginate: 5
+# paginate_path: /page:num/
+
+plugins:
+  - jekyll-paginate-v2 // jekyll-paginate에서 수정
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-include-cache
+
+// 전체 페이징 설정 추가
+pagination:
+  enabled: true
+  per_page: 5
+  permalink: "/page/:num/"
+  title: ":title - page :num"
+  limit: 0
+  sort_field: "date"
+  sort_reverse: true
+  trail:
+    before: 2
+    after: 2
+
+// 카테고리 및 태그별 페이징 설정 추가
+autopages:
+  enabled: true
+  categories:
+    enabled: true
+    title: '카테고리: :cat'
+    permalink: '/categories/:cat/'
+    layout: 'archive-taxonomy'
+</code></pre></div></div>
+<p>_config.yml 파일에서 jekyll-paginate-v2 플러그인을 활성화합니다.<br />
+/categories/카테고리명 페이지가 생기고, archive-taxonomy.html 레이아웃이 적용됩니다.</p>
+
+<hr />
+
+<h2 id="github-actions로-블로그-빌드">GitHub Actions로 블로그 빌드</h2>
+
+<h3 id="ruby-설치">Ruby 설치</h3>
+<p><a href="https://rubyinstaller.org/downloads" target="_blank">https://rubyinstaller.org/downloads</a><br />
+Ruby 공식 설치 페이지에서 Ruby+Devkit 3.x.x 버전 다운로드 후 설치합니다.</p>
+
+<p><mark>Ruby 설치 확인 명령어</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruby -v
+gem -v
+</code></pre></div></div>
+<p>VS Code 터미널은 툴을 재시작해야 명령어를 사용할 수 있습니다.</p>
+
+<h3 id="bundler-설치">Bundler 설치</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem install bundler
+</code></pre></div></div>
+<p>Ruby 명령어를 이용하여 Bundler를 설치합니다.</p>
+
+<p><mark>Bundler 설치 확인 명령어</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundler -v
+</code></pre></div></div>
+<p>Buldler 설치 성공 시 아래와 같은 메세지가 나옵니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Successfully installed bundler-2.6.9
+1 gem installed
+
+A new release of RubyGems is available: 3.6.7 → 3.6.9!      
+Run `gem update --system 3.6.9` to update your installation.
+</code></pre></div></div>
+
+<h3 id="gemfilelock-생성">Gemfile.lock 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle install
+</code></pre></div></div>
+<p>터미널에서 블로그 폴더로 이동 후 위 명령어를 실행하여 Jekyll 의존성을 설치합니다.<br />
+Gemfile 파일 수정 시 bundle install 재실행이 필요합니다.</p>
+
+<p><mark>정상 설치 메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Fetching gem metadata from https://rubygems.org/...........
+Resolving dependencies...
+Fetching public_suffix 6.0.2
+Fetching bigdecimal 3.1.9
+...
+Installing jekyll-sitemap 1.4.0
+Installing jekyll-admin 0.12.0
+Bundle complete! 6 Gemfile dependencies, 60 gems now installed.
+Use `bundle info [gemname]` to see where a bundled gem is installed.
+</code></pre></div></div>
+
+<h3 id="github-actions-워크플로우-생성">GitHub Actions 워크플로우 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name: Build and Deploy Jekyll Site
+
+on:
+  push:
+    branches: [ main ]  # 기본 브랜치가 main이 아닌 경우 수정
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'  # 최신 버전 사용 가능
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Build the site
+        run: bundle exec jekyll build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3  # gh-pages 브랜치 미사용 시 변경
+        with:
+          github_token: $
+          publish_dir: ./_site
+</code></pre></div></div>
+<p>Git 블로그 폴더에 /.github/workflows/jekyll.yml 폴더 및 파일을 생성합니다.<br />
+GitHub Actions 빌드 자동화 스크립트입니다.</p>
+
+<h3 id="archive-taxonomyhtml-파일-수정">archive-taxonomy.html 파일 수정</h3>
+<p>카테고리 글 목록 페이지에 페이징 코드를 추가합니다.</p>
+
+<h3 id="github-pages-빌드-설정-변경">GitHub Pages 빌드 설정 변경</h3>
+<p>GitHub 페이지 &gt; 로그인 &gt; 우측 상단 프로필 아이콘 &gt; Your repositories &gt; *.github.io 블로그 리포지토리 선택 &gt; Settings &gt; Pages &gt; Source : GitHub Actions로 변경<br />
+이제 main 브랜치에 push 시 GitHub Actions를 통해 gh-pages 브랜치가 자동 생성되고 배포됩니다.</p>
+
+<h3 id="github-actions-푸시-권한-설정">GitHub Actions 푸시 권한 설정</h3>
+<p>GitHub 페이지 &gt; 로그인 &gt; 우측 상단 프로필 아이콘 &gt; Your repositories &gt; Settings &gt; Actions &gt; General &gt; 하단 Workflow permission : Read and write permissions 선택 &gt; Save</p>
+
+<p><mark>빌드 시 403 오류 메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Run peaceiris/actions-gh-pages@v3
+[INFO] Usage https://github.com/peaceiris/actions-gh-pages#readme
+Dump inputs
+Setup auth token
+Prepare publishing assets
+Setup Git config
+Create a commit
+Push the commit or tag
+  /usr/bin/git push origin gh-pages
+  remote: Permission to 0songha0/0songha0.github.io.git denied to github-actions[bot].
+  fatal: unable to access 'https://github.com/0songha0/0songha0.github.io.git/': The requested URL returned error: 403
+  Error: Action failed with "The process '/usr/bin/git' failed with exit code 128"
+</code></pre></div></div>
+<p>GitHub Actions 봇에 gh-pages 브랜치에 푸시 권한이 없어서 발생하는 403 권한 오류입니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#web-dev" class="page__taxonomy-item" rel="tag">web-dev</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-05-21">2025-05-21</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/kafka/2025-05-12-1" class="pagination--pager" title="카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+">Prev</a>
+    
+    
+      <a href="/web-dev/2025-05-21-2" class="pagination--pager" title="Vue.js 개념 / Vue 개발환경 구성 방법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-07-1" rel="permalink">Java 카프카 프로듀서, 컨슈머 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-07T00:00:00+00:00">2025-05-07</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

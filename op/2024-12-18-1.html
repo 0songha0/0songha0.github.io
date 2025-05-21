@@ -1,0 +1,874 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>네이버 클라우드 서버 콘솔 (NCP Console) 사용법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="네이버 클라우드 서버 콘솔 (NCP Console) 사용법">
+<meta property="og:url" content="https://0songha0.github.io/op/2024-12-18-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-12-18T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2024-12-18T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/op/2024-12-18-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="네이버 클라우드 서버 콘솔 (NCP Console) 사용법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2024-12-18T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2024-12-18T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">네이버 클라우드 서버 콘솔 (NCP Console) 사용법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2024-12-18T00:00:00+00:00">2024-12-18</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 네이버 클라우드 서버 콘솔 (NCP Console) 사용법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#ncp-콘솔-사용법">NCP 콘솔 사용법</a><ul><li><a href="#ncp-서버-정보-확인">NCP 서버 정보 확인</a></li><li><a href="#alb-로드밸런서-정보-확인">ALB 로드밸런서 정보 확인</a></li><li><a href="#alb-로드밸런서-target-확인">ALB 로드밸런서 Target 확인</a></li><li><a href="#ncp-서버-방화벽-acg-설정">NCP 서버 방화벽 ACG 설정</a></li></ul></li><li><a href="#ncp-트러블-슈팅">NCP 트러블 슈팅</a><ul><li><a href="#서버-요청-중-슬로우-쿼리-확인-방법">서버 요청 중 슬로우 쿼리 확인 방법</a></li><li><a href="#db-서버-과부화-학인-방법">DB 서버 과부화 학인 방법</a></li><li><a href="#db-장애-시점-모니터링-방법">DB 장애 시점 모니터링 방법</a></li></ul></li><li><a href="#ncp-톰캣-로그-관리">NCP 톰캣 로그 관리</a><ul><li><a href="#ncp-톰캣-로그-백업-방법">NCP 톰캣 로그 백업 방법</a></li></ul></li><li><a href="#ncp-db-백업-및-복원">NCP DB 백업 및 복원</a><ul><li><a href="#ncp-db-백업-방법">NCP DB 백업 방법</a></li><li><a href="#ncp-db-백업-설정-확인">NCP DB 백업 설정 확인</a></li><li><a href="#ncp-db-복원-방법">NCP DB 복원 방법</a></li><li><a href="#ncp-db-장애-시-복구-절차">NCP DB 장애 시 복구 절차</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="ncp-콘솔-사용법">NCP 콘솔 사용법</h2>
+
+<h3 id="ncp-서버-정보-확인">NCP 서버 정보 확인</h3>
+<p>NCP Console 좌측 Services 메뉴 &gt; Server &gt; 네이버 클라우드 서버 목록<br />
+OS, CPU, Memory, 디스크 용량, 서브넷, IP 등 전반적인 서버 정보 확인이 가능합니다.</p>
+
+<h3 id="alb-로드밸런서-정보-확인">ALB 로드밸런서 정보 확인</h3>
+<p>NCP Console 좌측 Services 메뉴 &gt; Load Balancer &gt; Load Balancer &gt;<br />
+Public 네트워크의 ALB 로드밸런서 IP가 로드밸런서 공인 IP입니다.<br />
+로드밸런서는 운영서버 was들과 동일한 VPC에 위치합니다.</p>
+
+<h3 id="alb-로드밸런서-target-확인">ALB 로드밸런서 Target 확인</h3>
+<p>NCP Console 좌측 Services 메뉴 &gt; Load Balancer &gt; Target Group &gt;<br />
+연결 로드밸런서 확인하여 선택 &gt; Target 설정 버튼 &gt;<br />
+우측 적용 Target 목록이 현재 로드밸런서에 연결된 서버들입니다.<br />
+was 서버들 앞에 웹서버들이 있는 경우, 로드밸런서는 웹서버들과 연결됩니다.</p>
+
+<h3 id="ncp-서버-방화벽-acg-설정">NCP 서버 방화벽 ACG 설정</h3>
+<p>NCP Console 좌측 Services 메뉴 &gt; Server &gt; ACG &gt; 서버 전용 ACG 선택 &gt; ACG 설정 &gt; Inbound 탭 &gt;<br />
+프로토콜 : TCP / 접근 소스 : 현재 서버에 요청하는 IP / 허용 포트 : 요청 받는 서버 포트 (범위지정 1-65535는 모든 포트 허용) / 메모 : 기능 및 요청자 정보 입력 &gt; 추가<br />
+Outbound에 대해서는 TCP 0.0.0.0/0(전체)에 대해서 1-65535포트 모두 허용하는 편입니다.</p>
+
+<p><mark>ACG 방화벽 허용 시 참고</mark><br />
+현재 서버로 콜백 API 호출하는 서버가 로드밸런서 도메인으로 서비스하는 API 서버 2대여도,<br />
+ACG 인바운드 설정 시 로드밸런서 도메인은 허용할 필요 없고, Real 서버 2대를 각각 허용해야 합니다.</p>
+
+<hr />
+
+<h2 id="ncp-트러블-슈팅">NCP 트러블 슈팅</h2>
+
+<h3 id="서버-요청-중-슬로우-쿼리-확인-방법">서버 요청 중 슬로우 쿼리 확인 방법</h3>
+<p>NCP Console 좌측 Platform : VPC 선택 &gt; 좌측 Services 메뉴 &gt; Cloud DB for MySQL &gt; Monitoring 메뉴 &gt; M DB 선택 (M:마스터 = 주 데이터베이스 / H:Hot Standby = 마스터 변경사항을 실시간 복제하여 백업, 읽기 전용 레플리카, 마스터 장애 시 자동 전환) &gt; DB Logs 탭 &gt; Slow Log 필터 및 기간 설정 (직접입력) &gt; 하단 슬로우 쿼리 확인</p>
+
+<p><mark>MyBatis 쿼리 주석 추가 권장</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;select id="쿼리명" parameterType="com.도메인명.서비스명.dto.DTO명" resultMap="ResultMap명"&gt;
+  /* Mapper명.쿼리명 */
+  SELECT
+    *
+  FROM
+    테이블명
+&lt;/select&gt;
+</code></pre></div></div>
+<p>위와 같이, 모든 쿼리 상단에 Mapper명.쿼리명을 쿼리 위에 주석으로 달아두면 모니터링 시 어떤 쿼리인지 식별하기 좋습니다.</p>
+
+<p><mark>슬로우 쿼리로 인한 트래픽 지연 예시</mark><br />
+Query_time 65초, Lock_time 0초, Rows_sent 1, Rows_examined 2705 쿼리에서 Rows_examined 값은 MySQL이 최종적으로 확인한 행만 나타내므로 작게 나왔으나, 실제 실행계획을 보면 서브쿼리에서 테이블 조인 시 키 조건이 누락되어 29억 건을 스캔하고 있었습니다.<br />
+해당 통계 쿼리가 운영 관리자에서 3번 실행되었는데, 처음 실행된 직후부터 DB CPU Usage(%) total 22~25% (평소 1~4%), Memory Usage(%) value 53.60% (평소 50.80%), Disk I/O value 152.70% (평소 0.4~1.8%) 모두 크게 상승하여 평소 문제가 없던 쿼리들도 서버 과부하로 인해 Query_time이 지연되었고 이에 따라 같은 자원을 사용하는 쿼리는 Lock_time이 오래 걸리게 되어 전반적으로 트래픽 요청이 지연되는 문제가 생겼습니다.<br />
+DB 서버 부하이므로, WAS 서버 CPU, Memory 사용률 차트는 정상이었습니다.<br />
+관리자 슬로우 쿼리도 운영 서비스에 영향을 미칠 수 있으니, 검색 조건 추가 및 쿼리 성능 개선이 필요합니다.</p>
+
+<h3 id="db-서버-과부화-학인-방법">DB 서버 과부화 학인 방법</h3>
+<p>NCP Console 좌측 Platform : VPC 선택 &gt; 좌측 Services 메뉴 &gt; Cloud DB for MySQL &gt; Monitoring 메뉴 &gt; M DB 선택 &gt; OS Dashboard 탭 &gt; 기간 설정 (직접입력) &gt; CPU Usage(%), Memory Usage(%), Disk I/O(MB / sec) 등 확인</p>
+
+<p><mark>대용량 결과 반환 쿼리로 인한 서버 장애 예시</mark><br />
+760만 건을 Rows_examined(검사)하고, 80만 건을 Rows_sent(반환) 한 Query_time 46초 쿼리 발생 시 WAS 서버 CPU가 100%에 도달하여 모든 API 및 DB 요청이 지연되고 톰캣 서버가 죽었습니다.<br />
+해당 쿼리 실행 시 DB CPU Usage(%), Memory Usage(%), Disk I/O는 큰 변화가 없었지만, 80만 건의 데이터를 전송하면서 Network I/O(MB / Sec) Send 1.86 (평소 0.04)가 크게 상승하였습니다.<br />
+DB 서버 부하는 크지 않았지만, WAS 서버가 전달 받은 80만 건의 데이터를 처리하면서 메모리, CPU 사용량이 급증해 WAS 서버 과부하가 발생한 것으로 보여집니다.<br />
+서버 장애를 방지하기 위해서는 풀스캔 쿼리 및 대용량 결과 반환 쿼리를 지양해야 합니다.<br />
+해당 쿼리는 검색 조건이 누락되어 풀스캔 한 것이므로, 필수 검색 조건을 반드시 받도록 개선하였습니다.</p>
+
+<h3 id="db-장애-시점-모니터링-방법">DB 장애 시점 모니터링 방법</h3>
+<p>NCP Console 좌측 Services 메뉴 &gt; Cloud Insight (Monitoring) &gt; Dashboard &gt; 상단 Service Dashboard / Cloud DB for MySQL(VPC) 선택 &gt; 날짜 및 시간대 선택 &gt; 적용 &gt; select, insert, update, delete, 슬로우 쿼리 수, total connection, running threads 차트 등 확인</p>
+
+<p><mark>DB 장애 예시 및 개선 방안</mark><br />
+슬로우 쿼리 다수 발생 및 DB 요청 급증 시 쓰레드 풀의 모든 쓰레드가 사용 중인 경우,<br />
+모든 요청의 인터셉터에서 실행하는 메뉴 통계 테이블 UPDATE 쿼리에 락이 걸려서 슬로우 쿼리가 더욱 늘어나기도 합니다.<br />
+특히, 오늘 날짜의 메뉴별 사용자 수를 UPDATE 하면서 집계하는 경우 해당 레코드에 행 수준 락이 걸립니다.<br />
+이렇게 락 경합이 있는 경우, 오토 commit 실행 시간도 오래 걸리게 됩니다.<br />
+UPDATE 대신 메뉴 로그 테이블에 INSERT 후 주기적으로 통계 테이블에 집계하는 방식으로 개선해야 합니다.<br />
+로그 테이블 집계 완료 후 3개월 이상 지난 로그 데이터를 삭제하면 더욱 좋습니다.<br />
+스프링 배치를 통해 통계 집계 배치 job, 로그 삭제 배치 Job을 만들고 매일 스케줄링 할 수 있습니다.</p>
+
+<hr />
+
+<h2 id="ncp-톰캣-로그-관리">NCP 톰캣 로그 관리</h2>
+
+<h3 id="ncp-톰캣-로그-백업-방법">NCP 톰캣 로그 백업 방법</h3>
+<p>톰캣 설정파일 백업은 서버 내에 sh 스크립트 파일을 만들고 크론탭에 등록하여 매일 0시에 실행합니다.<br />
+톰캣 로그 백업은 로그 로테이트 설정으로 매일 30일치 로그를 압축 및 삭제 합니다.</p>
+
+<hr />
+
+<h2 id="ncp-db-백업-및-복원">NCP DB 백업 및 복원</h2>
+
+<h3 id="ncp-db-백업-방법">NCP DB 백업 방법</h3>
+<p>NCP Console 좌측 Services 메뉴 &gt; Cloud DB for MySQL &gt; DB Server 메뉴 &gt; DB 선택 &gt; DB 관리 &gt; DB Server 상세보기 &gt; Backup 설정 관리 &gt; Backup 파일 보관 기간 및 Backup 시간 설정 &gt; 저장</p>
+
+<h3 id="ncp-db-백업-설정-확인">NCP DB 백업 설정 확인</h3>
+<p>NCP Console 좌측 Services 메뉴 &gt; Cloud DB for MySQL &gt; Bakup 메뉴</p>
+<ul>
+  <li>Backup 보관일 : 14 DAY (백업 삭제 주기 14일)</li>
+  <li>Backup 시작시간 : 00:00 (매일 자정 증분 백업)</li>
+</ul>
+
+<p><mark>증분 백업이란?</mark><br />
+마지막 백업 이후에 변경된 데이터만 백업하는 방법입니다.<br />
+마지막 전체 백업 이후에 변경된 데이터만 백업하는 차등 백업보다 복구 시간이 오래걸릴 수 있습니다.</p>
+
+<p><mark>NCP DB 백업 저장 위치</mark><br />
+SaaS (CDB Mysql) 상품을 이용하는 경우, Naver Cloud Platofrm Service 내 Backup 경로에 저장됩니다.</p>
+
+<h3 id="ncp-db-복원-방법">NCP DB 복원 방법</h3>
+<p>NCP Console 좌측 Services 메뉴 &gt; Cloud DB for MySQL &gt; Bakup 메뉴 &gt; DB 선택 &gt; 상세 내역 &gt; Backup 리스트에서 백업 날짜 선택 &gt; Backup 파일 복원</p>
+
+<h3 id="ncp-db-장애-시-복구-절차">NCP DB 장애 시 복구 절차</h3>
+<p>평소 Standby Master DB는 어떠한 역할도 하지 않고 Master DB 데이터를 그대로 복제합니다.<br />
+Master DB 장애 시 자동으로 Master DB의 역할을 Stadby Master DB가 넘겨 받는 Failover를 수행합니다.<br />
+Master Role 이전 시 약 3분 가량 소요되며, 전환되는 동안 DB 서버 접속이 되지 않습니다.<br />
+Failover 완료 시 현재 Master DB는 Standby Master Fole으로 변경됩니다.</p>
+
+<p><mark>수동 Failover 방법</mark><br />
+NCP Console 좌측 Services 메뉴 &gt; Cloud DB for MySQL &gt; DB Server 메뉴 &gt; DB 선택 &gt; DB 관리 &gt; Master DB Failover &gt; 예</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%9A%B4%EC%98%81" class="page__taxonomy-item" rel="tag">리눅스 / 운영</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2024-12-18">2024-12-18</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/tool/2024-12-05-1" class="pagination--pager" title="윈도우 잠금화면 먹통 문제 해결 방법
+">Prev</a>
+    
+    
+      <a href="/tool/2024-12-23-1" class="pagination--pager" title="제이미터 부하테스트 방법 / 제이미터 사용법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

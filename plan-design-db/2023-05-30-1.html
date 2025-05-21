@@ -1,0 +1,889 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>자주 쓰는 MariaDB 쿼리 정리 / MySQL 사용법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="자주 쓰는 MariaDB 쿼리 정리 / MySQL 사용법">
+<meta property="og:url" content="https://0songha0.github.io/plan-design-db/2023-05-30-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-05-30T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2023-05-30T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/plan-design-db/2023-05-30-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="자주 쓰는 MariaDB 쿼리 정리 / MySQL 사용법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2023-05-30T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2023-05-30T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">자주 쓰는 MariaDB 쿼리 정리 / MySQL 사용법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2023-05-30T00:00:00+00:00">2023-05-30</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 자주 쓰는 MariaDB 쿼리 정리 / MySQL 사용법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#mysql-ddl-쿼리">MySQL DDL 쿼리</a></li><li><a href="#mysql-dql-쿼리">MySQL DQL 쿼리</a></li><li><a href="#mysql-dml-쿼리">MySQL DML 쿼리</a><ul><li><a href="#데이터-insert문">데이터 INSERT문</a></li><li><a href="#update-문">UPDATE 문</a></li><li><a href="#join으로-조회된-행-delete">JOIN으로 조회된 행 DELETE</a></li></ul></li><li><a href="#mysql-설정">MySQL 설정</a><ul><li><a href="#mysql-타임아웃-설정-방법">MySQL 타임아웃 설정 방법</a></li></ul></li><li><a href="#mysql-db-정보-확인">MySQL DB 정보 확인</a><ul><li><a href="#db-목록-조회">DB 목록 조회</a></li><li><a href="#mysql-쓰레드-조회-쿼리">MySQL 쓰레드 조회 쿼리</a></li></ul></li><li><a href="#mysql-인덱스-관련-쿼리">MySQL 인덱스 관련 쿼리</a><ul><li><a href="#테이블-인덱스-조회-쿼리">테이블 인덱스 조회 쿼리</a></li><li><a href="#인덱스-생성-쿼리">인덱스 생성 쿼리</a></li><li><a href="#인덱스-삭제-쿼리">인덱스 삭제 쿼리</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="mysql-ddl-쿼리">MySQL DDL 쿼리</h2>
+
+<p><a href="https://0songha0.github.io/plan-design-db/2025-01-08-1" target="_blank">https://0songha0.github.io/plan-design-db/2025-01-08-1</a></p>
+
+<hr />
+
+<h2 id="mysql-dql-쿼리">MySQL DQL 쿼리</h2>
+
+<p><a href="https://0songha0.github.io/plan-design-db/2025-01-08-2" target="_blank">https://0songha0.github.io/plan-design-db/2025-01-08-2</a></p>
+
+<hr />
+
+<h2 id="mysql-dml-쿼리">MySQL DML 쿼리</h2>
+
+<h3 id="데이터-insert문">데이터 INSERT문</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INSERT INTO 테이블명 (
+	컬럼명1,
+	컬럼명2
+) VALUES (
+	'값1',
+	'값2'
+);
+</code></pre></div></div>
+
+<p><mark>INSERT INTO DB명.테이블명 시 에러</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SQL Error [1142] [42000]: (conn=1043447) INSERT command denied to user 'DB명'@'10.0.0.4' for table '테이블명'
+</code></pre></div></div>
+<p>개발 DB명과 운영 DB명이 다른 경우, 쿼리에 DB명이 들어가면 위와 같은 에러가 날 수 있습니다.<br />
+쿼리에서 DB명을 제거하고, ‘INSERT INTO 테이블명’으로 실행하면 됩니다.</p>
+
+<h3 id="update-문">UPDATE 문</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UPDATE 테이블명
+SET 컬럼명 = '변경값'
+WHERE 컬럼명 = '값'
+</code></pre></div></div>
+<p>조회 조건에 해당하는 row에 대해 컬럼 값을 변경합니다.</p>
+
+<h3 id="join으로-조회된-행-delete">JOIN으로 조회된 행 DELETE</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DELTE    
+	a
+FROM
+	테이블1 a
+INNER JOIN
+	테이블2 b
+ON
+	b.키열 = a.키열
+WHERE
+	b.열 = '값'
+</code></pre></div></div>
+<p>DELETE문 실행 전에는 항상 FROM 이하 구문을 SELECT 해서 어떤 데이터를 삭제하는지 확인해야 합니다.</p>
+
+<hr />
+
+<h2 id="mysql-설정">MySQL 설정</h2>
+
+<h3 id="mysql-타임아웃-설정-방법">MySQL 타임아웃 설정 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SET GLOBAL max_execution_time=30000;
+-- 최대 쿼리 실행 시간 (밀리초)
+
+SET GLOBAL wait_timeout=30;
+-- 비대화형 유휴 연결 타임아웃 (초)
+
+SET GLOBAL interactive_timeout=30;
+-- 대화형 터미널 세션 타임아웃 (초)
+</code></pre></div></div>
+<p>DBMS 자체 타임아웃 설정 방법입니다.<br />
+JDBC 타임아웃 설정이 더 일반적이나, 둘 다 설정하는 것이 안전합니다.</p>
+
+<p><mark>MySQL DB 타임아웃 시간 조회</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SHOW VARIABLES LIKE 'max_execution_time';
+</code></pre></div></div>
+<p>DB 쿼리 타임아웃 시간을 확인하는 쿼리입니다.</p>
+
+<hr />
+
+<h2 id="mysql-db-정보-확인">MySQL DB 정보 확인</h2>
+
+<h3 id="db-목록-조회">DB 목록 조회</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>show databases
+</code></pre></div></div>
+<p>DB 서버에 속한 모든 DB 이름을 조회할 수 있습니다.</p>
+
+<h3 id="mysql-쓰레드-조회-쿼리">MySQL 쓰레드 조회 쿼리</h3>
+<p><mark>활성 쓰레드 수</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SHOW STATUS LIKE 'Threads_connected';
+</code></pre></div></div>
+<p>현재 연결된 클라이언트 수를 보여줍니다.</p>
+
+<p><mark>현재 실행 중 쓰레드 수</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SHOW STATUS LIKE 'Threads_running';
+</code></pre></div></div>
+<p>현재 연결된 클라이언트 중, 대기하는 클라이언트를 제외하고 쿼리를 실행 중인 클라이언트 수만 보여줍니다.</p>
+
+<p><mark>최대 쓰레드 수</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SHOW VARIABLES LIKE 'max_connections';
+</code></pre></div></div>
+<p>1,000개 연결 허용 시 최소 1GB 이상의 메모리가 필요하며, CPU 과부하 발생을 고려하여 적절한 설정이 필요합니다.</p>
+
+<p><mark>현재 모든 쓰레드 상태</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SHOW PROCESSLIST;
+</code></pre></div></div>
+<p>각 쓰레드의 Id, User, Host, Command, State, Time, Info 정보가 포함됩니다.<br />
+어떤 쿼리가 실행 중인지, 어떤 상태인지 등을 확인할 수 있습니다.</p>
+
+<hr />
+
+<h2 id="mysql-인덱스-관련-쿼리">MySQL 인덱스 관련 쿼리</h2>
+
+<h3 id="테이블-인덱스-조회-쿼리">테이블 인덱스 조회 쿼리</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SHOW INDEX FROM 테이블명;
+</code></pre></div></div>
+<ul>
+  <li>Key_name : PK 인덱스는 PRIMARY, 논클러스터드 인덱스는 인덱스명으로 표현</li>
+  <li>Seq_in_index : 인덱스 내에 현재 컬럼이 포함된 순서</li>
+  <li>Column_name : 인덱스가 적용된 컬럼명</li>
+  <li>Cardnality : 선택도 (선택도가 높은 = 유니크한 값이 많은 컬럼에 인덱스를 걸면 쿼리 성능이 더 좋습니다.)</li>
+</ul>
+
+<h3 id="인덱스-생성-쿼리">인덱스 생성 쿼리</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE INDEX 인덱스명 ON 테이블명 (컬럼명);
+-- 인덱스명 예시 : idx_테이블명_컬럼명1_컬럼명2 또는 idx_테이블명_순번
+</code></pre></div></div>
+<p>테이블 잠금이 발생할 수 있으므로, 운영 중 인덱스 생성은 지양해야 합니다.<br />
+논클러스터드 인덱스 추가 시 테이블 데이터와 별도로 저장되며, 물리적인 데이터 정렬과는 무관합니다.</p>
+
+<h3 id="인덱스-삭제-쿼리">인덱스 삭제 쿼리</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DROP INDEX 인덱스명 ON 테이블명;
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%EA%B8%B0%ED%9A%8D-%EC%84%A4%EA%B3%84-db" class="page__taxonomy-item" rel="tag">기획 / 설계 / DB</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-05-30">2023-05-30</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/web-dev/2023-05-29-1" class="pagination--pager" title="리액트 리덕스 사용법 정리
+">Prev</a>
+    
+    
+      <a href="/it-tip/2023-06-12-1" class="pagination--pager" title="태블릿/모바일 웹 F12 개발자도구 사용 방법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

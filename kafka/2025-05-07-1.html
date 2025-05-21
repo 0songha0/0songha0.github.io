@@ -1,0 +1,1119 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Java 카프카 프로듀서, 컨슈머 애플리케이션 개발 방법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="Java 카프카 프로듀서, 컨슈머 애플리케이션 개발 방법">
+<meta property="og:url" content="https://0songha0.github.io/kafka/2025-05-07-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-05-07T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2025-05-07T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/kafka/2025-05-07-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Java 카프카 프로듀서, 컨슈머 애플리케이션 개발 방법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2025-05-07T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-05-07T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Java 카프카 프로듀서, 컨슈머 애플리케이션 개발 방법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-07T00:00:00+00:00">2025-05-07</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Java 카프카 프로듀서, 컨슈머 애플리케이션 개발 방법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#java-프로젝트-생성-공통">Java 프로젝트 생성 (공통)</a><ul><li><a href="#intellij-java-프로젝트-생성-방법">IntelliJ Java 프로젝트 생성 방법</a></li><li><a href="#카프카-클라이언트-라이브러리-추가">카프카 클라이언트 라이브러리 추가</a></li></ul></li><li><a href="#카프카-프로듀서-애플리케이션-개발">카프카 프로듀서 애플리케이션 개발</a><ul><li><a href="#프로듀서-클래스-예시">프로듀서 클래스 예시</a></li><li><a href="#트랜잭션-프로듀서-예시">트랜잭션 프로듀서 예시</a></li></ul></li><li><a href="#카프카-컨슈머-애플리케이션-개발">카프카 컨슈머 애플리케이션 개발</a><ul><li><a href="#자동-커밋-컨슈머-클래스-예시">자동 커밋 컨슈머 클래스 예시</a></li><li><a href="#수동-커밋-컨슈머">수동 커밋 컨슈머</a></li><li><a href="#파티션-수동-할당-컨슈머-예시">파티션 수동 할당 컨슈머 예시</a></li><li><a href="#트랜잭션-컨슈머-예시">트랜잭션 컨슈머 예시</a></li></ul></li><li><a href="#컨슈머-리밸런스-리스너-설정">컨슈머 리밸런스 리스너 설정</a><ul><li><a href="#리밸런스-리스너-정의">리밸런스 리스너 정의</a></li><li><a href="#토픽-구독-시-리밸런스-리스너-전달">토픽 구독 시 리밸런스 리스너 전달</a></li><li><a href="#파티션-할당-로그-확인">파티션 할당 로그 확인</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="java-프로젝트-생성-공통">Java 프로젝트 생성 (공통)</h2>
+
+<p>카프카 프로듀서, 컨슈머 애플리케이션은 Java 프로젝트로 개발할 수 있습니다.<br />
+Javascript, go, Python 등으로도 가능하지만, 공식 지원되는 라이브러리 언어는 Java입니다.</p>
+
+<h3 id="intellij-java-프로젝트-생성-방법">IntelliJ Java 프로젝트 생성 방법</h3>
+<p>File &gt; New &gt; Project… &gt; 아래와 같이 입력 후 Create</p>
+<table>
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>프로젝트명 입력</td>
+    </tr>
+    <tr>
+      <td>Language</td>
+      <td>Java 1.8 이상 선택</td>
+    </tr>
+    <tr>
+      <td>Build system</td>
+      <td>Gradle 선택</td>
+    </tr>
+    <tr>
+      <td>JDK</td>
+      <td>18 이상 선택</td>
+    </tr>
+    <tr>
+      <td>Gradle DSL</td>
+      <td>Groovy 선택</td>
+    </tr>
+  </tbody>
+</table>
+<p>프로젝트가 생성되면 src/main/java 폴더 안에 패키지 폴더를 만들어야 합니다.<br />
+패키지 폴더 내에 프로듀서 또는 컨슈머 애플리케이션 클래스를 작성하고 실행하면 됩니다.</p>
+
+<h3 id="카프카-클라이언트-라이브러리-추가">카프카 클라이언트 라이브러리 추가</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dependencies {
+    implementation 'org.apache.kafka:kafka-clients:2.5.0'
+    implementation 'org.slf4j:slf4j-simple:1.7.30'
+}
+</code></pre></div></div>
+<p>java 프로젝트 내 build.gradle 파일에 카프카 브로커와 동일한 버전의 클라이언트 라이브러리를 추가합니다.<br />
+카프카 클라이언트 로그 출력을 위해 slf4j 라이브러리 의존성도 추가합니다.</p>
+
+<hr />
+
+<h2 id="카프카-프로듀서-애플리케이션-개발">카프카 프로듀서 애플리케이션 개발</h2>
+
+<h3 id="프로듀서-클래스-예시">프로듀서 클래스 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class TestProducer {
+  private final static Logger LOGGER = LoggerFactory.getLogger(TestProducer.class);
+  private final static String TOPIC_NAME = "토픽명";
+  private final static String BOOTSTRAP_SERVERS = "localhost:9092";
+
+  public static void main(String[] args) {
+
+    // 프로듀서 필수 옵션 설정
+    Properties configs = new Properties();
+    configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS); // 요청할 브로커 서버 정의
+    configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName()); // 메시지 키 직렬화 클래스 정의
+    configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName()); // 메시지 값 직렬화 클래스 정의
+
+    // 프로듀서 생성
+    KafkaProducer&lt;String, String&gt; producer = new KafkaProducer&lt;&gt;(configs);
+
+    // 메시지 값 프로듀서 레코드 생성
+    ProducerRecord&lt;String, String&gt; record1 = new ProducerRecord&lt;&gt;(TOPIC_NAME, "메시지 값");
+
+    // 메시지 키-값 프로듀서 레코드 생성
+    ProducerRecord&lt;String, String&gt; record2 = new ProducerRecord&lt;&gt;(TOPIC_NAME, "메시지 키", "메시지 값");
+
+    // 파티션 번호를 지정한 프로듀서 레코드 생성
+    ProducerRecord&lt;String, String&gt; record3 = new ProducerRecord&lt;&gt;(TOPIC_NAME, 0, "메시지 키", "메시지 값");
+
+    try {
+      // 메시지 비동기 전송 (파티셔너 → Accumulator → 브로커 → 파티션에 로그 세그먼트 파일 저장)
+      // Accumulator에서 배치로 묶이면 일정 크기 및 시간에 도달 시 전송
+      producer.send(record1);
+      producer.send(record2);
+
+      // 메시지 동기 전송 (send 후 응답 get)
+      RecordMetadata metadata = producer.send(record3).get();
+
+      // 콜백 출력 결과 : 토픽명-파티션번호@오프셋번호
+      // 오프셋번호가 -1이면, acks 옵션이 0이라 응답이 없는 것
+      LOGGER.info(metadata.toString());
+
+      // 메시지 비동기 전송 + 콜백 처리
+      producer.send(record, new Callback() {
+        @Override
+        public void onCompletion(RecordMetadata metadata, Exception exception) {
+          if (exception != null) {
+            // 전송 실패
+          } else {
+            // 전송 성공
+          }
+        }
+      });
+
+    } catch (Exception e) {
+      LOGGER.error(e.getMessage(), e);
+
+    } finally {
+      // accumulator에 전송 대기 중인 메시지 전송
+      producer.flush();
+      
+      // 프로듀서 종료 (리소스 해제)
+      producer.close();
+    }
+  }
+}
+</code></pre></div></div>
+<p>Java 라이브러리로 카프카 프로듀서를 생성하고, 브로커로 메시지를 보내는 예시입니다.</p>
+
+<h3 id="트랜잭션-프로듀서-예시">트랜잭션 프로듀서 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 프로듀서별 고유 트랜잭션 ID 설정
+configs.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, UUID.randomUUID().toString());
+
+// 프로듀서 생성
+Producer&lt;String, String&gt; producer = new KafkaProducer&lt;&gt;(configs);
+
+// 프로듀서 트랜잭션 초기화
+producer.initTransactions();
+
+try {
+  // 트랜잭션 시작
+  producer.beginTransaction();
+
+  // 레코드 전송
+  producer.send(new ProducerRecord&lt;&gt;(TOPIC, "메시지 값1"));
+  producer.send(new ProducerRecord&lt;&gt;(TOPIC, "메시지 값2"));
+
+  // 레코드 트랜잭션 커밋
+  producer.commitTransaction();
+
+} catch (Exception e) {
+  // 트랜잭션 롤백
+  producer.abortTransaction();
+
+} finally {
+  // 프로듀서 종료
+  producer.close();
+
+}
+</code></pre></div></div>
+<p>레코드들을 트랜잭션으로 묶어서 전송하고 커밋하는 프로듀서 예시입니다.</p>
+
+<hr />
+
+<h2 id="카프카-컨슈머-애플리케이션-개발">카프카 컨슈머 애플리케이션 개발</h2>
+
+<h3 id="자동-커밋-컨슈머-클래스-예시">자동 커밋 컨슈머 클래스 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class TestConsumer {
+  private final static Logger LOGGER = LoggerFactory.getLogger(TestConsumer.class);
+  private final static String TOPIC_NAME = "토픽명";
+  private final static String BOOTSTRAP_SERVERS = "localhost:9092";
+  private final static String GROUP_ID = "컨슈머그룹ID";
+  private static KafkaConsumer&lt;String, String&gt; consumer;
+
+  public static void main(String[] args) {
+
+    // 컨슈머 필수 옵션 설정
+    Properties configs = new Properties();
+    configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
+    configs.put(ConsumerConfig.GROUP_ID_CONFIG, GROUP_ID);
+    configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+    configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+
+    // 컨슈머 선택 옵션 설정
+    configs.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true); // 기본값 : true 이므로, 명시하지 않아도 자동 커밋 됨
+    configs.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, 60000); // 자동 커밋 주기 : 1분 (이후 poll 호출 시 자동 커밋)
+
+    // 컨슈머 생성
+    consumer = new KafkaConsumer&lt;&gt;(configs);
+
+    // 런타임 종료 시 실행되는 스레드 셧다운 훅 등록
+    Runtime.getRuntime().addShutdownHook(new ShutdownThread());
+
+    // 토픽 구독
+    consumer.subscribe(Arrays.asList(TOPIC_NAME));
+
+    try {
+
+      // 무한루프
+      while (true) {
+        // 최대 1초 대기하며 메시지 요청
+        ConsumerRecords&lt;String, String&gt; records = consumer.poll(Duration.ofSeconds(1));
+
+        // 받은 메시지가 있으면 출력
+        for (ConsumerRecord&lt;String, String&gt; record : records) {
+          LOGGER.info("record:{}", record);
+        }
+      }
+
+    } catch (WakeupException e) {
+      LOGGER.error(e.getMessage(), e);
+
+    } finally {
+      // 컨슈머 종료 (컨슈머 그룹에서 제외)
+      consumer.close();
+    }
+  }
+
+  // 런타임 종료 시 실행되는 스레드 클래스 구현
+  static class ShutdownThread extends Thread {
+    public void run() {
+      // 컨슈머 poll 진행 중단 (WakeupException 발생)
+      // 런타임 스레드가 아닌 다른 스레드에서 호출해야 안전하게 종료 가능
+      consumer.wakeup();
+    }
+  }
+}
+</code></pre></div></div>
+<p>컨슈머 그룹이 토픽을 구독하고 전체 파티션에 대해서 메시지를 가져가는 예시입니다.<br />
+토픽의 파티션 수 : 컨슈머 그룹 내 컨슈머 수는 1:1로 운영하는 것이 좋습니다.<br />
+파티션은 1개의 컨슈머만 할당 가능하므로, 파티션 수보다 많은 컨슈머는 유휴 상태가 됩니다.</p>
+
+<h3 id="수동-커밋-컨슈머">수동 커밋 컨슈머</h3>
+
+<p><mark>자동 커밋 비활성화 옵션 설정</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>configs.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
+</code></pre></div></div>
+<p>수동 커밋은 컨슈머 생성 시 파라미터 configs에 자동 커밋 비활성화 옵션을 넣어야 합니다.</p>
+
+<p><mark>동기 오프셋 커밋 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>while (true) {
+  ConsumerRecords&lt;String, String&gt; records = consumer.poll(Duration.ofSeconds(1));
+
+  for (ConsumerRecord&lt;String, String&gt; record : records) {
+    LOGGER.info("record:{}", record);
+  }
+
+  // 동기 오프셋 커밋
+  consumer.commitSync();
+}
+</code></pre></div></div>
+<p>커밋 응답을 기다리는 동기 오프셋 커밋 예시입니다.<br />
+레코드 처리가 끝난 후 커밋해야 합니다.</p>
+
+<p><mark>레코드 단위 동기 오프셋 커밋 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>while (true) {
+  ConsumerRecords&lt;String, String&gt; records = consumer.poll(Duration.ofSeconds(1));
+
+  // 파티션별 현재 오프셋 데이터 맵 생성
+  Map&lt;TopicPartition, OffsetAndMetadata&gt; currentOffset = new HashMap&lt;&gt;();
+
+  for (ConsumerRecord&lt;String, String&gt; record : records) {
+    LOGGER.info("record:{}", record);
+
+    // 파티션별 현재 오프셋 데이터 맵 갱신
+    currentOffset.put(
+      new TopicPartition(record.topic(), record.partition()),
+      new OffsetAndMetadata(record.offset() + 1, null)
+    );
+
+    // 레코드 단위 동기 오프셋 커밋
+    // 이미 커밋된 파티션-오프셋은 무시
+    consumer.commitSync(currentOffset);
+  }
+}
+</code></pre></div></div>
+<p>레코드 단위 커밋은 비효율적이고, 데이터가 많을수록 느려져서 잘 사용되지 않는 방식입니다.</p>
+
+<p><mark>비동기 오프셋 커밋 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>while (true) {
+  ConsumerRecords&lt;String, String&gt; records = consumer.poll(Duration.ofSeconds(1));
+
+  for (ConsumerRecord&lt;String, String&gt; record : records) {
+    LOGGER.info("record:{}", record);
+  }
+
+  // 비동기 오프셋 커밋
+  consumer.commitAsync();
+}
+</code></pre></div></div>
+<p>비동기 오프셋은 커밋 수행 시 응답을 기다리지 않으므로, 더 많은 데이터를 처리할 수 있습니다.</p>
+
+<p><mark>비동기 오프셋 커밋 콜백 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>while (true) {
+  ConsumerRecords&lt;String, String&gt; records = consumer.poll(Duration.ofSeconds(1));
+
+  for (ConsumerRecord&lt;String, String&gt; record : records) {
+    LOGGER.info("record:{}", record);
+  }
+
+  // 비동기 오프셋 커밋 후 완료 콜백 함수 실행
+  consumer.commitAsync(new OffsetCommitCallback() {
+    @Override
+    public void onComplete(Map&lt;TopicPartition, OffsetAndMetadata&gt; offsets, Exception e) {
+      if (e != null) {
+        // 커밋 실패
+        e.printStackTrace();
+      } else {
+        // 커밋 성공
+        LOGGER.info("커밋 성공 오프셋:{}", offsets);
+      }
+    }
+  });
+}
+</code></pre></div></div>
+
+<h3 id="파티션-수동-할당-컨슈머-예시">파티션 수동 할당 컨슈머 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>KafkaConsumer&lt;String, String&gt; consumer = new KafkaConsumer&lt;&gt;(configs);
+
+// 리밸런싱을 위한 컨슈머 그룹을 사용하지 않고, 컨슈머에 토픽 파티션 직접 할당
+consumer.assign((Collections.singleton(new TopicPartition(TOPIC_NAME, PARTITION_NUMBER))));
+
+while (true) {
+  ConsumerRecords&lt;String, String&gt; records = consumer.poll(Duration.ofSeconds(1));
+
+  for (ConsumerRecord&lt;String, String&gt; record : records) {
+    LOGGER.info("record:{}", record);
+  }
+}
+</code></pre></div></div>
+<p>subscribe를 사용하지 않아서 GroupID 옵션 지정이 필수가 아닙니다.</p>
+
+<h3 id="트랜잭션-컨슈머-예시">트랜잭션 컨슈머 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 트랜잭션 레벨 설정
+config.put(ConsumerConfig.ISOLATION_LEVEL_CONFIG, "read_committed");
+
+// 컨슈머 생성
+KafkaConsumer&lt;String, String&gt; consumer = new KafkaConsumer&lt;&gt;(configs);
+</code></pre></div></div>
+<p>트랜잭션 프로듀서가 커밋한 메시지만 읽는 컨슈머 설정 예시입니다.<br />
+기본값 read_uncommitted는 커밋 전 메시지도 읽습니다.</p>
+
+<hr />
+
+<h2 id="컨슈머-리밸런스-리스너-설정">컨슈머 리밸런스 리스너 설정</h2>
+
+<h3 id="리밸런스-리스너-정의">리밸런스 리스너 정의</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class RebalanceListener implements ConsumerRebalanceListener {
+  private static final Logger LOGGER = LoggerFactory.getLogger(RebalanceListener.class);
+
+  @Override
+  public void onPartitionsRevoked(Collection&lt;TopicPartition&gt; partitions) {
+    // 파티션 해제 전 (리밸런싱 발생 전) 동작할 로직
+    LOGGER.warn("Partitions are revoked : {}", partitions);
+  }
+
+  @Override
+  public void onPartitionsAssigned(Collection&lt;TopicPartition&gt; partitions) {
+    // 파티션 할당 후 (리밸런싱 발생 후) 동작할 로직
+    LOGGER.warn("Partitions are assigned : {}", partitions);
+  }
+}
+</code></pre></div></div>
+<p>컨슈머에 파티션 할당/해제 시 동작할 로직을 정의합니다.</p>
+
+<h3 id="토픽-구독-시-리밸런스-리스너-전달">토픽 구독 시 리밸런스 리스너 전달</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>consumer.subscribe(Arrays.asList(TOPIC_NAME), new RebalanceListener());
+</code></pre></div></div>
+<p>ConsumerRebalanceListener 인터페이스를 구현한 리밸런스 리스너 클래스를 파라미터로 넘기면 됩니다.</p>
+
+<h3 id="파티션-할당-로그-확인">파티션 할당 로그 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[main] WARN com.example.RebalanceListener - Partitions are assigned : [토픽명-파티션번호]
+</code></pre></div></div>
+<p>컨슈머 애플리케이션 실행 시 로그에서 위와 같이 할당된 파티션을 확인할 수 있습니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#kafka" class="page__taxonomy-item" rel="tag">Kafka</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-05-07">2025-05-07</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/kafka/2025-05-02-1" class="pagination--pager" title="카프카 쉘 스크립트 CLI 종류 및 사용법
+">Prev</a>
+    
+    
+      <a href="/kafka/2025-05-12-1" class="pagination--pager" title="카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,1120 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>DB 마이그레이션 테이블을 통한 엑셀 일괄 업로드 방법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="DB 마이그레이션 테이블을 통한 엑셀 일괄 업로드 방법">
+<meta property="og:url" content="https://0songha0.github.io/plan-design-db/2024-04-02-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-04-02T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2024-04-02T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/plan-design-db/2024-04-02-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="DB 마이그레이션 테이블을 통한 엑셀 일괄 업로드 방법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2024-04-02T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2024-04-02T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">DB 마이그레이션 테이블을 통한 엑셀 일괄 업로드 방법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2024-04-02T00:00:00+00:00">2024-04-02</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> DB 마이그레이션 테이블을 통한 엑셀 일괄 업로드 방법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#엑셀-일괄-업로드-절차">엑셀 일괄 업로드 절차</a></li><li><a href="#테이블-설계-참고">테이블 설계 참고</a><ul><li><a href="#원본-테이블-설계">원본 테이블 설계</a></li><li><a href="#마이그레이션-테이블-설계">마이그레이션 테이블 설계</a></li></ul></li><li><a href="#엑셀-일괄-업로드-방법">엑셀 일괄 업로드 방법</a><ul><li><a href="#마이그레이션-테이블-delete">마이그레이션 테이블 DELETE</a></li><li><a href="#csv-내보내기">CSV 내보내기</a></li><li><a href="#엑셀에서-csv-열기-csv-편집">엑셀에서 CSV 열기 (CSV 편집)</a></li><li><a href="#csv-파일-저장">CSV 파일 저장</a></li><li><a href="#csv-파일-인코딩-변환">CSV 파일 인코딩 변환</a></li><li><a href="#csv-가져오기">CSV 가져오기</a></li><li><a href="#insert-쿼리-실행">INSERT 쿼리 실행</a></li><li><a href="#데이터-정상-확인">데이터 정상 확인</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="엑셀-일괄-업로드-절차">엑셀 일괄 업로드 절차</h2>
+
+<ol>
+  <li>테이블 CSV 파일에 엑셀 데이터 입력 후 인코딩을 UTF-8로 변경합니다.</li>
+  <li>DBeaver 툴에서 마이그레이션 테이블에 CSV 파일을 가져옵니다.</li>
+  <li>INSERT SELECT문으로 원본 테이블에 마이그레이션 테이블 데이터를 일괄 등록합니다.</li>
+</ol>
+
+<hr />
+
+<h2 id="테이블-설계-참고">테이블 설계 참고</h2>
+
+<h3 id="원본-테이블-설계">원본 테이블 설계</h3>
+<table>
+  <thead>
+    <tr>
+      <th>제약조건</th>
+      <th>컬럼명</th>
+      <th>데이터 타입</th>
+      <th>기본값</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>PK</td>
+      <td>QSTN_STNDRD_ID</td>
+      <td>varchar(20)</td>
+      <td></td>
+      <td>문항기준ID</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>QSTN_DVSN_CDV</td>
+      <td>varchar(50)</td>
+      <td></td>
+      <td>문항구분코드값</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>PUBSER_CDV</td>
+      <td>varchar(50)</td>
+      <td></td>
+      <td>출판사코드값</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>BOK_NM</td>
+      <td>varchar(2000)</td>
+      <td></td>
+      <td>교재명</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>SHC_LVL</td>
+      <td>varchar(50)</td>
+      <td></td>
+      <td>학교급</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>SHC_YEAR</td>
+      <td>varchar(4)</td>
+      <td></td>
+      <td>학년</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>SHC_TRM</td>
+      <td>varchar(4)</td>
+      <td></td>
+      <td>학기</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>SBJ_CDV</td>
+      <td>varchar(50)</td>
+      <td></td>
+      <td>과목코드값</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>EDU_CRS_CDV</td>
+      <td>varchar(50)</td>
+      <td></td>
+      <td>교육과정코드값</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>PUB_YEAR</td>
+      <td>varchar(4)</td>
+      <td></td>
+      <td>출판년도</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>SOURCE_ID</td>
+      <td>varchar(50)</td>
+      <td></td>
+      <td>출처ID</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>DITB_YN</td>
+      <td>char(1)</td>
+      <td>'N'</td>
+      <td>관리자배포여부</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>FILE_STNG</td>
+      <td>varchar(2000)</td>
+      <td></td>
+      <td>파일설정</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>DEL_YN</td>
+      <td>char(1)</td>
+      <td></td>
+      <td>삭제여부</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>FRST_REGER_ID</td>
+      <td>varchar(20)</td>
+      <td></td>
+      <td>최초등록자ID</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>FRST_REG_DT</td>
+      <td>varchar(14)</td>
+      <td></td>
+      <td>최초등록일시</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>FRST_REGER_IP</td>
+      <td>varchar(50)</td>
+      <td></td>
+      <td>최초등록자IP</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>LAST_MDFER_ID</td>
+      <td>varchar(20)</td>
+      <td></td>
+      <td>최종수정자ID</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>LAST_MDFCN_DT</td>
+      <td>varchar(14)</td>
+      <td></td>
+      <td>최종수정일시</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>LAST_MDFER_IP</td>
+      <td>varchar(50)</td>
+      <td></td>
+      <td>최종수정자IP</td>
+    </tr>
+  </tbody>
+</table>
+<p>교과서 정보를 저장하는 원본 테이블입니다.</p>
+
+<h3 id="마이그레이션-테이블-설계">마이그레이션 테이블 설계</h3>
+<table>
+  <thead>
+    <tr>
+      <th>제약조건</th>
+      <th>컬럼명</th>
+      <th>데이터 타입</th>
+      <th>기본값</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td>QSTN_STNDRD_ID</td>
+      <td>varchar(20)</td>
+      <td></td>
+      <td>문항기준ID</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>SOURCE_ID</td>
+      <td>varchar(50)</td>
+      <td></td>
+      <td>출처ID</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>PUBSER</td>
+      <td>varchar(50)</td>
+      <td></td>
+      <td>출판사</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>BOK_NM</td>
+      <td>varchar(2000)</td>
+      <td></td>
+      <td>교재명</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>SHC_LVL</td>
+      <td>varchar(50)</td>
+      <td></td>
+      <td>학교급</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>SHC_YEAR</td>
+      <td>varchar(4)</td>
+      <td></td>
+      <td>학년</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>SHC_TRM</td>
+      <td>varchar(4)</td>
+      <td></td>
+      <td>학기</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>SBJ</td>
+      <td>varchar(50)</td>
+      <td></td>
+      <td>과목</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>EDU_CRS</td>
+      <td>varchar(50)</td>
+      <td></td>
+      <td>교육과정</td>
+    </tr>
+  </tbody>
+</table>
+<p>엑셀로 전달받은 교과서 데이터를 임시 저장하는 마이그레이션 테이블입니다.</p>
+
+<hr />
+
+<h2 id="엑셀-일괄-업로드-방법">엑셀 일괄 업로드 방법</h2>
+
+<h3 id="마이그레이션-테이블-delete">마이그레이션 테이블 DELETE</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DELETE FROM im_qstn_stndrd_mig;
+</code></pre></div></div>
+<p>마이그레이션 테이블에서 모든 데이터를 삭제합니다.</p>
+
+<h3 id="csv-내보내기">CSV 내보내기</h3>
+<p>DBeaver 툴 &gt; 마이그레이션 테이블명 검색 &gt; 테이블 우클릭 &gt; 데이터 내보내기 &gt; CSV 파일로 내보내기 &gt; 다음 &gt; 다음 &gt; CSV 파일을 저장할 폴더 지정 &gt; 진행</p>
+
+<p>이미 내보내기 했던 테이블 CSV 파일이 있다면, 재사용합니다.</p>
+
+<h3 id="엑셀에서-csv-열기-csv-편집">엑셀에서 CSV 열기 (CSV 편집)</h3>
+<p>빈 엑셀 열기 &gt; 데이터 탭 &gt; 외부 데이터 가져오기 &gt; 텍스트 &gt; 구분 기호로 분리됨 체크 &gt; 다음 &gt; 구분기호 : 쉼표 체크 &gt; 다음 &gt; 각 열 선택 후 텍스트 서식으로 변경 &gt; 마침 &gt; 기존 워크시트 선택 &gt; 확인</p>
+
+<p>컬럼을 텍스트 타입으로 지정해서 열지 않으면, 일반 형식으로 열려서 01이 1로 변환되어 버립니다.</p>
+
+<p><mark>CSV 파일에 엑셀 데이터 입력</mark><br />
+전달받은 엑셀 데이터를 마이그레이션 테이블 컬럼에 맞춰서 붙여 넣습니다.</p>
+
+<p>Autoincrement로 자동 증가되지 않는 PK라면, MAX 값 조회해서 +1부터 채웁니다.</p>
+
+<h3 id="csv-파일-저장">CSV 파일 저장</h3>
+<p>Ctrl + S &gt; 다른 이름으로 저장 &gt; 파일 형식 : CSV (쉼표로 분리) (.*.csv) 선택 &gt; 파일명 입력 &gt; 저장 &gt; 예 &gt; 닫기 &gt; 저장 안함</p>
+
+<h3 id="csv-파일-인코딩-변환">CSV 파일 인코딩 변환</h3>
+<p>csv 파일을 메모장으로 열고, 다른 이름으로 저장 &gt; 인코딩: UTF-8 선택 후 저장<br />
+엑셀로 다시 열었을 때 한국어가 중국어처럼 깨져있어도 정상입니다.</p>
+
+<p><mark>인코딩 변환 이유</mark><br />
+엑셀에서 CSV 파일을 저장하면 기본 인코딩이 ANSI이기 때문에,<br />
+인코딩 변환 없이 가져오면 DB 인코딩 UTF-8과 달라서 한글이 전부 깨질 수 있습니다.</p>
+
+<h3 id="csv-가져오기">CSV 가져오기</h3>
+<p>DBeaver 툴 &gt; 마이그레이션 테이블명 검색 &gt; 테이블 우클릭 &gt; 데이터 가져오기 &gt; CSV에서 가져오기 &gt; Target CSV 파일 지정 &gt; 다음 &gt; 다음 &gt; 진행</p>
+
+<p><mark>CSV 가져오기 에러메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Can't init data transfer
+
+이유:
+ New table creation in database [DB별칭] restricted by connection configuration
+</code></pre></div></div>
+<p>위와 같은 에러 팝업이 나오면, DBeaver 상단 데이터베이스 메뉴 아래의 자물쇠 아이콘을 해제하면 됩니다.</p>
+
+<h3 id="insert-쿼리-실행">INSERT 쿼리 실행</h3>
+<p>INSERT SELECT 쿼리에서 SELECT 부분을 먼저 조회해보고, 데이터 및 한글 인코딩이 크게 이상 없으면 실행합니다.</p>
+
+<p><mark>INSERT SELECT 쿼리 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INSERT INTO im_qstn_stndrd (
+    qstn_stndrd_id,
+    qstn_dvsn_cdv,
+    pubser_cdv,
+    bok_nm,
+    shc_lvl,
+    shc_year,
+    shc_trm,
+    sbj_cdv,
+    edu_crs_cdv,
+    source_id,
+	  ditb_yn,
+    del_yn,
+    frst_reger_id,
+    frst_reg_dt,
+    frst_reger_ip
+)
+SELECT
+	QSTN_STNDRD_ID,
+	'01' AS QSTN_DVSN_CDV,
+	'01' AS PUBSER_CDV,
+	BOK_NM,
+	CASE
+		WHEN SHC_LVL = '중등' THEN 'M0'
+		WHEN SHC_LVL = '초등' THEN 'E0'
+		WHEN SHC_LVL = '고등' THEN 'H0'
+	END AS SHC_LVL,
+	concat('0', SHC_YEAR) AS SHC_YEAR,
+	CASE
+		WHEN SHC_TRM = '1학기' THEN 1
+		WHEN SHC_TRM = '2학기' THEN 2
+		ELSE '0'
+	END AS SHC_TRM,
+	CASE
+		WHEN SBJ = '수학' THEN '01'
+		WHEN SBJ = '국어' THEN '02'
+		WHEN SBJ = '과학' THEN '03'
+		WHEN SBJ = '영어' THEN '04'
+		WHEN SBJ = '사회' THEN '05'
+		WHEN SBJ = '역사' THEN '06'
+		WHEN SBJ = '도덕' THEN '07'
+	END AS SBJ_CDV,
+	'2015' EDU_CRS_CDV,
+	SOURCE_ID,
+	'N' AS DITB_YN,
+	'N',
+	'USRCNFRM_99999999999',
+	DATE_FORMAT(NOW(), '%Y%m%d%H%i%s'),
+	'0.0.0.0'
+FROM
+	im_qstn_stndrd_mig a
+WHERE
+	QSTN_STNDRD_ID NOT IN (SELECT QSTN_STNDRD_ID FROM im_qstn_stndrd);
+</code></pre></div></div>
+<p>교과서 마이그레이션 테이블에서 원본 교과서 테이블로 INSERT 하는 쿼리 예시입니다.<br />
+NOT IN을 사용하여 교과서 테이블에 이미 존재하는 교과서 ID는 INSERT 되지 않도록 했습니다.</p>
+
+<h3 id="데이터-정상-확인">데이터 정상 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * FROM im_qstn_stndrd
+WHERE FRST_REG_DT LIKE '20240402%'
+</code></pre></div></div>
+<p>오늘 원본 테이블에 INSERT 한 데이터가 정상적인지 조회하여 확인합니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%EA%B8%B0%ED%9A%8D-%EC%84%A4%EA%B3%84-db" class="page__taxonomy-item" rel="tag">기획 / 설계 / DB</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2024-04-02">2024-04-02</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/op/2024-04-02-1" class="pagination--pager" title="젠킨스 장점 / 리눅스 개발서버 젠킨스 설치 방법
+">Prev</a>
+    
+    
+      <a href="/it-tip/2024-04-18-1" class="pagination--pager" title="옵시디언 설치 / 옵시디언 파일 구글 드라이브 동기화 방법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

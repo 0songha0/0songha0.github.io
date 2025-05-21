@@ -1,0 +1,1314 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>이클립스 스프링 배치 프로젝트 생성 및 스케줄링 실행 방법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="이클립스 스프링 배치 프로젝트 생성 및 스케줄링 실행 방법">
+<meta property="og:url" content="https://0songha0.github.io/web-dev/2025-03-10-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-03-10T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2025-03-10T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/web-dev/2025-03-10-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="이클립스 스프링 배치 프로젝트 생성 및 스케줄링 실행 방법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2025-03-10T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-03-10T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">이클립스 스프링 배치 프로젝트 생성 및 스케줄링 실행 방법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-03-10T00:00:00+00:00">2025-03-10</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 이클립스 스프링 배치 프로젝트 생성 및 스케줄링 실행 방법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#이클립스-sts-사용법">이클립스 STS 사용법</a><ul><li><a href="#독립형-sts-이클립스-설치-방법">독립형 STS 이클립스 설치 방법</a></li><li><a href="#기존-spring-batch-프로젝트-import-방법">기존 Spring Batch 프로젝트 import 방법</a></li></ul></li><li><a href="#이클립스-스프링배치-사용법">이클립스 스프링배치 사용법</a><ul><li><a href="#스프링배치-프로젝트-생성-방법">스프링배치 프로젝트 생성 방법</a></li></ul></li><li><a href="#스프링배치-프로젝트-db-사용법">스프링배치 프로젝트 DB 사용법</a><ul><li><a href="#db-정보-설정">DB 정보 설정</a></li><li><a href="#jdbc-드라이버-의존성-추가">JDBC 드라이버 의존성 추가</a></li><li><a href="#mybatis-의존성-추가">MyBatis 의존성 추가</a></li><li><a href="#메타데이터-테이블-사용-설정">메타데이터 테이블 사용 설정</a></li><li><a href="#배치-및-db-로그-출력">배치 및 DB 로그 출력</a></li></ul></li><li><a href="#스프링배치-프로젝트-설정-방법">스프링배치 프로젝트 설정 방법</a><ul><li><a href="#내장-톰캣-실행-포트-설정">내장 톰캣 실행 포트 설정</a></li><li><a href="#프로젝트-jdk-변경">프로젝트 JDK 변경</a></li></ul></li><li><a href="#스프링배치-실행-및-빌드-방법">스프링배치 실행 및 빌드 방법</a><ul><li><a href="#독립형-sts-이클립스에서-스프링배치-실행-방법">독립형 STS 이클립스에서 스프링배치 실행 방법</a></li><li><a href="#기존-이클립스에서-스프링배치-실행-방법">기존 이클립스에서 스프링배치 실행 방법</a></li><li><a href="#스프링배치-jar-빌드-방법">스프링배치 jar 빌드 방법</a></li><li><a href="#리눅스-스프링배치-jar-실행-명령어">리눅스 스프링배치 jar 실행 명령어</a></li></ul></li><li><a href="#스프링배치-서비스-등록-방법">스프링배치 서비스 등록 방법</a><ul><li><a href="#서비스-파일-생성">서비스 파일 생성</a></li><li><a href="#서비스-등록-및-자동실행-설정">서비스 등록 및 자동실행 설정</a></li><li><a href="#스프링배치-실행-로그-확인">스프링배치 실행 로그 확인</a></li></ul></li><li><a href="#스프링배치-실행-시-에러-수정">스프링배치 실행 시 에러 수정</a><ul><li><a href="#java-파일-실행-권한이-없는-경우">java 파일 실행 권한이 없는 경우</a></li><li><a href="#db-인증-방식-에러">DB 인증 방식 에러</a></li></ul></li><li><a href="#db-연결-거부-에러">DB 연결 거부 에러</a></li><li><a href="#스프링배치-개발-예시">스프링배치 개발 예시</a><ul><li><a href="#배너-비노출-쿼리-작성">배너 비노출 쿼리 작성</a></li><li><a href="#쿼리-mapper-생성">쿼리 Mapper 생성</a></li><li><a href="#job-작성">Job 작성</a></li><li><a href="#스케줄러-작성">스케줄러 작성</a></li><li><a href="#스프링-배치-활성화">스프링 배치 활성화</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="이클립스-sts-사용법">이클립스 STS 사용법</h2>
+<p>STS는 이클립스에서 스프링 부트 프로젝트를 쉽게 관리하고 실행할 수 있게 도와주는 플러그인입니다.<br />
+독립형 STS 이클립스를 설치해도 되고, 기존 이클립스에 STS 플러그인을 설치해도 됩니다.</p>
+
+<h3 id="독립형-sts-이클립스-설치-방법">독립형 STS 이클립스 설치 방법</h3>
+<p><a href="https://spring.io/tools" target="_blank">https://spring.io/tools</a><br />
+Spring Tools for Eclipse - WINDOWS X86_64 선택하여 다운로드 후 압축 해제합니다.<br />
+SpringToolSuite4.exe 파일을 실행하면 STS 이클립스가 실행됩니다.<br />
+실행 시 프로젝트 workspace를 지정해야 합니다.</p>
+
+<h3 id="기존-spring-batch-프로젝트-import-방법">기존 Spring Batch 프로젝트 import 방법</h3>
+<p>프로젝트 workspace로 기존 Spring Batch 프로젝트 이동 &gt; File &gt; Import &gt; Maven &gt; Existing Maven Projects (Gradle 프로젝트는 Gradle &gt;  Existing Gradle Project) &gt; Root Directory : Browse… &gt; 프로젝트 폴더 선택 &gt; Finish</p>
+
+<hr />
+
+<h2 id="이클립스-스프링배치-사용법">이클립스 스프링배치 사용법</h2>
+
+<h3 id="스프링배치-프로젝트-생성-방법">스프링배치 프로젝트 생성 방법</h3>
+<p>이클립스 &gt; File &gt; Other… &gt; Spring Boot &gt; Spring Stater Project &gt;</p>
+<table class="table_2_left">
+<tbody>
+  <tr>
+    <td>Service URL</td>
+    <td>https://start.spring.io (그대로 두기)</td>
+  </tr>
+  <tr>
+    <td>Name</td>
+    <td>프로젝트명-batch</td>
+  </tr>
+  <tr>
+    <td>Type</td>
+    <td>Maven, Gradle 중 원하는 Build Tool 선택</td>
+  </tr>
+  <tr>
+    <td>Packaging</td>
+    <td>
+      스프링 부트 내장 톰캣으로 실행 예정 : jar 선택<br />
+      또는<br />
+      외장 톰캣에 올릴 경우 : war 선택
+    </td>
+  </tr>
+  <tr>
+    <td>Java Versiion</td>
+    <td>JDK 버전 선택</td>
+  </tr>
+  <tr>
+    <td>Group</td>
+    <td>
+      도메인에서 www 제외하고 거꾸로 작성<br />
+      (예시 : www.geniatutor.co.kr = kr.co.geniatutor)
+    </td>
+  </tr>
+  <tr>
+    <td>Artifact</td>
+    <td>보통 프로젝트 이름과 동일하게 설정</td>
+  </tr>
+  <tr>
+    <td>Description</td>
+    <td>프로젝트 설명 작성</td>
+  </tr>
+  <tr>
+    <td>Package</td>
+    <td>
+      Group ID 기반으로 프로젝트별 하위 패키지 추가하여 구분<br />
+      (예시 : 배치 프로젝트 = kr.co.geniatutor.batch)
+    </td>
+  </tr>
+</tbody>
+</table>
+<p>위 참고하여 입력 &gt; Next &gt; Dependencies 창에서 I/O : Spring Batch 선택 &gt; Finish</p>
+
+<hr />
+
+<h2 id="스프링배치-프로젝트-db-사용법">스프링배치 프로젝트 DB 사용법</h2>
+
+<h3 id="db-정보-설정">DB 정보 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://DB서버IP:3306/DB명
+spring.datasource.username=유저명
+spring.datasource.password=패스워드
+
+mybatis.mapper-locations=classpath:mapper/**/*.xml
+</code></pre></div></div>
+<p>application.properties 파일에 DB 정보를 작성하고, Mapper 위치를 설정합니다.</p>
+
+<p><mark>개발/운영 환경별 프로파일 설정</mark><br />
+<code class="language-plaintext highlighter-rouge">개발 설정 파일</code> : application.properties 또는 application-dev.properties<br />
+<code class="language-plaintext highlighter-rouge">운영 설정 파일</code> : application-prod.properties</p>
+
+<h3 id="jdbc-드라이버-의존성-추가">JDBC 드라이버 의존성 추가</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;dependency&gt;
+  &lt;groupId&gt;mysql&lt;/groupId&gt;
+  &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre></div></div>
+<p>Maven을 사용하는 경우, pom.xml dependencies 안에 위와 같이 추가합니다.<br />
+프로젝트에서 연결할 DB에 맞는 의존성을 추가해야 합니다.<br />
+spring-boot-starter에서 의존성 버전을 관리하는 BOM을 사용하므로, 버전을 명시하지 않아도 됩니다.</p>
+
+<h3 id="mybatis-의존성-추가">MyBatis 의존성 추가</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;dependency&gt;
+  &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
+  &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
+  &lt;version&gt;2.2.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre></div></div>
+<p>MyBatis 의존성을 추가해야 Mapper.java에 @Mapper 어노테이션을 달 수 있습니다.</p>
+
+<h3 id="메타데이터-테이블-사용-설정">메타데이터 테이블 사용 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>spring.batch.jdbc.initialize-schema=always
+</code></pre></div></div>
+<p>application.properties 파일에 스프링배치 메타데이터 테이블 사용 설정을 합니다.<br />
+개발 단계에서는 항상 새 테이블 생성하는 always로 테스트 합니다.<br />
+운영에서는 초기 1회만 always로 실행하여 테이블을 만들고, 테이블을 생성하지 않는 never로 고정하여 사용합니다.</p>
+
+<p><mark>메타데이터 테이블 미생성 시 실행 에러메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java.lang.IllegalStateException: Failed to execute ApplicationRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:785) ~[spring-boot-2.5.4.jar:2.5.4]
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772) ~[spring-boot-2.5.4.jar:2.5.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:345) ~[spring-boot-2.5.4.jar:2.5.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343) ~[spring-boot-2.5.4.jar:2.5.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332) ~[spring-boot-2.5.4.jar:2.5.4]
+	at kr.co.geniatutor.batch.GeniaBatchApplication.main(GeniaBatchApplication.java:14) ~[classes/:na]
+Caused by: org.springframework.jdbc.BadSqlGrammarException: PreparedStatementCallback; bad SQL grammar [SELECT JOB_INSTANCE_ID, JOB_NAME from BATCH_JOB_INSTANCE where JOB_NAME = ? and JOB_KEY = ?]; nested exception is java.sql.SQLSyntaxErrorException: Table 'genia_db.batch_job_instance' doesn't exist
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:239) ~[spring-jdbc-5.3.9.jar:5.3.9]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:70) ~[spring-jdbc-5.3.9.jar:5.3.9]
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1541) ~[spring-jdbc-5.3.9.jar:5.3.9]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:667) ~[spring-jdbc-5.3.9.jar:5.3.9]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:713) ~[spring-jdbc-5.3.9.jar:5.3.9]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:744) ~[spring-jdbc-5.3.9.jar:5.3.9]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:757) ~[spring-jdbc-5.3.9.jar:5.3.9]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:815) ~[spring-jdbc-5.3.9.jar:5.3.9]
+	at org.springframework.batch.core.repository.dao.JdbcJobInstanceDao.getJobInstance(JdbcJobInstanceDao.java:151) ~[spring-batch-core-4.3.3.jar:4.3.3]
+	at org.springframework.batch.core.repository.support.SimpleJobRepository.isJobInstanceExists(SimpleJobRepository.java:93) ~[spring-batch-core-4.3.3.jar:4.3.3]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344) ~[spring-aop-5.3.9.jar:5.3.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.3.9.jar:5.3.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.3.9.jar:5.3.9]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123) ~[spring-tx-5.3.9.jar:5.3.9]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:388) ~[spring-tx-5.3.9.jar:5.3.9]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-5.3.9.jar:5.3.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.9.jar:5.3.9]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:215) ~[spring-aop-5.3.9.jar:5.3.9]
+	at jdk.proxy2/jdk.proxy2.$Proxy46.isJobInstanceExists(Unknown Source) ~[na:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344) ~[spring-aop-5.3.9.jar:5.3.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.3.9.jar:5.3.9]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.3.9.jar:5.3.9]
+	at org.springframework.batch.core.configuration.annotation.SimpleBatchConfiguration$PassthruAdvice.invoke(SimpleBatchConfiguration.java:128) ~[spring-batch-core-4.3.3.jar:4.3.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.9.jar:5.3.9]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:215) ~[spring-aop-5.3.9.jar:5.3.9]
+	at jdk.proxy2/jdk.proxy2.$Proxy46.isJobInstanceExists(Unknown Source) ~[na:na]
+	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.getNextJobParameters(JobLauncherApplicationRunner.java:206) ~[spring-boot-autoconfigure-2.5.4.jar:2.5.4]
+	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.execute(JobLauncherApplicationRunner.java:198) ~[spring-boot-autoconfigure-2.5.4.jar:2.5.4]
+	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.executeLocalJobs(JobLauncherApplicationRunner.java:173) ~[spring-boot-autoconfigure-2.5.4.jar:2.5.4]
+	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.launchJobFromProperties(JobLauncherApplicationRunner.java:160) ~[spring-boot-autoconfigure-2.5.4.jar:2.5.4]
+	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.run(JobLauncherApplicationRunner.java:155) ~[spring-boot-autoconfigure-2.5.4.jar:2.5.4]
+	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.run(JobLauncherApplicationRunner.java:150) ~[spring-boot-autoconfigure-2.5.4.jar:2.5.4]
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:782) ~[spring-boot-2.5.4.jar:2.5.4]
+	... 5 common frames omitted
+Caused by: java.sql.SQLSyntaxErrorException: Table 'genia_db.batch_job_instance' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1003) ~[mysql-connector-java-8.0.26.jar:8.0.26]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeQuery(ProxyPreparedStatement.java:52) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeQuery(HikariProxyPreparedStatement.java) ~[HikariCP-4.0.3.jar:na]
+	at org.springframework.jdbc.core.JdbcTemplate$1.doInPreparedStatement(JdbcTemplate.java:722) ~[spring-jdbc-5.3.9.jar:5.3.9]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:651) ~[spring-jdbc-5.3.9.jar:5.3.9]
+	... 38 common frames omitted
+</code></pre></div></div>
+
+<h3 id="배치-및-db-로그-출력">배치 및 DB 로그 출력</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>logging.level.org.springframework.batch=DEBUG
+mybatis.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl
+</code></pre></div></div>
+<p>application.properties에 배치 및 SQL 로그를 출력하도록 설정합니다.</p>
+
+<hr />
+
+<h2 id="스프링배치-프로젝트-설정-방법">스프링배치 프로젝트 설정 방법</h2>
+
+<h3 id="내장-톰캣-실행-포트-설정">내장 톰캣 실행 포트 설정</h3>
+<p>src &gt; main &gt; resources &gt; application.properties 파일에 서버 포트를 추가합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server.port=8081
+</code></pre></div></div>
+<p>server.port를 설정하지 않으면, 기본 포트는 8080입니다.<br />
+실행 시 다른 톰캣 서비스와 충돌하지 않도록 포트를 변경해주는 것이 좋습니다.</p>
+
+<h3 id="프로젝트-jdk-변경">프로젝트 JDK 변경</h3>
+<p>스프링 배치 프로젝트 우클릭 &gt; Properties &gt; Java Build Path &gt; Libraries &gt; Modulepath &gt; JRE System Library 선택 &gt; Edit… &gt; Workspace default JRE 선택 &gt; Finish &gt; Apply and Close</p>
+
+<p>프로젝트 내 pom.xml 또는 build.gradle에서도 java.version을 변경해줘야 합니다.</p>
+
+<p><mark>pom.xml 수정 반영 방법</mark><br />
+프로젝트 우클릭 &gt; Maven &gt; Update Project</p>
+
+<p><mark>Java 버전 11로 다운그레이드 시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;parent&gt;
+  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+  &lt;version&gt;2.5.4&lt;/version&gt;
+  &lt;relativePath/&gt;
+&lt;/parent&gt;
+</code></pre></div></div>
+<p>pom.xml에서 Spring Boot 버전을 Java 11과 호환되는 2.5.x 대로 변경해야 합니다.</p>
+
+<hr />
+
+<h2 id="스프링배치-실행-및-빌드-방법">스프링배치 실행 및 빌드 방법</h2>
+
+<h3 id="독립형-sts-이클립스에서-스프링배치-실행-방법">독립형 STS 이클립스에서 스프링배치 실행 방법</h3>
+<p>Boot Dashboard 탭 &gt; local &gt; 스프링배치 프로젝트 선택 &gt; Start or Restart 버튼 클릭<br />
+스프링 배치는 정의된 모든 배치 스텝 처리 후 JobExecution 상태가 완료로 변경되면 자동 종료됩니다.<br />
+cron 등으로 주기적 실행을 설정한 경우는 애플리케이션이 종료되지 않고 계속 실행됩니다.</p>
+
+<p><mark>프로파일 변경 실행</mark><br />
+Boot Dashboard 탭 &gt; local &gt; 스프링배치 프로젝트 우클릭 &gt; Open Config &gt; Profile : 변경할 프로파일 선택 &gt; Apply &gt; Debug</p>
+
+<h3 id="기존-이클립스에서-스프링배치-실행-방법">기존 이클립스에서 스프링배치 실행 방법</h3>
+<p>스프링배치 프로젝트 우클릭 &gt; Run As &gt; Spring Boot App</p>
+
+<h3 id="스프링배치-jar-빌드-방법">스프링배치 jar 빌드 방법</h3>
+<p>Run &gt; Run Congigurations… &gt; Maven Build 우클릭 &gt; New configuration &gt; Name : 프로젝트명 입력 &gt; workspace… : 빌드할 프로젝트 선택 &gt; Goals : clean package 입력 &gt; JRE 탭 : Alternate JRE 선택 &gt; Apply &gt; Run<br />
+이후 재빌드 시에는 Run &gt; Run Congigurations… &gt; Maven Build 목록에서 프로젝트명 더블클릭 하면 됩니다.</p>
+
+<p><mark>서버 구분별 Goals 예시</mark></p>
+<ul>
+  <li>개발서버용 Goals : clean package -D spring.profiles.active=dev</li>
+  <li>운영서버용 Goals : clean package -D spring.profiles.active=prod -D skipTests
+빌드 시 프로파일에 맞는 application.properties 로드 후 TEST 코드 실행이 성공하면 패키징이 진행됩니다.<br />
+-D skipTests 옵션을 추가하면 DB 연결 및 테스트 코드 실행 없이 바로 패키징 됩니다.</li>
+</ul>
+
+<h3 id="리눅스-스프링배치-jar-실행-명령어">리눅스 스프링배치 jar 실행 명령어</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 개발 서버 실행
+java -jar 프로젝트명.jar
+또는
+java -jar -Dspring.profiles.active=dev 프로젝트명.jar
+
+# 운영 서버 실행
+java -jar -Dspring.profiles.active=prod 프로젝트명.jar
+</code></pre></div></div>
+<p>프로파일 옵션 미설정 시, 실행된 프로젝트에 application.properties가 기본 적용됩니다.<br />
+프로파일 옵션 설정 시, application-프로파일명.properties가 적용됩니다.</p>
+
+<hr />
+
+<h2 id="스프링배치-서비스-등록-방법">스프링배치 서비스 등록 방법</h2>
+
+<p>리눅스 서버 재기동 시 스프링배치 자동 실행 가능하도록, 시스템 서비스 등록하는 방법입니다.</p>
+
+<h3 id="서비스-파일-생성">서비스 파일 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo vi /etc/systemd/system/프로젝트명-batch.service
+</code></pre></div></div>
+<p>아래와 같이 내용을 작성합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Unit]
+Description=Spring Batch Job
+After=network.target
+
+[Service]
+User=유저명
+WorkingDirectory=/opt/프로젝트명-batch
+ExecStart=/java경로 -jar -Dspring.profiles.active=프로파일명 /opt/프로젝트명-batch/프로젝트명.jar
+SuccessExitStatus=143
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+</code></pre></div></div>
+<p>파일질라로 리눅스 /opt/프로젝트명-batch 폴더에 스프링배치 jar 파일을 옮긴 뒤, 서비스 파일을 생성하면 됩니다.</p>
+
+<p><mark>리눅스 java 경로 확인 명령어</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>which java
+</code></pre></div></div>
+
+<p><mark>리눅스 java 버전 확인 명령어</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java -version
+</code></pre></div></div>
+<p>스프링 배치 프로젝트 java 버전과 동일해야 합니다.</p>
+
+<h3 id="서비스-등록-및-자동실행-설정">서비스 등록 및 자동실행 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 서비스 등록 및 수정
+sudo systemctl daemon-reload
+
+# 서비스 시작
+sudo systemctl start 프로젝트명-batch
+
+# 서버 재부팅 시 자동 시작 설정
+sudo systemctl enable 프로젝트명-batch
+
+# 서버 재부팅 시 자동 시작 여부 확인
+sudo systemctl is-enabled 프로젝트명-batch
+</code></pre></div></div>
+
+<h3 id="스프링배치-실행-로그-확인">스프링배치 실행 로그 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 특정 시간 이후 로그 확인
+journalctl -u genia-batch.service --since "2025-04-10 00:00"
+
+# 금일 로그 확인
+journalctl -u 프로젝트명-batch.service --since today
+
+# 전체 로그 확인
+journalctl -u 프로젝트명-batch.service
+</code></pre></div></div>
+<p>전체 로그 확인 시 너무 많은 로그가 나오므로, 시간 조건을 넣어서 확인하는 것이 좋습니다.</p>
+
+<hr />
+
+<h2 id="스프링배치-실행-시-에러-수정">스프링배치 실행 시 에러 수정</h2>
+
+<h3 id="java-파일-실행-권한이-없는-경우">java 파일 실행 권한이 없는 경우</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Apr 10 09:28:40 genius-staging systemd[1]: Started Genia Spring Batch Job.
+Apr 10 09:28:40 genius-staging systemd[1]: genia-batch.service: Main process exited, code=exited, status=203/EXEC
+Apr 10 09:28:40 genius-staging systemd[1]: genia-batch.service: Failed with result 'exit-code'.
+Apr 10 09:28:40 genius-staging systemd[1]: genia-batch.service: Service RestartSec=100ms expired, scheduling restart.
+Apr 10 09:28:40 genius-staging systemd[1]: genia-batch.service: Scheduled restart job, restart counter is at 1.
+Apr 10 09:28:40 genius-staging systemd[1]: Stopped Genia Spring Batch Job.
+Apr 10 09:28:40 genius-staging systemd[1]: Started Genia Spring Batch Job.
+</code></pre></div></div>
+<p>스프링 배치 실행 시 실패하고, 위와 같은 에러 로그가 확인되는 경우입니다.</p>
+
+<p><mark>java 파일 실행 권한 확인</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd java경로
+ll
+</code></pre></div></div>
+<p>java 파일 경로에서 ll으로 파일 권한 상태 확인 시 아래와 같이 x(실행 권한)이 없는 것을 확인할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-rw-r--r-- 1 root root  12848 Apr 10 09:25 java
+</code></pre></div></div>
+
+<p><mark>java 파일 실행 권한 생성 명령어</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod +x /usr/local/jdk-11/bin/*
+</code></pre></div></div>
+<p>권한 생성 후 스프링부트를 재실행 하면 됩니다.</p>
+
+<h3 id="db-인증-방식-에러">DB 인증 방식 에러</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Apr 10 09:44:03 genius-staging java[802301]: java.sql.SQLNonTransientConnectionException: Public Key Retrieval is not allowed
+Apr 10 09:44:03 genius-staging java[802301]:         at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:110) ~[mysql-connector-java-8.0.26.jar!/:8.0.26]
+Apr 10 09:44:03 genius-staging java[802301]:         at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.26.jar!/:8.0.26]
+Apr 10 09:44:03 genius-staging java[802301]:         at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:828) ~[mysql-connector-java-8.0.26.jar!/:8.0.26]
+Apr 10 09:44:03 genius-staging java[802301]:         at com.mysql.cj.jdbc.ConnectionImpl.&lt;init&gt;(ConnectionImpl.java:448) ~[mysql-connector-java-8.0.26.jar!/:8.0.26]
+Apr 10 09:44:03 genius-staging java[802301]:         at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:241) ~[mysql-connector-java-8.0.26.jar!/:8.0.26]
+Apr 10 09:44:03 genius-staging java[802301]:         at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:198) ~[mysql-connector-java-8.0.26.jar!/:8.0.26]
+</code></pre></div></div>
+<p>MySQL 8 이상 기본 인증 방식은 공개 키를 통해 비밀번호를 암호화해서 전송하는 caching_sha2_password입니다.<br />
+해당 방식에서 클라이언트가 서버의 공개 키를 받아들이는 설정이 안 돼 있으면 위와 같은 오류가 나옵니다.<br />
+만약, DB 사용자 비밀번호 인증 방식이 mysql_native_password라면 이 문제는 발생하지 않습니다.</p>
+
+<p><mark>DB 인증 방식 에러 해결 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>allowPublicKeyRetrieval=true&amp;useSSL=true
+</code></pre></div></div>
+<p>스프링배치 application.properties 파일 JDBC URL 뒤에 위 옵션을 추가 후 재빌드하고 실행하면 됩니다.<br />
+allowPublicKeyRetrieval=true는 MySQL 클라이언트(JDBC 드라이버)가 비밀번호를 암호화해서 전송할 수 있도록, 서버에 공개키 요청하는 것을 허용하는 옵션입니다.<br />
+useSSL=true는 서버에서 SSL 인증서를 사용하는 경우, 비밀번호를 평문으로 전송하지 않도록 보호하는 옵션입니다.</p>
+
+<h2 id="db-연결-거부-에러">DB 연결 거부 에러</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Apr 10 09:59:30 genius-staging java[803094]: java.sql.SQLException: Access denied for user 'DB유저명'@'172.16.0.8' (using password: YES)
+Apr 10 09:59:30 genius-staging java[803094]:         at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129) ~[mysql-connector-java-8.0.26.jar!/:8.0.26]
+Apr 10 09:59:30 genius-staging java[803094]:         at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.26.jar!/:8.0.26]
+Apr 10 09:59:30 genius-staging java[803094]:         at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:828) ~[mysql-connector-java-8.0.26.jar!/:8.0.26]
+Apr 10 09:59:30 genius-staging java[803094]:         at com.mysql.cj.jdbc.ConnectionImpl.&lt;init&gt;(ConnectionImpl.java:448) ~[mysql-connector-java-8.0.26.jar!/:8.0.26]
+Apr 10 09:59:30 genius-staging java[803094]:         at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:241) ~[mysql-connector-java-8.0.26.jar!/:8.0.26]
+Apr 10 09:59:30 genius-staging java[803094]:         at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:198) ~[mysql-connector-java-8.0.26.jar!/:8.0.26]
+</code></pre></div></div>
+<p>현재 서버 IP로 접속할 수 있는 유저 권한이 없어서 나는 스프링배치 실행 시 에러입니다.</p>
+
+<p><mark>DB 유저 권한 확인 쿼리</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-- 현재 유저로 연결 가능한 host 목록 확인
+SELECT host, user FROM mysql.user WHERE user = 'DB유저명';
+
+-- 전체 유저 권한 목록 확인
+SELECT user, host, plugin FROM mysql.user;
+</code></pre></div></div>
+<p>host가 %로 되어 있으면, 모든 IP에서 접근할 수 있는 계정이라는 뜻입니다.<br />
+현재 유저로 접근 가능한 IP가 없으면, GRANT 쿼리로 권한을 신규 생성하거나 다른 유저로 연결해야 합니다.</p>
+
+<p><mark>DB 유저 권한 생성 쿼리</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GRANT ALL PRIVILEGES ON DB명.* TO 'DB유저명'@'172.16.0.8';
+FLUSH PRIVILEGES;
+</code></pre></div></div>
+
+<p><mark>권한 생성 불가 오류 메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You are not allowed to create a user with GRANT
+</code></pre></div></div>
+<p>위와 같은 오류가 나오면, 현재 DB에 연결된 계정에서 GRANT 쿼리 권한이 없는 것입니다.<br />
+root 계정 등으로 다시 시도해야 합니다.</p>
+
+<hr />
+
+<h2 id="스프링배치-개발-예시">스프링배치 개발 예시</h2>
+
+<p>매일 0시, 노출 기한이 지난 배너의 노출 여부를 비노출로 변경하는 스프링배치 예시입니다.</p>
+
+<h3 id="배너-비노출-쿼리-작성">배너 비노출 쿼리 작성</h3>
+<p>src/main/resources/mapper/banner/BannerMapper.xml 파일을 작성합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;
+&lt;mapper namespace="kr.co.geniatutor.batch.banner.mapper.BannerMapper"&gt;
+  &lt;update id="disableExpiredBanners"&gt;
+    UPDATE
+      배너테이블명
+    SET
+      SHOW_YN = 'N'
+    WHERE
+      SHOW_YN = 'Y'
+    AND
+      DEL_YN = 'N'
+    AND	
+      SHOW_END_DT &lt;![CDATA[&lt;]]&gt; NOW()
+  &lt;/update&gt;
+&lt;/mapper&gt;
+</code></pre></div></div>
+<p>배너 노출 기한이 지난 배너의 노출여부를 비노출로 변경하는 쿼리 예시입니다.<br />
+XML 파일 내에서 부등호를 사용하기 위해 CDATA를 사용하였습니다.</p>
+
+<h3 id="쿼리-mapper-생성">쿼리 Mapper 생성</h3>
+<p>src/main/java/kr/co/geniatutor/batch/banner/mapper/BannerMapper.java 파일을 작성합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package kr.co.geniatutor.batch.banner.mapper;
+
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface BannerMapper {
+    void disableExpiredBanners();
+}
+</code></pre></div></div>
+
+<h3 id="job-작성">Job 작성</h3>
+<p>src/main/java/kr/co/geniatutor/batch/banner/job/BannerBatchJobConfig.java 파일을 작성합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package kr.co.geniatutor.batch.banner.job;
+
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import kr.co.geniatutor.batch.banner.mapper.BannerMapper;
+
+@Configuration
+public class BannerBatchJobConfig {
+
+  @Autowired
+  private JobBuilderFactory jobBuilderFactory;
+
+  @Autowired
+  private StepBuilderFactory stepBuilderFactory;
+
+  @Autowired
+  private BannerMapper bannerMapper;
+
+  @Bean
+  public Job bannerJob() {
+    return jobBuilderFactory.get("bannerJob")
+            .incrementer(new RunIdIncrementer())
+            .start(bannerStep())
+            .build();
+  }
+
+  @Bean
+  public Step bannerStep() {
+    return stepBuilderFactory.get("bannerStep")
+            .tasklet((contribution, chunkContext) -&gt; {
+              bannerMapper.disableExpiredBanners();
+              return RepeatStatus.FINISHED;
+            })
+            .build();
+  }
+}
+</code></pre></div></div>
+
+<h3 id="스케줄러-작성">스케줄러 작성</h3>
+<p>src/main/java/kr/co/geniatutor/batch/SchedulerConfig.java 파일을 작성합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package kr.co.geniatutor.batch;
+
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+
+@Configuration
+@EnableScheduling
+public class SchedulerConfig {
+
+    @Autowired
+    private JobLauncher jobLauncher;
+
+    @Autowired
+    private Job bannerJob;
+
+    @Scheduled(cron = "0 0 0 * * *")
+    public void runBannerJob() throws Exception {
+    	// 스프링 배치는 기본적으로 동시에 같은 Job이 중복 실행되지 않도록 방지하므로,
+    	JobParameters jobParameters = new JobParametersBuilder()
+    	        .addLong("time", System.currentTimeMillis()) // 매번 다른 파라미터 추가
+    	        .toJobParameters();
+    	
+        jobLauncher.run(bannerJob, jobParameters);
+    }
+}
+</code></pre></div></div>
+<p>@EnableScheduling 어노테이션을 단 class는 SpringApplication이 실행될 때 빈으로 등록되고,<br />
+@Scheduled가 붙은 메서드를 찾아서 스케줄러에 등록합니다.</p>
+
+<p>cron 스케줄을 0 0 0 * * * 로 설정하면 매일 자정 0시 Job이 실행됩니다.</p>
+
+<h3 id="스프링-배치-활성화">스프링 배치 활성화</h3>
+<p>src/main/java/kr/co/geniatutor/GeniaBatchApplication.java 파일에 @EnableBatchProcessing를 추가합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package kr.co.geniatutor.batch;
+
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+@EnableBatchProcessing
+public class GeniaBatchApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(GeniaBatchApplication.class, args);
+	}
+
+}
+</code></pre></div></div>
+
+<p><mark>스프링 배치 미활성화 시 실행 에러메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field jobLauncher in kr.co.geniatutor.batch.SchedulerConfig required a bean of type 'org.springframework.batch.core.launch.JobLauncher' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'org.springframework.batch.core.launch.JobLauncher' in your configuration.
+</code></pre></div></div>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#web-%EA%B0%9C%EB%B0%9C" class="page__taxonomy-item" rel="tag">Web 개발</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-03-10">2025-03-10</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/op/2025-02-17-1" class="pagination--pager" title="웹 취약점 점검 결과 이행 조치 방법
+">Prev</a>
+    
+    
+      <a href="/tool/2025-04-20-1" class="pagination--pager" title="에디트플러스 사용법 / 에디트플러스 Java 실행 방법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

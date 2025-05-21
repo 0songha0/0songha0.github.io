@@ -1,0 +1,857 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>기획자와 협업 시 참고 / 기획 및 초기 개발 시 고려할 점 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="기획자와 협업 시 참고 / 기획 및 초기 개발 시 고려할 점">
+<meta property="og:url" content="https://0songha0.github.io/plan-design-db/2022-07-12-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-07-12T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2022-07-12T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/plan-design-db/2022-07-12-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="기획자와 협업 시 참고 / 기획 및 초기 개발 시 고려할 점">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2022-07-12T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2022-07-12T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">기획자와 협업 시 참고 / 기획 및 초기 개발 시 고려할 점
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2022-07-12T00:00:00+00:00">2022-07-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 기획자와 협업 시 참고 / 기획 및 초기 개발 시 고려할 점</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#기획자와-협업-시-참고">기획자와 협업 시 참고</a><ul><li><a href="#기획자와-협의할-때-고려하는-순서">기획자와 협의할 때 고려하는 순서</a></li><li><a href="#기획자를-통한-소통">기획자를 통한 소통</a></li><li><a href="#기획자-롤">기획자 롤</a></li><li><a href="#일정-조율의-중요성">일정 조율의 중요성</a></li><li><a href="#화면-기획이-중요한-이유">화면 기획이 중요한 이유</a></li><li><a href="#초기-개발-전-기획-체크-시-장점">초기 개발 전 기획 체크 시 장점</a></li></ul></li><li><a href="#기획-및-초기-개발-시-고려할-점">기획 및 초기 개발 시 고려할 점</a><ul><li><a href="#꼭-필요한-화면기능인가">꼭 필요한 화면/기능인가?</a></li><li><a href="#프로젝트-분리-개발">프로젝트 분리 개발</a></li><li><a href="#화면-분리-개발-고려">화면 분리 개발 고려</a></li></ul></li><li><a href="#기획자가-작성하는-문서">기획자가 작성하는 문서</a><ul><li><a href="#화면설계서">화면설계서</a></li><li><a href="#기능정의서-or-메뉴구조도정보구조도ia-엑셀">기능정의서 or 메뉴구조도+정보구조도(IA) 엑셀</a></li><li><a href="#wbs-일정표">WBS (일정표)</a></li><li><a href="#정책정의서">정책정의서</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="기획자와-협업-시-참고">기획자와 협업 시 참고</h2>
+
+<h3 id="기획자와-협의할-때-고려하는-순서">기획자와 협의할 때 고려하는 순서</h3>
+<ol>
+  <li>사용자 편의성, 고객 니즈 파악</li>
+  <li>구현 가능성, 개발 방법 및 단점</li>
+  <li>개발의 용이성, 효율성</li>
+  <li>개발 우선순위</li>
+</ol>
+
+<h3 id="기획자를-통한-소통">기획자를 통한 소통</h3>
+<p>개발자는 고객/타 업체/타 부서와 직접 대면하지 않고 기획자를 통해 소통해서,<br />
+변경되는 부분들에 대해 기획자가 직접 화면설계서를 관리하게 해야 불필요한 책임 소재를 넘겨받지 않습니다.</p>
+
+<h3 id="기획자-롤">기획자 롤</h3>
+<p>개발자가 업무를 모르면 기획자에게 물어보는 것이 맞다 합니다.<br />
+반면, 기획자가 테이블 설계를 알아야 하는 의무는 없습니다.</p>
+
+<h3 id="일정-조율의-중요성">일정 조율의 중요성</h3>
+<p>개발자가 시스템을 분석하고 작업을 효율적으로 설계할 시간이 있어야 하드코딩을 방지하고 확장성을 높일 수 있습니다.<br />
+너무 짧은 기힌으로 닥달하면 좋은 코드로 이어지기 어렵고, 인수인계 받아 유지보수하는 개발자에게도 좋지 않습니다.<br />
+기존 코드를 분석하고, 운영 오류 수정 및 운영 반영을 병행하면서 신규 작업을 하느라 개선할 시간이 없기 때문입니다.<br />
+이미 운영 중인 소스와 DB를 변경하는 일은 부담이 되기도 합니다.<br />
+중복 코드가 정리되지 않고 하드 코딩이 늘어가면 잠재적 오류가 많아서 시스템 안정성 측면에서도 위험합니다.</p>
+
+<h3 id="화면-기획이-중요한-이유">화면 기획이 중요한 이유</h3>
+<p>기획이 명확하게 정해지지 않으면 개발 일정 산출이 어렵습니다.<br />
+화면설계서 디스크립션을 명확하게 달아달라 요구하고, 화면설계서대로만 개발하는 것이 가장 좋습니다.</p>
+
+<h3 id="초기-개발-전-기획-체크-시-장점">초기 개발 전 기획 체크 시 장점</h3>
+<ul>
+  <li>구현이 불가하거나 이상한 기능은 미리 협의하여 없애거나 조율할 수 있습니다.</li>
+  <li>명확하지 않은 부분에 대해 기획자에게 미리 요구할 수 있습니다.</li>
+  <li>테이블 설계 시 빠졌던 컬럼도 추가해서 넣을 수 있습니다.</li>
+  <li>업무 이해도가 높아져 회의 때마다 협의가 수월합니다.</li>
+  <li>역할을 분담하거나 개발 일정 산출하기 좋은 지표입니다.</li>
+  <li>전체적인 흐름이 잡히니까 개발에 용이합니다.</li>
+  <li>재활용할 수 있는 중복 화면이나 기능을 파악할 수 있습니다.</li>
+  <li>필요한 유틸이나 기능들을 미리 준비해둘 수 있습니다.</li>
+</ul>
+
+<hr />
+
+<h2 id="기획-및-초기-개발-시-고려할-점">기획 및 초기 개발 시 고려할 점</h2>
+
+<h3 id="꼭-필요한-화면기능인가">꼭 필요한 화면/기능인가?</h3>
+<p>오픈 전에는 사용자 서비스 기본 기능 개발에 충실하는 것이 중요합니다.<br />
+어드민 화면을 우선하여 개발하거나 이쁘게 만드는 데에 집중해서는 안 됩니다.</p>
+
+<h3 id="프로젝트-분리-개발">프로젝트 분리 개발</h3>
+<p>사용자 프로젝트와 관리자 프로젝트는 따로 만드는 것이 좋습니다.<br />
+공통 코드를 공유하면, 관리자에만 수정하고 싶은 쿼리가 사용자에 적용되기도 해서 좋지 않습니다.<br />
+관리자 반영 시 또는 관리자가 죽었을 때 사용자에 영향이 가지 않게 하려면 WAS 서버를 분리해야 하는데,<br />
+프로젝트를 분리하여 개발하면 톰캣 war 빌드 시 관리자/사용자 구분을 설정하지 않아도 됩니다.</p>
+
+<h3 id="화면-분리-개발-고려">화면 분리 개발 고려</h3>
+<p><mark>기능이 비슷하나 성격이 다른 데이터 화면</mark><br />
+특히 테이블이 다른 경우, 한 화면에서 관리하면 각 테이블에 대한 분기처리가 들어가 복잡해집니다.<br />
+데이터가 많아지면 사용자 입장에서도 헷갈려서 사용성이 떨어질 수 있습니다.</p>
+
+<p><mark>탭 메뉴 화면</mark><br />
+한 화면에서 모든 탭 메뉴를 한번에 개발하는 경우, 소스가 매우 복잡해질 수 있습니다.</p>
+
+<p><mark>등록/수정 화면</mark><br />
+한 화면에서 등록/수정을 하면 등록 시에만 하는 처리, 수정 시에만 하는 처리가 늘어날수록 유지보수가 어렵습니다.<br />
+등록/수정 화면 또는 팝업을 공통화하지 않고 분리 개발하는 것이 좋습니다.</p>
+
+<hr />
+
+<h2 id="기획자가-작성하는-문서">기획자가 작성하는 문서</h2>
+<h3 id="화면설계서">화면설계서</h3>
+<p>사용자 편의성 기반하여 우선순위 높은 항목 순으로 설계하는 것이 좋습니다.<br />
+반응형 페이지는 PC, 모바일 화면 기획이 나와야 힙니다. 태블릿 기획은 필수가 아닙니다.<br />
+예전에는 화면설계서를 PPT로 그렸는데, 최근에는 피그마로 그리는 추세입니다.</p>
+
+<p><mark>화면설계서에 명시되어야 할 요소들</mark></p>
+<ul>
+  <li>데이터가 있는 경우, 없는 경우, 많은 경우 등 각각의 화면 케이스</li>
+  <li>화면 UI의 동작, 처리 방식에 대해 명확한 설명</li>
+  <li>등록/수정 인풋마다 최대 입력 글자수 제한 (max length)</li>
+  <li>selectbox 내 데이터 목록</li>
+  <li>엑셀 다운로드, 업로드 시 엑셀 양식 (엑셀 데이터 샘플)</li>
+  <li>파일 업로드 시 제한 용량</li>
+  <li>조회 시 필수 검색조건, 기본 정렬 순서<br />
+(데이터가 많은 경우, 검색조건이 없으면 조회가 느릴 수 있습니다.<br />
+관리자 화면에서는 느려도 괜찮다 하면 필수 검색조건 없이 만들기도 합니다.)</li>
+</ul>
+
+<h3 id="기능정의서-or-메뉴구조도정보구조도ia-엑셀">기능정의서 or 메뉴구조도+정보구조도(IA) 엑셀</h3>
+<p>각 Depth, 팝업 여부, 기능 정의, PC/모바일 여부, 디자인/퍼블리싱/개발 여부, 관리자 연동 여부 등</p>
+
+<h3 id="wbs-일정표">WBS (일정표)</h3>
+<p>기획/디자인/퍼블리싱/개발/테스트 업무, 시작일, 완료일, 완료여부, 담당자, 일정 색칠 등</p>
+
+<h3 id="정책정의서">정책정의서</h3>
+<p>회원가입 정책, 상품 구매 정책, 게시판 이용 정책 등</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%EA%B8%B0%ED%9A%8D-%EC%84%A4%EA%B3%84-db" class="page__taxonomy-item" rel="tag">기획 / 설계 / DB</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-07-12">2022-07-12</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/plan-design-db/2022-07-08-1" class="pagination--pager" title="로그 테이블 및 통계 테이블 설계 시 고려사항
+">Prev</a>
+    
+    
+      <a href="/plan-design-db/2022-07-13-1" class="pagination--pager" title="트리구조 카테고리 테이블 설계 방법 / 카테고리 조회 쿼리
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

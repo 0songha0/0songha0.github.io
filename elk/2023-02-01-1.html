@@ -1,0 +1,1035 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>AWS EC2 리눅스 운영서버에 엘라스틱서치, 키바나 설치 방법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="AWS EC2 리눅스 운영서버에 엘라스틱서치, 키바나 설치 방법">
+<meta property="og:url" content="https://0songha0.github.io/elk/2023-02-01-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-02-01T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2023-02-01T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/elk/2023-02-01-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="AWS EC2 리눅스 운영서버에 엘라스틱서치, 키바나 설치 방법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2023-02-01T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2023-02-01T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">AWS EC2 리눅스 운영서버에 엘라스틱서치, 키바나 설치 방법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2023-02-01T00:00:00+00:00">2023-02-01</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> AWS EC2 리눅스 운영서버에 엘라스틱서치, 키바나 설치 방법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#엘라스틱서치-설치-방법">엘라스틱서치 설치 방법</a><ul><li><a href="#엘라스틱서치-rpm-파일-업로드">엘라스틱서치 rpm 파일 업로드</a></li><li><a href="#rpm-파일로-엘라스틱서치-설치">rpm 파일로 엘라스틱서치 설치</a></li><li><a href="#엘라스틱서치-방화벽-허용">엘라스틱서치 방화벽 허용</a></li><li><a href="#엘라스틱서치-실행">엘라스틱서치 실행</a></li><li><a href="#엘라스틱서치-자동실행-설정">엘라스틱서치 자동실행 설정</a></li><li><a href="#엘라스틱서치-정상-설치-확인">엘라스틱서치 정상 설치 확인</a></li></ul></li><li><a href="#키바나-설치-및-엘라스틱서치-연동">키바나 설치 및 엘라스틱서치 연동</a><ul><li><a href="#rpm-파일로-kibana-설치">rpm 파일로 Kibana 설치</a></li><li><a href="#키바나-방화벽-허용">키바나 방화벽 허용</a></li><li><a href="#kibana-설정파일-수정">kibana 설정파일 수정</a></li><li><a href="#kibana-실행">kibana 실행</a></li><li><a href="#kibana-자동실행-설정">kibana 자동실행 설정</a></li><li><a href="#키바나-url-접속">키바나 URL 접속</a></li></ul></li><li><a href="#엘라스틱서치-계정-보안-활성화">엘라스틱서치 계정 보안 활성화</a><ul><li><a href="#엘라스틱서치-보안설정-변경">엘라스틱서치 보안설정 변경</a></li><li><a href="#엘라스틱서치-사용자-비밀번호-재설정">엘라스틱서치 사용자 비밀번호 재설정</a></li><li><a href="#kibana-설정파일-수정-1">kibana 설정파일 수정</a></li><li><a href="#키바나-화면-진입">키바나 화면 진입</a></li><li><a href="#엘라스틱서치-사용자-계정-생성-방법">엘라스틱서치 사용자 계정 생성 방법</a></li></ul></li><li><a href="#엘라스틱서치-설치-후-할-일">엘라스틱서치 설치 후 할 일</a></li><li><a href="#nori-형태소분석기-설치-방법">Nori 형태소분석기 설치 방법</a><ul><li><a href="#nori-형태소분석기-설치-zip-파일-다운">Nori 형태소분석기 설치 zip 파일 다운</a></li><li><a href="#zip으로-nori-형태소분석기-설치">zip으로 Nori 형태소분석기 설치</a></li><li><a href="#nori-토크나이저-테스트">Nori 토크나이저 테스트</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p>현재 엘라스틱서치 운영서버는 private 한 AWS VPC 망 내에 있어서 배스천서버를 통해야만 들어올 수 있기 때문에 인터넷 연결 및 yum 명령어 사용이 불가합니다.</p>
+
+<p>그래서 윈도우로 엘라스틱서치 홈페이지에서 rpm 파일 다운 후 SFTP 업로드하는 방법을 이용하였습니다.</p>
+
+<p><mark>엘라스틱서치 운영서버 로드밸런서 생성 방법</mark><br />
+<a href="https://0songha0.github.io/aws/2023-02-01-1" target="_blank">https://0songha0.github.io/aws/2023-02-01-1</a></p>
+
+<hr />
+
+<h2 id="엘라스틱서치-설치-방법">엘라스틱서치 설치 방법</h2>
+
+<h3 id="엘라스틱서치-rpm-파일-업로드">엘라스틱서치 rpm 파일 업로드</h3>
+<p>엘라스틱서치, 키바나 rpm 파일을 가장 최신 버전인 8.3.3으로 다운받아 파일질라로 업로드 해주었습니다.</p>
+
+<p><mark>rpm 파일 확인</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ll
+</code></pre></div></div>
+<p>업로드 한 경로에 rpm 파일이 있는지 확인합니다.</p>
+
+<h3 id="rpm-파일로-엘라스틱서치-설치">rpm 파일로 엘라스틱서치 설치</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo rpm -i elasticsearch-8.3.3-x86_64.rpm
+</code></pre></div></div>
+
+<h3 id="엘라스틱서치-방화벽-허용">엘라스틱서치 방화벽 허용</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>firewall-cmd --permanent --zone=public --add-port=9200/tcp           -- 방화벽에 9200 포트 추가 
+firewall-cmd --permanent --zone=public --add-service=elasticsearch   -- 방화벽에 엘라스틱서치 서비스 추가
+firewall-cmd --reload                                                -- 방화벽을 다시 로드하여 변경된 설정 반영
+firewall-cmd --list-ports                                            -- 포트 확인
+</code></pre></div></div>
+<p>방화벽에 엘라스틱서치 기본 포트 9200을 추가합니다.</p>
+
+<p>AWS EC2 서버는 위 명령어 대신, 보안그룹 인바운드 규칙에서 0.0.0.0에 대해 9200 포트를 허용하면 됩니다.</p>
+
+<p>배스천서버를 통하는 운영 AWS EC2 서버는 보안그룹 인바운드 규칙에서 로드밸런서 보안그룹에 대해 9200 포트를 허용하면 됩니다.</p>
+
+<h3 id="엘라스틱서치-실행">엘라스틱서치 실행</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo systemctl start elasticsearch
+</code></pre></div></div>
+<p>실행 완료까지 조금 오래 걸릴 수 있습니다.</p>
+
+<p><mark>엘라스틱서치 실행 상태 확인</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl status elasticsearch
+</code></pre></div></div>
+<p>active (running) 이면 정상 실행된 것입니다.<br />
+CGroup 부분에서 엘라스틱서치 설치 경로 확인이 가능합니다. (/usr/share/elasticsearch)</p>
+
+<h3 id="엘라스틱서치-자동실행-설정">엘라스틱서치 자동실행 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo systemctl enable elasticsearch
+</code></pre></div></div>
+<p>리눅스 재부팅 시 엘라스틱서치를 자동 실행하게 할 수 있습니다.</p>
+
+<h3 id="엘라스틱서치-정상-설치-확인">엘라스틱서치 정상 설치 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -X GET localhost:9200
+또는
+curl -X GET -u elastic localhost:9200
+</code></pre></div></div>
+<p>Empty reply from server라고 뜬다면 엘라스틱서치 최신버전이라 보안 설정이 되어있어서 인증서와 비밀번호가 필요한 것입니다.</p>
+
+<p><mark>엘라스틱서치 보안 설정 해제</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo vi /etc/elasticsearch/elasticsearch.yml
+</code></pre></div></div>
+<p>엘라스틱서치 설정 파일의 일부 주석을 풀고 아래와 같이 수정합니다. (단일 노드 설정)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cluster.name: 프로젝트명-appliction # 클러스터명 통일
+node.name: node-1 # 노드명 중복 불가
+bootstrap.memory_lock: true # 물리 메모리 미리 할당 설정
+network.host: 0.0.0.0 # IP 자동 할당
+http.port: 9200 # REST API 포트. 충돌 방지를 위해 중복 불가
+xpack.security.enabled : false # 보안 풀고 접속 가능 확인 후 다시 설정 예정
+</code></pre></div></div>
+
+<p><mark>엘라스틱서치 재실행</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo systamctl restart elasticsearch
+</code></pre></div></div>
+<p>설정파일 변경 후에는 재시작을 해야 반영됩니다.</p>
+
+<p><mark>보안설정 해제 후 curl 재시도 시 정상 메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "name" : "node-1",
+  "cluster_name" : "프로젝트명-application",
+  "cluster_uuid" : "fm_XjxE1Ri-1fVXk0k~",
+  "version" : {
+    "number" : "8.3.3",
+    "build_flavor" : "default",
+    "build_type" : "rpm",
+    "build_hash" : "801fed82df74dbe537f89b71b098ccaff88~",
+    "build_date" : "2022-07-23T19:30:09.227964~",
+    "build_snapshot" : false,
+    "lucene_version" : "9.2.0",
+    "minimum_wire_compatibility_version" : "7.17.0",
+    "minimum_index_compatibility_version" : "7.0.0"
+  },
+  "tagline" : "You Know, for Search"
+}
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="키바나-설치-및-엘라스틱서치-연동">키바나 설치 및 엘라스틱서치 연동</h2>
+
+<h3 id="rpm-파일로-kibana-설치">rpm 파일로 Kibana 설치</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo rpm -i kibana-8.3.3-x86_64.rpm
+</code></pre></div></div>
+
+<h3 id="키바나-방화벽-허용">키바나 방화벽 허용</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>firewall-cmd --permanent --zone=public --add-port=5601/tcp
+firewall-cmd --permanent --zone=public --add-service=elasticsearch
+firewall-cmd --reload
+firewall-cmd --list-ports
+</code></pre></div></div>
+<p>AWS EC2 서버는 위 명령어 대신, 보안그룹 인바운드 규칙에서 0.0.0.0에 대해 5601 포트를 허용하면 됩니다.</p>
+
+<p>배스천서버를 통하는 운영 AWS EC2 서버는 보안그룹 인바운드 규칙에서 로드밸런서 보안그룹에 대해 5601 포트를 허용하면 됩니다.</p>
+
+<h3 id="kibana-설정파일-수정">kibana 설정파일 수정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo vi /etc/kibana/kibana.yml
+</code></pre></div></div>
+<p>아래처럼 주석해제 및 수정합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server.port: 5601
+server.host: "0.0.0.0" # 자동으로 외부 IP 바인딩
+elasticsearch.hosts: ["http://localhost:9200"]
+</code></pre></div></div>
+
+<h3 id="kibana-실행">kibana 실행</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo systemctl start kibana
+</code></pre></div></div>
+
+<h3 id="kibana-자동실행-설정">kibana 자동실행 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo systemctl enable kibana
+</code></pre></div></div>
+
+<h3 id="키바나-url-접속">키바나 URL 접속</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://EC2서버IP:5601
+</code></pre></div></div>
+<p>키바나 실행 중에는 웹브라우저에서 키바나 화면을 볼 수 있습니다.<br />
+처음 접속 시 Explore on my own를 선택하면 됩니다.</p>
+
+<hr />
+
+<h2 id="엘라스틱서치-계정-보안-활성화">엘라스틱서치 계정 보안 활성화</h2>
+
+<h3 id="엘라스틱서치-보안설정-변경">엘라스틱서치 보안설정 변경</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo vi /etc/elasticsearch/elasticsearch.yml
+</code></pre></div></div>
+<p>아래와 같이 보안설정 변경 후 설정파일 반영을 위해 엘라스틱서치를 재시작합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xpack.security.enabled: true # 엘라스틱서치 보안 기능 활성화
+
+xpack.security.enrollment.enabled: true
+
+xpack.security.http.ssl: # 외부 HTTP 통신 암호화
+  enabled: false # 비활성화
+  keystore.path: certs/http.p12 # 외부 HTTP 통신 인증서
+
+xpack.security.transport.ssl: # 내부 노드 간 통신 암호화
+  enabled: true # 엘라스틱서치 보안 기능 활성화 시 활성화 필수 (비활성화 실행 시 에러)
+  verification_mode: certificate # 인증서 검증 방식: 기본적인 인증서 검증만 수행
+  keystore.path: certs/transport.p12 # 내부 노드 간 통신 인증서
+  truststore.path: certs/transport.p12 # 내부 노드 간 통신 인증서
+</code></pre></div></div>
+
+<h3 id="엘라스틱서치-사용자-비밀번호-재설정">엘라스틱서치 사용자 비밀번호 재설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /usr/share/elasticsearch
+sudo bin/elasticsearch-reset-password -u elastic
+</code></pre></div></div>
+<p><strong>1. </strong>y를 눌러 elastic 유저의 비밀번호를 재설정합니다.<br />
+<strong>2. </strong>새로운 비밀번호 (New value) 값을 따로 메모해둡니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo bin/elasticsearch-reset-password -u kibana_system
+</code></pre></div></div>
+<p>kibana_system 유저에 대해서도 비밀번호를 재설정합니다.</p>
+
+<h3 id="kibana-설정파일-수정-1">kibana 설정파일 수정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo vi /etc/kibana/kibana.yml
+</code></pre></div></div>
+<p>키바나 시스템에서 엘라스틱서치에 접근할 계정 정보를 아래처럼 주석해제 및 수정합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>elasticsearch.username: "kibana_system"
+elasticsearch.password: "재설정한비밀번호"
+</code></pre></div></div>
+<p>계정 정보 변경 후 설정파일 반영을 위해 키바나를 재시작합니다.</p>
+
+<h3 id="키바나-화면-진입">키바나 화면 진입</h3>
+<p>재시작 후 약간의 시간이 지나면, 키바나 로드밸런서 DNS name 복사 후 웹에서 URL 요청 시 키바나 로그인 화면을 볼 수 있습니다.</p>
+<table>
+  <tbody>
+    <tr>
+      <td>Username</td>
+      <td>elastic 입력</td>
+    </tr>
+    <tr>
+      <td>Password</td>
+      <td>재설정 했던 비밀번호 입력</td>
+    </tr>
+  </tbody>
+</table>
+<p>위와 같이 입력 후 로그인하면 키바나 화면 진입 가능합니다.</p>
+
+<h3 id="엘라스틱서치-사용자-계정-생성-방법">엘라스틱서치 사용자 계정 생성 방법</h3>
+<p>키바나 좌측 메뉴 &gt; Management &gt; Security &gt; Users &gt; Create user</p>
+<table>
+  <tbody>
+    <tr>
+      <td>Username</td>
+      <td>admin 입력</td>
+    </tr>
+    <tr>
+      <td>
+        Password,<br />
+        Confirm password
+      </td>
+      <td>외울 수 있는 비밀번호 입력</td>
+    </tr>
+    <tr>
+      <td>Roles</td>
+      <td>superuser 선택</td>
+    </tr>
+  </tbody>
+</table>
+<p>위와 같이 입력하여 키바나 로그인, Java에서 요청 시 주로 사용할 admin 계정을 생성합니다.</p>
+
+<hr />
+
+<h2 id="엘라스틱서치-설치-후-할-일">엘라스틱서치 설치 후 할 일</h2>
+
+<p><strong>1. </strong>Nori 형태소 분석기 설치<br />
+<strong>2. </strong>동의어 사전 txt 파일 만들기<br />
+<strong>3. </strong>동의어 사전, nori_tokenizer를 세팅한 범용 nori 인덱스 템플릿 생성</p>
+
+<hr />
+
+<h2 id="nori-형태소분석기-설치-방법">Nori 형태소분석기 설치 방법</h2>
+
+<p>인터넷 연결 불가 환경에서의 Nori 형태소 분석기 설치 방법입니다.</p>
+
+<h3 id="nori-형태소분석기-설치-zip-파일-다운">Nori 형태소분석기 설치 zip 파일 다운</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://artifacts.elastic.co/downloads/elasticsearch-plugins/analysis-nori/analysis-nori-8.3.3.zip?_gl=1*1n6chbs*_ga*MTkxMTYwOTc0Ny4xNjc1MTQwMjUy*_ga_Q7TEQDPTH5*MTY3NTMxMDk5NC42LjEuMTY3NTMxMTA4My4wLjAuMA..
+</code></pre></div></div>
+<p>윈도우에서 위 링크로 zip 다운 후 파일질라에서 SFTP로 User Home에 전송합니다.</p>
+
+<h3 id="zip으로-nori-형태소분석기-설치">zip으로 Nori 형태소분석기 설치</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /usr/share/elasticsearch
+sudo bin/elasticsearch-plugin install file:/home/유저명/analysis-nori-8.3.3.zip
+</code></pre></div></div>
+<p>설치 후에는 형태소분석기 사용을 위해 엘라스틱서치 노드를 재시작해야 합니다.</p>
+
+<p><mark>설치 성공 메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-&gt; Installing file:/home/ec2-user/analysis-nori-8.3.3.zip
+-&gt; Downloading file:/home/ec2-user/analysis-nori-8.3.3.zip
+[=================================================] 100%  
+-&gt; Installed analysis-nori
+-&gt; Please restart Elasticsearch to activate any plugins installed
+</code></pre></div></div>
+
+<p><mark>설치 실패 메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Exception in thread "main" java.lang.IllegalArgumentException: Plugin [analysis-nori] was built for Elasticsearch version 8.6.1 but version 8.3.3 is running
+        at org.elasticsearch.plugins.PluginsUtils.verifyCompatibility(PluginsUtils.java:85)
+        at org.elasticsearch.plugins.cli.InstallPluginAction.loadPluginInfo(InstallPluginAction.java:853)
+        at org.elasticsearch.plugins.cli.InstallPluginAction.installPlugin(InstallPluginAction.java:894)
+        at org.elasticsearch.plugins.cli.InstallPluginAction.execute(InstallPluginAction.java:245)
+        at org.elasticsearch.plugins.cli.InstallPluginCommand.execute(InstallPluginCommand.java:89)
+        at org.elasticsearch.common.cli.EnvironmentAwareCommand.execute(EnvironmentAwareCommand.java:54)
+        at org.elasticsearch.cli.Command.mainWithoutErrorHandling(Command.java:85)
+        at org.elasticsearch.cli.MultiCommand.execute(MultiCommand.java:94)
+        at org.elasticsearch.cli.Command.mainWithoutErrorHandling(Command.java:85)
+        at org.elasticsearch.cli.Command.main(Command.java:50)
+        at org.elasticsearch.launcher.CliToolLauncher.main(CliToolLauncher.java:64)
+</code></pre></div></div>
+<p>엘라스틱서치 버전과 Nori 형태소분석기 버전이 다를 경우 발생하는 에러입니다.</p>
+
+<h3 id="nori-토크나이저-테스트">Nori 토크나이저 테스트</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>post _analyze
+{
+  "tokenizer": "nori_tokenizer",
+  "text" : "형태소 분리 테스트, 오늘도 행복한 하루"
+}
+</code></pre></div></div>
+<p>기본 standard 분석기는 띄어쓰기로만 한글을 분리하지만, Nori 분석기는 한글 형태소를 분석하여 분리합니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%EC%97%98%EB%9D%BC%EC%8A%A4%ED%8B%B1%EC%84%9C%EC%B9%98" class="page__taxonomy-item" rel="tag">엘라스틱서치</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-02-01">2023-02-01</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/aws/2023-02-01-1" class="pagination--pager" title="AWS EC2 엘라스틱서치 운영서버 로드밸런서 생성 및 보안그룹 설정 방법
+">Prev</a>
+    
+    
+      <a href="/op/2023-02-01-1" class="pagination--pager" title="운영서버 접속 방법 / PuTTY, 파일질라, DBeaver 운영 연결 방법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

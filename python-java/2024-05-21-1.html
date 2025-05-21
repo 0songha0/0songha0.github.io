@@ -1,0 +1,4028 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>프로그래머스 코딩 기초 트레이닝 Lv.0 124문제 Java 풀이 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="프로그래머스 코딩 기초 트레이닝 Lv.0 124문제 Java 풀이">
+<meta property="og:url" content="https://0songha0.github.io/python-java/2024-05-21-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-05-21T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2024-05-21T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/python-java/2024-05-21-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="프로그래머스 코딩 기초 트레이닝 Lv.0 124문제 Java 풀이">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2024-05-21T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2024-05-21T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">프로그래머스 코딩 기초 트레이닝 Lv.0 124문제 Java 풀이
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2024-05-21T00:00:00+00:00">2024-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 프로그래머스 코딩 기초 트레이닝 Lv.0 124문제 Java 풀이</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#프로그래머스-코딩-기초-트레이닝-lv0-124문제">프로그래머스 코딩 기초 트레이닝 Lv.0 124문제</a><ul><li><a href="#출력-문제-풀이">출력 문제 풀이</a></li><li><a href="#연산-문제-풀이">연산 문제 풀이</a></li><li><a href="#조건문-문제-풀이">조건문 문제 풀이</a></li><li><a href="#반복문-문제-풀이">반복문 문제 풀이</a></li><li><a href="#문자열-문제-풀이">문자열 문제 풀이</a></li><li><a href="#배열-문제-풀이">배열 문제 풀이</a></li><li><a href="#이차원-배열-문제-풀이">이차원 배열 문제 풀이</a></li><li><a href="#함수-문제-풀이">함수 문제 풀이</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="프로그래머스-코딩-기초-트레이닝-lv0-124문제">프로그래머스 코딩 기초 트레이닝 Lv.0 124문제</h2>
+
+<p><a href="https://school.programmers.co.kr/learn/challenges/training?order=recent&amp;page=1" target="_blank">https://school.programmers.co.kr/learn/challenges/training?order=recent&amp;page=1</a><br />
+문자열 연산, 배열, 조건문, 반복문 등 기본적인 Java 문법을 익힐 수 있는 문제들입니다.<br />
+정답률 높은 순으로 풀면 성취감 느끼며 기본을 다질 수 있습니다.</p>
+
+<h3 id="출력-문제-풀이">출력 문제 풀이</h3>
+<p><mark>문자열 출력하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String a = sc.next();
+    sc.close();
+    
+    System.out.println(a);
+  }
+}
+</code></pre></div></div>
+
+<p><mark>a와 b 출력하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int a = sc.nextInt();
+    int b = sc.nextInt();
+    sc.close();
+
+    System.out.println("a = " + a);
+    System.out.println("b = " + b);
+  }
+}
+</code></pre></div></div>
+<p>Scanner 사용 후에는 close 함수로 키보드 입력 스트림을 닫아 시스템 자원을 낭비하지 않는 것이 중요합니다.</p>
+
+<p><mark>문자열 반복해서 출력하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String str = sc.next();
+    int n = sc.nextInt();
+    
+    System.out.println(str.repeat(n));
+  }
+}
+</code></pre></div></div>
+
+<p><mark>대소문자 바꿔서 출력하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String a = sc.next();
+    
+    for (char c : a.toCharArray()) {
+      System.out.print(Character.isUpperCase(c)? Character.toLowerCase(c) : Character.toUpperCase(c));
+    }
+  }
+}
+</code></pre></div></div>
+
+<p><mark>특수문자 출력하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    System.out.print("!@#$%^&amp;*(\\'\"&lt;&gt;?:;");
+  }
+}
+</code></pre></div></div>
+<p>java에서 백슬래시()는 이스케이프 문자로 사용되며, 다음에 오는 문자를 코드가 아닌 문자로 출력합니다.</p>
+
+<p><mark>덧셈식 출력하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int a = sc.nextInt();
+    int b = sc.nextInt();
+
+    System.out.println(a + " + " + b + " = " + (a + b));
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, printf 함수로도 구현할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int a = sc.nextInt();
+    int b = sc.nextInt();
+
+    System.out.printf("%d + %d = %d", a, b, a+b);
+  }
+}
+</code></pre></div></div>
+
+<p><mark>문자열 붙여서 출력하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String a = sc.next();
+    String b = sc.next();
+    
+    System.out.println(a + b);
+  }
+}
+</code></pre></div></div>
+<p>이 문제는 아래처럼 다양한 풀이가 가능합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String a = sc.next();
+    for(int i=0; i &lt; a.length(); i++){
+      System.out.println(a.charAt(i));
+    }
+  }
+}
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String a = sc.next();
+    for(String s : a.split("")){
+      System.out.println(s);
+    }
+  }
+}
+
+</code></pre></div></div>
+
+<p><mark>문자열 돌리기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String a = sc.next();
+    
+    for (char c : a.toCharArray()) {
+      System.out.println(c);
+    }
+  }
+}
+</code></pre></div></div>
+
+<p><mark>홀짝 구분하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Scanner;
+
+public class Solution {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    
+    if (n % 2 == 0) {
+      System.out.println(n + " is even");
+    } else {
+      System.out.println(n + " is odd");
+    }
+  }
+}
+</code></pre></div></div>
+
+<h3 id="연산-문제-풀이">연산 문제 풀이</h3>
+<p><mark>문자열 겹쳐쓰기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String my_string, String overwrite_string, int s) {
+    String[] myArr = my_string.split("");
+    
+    int i = 0;
+    
+    for (char c : overwrite_string.toCharArray()) {
+      myArr[s + i] = String.valueOf(c);
+      
+      i++;
+    }
+    
+    return String.join("", myArr);
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, char 배열 두개로 푸는 방법이 split + join 보다 메모리 효율적입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String my_string, String overwrite_string, int s) {
+    char[] myChars = my_string.toCharArray();
+    char[] overChars = overwrite_string.toCharArray();
+    
+    for (int i = 0; i &lt; overChars.length; i++) {
+      myChars[s + i] = overChars[i];
+    }
+    
+    return String.valueOf(myChars);
+  }
+}
+</code></pre></div></div>
+<p>아래와 같이, substring을 활용하면 더 간결하게 풀 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String my_string, String overwrite_string, int s) {
+    String before = my_string.substring(0, s);
+    String after = my_string.substring(s + overwrite_string.length(), my_string.length());
+    
+    return before + overwrite_string + after;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>문자열 섞기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String str1, String str2) {
+    String answer = "";
+    
+    for (int i = 0; i &lt; str1.length(); i++) {
+      answer += str1.charAt(i) + "" + str2.charAt(i);
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, StringBuilder를 사용하여 문자열 결합하는 것이 메모리 효율적입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String str1, String str2) {
+    char[] chars1 = str1.toCharArray();
+    char[] chars2 = str2.toCharArray();
+
+    StringBuilder sb = new StringBuilder();
+    for (int i=0; i&lt;chars1.length; i++) {
+      sb.append(chars1[i]);
+      sb.append(chars2[i]);
+    }
+
+    return sb.toString();
+  }
+}
+</code></pre></div></div>
+<p>StringBuilder는 java.lang 패키지에 포함되어 있어, import문 없이 사용할 수 있습니다.</p>
+
+<p><mark>문자 리스트를 문자열로 변환하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String[] arr) {
+    return String.join("", arr);
+  }
+}
+</code></pre></div></div>
+
+<p><mark>문자열 곱하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String my_string, int k) {
+    return my_string.repeat(k);
+  }
+}
+</code></pre></div></div>
+
+<p><mark>더 크게 합치기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int a, int b) {
+    return Math.max(Integer.parseInt(a + "" + b), Integer.parseInt(b + "" + a));
+  }
+}
+</code></pre></div></div>
+
+<p><mark>두 수의 연산값 비교하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int a, int b) {
+    int case1 = Integer.parseInt(String.valueOf(a) + String.valueOf(b));
+    
+    int case2 = 2 * a * b;
+    
+    return Math.max(case1, case2);
+  }
+}
+</code></pre></div></div>
+
+<p><mark>n의 배수</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int num, int n) {
+    return num % n == 0 ? 1 : 0;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>공배수</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int number, int n, int m) {
+    int answer = 0;
+    
+    if (number % n == 0 &amp;&amp; number % m == 0) {
+      answer = 1;
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, 삼항연산자를 사용하면 더 짧게 구현할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int number, int n, int m) {
+    return number % n == 0 &amp;&amp; number % m == 0 ? 1 : 0;
+  }
+}
+</code></pre></div></div>
+
+<h3 id="조건문-문제-풀이">조건문 문제 풀이</h3>
+<p><mark>홀짝에 따라 다른 값 반환하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int n) {
+    int answer = 0;
+    
+    boolean isEven = false;
+    
+    if (n % 2 == 0) {
+      isEven = true;
+    }
+    
+    for (int i = 1; i &lt;= n; i++) {
+      if (isEven) {
+        if (i % 2 == 0) {
+          answer += (i * i);
+        }
+      } else {
+        if (i % 2 == 1) {
+          answer += i;
+        }
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, 홀짝 for문을 분리하면 반복 중 비교 연산을 줄일 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int n) {
+    int answer = 0;
+    
+    if (n % 2 == 0) {
+      for (int i = 2; i &lt;= n; i += 2) {
+        answer += i * i;
+      }
+    } else {
+      for (int i = 1; i &lt;= n; i += 2) {
+        answer += i;
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>조건 문자열</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(String ineq, String eq, int n, int m) {
+      int answer = 0;
+      
+      if (ineq.equals("&gt;")) {
+        if (eq.equals("=")) {
+          answer = n &gt;= m? 1 : 0;
+        } else {
+          answer = n &gt; m? 1 : 0;
+        }
+          
+      } else {
+        if (eq.equals("=")) {
+          answer = n &lt;= m? 1 : 0;
+        } else {
+          answer = n &lt; m? 1 : 0;
+        }
+          
+      }
+      
+      return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼 switch문을 사용하면 가독성과 유지보수성이 조금 더 높아집니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(String ineq, String eq, int n, int m) {
+    boolean answer = false;
+    
+    switch(ineq + eq) {
+      case "&gt;=" :
+        answer = n &gt;= m;
+        break;
+      case "&gt;!" :
+        answer = n &gt; m;
+        break;
+      case "&lt;=" :
+        answer = n &lt;= m;
+        break;
+      case "&lt;!" :
+        answer = n &lt; m;
+        break;
+    }
+    
+    return answer? 1:0;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>flag에 따라 다른 값 반환하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int a, int b, boolean flag) {
+    if (flag) {
+      return a + b;
+    } else {
+      return a - b;
+    }
+  }
+}
+</code></pre></div></div>
+<p>아래처럼 삼항연산자로 더 간단하게 구현할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int a, int b, boolean flag) {
+    return flag ? a + b : a - b;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>코드 처리하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String code) {
+    StringBuilder sb = new StringBuilder();
+    
+    int mode = 0;
+    
+    for (int idx = 0; idx &lt; code.length(); idx++) {
+      char codeIdx = code.charAt(idx);
+      
+      if (mode == 0) {
+        if (codeIdx != '1') {
+          if (idx % 2 == 0) {
+            sb.append(codeIdx);
+          }
+        } else {
+          mode = 1;
+        }
+          
+      } else {
+        if (codeIdx != '1') {
+          if (idx % 2 == 1) {
+            sb.append(codeIdx);
+          }
+        } else {
+          mode = 0;
+        }
+      }
+    }
+    
+    String ret = sb.toString();
+    
+    return "".equals(ret)? "EMPTY" : ret;
+  }
+}
+</code></pre></div></div>
+<p>아래와 같이, 문제의 공통 조건을 리팩토링하면 더 간결해집니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String code) {
+    StringBuilder sb = new StringBuilder();
+    
+    int mode = 0;
+    
+    for (int idx = 0; idx &lt; code.length(); idx++) {
+      char codeIdx = code.charAt(idx);
+      
+      if (codeIdx == '1') {
+        mode = mode == 0? 1 : 0;
+        continue;
+      }
+      
+      if (idx % 2 == mode) {
+        sb.append(codeIdx);
+      }
+    }
+    
+    return sb.length() == 0? "EMPTY" : sb.toString();
+  }
+}
+</code></pre></div></div>
+
+<p><mark>등차수열의 특정한 항만 더하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int a, int d, boolean[] included) {
+    int answer = 0;
+    
+    for (int i = 0; i &lt; included.length; i++) {
+      if (included[i]) {
+        answer += a + (i * d);
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>주사위 게임 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int solution(int a, int b, int c) {
+    int answer = 0;
+    
+    Set&lt;Integer&gt; hashSet = new HashSet&lt;&gt;();
+    
+    hashSet.add(a);
+    hashSet.add(b);
+    hashSet.add(c);
+    
+    switch (hashSet.size()) {
+      case 3:
+        answer = a + b + c;
+        break;
+      case 2:
+        answer = (a + b + c) * (a*a + b*b + c*c);
+        break;
+      case 1:
+        answer = (a + b + c) * (a*a + b*b + c*c) * (a*a*a + b*b*b + c*c*c);
+        break;
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>(int) Math.pow(a, 제곱수) 로 제곱을 구할 수 있으나, 가독성을 위해 사용하지 않았습니다.</p>
+
+<p><mark>원소들의 곱과 합</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int[] num_list) {
+    int gop = 1;
+    int sum = 0;
+
+    for (int num : num_list) {
+      gop *= num;
+      sum += num;
+    }
+    
+    return gop &lt;= (sum * sum) ? 1 : 0;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>이어 붙인 수</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int[] num_list) {
+    int answer = 0;
+    String odd = "";
+    String even = "";
+    
+    for (int num : num_list) {
+      if (num % 2 == 1) {
+        odd += String.valueOf(num);
+      } else {
+        even += String.valueOf(num);
+      }
+    }
+    
+    return Integer.parseInt(odd) + Integer.parseInt(even);
+  }
+}
+</code></pre></div></div>
+
+<p><mark>마지막 두 원소</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[] solution(int[] num_list) {
+    int[] answer = new int[num_list.length+1];
+    
+    for (int i = 0; i &lt; num_list.length; i++) {
+      answer[i] = num_list[i];
+    }
+    
+    int last = answer[num_list.length-1];
+    int last_prev = answer[num_list.length-2];
+    
+    if (last &gt; last_prev) {
+      answer[num_list.length] = last - last_prev;
+    } else {
+      answer[num_list.length] = last * 2;
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, 마지막 부분을 삼항 연산자로 줄일 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[] solution(int[] num_list) {
+    int[] answer = new int[num_list.length+1];
+    
+    for (int i = 0; i &lt; num_list.length; i++) {
+      answer[i] = num_list[i];
+    }
+    
+    int last = answer[num_list.length-1];
+    int last_prev = answer[num_list.length-2];
+    
+    answer[num_list.length] = last &gt; last_prev ? last - last_prev : last * 2;
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>수 조작하기 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int n, String control) {
+    int answer = n;
+    
+    for (char c : control.toCharArray()) {
+      if (c == 'w') {
+        answer += 1;
+      } else if (c == 's') {
+        answer -= 1;
+      } else if (c == 'd') {
+        answer += 10;
+      } else {
+        answer -= 10;
+      } 
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>수 조작하기 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(int[] numLog) {
+    String answer = "";
+    
+    for (int i = 0; i &lt; numLog.length-1; i++) {
+      int move = numLog[i+1] - numLog[i];
+      
+      switch (move) {
+        case 1:
+          answer += "w";
+          break;
+        case -1:
+          answer += "s";
+          break;
+        case 10:
+          answer += "d";
+          break;
+        case -10:
+          answer += "a";
+          break;
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, i를 1부터 시작해도 동일하게 구현할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(int[] numLog) {
+    String answer = "";
+    
+    for (int i = 1; i &lt; numLog.length; i++) {
+      int move = numLog[i] - numLog[i-1];
+      
+      switch (move) {
+        case 1:
+          answer += "w";
+          break;
+        case -1:
+          answer += "s";
+          break;
+        case 10:
+          answer += "d";
+          break;
+        case -10:
+          answer += "a";
+          break;
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>간단한 논리 연산</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public boolean solution(boolean x1, boolean x2, boolean x3, boolean x4) {
+    return (x1 || x2) &amp;&amp; (x3 || x4);
+  }
+}
+</code></pre></div></div>
+<p>∨는 OR 연산 (합집합), ∧는 and 연산 (교집합)입니다.</p>
+
+<p><mark>주사위 게임 3</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+
+class Solution {
+  public int solution(int a, int b, int c, int d) {
+
+    int[] dice = { a, b, c, d };
+    Arrays.sort(dice);
+
+    int answer = 0;
+
+    if (dice[0] == dice[3]) {
+      // 네 숫자가 같은 경우
+      answer = 1111 * dice[3];
+    } else if (dice[0] == dice[2] || dice[1] == dice[3]) {
+      // 세 숫자가 같은 경우
+      answer = (int) Math.pow(10 * dice[1] + (dice[0] + dice[3] - dice[1]), 2);
+    } else if (dice[0] == dice[1] &amp;&amp; dice[2] == dice[3]) {
+      // 두 숫자 쌍이 같은 경우
+      answer = (dice[0] + dice[3]) * (dice[3] - dice[0]);
+    } else if (dice[0] == dice[1]) {
+      // 두 숫자만 같은 경우 1
+      answer = dice[2] * dice[3];
+    } else if (dice[1] == dice[2]) {
+      // 두 숫자만 같은 경우 2
+      answer = dice[0] * dice[3];
+    } else if (dice[2] == dice[3]) {
+      // 두 숫자만 같은 경우 3
+      answer = dice[0] * dice[1];
+    } else {
+      // 모든 숫자가 다른 경우
+      answer = dice[0];
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>배열의 원소 삭제하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] arr, int[] delete_list) {
+    Set&lt;Integer&gt; delSet = new HashSet&lt;&gt;();
+    List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+    
+    for (int i = 0; i &lt; delete_list.length; i++) {
+      delSet.add(delete_list[i]);
+    }
+    
+    for (int i = 0; i &lt; arr.length; i++) {
+      if (!delSet.contains(arr[i])) {
+        list.add(arr[i]);
+      }
+    }
+    
+    int[] answer = new int[list.size()];
+    
+    for (int i = 0; i &lt; list.size(); i++) {
+      answer[i] = list.get(i);
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] arr, int[] delete_list) {
+    List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+    
+    for (int i = 0; i &lt; arr.length; i++) {
+      list.add(arr[i]);
+    }
+    
+    for (int i = 0; i &lt; delete_list.length; i++) {
+      // 형변환 하지 않으면 int형이라서 index에 해당하는 원소 삭제하여 에러 발생
+      // Integer로 형변환 하면 값에 해당하는 원소 삭제하여 정상 작동
+      list.remove((Integer) delete_list[i]);
+    }
+    
+    int[] answer = new int[list.size()];
+    
+    for (int i = 0; i &lt; list.size(); i++) {
+      answer[i] = list.get(i);
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>부분 문자열인지 확인하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(String my_string, String target) {
+    return my_string.contains(target)? 1 : 0;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>부분 문자열</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(String str1, String str2) {
+    return str2.contains(str1)? 1 : 0;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>꼬리 문자열</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public String solution(String[] str_list, String ex) {
+    StringBuilder sb = new StringBuilder();
+    
+    for (String str : str_list) {
+      if (!str.contains(ex)) {
+        sb.append(str);
+      }
+    }
+    
+    return sb.toString();
+  }
+}
+</code></pre></div></div>
+
+<p><mark>정수 찾기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int[] num_list, int n) {
+    int answer = 0;
+    
+    for (int num : num_list) {
+      if (num == n) {
+        answer = 1;
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>주사위 게임 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int a, int b) {
+    if (a % 2 == 1 &amp;&amp; b % 2 == 1) {
+      return a*a + b*b;
+    } else if (a % 2 == 1 || b % 2 == 1) {
+      return 2 * (a + b);
+    } else {
+      return Math.abs(a - b);
+    }
+  }
+}
+</code></pre></div></div>
+
+<p><mark>날짜 비교하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int[] date1, int[] date2) {
+    String date1Str = "";
+    String date2Str = "";
+    
+    for (int d1 : date1) {
+      date1Str += d1;
+    }
+    
+    for (int d2 : date2) {
+      date2Str += d2;
+    }
+    
+    return Integer.parseInt(date1Str) &lt; Integer.parseInt(date2Str) ? 1 : 0;
+  }
+}
+</code></pre></div></div>
+<p>java 날짜 비교는 아래처럼 LocalDate 객체를 이용하는 것이 정확합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.time.LocalDate;
+
+class Solution {
+  public int solution(int[] date1, int[] date2) {
+      
+    LocalDate localDate1 = LocalDate.of(date1[0], date1[1], date1[2]);
+    LocalDate localDate2 = LocalDate.of(date2[0], date2[1], date2[2]);
+    
+    return localDate1.isBefore(localDate2) ? 1 : 0;
+  }
+}
+</code></pre></div></div>
+<p>LocalDate에서 제공하는 함수는 isBefore, isAfter, isEqual 등이 있습니다.</p>
+
+<p><mark>커피 심부름</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(String[] order) {
+    int answer = 0;
+    
+    for (String order_str : order) {
+      if (order_str.indexOf("cafelatte") != -1) {
+        answer += 5000;
+      } else { 
+        answer += 4500;
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, contains 함수를 사용하면 더 간결하게 구현할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(String[] order) {
+    int answer = 0;
+    
+    for (String order_str : order) {
+      answer += order_str.contains("cafelatte")? 5000 : 4500;
+    }
+        
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<h3 id="반복문-문제-풀이">반복문 문제 풀이</h3>
+<p><mark>수열과 구간 쿼리 3</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[] solution(int[] arr, int[][] queries) {
+    for (int i = 0; i &lt; queries.length; i++) {
+      int index_i = queries[i][0];
+      int index_j = queries[i][1];
+      
+      int temp = arr[index_i];
+      arr[index_i] = arr[index_j];
+      arr[index_j] = temp;
+    }
+    
+    return arr;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, 향상된 for문을 사용하는 것도 좋습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] arr, int[][] queries) {
+    for (int[] query : queries) {
+      int i = query[0];
+      int j = query[1];
+      
+      int temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+    }
+    
+    return arr;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>수열과 구간 쿼리 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[] solution(int[] arr, int[][] queries) {
+    int[] answer = new int[queries.length];
+    
+    for (int i = 0; i &lt; queries.length; i++) {
+      int min = 1000000;
+      for (int j = queries[i][0]; j &lt;= queries[i][1]; j++) {
+        if (arr[j] &gt; queries[i][2]) {
+          min = Math.min(min, arr[j]);
+        }
+      }
+      
+      if (min == 1000000) {
+        min = -1;
+      }
+      
+      answer[i] = min;
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래와 같이, Arrays.fill 함수를 사용하여 배열을 -1로 채우고 삼항연산자를 이용하면,<br />
+불필요한 min 변수를 선언하지 않아서 더 간결하고 효율적입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] arr, int[][] queries) {
+    int[] answer = new int[queries.length];
+    Arrays.fill(answer, -1);
+    
+    for (int i = 0; i &lt; queries.length; i++) {
+      for (int j = queries[i][0]; j &lt;= queries[i][1]; j++) {
+        if (arr[j] &gt; queries[i][2]) {
+          answer[i] = answer[i] == -1? arr[j] : Math.min(answer[i], arr[j]);
+        }
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>수열과 구간 쿼리 4</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[] solution(int[] arr, int[][] queries) {
+    for (int[] query : queries) {
+      int s = query[0];
+      int e = query[1];
+      int k = query[2];
+      
+      for (int i = s; i &lt;= e; i++) {
+        if (i % k == 0) {
+          arr[i]++;
+        }
+      }
+    }
+    
+    return arr;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>배열 만들기 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int l, int r) {
+    List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+    
+    for (int i = l; i &lt;= r; i++) {
+      char[] charArr = String.valueOf(i).toCharArray();
+      
+      boolean isAnswer = true;
+      
+      for (int j = 0; j &lt; charArr.length; j++) {
+        if (charArr[j] != '0' &amp;&amp; charArr[j] != '5') {
+          isAnswer = false;
+          break;
+        }
+      }
+      
+      if (isAnswer) {
+        list.add(Integer.parseInt(String.valueOf(charArr)));
+      }
+    }
+    
+    int[] answer = new int[list.size()];
+    
+    for (int i = 0; i &lt; list.size(); i++) {
+      answer[i] = list.get(i);
+    }
+    
+    return answer.length == 0 ? new int[] {-1} : answer;
+  }
+}
+</code></pre></div></div>
+<p>아래와 같이, 문자열 변환 없이 int 연산을 활용하면 더 메모리 효율적입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int l, int r) {
+    List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+    
+    for (int i = l; i &lt;= r; i++) {
+      int num = i;
+      
+      boolean isAnswer = true;
+
+      while (num &gt; 0) {
+        int digit = num % 10; // 마지막 자리 확인
+        if (digit != 0 &amp;&amp; digit != 5) {
+          isAnswer = false;
+          break;
+        }
+        num /= 10; // 자리수 이동
+      }
+      
+      if (isAnswer) {
+        list.add(i);
+      }
+    }
+    
+    int[] answer = new int[list.size()];
+    
+    for (int i = 0; i &lt; list.size(); i++) {
+      answer[i] = list.get(i);
+    }
+    
+    return answer.length == 0 ? new int[] {-1} : answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>카운트 업</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[] solution(int start_num, int end_num) {
+    int[] answer = new int[end_num - start_num +1];
+    
+    int index = 0;
+    
+    for (int i = start_num; i &lt;= end_num; i++) {
+      answer[index++] = i;
+    }
+        
+    return answer;
+  }
+}
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[] solution(int start_num, int end_num) {
+    int[] answer = new int[end_num - start_num +1];
+    
+    for (int i = 0; i &lt;= end_num - start_num; i++) {
+      answer[i] = i + start_num;
+    }
+        
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>콜라츠 수열 만들기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int n) {
+    ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+    
+    list.add(n);
+    
+    while (n &gt; 1) {
+      if (n % 2 == 0) {
+        n /= 2;
+      } else {
+        n = 3 * n + 1;
+      }
+      
+      list.add(n);
+    }
+    
+    int[] answer = new int[list.size()];
+    
+    for (int i = 0; i &lt; list.size(); i++) {
+      answer[i] = list.get(i);
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>배열 만들기 4</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] arr) {
+    Deque&lt;Integer&gt; stack = new ArrayDeque&lt;&gt;();
+    
+    for (int i = 0; i &lt; arr.length; i++) {
+      if (stack.isEmpty()) {
+        stack.push(arr[i]);
+      } else {
+        if(stack.peek() &lt; arr[i]) {
+          stack.push(arr[i]);
+        } else {
+          stack.pop();
+          i -= 1;
+        }
+      }
+    }
+    
+    int[] stk = new int[stack.size()];
+    
+    for (int i = stack.size() -1; i &gt;= 0; i--) {
+      stk[i] = stack.pop();
+    }
+    
+    return stk;
+  }
+}
+</code></pre></div></div>
+<p>마지막 원소만 이용하는 문제이므로, 스택을 이용하며 풀면 효율적입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] arr) {
+    Deque&lt;Integer&gt; stack = new ArrayDeque&lt;&gt;();
+    
+    int i = 0;
+    
+    while(i &lt; arr.length) {
+      if (stack.isEmpty() || stack.peek() &lt; arr[i]) {
+        stack.push(arr[i]);
+        i += 1;
+      } else {
+        stack.pop();
+      }
+    }
+    
+    int[] stk = new int[stack.size()];
+    
+    for (int j = stack.size() -1; j &gt;= 0; j--) {
+      stk[j] = stack.pop();
+    }
+    
+    return stk;
+  }
+}
+</code></pre></div></div>
+<p>위와 같이, while문을 사용하여 불필요한 i -= 1 연산을 없애고 동일한 작업을 하는 조건문을 통일하면 더 좋습니다.</p>
+
+<p><mark>그림 확대</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String[] solution(String[] picture, int k) {
+    String[] answer = new String[picture.length * k];
+    
+    for (int i = 0; i &lt; picture.length * k; i++) {
+      StringBuilder sb = new StringBuilder();
+      
+      for (int j = 0; j &lt; picture[0].length() * k; j++) {
+        sb.append(picture[(i / k)].charAt((j / k)));
+      }
+      answer[i] = sb.toString();
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>조건에 맞게 수열 변환하기 3</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[] solution(int[] arr, int k) {
+    int[] answer = new int[arr.length];
+    
+    for (int i = 0; i &lt; arr.length; i++) {
+      if (k % 2 == 1) {
+        answer[i] = arr[i] * k;
+      } else {
+        answer[i] = arr[i] + k;
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, 한 번만 비교하고 각각의 for문으로 돌리는 것이 더 효율적입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[] solution(int[] arr, int k) {
+    if (k % 2 == 0) {
+      for (int i = 0; i &lt; arr.length; i++) {
+        arr[i] = arr[i] + k;
+      }
+    } else {
+      for (int i = 0; i &lt; arr.length; i++) {
+        arr[i] = arr[i] * k;
+      }
+    }
+    
+    return arr;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>l로 만들기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public String solution(String myString) {
+    StringBuilder sb = new StringBuilder();
+    
+    for (char c : myString.toCharArray()) {
+      if (c - 'l' &gt; 0) {
+        sb.append(c);
+      } else {
+        sb.append('l');
+      }
+    }
+    
+    return sb.toString();
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, 정규표현식을 이용하면 더 간단하게 변경할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public String solution(String myString) {
+    return myString.replaceAll("[^l-z]", "l");
+  }
+}
+</code></pre></div></div>
+
+<h3 id="문자열-문제-풀이">문자열 문제 풀이</h3>
+<p><mark>글자 이어 붙여 문자열 만들기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public String solution(String my_string, int[] index_list) {
+    StringBuilder sb = new StringBuilder();
+    
+    for (int i = 0; i &lt; index_list.length; i++) {
+      sb.append(my_string.substring(index_list[i], index_list[i]+1));
+    }
+    
+    return sb.toString();
+  }
+}
+</code></pre></div></div>
+<p>아래처럼 charAt으로 문자를 추출하면 더 쉽게 이어붙일 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public String solution(String my_string, int[] index_list) {
+    StringBuilder sb = new StringBuilder();
+    
+    for (int index : index_list) {
+      sb.append(my_string.charAt(index));
+    }
+    
+    return sb.toString();
+  }
+}
+</code></pre></div></div>
+
+<p><mark>9로 나눈 나머지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(String number) {
+    int answer = 0;
+    
+    for (char c : number.toCharArray()) {
+      answer += c - '0';
+    }
+    
+    return answer % 9;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>문자열 여러 번 뒤집기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String my_string, int[][] queries) {
+      
+    for (int i = 0; i &lt; queries.length; i++) {
+      String startStr = my_string.substring(0, queries[i][0]);
+      
+      String middleStr = my_string.substring(queries[i][0], queries[i][1]+1);
+      
+      StringBuilder sb = new StringBuilder();
+      
+      for (int j = middleStr.length()-1; j &gt;= 0; j--) {
+        sb.append(middleStr.charAt(j));
+      }
+      
+      String endStr = my_string.substring(queries[i][1]+1, my_string.length());
+
+      my_string = startStr + sb.toString() + endStr;
+    }
+    
+    return my_string;
+  }
+}
+</code></pre></div></div>
+<p>아래와 같이, StringBuilder 생성 시 파라미터로 문자열을 넣고 reverse 명령어를 사용하면 더 효율적입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String my_string, int[][] queries) {
+      
+    for (int i = 0; i &lt; queries.length; i++) {
+      StringBuilder sb = new StringBuilder(my_string.substring(queries[i][0], queries[i][1]+1));
+      sb.reverse();
+      
+      my_string = my_string.substring(0, queries[i][0])
+                + sb.toString()
+                + my_string.substring(queries[i][1]+1, my_string.length());
+    }
+    
+    return my_string;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>배열 만들기 5</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(String[] intStrs, int k, int s, int l) {
+    ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+    
+    for (int i = 0; i &lt; intStrs.length; i++) {
+      int subInt = Integer.parseInt(intStrs[i].substring(s, s+l));
+      
+      if (subInt &gt; k) {
+        list.add(subInt);
+      }
+    }
+    
+    int[] answer = new int[list.size()];
+    
+    for (int i = 0; i &lt; list.size(); i++) {
+      answer[i] = list.get(i);
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>부분 문자열 이어 붙여 문자열 만들기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String[] my_strings, int[][] parts) {
+    String answer = "";
+    
+    for (int i = 0; i &lt; my_strings.length; i++) {
+      answer += my_strings[i].substring(parts[i][0], parts[i][1]+1);
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>문자열의 뒤의 n글자</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String my_string, int n) {
+    return my_string.substring(my_string.length()-n);
+  }
+}
+</code></pre></div></div>
+
+<p><mark>접미사 배열</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public String[] solution(String my_string) {
+    ArrayList&lt;String&gt; list = new ArrayList&lt;&gt;();
+    
+    for (int i = 0; i &lt; my_string.length(); i++) {
+      list.add( my_string.substring(i) );
+    }
+    
+    Collections.sort(list);
+    
+    String[] answer = new String[list.size()];
+    
+    for (int i = 0; i &lt; list.size(); i++) {
+      answer[i] = list.get(i);
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>이 문제는 정답 배열 사이즈가 정해져있기 때문에, ArrayList를 사용하지 않아도 풀 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public String[] solution(String my_string) {
+    String[] answer = new String[my_string.length()];
+    
+    for (int i = 0; i &lt; my_string.length(); i++) {
+      answer[i] = my_string.substring(i);
+    }
+    
+    Arrays.sort(answer);
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>접미사인지 확인하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(String my_string, String is_suffix) {
+    int i = my_string.indexOf(is_suffix, my_string.length() - is_suffix.length());
+    
+    if (my_string.length() &lt; is_suffix.length()) {
+      return 0;
+    }
+    
+    return i + is_suffix.length() == my_string.length()? 1 : 0;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, endsWith 함수를 사용하면 접미사인지 더 쉽게 확인할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(String my_string, String is_suffix) {
+    if (my_string.endsWith(is_suffix)) {
+      return 1;
+    }
+    
+    return 0;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>문자열의 앞의 n글자</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String my_string, int n) {
+    return my_string.substring(0, n);
+  }
+}
+</code></pre></div></div>
+
+<p><mark>접두사인지 확인하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(String my_string, String is_prefix) {
+    return my_string.indexOf(is_prefix) == 0? 1 : 0;
+  }
+}
+</code></pre></div></div>
+<p>startsWith 함수로 더 간단히 확인할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(String my_string, String is_prefix) {
+    return my_string.startsWith(is_prefix)? 1 : 0;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>문자열 뒤집기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String my_string, int s, int e) {
+    String[] myArr = my_string.split("");
+    
+    for (int i = 0; i &lt;= e - s; i++) {
+      myArr[s + i] = String.valueOf(my_string.charAt(e - i));
+    }
+    
+    return String.join("", myArr);
+  }
+}
+</code></pre></div></div>
+<p>StringBuilder의 reverse 함수로 문자열을 뒤집으면 메모리와 성능 면에서 더 효율적입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String my_string, int s, int e) {
+    StringBuilder sb = new StringBuilder(my_string.substring(s, e+1));
+    
+    sb.reverse();
+    
+    return my_string.substring(0, s) + sb.toString() + my_string.substring(e+1);
+  }
+}
+</code></pre></div></div>
+<p>StringBuilder 생성자에 String을 넘기면, append 함수와 같은 효과입니다.</p>
+
+<p><mark>세로 읽기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String my_string, int m, int c) {
+    String answer = "";
+    
+    for (int i = 0; i &lt; my_string.length() / m; i++) {
+      answer += my_string.charAt((i * m) + c -1);
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, i의 시작을 c 인덱스부터 하면 더 간결합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String my_string, int m, int c) {
+    String answer = "";
+    
+    for (int i = c - 1; i &lt; my_string.length(); i += m) {
+      answer += my_string.charAt(i);
+    }
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>qr code</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(int q, int r, String code) {
+    String answer = "";
+    
+    for (int i = r; i &lt; code.length(); i += q) {
+      answer += code.charAt(i);
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래와 같이, StringBuilder를 통한 문자열 연산이 더 성능상 좋습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public String solution(int q, int r, String code) {
+    StringBuilder sb = new StringBuilder();
+    
+    for (int i = r; i &lt; code.length(); i += q) {
+      sb.append(code.charAt(i));
+    }
+    
+    return sb.toString();
+  }
+}
+</code></pre></div></div>
+
+<p><mark>원하는 문자열 찾기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(String myString, String pat) {
+    return myString.toLowerCase().contains(pat.toLowerCase())? 1 : 0;
+  }
+}
+</code></pre></div></div>
+<p>contains 함수 뿐 아니라, indexOf 함수로도 문자열 포함 여부를 알 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(String myString, String pat) {
+    return myString.toLowerCase().indexOf(pat.toLowerCase()) != -1? 1 : 0;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>대문자로 바꾸기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String myString) {
+    return myString.toUpperCase();
+  }
+}
+</code></pre></div></div>
+
+<p><mark>소문자로 바꾸기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String myString) {
+    return myString.toLowerCase();
+  }
+}
+</code></pre></div></div>
+
+<p><mark>배열에서 문자열 대소문자 변환하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String[] solution(String[] strArr) {
+    for (int i = 0; i &lt; strArr.length; i++) {
+      if (i % 2 == 1) {
+        strArr[i] = strArr[i].toUpperCase();
+      } else {
+        strArr[i] = strArr[i].toLowerCase();
+      }
+    }
+    
+    return strArr;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>A 강조하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String myString) {
+    return myString.toLowerCase().replaceAll("a", "A");
+  }
+}
+</code></pre></div></div>
+
+<p><mark>특정한 문자를 대문자로 바꾸기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String my_string, String alp) {
+    return my_string.replaceAll(alp, alp.toUpperCase());
+  }
+}
+</code></pre></div></div>
+
+<p><mark>특정 문자열로 끝나는 가장 긴 부분 문자열 찾기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String myString, String pat) {
+    String answer = "";
+    
+    for (int i = myString.length(); i &gt;= 0; i--) {
+      String subStr = myString.substring(0, i);
+      
+      if (subStr.endsWith(pat)) {
+        answer = subStr;
+        break;
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>뒤에서부터 문자 Index를 찾는 lastIndexOf 함수를 사용하면 더 효율적입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String myString, String pat) {
+    int e = myString.lastIndexOf(pat);
+    
+    return myString.substring(0, e + pat.length());
+  }
+}
+</code></pre></div></div>
+
+<p><mark>문자열이 몇 번 등장하는지 세기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(String myString, String pat) {
+    int answer = 0;
+        
+    for (int i = 0; i + pat.length() &lt;= myString.length(); i++) {
+      String subString = myString.substring(i, i + pat.length());
+      
+      if (subString.equals(pat)) {
+        answer++;
+      }
+    }
+        
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, startsWith를 사용하면 문자열로 시작 여부를 더 쉽게 확인할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(String myString, String pat) {
+    int answer = 0;
+    
+    for (int i = 0; i &lt; myString.length(); i++) {
+      if (myString.substring(i).startsWith(pat)) {
+        answer++;
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>ad 제거하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public String[] solution(String[] strArr) {
+    ArrayList&lt;String&gt; list = new ArrayList&lt;&gt;();
+    
+    for (String str : strArr) {
+      if (!str.contains("ad")) {
+        list.add(str);
+      }
+    }
+    
+    String[] answer = new String[list.size()];
+    
+    for (int i = 0; i &lt; list.size(); i++) {
+      answer[i] = list.get(i);
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>공백으로 구분하기 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String[] solution(String my_string) {
+    return my_string.split(" ");
+  }
+}
+</code></pre></div></div>
+
+<p><mark>공백으로 구분하기 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public String[] solution(String my_string) {
+    String[] my_arr = my_string.split(" ");
+    List&lt;String&gt; list = new ArrayList&lt;&gt;();
+    
+    for (String str : my_arr) {
+      if (!str.isEmpty()) {
+        list.add(str);
+      }
+    }
+    
+    String[] answer = new String[list.size()];
+    
+    for (int i = 0; i &lt; list.size(); i++) {
+      answer[i] = list.get(i);
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, 좌우 공백을 trim으로 제거하고 정규표현식으로 하나 이상의 공백을 자르면 좋습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String[] solution(String my_string) {
+    return my_string.trim().split("[ ]+");
+  }
+}
+</code></pre></div></div>
+
+<p><mark>x 사이의 개수</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(String myString) {
+    myString = myString + " ";
+    
+    String[] myArr = myString.split("x");
+    int[] answer = new int[myArr.length];
+    
+    for (int i = 0; i &lt; myArr.length; i++) {
+      answer[i] = myArr[i].trim().length();
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>문자열 잘라서 정렬하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public String[] solution(String myString) {
+    String[] myArr = myString.split("x");
+    
+    Arrays.sort(myArr);
+    
+    ArrayList&lt;String&gt; list = new ArrayList&lt;&gt;();
+    
+    for (String myStr : myArr) {
+      if (!"".equals(myStr)) {
+        list.add(myStr);
+      }
+    }
+    
+    String[] answer = new String[list.size()];
+    
+    for (int i = 0; i &lt; list.size(); i++) {
+      answer[i] = list.get(i);
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>간단한 식 계산하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(String binomial) {
+    int answer = 0;
+    
+    String[] strArr = binomial.split(" ");
+    
+    if (strArr[1].equals("+")) {
+      answer = Integer.parseInt(strArr[0]) + Integer.parseInt(strArr[2]);
+    } else if (strArr[1].equals("-")) {
+      answer = Integer.parseInt(strArr[0]) - Integer.parseInt(strArr[2]);
+    } else {
+      answer = Integer.parseInt(strArr[0]) * Integer.parseInt(strArr[2]);
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>문자열 바꿔서 찾기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int solution(String myString, String pat) {
+    StringBuilder sb = new StringBuilder();
+    
+    for (char c : myString.toCharArray()) {
+      if (c == 'A') {
+        sb.append('B');
+      } else {
+        sb.append('A');
+      }
+    }
+    
+    myString = sb.toString();
+    
+    return myString.contains(pat)? 1 : 0;
+  }
+}
+</code></pre></div></div>
+<p>이래처럼, replace를 이용하면 더 간결하게 A와 B를 바꿀 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(String myString, String pat) {
+    myString = myString.replace("A", "a").replace("B", "A").replace("a", "B");
+    return myString.contains(pat)? 1 : 0;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>rny_string</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String rny_string) {
+    return rny_string.replaceAll("m", "rn");
+  }
+}
+</code></pre></div></div>
+
+<p><mark>세 개의 구분자</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String[] solution(String myStr) {
+    String[] answer = myStr.replaceAll("[a|b|c]", " ").trim().split("\\s+");
+    
+    if (answer[0].isEmpty()) {
+      answer[0] = "EMPTY";
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>조건 문자열을 정규표현식으로 공백 치환하고, trim으로 좌우 공백을 제거합니다.<br />
+그리고 split(“\s+”)으로 1개 이상의 공백을 기준으로 잘라서 배열을 만드는 풀이입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String[] solution(String myStr) {
+    String[] answer = myStr.replaceAll("[a|b|c]+", " ").trim().split(" ");
+    
+    if (answer[0].isEmpty()) {
+      answer[0] = "EMPTY";
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아니면, 1개 이상의 문자열을 공백 1개로 치환하는 방법도 있습니다.</p>
+
+<h3 id="배열-문제-풀이">배열 문제 풀이</h3>
+
+<p><mark>문자 개수 세기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[] solution(String my_string) {
+    int[] answer = new int[52];
+    
+    for (char c : my_string.toCharArray()) {
+      if (Character.isUpperCase(c)) {
+        answer[c - 'A']++;
+      } else {
+        answer[26 + (c - 'a')]++;
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>배열 만들기 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[] solution(int n, int k) {
+    int[] answer = new int[n / k];
+    
+    for (int i = 1; i &lt;= n; i++) {
+      if (i % k == 0) {
+        answer[i / k -1] = i;
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>글자 지우기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public String solution(String my_string, int[] indices) {
+    Arrays.sort(indices);
+    
+    for (int i = indices.length -1; i &gt;= 0; i--) {
+      my_string = my_string.substring(0, indices[i]) + my_string.substring(indices[i]+1);
+    }
+    
+    return my_string;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, split과 join 함수를 활용하면 문자열을 쉽게 지울 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String my_string, int[] indices) {
+    String[] myArr = my_string.split("");
+    
+    for (int i = 0; i &lt; indices.length; i++) {
+      myArr[indices[i]] = "";
+    }
+    
+    return String.join("", myArr);
+  }
+}
+</code></pre></div></div>
+
+<p><mark>카운트 다운</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[] solution(int start, int end_num) {
+    int[] answer = new int[start - end_num +1];
+    
+    for (int i = start; i &gt;= end_num; i--) {
+      answer[start - i] = i;
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>가까운 1 찾기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int[] arr, int idx) {
+    int answer = -1;
+    
+    for (int i = idx; i &lt; arr.length; i++) {
+      if (arr[i] == 1) {
+        return i;
+      }
+    }
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>위 코드처럼 바로 return 하지 않으면, break문이 필요합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int[] arr, int idx) {
+    int answer = -1;
+    
+    for (int i = idx; i &lt; arr.length; i++) {
+      if (arr[i] == 1) {
+        answer = i;
+        break;
+      }
+    }
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>리스트 자르기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int n, int[] slicer, int[] num_list) {
+    int[] answer = {};
+    
+    int a = slicer[0];
+    int b = slicer[1];
+    int c = slicer[2];
+    
+    switch (n) {
+      case 1:
+        answer = Arrays.copyOfRange(num_list, 0, b+1);
+        break;
+      case 2:
+        answer = Arrays.copyOfRange(num_list, a, num_list.length);
+        break;
+      case 3:
+        answer = Arrays.copyOfRange(num_list, a, b+1);
+        break;
+      case 4:
+        int[] tempArr = Arrays.copyOfRange(num_list, a, b+1);
+        int[] newArr = new int[(tempArr.length+c-1) / c];
+        
+        for (int i = 0; i &lt; tempArr.length; i += c) {
+          newArr[i / c] = tempArr[i];
+        }
+        
+        answer = newArr;
+        
+        break;
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래 코드는 위 코드와 같은 결과가 나옵니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int n, int[] slicer, int[] num_list) {
+    int[] answer = {};
+    
+    int a = slicer[0];
+    int b = slicer[1];
+    int c = slicer[2];
+    
+    switch (n) {
+      case 1:
+        answer = Arrays.copyOfRange(num_list, 0, b+1);
+        break;
+      case 2:
+        answer = Arrays.copyOfRange(num_list, a, num_list.length);
+        break;
+      case 3:
+        answer = Arrays.copyOfRange(num_list, a, b+1);
+        break;
+      case 4:
+        int[] tempArr = Arrays.copyOfRange(num_list, a, b+1);
+        int[] newArr = new int[(b - a + c) / c];
+        
+        for (int i = 0, j = 0; i &lt; tempArr.length; i += c) {
+          newArr[j++] = tempArr[i];
+        }
+        
+        answer = newArr;
+        
+        break;
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>첫 번째로 나오는 음수</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int[] num_list) {
+    int answer = -1;
+    
+    for (int i = 0; i &lt; num_list.length; i++) {
+      if (num_list[i] &lt; 0) {
+        answer = i;
+        break;
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>배열 만들기 3</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] arr, int[][] intervals) {
+    int[] arr1 = Arrays.copyOfRange(arr, intervals[0][0], intervals[0][1]+1);
+    int[] arr2 = Arrays.copyOfRange(arr, intervals[1][0], intervals[1][1]+1);
+    
+    int[] answer = new int[arr1.length + arr2.length];
+    
+    int idx = 0;
+    
+    for (int i = 0; i &lt; arr1.length; i++) {
+      answer[idx++] = arr1[i];
+    }
+    
+    for (int i = 0; i &lt; arr2.length; i++) {
+      answer[idx++] = arr2[i];
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>intervals[0] 인덱스 구간 arr1 배열과 intervals[1] 인덱스 구간 arr2 배열을 이어붙이는 문제입니다.<br />
+어차피 배열을 이어붙이기 위해 for문을 사용하므로, copyOfRange 함수는 필요하지 않습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] arr, int[][] intervals) {
+    int s1 = intervals[0][0];
+    int e1 = intervals[0][1];
+    int s2 = intervals[1][0];
+    int e2 = intervals[1][1];
+    
+    int[] answer = new int[(e1 - s1 +1) + (e2 - s2 +1)];
+    
+    int idx = 0;
+    
+    for (int i = s1; i &lt;= e1; i++) {
+      answer[idx++] = arr[i];
+    }
+    
+    for (int i = s2; i &lt;= e2; i++) {
+      answer[idx++] = arr[i];
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>2의 영역</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] arr) {
+    int start_i = -1;
+    int end_i = -1;
+    
+    for (int i = 0; i &lt; arr.length; i++) {
+      if (arr[i] == 2) {
+        start_i = i;
+        break;
+      }
+    }
+    
+    for (int i = arr.length-1; i &gt;= 0; i--) {
+      if (arr[i] == 2) {
+        end_i = i;
+        break;
+      }
+    }
+    
+    if (start_i == -1) {
+      return new int[] { -1 };
+    }
+    
+    return Arrays.copyOfRange(arr, start_i, end_i+1);
+  }
+}
+</code></pre></div></div>
+
+<p><mark>배열 조각하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] arr, int[] query) {
+    for (int i = 0; i &lt; query.length; i++) {
+      if (i % 2 == 0) {
+        arr = Arrays.copyOfRange(arr, 0, query[i] + 1);
+      } else {
+        arr = Arrays.copyOfRange(arr, query[i], arr.length);
+      }
+    }
+    
+    return arr;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>n 번째 원소부터</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[] solution(int[] num_list, int n) {
+    int[] answer = new int[num_list.length -n +1];
+    
+    for (int i = n; i &lt;= num_list.length; i++) {
+      answer[i-n] = num_list[i-1];
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, copyOfRange를 사용하면 배열을 쉽게 자를 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] num_list, int n) {
+    int[] answer = Arrays.copyOfRange(num_list, n-1, num_list.length);
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>순서 바꾸기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] num_list, int n) {
+    int[] array1 = Arrays.copyOfRange(num_list, n, num_list.length);
+    int[] array2 = Arrays.copyOfRange(num_list, 0, n);
+    int[] answer = new int[array1.length + array2.length];
+    
+    for (int i = 0; i &lt; array1.length; i++) {
+      answer[i] = array1[i];
+    }
+    
+    for (int i = 0; i &lt; array2.length; i++) {
+      answer[array1.length + i] = array2[i];
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, 인덱스를 하나로 공유해서 쓰는 방법이 더 효율적입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[] solution(int[] num_list, int n) {
+    int[] answer = new int[num_list.length];
+    int idx = 0;
+    
+    for (int i = n; i &lt; num_list.length; i++) {
+      answer[idx++] = num_list[i];
+    }
+    
+    for (int i = 0; i &lt; n; i++) {
+      answer[idx++] = num_list[i];
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>왼쪽 오른쪽</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public String[] solution(String[] str_list) {
+    String[] answer = {};
+    
+    for (int i = 0; i &lt; str_list.length; i++) {
+      String str = str_list[i];
+      
+      if ("l".equals(str)) {
+        answer = Arrays.copyOfRange(str_list, 0, i);
+        break;
+      } else if ("r".equals(str)) {
+        answer = Arrays.copyOfRange(str_list, i+1, str_list.length);
+        break;
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래와 같이, 정답을 바로 return 해주는 방식도 가능합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public String[] solution(String[] str_list) {
+      
+    for (int i = 0; i &lt; str_list.length; i++) {
+      String str = str_list[i];
+      
+      if ("l".equals(str)) {
+        return Arrays.copyOfRange(str_list, 0, i);
+      } else if ("r".equals(str)) {
+        return Arrays.copyOfRange(str_list, i+1, str_list.length);
+      }
+    }
+    
+    return new String[]{};
+  }
+}
+</code></pre></div></div>
+
+<p><mark>n번째 원소까지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] num_list, int n) {
+    int[] answer = Arrays.copyOfRange(num_list, 0, n);
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>n개 간격의 원소들</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.ArrayList;
+
+class Solution {
+  public int[] solution(int[] num_list, int n) {
+      
+    ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+    
+    for (int i = 0; i &lt; num_list.length; i++) {
+      if (i % n == 0) {
+        list.add(num_list[i]);
+      }
+    }
+    
+    int[] answer = new int[list.size()];
+    
+    for (int i = 0; i &lt; list.size(); i++) {
+      answer[i] = list.get(i);
+    }
+        
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>홀수 vs 짝수</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int[] num_list) {
+    int even = 0;
+    int odd = 0;
+    
+    for (int i = 0; i &lt; num_list.length; i++) {
+      int num = num_list[i];
+      
+      if (i % 2 == 0) {
+        even += num;
+      } else {
+        odd += num;
+      }
+    }
+    
+    return Math.max(even, odd);
+  }
+}
+</code></pre></div></div>
+
+<p><mark>5명씩</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String[] solution(String[] names) {
+    String[] answer = new String[(names.length + 4) / 5];
+    int idx = 0;
+    
+    for (int i = 0; i &lt; names.length; i += 5) {
+      answer[idx++] = names[i];
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, i*5번째 값을 이용하면 인덱스 하나로 구현 가능합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String[] solution(String[] names) {
+    String[] answer = new String[((names.length-1) / 5) +1];
+    
+    for (int i = 0; i &lt; answer.length; i++) {
+        answer[i] = names[i * 5];
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>할 일 목록</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public String[] solution(String[] todo_list, boolean[] finished) {
+    List&lt;String&gt; list = new ArrayList&lt;&gt;();
+    
+    for (int i = 0; i &lt; todo_list.length; i++) {
+      if (!finished[i]) {
+        list.add(todo_list[i]);
+      }
+    }
+    
+    String[] answer = new String[list.size()];
+    
+    for (int i = 0; i &lt; list.size(); i++) {
+      answer[i] = list.get(i);
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, ArrayList를 쓰지 않고 문자열 더하기 후 split으로 구현하는 방법도 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String[] solution(String[] todo_list, boolean[] finished) {
+    String answer = new String();
+    
+    for (int i = 0; i &lt; todo_list.length; i++) {
+      if (!finished[i]) {
+        answer += todo_list[i] + ",";
+      }
+    }
+    
+    return answer.split(",");
+  }
+}
+</code></pre></div></div>
+
+<p><mark>n보다 커질 때까지 더하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int[] numbers, int n) {
+    int answer = 0;
+    
+    for (int v : numbers) {
+      answer += v;
+      
+      if (answer &gt; n) {
+        break;
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>수열과 구간 쿼리 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[] solution(int[] arr, int[][] queries) {
+    for (int i = 0; i &lt; queries.length; i++) {
+      for (int s = queries[i][0]; s &lt;= queries[i][1]; s++) {
+        arr[s]++;
+      }
+    }
+    
+    return arr;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>조건에 맞게 수열 변환하기 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[] solution(int[] arr) {
+    int[] answer = {};
+    
+    for (int i = 0; i &lt; arr.length; i++) {
+      int v = arr[i];
+      
+      if (v &gt;= 50 &amp;&amp; v % 2 == 0) {
+        arr[i] = v / 2;
+      }
+          
+      if (v &lt; 50 &amp;&amp; v % 2 == 1) {
+        arr[i] = v * 2;
+      }
+    }
+    
+    return arr;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>조건에 맞게 수열 변환하기 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int solution(int[] arr) {
+    int x = 0;
+    
+    while(true) {
+      int[] tempArr = arr.clone();
+      
+      // 문제 조건 반복
+      for (int i = 0; i &lt; tempArr.length; i++) {
+        int value = tempArr[i];
+        
+        if (value &gt;= 50 &amp;&amp; value % 2 == 0) {
+          tempArr[i] = value / 2;
+        } else if (value &lt; 50 &amp;&amp; value % 2 == 1) {
+          tempArr[i] = (value * 2) + 1;
+        }
+      }
+      
+      if (Arrays.equals(arr, tempArr)) {
+        return x;
+      } else {
+        arr = tempArr;
+      }
+      
+      x += 1;
+    }
+      
+  }
+}
+</code></pre></div></div>
+<p>배열 복제 시 clone 함수를 사용하지 않으면, tempArr 수정 시 원본 arr가 수정되는 버그가 생깁니다.<br />
+배열 비교 시에는 Arrays.equals 함수를 사용해야 배열 내 값까지 비교됩니다.</p>
+
+<p><mark>1로 만들기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int[] num_list) {
+    int answer = 0;
+    
+    for (int i = 0; i &lt; num_list.length; i++) {
+      int num = num_list[i];
+      
+      while (num &gt; 1) {
+        if (num % 2 == 0) {
+          num = num / 2;
+        } else {
+          num = (num - 1) / 2;
+        }
+        
+        answer++;
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>홀수에서 1을 빼고 2로 나누는 것, 그냥 2로 나누는 것은 결과가 동일합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int[] num_list) {
+    int answer = 0;
+    
+    for (int i = 0; i &lt; num_list.length; i++) {
+      while (num_list[i] &gt; 1) {
+        num_list[i] /= 2;
+        
+        answer++;
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>길이에 따른 연산</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int[] num_list) {
+    int sum = 0;
+    int gob = 1;
+    
+    for (int i = 0; i &lt; num_list.length; i++) {
+      sum += num_list[i];
+      gob *= num_list[i];
+    }
+    
+    return num_list.length &gt; 10? sum : gob;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>배열의 원소만큼 추가하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] arr) {
+    ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+    
+    for (int v : arr) {
+      for (int i = 0; i &lt; v; i++) {
+        list.add(v);
+      }
+    }
+    
+    int[] answer = new int[list.size()];
+    
+    for (int i = 0; i &lt; list.size(); i++) {
+      answer[i] = list.get(i);
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>빈 배열에 추가, 삭제하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] arr, boolean[] flag) {
+    ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+    
+    for (int i = 0; i &lt; arr.length; i++) {
+      if (flag[i]) {
+        for (int j = 0; j &lt; arr[i] * 2; j++) {
+          list.add(arr[i]);
+        }
+      } else {
+        for (int j = 0; j &lt; arr[i]; j++) {
+          list.remove(list.size()-1);
+        }
+      }
+    }
+    
+    int[] answer = new int[list.size()];
+    
+    for (int i = 0; i &lt; list.size(); i++) {
+      answer[i] = list.get(i);
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>배열 만들기 6</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] arr) {
+    List&lt;Integer&gt; stkList = new ArrayList&lt;Integer&gt;();
+    int[] stk = {-1};
+    
+    for (int i = 0; i &lt; arr.length; i++) {
+      int arr_i = arr[i];
+      
+      if (stkList.isEmpty()) {
+        stkList.add(arr_i);
+          
+      } else {
+        int stk_last = stkList.get(stkList.size() - 1);
+        
+        if (stk_last == arr_i) {
+          stkList.remove(stkList.size() - 1);
+        } else {
+          stkList.add(arr_i);
+        }
+
+      }
+    }
+    
+    if (!stkList.isEmpty()) {
+      stk = new int[stkList.size()];
+      
+      for (int i = 0; i &lt; stkList.size(); i++) {
+        stk[i] = stkList.get(i);
+      }
+    }
+    
+    return stk;
+  }
+}
+</code></pre></div></div>
+<p>위/아래 코드 시간복잡도는 같지만,<br />
+양쪽 끝에서의 삽입/삭제 시 ArrayList보다 ArrayDeque가 더 빠르고 효율적입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] arr) {
+    Deque&lt;Integer&gt; stack = new ArrayDeque&lt;&gt;();
+    int[] stk = {-1};
+    
+    for (int i = 0; i &lt; arr.length; i++) {
+      if (stack.isEmpty()) {
+        stack.push(arr[i]);
+      } else {
+        if (stack.peek() == arr[i]) {
+          stack.pop();
+        } else {
+          stack.push(arr[i]);
+        }
+      }
+    }
+    
+    if (!stack.isEmpty()) {
+      stk = new int[stack.size()];
+      
+      for (int i = stack.size() - 1; i &gt;= 0; i--) {
+        stk[i] = stack.pop();
+      }
+    }
+    
+    return stk;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>무작위로 K개의 수 뽑기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] arr, int k) {
+      
+    int[] answer = new int[k];
+    Arrays.fill(answer, -1);
+    
+    Set&lt;Integer&gt; set = new LinkedHashSet&lt;&gt;();
+    
+    // 중복 숫자 제거
+    for(int i = 0; i &lt; arr.length; i++) {
+      set.add(arr[i]);
+    }
+    
+    // k번째 미만에 값 채우기
+    int i = 0;
+    
+    for (int v : set) {
+      if (i == k) {
+        break;
+      }
+      
+      answer[i] = v;
+      
+      i++;
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<h3 id="이차원-배열-문제-풀이">이차원 배열 문제 풀이</h3>
+
+<p><mark>특별한 이차원 배열 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[][] solution(int n) {
+    int[][] answer = new int[n][];
+    
+    for (int i = 0; i &lt; n; i++) {
+      answer[i] = new int[n];
+      answer[i][i] = 1;
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>n x n 배열이므로, 아래처럼 배열 초기화 시 모두 생성해도 됩니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[][] solution(int n) {
+    int[][] answer = new int[n][n];
+    
+    for (int i = 0; i &lt; n; i++) {
+      answer[i][i] = 1;
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>정수를 나선형으로 배치하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[][] solution(int n) {
+    int[][] answer = new int[n][n];
+    HashMap&lt;String, int[]&gt; moveMap = new HashMap&lt;&gt;();
+    
+    moveMap.put("up", new int[]{-1, 0});
+    moveMap.put("down", new int[]{1, 0});
+    moveMap.put("left", new int[]{0, -1});
+    moveMap.put("right", new int[]{0, 1});
+    
+    int curCol = 0;
+    int curRow = 0;
+    int v = 1;
+    answer[0][0] = v;
+    String nextMoveKey = "right";
+    
+    while (v &lt; n * n) {
+      int[] nextMove = moveMap.get(nextMoveKey);
+      
+      int nextRow = curRow + nextMove[0];
+      int nextCol = curCol + nextMove[1];
+      
+      // 배열 밖으로 나가거나, 이미 값이 있는 경우 방향 전환
+      if (nextCol &gt;= n || nextRow &gt;= n || nextCol &lt; 0 || nextRow &lt; 0 || answer[nextRow][nextCol] != 0) {
+        if (nextMoveKey.equals("right")) {
+          nextMoveKey = "down";
+        } else if (nextMoveKey.equals("down")) {
+          nextMoveKey = "left";
+        } else if (nextMoveKey.equals("left")) {
+          nextMoveKey = "up";
+        } else if (nextMoveKey.equals("up")) {
+          nextMoveKey = "right";
+        }
+        continue;
+      }
+      
+      curRow = nextRow;
+      curCol = nextCol;
+      v++;
+      
+      answer[curRow][curCol] = v;
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>2차원 배열을 나선형으로 채우는 시뮬레이션 문제입니다.<br />
+아래 코드가 더 간결하고 직관적입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[][] solution(int n) {
+    int[][] answer = new int[n][n];
+    int num = 1;
+    int x = 0, y = 0;
+    
+    // 방향 : 오른쪽, 아래, 왼쪽, 위
+    int dx[] = {0, 1, 0, -1};
+    int dy[] = {1, 0, -1, 0};
+    
+    int direction = 0;
+
+    while (num &lt;= n * n) {
+      answer[x][y] = num++;
+
+      int nx = x + dx[direction]; 
+      int ny = y + dy[direction];
+
+      if (nx &lt; 0 || nx &gt;= n || ny &lt; 0 || ny &gt;= n || answer[nx][ny] != 0) {
+        // 범위 밖으로 나갔을 때 방향전환
+        direction = (direction + 1) % 4;
+        
+        nx = x + dx[direction];
+        ny = y + dy[direction];
+      }
+      x = nx;
+      y = ny;
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>특별한 이차원 배열 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int[][] arr) {
+    int answer = 1;
+    
+    for (int i = 0; i &lt; arr.length; i++) {
+      for (int j = 0; j &lt; arr.length; j++) {
+        if (arr[i][j] != arr[j][i]) {
+          answer = 0;
+          break;
+        }
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>정사각형으로 만들기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[][] solution(int[][] arr) {
+      
+    int maxLangth = Math.max(arr.length, arr[0].length);
+    
+    int[][] answer = new int[maxLangth][maxLangth];
+    
+    for (int i = 0; i &lt; answer.length; i++) {
+      for (int j = 0; j &lt; answer[i].length; j++) {
+        if (i &lt; arr.length &amp;&amp; j &lt; arr[i].length) {
+          answer[i][j] = arr[i][j];
+        }
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>행이 열보다 더 많은 경우, 이미 0으로 초기화되어 있으므로 0을 입력하지 않아도 됩니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[][] solution(int[][] arr) {
+      
+    int maxLangth = Math.max(arr.length, arr[0].length);
+    
+    int[][] answer = new int[maxLangth][maxLangth];
+    
+    for (int i = 0; i &lt; arr.length; i++) {
+      System.arraycopy(arr[i], 0, answer[i], 0, arr[i].length);
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>System.arraycopy 함수를 이용하면 더 간결하게 배열 값을 복사할 수 있습니다.<br />
+arr[i] 배열의 0번째 인덱스부터 answer[i] 배열의 0번째 인덱스에 arr[i] 배열의 길이만큼 복사합니다.</p>
+
+<p><mark>이차원 배열 대각선 순회하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int[][] board, int k) {
+    int answer = 0;
+    
+    for (int i = 0; i &lt; board.length; i++) {
+      for (int j = 0; j &lt; board[i].length; j++) {
+        if (i + j &lt;= k) {
+          answer += board[i][j];
+        }
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<h3 id="함수-문제-풀이">함수 문제 풀이</h3>
+<p><mark>배열의 길이를 2의 거듭제곱으로 만들기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[] solution(int[] arr) {
+    int targetNum = 0;
+    int i = 0;
+    
+    if (arr.length == 1) {
+      // 1은 2의 0승이므로 그대로 리턴
+      return arr;
+    }
+        
+    while (targetNum &lt; arr.length) {
+      i++;
+      targetNum = (int) Math.pow(2, i);
+    }
+    
+  int[] answer = new int[targetNum];
+  
+  for (int j = 0; j &lt; arr.length; j++) {
+    answer[j] = arr[j];
+  }
+  
+  return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, Math.pow 함수 없이 구현할 수도 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] arr) {
+    int length = 1;
+    
+    while (length &lt; arr.length) {
+      length *= 2;
+    }
+    
+    return Arrays.copyOf(arr, length);
+  }
+}
+</code></pre></div></div>
+
+<p><mark>배열 비교하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int[] arr1, int[] arr2) {
+    int answer = 0;
+    
+    if (arr1.length &gt; arr2.length) {
+      answer = 1;
+    } else if (arr1.length &lt; arr2.length) {
+      answer = -1;
+    } else {
+      int arr1Sum = 0;
+      for (int v : arr1) {
+        arr1Sum += v;
+      }
+      
+      int arr2Sum = 0;
+      for (int v : arr2) {
+        arr2Sum += v;
+      }
+      
+      if (arr1Sum &gt; arr2Sum) {
+        answer = 1;
+      } else if (arr1Sum &lt; arr2Sum) {
+        answer = -1;
+      } else {
+        answer = 0;
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>문자열 묶기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashMap;
+
+class Solution {
+  public int solution(String[] strArr) {
+      
+    HashMap&lt;Integer, Integer&gt; countMap = new HashMap&lt;&gt;();
+    
+    for (String str : strArr) {
+      int key = str.length();
+      countMap.put(key, countMap.getOrDefault(key, 0) +1);
+    }
+    
+    int answer = 0;
+    
+    for (int count : countMap.values()) {
+      answer = Math.max(answer, count);
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>배열의 길이에 따라 다른 연산하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[] solution(int[] arr, int n) {
+    if (arr.length % 2 == 1) {
+      for (int i = 0; i &lt; arr.length; i++) {
+        if (i % 2 == 0) {
+          arr[i] += n;
+        }
+      }
+    } else {
+      for (int i = 0; i &lt; arr.length; i++) {
+        if (i % 2 == 1) {
+          arr[i] += n;
+        }
+      }
+    }
+    
+    return arr;
+  }
+}
+</code></pre></div></div>
+<p>아래처럼, 하나의 for문으로 구현할 수도 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int[] solution(int[] arr, int n) {
+    for (int i = arr.length % 2 == 1? 0 : 1; i &lt; arr.length; i+=2) {
+      arr[i] += n;
+    }
+    
+    return arr;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>뒤에서 5등까지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] num_list) {
+    Arrays.sort(num_list);
+    
+    return Arrays.copyOfRange(num_list, 0, 5);
+  }
+}
+</code></pre></div></div>
+
+<p><mark>뒤에서 5등 위로</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int[] solution(int[] num_list) {
+    Arrays.sort(num_list);
+    
+    return Arrays.copyOfRange(num_list, 5, num_list.length);
+  }
+}
+</code></pre></div></div>
+
+<p><mark>전국 대회 선발 고사</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int solution(int[] rank, boolean[] attendance) {
+    int answer = 0;
+    
+    TreeMap&lt;Integer, Integer&gt; treeMap = new TreeMap&lt;&gt;();
+    
+    for (int i = 0; i &lt; rank.length; i++) {
+      if (attendance[i]) {
+        treeMap.put(rank[i], i);
+      }
+    }
+    
+    int i = 0;
+    
+    for (int rankIndex : treeMap.values()) {
+      if (i == 3) {
+        break;
+      }
+      
+      switch (i) {
+        case 0 : 
+          answer += (10000 * rankIndex);
+          break;
+        case 1 : 
+          answer += (100 * rankIndex);
+          break;
+        case 2 : 
+          answer += rankIndex;
+          break;
+      }
+      
+      i++;
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>TreeMap으로 등수에 따라 오름차순 정렬하여 풀이하였습니다.<br />
+아래와 같이, 우선순위 큐를 이용하면 값을 순차적으로 꺼낼 수 있어서 간결한 풀이가 가능합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+class Solution {
+  public int solution(int[] rank, boolean[] attendance) {
+    PriorityQueue&lt;Integer&gt; pq = new PriorityQueue&lt;&gt;((a, b) -&gt; rank[a] - rank[b]);
+
+    for (int i = 0; i &lt; attendance.length; i++) {
+      if (attendance[i]) {
+        pq.add(i);
+      }
+    }
+
+    return 10000 * pq.poll() + 100 * pq.poll() + pq.poll();
+  }
+}
+</code></pre></div></div>
+
+<p><mark>정수 부분</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(double flo) {
+    return (int) flo;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>문자열 정수의 합</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(String num_str) {
+    int answer = 0;
+    String[] num_arr = num_str.split("");
+    
+    for (String num : num_arr) {
+      answer += Integer.parseInt(num);
+    }
+    
+  return answer;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>문자열을 정수로 변환하기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(String n_str) {
+    return Integer.parseInt(n_str);
+  }
+}
+</code></pre></div></div>
+
+<p><mark>0 떼기</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String n_str) {
+    String answer = "";
+    int length = n_str.length();
+    
+    for (int i = 0; i &lt; length; i++) {
+      char c = n_str.charAt(0);
+      
+      if (c == '0') {
+        n_str = n_str.replaceFirst("0", "");
+              
+      } else {
+          answer = n_str;
+        break;
+      }
+    }
+    
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p>아래와 같이, 정수로 변환 후 문자열로 변환해도 왼쪽의 0을 제거할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(String n_str) {
+    return String.valueOf(Integer.parseInt(n_str));
+  }
+}
+</code></pre></div></div>
+
+<p><mark>두 수의 합</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.math.*;
+
+class Solution {
+  public String solution(String a, String b) {
+    BigInteger bigA = new BigInteger(a);
+    BigInteger bigB = new BigInteger(b);
+    
+    return bigA.add(bigB).toString();
+  }
+}
+</code></pre></div></div>
+<p>Integer 최대 10자리, Long 최대 19자리 숫자 범위를 초과하는 정수입니다.<br />
+math 패키지의 BigInteger 타입을 사용하면 처리할 수 있습니다.</p>
+
+<p><mark>문자열로 변환</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public String solution(int n) {
+    return String.valueOf(n);
+  }
+}
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%ED%8C%8C%EC%9D%B4%EC%8D%AC-java" class="page__taxonomy-item" rel="tag">파이썬 / Java</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2024-05-21">2024-05-21</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/web-dev/2024-05-15-1" class="pagination--pager" title="Java 접근제어자 정의 및 종류
+">Prev</a>
+    
+    
+      <a href="/python-java/2024-05-21-2" class="pagination--pager" title="프로그래머스 코딩테스트 입문 Lv.0 100문제 Java 풀이
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,1193 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>아파치 카프카 설정 방법 / 브로커, 토픽, 프로듀서, 컨슈머, 스트림즈 옵션 정리 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="아파치 카프카 설정 방법 / 브로커, 토픽, 프로듀서, 컨슈머, 스트림즈 옵션 정리">
+<meta property="og:url" content="https://0songha0.github.io/kafka/2025-04-29-2">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-04-29T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2025-04-29T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/kafka/2025-04-29-2">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="아파치 카프카 설정 방법 / 브로커, 토픽, 프로듀서, 컨슈머, 스트림즈 옵션 정리">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2025-04-29T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-04-29T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">아파치 카프카 설정 방법 / 브로커, 토픽, 프로듀서, 컨슈머, 스트림즈 옵션 정리
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-04-29T00:00:00+00:00">2025-04-29</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 아파치 카프카 설정 방법 / 브로커, 토픽, 프로듀서, 컨슈머, 스트림즈 옵션 정리</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#카프카-브로커-설정">카프카 브로커 설정</a><ul><li><a href="#브로커-id-설정">브로커 ID 설정</a></li><li><a href="#브로커-리스너-설정">브로커 리스너 설정</a></li><li><a href="#로그-디렉터리-설정">로그 디렉터리 설정</a></li><li><a href="#로그-파일-생성주기-설정">로그 파일 생성주기 설정</a></li><li><a href="#로그-파일-삭제주기-설정">로그 파일 삭제주기 설정</a></li><li><a href="#클린업-정책-설정">클린업 정책 설정</a></li><li><a href="#파티션-수-설정">파티션 수 설정</a></li><li><a href="#주키퍼-연결-설정">주키퍼 연결 설정</a></li><li><a href="#리더파티션-자동-분배-활성화">리더파티션 자동 분배 활성화</a></li><li><a href="#신규-토픽-자동-생성-비활성화">신규 토픽 자동 생성 비활성화</a></li></ul></li><li><a href="#카프카-토픽-설정">카프카 토픽 설정</a><ul><li><a href="#로그-파일-삭제주기-설정-1">로그 파일 삭제주기 설정</a></li><li><a href="#파티션-복제-수-설정">파티션 복제 수 설정</a></li><li><a href="#isr-최소-개수-설정">ISR 최소 개수 설정</a></li><li><a href="#파티션-리더-승급-설정">파티션 리더 승급 설정</a></li><li><a href="#메시지-타임스탬프-설정">메시지 타임스탬프 설정</a></li></ul></li><li><a href="#프로듀서-옵션-설정">프로듀서 옵션 설정</a><ul><li><a href="#프로듀서-필수-옵션">프로듀서 필수 옵션</a></li><li><a href="#프로듀서-선택-옵션">프로듀서 선택 옵션</a></li></ul></li><li><a href="#컨슈머-옵션-설정">컨슈머 옵션 설정</a><ul><li><a href="#컨슈머-필수-옵션">컨슈머 필수 옵션</a></li><li><a href="#컨슈머-선택-옵션">컨슈머 선택 옵션</a></li></ul></li><li><a href="#스트림즈-dsl-옵션-설정">스트림즈 DSL 옵션 설정</a><ul><li><a href="#스트림즈-dsl-필수-옵션">스트림즈 DSL 필수 옵션</a></li><li><a href="#스트림즈-dsl-선택-옵션">스트림즈 DSL 선택 옵션</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="카프카-브로커-설정">카프카 브로커 설정</h2>
+
+<p>카프카폴더/config/server.properties 파일에 브로커 실행 시 사용되는 설정들을 정의합니다.</p>
+
+<h3 id="브로커-id-설정">브로커 ID 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>broker.id=0
+</code></pre></div></div>
+<p>같은 클러스터 내에서 현재 실행할 브로커 고유 ID를 설정합니다.</p>
+
+<h3 id="브로커-리스너-설정">브로커 리스너 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-- 브로커가 요청을 수신할 주소 설정 (내부 바인딩)
+listeners=PLAINTEXT://localhost:9092
+
+-- 클라이언트가 접속할 브로커 주소 설정 (외부 연결용)
+advertised.listeners=PLAINTEXT://localhost:9092
+</code></pre></div></div>
+<p>클라이언트는 advertised.listeners에 설정된 브로커 주소:포트를 통해 접속합니다ㅈㄴㅈㄴ.</p>
+
+<h3 id="로그-디렉터리-설정">로그 디렉터리 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>log.dirs=/로그저장폴더경로
+</code></pre></div></div>
+<p>프로듀서가 보낸 메시지 로그를 해당 디렉터리 경로에 파일로 저장합니다.<br />
+‘토픽명-파티션번호’ 하위 디렉터리를 자동 생성하여 분류합니다.</p>
+
+<p><mark>카프카 도커 옵션 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>KAFKA_LOG_DIRS: '/tmp/kafka-logs'
+</code></pre></div></div>
+<p>도커에서는 docker-compose.yml 파일에 카프카 로그 세그먼트 저장 경로를 위와 같이 정의합니다.</p>
+
+<p><mark>토픽-파티션별 카프카 로그 파일 예시</mark></p>
+<ul>
+  <li>00000000000000000000.log : 오프셋, 타임스탬프, 헤더, 메시지 키, 메시지 값 등 실제 메시지 데이터 저장</li>
+  <li>00000000000000000000.index : 오프셋과 로그 파일 내 위치를 매핑한 인덱스 파일</li>
+  <li>00000000000000000000.timeindex : 타임스탬프와 로그 파일 내 위치를 매핑한 인덱스 파일</li>
+  <li>leader-epoch-checkpoint : 리더 에폭 정보 저장 (리더 변경 기록 관리)</li>
+  <li>partition.metadata : 파티션 설정 정보 저장
+파일명이 00000000000000000010.log면, 오프셋 10번부터의 데이터가 저장된 로그 파일입니다.<br />
+프로듀서에서 받은 메시지에 브로커가 오프셋을 부여하고, 타임스탬프를 지정하여 저장합니다.</li>
+</ul>
+
+<h3 id="로그-파일-생성주기-설정">로그 파일 생성주기 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-- 로그 파일 (=세그먼트 파일) 최대 크기 지정
+log.segment.bytes
+또는
+-- 세그먼트 신규 생성 후 다음 파일로 넘어가는 주기 (기본값 7일)
+log.roll.ms(hosurs)
+</code></pre></div></div>
+
+<h3 id="로그-파일-삭제주기-설정">로그 파일 삭제주기 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-- 세그먼트 삭제 주기. 리텐션 기간 (기본값 7일, 일반적으로 3일)
+log.retention.hours=168
+또는
+-- 파티션당 로그 최대 크기 도달 시 삭제 (기본값 -1)
+retrntion.bytes
+
+-- 삭제 대상 체크 주기 (기본값 5분)
+log.retention.check.interval.ms
+</code></pre></div></div>
+<p>카프카 데이터는 세그먼트 단위로 삭제되며, 레코드 단위 삭제 및 수정은 불가합니다.</p>
+
+<p><mark>액티브 세그먼트</mark><br />
+쓰기가 일어나고 있는 가장 마지막 세그먼트 파일을 액티브 세그먼트라고 합니다.<br />
+액티브 세그먼트는 브로커의 삭제 대상이 되지 않습니다.<br />
+일반 세그먼트는 retention 옵션 기간이 지나면 삭제될 수 있습니다.</p>
+
+<h3 id="클린업-정책-설정">클린업 정책 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cleanup.policy=compact
+</code></pre></div></div>
+<p>delete : 일정 시간 경과 또는 기준 크기 초과 시 세그먼트 전체를 삭제합니다.<br />
+compact : 액티브 세그먼트에서 각 메시지 키의 가장 최신 레코드만 남기고, 오래된 레코드들은 삭제하여 압축합니다.</p>
+
+<p><mark>compact 정책 로그 상태 분류</mark></p>
+<ul>
+  <li>클린 로그 (테일 영역) : 압축이 완료된 로그 (중복 메시지 키 없음)</li>
+  <li>더티 로그 (헤드 영역) : 압축 정책 실행 전 로그 (중복 메시지 키 있음)</li>
+</ul>
+
+<p><mark>압축 시작 시점 설정</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>min.cleanable.dirty.ratio
+</code></pre></div></div>
+<p>클린 레코드에 비한 더티 레코드 비율에 따라 압축 실행합니다.</p>
+<ul>
+  <li>0.9 : 압축 효과가 좋으나, 더티 레코드 0.9 비율이 될 때까지 용량 효율이 좋지 않습니다.</li>
+  <li>0.1 : 압축이 자주 일어나서 브로커에 부담이 되고, 최신 데이터만 유지할 수 있습니다.</li>
+</ul>
+
+<h3 id="파티션-수-설정">파티션 수 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>num.partitions=3
+</code></pre></div></div>
+<p>카프카 토픽 생성 시 기본적으로 만들 파티션 수를 정의합니다.<br />
+토픽 생성 시 파티션 수를 지정하지 않으면, 이 브로커 설정으로 생성됩니다.</p>
+
+<h3 id="주키퍼-연결-설정">주키퍼 연결 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>zookeeper.connect=localhost:2181
+zookeeper.connection.timeout.ms=18000
+</code></pre></div></div>
+<p>브로커에서 연결할 주키퍼 서버주소:포트, 연결 타임아웃 시간을 설정합니다.<br />
+카프카 3.0 이하 버전에서는 브로커 실행 전 주키퍼를 필수로 실행해야 합니다.</p>
+
+<h3 id="리더파티션-자동-분배-활성화">리더파티션 자동 분배 활성화</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>auto.leader.rebalance.enable=true
+</code></pre></div></div>
+<p>리더파티션이 특정 브로커에 몰린 경우, 자동으로 리더파티션을 재분배하도록 설정합니다.</p>
+
+<h3 id="신규-토픽-자동-생성-비활성화">신규 토픽 자동 생성 비활성화</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>auto.create.topics.enable=false
+</code></pre></div></div>
+<p>프로듀서, 컨슈머가 존재하지 않는 토픽 요청 시 자동으로 토픽이 생성되지 않도록 방지합니다.<br />
+불필요한 토픽 생성을 방지하며, 토픽을 CLI로 수동 생성해야 합니다.</p>
+
+<hr />
+
+<h2 id="카프카-토픽-설정">카프카 토픽 설정</h2>
+
+<p>토픽 단위로 설정할 수 있는 옵션들입니다.</p>
+
+<h3 id="로그-파일-삭제주기-설정-1">로그 파일 삭제주기 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-- 세그먼트 삭제 주기. 리텐션 기간 (기본값 7일, 일반적으로 3일)
+retention.ms
+또는
+retention.minutes
+또는
+retention.hours
+</code></pre></div></div>
+<p>브로커 기본 설정 (log.retention.hours 등) 보다 우선 적용되는, 토픽별 설정 옵션입니다.</p>
+
+<h3 id="파티션-복제-수-설정">파티션 복제 수 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>replication.factor
+</code></pre></div></div>
+<p>토픽 생성 시 파티션 복제 수는 최소 1 (복제 없음) 부터 최대 브로커 개수까지 설정 가능합니다.<br />
+운영 브로커가 5개면, 2~3으로 설정하는 것이 일반적입니다.<br />
+각 파티션을 복제하여 디스크 용량을 차지하는 대신, 시스템 안정성과 가용성을 높일 수 있습니다.</p>
+
+<p><mark>파티션 복제 수 설정 시 참고</mark><br />
+일부 데이터가 유실되어도 되는 GPS 데이터는 복제하지 않고 운영하기도 합니다.<br />
+데이터가 유실되면 안 되는 금융 데이터는 복제 수를 3으로 설정하여 운영하기도 합니다.</p>
+
+<h3 id="isr-최소-개수-설정">ISR 최소 개수 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>min.insync.replicas
+</code></pre></div></div>
+<p>프로듀서 데이터 전송이 성공하려면 최소 몇 개의 복제본이 동기화 상태여야 하는지 정의합니다.<br />
+프로듀서 설정이 acks=all이고 min.insync.replicas=2인 경우,<br />
+ISR이 1개로 줄어들면 해당 토픽에 프로듀서 메시지 전송이 실패합니다.</p>
+
+<h3 id="파티션-리더-승급-설정">파티션 리더 승급 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-- 데이터 유실을 감수하고, 지속적으로 데이터 처리
+-- 복제가 안된 (ISR이 아닌) 팔로워 파티션을 리더로 승급하는 옵션
+unclean.leader.election.enable=true
+
+-- 데이터 유실을 감수하지 않고, 리더 파티션이 복구될 때까지 중단
+-- 복제가 안된 (ISR이 아닌) 팔로워 파티션을 리더로 승급하지 않는 옵션
+unclean.leader.election.enable=false
+</code></pre></div></div>
+
+<h3 id="메시지-타임스탬프-설정">메시지 타임스탬프 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>message.timestamp.type
+</code></pre></div></div>
+<p>타임스탬프 기본값은 프로듀서 레코드 생성 시간이고, 브로커 적재 시간으로 변경 가능합니다.</p>
+
+<hr />
+
+<h2 id="프로듀서-옵션-설정">프로듀서 옵션 설정</h2>
+
+<h3 id="프로듀서-필수-옵션">프로듀서 필수 옵션</h3>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>bootstrap.servers</td>
+      <td>
+        프로듀서가 레코드를 전송할 카프카 클러스터 내 브로커 호스트명:포트 목록 작성<br />
+        2개 이상 작성 시 브로커 장애 대비 가능
+      </td>
+    </tr>
+    <tr>
+      <td>key.serializer</td>
+      <td>
+        메시지 키를 직렬화 할 클래스 지정<br />
+        String Serializer로 통일하면 컨슈머 역직렬화 클래스 설정 및 디버깅 시 용이
+      </td>
+    </tr>
+    <tr>
+      <td>value.serializer</td>
+      <td>메시지 값을 직렬화 할 클래스 지정</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="프로듀서-선택-옵션">프로듀서 선택 옵션</h3>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>acks ★</td>
+      <td>
+        프로듀서가 보낸 데이터에 대해 브로커로부터 성공 응답을 받을 조건 설정<br />
+        복제 강도를 높여서 성능 낮추고 신뢰성 높게 저장할지 여부<br />
+        복제 수가 많을수록 차이가 큼<br />
+        기본값 : 1<br /><br />
+        0 : 데이터 전송 후 응답 확인 X (가장 빠르지만 브로커 장애 시 데이터 유실 위험 큼)<br />
+        1 : 리더 브로커에 레코드 저장 시 성공 응답<br />
+        all 또는 -1: 리더 + ISR에 포함된 팔로워들에 레코드 저장 시 성공 응답 (가장 느리고 신뢰성 높음)
+      </td>
+    </tr>
+    <tr>
+      <td>linger.ms</td>
+      <td>
+        Accumulator에 모은 배치 데이터 전송 전 기다리는 최소 시간<br />
+        기본값 : 0 (Send 시 즉시 전송)
+      </td>
+    </tr>
+    <tr>
+      <td>retries</td>
+      <td>
+        브로커 전송 실패 시 재전송 시도 횟수<br />
+        기본값 : Integer.MAX_VALUE (2147483647)
+      </td>
+    </tr>
+    <tr>
+      <td>max.in.flight.requests.per.connection</td>
+      <td>
+        한 커넥션에서 동시 전송할 수 있는 최대 요청 수<br />
+        기본값 : 5 (순서 보장 필요 시 1로 설정)
+      </td>
+    </tr>
+    <tr>
+      <td>partitioner.class</td>
+      <td>
+        레코드를 어느 파티션에 보낼지 결정하는 파티셔너 클래스 지정<br />
+        기본값 : DefaultPartitioner (카프카 2.4 이상 : UniformStickyPartitioner)
+      </td>
+    </tr>
+    <tr>
+      <td>enable.idempotence</td>
+      <td>
+        네트워크 오류, 재시도 시에도 중복 없이 한 번만 레코드를 적재하는 멱등성 보장 여부<br />
+        true 설정 시 acks=all 등으로 자동 변경되어 처리 속도가 느려질 수 있음<br />
+        멱등성 프로듀서로 동작할 필요가 있는 경우 true 설정<br />
+        각 레코드에 프로듀서 ID, 파티션별 시퀀스 번호를 부여하여 중복 전송 방지 및 안정성 향상<br />
+        카프카 3.0 이상 기본값 : true
+      </td>
+    </tr>
+    <tr>
+      <td>transactional.id</td>
+      <td>
+        레코드를 트랙잭션 단위로 묶어서 전송 여부<br />
+        기본값 : null (트랜잭션 프로듀서가 아닌, 기본 프로듀서로 동작)
+      </td>
+    </tr>
+    <tr>
+      <td>metadata.max.age.ms</td>
+      <td>
+        클러스터 메타데이터 강제 갱신 요청 주기<br />
+        기본값 : 5분<br /><br />
+        카프카 프로듀서는 초기 메시지 전송 전 또는 메시지 전송 중 오류가 발생했을 때 클러스터에 메타데이터를 요청하고 응답 받아서 캐시에 저장합니다.<br />
+        메타데이터로 각 토픽의 리더 파티션이 어떤 브로커에 있는지 알 수 있습니다.<br />
+        리더 파티션이 있는 브로커와 메시지를 통신하기 위해 프로듀서, 컨슈머는 메타데이터 갱신이 주기적으로 필요합니다.<br />
+        컨슈머에서 잘못된 브로커로 데이터 요청 시에는 LEADER_NOT_AVAILABLE 익셉션이 발생합니다.
+      </td>
+    </tr>
+    <tr>
+      <td>metadata.max.idle.ms</td>
+      <td>
+        프로듀서 유휴 상태 시 메타데이터 캐시 유지 주기<br />
+        기본값 : 5분
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p>카프카 2.5.0 버전 기준 기본값이며, 사용하는 클라이언트 라이브러리 버전에 따라 기본값이 다를 수 있습니다.</p>
+
+<hr />
+
+<h2 id="컨슈머-옵션-설정">컨슈머 옵션 설정</h2>
+
+<h3 id="컨슈머-필수-옵션">컨슈머 필수 옵션</h3>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>bootstrap.servers</td>
+      <td>
+        컨슈머가 카프카 클러스터에 연결할 때 사용할 브로커 호스트명:포트 목록 작성<br />
+        2개 이상 작성 시 브로커 장애 대비 가능
+      </td>
+    </tr>
+    <tr>
+      <td>key.deserializer</td>
+      <td>
+        토픽에서 읽은 메시지 키를 역직렬화 할 클래스 지정<br />
+        프로듀서에서 직렬화 한 클래스와 동일하게 설정
+      </td>
+    </tr>
+    <tr>
+      <td>value.deserializer</td>
+      <td>토픽에서 읽은 메시지 값을 역직렬화 할 클래스 지정</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="컨슈머-선택-옵션">컨슈머 선택 옵션</h3>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>group.id</td>
+      <td>컨슈머가 속할 컨슈머 그룹 ID<br />subscribe()로 토픽 구독 시 필수 값</td>
+    </tr>
+    <tr>
+      <td>auto.offset.reset ★</td>
+      <td>
+        컨슈머 그룹이 처음 시작되어 컨슈머 오프셋이 없는 경우, 어느 오프셋부터 읽을지 설정<br />
+        기본값 : latest<br /><br />
+        latest : 가장 최근 오프셋부터 읽기 시작<br />
+        earliest : 가장 예전 오프셋부터 읽기 시작<br />
+        none : 커밋이 이후 오프셋부터 읽기 시작, 커밋 기록이 없으면 오류 반환
+      </td>
+    </tr>
+    <tr>
+      <td>enable.auto.commit</td>
+      <td>
+        자동 커밋 여부<br />
+        기본값 : true
+      </td>
+    </tr>
+    <tr>
+      <td>auto.commit.interval.ms</td>
+      <td>
+        자동 오프셋 커밋 주기<br />
+        기본값 : 5000 (5초)
+      </td>
+    </tr>
+    <tr>
+      <td>max.poll.records</td>
+      <td>
+        poll() 시 반환되는 레코드 개수<br />
+        기본값 : 500
+      </td>
+    </tr>
+    <tr>
+      <td>session.timeout.ms</td>
+      <td>
+        컨슈머-브로커 연결 타임아웃 시간<br />
+        설정한 시간 내 브로커에 컨슈머의 하트비트가 오지 않으면 리밸런싱 발생<br />
+        기본값 : 10000 (10초)
+      </td>
+    </tr>
+    <tr>
+      <td>heartbeat.interval.ms</td>
+      <td>
+        컨슈머가 브로커에게 하트비트 전송 주기<br />
+        기본값 : 3000 (3초)
+      </td>
+    </tr>
+    <tr>
+      <td>max.poll.interval.ms</td>
+      <td>
+        poll() 호출 간격의 최대 허용 시간<br />
+        리밸런싱 판단 기준 (시간 내 poll 호출이 없으면 컨슈머 세션 종료 후 리밸런싱)<br />
+        레코드 처리 속도가 느리면 늘리는게 좋음<br />
+        기본값 : 300000 (5분)
+      </td>
+    </tr>
+    <tr>
+      <td>isolation.level</td>
+      <td>
+        트랜잭션 메시지 처리 방식 설정<br />
+        트랜잭션 프로듀서가 트랜잭션 단위로 데이터 보낼 경우 사용<br />
+        기본값 : read_uncommitted<br /><br />
+        read_uncommitted : 커밋 전 메시지도 읽음<br />
+        read_committed : 커밋 된 메시지만 읽음
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="스트림즈-dsl-옵션-설정">스트림즈 DSL 옵션 설정</h2>
+
+<h3 id="스트림즈-dsl-필수-옵션">스트림즈 DSL 필수 옵션</h3>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>bootstrap.servers</td>
+      <td>
+        스트림즈가 카프카 클러스터에 연결할 때 사용할 브로커 호스트명:포트 목록 작성<br />
+        2개 이상 작성 시 브로커 장애 대비 가능
+      </td>
+    </tr>
+    <tr>
+      <td>application.id</td>
+      <td>
+        스트림즈 애플리케이션 그룹 ID<br />
+        로직이 다른 스트림즈 애플리케이션은 반드시 다른 ID 사용 필요
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="스트림즈-dsl-선택-옵션">스트림즈 DSL 선택 옵션</h3>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>default.key.serde</td>
+      <td>
+        레코드의 메시지 키 직렬화/역직렬화 클래스 지정<br />
+        기본값 : Serdes.ByteArray().getClass().getName()
+      </td>
+    </tr>
+    <tr>
+      <td>default.value.serde</td>
+      <td>
+        레코드의 메시지 값 직렬화/역직렬화 클래스 지정<br />
+        기본값 : Serdes.ByteArray().getClass().getName()
+      </td>
+    </tr>
+    <tr>
+      <td>num.stream.threads</td>
+      <td>
+        스트림 프로세스 실행 시 스레드 수 지정<br />
+        한 프로세스에서 병렬 처리할 태스크 수 늘려서 스케일 업 가능<br />
+        병렬도는 입력 토픽의 파티션 수를 초과할 수 없음<br />
+        기본값 : 1
+      </td>
+    </tr>
+    <tr>
+      <td>state.dir</td>
+      <td>
+        상태 기반 데이터 처리 시 내장 RocksDB에 상태 데이터를 저장할 디렉토리 지정<br />
+        /tmp는 재부팅 시 초기화되는 휘발성 디렉토리이므로, 운영에서는 영속적인 디렉토리 사용 권장<br />
+        기본값 : /tmp/kafka-streams
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#kafka" class="page__taxonomy-item" rel="tag">Kafka</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-04-29">2025-04-29</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/kafka/2025-04-29-1" class="pagination--pager" title="로컬 리눅스 아파치 카프카 설치 및 실행 방법
+">Prev</a>
+    
+    
+      <a href="/kafka/2025-04-30-1" class="pagination--pager" title="카프카 구축 시 참고사항 / 설치형 카프카, SaaS형 카프카 차이 및 장단점
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

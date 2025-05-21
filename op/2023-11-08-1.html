@@ -1,0 +1,926 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>eGovFramework 서버별 resources 분리 방법 / Maven war 빌드 방법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="eGovFramework 서버별 resources 분리 방법 / Maven war 빌드 방법">
+<meta property="og:url" content="https://0songha0.github.io/op/2023-11-08-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-11-08T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2023-11-08T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/op/2023-11-08-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="eGovFramework 서버별 resources 분리 방법 / Maven war 빌드 방법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2023-11-08T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2023-11-08T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">eGovFramework 서버별 resources 분리 방법 / Maven war 빌드 방법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2023-11-08T00:00:00+00:00">2023-11-08</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> eGovFramework 서버별 resources 분리 방법 / Maven war 빌드 방법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#egovframework-서버별-resources-분리-방법">eGovFramework 서버별 resources 분리 방법</a><ul><li><a href="#resources-폴더-분리-예시">resources 폴더 분리 예시</a></li><li><a href="#pomxml-설정">pom.xml 설정</a></li><li><a href="#intellij에서-resources-폴더-변경하여-외장-톰캣-실행-방법">IntelliJ에서 resources 폴더 변경하여 외장 톰캣 실행 방법</a></li></ul></li><li><a href="#이클립스-maven-war-빌드-방법">이클립스 Maven war 빌드 방법</a><ul><li><a href="#서버별-war-빌드-방법">서버별 war 빌드 방법</a></li><li><a href="#war-빌드-failed-시">war 빌드 Failed 시</a></li></ul></li><li><a href="#intellij-maven-war-빌드-방법">IntelliJ Maven war 빌드 방법</a><ul><li><a href="#서버별-war-빌드-구성-추가">서버별 war 빌드 구성 추가</a></li><li><a href="#서버별-war-빌드-방법-1">서버별 war 빌드 방법</a></li><li><a href="#빌드-결과물이-서버-구분에-맞는-properties가-아닌-경우">빌드 결과물이 서버 구분에 맞는 properties가 아닌 경우</a></li></ul></li><li><a href="#maven-war-빌드-확인">Maven war 빌드 확인</a><ul><li><a href="#war-파일-위치">war 파일 위치</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="egovframework-서버별-resources-분리-방법">eGovFramework 서버별 resources 분리 방법</h2>
+
+<h3 id="resources-폴더-분리-예시">resources 폴더 분리 예시</h3>
+<table>
+  <thead>
+    <tr>
+      <th>구분</th>
+      <th>resources 폴더명</th>
+      <th>프로파일명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>개발서버용</td>
+      <td>resources-dev</td>
+      <td>dev</td>
+    </tr>
+    <tr>
+      <td>운영서버 사용자용</td>
+      <td>resources-service</td>
+      <td>service</td>
+    </tr>
+    <tr>
+      <td>운영서버 어드민용</td>
+      <td>resources-admin</td>
+      <td>admin</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><mark>resources 폴더 경로</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>프로젝트폴더/src/main
+</code></pre></div></div>
+
+<h3 id="pomxml-설정">pom.xml 설정</h3>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;build&gt;</span>
+  <span class="nt">&lt;resources&gt;</span>
+    <span class="nt">&lt;resource&gt;</span>
+        <span class="nt">&lt;directory&gt;</span>src/main/resources-${env}<span class="nt">&lt;/directory&gt;</span>
+    <span class="nt">&lt;/resource&gt;</span>
+    <span class="nt">&lt;resource&gt;</span>
+        <span class="nt">&lt;directory&gt;</span>src/main/resources<span class="nt">&lt;/directory&gt;</span>
+    <span class="nt">&lt;/resource&gt;</span>
+  <span class="nt">&lt;/resources&gt;</span> 
+<span class="nt">&lt;/build&gt;</span>
+<span class="nt">&lt;profiles&gt;</span>
+  <span class="c">&lt;!-- 개발서버 반영용 --&gt;</span>
+  <span class="nt">&lt;profile&gt;</span>
+      <span class="nt">&lt;id&gt;</span>dev<span class="nt">&lt;/id&gt;</span>
+      <span class="nt">&lt;activation&gt;</span>
+          <span class="nt">&lt;activeByDefault&gt;</span>true<span class="nt">&lt;/activeByDefault&gt;</span>
+      <span class="nt">&lt;/activation&gt;</span>
+      <span class="nt">&lt;properties&gt;</span>
+          <span class="nt">&lt;env&gt;</span>dev<span class="nt">&lt;/env&gt;</span>
+      <span class="nt">&lt;/properties&gt;</span>
+  <span class="nt">&lt;/profile&gt;</span>
+  <span class="c">&lt;!-- 운영서버 사용자용 --&gt;</span>
+  <span class="nt">&lt;profile&gt;</span>
+      <span class="nt">&lt;id&gt;</span>service<span class="nt">&lt;/id&gt;</span>
+      <span class="nt">&lt;properties&gt;</span>
+          <span class="nt">&lt;env&gt;</span>service<span class="nt">&lt;/env&gt;</span>
+      <span class="nt">&lt;/properties&gt;</span>
+  <span class="nt">&lt;/profile&gt;</span>
+  <span class="c">&lt;!-- 운영서버 어드민용 --&gt;</span>
+  <span class="nt">&lt;profile&gt;</span>
+      <span class="nt">&lt;id&gt;</span>admin<span class="nt">&lt;/id&gt;</span>
+      <span class="nt">&lt;properties&gt;</span>
+          <span class="nt">&lt;env&gt;</span>admin<span class="nt">&lt;/env&gt;</span>
+      <span class="nt">&lt;/properties&gt;</span>
+  <span class="nt">&lt;/profile&gt;</span>
+<span class="nt">&lt;/profiles&gt;</span>
+</code></pre></div></div>
+<p>pom.xml의 &lt;project&gt; 태그 안에 서버별 resources 폴더 정보를 작성해두면,<br />
+클린패키지 설정으로 프로파일명 명시 후 war 빌드 시 구분에 맞는 resources 폴더로 패키징 하게 됩니다.</p>
+
+<h3 id="intellij에서-resources-폴더-변경하여-외장-톰캣-실행-방법">IntelliJ에서 resources 폴더 변경하여 외장 톰캣 실행 방법</h3>
+<p>우측 상단 ‘프로젝트명Application’ 클릭 &gt; Edit Configuration… &gt; VM options: -Dspring.profiles.active=프로파일명 입력 &gt; Apply &gt; OK &gt; 상단 Tomcat 오른쪽 ▶ 버튼 클릭</p>
+
+<hr />
+
+<h2 id="이클립스-maven-war-빌드-방법">이클립스 Maven war 빌드 방법</h2>
+
+<h3 id="서버별-war-빌드-방법">서버별 war 빌드 방법</h3>
+<p>Run &gt; Run Configurations &gt; Maven Build 더블 클릭 &gt; New_confiuration에서 아래와 같이 설정 후 Apply &gt; Run</p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>프로젝트명_서버구분(한글) 입력</td>
+    </tr>
+    <tr>
+      <td>Main 탭</td>
+      <td>
+        Workspace... 눌러서 프로젝트 선택 후<br />
+        Goals에 'clean package -P 개발서버용/운영사용자용/운영관리자용 프로파일명' 입력<br />
+        (로컬용은 clean package만 입력합니다.)
+      </td>
+    </tr>
+    <tr>
+      <td>JRE 탭</td>
+      <td>Alternate JRE 선택 후 프로젝트 버전에 맞는 jdk 선택</td>
+    </tr>
+  </tbody>
+</table>
+<p>clean package 설정 후 빌드 된 war는 src/main/resources-프로파일명 폴더의 파일들을 갖게 됩니다.</p>
+
+<p>만들어진 Configurations 우클릭 &gt; Duplicate로 복제 후 각 서버와 서비스 구분별로 하나씩 만들어두고 재사용하면 편합니다.</p>
+
+<h3 id="war-빌드-failed-시">war 빌드 Failed 시</h3>
+<p>프로젝트 우클릭 &gt; Run As &gt; Maven Clean으로 target 폴더를 초기화하고 다시 시도하면 됩니다.</p>
+
+<hr />
+
+<h2 id="intellij-maven-war-빌드-방법">IntelliJ Maven war 빌드 방법</h2>
+
+<h3 id="서버별-war-빌드-구성-추가">서버별 war 빌드 구성 추가</h3>
+<p>우측 상단 Edit Configurations &gt; 좌측 상단 + 버튼 &gt; Maven &gt; 아래와 같이 설정 후 Apply &gt; OK</p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>프로젝트명_서버구분(한글) 입력</td>
+    </tr>
+    <tr>
+      <td>Store as project file</td>
+      <td>체크해야 .run 폴더에 이름.run.xml이 저장되어서, IntelliJ 재시작 시 삭제되지 않습니다.</td>
+    </tr>
+    <tr>
+      <td>Run</td>
+      <td>clean package 입력</td>
+    </tr>
+    <tr>
+      <td>Woking directory</td>
+      <td>자동 완성된 프로젝트명 확인</td>
+    </tr>
+    <tr>
+      <td>Profiles</td>
+      <td>서버 구분에 맞는 프로파일명 입력 (dev 등)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="서버별-war-빌드-방법-1">서버별 war 빌드 방법</h3>
+<p>우측 상단 Run Configurations 목록에서 생성한 war 빌드 구성 선택 &gt; 오른쪽 ▶ 버튼 클릭<br />
+또는<br />
+우측 Maven View &gt; 하단 Run Configurations &gt; 생성한 war 빌드 구성 더블 클릭</p>
+
+<h3 id="빌드-결과물이-서버-구분에-맞는-properties가-아닌-경우">빌드 결과물이 서버 구분에 맞는 properties가 아닌 경우</h3>
+<p>좌측 상단 File &gt; Project Structure… &gt; Modules &gt; 프로젝트명 &gt; Sources 탭 &gt; 우측에서 Test Resource Folders 삭제 &gt; OK</p>
+
+<hr />
+
+<h2 id="maven-war-빌드-확인">Maven war 빌드 확인</h2>
+
+<h3 id="war-파일-위치">war 파일 위치</h3>
+<p>console에 ‘BUILD SUCCESS’가 나오면 프로젝트 폴더 아래의 target 폴더 안에 war 파일이 생성됩니다.</p>
+
+<p><mark>war 파일 resources 정상 확인</mark><br />
+target 폴더 안의 war 파일과 같은 위치에 있는 war 압축이 풀린 폴더에서 확인합니다.<br />
+WEB-INF/classes 폴더 안에 기존 resources 폴더의 내용들이 패키징 된 것을 볼 수 있습니다.</p>
+
+<p><mark>빌드된 eGovFramework properties 경로 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>프로젝트명\target\egovframework-all-in-one\WEB-INF\classes\egovframework\egovProps\globals.properties
+</code></pre></div></div>
+<p>MainPage URL, DB 연결 정보, fileStorePath 등이 서버와 서비스 구분에 맞는지 확인해야 합니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%9A%B4%EC%98%81" class="page__taxonomy-item" rel="tag">리눅스 / 운영</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-11-08">2023-11-08</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/tool/2023-11-01-1" class="pagination--pager" title="이클립스에서 Git 사용하는 방법
+">Prev</a>
+    
+    
+      <a href="/tool/2023-11-08-1" class="pagination--pager" title="윈도우 창 잡고 흔들면 모든 창 최소화되는 기능 끄기
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,1102 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>JAVA에서 엘라스틱서치 REST API 호출 방법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="JAVA에서 엘라스틱서치 REST API 호출 방법">
+<meta property="og:url" content="https://0songha0.github.io/elk/2022-09-16-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-09-16T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2022-09-16T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/elk/2022-09-16-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="JAVA에서 엘라스틱서치 REST API 호출 방법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2022-09-16T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2022-09-16T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">JAVA에서 엘라스틱서치 REST API 호출 방법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2022-09-16T00:00:00+00:00">2022-09-16</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> JAVA에서 엘라스틱서치 REST API 호출 방법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#java-httpurlconnection-방식">JAVA HttpURLConnection 방식</a></li><li><a href="#transport-client-방식">Transport Client 방식</a></li><li><a href="#java-high-level-rest-client-방식">JAVA High Level REST Client 방식</a></li><li><a href="#java-low-level-rest-client-방식">JAVA Low Level REST Client 방식</a><ul><li><a href="#gradle-의존성-주입">Gradle 의존성 주입</a></li><li><a href="#aplcationproperties-속성-추가">aplcation.properties 속성 추가</a></li><li><a href="#엘라스틱서치-api-호출-유틸-생성">엘라스틱서치 API 호출 유틸 생성</a></li><li><a href="#엘라스틱서치-api-요청-예시">엘라스틱서치 API 요청 예시</a></li><li><a href="#엘라스틱서치에-엑셀-데이터-저장-예시">엘라스틱서치에 엑셀 데이터 저장 예시</a></li><li><a href="#엘라스틱서치-검색-컨트롤러-예시">엘라스틱서치 검색 컨트롤러 예시</a></li><li><a href="#javascript에서-java-요청-예시">Javascript에서 Java 요청 예시</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="java-httpurlconnection-방식">JAVA HttpURLConnection 방식</h2>
+<p>JDK에서 기본 지원하는 HttpURLConnection 객체로 Rest API를 호출하는 통신 방식입니다.<br />
+OkHttp를 사용하는 Retrofit 라이브러리로 개발하면 더 간결하고 가독성 좋아집니다.</p>
+
+<p>포스트맨으로 엘라스틱서치 Rest API 호출이 가능하니까 시도해 볼까 했으나,<br />
+한 번에 다중 노드에 요청할 수 있는 엘라스틱서치 지원 방식 중 하나로 구현할 예정입니다.</p>
+
+<hr />
+
+<h2 id="transport-client-방식">Transport Client 방식</h2>
+<p>엘라스틱서치에서 지원하는 TransportClient 객체로 소켓을 사용해 연결하는 방식입니다.<br />
+엘라스틱서치 최신 버전부터는 지원되지 않아 사용할 수 없습니다.</p>
+
+<hr />
+
+<h2 id="java-high-level-rest-client-방식">JAVA High Level REST Client 방식</h2>
+
+<p>엘라스틱서치에서 지원하는 HighLevelRestClient 객체로 엘라스틱서치 Rest API를 호출하는 방식입니다.<br />
+Query DSL을 JSON String이 아닌 Builder 객체로 만드는 과정이 번거롭다는 단점이 있습니다.</p>
+
+<hr />
+
+<h2 id="java-low-level-rest-client-방식">JAVA Low Level REST Client 방식</h2>
+<p>엘라스틱서치에서 지원하는 RestClient 객체로 엘라스틱서치 Rest API를 호출하는 방식입니다.<br />
+Query DSL을 JSON String으로 만들어 요청할 수 있어 사용이 편리하다는 장점이 있습니다.</p>
+
+<p>SpringBoot에서 JAVA 엘라스틱서치 유틸 생성 후 호출하도록 구현해 보았습니다.</p>
+
+<h3 id="gradle-의존성-주입">Gradle 의존성 주입</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implementation 'org.elasticsearch.client:elasticsearch-rest-client:8.4.1'
+</code></pre></div></div>
+<p>위와 같이 build.gradle 파일에 dependencies를 추가합니다.</p>
+
+<h3 id="aplcationproperties-속성-추가">aplcation.properties 속성 추가</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>elasticsearch.hosts=노드1IP,노드2IP
+elasticsearch.ports=노드1HTTP포트,노드2HTTP포트
+elasticsearch.apikey=ApiKey *******JTUJlcEV0N0tSQlZhc1Y6UVJ4cmNHdmJRQnVpWnYxdmRjRHdqQQ==
+</code></pre></div></div>
+<p>프로퍼티 파일에 엘라스틱서치 노드 접속 정보와 Apikey를 설정합니다.</p>
+
+<h3 id="엘라스틱서치-api-호출-유틸-생성">엘라스틱서치 API 호출 유틸 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import lombok.extern.slf4j.Slf4j;
+import org.apache.http.HttpHost;
+import org.apache.http.util.EntityUtils;
+import org.elasticsearch.client.Request;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.Response;
+import org.elasticsearch.client.RestClient;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+@Slf4j
+@Component
+public class ElasticUtil {
+
+    @Value("${elasticsearch.hosts}")
+    private List&lt;String&gt; hosts;
+
+    @Value("${elasticsearch.ports}")
+    private List&lt;String&gt; ports;
+
+    @Value("${elasticsearch.apikey}")
+    private String apikey;
+
+    public Map&lt;String, Object&gt; callElasticRestApi(String method, String url, String jsonBody) {
+
+        Map&lt;String, Object&gt; result = new HashMap&lt;&gt;();
+
+        try {
+            // 엘라스틱서치 노드 정보 배열 생성
+            int nodeCnt = hosts.size();
+            HttpHost[] hostArr = new HttpHost[nodeCnt];
+
+            for(int i = 0; i &lt; nodeCnt; i++) {
+                hostArr[i] = new HttpHost(hosts.get(i), Integer.parseInt(ports.get(i)), "http");
+            }
+
+            // 엘라스틱서치 요청 생성
+            Request request = new Request(method, url);
+
+            // 헤더에 엘라스틱서치 계정 API Key 입력
+            RequestOptions.Builder builder = RequestOptions.DEFAULT.toBuilder();
+            builder.addHeader("Authorization", apikey);
+            request.setOptions(builder);
+
+            // 요청 Json Body
+            request.setJsonEntity(jsonBody);
+
+            // 요청 실행 후 응답 받기
+            RestClient restClient = RestClient.builder(hostArr).build();
+            request.addParameter("pretty", "true");
+            Response response = restClient.performRequest(request);
+
+            // 정상 응답 코드 : 200
+            result.put("resultCode", response.getStatusLine().getStatusCode());
+
+            // 응답 Json Body
+            result.put("resultBody", EntityUtils.toString(response.getEntity()));
+
+/*
+            TODO : 엘라스틱서치 에러 처리 안 하기로 하여 주석 처리
+
+            // 응답 코드 생성
+            String resultBody = EntityUtils.toString(response.getEntity());
+
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObject = (JSONObject) parser.parse(resultBody);
+
+            if("true".equals(jsonObject.get("errors").toString())) {
+                result.put("resultCode", "615");
+            }else {
+                // 정상 응답 코드 : 200
+                result.put("resultCode", response.getStatusLine().getStatusCode());
+            }
+
+            // 응답 Json Body
+            result.put("resultBody", resultBody);
+*/
+
+            restClient.close();
+
+        } catch (Exception e) {
+            result.put("resultCode", -1);
+            result.put("resultBody", e.toString());
+        }
+
+        return result;
+    }
+    
+    public String convertEmptyStrIfNull(Map&lt;String, Object&gt; map, String key) {
+        // map 데이터가 null인 경우 빈문자열로 치환하여 return
+        String value = String.valueOf(map.getOrDefault(key, ""));
+        return Objects.isNull(map.getOrDefault(key, null)) ? "" : value;
+    }
+}
+</code></pre></div></div>
+<p>엘라스틱서치 API 호출을 위한 전용 유틸을 개발하였습니다.</p>
+
+<p><mark>API Key 생성 쿼리</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /_security/api_key
+{
+  "name": "유저명-api-key"
+}
+</code></pre></div></div>
+<p>Heagers : “Authorization” 항목으로 “ApiKey 인코딩APIKey”를 넣어줘야 API 요청이 정상적으로 보내집니다.</p>
+
+<p><mark>포스트맨으로 엘라스틱서치 API 요청 테스트</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET http://엘라스틱서치IP:9200
+</code></pre></div></div>
+<p>Body : raw &gt; JSON (content-type:application/json) 선택 시 쿼리 DSL의 Json 파라미터를 입력할 수 있습니다.</p>
+
+<h3 id="엘라스틱서치-api-요청-예시">엘라스틱서치 API 요청 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import com.chunjae.archive_cms.common.util.ElasticUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.util.Map;
+
+@Slf4j
+@Component
+public class ElasticQuery {
+    
+    @Autowired
+    private ElasticUtil elasticUtil;
+
+    public Map&lt;String, Object&gt; getElasticData(Map&lt;String,Object&gt; paramMap) throws Exception {
+        Map&lt;String, Object&gt; resultMap;
+
+        String jsonBody = "";
+
+        jsonBody += "{";
+        jsonBody += 	"\"query\": {";
+        jsonBody += 		"\"bool\" : {";
+        jsonBody += 			"\"must\": [";
+        jsonBody += 				"{\"match\": {\"필드명1\": \"" + paramMap.get필드명1() + "\"}},";
+        jsonBody += 				"{\"match\": {\"필드명2\": \"" + paramMap.get필드명2() + "\"}},";
+        jsonBody += 				"{\"match\": {\"필드명3\": \"" + paramMap.get필드명3() + "\"}}";
+        jsonBody += 			"]";
+        jsonBody += 		"}";
+        jsonBody += 	"},";
+        jsonBody += 	"\"size\": 1000,";
+        jsonBody += 	"\"track_total_hits\": true";
+        jsonBody += "}";
+
+        resultMap = elasticUtil.callElasticRestApi("GET", "인덱스명/_search", jsonBody);
+
+        return resultMap;
+    }
+}
+</code></pre></div></div>
+<p>ElasticUtil을 사용하여 엘라스틱서치 데이터를 검색하는 ElasticQuery 클래스 예시입니다.<br />
+Mapper처럼 쿼리를 따로 모아두면 관리가 편하고, 코드 재사용성을 높일 수 있습니다.</p>
+
+<p>Json 문자열은 JSONObject 객체를 이용해서 생성할 수도 있지만,<br />
+Query DSL은 뎁스가 많아 복잡하기 때문에 가독성과 편의를 위해 String으로 작성하였습니다.</p>
+
+<p><mark>Query DSL을 Json String으로 만드는 방법</mark></p>
+<ol>
+  <li>키바나 Console에서 완성한 Query DSL을 Notepad++에 붙여 넣습니다.</li>
+  <li>“를 \“으로 모두 바꾸기 합니다.</li>
+  <li>한 줄마다 “ “;로 감싸줍니다.</li>
+  <li>텍스트 상단 좌측에서 Alt 키 누르며 세로로 드래그 후 ‘jsonBody += ‘를 입력합니다.</li>
+  <li>가독성을 위해 문자열 왼쪽에 뎁스에 맞는 들여쓰기를 넣어줍니다.</li>
+</ol>
+
+<p>위 String += 방법은 성능이 좋지 않아서, StringBuilder를 사용하여 메모리 부하를 줄여주는 것이 좋습니다.</p>
+
+<p><mark>StringBuilder로 개선한 코드</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import com.chunjae.archive_cms.common.util.ElasticUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.util.Map;
+
+@Slf4j
+@Component
+public class ElasticQuery {
+
+    @Autowired
+    private ElasticUtil elasticUtil;
+
+    public Map&lt;String, Object&gt; getElasticData(Map&lt;String,Object&gt; paramMap) throws Exception {
+        Map&lt;String, Object&gt; resultMap;
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("{");
+        sb.append("  \"query\": {");
+        sb.append("    \"bool\" : {");
+        sb.append("      \"must\": [");
+        sb.append("        {\"match\": {\"필드명1\": \"" + paramMap.get필드명1() + "\"}},");
+        sb.append("        {\"match\": {\"필드명2\": \"" + paramMap.get필드명2() + "\"}},");
+        sb.append("        {\"match\": {\"필드명3\": \"" + paramMap.get필드명3() + "\"}}");
+        sb.append("      ]");
+        sb.append("    }");
+        sb.append("  },");
+        sb.append("  \"size\": 1000,");
+        sb.append("  \"track_total_hits\": true");
+        sb.append("}");
+
+        resultMap = elasticUtil.callElasticRestApi("GET", "인덱스명/_search", sb.toString());
+
+        return resultMap;
+    }
+}
+</code></pre></div></div>
+
+<h3 id="엘라스틱서치에-엑셀-데이터-저장-예시">엘라스틱서치에 엑셀 데이터 저장 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Transactional(rollbackFor={Exception.class})
+public void saveExcelData(MultipartFile mContentFile) throws Exception {
+	try {
+		ExcelReader reader = new ExcelReader();
+		List&lt;Map&lt;Integer, Object&gt;&gt; excelList = reader.getExcelList(mContentFile);
+
+		List&lt;Map&lt;String, Object&gt;&gt; contentList = new ArrayList&lt;&gt;();
+		
+		for (int i = 4; i &lt; excelList.size(); i++) {
+			Map&lt;Integer, Object&gt; excelMap = excelList.get(i);
+			int rowNum = i + 1;
+			
+			if(excelMap.get(5) != null) {
+				contentMap.put("type_cd", codeService.getCodeByName("2", String.valueOf(excelMap.get(5)))); // 2:공통코드그룹코드
+			}else {
+				throw new Exception(rowNum + "번째 row : 콘텐츠 유형이 존재하지 않아 정상적으로 완료되지 않았습니다.");
+			
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+			Date nowDate = Calendar.getInstance().getTime();
+			contentMap.put("now_elastic_date", format.format(nowDate));
+			contentMap.put("now_date", nowDate);
+
+			// DB insert
+			Integer contentInsertResult = contentService.insertContent(contentMap);
+			log.info("INSERT ID : " + contentMap.get("id"));
+
+			if(contentInsertResult == 0) {
+				throw new Exception(rowNum + "번째 row : 콘텐츠가 정상적으로 DB에 저장되지 않았습니다.");
+			}else {
+				contentList.add(contentMap);
+			}
+			
+		}
+		
+		// 엘라스틱서치 Bulk insert
+		boolean bulkRes = elasticService.insertNoriContentBulkData(contentList);
+		
+		if (bulkRes == false) {
+			throw new Exception("엘라스틱서치 Bulk Insert가 실패하였습니다.");
+		}
+		
+	} catch (Exception e) {
+		throw e;
+	}
+}
+</code></pre></div></div>
+<p>JAVA에서 엑셀 데이터를 DB Insert 후 엘라스틱서치에 저장하는 서비스 함수 예시입니다.<br />
+ElasticService에서 데이터 가공 후 ElasticQuery를 호출하여 엘라스틱서치 인덱스에 도큐먼트를 생성합니다.</p>
+
+<h3 id="엘라스틱서치-검색-컨트롤러-예시">엘라스틱서치 검색 컨트롤러 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@ResponseBody
+@PostMapping("/컨트롤러URL")
+public Map&lt;String, Object&gt; getTopicList(@RequestBody Map&lt;String,Object&gt; paramMap) {
+    HashMap&lt;String, Object&gt; resultMap = new HashMap&lt;&gt;();
+
+    try {
+        resultMap.put("topicList", topicService.getTopicList(paramMap));
+        resultMap.put("success", true);
+    }catch (Exception e) {
+        resultMap.put("success", false);
+    }
+    return resultMap;
+}
+</code></pre></div></div>
+<p>TopicService에서 ElasticService를 호출하여 엘라스틱서치 검색 결과를 가져옵니다.</p>
+
+<h3 id="javascript에서-java-요청-예시">Javascript에서 Java 요청 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let formData = new FormData();
+formData.append("파라미터1", 값);
+formData.append("파라미터2", 값);
+
+fetch('/컨트롤러URL', {
+    method: 'POST',
+    body: formData
+})
+.then((response) =&gt; response.json())
+.then((data) =&gt; {
+    if(data.success == true) {
+        // 정상 처리
+        console.log(data.topicList);
+    }else {
+        // 에러 처리
+    }
+})
+.catch((error) =&gt; {
+    // 에러 처리
+})
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%EC%97%98%EB%9D%BC%EC%8A%A4%ED%8B%B1%EC%84%9C%EC%B9%98" class="page__taxonomy-item" rel="tag">엘라스틱서치</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-09-16">2022-09-16</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/tool/2022-09-08-1" class="pagination--pager" title="Postman 설치 / 무료 API 테스트 툴 포스트맨 사용법 / 포스트맨 오류 해결
+">Prev</a>
+    
+    
+      <a href="/web-dev/2022-09-28-1" class="pagination--pager" title="JAVA에서 HTML을 PDF 파일로 변환 및 다운로드하는 방법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

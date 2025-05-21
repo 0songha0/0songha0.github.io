@@ -1,0 +1,929 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>AWS EC2 엘라스틱서치 운영서버 로드밸런서 생성 및 보안그룹 설정 방법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="AWS EC2 엘라스틱서치 운영서버 로드밸런서 생성 및 보안그룹 설정 방법">
+<meta property="og:url" content="https://0songha0.github.io/aws/2023-02-01-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-02-01T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2023-02-01T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/aws/2023-02-01-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="AWS EC2 엘라스틱서치 운영서버 로드밸런서 생성 및 보안그룹 설정 방법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2023-02-01T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2023-02-01T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">AWS EC2 엘라스틱서치 운영서버 로드밸런서 생성 및 보안그룹 설정 방법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2023-02-01T00:00:00+00:00">2023-02-01</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> AWS EC2 엘라스틱서치 운영서버 로드밸런서 생성 및 보안그룹 설정 방법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#엘라스틱서치-서버-로드밸런서-생성">엘라스틱서치 서버 로드밸런서 생성</a><ul><li><a href="#생성-예정-로드밸런서">생성 예정 로드밸런서</a></li><li><a href="#aws-로드밸런서-대상-그룹-생성">AWS 로드밸런서 대상 그룹 생성</a></li><li><a href="#aws-로드밸런서-생성">AWS 로드밸런서 생성</a></li><li><a href="#로드밸런서-보안그룹-인바운드-규칙-추가">로드밸런서 보안그룹 인바운드 규칙 추가</a></li><li><a href="#로드밸런서-도메인-변경-방법">로드밸런서 도메인 변경 방법</a></li></ul></li><li><a href="#aws-ec2-서버-방화벽-설정">AWS EC2 서버 방화벽 설정</a><ul><li><a href="#엘라스틱서치-서버-보안그룹-설정">엘라스틱서치 서버 보안그룹 설정</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="엘라스틱서치-서버-로드밸런서-생성">엘라스틱서치 서버 로드밸런서 생성</h2>
+
+<h3 id="생성-예정-로드밸런서">생성 예정 로드밸런서</h3>
+<p><strong>1) 엘라스틱서치용 로드밸런서</strong><br />
+로드밸런서1 DNS name:80으로 들어오는 요청을 엘라스틱서치서버:9200으로 포워딩하는 ALB 로드밸런서1</p>
+
+<p><strong>2) 키바나용 로드밸런서</strong><br />
+로드밸런서2 DNS name:80으로 들어오는 요청을 엘라스틱서치서버:5600으로 포워딩하는 ALB 로드밸런서2</p>
+
+<p><mark>로드밸런서 종류</mark><br />
+<code class="language-plaintext highlighter-rouge">CLB</code> : 이전 세대의 로드 밸런서로서, 현재는 사용이 권장되지 않습니다.<br />
+<code class="language-plaintext highlighter-rouge">ALB</code> : HTTP 및 HTTPS 트래픽을 처리합니다. 웹 애플리케이션을 더 효율적으로 관리할 수 있습니다.<br />
+<code class="language-plaintext highlighter-rouge">NLB</code>: TCP, UDP 및 HTTPS 트래픽을 처리합니다. 대규모 네트워크 트래픽 처리에 적합합니다.</p>
+
+<h3 id="aws-로드밸런서-대상-그룹-생성">AWS 로드밸런서 대상 그룹 생성</h3>
+
+<p>EC2 &gt; 로드 밸런싱 &gt; 대상 그룹 &gt; Create target group &gt;</p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>Target type</td>
+      <td>Instances 선택</td>
+    </tr>
+    <tr>
+      <td>Target group name</td>
+      <td>프로젝트명-서버구분-포트명(9200) 입력</td>
+    </tr>
+    <tr>
+      <td>Protocol</td>
+      <td>HTTP 선택</td>
+    </tr>
+    <tr>
+      <td>Port</td>
+      <td>로드밸런서로 들어오는 요청을 포워딩 할 포트 입력 (9200)</td>
+    </tr>
+    <tr>
+      <td>VPC</td>
+      <td>프로젝트명-active-vpc 선택</td>
+    </tr>
+    <tr>
+      <td>Protocol version</td>
+      <td>HTTP1 선택</td>
+    </tr>
+    <tr>
+      <td>Health check protocol</td>
+      <td>HTTP 선택</td>
+    </tr>
+    <tr>
+      <td>Health check path</td>
+      <td>/ 입력</td>
+    </tr>
+  </tbody>
+</table>
+<p>위와 같이 입력하고 다음 Register targets 페이지로 넘어갑니다.<br />
+요청 받을 엘라스틱서치서버 instance를 선택하고 포워딩 포트 (9200) 입력 후 ‘Include as pending below’를 눌러 타겟을 추가한 뒤 대상 그룹을 생성합니다.</p>
+
+<p>같은 설정으로 키바나 5601 포트에 대한 대상 그룹도 생성해 줍니다.</p>
+
+<h3 id="aws-로드밸런서-생성">AWS 로드밸런서 생성</h3>
+
+<p>EC2 &gt; 로드 밸런싱 &gt; 로드밸런서 &gt; Create load balancer &gt; Application Load Balancer (ALB) Create &gt;</p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>Load balancer name</td>
+      <td>프로젝트명-서버구분-alb-포워딩포트(9200)</td>
+    </tr>
+    <tr>
+      <td>Scheme</td>
+      <td>Internet-facing 선택</td>
+    </tr>
+    <tr>
+      <td>IP address type</td>
+      <td>IPv4 선택</td>
+    </tr>
+    <tr>
+      <td>VPC</td>
+      <td>프로젝트명-active-vpc 선택</td>
+    </tr>
+    <tr>
+      <td>Mappings</td>
+      <td>
+        ap-northeast-2a (apne2-az1) 체크 &gt; Subnet : 프로젝트명-pub-a 선택,<br />
+        ap-northeast-2c (apne2-az3) 체크 &gt; Subnet : 프로젝트명-pub-c 선택
+      </td>
+    </tr>
+    <tr>
+      <td>Security groups</td>
+      <td>프로젝트명-서버구분-ALB-SG 선택</td>
+    </tr>
+    <tr>
+      <td>Listener</td>
+      <td>Protocol HTTP : Port 80 (요청을 받을 포트) 입력</td>
+    </tr>
+    <tr>
+      <td>Listener action</td>
+      <td>프로젝트명-서버구분-포트명(9200) 선택</td>
+    </tr>
+  </tbody>
+</table>
+<p>위와 같이 80 요청을 9200 포트로 전달할 로드밸런서 생성 후, 키바나 5601 포트에 대한 로드밸런서도 생성합니다.</p>
+
+<p><mark>AWS 로드밸런서 리스너 추가 방법</mark><br />
+EC2 &gt; 로드 밸런싱 &gt; 로드밸런서 &gt; 로드밸런서 선택 &gt; Add listener &gt;</p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>Protocol</td>
+      <td>HTTP 또는 HTTPS</td>
+    </tr>
+    <tr>
+      <td>Port</td>
+      <td>들어오는 요청을 허용할 포트 입력 (80)</td>
+    </tr>
+    <tr>
+      <td>Add action &gt; Forward</td>
+      <td>로드밸런서 URL로 들어오는 요청을 전달받을 대상 그룹 선택 (Weight 1)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="로드밸런서-보안그룹-인바운드-규칙-추가">로드밸런서 보안그룹 인바운드 규칙 추가</h3>
+<p>EC2 &gt; 로드 밸런싱 &gt; 로드밸런서 &gt; 로드밸런서 선택 &gt; Security &gt; 보안 그룹 수정 &gt; 인바운드 규칙 편집 편집 &gt; 규칙 추가</p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>유형</td>
+      <td>사용자 지정 TCP</td>
+    </tr>
+    <tr>
+      <td>포트 범위</td>
+      <td>로드밸런서로 들어오는 요청을 허용할 포트 입력 (80)</td>
+    </tr>
+    <tr>
+      <td>소스</td>
+      <td>
+        사내 외부망IP/32 (사내 외부망에 연결된 컴퓨터로 네이버에서 '내 ip' 검색해서 나온 IP)<br />
+        → 외부 접속이 불가해서 엘라스틱서치 Rest API 라이브러리 호출이 안되어, 0.0.0.0/0으로 변경하였습니다.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="로드밸런서-도메인-변경-방법">로드밸런서 도메인 변경 방법</h3>
+<p><strong>1. </strong>아이네임즈 사이트에서 도메인 주소를 구매합니다. (http://서브도메인.루트도메인.co.kr)<br />
+<strong>2. </strong>새 도메인으로 들어오는 요청을 로드밸런서 도메인으로 넘기게 cname 설정합니다.</p>
+
+<hr />
+
+<h2 id="aws-ec2-서버-방화벽-설정">AWS EC2 서버 방화벽 설정</h2>
+
+<h3 id="엘라스틱서치-서버-보안그룹-설정">엘라스틱서치 서버 보안그룹 설정</h3>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>인바운드 규칙</td>
+      <td>
+        로드밸런서 보안그룹 대상으로 9200(엘라스틱서치), 5601(키바나) 포트를 허용하고,
+        배스천서버 보안그룹 대상으로 22(SSH/터미널) 포트를 허용합니다.
+      </td>
+    </tr>
+    <tr>
+      <td>아웃바운드 규칙</td>
+      <td>0.0.0.0./0 대상으로 전체 포트를 허용합니다.</td>
+    </tr>
+  </tbody>
+</table>
+<p>배스천서버를 통해 SSH 접속할 수 있고, 로드밸런서를 통해 HTTP 접속할 수 있는 엘라스틱서치 서버의 보안 규칙입니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#aws" class="page__taxonomy-item" rel="tag">AWS</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-02-01">2023-02-01</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/op/2023-01-31-1" class="pagination--pager" title="리눅스 패키지 매니저 종류 / 패키지 설치 방법
+">Prev</a>
+    
+    
+      <a href="/elk/2023-02-01-1" class="pagination--pager" title="AWS EC2 리눅스 운영서버에 엘라스틱서치, 키바나 설치 방법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

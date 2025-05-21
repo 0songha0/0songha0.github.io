@@ -1,0 +1,942 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Java 로깅 라이브러리 종류 / lombok 및 slf4j를 이용한 log4j2 사용 방법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="Java 로깅 라이브러리 종류 / lombok 및 slf4j를 이용한 log4j2 사용 방법">
+<meta property="og:url" content="https://0songha0.github.io/web-dev/2022-06-23-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-06-23T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2022-06-23T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/web-dev/2022-06-23-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Java 로깅 라이브러리 종류 / lombok 및 slf4j를 이용한 log4j2 사용 방법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2022-06-23T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2022-06-23T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Java 로깅 라이브러리 종류 / lombok 및 slf4j를 이용한 log4j2 사용 방법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2022-06-23T00:00:00+00:00">2022-06-23</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Java 로깅 라이브러리 종류 / lombok 및 slf4j를 이용한 log4j2 사용 방법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#java-로깅-라이브러리-종류">Java 로깅 라이브러리 종류</a><ul><li><a href="#log4j">log4j</a></li><li><a href="#log4j2">log4j2</a></li><li><a href="#logback">logback</a></li></ul></li><li><a href="#log4j-사용-예시">log4j 사용 예시</a></li><li><a href="#slf4j를-통해-log4j2-사용-방법">slf4j를 통해 log4j2 사용 방법</a><ul><li><a href="#log4j2-추가">log4j2 추가</a></li><li><a href="#slf4j-추가">slf4j 추가</a></li><li><a href="#slf4j-사용-예시">slf4j 사용 예시</a></li></ul></li><li><a href="#lombok으로-slf4j-사용-방법">lombok으로 slf4j 사용 방법</a><ul><li><a href="#lombok-추가">lombok 추가</a></li><li><a href="#lombok으로-slf4j-사용-예시">lombok으로 slf4j 사용 예시</a></li></ul></li><li><a href="#springboot-logback-사용-방법">SpringBoot logback 사용 방법</a><ul><li><a href="#logbackxml-파일-생성">logback.xml 파일 생성</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p><mark>System.out.println 대신 Logger 사용 이유</mark><br />
+System.out.println은 IO 자원을 사용하기 때문에 리소스를 많이 사용하여 성능 저하가 올 수 있습니다.<br />
+그래서 System.out.println는 운영 반영 시 직접 전부 삭제하고 올려야 하기 때문에,<br />
+로그 레벨에 따라 출력 여부를 설정할 수 있고 로깅 성능이 좋은 Logger를 사용하여 개발하는 것이 좋습니다.</p>
+
+<hr />
+
+<h2 id="java-로깅-라이브러리-종류">Java 로깅 라이브러리 종류</h2>
+
+<h3 id="log4j">log4j</h3>
+<p>초기에 많은 Java 어플리케이션에서 사용되었으나, 보안 취약점 문제로 인해 사용이 줄어들고 있습니다.</p>
+
+<h3 id="log4j2">log4j2</h3>
+<p>log4j의 보안 취약점 문제를 보완하고 성능을 향상시킨 log4j2 사용이 권장되고 있습니다.<br />
+Spring, SpringBoot, egovFramework 모두 log4j2 사용이 가능합니다.</p>
+
+<h3 id="logback">logback</h3>
+<p>log4j의 후속 프로젝트로 개발되어 향상된 성능을 제공합니다.<br />
+Spring Boot는 기본적으로 logback을 사용하여 로깅을 구성합니다.</p>
+
+<hr />
+
+<h2 id="log4j-사용-예시">log4j 사용 예시</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import org.apache.log4j.Logger;
+
+public class 클래스명 {
+  Logger log = Logger.getLogger(this.getClass());
+
+  public void 함수명() {
+    log.info("test");
+  }
+</code></pre></div></div>
+<p>이렇게 log4j를 직접 import 하면, 다른 로깅 라이브러리로 변경 시 모든 Java 파일을 수정해줘야 합니다.<br />
+특정 로깅 라이브러리에 종속되는 것을 방지하기 위해서 slf4j를 통해 사용하는 것이 좋습니다.</p>
+
+<hr />
+
+<h2 id="slf4j를-통해-log4j2-사용-방법">slf4j를 통해 log4j2 사용 방법</h2>
+
+<p><mark>slf4j란?</mark><br />
+slf4j는 다양한 로깅 라이브러리들과의 인터페이스입니다.</p>
+
+<h3 id="log4j2-추가">log4j2 추가</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+</code></pre></div></div>
+<p>build.gradle 파일에 log4j2 라이브러리 의존성을 추가합니다.</p>
+
+<h3 id="slf4j-추가">slf4j 추가</h3>
+
+<p><mark>Gradle 사용 시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implementation 'org.slf4j:slf4j-api:1.7.32'
+implementation 'org.slf4j:slf4j-simple:1.7.32'
+</code></pre></div></div>
+<p>build.gradle 파일에 slf4j 라이브러리 의존성을 추가합니다.</p>
+
+<p><mark>Maven 사용 시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+    &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
+    &lt;version&gt;1.7.25&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre></div></div>
+<p>pom.xml 파일에 slf4j 라이브러리 의존성을 추가합니다.</p>
+
+<h3 id="slf4j-사용-예시">slf4j 사용 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class 클래스명 {
+  Logger log = LoggerFactory.getLogger(this.getClass());
+
+  public void 함수명() {
+    log.info("test");
+    log.debug("디버깅 메시지 ::: " + 변수);
+  }
+</code></pre></div></div>
+<p>slf4j를 통해서 log를 작성하면, 다른 로깅 라이브러리로 변경 시 코드 변경 작업이 필요 없습니다.</p>
+
+<hr />
+
+<h2 id="lombok으로-slf4j-사용-방법">lombok으로 slf4j 사용 방법</h2>
+
+<p><mark>lombok이란?</mark><br />
+lombok은 코드를 더 간결하게 만들어주는 라이브러리입니다.</p>
+
+<h3 id="lombok-추가">lombok 추가</h3>
+
+<p><mark>Gradle 사용 시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>compileOnly 'org.projectlombok:lombok'
+annotationProcessor 'org.projectlombok:lombok'
+</code></pre></div></div>
+<p>build.gradle 파일에 lombok 라이브러리 의존성을 추가합니다.</p>
+
+<p><mark>Maven 사용 시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;dependency&gt;
+  &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+  &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+  &lt;version&gt;1.18.24&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre></div></div>
+<p>pom.xml 파일에 lombok 라이브러리 의존성을 추가합니다.</p>
+
+<h3 id="lombok으로-slf4j-사용-예시">lombok으로 slf4j 사용 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+public class 클래스명 {
+
+  public void 함수명() {
+    log.info("test");
+    log.debug("디버깅 메시지 ::: " + 변수);
+  }
+</code></pre></div></div>
+<p>lombok을 사용하여 클래스에 @Slf4j 어노테이션을 달아주면,<br />
+Logger 객체를 직접 생성하지 않아도 롬복이 자동으로 생성하니까 사용이 간결해집니다.</p>
+
+<hr />
+
+<h2 id="springboot-logback-사용-방법">SpringBoot logback 사용 방법</h2>
+
+<h3 id="logbackxml-파일-생성">logback.xml 파일 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!--
+jdbc.sqlonly    : Logs only SQL
+jdbc.sqltiming  : Logs the SQL, post-execution, including timing execution statistics
+jdbc.audit      : Logs ALL JDBC calls except for ResultSets
+jdbc.resultset  : all calls to ResultSet objects are logged
+jdbc.connection : Logs connection open and close events
+--&gt;
+&lt;configuration&gt;
+    &lt;appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender"&gt;
+        &lt;!-- By default, encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder --&gt;
+        &lt;encoder&gt;
+            &lt;pattern&gt;%d{yyyyMMdd HH:mm:ss.SSS} [%thread] %green(%-3level) %blue(%logger{5}) - %msg %n&lt;/pattern&gt;
+        &lt;/encoder&gt;
+    &lt;/appender&gt;
+
+    &lt;appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender"&gt;
+        &lt;file&gt;/tmp/access.log&lt;/file&gt;
+        &lt;rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"&gt;
+            &lt;fileNamePattern&gt;/tmp/access-%d{yyyy-MM-dd}.log&lt;/fileNamePattern&gt;
+            &lt;maxHistory&gt;30&lt;/maxHistory&gt;
+        &lt;/rollingPolicy&gt;
+
+        &lt;encoder&gt;
+            &lt;Pattern&gt;%d{HH:mm} %-5level %logger{36} - %msg%n&lt;/Pattern&gt;
+        &lt;/encoder&gt;
+    &lt;/appender&gt;
+
+    &lt;logger name="org.springframework" level="INFO"/&gt;
+    &lt;logger name="org.mybatis.spring" level="INFO"/&gt;
+    &lt;logger name="kr.co.chunjae" level="DEBUG"/&gt;
+
+    &lt;logger name="kr.co.chunjae.menu" level="OFF"/&gt;
+    &lt;logger name="kr.co.chunjae.code" level="INFO"/&gt;
+
+
+    &lt;logger name="jdbc" level="OFF" /&gt; &lt;!-- 커넥션 open close 이벤트를 로그로 남긴다. --&gt;
+    &lt;logger name="jdbc.connection" level="OFF" /&gt; &lt;!-- SQL문만을 로그로 남기며, PreparedStatement일 경우 관련된 argument 값으로 대체된 SQL문이 보여진다. --&gt;
+    &lt;logger name="jdbc.sqlonly" level="OFF" /&gt; &lt;!-- SQL문과 해당 SQL을 실행시키는데 수행된 시간 정보(milliseconds)를 포함한다. --&gt;
+    &lt;logger name="jdbc.sqltiming" level="OFF" /&gt; &lt;!-- ResultSet을 제외한 모든 JDBC 호출 정보를 로그로 남긴다. 많은 양의 로그가 생성되므로 특별히 JDBC 문제를 추적해야 할 필요가 있는 경우를 제외하고는 사용을 권장하지 않는다. --&gt;
+    &lt;logger name="jdbc.audit" level="OFF" /&gt; &lt;!-- ResultSet을 포함한 모든 JDBC 호출 정보를 로그로 남기므로 매우 방대한 양의 로그가 생성된다. --&gt;
+    &lt;logger name="jdbc.resultset" level="OFF" /&gt; &lt;!-- SQL 결과 조회된 데이터의 table을 로그로 남긴다. --&gt;
+    &lt;logger name="jdbc.resultsettable" level="OFF" /&gt;
+    &lt;logger name="log4jdbc.debug" level="INFO" /&gt;
+
+
+    &lt;!--   &lt;logger name="jdbc.resultsettable" level="DEBUG" additivity="false"&gt;&gt;  --&gt;
+    &lt;!--     &lt;appender-ref ref="STDOUT" /&gt; --&gt;
+    &lt;!--   &lt;/logger&gt;   --&gt;
+
+    &lt;root level="INFO"&gt;
+        &lt;appender-ref ref="CONSOLE" /&gt;
+        &lt;appender-ref ref="FILE" /&gt;
+    &lt;/root&gt;
+
+&lt;/configuration&gt;
+</code></pre></div></div>
+<p>resources 폴더 안에 logback.xml 파일 생성 후 톰캣 재시작하면 즉시 적용됩니다.<br />
+만약 우선순위가 더 높은 application.properties 또는 application.yml 파일에 동일한 패키지에 대한 로그 레벨 설정이 있다면 적용되지 않습니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#web-%EA%B0%9C%EB%B0%9C" class="page__taxonomy-item" rel="tag">Web 개발</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-06-23">2022-06-23</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/it-tip/2022-06-22-1" class="pagination--pager" title="크롬 F12 디버깅 및 소스 분석 방법 / 크롬 개발자도구 사용법
+">Prev</a>
+    
+    
+      <a href="/plan-design-db/2022-07-08-1" class="pagination--pager" title="로그 테이블 및 통계 테이블 설계 시 고려사항
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

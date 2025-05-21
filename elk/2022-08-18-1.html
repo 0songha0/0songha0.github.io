@@ -1,0 +1,1126 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>엘라스틱서치 검색 유사도 높이는 방법 / 인덱스 템플릿 생성 / 형태소 분석 테스트 쿼리 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="엘라스틱서치 검색 유사도 높이는 방법 / 인덱스 템플릿 생성 / 형태소 분석 테스트 쿼리">
+<meta property="og:url" content="https://0songha0.github.io/elk/2022-08-18-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-08-18T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2022-08-18T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/elk/2022-08-18-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="엘라스틱서치 검색 유사도 높이는 방법 / 인덱스 템플릿 생성 / 형태소 분석 테스트 쿼리">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2022-08-18T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2022-08-18T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">엘라스틱서치 검색 유사도 높이는 방법 / 인덱스 템플릿 생성 / 형태소 분석 테스트 쿼리
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2022-08-18T00:00:00+00:00">2022-08-18</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 엘라스틱서치 검색 유사도 높이는 방법 / 인덱스 템플릿 생성 / 형태소 분석 테스트 쿼리</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#형태소-분석기-analyzer">형태소 분석기 (Analyzer)</a><ul><li><a href="#형태소-분석기-구성요소">형태소 분석기 구성요소</a></li><li><a href="#nori-형태소-분석기-설치-방법">Nori 형태소 분석기 설치 방법</a></li><li><a href="#설치된-형태소-분석기-목록-확인">설치된 형태소 분석기 목록 확인</a></li><li><a href="#nori-토크나이저를-컬럼에-매핑한-인덱스-생성-쿼리">Nori 토크나이저를 컬럼에 매핑한 인덱스 생성 쿼리</a></li><li><a href="#커스텀-형태소-분석기를-컬럼에-매핑한-인덱스-생성-쿼리">커스텀 형태소 분석기를 컬럼에 매핑한 인덱스 생성 쿼리</a></li><li><a href="#커스텀-형태소-분석기를-기본-분석기로-사용하는-인덱스-생성-쿼리">커스텀 형태소 분석기를 기본 분석기로 사용하는 인덱스 생성 쿼리</a></li><li><a href="#형태소-분석기-테스트-쿼리">형태소 분석기 테스트 쿼리</a></li><li><a href="#형태소-분석기를-적용한-인덱스-템플릿-생성">형태소 분석기를 적용한 인덱스 템플릿 생성</a></li><li><a href="#인덱스-템플릿-리스트-및-코드-확인">인덱스 템플릿 리스트 및 코드 확인</a></li><li><a href="#인덱스-템플릿-삭제">인덱스 템플릿 삭제</a></li></ul></li><li><a href="#딕셔너리--동의어-사전">딕셔너리 &gt; 동의어 사전</a><ul><li><a href="#동의어-사전-txt-파일-만들기">동의어 사전 txt 파일 만들기</a></li><li><a href="#동의어-사전-txt를-필터로-매핑한-인덱스템플릿-생성-쿼리">동의어 사전 txt를 필터로 매핑한 인덱스템플릿 생성 쿼리</a></li><li><a href="#동의어-사전-txt-수정-후-규칙-적용">동의어 사전 txt 수정 후 규칙 적용</a></li></ul></li><li><a href="#딕셔너리--사용자-사전">딕셔너리 &gt; 사용자 사전</a><ul><li><a href="#사용자-사전-txt-파일-생성">사용자 사전 txt 파일 생성</a></li><li><a href="#사용자-사전-적용-인덱스템플릿-생성-쿼리-최종-공통-템플릿">사용자 사전 적용 인덱스템플릿 생성 쿼리 (최종 공통 템플릿)</a></li><li><a href="#인덱스에-적용한-형태소-분석기-테스트-쿼리">인덱스에 적용한 형태소 분석기 테스트 쿼리</a></li></ul></li><li><a href="#검색-알고리즘-유사도-알고리즘-모델">검색 알고리즘 (유사도 알고리즘 모델)</a><ul><li><a href="#검색-쿼리의-유사도-점수-확인-방법">검색 쿼리의 유사도 점수 확인 방법</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="형태소-분석기-analyzer">형태소 분석기 (Analyzer)</h2>
+
+<h3 id="형태소-분석기-구성요소">형태소 분석기 구성요소</h3>
+
+<p><code class="language-plaintext highlighter-rouge">캐릭터 필터</code> : 불필요한 문자열 제거 &gt;  <code class="language-plaintext highlighter-rouge">토크나이저</code> : 문자열을 토큰으로 분리 &gt;  <code class="language-plaintext highlighter-rouge">토큰 필터</code> : 토큰 변경/추가/삭제</p>
+
+<p>엘라스틱서치는 글로벌 오픈소스라서 영어 문법에 특화된 standard 분석기가 기본 분석기로 적용되어 있습니다.<br />
+standard 분석기는 한글을 단어가 아닌 공백으로만 분리하여 저장하기 때문에 한글 분석이 안 됩니다.<br />
+한글 검색 정확도를 높이려면 한글 형태소 분석에 특화된 Nori 형태소 분석기 등을 따로 설치해서 적용해야 합니다.</p>
+
+<h3 id="nori-형태소-분석기-설치-방법">Nori 형태소 분석기 설치 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /usr/share/elasticsearch
+</code></pre></div></div>
+<p>엘라스틱서치 실행 파일 경로 이동 후 플러그인을 사용하여 nori 형태소 분석기를 설치합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./bin/elasticsearch-plugin install analysis-nori
+</code></pre></div></div>
+<p>엘라스틱서치에서 공식 지원하여 명령어로 설치 가능합니다.<br />
+형태소 분석기는 elasticsearch 재시작 시 사용할 수 있습니다.</p>
+
+<h3 id="설치된-형태소-분석기-목록-확인">설치된 형태소 분석기 목록 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./bin/elasticsearch-plugin list
+</code></pre></div></div>
+
+<h3 id="nori-토크나이저를-컬럼에-매핑한-인덱스-생성-쿼리">Nori 토크나이저를 컬럼에 매핑한 인덱스 생성 쿼리</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PUT 신규인덱스명
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "nori" : {
+          "tokenizer" : "nori_tokenizer"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "Nori분석기적용컬렴명" : {
+        "type": "text",
+        "analyzer": "nori"
+      }
+    }
+  }
+}
+</code></pre></div></div>
+<p>형태소 분석기를 컬럼에 mapping한 인덱스 생성 후<br />
+logstash로 인덱스 데이터를 수집하면 자동으로 형태소 분석기가 적용되어 형태소 분리 저장됩니다.<br />
+생성된 인덱스의 analysis는 변경 불가하며, 변경 시 인덱스 삭제 후 재생성 또는 리인덱싱이 필요합니다.</p>
+
+<h3 id="커스텀-형태소-분석기를-컬럼에-매핑한-인덱스-생성-쿼리">커스텀 형태소 분석기를 컬럼에 매핑한 인덱스 생성 쿼리</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PUT 신규인덱스명
+{
+  "settings": {
+    "analysis": {
+      "filter": {
+        "custom_stopwords": {
+          "type": "stop",
+          "stopwords": ["제외단어1", "제외단어2"]
+        },
+        "custom_stoptags": {
+          "type": "nori_part_of_speech",
+          "stoptags": ["제외품사1", "제외품사2"] # SN은 숫자 품사
+        }
+      },
+      "analyzer": {
+        "custom_analyzer": {
+          "type": "custom",
+          "char_filter": ["html_strip"], # html 태그를 발라낼 경우 추가
+          "tokenizer": "nori_tokenizer", # Nori 형태소 분석기 설치 후 추가
+          "filter": ["custom_stopwords", "custom_stoptags"]
+        }
+      }
+    }
+  },
+  "mappings": {
+	"properties": {
+	  "커스텀분석기적용컬럼명": {"type": "text", "an alyzer": "custom_analyzer"}
+	}
+  }
+}
+</code></pre></div></div>
+<p>Nori 토크나이저에 제외단어, 제외품사 필터를 적용하여 인덱스를 생성해 보았습니다.</p>
+
+<p><mark>명사 이외 모든 품사 제거</mark><br />
+“E”, “IC”, “J”, “MAG”, “MAJ”, “MM”, “NA”, “NR”, “SC”, “SE”, “SF”, “SH”, “SL”, “SN”, “SP”, “SSC”, “SSO”, “SY”, “UNA”, “UNKNOWN”, “VA”, “VCN”, “VCP”, “VSV”, “VV”, “VX”, “XPN”, “XR”, “XSA”, “XSN”, “XSV” 등이 제거됩니다.<br />
+단점은 일부 영어, 숫자 등이 검색되지 않을 수 있습니다.</p>
+
+<h3 id="커스텀-형태소-분석기를-기본-분석기로-사용하는-인덱스-생성-쿼리">커스텀 형태소 분석기를 기본 분석기로 사용하는 인덱스 생성 쿼리</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PUT 신규인덱스명
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "default": { # 기본 분석기로 사용하여 모든 컬럼에 매핑
+          "type": "custom",
+          "tokenizer": "nori_tokenizer" # Nori 형태소 분석기 설치 후 추가
+        }
+      }
+    }
+  }
+}
+</code></pre></div></div>
+<p>defualt로 설정한 analyzer가 모든 컬럼에 자동 적용되니 컬럼마다 따로 매핑해주지 않아도 됩니다.</p>
+
+<h3 id="형태소-분석기-테스트-쿼리">형태소 분석기 테스트 쿼리</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>post _analyze
+{
+  "tokenizer": "nori_tokenizer 또는 standard",
+  "text" : "형태소 분리 테스트 텍스트"
+}
+</code></pre></div></div>
+<p>“explain”: true 속성도 넣고 검색하면 분리된 token들의 품사(leftPOS) 정보를 확인할 수 있습니다.</p>
+
+<p><mark>한글 형태소 품사 태그표</mark><br />
+<a href="http://kkma.snu.ac.kr/documents/?doc=postag" target="_blank">http://kkma.snu.ac.kr/documents/?doc=postag</a></p>
+
+<h3 id="형태소-분석기를-적용한-인덱스-템플릿-생성">형태소 분석기를 적용한 인덱스 템플릿 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PUT _index_template/인덱스패턴명
+{
+  "index_patterns": ["test*"], # 인덱스명이 test로 시작하는 모든 인덱스 생성 시 인덱스 패턴 적용
+  "priority": 1, # 템플릿 우선순위 (숫자가 높은 템플릿이 우선 적용됨)
+  "template": { # 인덱스 템플릿 코드 (settings, mappings)
+    "settings": {
+      "analysis": {
+        "analyzer": {
+          "default": {
+            "type": "custom",
+            "tokenizer": "nori_tokenizer"
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre></div></div>
+<p>테스트 또는 수집 쿼리 문제로 인덱스 삭제 후 재생성하여 데이터를 수집할 때마다,<br />
+수집 전에 형태소 분석기 매핑 &amp; 인덱스 생성 쿼리를 다시 날려줘야 하는 번거로움이 있어서<br />
+인덱스 템플릿을 생성해 인덱스 생성과 동시에 커스텀 형태소 분석기가 기본값으로 적용되게 했습니다.</p>
+
+<p>데이터 양이 많으면 성능 최적화를 위해 날짜별로 인덱스를 분리(파티셔닝) 하려고 인덱스 템플릿을 이용하기도 합니다.</p>
+
+<p><mark>적용되는 우선순위가 같은 인덱스 템플릿 생성 시 에러메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "error": {
+    "root_cause": [
+      {
+        "type": "illegal_argument_exception",
+        "reason": "index template [인덱스템플릿명] has index patterns [인덱스명] matching patterns from existing templates [nori_template] with patterns (nori_template =&gt; [nori_*]) that have the same priority [1], multiple index templates may not match during index creation, please use a different priority"
+      }
+    ],
+    "type": "illegal_argument_exception",
+    "reason": "index template [인덱스템플릿명] has index patterns [인덱스명] matching patterns from existing templates [nori_template] with patterns (nori_template =&gt; [nori_*]) that have the same priority [1], multiple index templates may not match during index creation, please use a different priority"
+  },
+  "status": 400
+}
+</code></pre></div></div>
+
+<h3 id="인덱스-템플릿-리스트-및-코드-확인">인덱스 템플릿 리스트 및 코드 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET _index_template/인덱스템플릿명*
+</code></pre></div></div>
+
+<h3 id="인덱스-템플릿-삭제">인덱스 템플릿 삭제</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DELETE _index_template/인덱스템플릿명
+</code></pre></div></div>
+<p>인덱스템플릿 생성 및 삭제 시, 기존에 생성된 인덱스들은 영향을 받지 않습니다.</p>
+
+<hr />
+
+<h2 id="딕셔너리--동의어-사전">딕셔너리 &gt; 동의어 사전</h2>
+
+<p>생성된 인덱스의 매핑 정보를 변경할 수 없기 때문에 동의어 사전 파일을 미리 생성하고 매핑해두면 좋습니다.</p>
+
+<h3 id="동의어-사전-txt-파일-만들기">동의어 사전 txt 파일 만들기</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /etc/elasticsearch
+mkdir analysis
+cd analysis
+touch synonym.txt
+vi synonym.txt
+</code></pre></div></div>
+<p>아래와 같은 내용으로 저장합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>elasticsearch, 엘라스틱서치 # elasticsearch 검색 시 엘라스틱서치도 나올 수 있게 동의어 토큰 추가
+Harry =&gt; 해리 # Harry 토큰을 해리 토큰으로 치환
+</code></pre></div></div>
+
+<h3 id="동의어-사전-txt를-필터로-매핑한-인덱스템플릿-생성-쿼리">동의어 사전 txt를 필터로 매핑한 인덱스템플릿 생성 쿼리</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PUT _index_template/인덱스템플릿명
+{
+  "index_patterns": ["인덱스명*"],
+  "priority": 1,
+  "template": {
+    "settings": {
+      "analysis": {
+        "analyzer": {
+          "default": {
+            "type": "custom",
+            "tokenizer": "nori_tokenizer",
+            "filter" : ["lowercase", "synonym"] # 대소문자 모두 검색 가능하게 lowercase 필터 먼저 적용
+          }
+        },
+        "filter" : {
+            "synonym" : {
+                "type" : "synonym",
+                "synonyms_path" : "analysis/synonym.txt" # 동의어 파일 생성 후 경로
+            }
+        }
+      }
+    }
+  }
+}
+</code></pre></div></div>
+<p>인덱스템플릿 생성 후 인덱스 재생성 해야 적용됩니다.</p>
+
+<h3 id="동의어-사전-txt-수정-후-규칙-적용">동의어 사전 txt 수정 후 규칙 적용</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST nori_item/_close 후
+POST nori_item/_open
+</code></pre></div></div>
+<p>동의어 사전 내용 변경 후에는, 이렇게 인덱스 reload 시 적용됩니다.</p>
+
+<hr />
+
+<h2 id="딕셔너리--사용자-사전">딕셔너리 &gt; 사용자 사전</h2>
+
+<h3 id="사용자-사전-txt-파일-생성">사용자 사전 txt 파일 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /etc/elasticsearch/analysis
+touch user_dict.txt
+</code></pre></div></div>
+
+<h3 id="사용자-사전-적용-인덱스템플릿-생성-쿼리-최종-공통-템플릿">사용자 사전 적용 인덱스템플릿 생성 쿼리 (최종 공통 템플릿)</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PUT _index_template/인덱스템플릿명
+{
+  "index_patterns": ["인덱스명*"],
+  "priority": 1,
+  "template": {
+    "settings": {
+      "analysis": {
+        "analyzer": {
+          "default": {
+            "type": "custom",
+            "tokenizer": "custom_tokenizer",
+            "filter" : ["custom_stoptags", "lowercase", "synonym"]
+          }
+        },
+        "tokenizer": {
+        "custom_tokenizer": {
+         "type": "nori_tokenizer",
+         "decompound_mode": "mixed",
+         "discard_punctuation": "false",
+         "user_dictionary": "analysis/user_dict.txt"
+         }
+        },
+        "filter" : {
+            "synonym" : {
+                "type" : "synonym",
+                "synonyms_path" : "analysis/synonym.txt"
+            },
+            "custom_stoptags": { 
+              "type": "nori_part_of_speech",
+              "stoptags": [
+                    "E",
+                    "IC",
+                    "J", 
+                    "MAG", 
+                    "MAJ", 
+                    "MM", 
+                    "SP", 
+                    "SSC", 
+                    "SSO", 
+                    "SC", 
+                    "SE", 
+                    "XPN", 
+                    "XSA", 
+                    "XSN", 
+                    "XSV", 
+                    "UNA", 
+                    "NA", 
+                    "VSV",
+                    "VA",
+                    "VV",
+                    "VX"]
+            }
+        }
+      }
+    }
+  }
+}
+</code></pre></div></div>
+<p>설정한 사용자 사전 txt에 등록된 단어는 형태소 분리되어도 검색됩니다.</p>
+
+<h3 id="인덱스에-적용한-형태소-분석기-테스트-쿼리">인덱스에 적용한 형태소 분석기 테스트 쿼리</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET 인덱스명/_analyze
+{
+  "analyzer": "default",
+  "text": ["삼성전자"]
+}
+</code></pre></div></div>
+
+<p><mark>검색 결과</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "tokens": [
+    {
+      "token": "삼성전자",
+      "start_offset": 0,
+      "end_offset": 4,
+      "type": "word",
+      "position": 0,
+      "positionLength": 2
+    },
+    {
+      "token": "삼성",
+      "start_offset": 0,
+      "end_offset": 2,
+      "type": "word",
+      "position": 0
+    },
+    {
+      "token": "전자",
+      "start_offset": 2,
+      "end_offset": 4,
+      "type": "word",
+      "position": 1
+    }
+  ]
+}
+</code></pre></div></div>
+<p>커스텀 토크나이저에 “decompound_mode”: “mixed” 설정을 주고 인덱스를 생성했기 때문에 위와 같은 결과가 나옵니다.</p>
+
+<hr />
+
+<h2 id="검색-알고리즘-유사도-알고리즘-모델">검색 알고리즘 (유사도 알고리즘 모델)</h2>
+
+<p>엘라스틱서치는 TF-IDF 알고리즘에서 발전한 BM25 알고리즘을 기본 검색 알고리즘으로 사용합니다.<br />
+DFR, DFI, IB, LM Dirichlet, LM Jelinek Mercer 등 다른 알고리즘은 _settings을 변경하여 사용 가능합니다.</p>
+
+<h3 id="검색-쿼리의-유사도-점수-확인-방법">검색 쿼리의 유사도 점수 확인 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"explain": true
+</code></pre></div></div>
+<p>GET 쿼리 속성에 추가시키면 아래 정보들이 상세하게 나옵니다.</p>
+
+<p><mark>1. score</mark><br />
+score(점수)가 높을수록 유사도 높은 document입니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">score = boost * idf * tf</code></p>
+
+<p><mark>2. boost</mark><br />
+관련성이 높은 필드나 키워드에 더하는 가중치이며, fields 속성의 필드명 뒤에 ^2 등 붙여서 가중치 부여 가능합니다.</p>
+
+<p><mark>3. IDF</mark><br />
+인덱스의 전체 document 내 용어 등장 빈도 (역문서 빈도) 이며, 낮을수록 연관성이 높습니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">IDF = freq / (freq + k1 * (1 - b + b * dl / avgdl))</code></p>
+<ul>
+  <li>freq : 해당 document 내 용어 등장 횟수</li>
+  <li>k1, b : 알고리즘을 정규화 하기 위한 가중치 (디폴트 상수)</li>
+  <li>dl : 해당 document 필드 길이</li>
+  <li>avgdl : 전체 document 평균 필드 길이</li>
+</ul>
+
+<p><mark>4. TF</mark><br />
+해당 document 내 용어 등장 빈도 (용어빈도) 이며, 높을수록 연관성이 높습니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">TF = log(1 + (N - n + 0.5) / (n + 0.5))</code></p>
+<ul>
+  <li>n : 용어 등장 document 수</li>
+  <li>N : 인덱스의 전체 document 수</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%EC%97%98%EB%9D%BC%EC%8A%A4%ED%8B%B1%EC%84%9C%EC%B9%98" class="page__taxonomy-item" rel="tag">엘라스틱서치</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-08-18">2022-08-18</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/web-dev/2022-08-16-1" class="pagination--pager" title="티스토리 블로그 목록 더보기 무한스크롤 기능 구현 방법
+">Prev</a>
+    
+    
+      <a href="/app-dev/2022-08-22-1" class="pagination--pager" title="공공데이터 활용 앱 개발 / 공공데이터 사이트 종류
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

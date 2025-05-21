@@ -1,0 +1,3222 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>코딩테스트 대비 프로그래머스 55문제 Java 풀이 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="코딩테스트 대비 프로그래머스 55문제 Java 풀이">
+<meta property="og:url" content="https://0songha0.github.io/python-java/2024-04-30-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-04-30T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2024-04-30T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/python-java/2024-04-30-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="코딩테스트 대비 프로그래머스 55문제 Java 풀이">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2024-04-30T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2024-04-30T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">코딩테스트 대비 프로그래머스 55문제 Java 풀이
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2024-04-30T00:00:00+00:00">2024-04-30</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 코딩테스트 대비 프로그래머스 55문제 Java 풀이</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#배열-문제-풀이">배열 문제 풀이</a></li><li><a href="#스택-문제-풀이">스택 문제 풀이</a></li><li><a href="#큐-문제-풀이">큐 문제 풀이</a></li><li><a href="#해시-문제-풀이">해시 문제 풀이</a></li><li><a href="#트리-문제-풀이">트리 문제 풀이</a></li><li><a href="#집합-문제-풀이">집합 문제 풀이</a></li><li><a href="#그래프-문제-풀이">그래프 문제 풀이</a></li><li><a href="#백트래킹-문제-풀이">백트래킹 문제 풀이</a></li><li><a href="#정렬-문제-풀이">정렬 문제 풀이</a></li><li><a href="#시뮬레이션-문제-풀이">시뮬레이션 문제 풀이</a></li><li><a href="#동적계획법dp-문제-풀이">동적계획법(DP) 문제 풀이</a></li><li><a href="#탐욕법greedy-문제-풀이">탐욕법(Greedy) 문제 풀이</a></li><li><a href="#카카오-문제-풀이-등">카카오 문제 풀이 등</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p>프로그래머스 코딩테스트 고득점 Kit 문제를 다 풀고서 풀면 좋은 문제들입니다.</p>
+
+<hr />
+
+<h2 id="배열-문제-풀이">배열 문제 풀이</h2>
+
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/68644" target="_blank">LV.1 두 개 뽑아서 더하기</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashSet;
+
+public class Solution {
+  public static int[] solution(int[] numbers) {
+      // 중복 값 제거를 위한 해쉬셋 생성
+      HashSet&lt;Integer&gt; set = new HashSet&lt;&gt;();
+
+      // 두 수를 선택하는 모든 경우의 수를 반복문으로 구함
+      for (int i = 0; i &lt; numbers.length - 1; i++) {
+        for (int j = i + 1; j &lt; numbers.length; j++) {
+          // 두 수를 더한 결과를 새로운 배열에 추가
+          set.add(numbers[i] + numbers[j]);
+        }
+      }
+      // 해쉬셋의 값을 오름차순 정렬하고 int[] 형태의 배열로 변환하여 반환
+      return set.stream().sorted().mapToInt(Integer::intValue).toArray();
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/12949" target="_blank">LV.2 행렬의 곱셈</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Solution {
+  public int[][] solution(int[][] arr1, int[][] arr2) {
+    // 행렬 arr1과 arr2의 행과 열의 수
+    int r1 = arr1.length;
+    int c1 = arr1[0].length;
+    int r2 = arr2.length;
+    int c2 = arr2[0].length;
+
+    // 결과를 저장할 2차원 배열 초기화
+    int[][] answer = new int[r1][c2];
+
+    // 첫 번째 행렬 arr1의 각 행과 두 번째 행렬 arr2의 각 열에 대해
+    for (int i = 0; i &lt; r1; i++) {
+      for (int j = 0; j &lt; c2; j++) {
+        // 두 행렬의 데이터를 곱해 결과 리스트에 더해줌
+        for (int k = 0; k &lt; c1; k++) {
+          answer[i][j] += arr1[i][k] * arr2[k][j];
+        }
+      }
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/42889" target="_blank">LV.1 실패율</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashMap;
+
+public class Solution {
+  public int[] solution(int N, int[] stages) {
+    // 스테이지별 도전자 수를 구함
+    int[] challenger = new int[N + 2];
+    for (int i = 0; i &lt; stages.length; i++) {
+      challenger[stages[i]] += 1;
+    }
+
+    // 스테이지별 실패한 사용자 수 계산
+    HashMap&lt;Integer, Double&gt; fails = new HashMap&lt;&gt;();
+    double total = stages.length;
+
+    // 각 스테이지를 순회하며, 실패율 계산
+    for (int i = 1; i &lt;= N; i++) {
+      if (challenger[i] == 0) {
+        // 도전한 사람이 없는 경우, 실패율은 0
+        fails.put(i, 0.);
+
+      } else {
+        // 실패율 구함
+        fails.put(i, challenger[i] / total);
+        // 다음 스테이지 실패율을 구하기 위해 현재 스테이지의 인원을 뺌
+        total -= challenger[i];
+      }
+    }
+
+    // 실패율이 높은 스테이지부터 내림차순으로 정렬
+    return fails.entrySet().stream().sorted((o1, o2) -&gt; Double.compare(o2.getValue(), o1.getValue())).mapToInt(HashMap.Entry::getKey).toArray();
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/49994" target="_blank">LV.2 방문 길이</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashMap;
+import java.util.HashSet;
+
+public class Solution {
+  // 좌표평면을 벗어나는지 체크하는 메소드
+  private static boolean isValidMove(int nx, int ny) {
+    return 0 &lt;= nx &amp;&amp; nx &lt; 11 &amp;&amp; 0 &lt;= ny &amp;&amp; ny &lt; 11;
+  }
+
+  // 다음 좌표 결정을 위한 HashMap 생성
+  private static final HashMap&lt;Character, int[]&gt; location = new HashMap&lt;&gt;();
+
+  private static void initLocation() {
+    location.put('U', new int[]{0, 1});
+    location.put('D', new int[]{0, -1});
+    location.put('L', new int[]{-1, 0});
+    location.put('R', new int[]{1, 0});
+  }
+
+  public int solution(String dirs) {
+    initLocation();
+    int x = 5, y = 5;
+
+    // 겹치는 좌표는 1개로 처리하기 위함
+    HashSet&lt;String&gt; answer = new HashSet&lt;&gt;();
+
+    // 주어진 명령어로 움직이면서 좌표 저장
+    for (int i = 0; i &lt; dirs.length(); i++) {
+      int[] offset = location.get(dirs.charAt(i));
+      int nx = x + offset[0];
+      int ny = y + offset[1];
+
+      // 벗어난 좌표는 인정하지 않음
+      if (!isValidMove(nx, ny))
+        continue;
+
+      // A에서 B로 간 경우 B에서 A도 추가해야 함 (총 경로의 개수는 방향성이 없음)
+      answer.add(x + " " + y + " " + nx + " " + ny);
+      answer.add(nx + " " + ny + " " + x + " " + y);
+
+      // 좌표를 이동했으므로 업데이트
+      x = nx;
+      y = ny;
+    }
+
+    return answer.size() / 2;
+  }
+}
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="스택-문제-풀이">스택 문제 풀이</h2>
+
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/76502" target="_blank">LV.2 괄호 회전하기</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.ArrayDeque;
+import java.util.HashMap;
+
+class Solution {
+  public static int solution(String s) {
+    // 괄호 정보를 저장함. 코드를 간결하게 할 수 있음
+    HashMap&lt;Character, Character&gt; map = new HashMap&lt;&gt;();
+    map.put(')', '(');
+    map.put('}', '{');
+    map.put(']', '[');
+
+    // 원본 문자열의 길이 저장
+    int n = s.length();
+
+    // 원본 문자열 뒤에 원본 문자열을 이어 붙여서 2번 나오도록 만들어줌
+    s += s;
+
+    int answer = 0;
+
+    // 확인할 문자열의 시작 인덱스를 0 부터 n 까지 이동
+    A:for (int i = 0; i &lt; n; i++) {
+      ArrayDeque&lt;Character&gt; stack = new ArrayDeque&lt;&gt;();
+
+      // i(시작 위치)부터 원본 문자열의 길이인 n개까지 올바른 괄호 문자열인지 확인
+      for (int j = i; j &lt; i + n; j++) {
+        char c = s.charAt(j);
+
+        // HashMap 안에 해당 key 가 없다면 열리는 괄호임
+        if (!map.containsKey(c)) {
+          stack.push(c);
+          
+        } else {
+          // 짝이 맞지 않으면 내부 for문은 종료하고 for문 A로 이동
+          if(stack.isEmpty() || !stack.pop().equals(map.get(c)))
+            continue A;
+        }
+      }
+
+      // 3에서 continue 되지 않았고, 스택이 비어있으면 올바른 괄호 문자열임
+      if (stack.isEmpty())
+          answer++;
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/12973" target="_blank">LV.2 짝지어 제거하기</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Stack;
+
+public class Solution {
+  public int solution(String s) {
+    Stack&lt;Character&gt; stack = new Stack&lt;&gt;();
+    for (int i = 0; i &lt; s.length(); i++) {
+      char c = s.charAt(i);
+
+      // 스택이 비어 있지 않고, 현재 문자와 스택의 맨 위 문자가 같으면
+      if (!stack.isEmpty() &amp;&amp; stack.peek() == c) {
+        // 스택의 맨 위 문자 제거
+        stack.pop();
+
+      } else {
+        // 스택에 현재 문자 추가
+        stack.push(c);
+      }
+    }
+
+    // 스택이 비어 있으면 1, 그렇지 않으면 0 반환
+    return stack.isEmpty() ? 1 : 0;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/64061" target="_blank">LV.1 크레인 인형 뽑기 게임</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Stack;
+
+public class Solution {
+  public int solution(int[][] board, int[] moves) {
+    // 각 열에 대한 스택을 생성합니다.
+    Stack&lt;Integer&gt;[] lanes = new Stack[board.length];
+    for (int i = 0; i &lt; lanes.length; i++) {
+      lanes[i] = new Stack&lt;&gt;();
+    }
+
+    // board를 역순으로 탐색하며, 각 열의 인형을 lanes에 추가합니다.
+    for (int i = board.length - 1; i &gt;= 0; i--) {
+      for (int j = 0; j &lt; board[i].length; j++) {
+        if (board[i][j] &gt; 0) {
+          lanes[j].push(board[i][j]);
+        }
+      }
+    }
+
+    // 인형을 담을 bucket을 생성합니다.
+    Stack&lt;Integer&gt; bucket = new Stack&lt;&gt;();
+
+    // 사라진 인형의 총 개수를 저장할 변수를 초기화합니다.
+    int answer = 0;
+
+    // moves를 순회하며, 각 열에서 인형을 뽑아 bucket에 추가합니다.
+    for (int move : moves) {
+      // 해당 열에 인형이 있는 경우
+      if (!lanes[move - 1].isEmpty()) {
+        int doll = lanes[move - 1].pop();
+
+        // 바구니에 인형이 있고, 가장 위에 있는 인형과 같은 경우
+        if (!bucket.isEmpty() &amp;&amp; bucket.peek() == doll) {
+          bucket.pop();
+          answer += 2;
+
+        } else {
+          // 바구니에 인형이 없거나, 가장 위에 있는 인형과 다른 경우
+          bucket.push(doll);
+        }
+      }
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/81303" target="_blank">LV.3 표 편집 ★</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+import java.util.Stack;
+
+public class Solution {
+  public String solution(int n, int k, String[] cmd) {
+    // 삭제된 행의 인덱스를 저장하는 스택
+    Stack&lt;Integer&gt; deleted = new Stack&lt;&gt;();
+
+    // 각 행을 기준으로 연산에 따른 위치를 표시하기 위한 배열
+    int[] up = new int[n + 2];
+    int[] down = new int[n + 2];
+
+    for (int i = 0; i &lt; n + 2; i++) {
+      up[i] = i - 1;
+      down[i] = i + 1;
+    }
+
+    // 현재 위치를 나타내는 인덱스
+    k++;
+
+    // 주어진 명령어(cmd) 배열을 하나씩 처리
+    for (String c : cmd) {
+      // 현재 위치를 삭제하고 그 다음 위치로 이동
+      if (c.startsWith("C")) {
+        deleted.push(k);
+        up[down[k]] = up[k];
+        down[up[k]] = down[k];
+        k = n &lt; down[k] ? up[k] : down[k];
+
+      } else if (c.startsWith("Z")) {
+        // 가장 최근에 삭제된 행을 복원
+        int restore = deleted.pop();
+        down[up[restore]] = restore;
+        up[down[restore]] = restore;
+
+      } else {
+        // U 또는 D를 사용해 현재 위치를 위아래로 이동
+        String[] s = c.split(" ");
+        int x = Integer.parseInt(s[1]);
+        for (int i = 0; i &lt; x; i++) {
+          k = s[0].equals("U") ? up[k] : down[k];
+        }
+      }
+    }
+
+    // 삭제된 행의 위치에 'X'를, 그렇지 않은 행 위치에는 'O'를 저장한 문자열 반환
+    char[] answer = new char[n];
+    Arrays.fill(answer, 'O');
+
+    for (int i : deleted) {
+        answer[i - 1] = 'X';
+    }
+
+    return new String(answer);
+  }
+}
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="큐-문제-풀이">큐 문제 풀이</h2>
+
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/159994" target="_blank">LV.1 카드 뭉치</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.ArrayDeque;
+import java.util.Arrays;
+
+public class Solution {
+  public String solution(String[] cards1, String[] cards2, String[] goal) {
+    // cards와 goal을 deque로 변환
+    ArrayDeque&lt;String&gt; cardsDeque1 = new ArrayDeque&lt;&gt;(Arrays.asList(cards1));
+    ArrayDeque&lt;String&gt; cardsDeque2 = new ArrayDeque&lt;&gt;(Arrays.asList(cards2));
+    ArrayDeque&lt;String&gt; goalDeque = new ArrayDeque&lt;&gt;(Arrays.asList(goal));
+
+    // goalDeque에 문자열이 남아있으면 계속 반복
+    while (!goalDeque.isEmpty()) {
+      if (!cardsDeque1.isEmpty() &amp;&amp; cardsDeque1.peekFirst().equals(goalDeque.peekFirst())) {
+        // cardsDeque1의 front와 일치하는 경우
+        cardsDeque1.pollFirst();
+        goalDeque.pollFirst();
+
+      } else if (!cardsDeque2.isEmpty() &amp;&amp; cardsDeque2.peekFirst().equals(goalDeque.peekFirst())) {
+        // cardsDeque2의 front와 일치하는 경우
+        cardsDeque2.pollFirst();
+        goalDeque.pollFirst();
+
+      } else {
+        break; // 일치하는 원소를 찾지 못했으므로 종료
+      }
+    }
+
+    // goal이 비었으면 "Yes" 아니면 "No"를 반환
+    return goalDeque.isEmpty() ? "Yes" : "No";
+  }
+}
+</code></pre></div></div>
+<p>poll, pollFirst는 같은 메서드입니다. pollLast는 뒤에서 꺼냅니다.</p>
+
+<hr />
+
+<h2 id="해시-문제-풀이">해시 문제 풀이</h2>
+
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/42576" target="_blank">LV.1 완주하지 못한 선수</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashMap;
+
+public class Solution {
+  public String solution(String[] participant, String[] completion) {
+    // 해시맵 생성
+    HashMap&lt;String, Integer&gt; hashMap = new HashMap&lt;&gt;();
+    
+    // 완주한 선수들의 이름을 해시맵에 저장
+    for (String string : completion) {
+      hashMap.put(string, hashMap.getOrDefault(string, 0) + 1);
+    }
+
+    // 참가한 선수들의 이름을 키로 하는 값을 1씩 감소
+    for (String string : participant) {
+      // 완주하지 못한 선수를 찾으면 반환
+      if (hashMap.getOrDefault(string, 0) == 0) {
+        return string;
+      }
+      hashMap.put(string, hashMap.get(string) - 1);
+    }
+
+    return null;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/131127" target="_blank">LV.2 할인 행사</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashMap;
+
+public class Solution {
+  public int solution(String[] want, int[] number, String[] discount) {
+    // want, number배열의 값을 해시맵에 저장
+    HashMap&lt;String, Integer&gt; wantMap = new HashMap&lt;&gt;();
+    for (int i = 0; i &lt; want.length; i++) {
+      wantMap.put(want[i], number[i]);
+    }
+
+    // 총 일수를 계산할 변수 초기화
+    int answer = 0;
+
+    // 특정일 i에 회원가입 시 할인받을 수 있는 품목 체크
+    for (int i = 0; i &lt; discount.length - 9; i++) {
+      // i일 회원가입 시 할인받는 제품 및 개수를 담을 해시맵
+      HashMap&lt;String, Integer&gt; discount10d = new HashMap&lt;&gt;();
+
+      // i일 회원가입 시 할인받는 제품 및 개수로 해시맵 구성
+      for (int j = i; j &lt; i + 10; j++) {
+        if (wantMap.containsKey(discount[j])) {
+          discount10d.put(discount[j], discount10d.getOrDefault(discount[j], 0) + 1);
+        }
+      }
+
+      // 할인하는 상품의 개수가 원하는 수량과 일치하면 정답 변수에 1 추가
+      if (discount10d.equals(wantMap))
+        answer++;
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/42888" target="_blank">LV.2 오픈 채팅방</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class Solution {
+  public String[] solution(String[] record) {
+    HashMap&lt;String, String&gt; codeMap = new HashMap&lt;String, String&gt;();
+    codeMap.put("enter","들어왔습니다.");
+    codeMap.put("leave","나갔습니다.");
+
+    HashMap&lt;String, String&gt; uidMap = new HashMap&lt;String, String&gt;();
+    List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+
+    for(String str:record){
+      String[] split = str.split("\\s+");
+      String code = split[0];
+      String uid = split[1];
+
+      if(split.length &gt; 2) {
+          String name = split[2];
+        uidMap.put(uid, name);
+      }
+
+      if(!"Change".equalsIgnoreCase(code)){
+        list.add(code +" "+uid);
+      }
+    }
+
+    String[] answer = new String[list.size()];
+
+    for(int i=0;i&lt;answer.length;i++){
+      String[] split = list.get(i).split("\\s+");
+      String name = uidMap.get(split[1]);
+      answer[i] = name+"님이 "+ codeMap.get(split[0].toLowerCase());
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/92334" target="_blank">LV.1 신고 결과 받기</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+
+public class Solution {
+  public int[] solution(String[] id_list, String[] report, int k) {
+    // 신고당한 유저 - 신고 유저 집합을 저장할 해시맵
+    HashMap&lt;String, HashSet&lt;String&gt;&gt; reportedUser = new HashMap&lt;&gt;();
+
+    // 처리 결과 메일을 받은 유저 - 받은 횟수를 저장할 해시맵
+    HashMap&lt;String, Integer&gt; count = new HashMap&lt;&gt;();
+
+    // 신고 기록 순회
+    for (String r : report) {
+      String[] s = r.split(" ");
+      String userId = s[0];
+      String reportedId = s[1];
+
+      // 신고당한 기록이 없다면
+      if (!reportedUser.containsKey(reportedId)) {
+        reportedUser.put(reportedId, new HashSet&lt;&gt;());
+      }
+
+      // 신고한 사람의 아이디를 해시맵의 value인 해시셋에 추가
+      reportedUser.get(reportedId).add(userId);
+    }
+
+    for (Map.Entry&lt;String, HashSet&lt;String&gt;&gt; entry : reportedUser.entrySet()) {
+      // 정지 기준에 만족하는지 확인
+      if (entry.getValue().size() &gt;= k) {
+        // 해시셋을 순회하며 count 계산
+        for (String uid : entry.getValue()) {
+          count.put(uid, count.getOrDefault(uid, 0) + 1);
+        }
+      }
+    }
+
+    int[] answer = new int[id_list.length];
+
+    // 각 아이디별 메일을 받은 횟수를 순서대로 정리
+    for (int i = 0; i &lt; id_list.length; i++) {
+      answer[i] = count.getOrDefault(id_list[i], 0);
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/72411" target="_blank">LV.2 메뉴 리뉴얼 ★</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+public class Solution {
+  // 만들 수 있는 메뉴 구성과 총 주문 수를 저장할 해시맵
+  private static HashMap&lt;Integer, HashMap&lt;String, Integer&gt;&gt; courseMap;
+
+  public String[] solution(String[] orders, int[] course) {
+    // 해시맵 초기화
+    courseMap = new HashMap&lt;&gt;();
+    for (int i : course) {
+      courseMap.put(i, new HashMap&lt;&gt;());
+    }
+
+    // 코스를 배열로 만들고 오름차순 정렬해서 가능한 모든 메뉴 구성을 구함
+    for (String order : orders) {
+      char[] orderArray = order.toCharArray();
+      Arrays.sort(orderArray);
+      combinations(0, orderArray, "");
+    }
+
+    ArrayList&lt;String&gt; answer = new ArrayList&lt;&gt;();
+
+    // 모든 코스 후보에 대해서
+    for (HashMap&lt;String, Integer&gt; count : courseMap.values()) {
+      count.values()
+            .stream()
+            .max(Comparator.comparingInt(o -&gt; o)) // 가장 빈도수가 높은 코스를 찾음
+            .ifPresent(cnt -&gt; count.entrySet() // 코스에 대한 메뉴 수가 가능할 때만
+                  .stream()
+                  // 최소 2명 이상의 손님으로부터 주문된 단품메뉴 조합에 대해서만
+                  .filter(entry -&gt; cnt.equals(entry.getValue()) &amp;&amp; cnt &gt; 1)
+                  // 코스 메뉴만 answer 리스트에 추가
+                  .forEach(entry -&gt; answer.add(entry.getKey())));
+    }
+
+    // 오름차순으로 정렬
+    Collections.sort(answer);
+    return answer.toArray(new String[0]);
+  }
+
+  // 만들 수 있는 모든 조합을 재귀 함수를 이용해서 구현
+  public static void combinations(int idx, char[] order, String result) {
+    // 필요한 코스 메뉴의 수와 일치하는 것만 저장
+    if (courseMap.containsKey(result.length())) {
+      HashMap&lt;String, Integer&gt; map = courseMap.get(result.length());
+      // 해당 코스의 수를 1증가
+      map.put(result, map.getOrDefault(result, 0) + 1);
+    }
+
+    for (int i = idx; i &lt; order.length; i++) {
+      combinations(i + 1, order, result + order[i]);
+    }
+  }
+}
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="트리-문제-풀이">트리 문제 풀이</h2>
+
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/12985" target="_blank">LV.2 예상 대진표</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Solution {
+  public int solution(int n, int a, int b) {
+    int answer;
+
+    for(answer = 0; a != b; answer++) {
+      a = (a + 1) / 2;
+      b = (b + 1) / 2;
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/77486" target="_blank">LV.3 다단계 칫솔 판매</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashMap;
+
+public class Solution {
+  public int[] solution(String[] enroll, String[] referral, String[] seller, int[] amount) {
+    // parent 해시맵. key는 enroll의 노드, value는 referral의 노드로 구성됨
+    HashMap&lt;String, String&gt; parent = new HashMap&lt;&gt;();
+    for (int i = 0; i &lt; enroll.length; i++) {
+      parent.put(enroll[i], referral[i]);
+    }
+
+    // total 해시맵 생성
+    HashMap&lt;String, Integer&gt; total = new HashMap&lt;&gt;();
+
+    // seller 배열과 amount 배열을 이용하여 이익 분배
+    for (int i = 0; i &lt; seller.length; i++) {
+      String curName = seller[i];
+
+      // 판매자가 판매한 총 금액 계산
+      int money = amount[i] * 100;
+
+      // 판매자부터 차례대로 상위 노드로 이동하며 이익 분배
+      while (money &gt; 0 &amp;&amp; !curName.equals("-")) {
+        // 현재 판매자가 받을 금액 계산(10%를 제외한 금액)
+        total.put(curName, total.getOrDefault(curName, 0) + money - (money / 10));
+        curName = parent.get(curName);
+        // 10% 를 제외한 금액 계산
+        money /= 10;
+      }
+    }
+
+    // enroll 배열의 모든 노드에 대해 해당하는 이익을 배열로 반환
+    int[] answer = new int[enroll.length];
+    for (int i = 0; i &lt; enroll.length; i++) {
+      answer[i] = total.getOrDefault(enroll[i], 0);
+    }
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/92343" target="_blank">LV.3 양과 늑대 ★</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.HashSet;
+
+public class Solution {
+  // 현재 위치, 양의 수, 늑대의 수 방문한 노드 저장을 위한 클래스
+  private static class Info {
+    int node, sheep, wolf;
+    HashSet&lt;Integer&gt; visited;
+
+    public Info(int node, int sheep, int wolf, HashSet&lt;Integer&gt; visited) {
+      this.node = node;
+      this.sheep = sheep;
+      this.wolf = wolf;
+      this.visited = visited;
+    }
+  }
+
+  // 트리 정보를 저장할 인접리스트
+  private static ArrayList&lt;Integer&gt;[] tree;
+
+  // 트리 구축 메소드
+  private static void buildTree(int[] info, int[][] edges) {
+    tree = new ArrayList[info.length];
+    for (int i = 0; i &lt; tree.length; i++) {
+      tree[i] = new ArrayList&lt;&gt;();
+    }
+
+    for (int[] edge : edges) {
+      tree[edge[0]].add(edge[1]);
+    }
+  }
+
+  public int solution(int[] info, int[][] edges) {
+    // 트리 생성
+    buildTree(info, edges);
+
+    // 최대 양의 수를 저장할 변수
+    int answer = 0;
+
+    // BFS를 위한 큐 생성 및 초기 상태 설정
+    ArrayDeque&lt;Info&gt; queue = new ArrayDeque&lt;&gt;();
+    queue.add(new Info(0, 1, 0, new HashSet&lt;&gt;()));
+
+    // BFS(너비 우선 탐색) 시작
+    while (!queue.isEmpty()) {
+      // 큐에서 현재 상태를 꺼냄
+      Info now = queue.poll();
+      // 최대 양의 수 업데이트
+      answer = Math.max(answer, now.sheep);
+      // 방문한 노드 집합에 현재 노드의 이웃 노드 추가
+      now.visited.addAll(tree[now.node]);
+
+      // 인접한 노드들에 대해 탐색
+      for (int next : now.visited) {
+        // 기존 해시셋의 데이터를 복사하고 현재 방문한 정점을 해시셋에서 제거
+        HashSet&lt;Integer&gt; set = new HashSet&lt;&gt;(now.visited);
+        set.remove(next);
+
+        if (info[next] == 1) {
+          // 늑대일 경우
+          if (now.sheep != now.wolf + 1) {
+            queue.add(new Info(next, now.sheep, now.wolf + 1, set));
+          }
+        } else {
+          // 양일 경우
+          queue.add(new Info(next, now.sheep + 1, now.wolf, set));
+        }
+      }
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/42892" target="_blank">LV.3 길 찾기 게임 ★</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+
+class Solution {
+  public static class Node{
+    int x;
+    int y;
+    int idx;
+    Node left;
+    Node right;
+
+    Node(int x, int y, int idx){
+      this.x = x;
+      this.y = y;
+      this.idx = idx;
+      left = null;
+      right = null;
+    }
+  }
+
+  public static class BinaryTree{
+    Node root = null;
+
+    public BinaryTree() {}
+
+    public void insert(int x, int y, int idx) {
+      if(root != null) {
+        Node head = root;
+        Node cNode;
+
+        while(true) {
+            cNode = head;
+            if(x &lt; cNode.x) {
+              if(cNode.left != null) head = cNode.left;
+              else {
+                cNode.left = new Node(x, y, idx);
+                break;
+              }
+            }
+            else {
+              if(cNode.right != null) head = cNode.right;
+              else {
+                cNode.right = new Node(x, y, idx);
+                break;
+              }
+            }
+          }
+      } 
+      else root = new Node(x, y, idx);
+    }
+
+    public void preorder(Node n, ArrayList&lt;Integer&gt; list) {
+      list.add(n.idx);
+      if(n.left != null) preorder(n.left, list);
+      if(n.right != null) preorder(n.right, list);
+    }
+
+    public void postorder(Node n, ArrayList&lt;Integer&gt; list) {
+      if(n.left != null) postorder(n.left, list);
+      if(n.right != null) postorder(n.right, list);
+      list.add(n.idx);
+    }
+  }
+
+  public static int[][] solution(int[][] nodeinfo) {
+    int len = nodeinfo.length;
+    int[][] answer = new int[2][len], infos = new int[len][3];
+
+    for(int idx = 0; idx &lt; len; ++idx) {
+      infos[idx][0] = nodeinfo[idx][0];
+      infos[idx][1] = nodeinfo[idx][1];
+      infos[idx][2] = idx + 1;
+    }
+
+    Arrays.sort(infos, new Comparator&lt;int[]&gt;() {
+      public int compare(int[] o1, int[] o2) {
+        if(o1[1] == o2[1]) {
+          return o1[0] - o2[0]; 
+        }
+        return o2[1] - o1[1];
+      };
+    });
+
+    BinaryTree binary = new BinaryTree();
+    for(int idx = 0; idx &lt; len; ++idx) binary.insert(infos[idx][0], infos[idx][1], infos[idx][2]);
+
+    ArrayList&lt;Integer&gt; pre = new ArrayList&lt;&gt;();
+    binary.preorder(binary.root, pre);
+
+    ArrayList&lt;Integer&gt; post = new ArrayList&lt;&gt;();
+    binary.postorder(binary.root, post);
+
+    for(int idx = 0; idx &lt; len; ++idx) {
+      answer[0][idx] = pre.get(idx);
+      answer[1][idx] = post.get(idx);
+    }
+
+    return answer;
+  }
+}
+
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="집합-문제-풀이">집합 문제 풀이</h2>
+
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/12981" target="_blank">LV.2 영어 끝말잇기</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashSet;
+
+public class Solution {
+  public int[] solution(int n, String[] words) {
+    // 이미 사용한 단어를 저장하는 set
+    HashSet&lt;String&gt; usedWords = new HashSet&lt;&gt;();
+
+    // 이전 단어의 마지막 글자
+    char prevWord = words[0].charAt(0);
+
+    for (int i = 0; i &lt; words.length; i++) {
+      // 이미 사용한 단어이거나 첫 글자가 이전 단어와 일치하지 않으면
+      if (usedWords.contains(words[i]) || words[i].charAt(0) != prevWord) {
+        // 탈락하는 사람의 번호와 차례를 반환
+        return new int[]{(i % n) + 1, (i / n) + 1};
+      }
+
+      // 사용한 단어로 추가
+      usedWords.add(words[i]);
+
+      // 이전 단어의 마지막 글자 업데이트
+      prevWord = words[i].charAt(words[i].length() - 1);
+    }
+
+    // 모두 통과했을 경우 반환값
+    return new int[]{0, 0};
+  }
+}
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="그래프-문제-풀이">그래프 문제 풀이</h2>
+
+<p>DFS, BFS, 완전탐색 등 자주 출제되는 문제 유형입니다.</p>
+
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/159993" target="_blank">LV.2 미로 탈출</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.ArrayDeque;
+
+public class Solution {
+  // 위, 아래, 왼쪽, 오른쪽 이동 방향
+  private static final int[] dx = {0, 0, -1, 1};
+  private static final int[] dy = {-1, 1, 0, 0};
+
+  // 위치 정보(x, y)를 저장할 클래스 생성
+  private static class Point {
+    int nx, ny;
+
+    public Point(int nx, int ny) {
+      this.nx = nx;
+      this.ny = ny;
+    }
+  }
+
+  private static char[][] map;
+  private static int N, M;
+
+  public int solution(String[] maps) {
+    N = maps.length;
+    M = maps[0].length();
+
+    // 미로에 대한 정보를 배열로 저장
+    map = new char[N][M];
+    for (int i = 0; i &lt; N; i++) {
+      map[i] = maps[i].toCharArray();
+    }
+
+    Point start = null, end = null, lever = null;
+
+    // 시작 지점, 출구 그리고 레버의 위치를 찾음
+    for (int i = 0; i &lt; N; i++) {
+      for (int j = 0; j &lt; M; j++) {
+        if (map[i][j] == 'S') start = new Point(j, i);
+        else if (map[i][j] == 'E') end = new Point(j, i);
+        else if (map[i][j] == 'L') lever = new Point(j, i);
+      }
+    }
+
+    // 시작 자점 -&gt; 레버, 레버 -&gt; 출구까지의 최단 거리를 각각 구함
+    int startLever = bfs(start, lever);
+    int leverEnd = bfs(lever, end);
+
+    // 도착 불가능한 경우는 -1, 도착 가능한 경우는 최단 거리를 반환
+    if (startLever == -1 || leverEnd == -1)
+      return -1;
+    else
+      return startLever + leverEnd;
+  }
+
+  // start -&gt; end 로 너비 우선 탐색하여 최단거리 반환
+  private static int bfs(Point start, Point end) {
+    // 너비 우선 탐색 초기 과정
+    int[][] dist = new int[N][M];
+    ArrayDeque&lt;Point&gt; queue = new ArrayDeque&lt;&gt;();
+
+    dist[start.ny][start.nx] = 1;
+    queue.add(start);
+
+    while (!queue.isEmpty()) {
+      Point now = queue.poll();
+
+      // 네 방향으로 이동
+      for (int i = 0; i &lt; 4; i++) {
+        int nextX = now.nx + dx[i];
+        int nextY = now.ny + dy[i];
+
+        // 범위를 벗어나는 경우 예외 처리
+        if (nextX &lt; 0 || nextX &gt;= M || nextY &lt; 0 || nextY &gt;= N)
+          continue;
+
+        // 이미 방문한 지점인 경우 탐색하지 않음
+        if (dist[nextY][nextX] &gt; 0)
+          continue;
+
+        // X가 아닌 지점만 이동 가능
+        if (map[nextY][nextX] == 'X')
+          continue;
+
+        // 거리 1증가
+        dist[nextY][nextX] = dist[now.ny][now.nx] + 1;
+
+        // 다음 정점을 큐에 넣음
+        queue.add(new Point(nextX, nextY));
+
+        // 도착점에 도달하면 최단 거리를 반환
+        if (nextX == end.nx &amp;&amp; nextY == end.ny)
+          return dist[end.ny][end.nx] - 1;
+      }
+    }
+
+    // 탐색을 종료할 때까지 도착 지점에 도달하지 못 했다면 -1 반환
+    return -1;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/12978" target="_blank">LV.2 배달 ★</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int N, int[][] road, int K) {
+    int answer = 0;
+
+    // 플로이드 와셜 알고리즘을 위한 2차원 배열
+    int[][] arr = new int[N][N];
+
+    // 최댓값으로 배열 초기화
+    for (int i = 0; i &lt; N; i++) {
+      for (int j = 0; j &lt; N; j++) {
+        if(i == j) {
+          continue;
+        }
+        arr[i][j] = 500001;
+      }
+    }
+
+    // 배열 인덱스를 0부터 하기위해 -1 뺴주고 인접 행렬 만들기
+    for (int i = 0; i &lt; road.length; i++) {
+      // 새로 입력되는 거리가 더 크면 무시
+      if(arr[road[i][0] - 1][road[i][1] - 1] &gt;= road[i][2]) {
+      arr[road[i][0] - 1][road[i][1] - 1] = road[i][2];
+      arr[road[i][1] - 1][road[i][0] - 1] = road[i][2];
+      }
+    }
+
+    // 플로이드 와샬
+    for (int i = 0; i &lt; N; i++) {
+      for (int j = 0; j &lt; N; j++) {
+        for (int k = 0; k &lt; N; k++) {
+          // jk를 바로 가는것과 i를 거쳐서 가는것중 i를 거쳐서 가는게 더 빠를 경우
+          if(arr[j][k] &gt; arr[j][i] + arr[i][k]) {
+            arr[j][k] = arr[j][i] + arr[i][k];
+          }
+        }
+      }
+    }
+
+    // 출력
+    for (int i = 0; i &lt; N; i++) {
+      if(arr[0][i] &lt;= K) {
+        answer++;
+      }
+    }
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/67259" target="_blank">LV.3 경주로 건설 ★</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.ArrayDeque;
+
+public class Solution {
+  private static class Node {
+    int x, y, direction, cost;
+
+    public Node(int x, int y, int direction, int cost) {
+      this.x = x;
+      this.y = y;
+      this.direction = direction;
+      this.cost = cost;
+    }
+  }
+
+  // 순서가 반드시 (0, -1), (-1, 0), (0, 1), (1, 0) 순서로 되어야합니다. (코너 계산에 필요)
+  private static final int[] rx = {0, -1, 0, 1};
+  private static final int[] ry = {-1, 0, 1, 0};
+
+  private static int N;
+  private static int[][][] visited;
+
+  // 주어진 좌표가 보드의 범위 내에 있는지 확인
+  private static boolean isValid(int x, int y) {
+    return 0 &lt;= x &amp;&amp; x &lt; N &amp;&amp; 0 &lt;= y &amp;&amp; y &lt; N;
+  }
+
+  // 주어진 좌표가 차단되었거나 이동할 수 없는지 확인
+  private static boolean isBlocked(int[][] board, int x, int y) {
+    return (x == 0 &amp;&amp; y == 0) || !isValid(x, y) || board[x][y] == 1;
+  }
+
+  // 이전 방향과 현재 방향에 따라 비용 계산
+  private static int calculateCost(int direction, int prevDirection, int cost) {
+    if (prevDirection == -1 || (prevDirection - direction) % 2 == 0)
+      return cost + 100;
+    return cost + 600;
+  }
+
+  // 주어진 좌표와 방향이 아직 방문하지 않았거나 새 비용이 더 작은 경우
+  private static boolean isShouldUpdate(int x, int y, int direction, int newCost) {
+    return visited[x][y][direction] == 0 || visited[x][y][direction] &gt; newCost;
+  }
+
+  public int solution(int[][] board) {
+    ArrayDeque&lt;Node&gt; queue = new ArrayDeque&lt;&gt;();
+    queue.add(new Node(0, 0, -1, 0));
+    N = board.length;
+    visited = new int[N][N][4];
+
+    int answer = Integer.MAX_VALUE;
+
+    // 큐가 빌 때까지 반복
+    while (!queue.isEmpty()) {
+      Node now = queue.poll();
+
+      // 가능한 모든 방향에 대해 반복
+      for (int i = 0; i &lt; 4; i++) {
+        int new_x = now.x + rx[i];
+        int new_y = now.y + ry[i];
+
+        // 이동할 수 없는 좌표는 건너뛰기
+        if (isBlocked(board, new_x, new_y)) {
+          continue;
+        }
+
+        int new_cost = calculateCost(i, now.direction, now.cost);
+
+        // 도착지에 도달한 경우 최소 비용 업데이트
+        if (new_x == N - 1 &amp;&amp; new_y == N - 1) {
+          answer = Math.min(answer, new_cost);
+
+        } else if(isShouldUpdate(new_x, new_y, i, new_cost)) {
+          // 좌표와 방향이 아직 방문하지 않았거나 새 비용이 더 작은 경우 큐에 추가
+          queue.add(new Node(new_x, new_y, i, new_cost));
+          visited[new_x][new_y][i] = new_cost;
+        }
+      }
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="백트래킹-문제-풀이">백트래킹 문제 풀이</h2>
+
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/92342" target="_blank">LV.2 양궁 대회</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+
+public class Solution {
+  private static int max;
+  private static int[] answer;
+  private static int[] apeach;
+
+  // 주어진 조합에서 각각의 점수 계산
+  private static int getScore(int[] ryan) {
+    int score = 0;
+    for (int i = 0; i &lt;= 10; i++) {
+      if (ryan[i] + apeach[i] &gt; 0) {
+        score += ryan[i] &gt; apeach[i] ? (10 - i) : -(10 - i);
+      }
+    }
+    return score;
+  }
+
+  // 최대 차이와 라이언의 과녁 저장
+  private static void calculateDiff(int[] ryan) {
+    int score = getScore(ryan);
+    if (max &lt; score) {
+      max = score;
+      answer = ryan.clone();
+    }
+
+    // 점수가 같으면 가장 낮은 점수를 더 많이 맞힌 경우를 찾음
+    else if (max &gt; 0 &amp;&amp; max == score) {
+      for (int i = 10; i &gt;= 0; i--) {
+        if(answer[i] != ryan[i]) {
+          if (answer[i] &lt; ryan[i]) {
+            answer = ryan.clone();
+          }
+          break;
+        }
+      }
+    }
+  }
+
+  // 가능한 라이언의 과녁 점수 조합의 모든 경우를 구함
+  private static void backtrack(int n, int idx, int[] ryan) {
+    if (n == 0) {
+      calculateDiff(ryan);
+      return;
+    }
+
+    for (int i = idx; i &lt;= 10; i++) {
+      int cnt = Math.min(n, apeach[i] + 1);
+      ryan[i] = cnt;
+      backtrack(n - cnt, i + 1, ryan);
+      ryan[i] = 0;
+    }
+  }
+
+  public static int[] solution(int n, int[] info) {
+    apeach = info;
+    max = 0;
+    backtrack(n, 0, new int[11]);
+
+    // 최대 차이가 0인 경우 -1 반환, 아니면 answer 반환
+    return max == 0 ? new int[]{-1} : answer;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/60062" target="_blank">LV.3 외벽 점검 ★</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+
+public class Solution {
+  private static int length, answer;
+  private static int[] Weak;
+  private static boolean[] used;
+
+  // dist 배열의 친구들로 모든 외벽이 점검 가능한지 확인
+  private static boolean check(int[] dist) {
+
+    // 점검을 시작하는 외벽을 0 부터 length 까지 전부 확인함
+    for (int i = 0; i &lt; length; i++) {
+      int idx = i;
+      
+      // 각 친구가 점검 가능한 외벽을 모두 점검하며 진행
+      for (int distance : dist) {
+        int position = Weak[idx++] + distance;
+        while (idx &lt; Weak.length &amp;&amp; Weak[idx] &lt;= position) {
+          idx++;
+        }
+      }
+      // 모든 외벽을 점검 가능하면 true 반환
+      if (idx - i &gt;= length)
+        return true;
+    }
+
+    // 모든 외벽을 점검할 수 없으면 false 반환
+    return false;
+  }
+
+  // n개의 숫자를 나열하는 모든 경우의 수를 구함
+  private static void backtrack(int n, int[] dist, int[] org) {
+    if (n == org.length) {
+      // 모든 외벽이 점검 가능하면 답 저장
+      if (check(dist))
+        answer = n;
+      return;
+    }
+
+    // 한 번 사용한 친구는 다시 사용하지 않도록 used 배열을 활용하여 백트래킹
+    for (int i = 0; i &lt; org.length; i++) {
+      if (!used[i]) {
+        used[i] = true;
+        dist[n] = org[i];
+        backtrack(n + 1, dist, org);
+        used[i] = false;
+      }
+    }
+  }
+
+  public static int solution(int n, int[] weak, int[] dist) {
+    // 주어진 weak 지점들을 선형으로 만들어 줌
+    length = weak.length;
+    Weak = new int[length * 2];
+    for (int i = 0; i &lt; 2; i++) {
+      for (int j = 0; j &lt; length; j++) {
+        Weak[j + (i * length)] = weak[j] + (i * n);
+      }
+    }
+
+    // 오름차순으로 정렬
+    Arrays.sort(dist);
+
+    // 답을 -1 로 초기화
+    answer = -1;
+
+    // used 배열 생성
+    used = new boolean[dist.length];
+
+    // 가장 점검 범위가 큰 친구부터 1명 씩 늘려가며 답을 탐색
+    for (int i = 1; i &lt;= dist.length; i++) {
+      int[] org = new int[i];
+      System.arraycopy(dist, dist.length - i, org, 0, i);
+      backtrack(0, new int[i], org);
+
+      // 답을 찾았으면 종료해야 함
+      if (answer &gt; 0)
+        break;
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/92345" target="_blank">LV.3 사라지는 발판 ★</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.ArrayList;
+import java.util.Comparator;
+
+public class Solution {
+  // 백트래킹을 위한 재귀 메소드의 반환값을 저장함
+  private static class Result {
+    boolean win;
+    int step;
+
+    public Result(boolean win, int step) {
+      this.win = win;
+      this.step = step;
+    }
+  }
+
+  // 게임판의 행과 열의 개수를 저장합니다.
+  private static int ROW, COL;
+
+  // 이동할 수 있는 방향을 저장합니다. 상, 우, 하, 좌 순서로 저장되어 있습니다.
+  private static final int[] DR = {0, 1, 0, -1};
+  private static final int[] DC = {-1, 0, 1, 0};
+
+  private static boolean[][] visited;
+
+  private static int[][] Board;
+
+  // 주어진 위치가 유효한 위치인지 확인하는 메소드입니다.
+  private static boolean isVaildPos(int r, int c) {
+    return 0 &lt;= r &amp;&amp; r &lt; ROW &amp;&amp; 0 &lt;= c &amp;&amp; c &lt; COL;
+  }
+
+  // 재귀적으로 호출되는 메소드입니다.
+  private static Result recursive(int[] alpha, int[] beta, int step) {
+    // 현재 플레이어의 위치와 이동 가능한지 여부,
+    // 상대 플레이어가 이긴 경우를 저장하는 변수들입니다.
+    int[] now = step % 2 == 0 ? alpha : beta;
+    boolean canMove = false;
+    boolean isOpponentWinner = true;
+
+    // 이긴 경우와 지는 경우를 저장하는 리스트입니다.
+    ArrayList&lt;Integer&gt; winSteps = new ArrayList&lt;&gt;();
+    ArrayList&lt;Integer&gt; loseSteps = new ArrayList&lt;&gt;();
+
+    // 현재 위치에서 이동할 수 있는 모든 방향으로 이동해봅니다.
+    for (int i = 0; i &lt; 4; i++) {
+      int nr = now[0] + DR[i];
+      int nc = now[1] + DC[i];
+
+      // 이동할 수 있는 위치인 경우
+      if (isVaildPos(nr, nc) &amp;&amp; !visited[nr][nc] &amp;&amp; Board[nr][nc] == 1) {
+        canMove = true;
+
+        // 두 플레이어의 위치가 같으면 A 플레이어가 이긴 것이므로 true와 step + 1을 반환합니다.
+        if (alpha[0] == beta[0] &amp;&amp; alpha[1] == beta[1])
+          return new Result(true, step + 1);
+
+        // 재귀적으로 호출하여 이긴 여부와 남은 턴 수를 가져옵니다.
+        visited[now[0]][now[1]] = true;
+        Result result = step % 2 == 0 ? recursive(new int[]{nr, nc}, beta, step + 1)
+              : recursive(alpha, new int[]{nr, nc}, step + 1);
+        visited[now[0]][now[1]] = false;
+
+        // 상대 플레이어가 이긴 경우만 true로 유지합니다.
+        isOpponentWinner &amp;= result.win;
+
+        // 이긴 경우와 지는 경우를 저장합니다.
+        if (result.win)
+          winSteps.add(result.step);
+        else
+          loseSteps.add(result.step);
+      }
+    }
+
+    // 이동할 수 있는 위치가 없는 경우
+    if (!canMove)
+        return new Result(false, step);
+
+    // 상대 플레이어가 이긴 경우
+    if (isOpponentWinner)
+        return new Result(false, winSteps.stream().max(Comparator.comparingInt(o -&gt; o)).get());
+
+    // 현재 플레이어가 이긴 경우
+    return new Result(true, loseSteps.stream().min(Comparator.comparingInt(o -&gt; o)).get());
+  }
+
+  public static int solution(int[][] board, int[] aloc, int[] bloc) {
+    Board = board;
+    ROW = board.length;
+    COL = board[0].length;
+    visited = new boolean[ROW][COL];
+
+    // 16 A 플레이어가 이길 때까지 걸리는 최소 턴 수를 반환합니다.
+    return recursive(aloc, bloc, 0).step;
+  }
+}
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="정렬-문제-풀이">정렬 문제 풀이</h2>
+
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/12915" target="_blank">LV.1 문자열 내 마음대로 정렬하기</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+
+public class Solution {
+  public String[] solution(String[] strings, int n) {
+    Arrays.sort(strings, (o1, o2) -&gt; o1.charAt(n) == o2.charAt(n) ? o1.compareTo(o2) : Character.compare(o1.charAt(n), o2.charAt(n)));
+    return strings;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/12933" target="_blank">LV.1 정수 내림차순으로 배치하기</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+import java.util.Collections;
+
+public class Solution {
+  public long solution(long n) {
+    // 정수 n을 문자열로 변환하고 각 자릿수를 배열로 저장합니다.
+    String[] digits = String.valueOf(n).split("");
+
+    // 내림차순으로 정렬합니다.
+    Arrays.sort(digits, Collections.reverseOrder());
+
+    // 정렬된 숫자를 다시 하나의 문자열로 합칩니다.
+    StringBuilder sb = new StringBuilder();
+    for (String digit : digits)
+      sb.append(digit);
+
+    // 문자열을 long형으로 변환하여 반환합니다.
+    return Long.parseLong(sb.toString());
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/64065" target="_blank">LV.2 튜플</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+import java.util.HashSet;
+
+public class Solution {
+  public int[] solution(String s) {
+    // 문자열 s에서 대괄호를 제거하고 ","을 기준으로 나누어 배열에 저장한 후 길이 기준으로 오름차순 정렬합니다.
+    s = s.substring(0, s.length() - 2).replace("{", "");
+    String[] arr = s.split("},");
+    Arrays.sort(arr, (o1, o2) -&gt; Integer.compare(o1.length(), o2.length()));
+
+    HashSet&lt;String&gt; set = new HashSet&lt;&gt;();
+    int[] answer = new int[arr.length];
+
+    // 각 원소를 순회하면서 이전 원소와 차이 나는 부분을 구합니다.
+    for (int i = 0; i &lt; arr.length; i++) {
+      String[] numbers = arr[i].split(",");
+      for (String number : numbers) {
+        if (!set.contains(number)) {
+          answer[i] = Integer.parseInt(number);
+          set.add(number);
+        }
+      }
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/62050" target="_blank">LV.4 지형 이동 ★</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.PriorityQueue;
+
+public class Solution {
+  private static class Node {
+    int i, j, cost;
+
+    public Node(int i, int j, int cost) {
+      this.i = i;
+      this.j = j;
+      this.cost = cost;
+    }
+  }
+
+  public int solution(int[][] land, int height) {
+    int answer = 0;
+    int n = land.length;
+
+    // 주변 노드 탐색을 위한 di, dj
+    int[] di = {-1, 0, 1, 0};
+    int[] dj = {0, 1, 0, -1};
+
+    boolean[][] visited = new boolean[n][n];
+
+    // 시작 노드 추가
+    PriorityQueue&lt;Node&gt; pq = new PriorityQueue&lt;&gt;((o1, o2) -&gt; Integer.compare(o1.cost, o2.cost));
+    pq.add(new Node(0, 0, 0));
+
+    // BFS + 우선순위 큐로 다음 노드 관리
+    while (!pq.isEmpty()) {
+      Node now = pq.poll();
+      // 아직 방문하지 않은 경로만 탐색
+      if (visited[now.i][now.j])
+        continue;
+
+      visited[now.i][now.j] = true;
+
+      // 현재까지 비용을 합산
+      answer += now.cost;
+
+      for (int i = 0; i &lt; 4; i++) {
+        int ni = now.i + di[i];
+        int nj = now.j + dj[i];
+
+        // 유효한 인덱스가 아닐 경우
+        if (!(0 &lt;= ni &amp;&amp; ni &lt; n &amp;&amp; 0 &lt;= nj &amp;&amp; nj &lt; n))
+          continue;
+
+        int tempCost = Math.abs(land[now.i][now.j] - land[ni][nj]);
+
+        // 입력으로 주어진 height 보다 높이차가 큰 경우
+        int newCost = tempCost &gt; height ? tempCost : 0;
+
+        // 다음 경로를 add
+        pq.add(new Node(ni, nj, newCost));
+      }
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="시뮬레이션-문제-풀이">시뮬레이션 문제 풀이</h2>
+
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/70129" target="_blank">LV.2 이진 변환 반복하기</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Solution {
+  public int[] solution(String s) {
+    // 이진 변환 횟수를 저장하는 변수
+    int countTransform = 0;
+
+    // 제거된 모든 0의 개수를 저장하는 변수
+    int countZero = 0;
+
+    // s가 '1'이 아닌 동안 계속 반복
+    while (!s.equals("1")) {
+      // 이진 변환 횟수를 1 증가
+      countTransform++;
+
+      // s에서 '0'의 개수를 세어 countZero에 누적
+      int zero = s.replace("1", "").length();
+      countZero += zero;
+
+      // s에서 '1'의 개수를 세고, 이를 이진수로 반환
+      // Integer.toBinaryString() 메소드를 활용
+      s = Integer.toBinaryString(s.length() - zero);
+    }
+
+    // 이진 변환 횟수와 제거된 모든 '0'의 개수를 배열에 담아 반환
+    return new int[]{countTransform, countZero};
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/132265" target="_blank">LV.2 롤케이크 자르기</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashMap;
+import java.util.HashSet;
+
+public class Solution {
+  public int solution(int[] topping) {
+    // 결과값을 저장할 변수 초기화
+    int answer = 0;
+
+    // 토핑의 개수를 세어서 해시맵에 저장
+    HashMap&lt;Integer, Integer&gt; toppingMap = new HashMap&lt;&gt;();
+    for (int t : topping) {
+      toppingMap.put(t, toppingMap.getOrDefault(t, 0) + 1);
+    }
+
+    // 토핑의 종류를 저장할 해시셋
+    HashSet&lt;Integer&gt; toppingSet = new HashSet&lt;&gt;();
+
+    // 롤케이크를 하나씩 해시셋에 넣으면서 확인
+    for (int t : topping) {
+      // 해시셋에 토핑을 추가하고, 해당 토핑의 전체 개수를 해시맵에서 줄임
+      toppingSet.add(t);
+      toppingMap.put(t, toppingMap.get(t) - 1);
+
+      // 토핑의 전체 개수가 0이면 해시맵에서 제거
+      if (toppingMap.get(t) == 0)
+        toppingMap.remove(t);
+
+      // 토핑의 종류의 수가 같다면
+      if (toppingSet.size() == toppingMap.size())
+        answer++;
+    }
+
+    // 공평하게 나눌 수 있는 방법의 수 반환
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/12980" target="_blank">LV.2 점프와 순간이동</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Solution {
+  public int solution(int n) {
+    return Integer.toBinaryString(n).replace("0","").length();
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/120861" target="_blank">LV.0 캐릭터의 좌표</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashMap;
+
+public class Solution {
+  // 보드의 경계좌표를 벗어나는지 확인하는 메소드
+  private static boolean isInBounds(int x, int y, int dx, int dy) {
+    return Math.abs(x + dx) &lt;= width &amp;&amp; Math.abs(y + dy) &lt;= height;
+  }
+
+  private static  int width, height;
+
+  public int[] solution(String[] keyinput, int[] board) {
+    // 캐릭터의 초기 위치
+    int x = 0, y = 0;
+
+    // 각 방향에 대한 움직임
+    HashMap&lt;String, int[]&gt; moves = new HashMap&lt;&gt;();
+    moves.put("up", new int[]{0, 1});
+    moves.put("down", new int[]{0, -1});
+    moves.put("left", new int[]{-1, 0});
+    moves.put("right", new int[]{1, 0});
+
+    // 게임 경계좌표
+    width = board[0] / 2;
+    height = board[1] / 2;
+
+    for (String key : keyinput) {
+      // 방향키에 따른 오프셋
+      int dx = moves.get(key)[0];
+      int dy = moves.get(key)[1];
+
+      // 게임 맵의 크기를 벗어나지 않는지 확인
+      if (isInBounds(x, y, dx, dy)) {
+        x += dx;
+        y += dy;
+      }
+    }
+
+    // 캐릭터의 위치를 반환합니다.
+    return new int[]{x, y};
+  }
+}
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="동적계획법dp-문제-풀이">동적계획법(DP) 문제 풀이</h2>
+
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/12945" target="_blank">LV.2 피보나치 수</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Solution {
+  public int solution(int n) {
+    int[] fibo = new int[n + 1];
+    fibo[0] = 0;
+    fibo[1] = 1;
+
+    for (int i = 2; i &lt;= n; i++) {
+      fibo[i] = (fibo[i - 1] + fibo[i - 2]) % 1234567;
+    }
+
+    return fibo[n];
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/12900" target="_blank">LV.2 2 x n 타일링</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Solution {
+  public int solution(int n) {
+    // 동적 계획법을 위한 배열 초기화
+    // dp[i]는 가로 길이가 i일 때 바닥을 채우는 방법의 수
+    int[] dp = new int[n + 1];
+    dp[1] = 1;
+    dp[2] = 2;
+
+    // 가로 길이가 3부터 n까지의 각각의 경우에 대해 바닥을 채우는 방법의 수를 구함
+    for (int i = 3; i &lt;= n; i++) {
+      // dp[i]는 dp[i - 1]과 dp[i - 2]를 더한 값
+      dp[i] = (dp[i - 1] + dp[i - 2]) % 1_000_000_007;
+    }
+
+    // 바닥의 가로 길이가 n일 때 바닥을 채우는 바업의 수인 dp[n]을 반환
+    return dp[n];
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/12913" target="_blank">LV.2 땅따먹기</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+
+public class Solution {
+  int solution(int[][] land) {
+    // 각 행마다 이전 행에서의 최대 점수를 더해가며 최대 점수를 구합니다.
+    for (int i = 1; i &lt; land.length; i++) {
+
+      for (int j = 0; j &lt; 4; j++) {
+        // 이전 행에서 현재 열의 값을 제외한 나머지 열들 중에서 가장 큰 값을 더해줍니다.
+        int max = 0;
+
+        for (int k = 0; k &lt; 4; k++) {
+          if (j != k) max = Math.max(max, land[i - 1][k]);
+        }
+
+        land[i][j] += max;
+      }
+    }
+
+    return Arrays.stream(land[land.length - 1]).max().getAsInt();
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/12905" target="_blank">LV.2 가장 큰 정사각형 찾기 ★</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Solution {
+  public int solution(int [][]board) {
+    // 주어진 2차원 보드의 행과 열의 개수를 변수에 저장합니다.
+    int row = board.length;
+    int col = board[0].length;
+
+    // 각 행과 열을 순회하며 최적의 정사각형을 찾습니다.
+    for (int i = 1; i &lt; row; i++) {
+      for (int j = 1; j &lt; col; j++) {
+
+        // 현재 위치의 값이 1인 경우를 확인합니다.
+        if (board[i][j] == 1) {
+
+          // 현재 위치에서 위, 왼쪽, 대각선 왼쪽 위의 값들을 가져옵니다.
+          int up = board[i - 1][j];
+          int left = board[i][j - 1];
+          int upLeft = board[i - 1][j - 1];
+
+          // 현재 위치의 값을 이전 위치들의 값들 중
+          // 가장 작은 값에 1을 더한 값으로 업데이트 합니다.
+          board[i][j] += Math.min(up, Math.min(upLeft, left));
+        }
+      }
+    }
+
+    int answer = 0;
+
+    // 보드에서 가장 큰 값(최대 정사각형의 한 변의 길이)을 찾습니다.
+    for (int i = 0; i &lt; row; i++) {
+      for (int j = 0; j &lt; col; j++) {
+        answer = Math.max(answer, board[i][j]);
+      }
+    }
+
+    // 최대 정사각형의 넓이를 반환합니다.
+    return answer * answer;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/12983" target="_blank">LV.4 단어 퍼즐 ★</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+import java.util.HashSet;
+
+public class Solution {
+  private static final int INF = 20_001;
+
+  public int solution(String[] strs, String t) {
+    // 타겟 문자열 t의 길이
+    int n = t.length();
+
+    // 각 위치에서 필요한 최소 조각수를 저장할 배열(초기값은 INF로 함)
+    int[] dp = new int[n + 1];
+    Arrays.fill(dp, INF);
+
+    // 빈 문자열을 위해 필요한 최소 조각수는 0
+    dp[0] = 0;
+
+    // strs 조각들의 길이를 저장한 해시셋
+    HashSet&lt;Integer&gt; sizes = new HashSet&lt;&gt;();
+    for (String str : strs) {
+      sizes.add(str.length());
+    }
+
+    // dp[i]부터 dp[n]까지 채우기 위한 반복문
+    for (int i = 1; i &lt;= n; i++) {
+
+      // 각 str 조각의 문자열 길이에 대하여
+      for (int size : sizes) {
+        if (i - size &gt;= 0) {
+          int idx = i;
+          String sub = t.substring(idx - size, idx);
+
+          // 이미 구한 해와 strs 조각을 추가해서 문자열을 만들 수 있다면
+          if (Arrays.asList(strs).contains(sub)) {
+            // 해당 위치의 최소 조각수를 갱신
+            dp[i] = Math.min(dp[i], dp[i - size] + 1);
+          }
+        }
+      }
+    }
+
+    // 최소 조각수를 반환
+    return dp[n] &lt; INF ? dp[n] : -1;
+  }
+}
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="탐욕법greedy-문제-풀이">탐욕법(Greedy) 문제 풀이</h2>
+
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/12982" target="_blank">LV.1 예산</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+
+public class Solution {
+  public int solution(int[] d, int budget) {
+    // 배열 d를 오름차순으로 정렬
+    Arrays.sort(d);
+
+    // 지원할 수 있는 부서의 개수를 세는 변수
+    int count = 0;
+
+    for (int amount : d) {
+      if (budget &lt; amount) {
+        // 남은 예산이 신청한 금액보다 작으면 더 이상 지원할 수 없으므로 종료
+        break;
+      }
+
+      // 예산에서 신청한 금액을 차감
+      budget -= amount;
+      count++;
+    }
+
+    return budget &gt;= 0 ? count : count - 1;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/138476" target="_blank">LV.2 귤 고르기</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+public class Solution {
+  public int solution(int k, int[] tangerine) {
+    // 귤의 개수를 세는 HashMap 객체 생성
+    HashMap&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
+    for (int i : tangerine) {
+      map.put(i, map.getOrDefault(i, 0) + 1);
+    }
+
+    // 개수를 내림차순으로 정렬
+    ArrayList&lt;Integer&gt; sortedCounts = new ArrayList&lt;&gt;(map.values());
+    sortedCounts.sort(Collections.reverseOrder());
+
+    // 현재까지의 종류 수
+    int numTypes = 0;
+
+    // 현재까지의 귤 개수 합
+    int countSum = 0;
+
+    for (int count : sortedCounts) {
+      countSum += count;
+      numTypes++;
+
+      // 귤 개수 합이 k 이상이 되는 순간 종료
+      if (countSum &gt;= k)
+        break;
+    }
+
+    return numTypes;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/12979" target="_blank">LV.3 기지국 설치</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Solution {
+  public int solution(int n, int[] stations, int w) {
+    int answer = 0;
+
+    // 현재 탐색하는 아파트의 위치
+    int location = 1;
+
+    // 설치된 기지국의 인덱스
+    int idx = 0;
+
+    while (location &lt;= n) {
+      // 기지국이 설치된 위치에 도달한 경우
+      if (idx &lt; stations.length &amp;&amp; location &gt;= stations[idx] - w) {
+        location = stations[idx] + w + 1;
+        idx++;
+
+      } else {
+        // 기지국이 설치되지 않은 위치인 경우
+        location += 2 * w + 1; // 기지국을 설치하고 해당 범위를 넘어감
+        answer++;
+      }
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="카카오-문제-풀이-등">카카오 문제 풀이 등</h2>
+
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/150365" target="_blank">LV.3 미로 탈출 명령어</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Solution {
+  public static void main(String[] args) {
+    System.out.println(solution(3,4,2,3,3	,1,5));
+    System.out.println(solution(2,2,1,1,2	,2,2));
+    System.out.println(solution(3,3,1,2,3	,3,4));
+  }
+
+  public static String solution(int n, int m, int x, int y, int r, int c, int k) {
+    StringBuilder sb = new StringBuilder();
+
+    int dist = k - (Math.abs(x - r) + Math.abs(y - c));
+
+    if (dist &lt; 0 || dist % 2 == 1) {
+      return "impossible";
+    }
+
+    while (k-- &gt; 0) {
+      int[] next = getNext(n, m, x, y, r, c, k);
+      x = x + next[0];
+      y = y + next[1];
+      sb.append((char)next[2]);
+    }
+
+    return sb.toString();
+  }
+
+  // 아래 &gt; 왼쪽 &gt; 오른쪽 &gt; 위쪽
+  private static int[] getNext(int n, int m, int x, int y, int r, int c, int k) {
+    if (x + 1 &lt;= n &amp;&amp; Math.abs(x + 1 - r) + Math.abs(y - c) &lt;= k) {
+      return new int[]{1, 0, 'd'};
+
+    } else if (y - 1 &gt;= 1 &amp;&amp; Math.abs(x - r) + Math.abs(y - 1 - c) &lt;= k) {
+      return new int[]{0, -1, 'l'};
+
+    } else if (y + 1 &lt;= m &amp;&amp; Math.abs(x - r) + Math.abs(y + 1 - c) &lt;= k) {
+      return new int[]{0, 1, 'r'};
+
+    } else {
+      return new int[]{-1, 0, 'u'};
+    }
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/150369" target="_blank">LV.2 택배 배달과 수거하기</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public static void main(String[] args) {
+    System.out.println(solution(4, 1, new int[]{0}, new int[]{0}));
+  }
+
+  public static long solution(int cap, int n, int[] deliveries, int[] pickups) {
+    int deliveries_idx = n - 1;
+    int pickups_idx = n - 1;
+
+    while (deliveries_idx &gt;= 0 &amp;&amp; deliveries[deliveries_idx] == 0) {
+      deliveries_idx--;
+    }
+    while (pickups_idx &gt;= 0 &amp;&amp; pickups[pickups_idx] == 0) {
+      pickups_idx--;
+    }
+
+    long answer = 0;
+
+    while (deliveries_idx &gt;= 0 || pickups_idx &gt;= 0) {
+      answer += (Math.max(deliveries_idx, pickups_idx) + 1) * 2L;
+      deliveries_idx = getMaxIdx(cap, deliveries, deliveries_idx);
+      pickups_idx = getMaxIdx(cap, pickups, pickups_idx);
+    }
+
+    return answer;
+  }
+
+  private static int getMaxIdx(int cap, int[] target, int idx) {
+    while (idx &gt;= 0 &amp;&amp; (cap &gt; 0 || target[idx] == 0)) {
+      if (target[idx] &gt; cap) {
+        target[idx] -= cap;
+        cap = 0;
+      }
+      else {
+        cap -= target[idx];
+        target[idx] = 0;
+        idx--;
+      }
+    }
+    return idx;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/150370" target="_blank">LV.1 개인정보 수집 유효기간</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.StringTokenizer;
+
+class Solution {
+  private static final int MONTH_OF_YEAR = 12;
+  private static final int DAY_OF_MONTH = 28;
+
+  public int[] solution(String today, String[] terms, String[] privacies) {
+    int todayDay = stringToDay(today);
+
+    HashMap&lt;Character, Integer&gt; term = new HashMap&lt;&gt;();
+    for (String s : terms) {
+      StringTokenizer st = new StringTokenizer(s);
+      term.put(st.nextToken().charAt(0), Integer.parseInt(st.nextToken()) * DAY_OF_MONTH);
+    }
+
+    ArrayList&lt;Integer&gt; answer = new ArrayList&lt;&gt;();
+
+    for (int i = 1; i &lt;= privacies.length; i++) {
+      StringTokenizer st = new StringTokenizer(privacies[i - 1]);
+      int day = stringToDay(st.nextToken()) + term.get(st.nextToken().charAt(0));
+      if (todayDay &gt;= day) {
+        answer.add(i);
+      }
+    }
+
+    return answer.stream().mapToInt(i -&gt; i).toArray();
+  }
+
+  private static int stringToDay(String s) {
+    StringTokenizer st = new StringTokenizer(s, ".");
+    int month = (Integer.parseInt(st.nextToken()) - 2000) * MONTH_OF_YEAR + Integer.parseInt(st.nextToken()) - 1;
+    int day = Integer.parseInt(st.nextToken());
+    return month * DAY_OF_MONTH + day;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/77886" target="_blank">LV.3 110 옮기기</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.ArrayDeque;
+import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    System.out.println(Arrays.toString(solution(new String[]{"1110","100111100","0111111010"})));
+    System.out.println(Arrays.toString(solution(new String[]{"1011110","01110","101101111010"})));
+    System.out.println(Arrays.toString(solution(new String[]{"1100111011101001"})));
+  }
+
+  public static String[] solution(String[] s) {
+    String[] answer = new String[s.length];
+
+    for (int i = 0; i &lt; s.length; i++) {
+      StringBuilder start = new StringBuilder();
+      ArrayDeque&lt;Character&gt; stack = new ArrayDeque&lt;&gt;();
+      char[] end = s[i].toCharArray();
+
+      for (char c : end) {
+        stack.push(c);
+        if (stack.size() &gt;= 3) {
+          char s3 = stack.pop();
+          char s2 = stack.pop();
+          char s1 = stack.pop();
+
+          if (("" + s1 + s2 + s3).equals("110")) {
+            start.append("110");
+
+          } else {
+            stack.push(s1);
+            stack.push(s2);
+            stack.push(s3);
+          }
+        }
+      }
+
+      StringBuilder ans = new StringBuilder();
+      while (!stack.isEmpty()) {
+        ans.append(stack.pollLast());
+      }
+
+      if (ans.indexOf("11") &gt;= 0) {
+        ans.insert(ans.indexOf("11"), start);
+
+      } else if (ans.lastIndexOf("0") &gt;= 0) {
+        ans.insert(ans.lastIndexOf("0") + 1, start);
+
+      } else {
+        ans.insert(0, start);
+      }
+
+      answer[i] = ans.toString();
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/68936" target="_blank">LV.2 쿼드 압축 후 개수 세기</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+
+class Solution {
+  public static void main(String[] args) {
+    int[][] a1 = { {1, 1, 0, 0}, {1, 0, 0, 0}, {1, 0, 0, 1}, {1, 1, 1, 1} };
+    System.out.println(Arrays.toString(solution(a1)));
+    int[][] a2 = { {1, 1, 1, 1, 1, 1, 1, 1}, {0, 1, 1, 1, 1, 1, 1, 1}, {0, 0, 0, 0, 1, 1, 1, 1}, {0, 1, 0, 0, 1, 1, 1, 1}, {0, 0, 0, 0, 0, 0, 1, 1}, {0, 0, 0, 0, 0, 0, 0, 1}, {0, 0, 0, 0, 1, 0, 0, 1}, {0, 0, 0, 0, 1, 1, 1, 1} };
+    System.out.println(Arrays.toString(solution(a2)));
+  }
+
+  public static int[] solution(int[][] arr) {
+    int[][] rev = new int[arr.length][arr.length];
+    for (int i = 0; i &lt; rev.length; i++) {
+      rev[i] = arr[i].clone();
+      for (int j = 0; j &lt; rev.length; j++) {
+        rev[i][j] ^= 1;
+      }
+    }
+
+    Compression(arr);
+    int one = sum(arr);
+    Compression(rev);
+    int zero = sum(rev);
+
+    return new int[]{zero, one};
+  }
+
+  private static void Compression(int[][] arr) {
+    for (int p = 0; Math.pow(2, p) &lt; arr.length; p++) {
+      int pow = (int)Math.pow(2, p);
+      int quad = (int)Math.pow(4, p + 1);
+      for (int i = (pow * 2) - 1; i &lt; arr.length; i += (pow * 2)) {
+        for (int j = (pow * 2) - 1; j &lt; arr.length; j += (pow * 2)) {
+          if (arr[i][j] + arr[i - pow][j] + arr[i][j - pow] + arr[i - pow][j - pow] == quad) {
+            arr[i - pow][j] = arr[i][j - pow] = arr[i - pow][j - pow] = 0;
+            arr[i][j] = quad;
+          }
+        }
+      }
+    }
+  }
+
+  private static int sum(int[][] arr) {
+    int sum = 0;
+    for (int[] a : arr) {
+      for (int x : a) {
+        if (x &gt; 0)
+          sum++;
+      }
+    }
+    return sum;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/86051" target="_blank">LV.1 없는 숫자 더하기</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public int solution(int[] numbers) {
+    int answer = 45;
+    for (int n : numbers)
+      answer -= n;
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/64064" target="_blank">LV.3 불량 사용자</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashSet;
+import java.util.regex.Pattern;
+
+class Solution {
+  public static void main(String[] args) {
+    String[] user_id_3 = {"frodo", "fradi", "crodo", "abc123", "frodoc"};
+    String[] banned_id_3 = {"fr*d*", "*rodo", "******", "******"};
+    System.out.println(solution(user_id_3, banned_id_3));
+  }
+
+  public static int solution(String[] user_id, String[] banned_id) {
+    answer = new HashSet&lt;&gt;();
+    userId = user_id;
+    used = new boolean[banned_id.length];
+    regex = new Pattern[banned_id.length];
+
+    for (int i = 0; i &lt; banned_id.length; i++) {
+      regex[i] = Pattern.compile(banned_id[i].replace("*", "[a-z0-9]"));
+    }
+
+    backtrack(0, "");
+
+    return answer.size();
+  }
+
+  private static String[] userId;
+  private static Pattern[] regex;
+  private static boolean[] used;
+  private static HashSet&lt;String&gt; answer;
+
+  private static void backtrack(int idx, String users) {
+    if (users.length() == regex.length) {
+      answer.add(users);
+    }
+
+    for (int i = idx; i &lt; userId.length; i++) {
+      String id = userId[i];
+      for (int j = 0; j &lt; regex.length; j++) {
+        if (!used[j] &amp;&amp; regex[j].matcher(id).matches()) {
+          used[j] = true;
+          backtrack(i + 1, users + i);
+          used[j] = false;
+        }
+      }
+    }
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/92335" target="_blank">LV.2 k진수에서 소수 개수 구하기</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public static void main(String[] args) {
+    System.out.println(solution(437674, 3));
+    System.out.println(solution(110011, 2));
+  }
+
+  public static int solution(int n, int k) {
+    String[] p = Integer.toString(n, k).split("0");
+    int answer = 0;
+    for (String s : p) {
+      if(!s.isEmpty() &amp;&amp; isPrimeNumber(Long.parseLong(s)))
+        answer++;
+    }
+    return answer;
+  }
+
+  private static boolean isPrimeNumber(long num) {
+    if (num == 1) return false;
+    boolean isPrime = true;
+    int sqrt = (int)Math.sqrt(num + 1);
+
+    for(int i = 2; i &lt;= sqrt; i++) {
+      if(num % i == 0) {
+        isPrime = false;
+        break;
+      }
+    }
+
+    return isPrime;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/81302" target="_blank">LV.2 거리두기 확인하기</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  private static int[] dx = {0, 0, 1, -1};
+  private static int[] dy = {1, -1, 0, 0};
+
+  public int[] solution(String[][] places) {
+    int[] answer = {1, 1, 1, 1, 1};
+
+    for (int t = 0; t &lt; places.length; t++) {
+      char[][] place = new char[5][5];
+      for (int i = 0; i &lt; 5; i++) {
+        place[i] = places[t][i].toCharArray();
+      }
+
+      for (int i = 0; i &lt; 5; i++) {
+        for (int j = 0; j &lt; 5; j++) {
+          if (place[i][j] == 'P') {
+            for (int k = 0; k &lt; 4; k++) {
+              int x = i + dx[k];
+              int y = j + dy[k];
+
+              if (x &lt; 0 || x &gt; 4 || y &lt; 0 || y &gt; 4)
+                continue;
+
+              if (place[x][y] == 'P' || place[x][y] == 'p')
+                answer[t] = 0;
+
+              if (place[x][y] == 'O')
+                place[x][y] = 'p';
+            }
+          }
+        }
+      }
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/118668" target="_blank">LV.3 코딩테스트 공부</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public static void main(String[] args) {
+    System.out.println(solution(10, 10, new int[][]{ {10,15,2,1,2},{20,20,3,3,4} }));
+  }
+
+  public static int solution(int alp, int cop, int[][] problems) {
+    int maxAlp = 0;
+    int maxCop = 0;
+
+    for (int[] problem : problems) {
+      maxAlp = Math.max(maxAlp, problem[0]);
+      maxCop = Math.max(maxCop, problem[1]);
+    }
+
+    int[][] dp = new int[maxAlp + 2][maxCop + 2];
+
+    for (int i = 0; i &lt;= maxAlp; i++) {
+      for (int j = 0; j &lt;= maxCop; j++) {
+        dp[i][j] = Math.max(i - alp, 0) + Math.max(j - cop, 0);
+      }
+    }
+
+    for (int i = 0; i &lt;= maxAlp; i++) {
+      for (int j = 0; j &lt;= maxCop; j++) {
+        for (int[] problem : problems) {
+          if (problem[0] &gt; i || problem[1] &gt; j)
+            continue;
+          int x = Math.min(i + problem[2], maxAlp);
+          int y = Math.min(j + problem[3], maxCop);
+          dp[x][y] = Math.min(dp[x][y], dp[i][j] + problem[4]);
+        }
+
+        dp[i + 1][j] = Math.min(dp[i + 1][j], dp[i][j] + 1);
+        dp[i][j + 1] = Math.min(dp[i][j + 1], dp[i][j] + 1);
+      }
+    }
+
+    return dp[maxAlp][maxCop];
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/118667" target="_blank">LV.2 두 큐 합 같게 만들기</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.ArrayDeque;
+
+class Solution {
+  public int solution(int[] queue1, int[] queue2) {
+    long sum1 = 0, sum2 = 0;
+    ArrayDeque&lt;Integer&gt; queue = new ArrayDeque&lt;&gt;();
+
+    for (int i : queue1) {
+      queue.add(i);
+      sum1 += i;
+    }
+
+    for (int i : queue2) {
+      sum2 += i;
+    }
+
+    long target = (sum1 + sum2) / 2;
+
+    int q2 = 0;
+
+    int count = 0;
+
+    while (!queue.isEmpty() &amp;&amp; q2 &lt; queue2.length) {
+      if (sum1 == target)
+        break;
+
+      if (sum1 &lt; target) {
+        queue.add(queue2[q2]);
+        sum1 += queue2[q2];
+        q2++;
+      }
+      else {
+        sum1 -= queue.poll();
+      }
+
+      count++;
+    }
+
+    if (sum1 != target)
+      return -1;
+
+    return count;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/12987" target="_blank">LV.3 숫자 게임</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+
+class Solution {
+  public int solution(int[] A, int[] B) {
+    Arrays.sort(A);
+    Arrays.sort(B);
+
+    int l = B.length - 1;
+    int answer = 0;
+
+    for (int i = A.length - 1; i &gt;= 0; i--) {
+      if (A[i] &lt; B[l]) {
+        l--;
+        answer++;
+      }
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/67258" target="_blank">LV.3 보석 쇼핑</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashMap;
+import java.util.Optional;
+
+class Solution {
+  public int[] solution(String[] gems) {
+    HashMap&lt;String, Integer&gt; map = new HashMap&lt;&gt;();
+    for (String gem : gems) map.put(gem, 0);
+
+    int l = 0, r = 0, min = gems.length + 1, al = 1, ar = gems.length, max = map.size();
+    map = new HashMap&lt;&gt;();
+
+    while (r &lt; gems.length) {
+      int cnt = Optional.ofNullable(map.get(gems[r])).orElse(0) + 1;
+      map.put(gems[r++], cnt);
+
+      while (map.size() == max) {
+        if (min &gt; r - l) {
+          min = r - l;
+          al = l + 1;
+          ar = r;
+        }
+
+        cnt = map.get(gems[l]) - 1;
+        if(cnt == 0) map.remove(gems[l]);
+        else map.put(gems[l], cnt);
+        l++;
+      }
+    }
+
+    return new int[]{al, ar};
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/92344" target="_blank">LV.3 파괴되지 않은 건물</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution {
+  public static void main(String[] args) {
+    int[][] board2 = { {1, 2, 3}, {4, 5, 6}, {7, 8, 9} };
+    int[][] skill2 = { {1, 1, 1, 2, 2, 4}, {1, 0, 0, 1, 1, 2}, {2, 2, 0, 2, 0, 100} };
+    System.out.println(solution(board2, skill2));
+  }
+
+  public static int solution(int[][] board, int[][] skill) {
+    int[][] sum = new int[board.length + 1][board[0].length + 1];
+
+    for (int[] s : skill) {
+      int degree = s[5] * (s[0] == 1 ? -1 : 1);
+      sum[s[1]][s[2]] += degree;
+      sum[s[3] + 1][s[4] + 1] += degree;
+      sum[s[1]][s[4] + 1] -= degree;
+      sum[s[3] + 1][s[2]] -= degree;
+    }
+
+    for (int i = 0; i &lt; sum.length; i++) {
+      for (int j = 1; j &lt; sum[0].length; j++) {
+        sum[i][j] += sum[i][j - 1];
+      }
+    }
+
+    for (int i = 1; i &lt; sum.length; i++) {
+      for (int j = 0; j &lt; sum[0].length; j++) {
+        sum[i][j] += sum[i - 1][j];
+      }
+    }
+
+    int answer = 0;
+
+    for (int i = 0; i &lt; board.length; i++) {
+      for (int j = 0; j &lt; board[0].length; j++) {
+        if (board[i][j] + sum[i][j] &gt; 0)
+          answer++;
+      }
+    }
+
+    return answer;
+  }
+}
+</code></pre></div></div>
+<p><br />
+<a href="https://school.programmers.co.kr/learn/courses/30/lessons/77484" target="_blank">LV.1 로또의 최고 순위와 최저 순위</a></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.HashSet;
+
+class Solution {
+  public int[] solution(int[] lottos, int[] win_nums) {
+    HashSet&lt;Integer&gt; win = new HashSet&lt;&gt;();
+    for (int winNum : win_nums) {
+      win.add(winNum);
+    }
+
+    int zero = 0, match = 0;
+
+    for (int lotto : lottos) {
+      if (lotto == 0) zero++;
+      else if (win.contains(lotto)) match++;
+    }
+
+    return new int[]{7 - Math.max((match + zero), 1), 7 - Math.max(match, 1)};
+  }
+}
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%ED%8C%8C%EC%9D%B4%EC%8D%AC-java" class="page__taxonomy-item" rel="tag">파이썬 / Java</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2024-04-30">2024-04-30</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/web-dev/2024-04-18-1" class="pagination--pager" title="CSS 폰트 네트워크 지연 문제 해결 방법
+">Prev</a>
+    
+    
+      <a href="/python-java/2024-05-01-1" class="pagination--pager" title="코딩테스트 필수 Java 문법 및 자료구조 정리
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

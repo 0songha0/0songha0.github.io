@@ -1,0 +1,835 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>코딩테스트 언어 선택 / Python → Java 변경 이유 / 코딩테스트 팁 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="코딩테스트 언어 선택 / Python → Java 변경 이유 / 코딩테스트 팁">
+<meta property="og:url" content="https://0songha0.github.io/python-java/2024-03-01-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-03-01T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2024-03-01T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/python-java/2024-03-01-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="코딩테스트 언어 선택 / Python → Java 변경 이유 / 코딩테스트 팁">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2024-03-01T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2024-03-01T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">코딩테스트 언어 선택 / Python → Java 변경 이유 / 코딩테스트 팁
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2024-03-01T00:00:00+00:00">2024-03-01</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 코딩테스트 언어 선택 / Python → Java 변경 이유 / 코딩테스트 팁</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#코딩테스트-언어-선택">코딩테스트 언어 선택</a><ul><li><a href="#python-선택-이유">Python 선택 이유</a></li><li><a href="#python--java-변경-이유">Python → Java 변경 이유</a></li></ul></li><li><a href="#코딩테스트-팁">코딩테스트 팁</a><ul><li><a href="#코딩테스트-공부-순서">코딩테스트 공부 순서</a></li><li><a href="#대기업-코테-난이도">대기업 코테 난이도</a></li><li><a href="#코딩테스트-문제-공부-방법">코딩테스트 문제 공부 방법</a></li><li><a href="#코딩테스트-시간복잡도">코딩테스트 시간복잡도</a></li><li><a href="#코딩테스트-동기부여">코딩테스트 동기부여</a></li><li><a href="#코딩테스트-풀면서-느낀점">코딩테스트 풀면서 느낀점</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="코딩테스트-언어-선택">코딩테스트 언어 선택</h2>
+
+<h3 id="python-선택-이유">Python 선택 이유</h3>
+<ul>
+  <li>Java, C에서 직접 구현해야 하는 코드를 파이썬에서는 기본 제공하는 경우가 많아 코드가 간결해집니다.</li>
+  <li>알고리즘 대회가 아닌, 기업 코딩테스트에서 파이썬이 느려서 탈락하는 경우는 거의 없다고 합니다.</li>
+  <li>코딩테스트에 유리한 언어가 파이썬이기 때문에, 좋은 강의가 대부분 파이썬으로 나와있습니다.</li>
+  <li>코딩테스트 공부 시간을 최소화하기 위해 파이썬으로 준비하기로 결정하였습니다.</li>
+  <li>파이썬은 웹 크롤링, 데이터 정제에 특화되어 개발형 코딩테스트 언어로도 유리합니다.</li>
+</ul>
+
+<h3 id="python--java-변경-이유">Python → Java 변경 이유</h3>
+<ul>
+  <li>신세계 등 대기업 코딩테스트는 Java로 픽스되어서 파이썬으로 못 푸는 경우가 꽤 있습니다.</li>
+  <li>파이썬 문법을 자주 안쓰니까 익숙하지 않아 문제 풀 때 헷갈려서 더 막히기도 했습니다.</li>
+  <li>웹 개발자로서 코테 준비와 동시에 주력 언어인 Java를 마스터하고 싶었습니다.</li>
+  <li>파이썬 내장 모듈을 외워서 푸는 것보다, 로직을 직접 구현하며 공부하고 싶었습니다.</li>
+  <li>평소에 자주 쓰는 언어라서 습득이 빠르고 응용하기 쉽다는 장점이 있습니다.</li>
+</ul>
+
+<hr />
+
+<h2 id="코딩테스트-팁">코딩테스트 팁</h2>
+
+<h3 id="코딩테스트-공부-순서">코딩테스트 공부 순서</h3>
+<ol>
+  <li>선택한 언어 문법 공부</li>
+  <li>프로그래머스 입문 Lv.0 100문제 풀기</li>
+  <li>프로그래머스 코딩 기초 트레이닝 Lv.0 124 문제 풀기</li>
+  <li>자료구조, 알고리즘 공부</li>
+  <li>프로그래머스 코딩테스트 고득점 Kit 1~3단계 풀기</li>
+  <li>코딩테스트 스킬체크 1~3단계 풀기</li>
+  <li>백준 골드3까지 풀기</li>
+  <li>카카오 등 대기업 코테 문제 풀기</li>
+</ol>
+
+<h3 id="대기업-코테-난이도">대기업 코테 난이도</h3>
+<p>프로그래머스 3단계, 백준 골드3, 코드포스 블루 레벨을 풀 수 있으면 대부분 합격 가능합니다.<br />
+잘 안 나오는 프로그래머스 LV.4 이상은 일단 건너 띄우고 공부해도 좋습니다.</p>
+
+<h3 id="코딩테스트-문제-공부-방법">코딩테스트 문제 공부 방법</h3>
+<ol>
+  <li>문제 설명, 제한사항, 입출력 예를 꼼꼼히 이해합니다.</li>
+  <li>코드 설계를 주석으로 작성하고 문제를 풀어봅니다.</li>
+  <li>30분 넘게 문제를 풀지 못하면, 검색하여 답안을 제출합니다.</li>
+  <li>마음에 드는 답안의 주석을 chatGPT에게 요청합니다.</li>
+  <li>위에서부터 순차적으로 한 줄씩 이해하며 주석을 수정합니다.</li>
+  <li>본인 스타일에 맞게 코드를 개선합니다.</li>
+  <li>시간이 지난 후, 모든 코드를 초기화하고 다시 풀어봅니다.</li>
+  <li>힌트 없이 코드를 구현할 수 있게 되면 다음 문제로 넘어갑니다.</li>
+</ol>
+
+<h3 id="코딩테스트-시간복잡도">코딩테스트 시간복잡도</h3>
+<ul>
+  <li>입력 값의 크기가 10의 8승(1억) 이상이면, 시간복잡도 O(n) 이하 자료구조/알고리즘을 선택합니다.</li>
+  <li>제한시간 1초 문제에 시간복잡도 O(n²) 자료구조/알고리즘을 사용하려면 입력 값이 5,000 이내여야 합니다.</li>
+</ul>
+
+<h3 id="코딩테스트-동기부여">코딩테스트 동기부여</h3>
+<ul>
+  <li>입사할 수 있는 좋은 기업이 더 많아집니다.</li>
+  <li>자료구조, 알고리즘을 직접 구현하며 공부할 수 있습니다.</li>
+  <li>실력 상승과 성취감을 원동력으로 풀면 좋습니다.</li>
+</ul>
+
+<h3 id="코딩테스트-풀면서-느낀점">코딩테스트 풀면서 느낀점</h3>
+<ul>
+  <li>문법을 익히고 유용한 자료구조 객체나 함수를 외우는 것이 중요합니다.</li>
+  <li>쉬운 문제부터 최대한 많은 문제를 풀어보며 익숙해져야 합니다.</li>
+  <li>문제를 풀고나면 항상 다른 사람의 풀이를 보고 배워서 익혀두는 것이 좋습니다.</li>
+  <li>다른 사람의 풀이에서 좋아요를 많이 받은 짧은 코드가 무조건 좋은 코드는 아닙니다.</li>
+  <li>Java 코테는 스트림보다 디버깅이 용이하고 성능이 좋은 for문 사용이 권장됩니다.</li>
+  <li>프로그래머스, 백준 등 여러 사이트를 골고루 풀어봐야 다른 사이트도 적응하기 쉽습니다.</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%ED%8C%8C%EC%9D%B4%EC%8D%AC-java" class="page__taxonomy-item" rel="tag">파이썬 / Java</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2024-03-01">2024-03-01</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/tool/2024-02-28-1" class="pagination--pager" title="윈도우 Host 파일 수정 / 특정 도메인 요청을 localhost로 전송하는 방법
+">Prev</a>
+    
+    
+      <a href="/web-dev/2024-03-05-1" class="pagination--pager" title="Spring 에러 핸들러 처리 / 톰캣에 에러 로그 안 찍히는 경우
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

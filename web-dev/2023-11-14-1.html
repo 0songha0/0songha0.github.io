@@ -1,0 +1,892 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Git 블로그 복제 및 커스텀 방법 / 깃허브 블로그 만드는 법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="Git 블로그 복제 및 커스텀 방법 / 깃허브 블로그 만드는 법">
+<meta property="og:url" content="https://0songha0.github.io/web-dev/2023-11-14-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-11-14T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2023-11-14T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/web-dev/2023-11-14-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Git 블로그 복제 및 커스텀 방법 / 깃허브 블로그 만드는 법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2023-11-14T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2023-11-14T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Git 블로그 복제 및 커스텀 방법 / 깃허브 블로그 만드는 법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2023-11-14T00:00:00+00:00">2023-11-14</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Git 블로그 복제 및 커스텀 방법 / 깃허브 블로그 만드는 법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#git-블로그-복제-방법">Git 블로그 복제 방법</a><ul><li><a href="#public-git-블로그-clone">Public Git 블로그 Clone</a></li><li><a href="#기존-git-연결-제거">기존 Git 연결 제거</a></li><li><a href="#깃허브-저장소-생성-방법">깃허브 저장소 생성 방법</a></li><li><a href="#생성한-git-저장소에-push">생성한 Git 저장소에 Push</a></li></ul></li><li><a href="#git-블로그-커스텀-방법">Git 블로그 커스텀 방법</a><ul><li><a href="#git-블로그-주소-변경">Git 블로그 주소 변경</a></li><li><a href="#블로그-프로필-사진-변경">블로그 프로필 사진 변경</a></li><li><a href="#파비콘-변경">파비콘 변경</a></li><li><a href="#댓글-위젯-사용-방법">댓글 위젯 사용 방법</a></li><li><a href="#상단-우측-메뉴-변경">상단 우측 메뉴 변경</a></li><li><a href="#푸터-변경">푸터 변경</a></li><li><a href="#글-검색-기능-추가">글 검색 기능 추가</a></li><li><a href="#글-날짜-포맷-변경">글 날짜 포맷 변경</a></li><li><a href="#카테고리-추가">카테고리 추가</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="git-블로그-복제-방법">Git 블로그 복제 방법</h2>
+
+<h3 id="public-git-블로그-clone">Public Git 블로그 Clone</h3>
+<p>마음에 드는 Git 블로그 주인이 허락한다면, Fork 또는 Clone하여 나만의 블로그를 생성할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone "복사한Git주소"
+</code></pre></div></div>
+<p>git 프로젝트 페이지에서 Code 버튼 클릭 시 Clone URL을 복사할 수 있습니다.<br />
+cmd에서 원하는 경로로 이동 후 위 명령어를 실행하여 Git 블로그 프로젝트를 내려받습니다.</p>
+
+<h3 id="기존-git-연결-제거">기존 Git 연결 제거</h3>
+<p>파일 탐색기에서 Git 블로그 프로젝트 폴더로 이동하여 .git 폴더를 삭제합니다.</p>
+
+<h3 id="깃허브-저장소-생성-방법">깃허브 저장소 생성 방법</h3>
+<p>깃허브 로그인 &gt; Your repositories &gt; New &gt; Repository name 입력 후 Public (무료) 체크 &gt; Create repository<br />
+Git 계정명과 저장소명 앞부분을 일치시키면 ‘https://Git계정명.github.io’로 접근할 수 있습니다.<br />
+따라서, 프로젝트 폴더명은 ‘Git계정명.github.io’로 구성하는 것이 URL이 깔끔해서 좋습니다.</p>
+
+<h3 id="생성한-git-저장소에-push">생성한 Git 저장소에 Push</h3>
+<p>cmd에서 프로젝트 폴더로 이동하여 아래의 명령어를 순차적으로 실행합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git init
+git add .
+git commit -m "깃 블로그 초기 구축"
+git branch -M main
+git remote add origin "복사한Git주소"
+git push -u origin main
+</code></pre></div></div>
+<p>push 시 에러가 난다면 Windows 자격 증명 관리자에서 ‘git:https://github.com’ 일반 자격 증명 계정을 변경하고 처음부터 다시 시도합니다.</p>
+
+<p><mark>정상 push 메시지 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>info: please complete authentication in your browser...
+Enumerating objects: 481, done.
+Counting objects: 100% (481/481), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (468/468), done.
+Writing objects: 100% (481/481), 34.11 MiB | 557.00 KiB/s, done.
+Total 481 (delta 11), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (11/11), done.
+To GIT주소
+ * [new branch]      main -&gt; main
+</code></pre></div></div>
+
+<p><mark>Git 저장소 삭제 방법</mark><br />
+깃허브 로그인 &gt; Your repositories &gt; Git 저장소 선택 &gt; Settings &gt; 하단 Delete this repository 선택<br />
+잘못 만든 Git 저장소를 삭제할 수 있습니다.</p>
+
+<hr />
+
+<h2 id="git-블로그-커스텀-방법">Git 블로그 커스텀 방법</h2>
+
+<h3 id="git-블로그-주소-변경">Git 블로그 주소 변경</h3>
+<p>_config.yml의 url, repository, name, description, title 등을 내 블로그에 맞게 수정합니다.<br />
+특히, url: 또는 repository: 부분을 “Git계정명/저장소명”으로 변경해야 정상적으로 URL 접근이 가능합니다.</p>
+
+<h3 id="블로그-프로필-사진-변경">블로그 프로필 사진 변경</h3>
+<p>assets/images 폴더에 작은 이미지를 올리고 _config.yml의 avatar: 부분에서 파일명을 변경해 줍니다.</p>
+
+<h3 id="파비콘-변경">파비콘 변경</h3>
+<p><a href="https://www.favicon-generator.org" target="_blank">https://www.favicon-generator.org</a><br />
+위 경로에서 Image 파일 선택하여 로컬 이미지로 파비콘을 생성하고 Download the generated로 다운로드합니다.<br />
+assets/images/favicon 폴더에 업로드 후 _layout/default.html에서 icon link 요소의 href들을 본인 블로그 주소로 수정해 줍니다.<br />
+웹에서 파비콘은 favicon-16x16.png 파일이 우선 적용되는 것을 확인하였습니다.</p>
+
+<h3 id="댓글-위젯-사용-방법">댓글 위젯 사용 방법</h3>
+<p><a href="https://github.com/apps/utterances" target="_blank">https://github.com/apps/utterances</a><br />
+위 링크에서 Install &gt; Only select repositories &gt; 생성한 Git 저장소 선택 &gt; Install</p>
+
+<p><mark>utterances.html 수정</mark><br />
+_includes/comments-providers/utterances.html 파일에서 repo 속성을 아래와 같이 수정합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>script.setAttribute('repo', 'Git계정명/저장소명');
+</code></pre></div></div>
+<p>Install 후 repo 수정 시 블로그 포스팅에 댓글을 달 수 있게 됩니다.</p>
+
+<p><mark>댓글 테마 변경</mark><br />
+<a href="https://utteranc.es" target="_blank">https://utteranc.es</a><br />
+하단 테마 변경 &gt; Enable Utterances Copy &gt; _config.yml의 utterances:에서 issue_term, theme 수정</p>
+
+<h3 id="상단-우측-메뉴-변경">상단 우측 메뉴 변경</h3>
+<p>_data/navigation.yml의 main: 안에서 아래와 같이 작성하시면 됩니다.</p>
+<div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">  -</span> title: "메뉴제목1"
+    url: /메뉴URL1
+<span class="p">  -</span> title: "메뉴제목2"
+    url: /메뉴URL2
+</code></pre></div></div>
+
+<h3 id="푸터-변경">푸터 변경</h3>
+<p>_includes/footer.html의 내용을 원하는 형태로 변경합니다.</p>
+
+<h3 id="글-검색-기능-추가">글 검색 기능 추가</h3>
+<p>_pages 폴더 안에 search.md 파일 만들고 내용은 아래와 같이 입력합니다.</p>
+<div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">Search</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">search</span>
+<span class="na">permalink</span><span class="pi">:</span> <span class="s">/search</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+<p>_data/navigation.yml의 main: 안에는 아래와 같이 추가합니다.</p>
+<div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">  -</span> title: "Search"
+    url: /search
+</code></pre></div></div>
+
+<h3 id="글-날짜-포맷-변경">글 날짜 포맷 변경</h3>
+<p>VSCode에서 프로젝트 폴더를 열고 전체 검색으로 %B %-d, %Y를 찾아서 %F로 모두 바꾸기 합니다.<br />
+Date Format %F는 YYYY-MM-DD 형식으로 가장 친숙한 날짜 포맷입니다.</p>
+
+<h3 id="카테고리-추가">카테고리 추가</h3>
+<p>_pages/categories 폴더 밑에 category-카테고리명.md 파일을 만들고 아래와 같이 입력합니다.</p>
+<div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">카테고리제목"</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">category</span>
+<span class="na">permalink</span><span class="pi">:</span> <span class="s">/categories/카테고리명</span>
+<span class="na">author_profile</span><span class="pi">:</span> <span class="kc">true</span>
+<span class="na">taxonomy</span><span class="pi">:</span> <span class="s">카테고리제목(categories 페이지의 카테고리 제목 또는 글 연동에 사용됩니다.)</span>
+<span class="na">sidebar</span><span class="pi">:</span>
+  <span class="na">nav</span><span class="pi">:</span> <span class="s2">"</span><span class="s">categories"</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+<p>_data/navigation.yml의 categories 부분에 아래의 예시들처럼 카테고리 정보를 추가합니다.</p>
+<div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>categories:
+<span class="p">  -</span> title: "카테고리제목1"
+    url: /categories/카테고리명1/
+<span class="p">  -</span> title: "카테고리제목2"
+    url: /categories/카테고리명2/
+</code></pre></div></div>
+<div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code>categories:
+<span class="p">  -</span> title: "1뎁스카테고리제목"
+    children:
+<span class="p">      -</span> title: "2뎁스카테고리제목1"
+        url: /categories/2뎁스카테고리명1/
+<span class="p">      -</span> title: "2뎁스카테고리제목2"
+        url: /categories/2뎁스카테고리명2/
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#web-%EA%B0%9C%EB%B0%9C" class="page__taxonomy-item" rel="tag">Web 개발</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-11-14">2023-11-14</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/it-tip/2023-11-10-1" class="pagination--pager" title="비수익형 티스토리 블로그 광고 차단 방법
+">Prev</a>
+    
+    
+      <a href="/web-dev/2023-11-16-1" class="pagination--pager" title="Git 블로그 글 작성 방법 / 마크다운 문법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

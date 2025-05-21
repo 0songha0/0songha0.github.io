@@ -1,0 +1,1141 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>카프카 쉘 스크립트 CLI 종류 및 사용법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="카프카 쉘 스크립트 CLI 종류 및 사용법">
+<meta property="og:url" content="https://0songha0.github.io/kafka/2025-05-02-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-05-02T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2025-05-02T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/kafka/2025-05-02-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="카프카 쉘 스크립트 CLI 종류 및 사용법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2025-05-02T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-05-02T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">카프카 쉘 스크립트 CLI 종류 및 사용법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-02T00:00:00+00:00">2025-05-02</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 카프카 쉘 스크립트 CLI 종류 및 사용법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#카프카-cli-종류">카프카 CLI 종류</a></li><li><a href="#카프카-토픽-관련-cli">카프카 토픽 관련 CLI</a><ul><li><a href="#토픽-생성">토픽 생성</a></li><li><a href="#토픽-리스트-확인">토픽 리스트 확인</a></li><li><a href="#토픽-설정-확인">토픽 설정 확인</a></li><li><a href="#토픽-파티션-수-변경">토픽 파티션 수 변경</a></li><li><a href="#토픽-옵션-추가">토픽 옵션 추가</a></li></ul></li><li><a href="#카프카-브로커-관련-cli">카프카 브로커 관련 CLI</a><ul><li><a href="#브로커-설정-확인">브로커 설정 확인</a></li></ul></li><li><a href="#카프카-프로듀서-관련-cli">카프카 프로듀서 관련 CLI</a><ul><li><a href="#토픽-메시지-값-전송">토픽 메시지 값 전송</a></li><li><a href="#토픽-메시지-키-값-전송">토픽 메시지 키-값 전송</a></li></ul></li><li><a href="#카프카-컨슈머-관련-cli">카프카 컨슈머 관련 CLI</a><ul><li><a href="#토픽-메시지-값-조회">토픽 메시지 값 조회</a></li><li><a href="#토픽-메시지-키-값-조회">토픽 메시지 키-값 조회</a></li><li><a href="#토픽-메시지-최대-n개-조회">토픽 메시지 최대 N개 조회</a></li><li><a href="#특정-파티션-메시지-조회">특정 파티션 메시지 조회</a></li><li><a href="#컨슈머-그룹-지정하여-메시지-조회">컨슈머 그룹 지정하여 메시지 조회</a></li></ul></li><li><a href="#카프카-컨슈머-그룹-관련-cli">카프카 컨슈머 그룹 관련 CLI</a><ul><li><a href="#컨슈머-그룹-리스트-확인">컨슈머 그룹 리스트 확인</a></li><li><a href="#컨슈머-그룹-상태-확인">컨슈머 그룹 상태 확인</a></li><li><a href="#컨슈머-그룹-오프셋-리셋">컨슈머 그룹 오프셋 리셋</a></li></ul></li><li><a href="#기타-cli">기타 CLI</a><ul><li><a href="#카프카-프로듀서-퍼포먼스-측정">카프카 프로듀서 퍼포먼스 측정</a></li><li><a href="#카프카-컨슈머-퍼포먼스-측정">카프카 컨슈머 퍼포먼스 측정</a></li><li><a href="#리더-파티션-분배">리더 파티션 분배</a></li><li><a href="#범위-레코드-삭제">범위 레코드 삭제</a></li><li><a href="#카프카-덤프-로그-확인">카프카 덤프 로그 확인</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="카프카-cli-종류">카프카 CLI 종류</h2>
+
+<p>Kafka CLI 도구는 카프카 설치 시 bin 폴더에 포함된 쉘 스크립트 (.sh 또는 .bat) 실행 파일입니다.<br />
+카프카 클러스터 운영 및 관리 기능들을 CLI (Command Line Interface) 형태로 제공합니다.</p>
+
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>kafka-server-start.sh</td>
+      <td>카프카 브로커 실행</td>
+    </tr>
+    <tr>
+      <td>kafka-server-stop.sh</td>
+      <td>카프카 브로커 종료</td>
+    </tr>
+    <tr>
+      <td>zookeeper-server-start.sh</td>
+      <td>주키퍼 서버 실행</td>
+    </tr>
+    <tr>
+      <td>zookeeper-server-stop.sh</td>
+      <td>주키퍼 서버 종료</td>
+    </tr>
+    <tr>
+      <td>kafka-topics.sh</td>
+      <td>토픽 생성, 삭제, 조회, 설정 변경 등 관리</td>
+    </tr>
+    <tr>
+      <td>kafka-console-producer.sh</td>
+      <td>터미널에서 메시지를 입력하고 전송하는 프로듀서 실행</td>
+    </tr>
+    <tr>
+      <td>kafka-console-consumer.sh</td>
+      <td>터미널에서 메시지를 실시간으로 읽는 컨슈머 실행</td>
+    </tr>
+    <tr>
+      <td>kafka-consumer-groups.sh</td>
+      <td>컨슈머 그룹 상태 조회, 오프셋 이동 등</td>
+    </tr>
+    <tr>
+      <td>kafka-configs.sh</td>
+      <td>사용자/브로커/토픽 등 설정값 변경</td>
+    </tr>
+    <tr>
+      <td>kafka-acls.sh</td>
+      <td>ACL 설정 (접근 제어)</td>
+    </tr>
+    <tr>
+      <td>kafka-reassign-partitions.sh</td>
+      <td>
+        파티션 재할당 작업<br /><br />
+        특정 브로커에 리터 파티션이 몰리는 경우 사용하면 좋은 명령어입니다.<br />
+        리더 파티션을 각 브로커에 균등하게 재분배하여 네트워크 통신으로 인한 리소스 부하를 분산합니다.
+      </td>
+    </tr>
+    <tr>
+      <td>kafka-preferred-replica-election.sh</td>
+      <td>선호 리더 선출 실행</td>
+    </tr>
+    <tr>
+      <td>kafka-run-class.sh</td>
+      <td>임의의 Kafka 클래스 실행 (고급용)</td>
+    </tr>
+    <tr>
+      <td>kafka-verifiable-consumer.sh</td>
+      <td>테스트용 컨슈머 (정합성 테스트)</td>
+    </tr>
+    <tr>
+      <td>kafka-verifiable-producer.sh</td>
+      <td>테스트용 프로듀서 (정합성 테스트)</td>
+    </tr>
+    <tr>
+      <td>connect-standalone.sh</td>
+      <td>커넥트 단일 모드 실행</td>
+    </tr>
+    <tr>
+      <td>connect-distributed.sh</td>
+      <td>커넥트 클러스터 모드 실행</td>
+    </tr>
+    <tr>
+      <td>kafka-producer-perf-test.sh</td>
+      <td>프로듀서 성능 테스트</td>
+    </tr>
+    <tr>
+      <td>kafka-consumer-perf-test.sh</td>
+      <td>컨슈머 성능 테스트</td>
+    </tr>
+    <tr>
+      <td>kafka-storage.sh</td>
+      <td>로그 디렉터리 포맷 및 검증</td>
+    </tr>
+    <tr>
+      <td>kafka-metadata-shell.sh</td>
+      <td>메타데이터 수동 조회 (고급 기능)</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="카프카-토픽-관련-cli">카프카 토픽 관련 CLI</h2>
+
+<h3 id="토픽-생성">토픽 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-- 필수 옵션만 포함하여 토픽 생성
+kafka-topics.sh --create --bootstrap-server localhost:9092 --topic 토픽명
+
+-- 파티션 수, 복제 수, 리텐션 주기 지정하여 토픽 생성
+kafka-topics.sh --create --bootstrap-server localhost:9092 --topic 토픽명 --partitions 3 --replication-factor 2 --config retention.ms=172800000
+</code></pre></div></div>
+
+<h3 id="토픽-리스트-확인">토픽 리스트 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-topics.sh --bootstrap-server localhost:9092 --list
+</code></pre></div></div>
+<p>로컬 카프카 브로커에 생성된 토픽 이름 리스트를 출력합니다.<br />
+–bootstrap-server 옵션 추가 시, 카프카 클러스터 내 브로커 1대에 요청합니다.</p>
+
+<h3 id="토픽-설정-확인">토픽 설정 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-topics.sh --bootstrap-server localhost:9092 --topic 토픽명 --describe
+</code></pre></div></div>
+<p>토픽에 설정된 옵션 (파티션 수, 복제 수, 세그먼트 크기 등) 을 확인할 수 있습니다.<br />
+각 파티션의 리더 파티션과 복제본이 위치한 브로커 ID, ISR 정보도 알 수 있습니다.</p>
+
+<h3 id="토픽-파티션-수-변경">토픽 파티션 수 변경</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-topics.sh --bootstrap-server localhost:9092 --topic 토픽명 --alter --partitions 4
+</code></pre></div></div>
+<p>한번 늘린 파티션 수는 줄일 수 없으므로, 신중하게 늘려야 합니다.</p>
+
+<h3 id="토픽-옵션-추가">토픽 옵션 추가</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-topics.sh --bootstrap-server localhost:9092 --topic 토픽명 --alter --add-config min.insync.replicas=2
+</code></pre></div></div>
+<p>토픽에 min.insync.replicas (ISR 최소 개수) 옵션을 추가합니다.</p>
+
+<hr />
+
+<h2 id="카프카-브로커-관련-cli">카프카 브로커 관련 CLI</h2>
+
+<h3 id="브로커-설정-확인">브로커 설정 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-configs.sh --bootstrap-server localhost:9092 --broker 브로커ID --all --describe
+</code></pre></div></div>
+<p>특정 브로커에 설정된 옵션 값들을 모두 확인할 수 있습니다.</p>
+
+<hr />
+
+<h2 id="카프카-프로듀서-관련-cli">카프카 프로듀서 관련 CLI</h2>
+
+<h3 id="토픽-메시지-값-전송">토픽 메시지 값 전송</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-console.producer.sh --bootstrap-server localhost:9092 --topic 토픽명
+</code></pre></div></div>
+<blockquote>
+  <p>가 나오면, 엔터로 구분하여 메시지 키가 null인 메시지 값을 여러개 보낼 수 있습니다.<br />
+메시지 키가 null인 경우, 라운드 로빈 방식으로 전송하여 여러 파티션에 고르게 분배됩니다.</p>
+</blockquote>
+
+<h3 id="토픽-메시지-키-값-전송">토픽 메시지 키-값 전송</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-console.producer.sh --bootstrap-server localhost:9092 --topic 토픽명 --property "parse.key=true" --property "key.separator=:"
+</code></pre></div></div>
+<blockquote>
+  <p>가 나오면, 엔터로 구분하여 메시지 키:값 레코드를 여러개 보낼 수 있습니다.<br />
+메시지 키는 동일한 파티션 매핑, 메시지 순서 보장★, 데이터 그룹화에 사용되는 값입니다.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="카프카-컨슈머-관련-cli">카프카 컨슈머 관련 CLI</h2>
+
+<h3 id="토픽-메시지-값-조회">토픽 메시지 값 조회</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic 토픽명 --from-beginning
+</code></pre></div></div>
+<p>from-beginning 옵션으로 토픽에 저장된 가장 처음 메시지부터 모든 값을 순차 출력합니다.<br />
+Ctrl + C로 실시간 보기를 나갈 수 있습니다.</p>
+
+<h3 id="토픽-메시지-키-값-조회">토픽 메시지 키-값 조회</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic 토픽명 --property parse.key=true --property key.separator="-" --from-beginning
+</code></pre></div></div>
+<p>토픽에 저장된 모든 메시지 키-값을 순차 출력합니다.</p>
+
+<h3 id="토픽-메시지-최대-n개-조회">토픽 메시지 최대 N개 조회</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic 토픽명 --from-beginning --max-messages 1
+</code></pre></div></div>
+<p>토픽에 저장된 모든 메시지 중, 가장 처음부터 최대 1개의 메시지만 출력하는 예시입니다.</p>
+
+<h3 id="특정-파티션-메시지-조회">특정 파티션 메시지 조회</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic 토픽명 --partition 2 --from-beginning
+</code></pre></div></div>
+<p>2번 파티션에 저장된 메시지만 출력하는 예시입니다.</p>
+
+<h3 id="컨슈머-그룹-지정하여-메시지-조회">컨슈머 그룹 지정하여 메시지 조회</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic 토픽명 --group 컨슈머그룹ID --from-beginning
+</code></pre></div></div>
+<p>지정된 컨슈머 그룹에 속한 컨슈머가 메시지를 처음부터 마지막으로 커밋된 오프셋까지 순차적으로 읽습니다.<br />
+지정한 컨슈머 그룹이 없으면 새로 만들어집니다.<br />
+컨슈머 그룹이 어느 메시지(레코드)까지 읽었는지는 __consumer_offsets 토픽에 저장됩니다.</p>
+
+<p><mark>마지막으로 커밋된 오프셋 이후부터 조회</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic 토픽명 --group 컨슈머그룹ID
+</code></pre></div></div>
+<p>컨슈머 그룹이 이전에 읽고 커밋한 레코드들을 제외하고, 프로듀서가 이후에 보낸 메시지들을 순차적으로 읽습니다.</p>
+
+<hr />
+
+<h2 id="카프카-컨슈머-그룹-관련-cli">카프카 컨슈머 그룹 관련 CLI</h2>
+
+<h3 id="컨슈머-그룹-리스트-확인">컨슈머 그룹 리스트 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
+</code></pre></div></div>
+<p>현재 생성되어 있는 컨슈머 그룹 이름 목록을 볼 수 있습니다.<br />
+console-sonsumer는 kafka-console-consumer.sh 사용 시 일시적으로 생성되는 기본 컨슈머 그룹입니다.<br />
+더 이상 사용되지 않으면 Kafka에서 GC 대상이 되어 삭제될 수 있습니다.</p>
+
+<h3 id="컨슈머-그룹-상태-확인">컨슈머 그룹 상태 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group 컨슈머그룹ID --describe
+</code></pre></div></div>
+<p>특정 컨슈머 그룹이 어떤 토픽 레코드를 어디까지 조회했는지 모니터링할 수 있습니다.<br />
+일회성 조회이므로, 실제 모니터링 시에는 외부 모니터링 툴로 컨슈머 랙을 수집하고 시각화하는 것이 좋습니다.</p>
+
+<p><mark>컨슈머 랙 모니터링 아키텍처</mark></p>
+<ul>
+  <li>버로우 : 컨슈머 랙 상태 체크 오픈소스 모니터링 툴</li>
+  <li>텔레그래프 : 버로우 REST API를 주기적으로 호출하여 컨슈머 랙 데이터 수집</li>
+  <li>엘라스틱서치 : 수집된 컨슈머 랙 데이터 저장 및 분석</li>
+  <li>그라파나 : 엘라스틱서치에 저장한 컨슈머 랙 데이터 시각화</li>
+</ul>
+
+<p><mark>컨슈머 그룹 상태 정보</mark></p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>GROUP</td>
+      <td>컨슈머 그룹명</td>
+    </tr>
+    <tr>
+      <td>TOPIC</td>
+      <td>연결된 토픽명</td>
+    </tr>
+    <tr>
+      <td>PARTITION</td>
+      <td>토픽 내 파티션 번호</td>
+    </tr>
+    <tr>
+      <td>CURRENT-OFFSET</td>
+      <td>컨슈머가 마지막으로 커밋한 오프셋 (마지막으로 읽은 위치)</td>
+    </tr>
+    <tr>
+      <td>LOG-END-OFFSET</td>
+      <td>해당 파티션의 가장 최신 메시지 오프셋 (프로듀서가 보낸 가장 마지막 메시지 위치)</td>
+    </tr>
+    <tr>
+      <td>LAG ★</td>
+      <td>
+        컨슈머가 아직 읽지 못한 메시지 수. 컨슈머 랙 (LOG-END-OFFSET - CURRENT-OFFSET)<br />
+        프로듀서 처리량 대비 컨슈머 처리량이 낮아 지연이 발생하는지 판단하는 모니터링 지표<br />
+        컨슈머 랙은 컨슈머 그룹-토픽-파티션 단위로 생성됨<br /><br />
+        컨슈머 처리 지연 및 장애 여부 확인을 위해서 컨슈머 랙 모니터링은 필수★<br /><br />
+        프로듀서 전송량이 증가하면 파티션, 컨슈머 수를 늘려 병렬 처리량을 높이는 것이 좋은 대응 방안<br />
+        컨슈머 장애 시 파티션 수만큼 컨슈머 수를 늘려 병렬 처리하는 것이 바람직함
+      </td>
+    </tr>
+    <tr>
+      <td>CONSUMER-ID</td>
+      <td>해당 파티션을 현재 읽고 있는 컨슈머 ID</td>
+    </tr>
+    <tr>
+      <td>HOST</td>
+      <td>컨슈머가 실행 중인 서버 IP</td>
+    </tr>
+    <tr>
+      <td>CLIENT-ID</td>
+      <td>컨슈머 클라이언트 ID</td>
+    </tr>
+  </tbody>
+</table>
+<p>컨슈머 렉, 컨슈머 호스트 정보 등을 알 수 있어서 유용합니다.</p>
+
+<h3 id="컨슈머-그룹-오프셋-리셋">컨슈머 그룹 오프셋 리셋</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group 컨슈머그룹ID --topic 토픽명 --reset-offsets --to-earliest --execute
+</code></pre></div></div>
+<p>컨슈머 그룹의 현재 오프셋을 리셋하고, 특정 위치부터 데이터를 읽도록 설정합니다.
+to-earliest은 토픽의 가장 첫 번째 메시지 오프셋 (0번째) 부터 읽도록 하는 옵션입니다.</p>
+
+<p><mark>오프셋 리셋 종류</mark></p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>to-earliest</td>
+      <td>가장 처음 오프셋으로 리셋</td>
+    </tr>
+    <tr>
+      <td>to-latest</td>
+      <td>가장 마지막 오프셋으로 리셋</td>
+    </tr>
+    <tr>
+      <td>to-current</td>
+      <td>현재 커밋된 오프셋으로 리셋</td>
+    </tr>
+    <tr>
+      <td>to-datetime {YYYY-MM-DDTHH:mmSS.sss}</td>
+      <td>레코드 타임스탬프 기준, 특정 시간 이후 첫 오프셋으로 리셋</td>
+    </tr>
+    <tr>
+      <td>to-offset {long}</td>
+      <td>특정 오프셋으로 리셋</td>
+    </tr>
+    <tr>
+      <td>shift-by {+/- long}</td>
+      <td>현재 컨슈머 오프셋에서 앞/뒤로 리셋</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="기타-cli">기타 CLI</h2>
+
+<h3 id="카프카-프로듀서-퍼포먼스-측정">카프카 프로듀서 퍼포먼스 측정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-producer-perf-test.sh --producer-props bootstrap-servers=localhost:9092 --topic 토픽명 --num-records 10 --throughput 1 --record-size 100 --print-metrics
+</code></pre></div></div>
+<p>카프카 프로듀서 퍼포먼스를 측정할 때 사용되는 스크립트입니다.<br />
+토픽에 10개의 레코드를 초당 1개씩, 각 100바이트 크기로 전송하며 성능을 측정합니다.<br />
+브로커로 전송되는 레코드 전송 속도, 레이턴시, 전송 처리량 등 메트릭을 확인할 수 있습니다.<br />
+네트워크 전송이 정상적인지 확인하는 테스트 용도로도 사용 가능합니다.</p>
+
+<h3 id="카프카-컨슈머-퍼포먼스-측정">카프카 컨슈머 퍼포먼스 측정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-consumer-perf-test.sh --bootstrap-server localhost:9092 --topic 토픽명 --messages 10 --show-detailed-stats
+</code></pre></div></div>
+<p>카프카 컨슈머 퍼포먼스를 측정할 때 사용되는 스크립트입니다.<br />
+토픽에서 10개의 메시지를 읽으며 레이턴시, 처리량 등 통계 정보를 출력합니다.</p>
+
+<h3 id="리더-파티션-분배">리더 파티션 분배</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-reassign-partitions.sh --bootstrap-server localhost:9092 --reassignment-json-file 파티션재배치계획파일명.json --execute
+</code></pre></div></div>
+<p>리더 파티션이 특정 브로커에 몰려있는 경우, 다른 브로커에 수동 분배할 수 있습니다.<br />
+파티션 재배치 계획 파일을 생성하고 스크립트를 실행하면 됩니다.</p>
+
+<marr>파티션 재배치 계획 파일 예시</marr>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "version": 1,
+  "partitions": [
+    {
+      "topic": "토픽명",
+      "partition": 0,
+      "replicas": [1, 2, 3] 
+    },
+    {
+      "topic": "토픽명",
+      "partition": 1,
+      "replicas": [2, 3, 4]
+    }
+  ]
+}
+</code></pre></div></div>
+
+<h3 id="범위-레코드-삭제">범위 레코드 삭제</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-delete-records.sh --bootstrap-server localhost:9092 --offsers-file 삭제오프셋파일명.json --execute
+</code></pre></div></div>
+<p>토픽의 파티션별 특정 범위 레코드를 수동 삭제하는 스크립트입니다.</p>
+
+<p><mark>삭제 오프셋 파일 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "partitions": [
+    {
+      "topic": "토픽명",
+      "partition": 0,
+      "offset": 100
+    },
+    {
+      "topic": "토픽명",
+      "partition": 1,
+      "offset": 50
+    }
+  ],
+  "version": 1
+}
+</code></pre></div></div>
+<p>파티션 0번에서 100번 오프셋 이전의 모든 레코드를 삭제하고,<br />
+파티션 1번에서 50번 오프셋 이전의 모든 레코드를 삭제하는 파일 예시입니다.</p>
+
+<h3 id="카프카-덤프-로그-확인">카프카 덤프 로그 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-dump-log.sh --files 카프카폴더/data/토픽명-파티션번호/00000000000000000000.log --deep-iteration
+</code></pre></div></div>
+<p>운영 이슈가 생겼을 때 특정 세그먼트 파일을 지정해서 상세 로그를 확인할 수 있습니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#kafka" class="page__taxonomy-item" rel="tag">Kafka</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-05-02">2025-05-02</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/op/2025-04-30-1" class="pagination--pager" title="클라우드 서비스 모델 종류 / 온프레미스, IaaS, PaaS, SaaS 개념 정리
+">Prev</a>
+    
+    
+      <a href="/kafka/2025-05-07-1" class="pagination--pager" title="Java 카프카 프로듀서, 컨슈머 애플리케이션 개발 방법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

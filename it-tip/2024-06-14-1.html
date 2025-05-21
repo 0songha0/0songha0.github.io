@@ -1,0 +1,893 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>자주 보이는 프로젝트 기술스택 개념 정리 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="자주 보이는 프로젝트 기술스택 개념 정리">
+<meta property="og:url" content="https://0songha0.github.io/it-tip/2024-06-14-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-06-14T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2024-06-14T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/it-tip/2024-06-14-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="자주 보이는 프로젝트 기술스택 개념 정리">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2024-06-14T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2024-06-14T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">자주 보이는 프로젝트 기술스택 개념 정리
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2024-06-14T00:00:00+00:00">2024-06-14</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 자주 보이는 프로젝트 기술스택 개념 정리</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#devops-기술">DevOps 기술</a><ul><li><a href="#docker">Docker</a></li><li><a href="#kubernetes">Kubernetes</a></li><li><a href="#bitbucket">Bitbucket</a></li><li><a href="#jenkins">Jenkins</a></li><li><a href="#github-actions">Github Actions</a></li></ul></li><li><a href="#데이터-처리-기술">데이터 처리 기술</a><ul><li><a href="#kafka">Kafka</a></li></ul></li><li><a href="#데이터베이스">데이터베이스</a><ul><li><a href="#radis">Radis</a></li><li><a href="#mongodb">MongoDB</a></li></ul></li><li><a href="#프레임워크">프레임워크</a><ul><li><a href="#spring-boot">Spring Boot</a></li><li><a href="#spring-cloud">Spring Cloud</a></li><li><a href="#spring-batch">Spring Batch</a></li><li><a href="#flutter">Flutter</a></li><li><a href="#typescript">Typescript</a></li></ul></li><li><a href="#프론트-프레임워크">프론트 프레임워크</a><ul><li><a href="#vuejs">Vue.js</a></li><li><a href="#reactjs">React.js</a></li></ul></li><li><a href="#백엔드-기술">백엔드 기술</a><ul><li><a href="#rabbitmq">RabbitMQ</a></li><li><a href="#jpa">JPA</a></li></ul></li><li><a href="#언어">언어</a><ul><li><a href="#swift">Swift</a></li><li><a href="#django">Django</a></li></ul></li><li><a href="#협업툴">협업툴</a><ul><li><a href="#jira">Jira</a></li><li><a href="#redmine">Redmine</a></li><li><a href="#slack">Slack</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p>여러 기업 채용공고에 자주 보이는 기술스택 개념을 익히기 위해 정리한 글입니다.</p>
+
+<hr />
+
+<h2 id="devops-기술">DevOps 기술</h2>
+
+<h3 id="docker">Docker</h3>
+<p>컨테이너화된 애플리케이션을 독립적으로 실행하기 위한 오픈 소스 플랫폼입니다.</p>
+
+<p>도커는 이미지라는 템플릿을 사용하여 컨테이너를 생성하고, 이를 저장하고 공유할 수 있는 레지스트리를 제공합니다.<br />
+도커 허브(Docker Hub)는 가장 잘 알려진 도커 레지스트리 중 하나입니다.</p>
+
+<h3 id="kubernetes">Kubernetes</h3>
+<p>컨테이너화된 애플리케이션의 자동 배포, 스케일링, 자동 복구 기능을 제공하는 오픈 소스 플랫폼입니다.<br />
+MSA(마이크로 서비스 아키텍처) 관리와 분산 시스템을 지원하기 위해 설계되었습니다.</p>
+
+<p>클러스터 내부에서 서비스 간의 통신을 관리하고, 자동 로드 밸런싱을 수행하여 효율적인 네트워크 관리를 지원합니다.<br />
+서비스 디스커버리 기능으로 애플리케이션 구성 요소 간의 통신을 단순화할 수 있고 확장성이 높습니다.</p>
+
+<h3 id="bitbucket">Bitbucket</h3>
+<p>Git 코드 관리, 코드 리뷰, 이슈 트래킹, CI/CD 기능을 제공하는 코드 호스팅 및 협업 플랫폼입니다.<br />
+개인 개발자들이 무료로 프로젝트를 호스팅할 수 있고, 코드를 비공개 설정할 수 있는 개인 저장소도 제공합니다.</p>
+
+<p><mark>Bamboo</mark><br />
+Bitbucket 저장소에서 최신 코드를 가져와 빌드, 테스트, 배포할 수 있는 CI/CD 도구입니다.</p>
+
+<h3 id="jenkins">Jenkins</h3>
+<p>소스 변경 사항을 감지하고 빌드, 테스트, 배포 등의 작업을 자동 실행할 수 있는 CI/CD 도구입니다.<br />
+다양한 플러그인이 있어 확장성이 뛰어나고 다양한 개발 환경에 맞춰 사용할 수 있습니다.</p>
+
+<h3 id="github-actions">Github Actions</h3>
+<p>Guthub에서 제공하는 CI/CD 서비스입니다.</p>
+
+<hr />
+
+<h2 id="데이터-처리-기술">데이터 처리 기술</h2>
+
+<h3 id="kafka">Kafka</h3>
+<p>실시간 대용량 데이터 스트림을 처리할 수 있는 오픈 소스 메시지 브로커입니다.<br />
+메시지 큐를 관리하는 RabbitMQ와 달리 대규모 데이터의 실시간 처리를 목적으로 합니다.<br />
+분산형 아키텍처로 데이터를 병렬로 처리하고 저장하여 뛰어난 TPS(초당 처리 트랜잭션 수) 성능을 보여줍니다.</p>
+
+<hr />
+
+<h2 id="데이터베이스">데이터베이스</h2>
+
+<h3 id="radis">Radis</h3>
+<p>메모리에 데이터를 저장하여 빠르게 접근하고 처리할 수 있는 인메모리 데이터 저장소입니다.<br />
+주로 캐싱, 세션 관리, 빠른 데이터베이스 쿼리 등에 사용되며, 높은 성능과 낮은 지연 시간을 제공합니다.</p>
+
+<h3 id="mongodb">MongoDB</h3>
+<p>수평적 확장(Scaling Out)이 가능한 NOSQL 데이터베이스로, 대규모 데이터 처리와 실시간 쿼리를 지원합니다.<br />
+JSON 형식의 유연한 데이터 모델로 문서를 저장하며, 각 문서는 컬렉션 단위로 관리됩니다.<br />
+다양한 집계 기능과 색인을 제공하여 데이터 검색과 분석을 용이하게 할 수 있습니다.</p>
+
+<hr />
+
+<h2 id="프레임워크">프레임워크</h2>
+
+<h3 id="spring-boot">Spring Boot</h3>
+<p>Spring에서 수동으로 설정해야 하는 많은 부분을 자동으로 설정해주는 Spring 기반 프레임워크입니다.<br />
+Spring과 달리, 내장 서버를 제공하여 독립 실행형 애플리케이션을 쉽게 만들 수 있습니다.</p>
+
+<h3 id="spring-cloud">Spring Cloud</h3>
+<p>Spring Boot 기반 프로젝트들을 클라우드 환경에서 개발, 배포, 관리하기 위한 프레임워크입니다.<br />
+서비스 디스커버리, 로드밸런싱, 분산 구성 관리 기능으로 MSA를 쉽게 구축할 수 있습니다.</p>
+
+<h3 id="spring-batch">Spring Batch</h3>
+<p>대용량 데이터 세트 처리를 위한 경량화된 일괄 작업(배치) 처리 프레임워크입니다.<br />
+배치는 확장 가능하고 재사용 가능하며, 트랜잭션 관리와 장애 처리 기능을 지원합니다.<br />
+데이터 처리를 청크(chunk) 단위로 나누어 읽기, 처리, 쓰기 과정을 순차적으로 수행합니다.</p>
+
+<h3 id="flutter">Flutter</h3>
+<p>하나의 코드 베이스로 Android, iOS 등 여러 플랫폼 개발을 할 수 있는 크로스플랫폼 개발 프레임워크입니다.<br />
+재사용 가능한 UI 구성 요소 Widget으로 UI를 구축하고, Dart 언어로 앱 개발을 할 수 있습니다.</p>
+
+<h3 id="typescript">Typescript</h3>
+<p>동적 타입 언어 JavaScript의 타입 관련 버그 문제를 해결하기 위해, 정적 타입을 도입한 언어입니다.<br />
+JavaScript 문법을 기반으로 하며 변수, 함수, 클래스 등에서 타입을 지정할 수 있습니다.<br />
+호환성이 뛰어나서 기존 JavaScript 프로젝트에 쉽게 도입할 수 있습니다.</p>
+
+<hr />
+
+<h2 id="프론트-프레임워크">프론트 프레임워크</h2>
+
+<h3 id="vuejs">Vue.js</h3>
+<p>유연성이 뛰어나 다른 프로젝트에 통합하기 쉽고, 점진적으로 적용할 수 있는 프레임워크입니다.<br />
+간단한 문법으로 쉽게 배울 수 있으며, 단방향 데이터 바인딩을 지원하여 데이터 흐름 예측이 가능합니다.</p>
+
+<h3 id="reactjs">React.js</h3>
+<p>UI를 독립적이고 재사용 가능한 컴포넌트 단위로 분리하여 개발할 수 있는 프레임워크입니다.<br />
+가상 DOM을 사용하여 전체 DOM이 아닌, 변화가 필요한 부분만 업데이트하여 렌더링 속도를 향상시킵니다.</p>
+
+<hr />
+
+<h2 id="백엔드-기술">백엔드 기술</h2>
+
+<h3 id="rabbitmq">RabbitMQ</h3>
+<p>AMQP 프로토콜 기반으로 다양한 시스템 간에 메시지를 전달하는 메시지 브로커입니다.<br />
+주로 대규모 분산 시스템의 백엔드에서 비동기 메시지 전송을 위해 사용됩니다.</p>
+
+<h3 id="jpa">JPA</h3>
+<p>Java 객체와 관계형 데이터베이스 테이블 간의 매핑을 지원하는 ORM 표준 인터페이스(API)입니다.<br />
+JPA로 객체 매핑을 정의해두면 특정 DB 쿼리를 작성하지 않아도 객체지향적으로 데이터 CRUD를 수행할 수 있습니다.<br />
+복잡한 데이터 모델링에서는 JPA를 다루는 것이 어려울 수 있습니다.</p>
+
+<hr />
+
+<h2 id="언어">언어</h2>
+
+<h3 id="swift">Swift</h3>
+<p>iOS, macOS 등 애플 애플리케이션을 개발하기 위한 프로그래밍 언어입니다.<br />
+기존의 Objective-C 보다 문법이 간결하며, 타입 안정성이 높고 성능 최적화가 잘 되어있습니다.</p>
+
+<h3 id="django">Django</h3>
+<p>파이썬으로 웹 애플리케이션을 개발할 수 있는 프레임워크입니다.</p>
+
+<hr />
+
+<h2 id="협업툴">협업툴</h2>
+
+<h3 id="jira">Jira</h3>
+<p>버그 추적, 이슈 추적, 프로젝트 관리 기능을 포함한 유료 협업툴입니다.<br />
+대규모 개발 프로젝트나 팀 협업에 널리 사용됩니다.</p>
+
+<h3 id="redmine">Redmine</h3>
+<p>웹 기반의 오픈소스 프로젝트 관리 도구로, 버그 추적 기능을 제공합니다.<br />
+달력과 간트 차트를 통해 일정을 시각적으로 관리할 수 있습니다.<br />
+(무료지만 UI가 직관적이지 않아서 조금 불편했습니다.)</p>
+
+<h3 id="slack">Slack</h3>
+<p>Google Drive, GitHub, Jira 등과 연동하여 파일 공유, 이슈 관리, 코드 리뷰를 쉽게 할 수 있는 무료 협업 메신저입니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#it-tip" class="page__taxonomy-item" rel="tag">IT Tip</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2024-06-14">2024-06-14</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/python-java/2024-06-13-1" class="pagination--pager" title="프로그래머스 SQL 고득점 Kit 106문제 MySQL 풀이 (작성중)
+">Prev</a>
+    
+    
+      <a href="/aws/2024-06-20-1" class="pagination--pager" title="자주 사용하는 AWS 용어 개념 정리
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

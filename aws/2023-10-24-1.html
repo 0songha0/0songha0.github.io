@@ -1,0 +1,856 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>AWS S3 버킷 활용하여 AWS RDS DB .bak 파일 복원 및 백업 방법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="AWS S3 버킷 활용하여 AWS RDS DB .bak 파일 복원 및 백업 방법">
+<meta property="og:url" content="https://0songha0.github.io/aws/2023-10-24-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-10-24T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2023-10-24T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/aws/2023-10-24-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="AWS S3 버킷 활용하여 AWS RDS DB .bak 파일 복원 및 백업 방법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2023-10-24T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2023-10-24T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">AWS S3 버킷 활용하여 AWS RDS DB .bak 파일 복원 및 백업 방법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2023-10-24T00:00:00+00:00">2023-10-24</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> AWS S3 버킷 활용하여 AWS RDS DB .bak 파일 복원 및 백업 방법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#aws-rds-db-복원-및-백업-방법">AWS RDS DB 복원 및 백업 방법</a><ul><li><a href="#bak-파일-업로드용-s3-버킷-생성">.bak 파일 업로드용 S3 버킷 생성</a></li><li><a href="#rds에서-s3에-접근-가능한-공용-iam-역할-생성">RDS에서 S3에 접근 가능한 공용 IAM 역할 생성</a></li><li><a href="#rds-옵션-그룹-생성">RDS 옵션 그룹 생성</a></li><li><a href="#생성된-옵션-그룹-선택-후-옵션-추가">생성된 옵션 그룹 선택 후 옵션 추가</a></li><li><a href="#rds-db-옵션-그룹-변경">RDS DB 옵션 그룹 변경</a></li><li><a href="#s3-버킷에-bak-파일-업로드">S3 버킷에 .bak 파일 업로드</a></li><li><a href="#s3-버킷에서-bak-파일-복원">S3 버킷에서 .bak 파일 복원</a></li><li><a href="#s3-버킷에-bak-파일-백업">S3 버킷에 .bak 파일 백업</a></li></ul></li><li><a href="#백업-및-복원-상태-확인">백업 및 복원 상태 확인</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="aws-rds-db-복원-및-백업-방법">AWS RDS DB 복원 및 백업 방법</h2>
+
+<h3 id="bak-파일-업로드용-s3-버킷-생성">.bak 파일 업로드용 S3 버킷 생성</h3>
+<p>버킷명 입력 &gt; RDS DB의 리전(ap-northeast-2b : 서울)과 같은 리전 선택 &gt; 퍼블릭 액세스 차단 전부 풀고 &gt; 암호화 키 유형 : Amazon S3 관리형 키(SSE-S3) 선택 &gt; 버킷 키 비활성화 &gt;  객체 잠금 비활성화 &gt; 버킷 만들기</p>
+
+<h3 id="rds에서-s3에-접근-가능한-공용-iam-역할-생성">RDS에서 S3에 접근 가능한 공용 IAM 역할 생성</h3>
+<p>IAM &gt; 액세스 관리 &gt; 역할 &gt; 역할 만들기</p>
+<table>
+  <tbody>
+    <tr>
+      <td>신뢰할 수 있는 엔터티 유형</td>
+      <td>AWS 서비스 선택</td>
+    </tr>
+    <tr>
+      <td>다른 AWS 서비스의 사용 사례</td>
+      <td>사용 사례를 조회할 서비스 선택 &gt; RDS &gt; RDS - Add Role to Database 선택</td>
+    </tr>
+  </tbody>
+</table>
+<p>위와 같이 선택 후 다음 &gt; AmazonS3FullAccess (모든 S3 리소스에 대한 모든 액세스 가능 정책) 검색하여 선택 후 다음 &gt; 역할 이름 : AddDatabaseRoleRDS-S3 입력 후 저장</p>
+
+<h3 id="rds-옵션-그룹-생성">RDS 옵션 그룹 생성</h3>
+<p>RDS &gt; 옵션 그룹 &gt; 그룹 생성</p>
+<table>
+  <tbody>
+    <tr>
+      <td>이름</td>
+      <td>NativeBackupRestore-프로젝트명 입력</td>
+    </tr>
+    <tr>
+      <td>설명</td>
+      <td>Option group to restore backup from S3 bucket 입력</td>
+    </tr>
+    <tr>
+      <td>엔진</td>
+      <td>sqlserver-ex 선택</td>
+    </tr>
+    <tr>
+      <td>메이저 엔진 버전</td>
+      <td>12.00 선택</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="생성된-옵션-그룹-선택-후-옵션-추가">생성된 옵션 그룹 선택 후 옵션 추가</h3>
+<table>
+  <tbody>
+    <tr>
+      <td>옵션 이름</td>
+      <td>SQLSERVER_BACKUP_RESTORE (SQL Server의 기본 백업/복원에 대해 사용합니다. 백업 파일을 저장하려는 S3 위치에 대한 액세스 권한을 IAM 역할을 통해 DB 인스턴스에 부여합니다.) 선택</td>
+    </tr>
+    <tr>
+      <td>IAM 역할</td>
+      <td>생성했던 IAM 역할 AddDatabaseRoleRDS-S3 선택</td>
+    </tr>
+    <tr>
+      <td>옵션 추가 예약</td>
+      <td>즉시 선택</td>
+    </tr>
+  </tbody>
+</table>
+<p>위와 같이, 옵션 그룹에 SQLSERVER_BACKUP_RESTORE 옵션 활성화, IAM 역할 부여가 필요합니다.</p>
+
+<h3 id="rds-db-옵션-그룹-변경">RDS DB 옵션 그룹 변경</h3>
+<p>RDS &gt; 데이터베이스 &gt; DB 선택 &gt; 수정 &gt; 추가구성 &gt; 옵션 그룹 : NativeBackupRestore-프로젝트명 선택 후 계속 &gt; 즉시 적용 선택 &gt; DB 인스턴스 수정</p>
+
+<h3 id="s3-버킷에-bak-파일-업로드">S3 버킷에 .bak 파일 업로드</h3>
+<p>S3 &gt; 생성했던 S3 버킷 선택 &gt; 업로드 &gt; 파일 추가 후 .bak 파일 추가</p>
+
+<h3 id="s3-버킷에서-bak-파일-복원">S3 버킷에서 .bak 파일 복원</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exec msdb.dbo.rds_restore_database
+@restore_db_name='복원할DB명',
+@s3_arn_to_restore_from='arn:aws:s3:::S3버킷명/DB백업파일명.bak';
+</code></pre></div></div>
+<p>DBeaver 또는 SSMS에서 위 명령어 실행하면 복원이 완료됩니다.</p>
+
+<h3 id="s3-버킷에-bak-파일-백업">S3 버킷에 .bak 파일 백업</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exec msdb.dbo.rds_backup_database 
+@source_db_name='백업할DB명', 
+@s3_arn_to_backup_to='arn:aws:s3:::S3버킷명/DB백업파일명.bak',
+@overwrite_S3_backup_file=1;
+</code></pre></div></div>
+<p>S3 버킷에 RDS DB를 백업할 수 있는 명령어입니다.</p>
+
+<hr />
+
+<h2 id="백업-및-복원-상태-확인">백업 및 복원 상태 확인</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exec msdb.dbo.rds_task_status @db_name='DB명';
+</code></pre></div></div>
+<p>complete : 100%, lifecycle : SUCCESS로 나오면 복원 성공입니다.</p>
+
+<p><mark>옵션 미설정 시 에러메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Database backup/restore option is not enabled yet or is in the process of being enabled. Please try again later.
+</code></pre></div></div>
+<p>복원 실패하면 RDS에 옵션 설정이 제대로 되어있는지 확인해야 합니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#aws" class="page__taxonomy-item" rel="tag">AWS</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-10-24">2023-10-24</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/python-java/2023-08-18-1" class="pagination--pager" title="프로그래머스 코딩테스트 입문 Lv.0 100문제 파이썬 풀이
+">Prev</a>
+    
+    
+      <a href="/tool/2023-10-26-1" class="pagination--pager" title="이클립스 사용법 / 이클립스 단축키 / 이클립스 에러 해결
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

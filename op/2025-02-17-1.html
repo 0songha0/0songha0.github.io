@@ -1,0 +1,920 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>웹 취약점 점검 결과 이행 조치 방법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="웹 취약점 점검 결과 이행 조치 방법">
+<meta property="og:url" content="https://0songha0.github.io/op/2025-02-17-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-02-17T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2025-02-17T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/op/2025-02-17-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="웹 취약점 점검 결과 이행 조치 방법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2025-02-17T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-02-17T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">웹 취약점 점검 결과 이행 조치 방법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-02-17T00:00:00+00:00">2025-02-17</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 웹 취약점 점검 결과 이행 조치 방법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#웹-취약점-점검도구">웹 취약점 점검도구</a></li><li><a href="#웹-취약점-점검-항목">웹 취약점 점검 항목</a><ul><li><a href="#크로스-사이트-스크립팅---xss">크로스 사이트 스크립팅 - XSS</a></li><li><a href="#중요정보-노출---개인정보-평문전송">중요정보 노출 - 개인정보 평문전송</a></li><li><a href="#중요정보-노출---에러메시지를-통한-정보노출">중요정보 노출 - 에러메시지를 통한 정보노출</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p>사내 정보보안팀에서 제공한 웹 취약점 점검 결과보고서를 통해 취약점 조치를 진행합니다.</p>
+
+<hr />
+
+<h2 id="웹-취약점-점검도구">웹 취약점 점검도구</h2>
+<ul>
+  <li>Burp-Suite : 프록시 툴</li>
+  <li>OWASP-ZAP : 웹 애플리케이션 취약점 스캔 및 자동화 공격도구</li>
+</ul>
+
+<hr />
+
+<h2 id="웹-취약점-점검-항목">웹 취약점 점검 항목</h2>
+
+<h3 id="크로스-사이트-스크립팅---xss">크로스 사이트 스크립팅 - XSS</h3>
+<p><mark>취약점 발생 예시</mark><br />
+공지사항 등록 시, 에디터에 아래의 크로스 사이트 스크립트 공격 구문 입력 후 등록이 가능한 경우입니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script&gt;alert(document.cookie)&lt;/script&gt;
+</code></pre></div></div>
+<p>공지사항 상세 보기 시 alert이 실행되며, 사용자 쿠키를 탈취하여 도용하거나 악성코드 사이트로 Redirect 할 수 있습니다.<br />
+사이트의 게시판, 1:1 문의, URL 등에서 사용자 입력 값이 실행되지 않도록 검증 및 치환 조치가 필요합니다.</p>
+
+<p><mark>취약점 조치 방법</mark><br />
+사용자가 &lt;, &gt;, &amp;, “,” 등 입력 시 Java에서 DB 등록 전 &amp;lt, &amp;rgt, &amp;amp 등으로 치환합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public static String clearXSSCustom(String value) {
+		if (value == null || value.trim().equals("")) {
+			return "";
+		}
+
+		String returnValue = value;
+
+		returnValue = returnValue.replaceAll("&amp;", "&amp;amp;");
+		returnValue = returnValue.replaceAll("&lt;", "&amp;lt;");
+		returnValue = returnValue.replaceAll("&gt;", "&amp;gt;");
+		return returnValue;
+	}
+</code></pre></div></div>
+<p>위와 같은 공통 유틸 함수를 만들어서 치환할 수 있습니다.</p>
+
+<h3 id="중요정보-노출---개인정보-평문전송">중요정보 노출 - 개인정보 평문전송</h3>
+<p><mark>취약점 발생 예시</mark><br />
+로그인 시 Burp-Suite 스캐닝 툴로 요청 패킷 확인하면 ID, PW가 암호화되지 않고 그대로 노출되는 경우입니다.<br />
+중요정보에 대해서는 반드시 SSL 등의 암호화 통신을 사용하여 도청 위험을 제거해야 합니다.</p>
+
+<p>암호화 전송 시 프로토콜 설계의 결함이 있는 SSLv2, SSLv3, TLSv1.0, TLSv1.1은 비활성화 설정해야 합니다.<br />
+TLSv1.2 이상 사용을 권장한다고 합니다.</p>
+
+<p>SSL 적용 시, 유서트 (SSL 인증서 제공자) 등에서 SSL 인증서를 구매하여 발급해야 합니다.<br />
+멀티 도메인 인증서 (*.도메인.co.kr) 를 구매하면, 하나의 인증서로 여러 하위 도메인에 적용 가능합니다.<br />
+현재 스테이징 서버, 운영서버는 디딤365 업체에서 관리하므로 서버 인증서 적용을 요청하였습니다.<br />
+사내 인프라기획팀에서 발급한 인증서가 네이버클라우드 서버에 적용되면, 톰캣 인증서 설정을 직접 해야 합니다.</p>
+
+<p><mark>유서트 SSL 인증서 예시</mark></p>
+<ul>
+  <li>발급기관 : GlobalSign GCC R6 AlphaSSL CA 2023</li>
+  <li>유효기간 : 1년</li>
+  <li>제공 인증서 파일 : crt, jks, pem, pfx</li>
+</ul>
+
+<p><mark>서버별 적용 가능 인증서 확장자</mark></p>
+<ul>
+  <li>Apache 서버 : crt, pem</li>
+  <li>Nginx 서버 : crt, pem</li>
+  <li>Webtob 서버 : crt, pem</li>
+  <li>IIS 서버 : pfx</li>
+  <li>Exchange 서버 : pfx</li>
+  <li>Tomcat 서버 : jks</li>
+  <li>Resin 서버 : jks</li>
+  <li>Jboss 서버 : jks</li>
+  <li>방화벽 : pfx, pem</li>
+</ul>
+
+<p><mark>SSL 인증서 확장자 변환 방법</mark></p>
+<ul>
+  <li>openssl 명령어를 통해 crt를 pfx로 변환 가능하며, crt의 개인 key 파일과 신규 비밀번호가 필요합니다.</li>
+  <li>keytool 명령어를 통해 pfx를 jks로 변환 가능하며, pfx 비밀번호와 신규 비밀번호가 필요합니다.</li>
+</ul>
+
+<p><mark>톰켓 SSL 인증서 설정 방법 ★</mark><br />
+톰캣설치경로/conf 폴더 안에 jks 인증서 파일을 복사해서 넣습니다.<br />
+server.xml 파일에서 아래와 같이 SSL 인증서를 적용한 8443 포트 커넥터를 추가합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+           maxThreads="150" SSLEnabled="true"
+           maxParameterCount="1000"&gt;
+    &lt;SSLHostConfig&gt;
+      &lt;Certificate certificateKeystoreFile="conf/jsk파일명.jks"
+                   certificateKeystorePassword="jks비밀번호"
+                   type="RSA"
+                   sslEnabledProtocols="TLSv1.2,TLSv1.3" /&gt;
+    &lt;/SSLHostConfig&gt;
+&lt;/Connector&gt;
+</code></pre></div></div>
+<p>위 예시는 톰캣 8.x 버전 옵션이며, 톰캣 버전에 따라 옵션이 달라지고 톰캣 재시작 시 반영됩니다.<br />
+서버 내에서 443 포트가 사용중인 경우, 위와 같이 8443, 9443 등 대체포트를 사용해야 합니다.<br />
+신규 포트는 사내에서 나가는 아웃바운드 방화벽을 허용해야 할 수 있으므로, 기존 HTTP 포트를 재사용해도 좋습니다.</p>
+
+<p><mark>HTTP → HTTPS 리다이렉트 허용 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;Connector port="8080" protocol="HTTP/1.1"
+           connectionTimeout="20000"
+           redirectPort="8443" /&gt;
+</code></pre></div></div>
+<p>server.xml에서 HTTP 8080으로 들어오는 요청을 HTTPS 8443 커넥터로 리다이렉트할 수 있도록 허용합니다.</p>
+
+<p><mark>HTTPS 강제 리다이렉트 설정 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;security-constraint&gt;
+    &lt;web-resource-collection&gt;
+        &lt;web-resource-name&gt;SecureApp&lt;/web-resource-name&gt;
+        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+    &lt;/web-resource-collection&gt;
+    &lt;user-data-constraint&gt;
+        &lt;transport-guarantee&gt;CONFIDENTIAL&lt;/transport-guarantee&gt;
+    &lt;/user-data-constraint&gt;
+&lt;/security-constraint&gt;
+</code></pre></div></div>
+<p>web.xml 파일 web-app 안에 위 코드를 추가하여 HTTP → HTTPS 강제 리다이렉트 되도록 설정합니다.<br />
+이 설정이 되어있지 않으면, redirectPort를 설정했어도 http 8080으로 접근이 가능합니다.<br />
+http 허용 메소드에 대한 security-constraint 설정이 있어도 별도 추가 가능합니다.</p>
+
+<p><mark>톰캣 HTTPS 포트 정상 실행 로그</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>21-Feb-2025 16:01:23.634 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["https-jsse-nio-8443"]
+</code></pre></div></div>
+<p>톰캣 실행 후 catalina.out 파일 확인 시 위와 같은 로그가 있으면 https 8443 포트가 정상 실행된 것입니다.<br />
+브라우저에서 https://서버도메인:8443으로 접속하여 https 적용이 잘 되었는지 확인하면 됩니다.</p>
+
+<p><mark>SSL 인증서 미적용 시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://서버도메인:8080/cmmn/index.do;jsessionid=65C209083F640982CA0ECB4409B9A82A.172.16.0.8
+</code></pre></div></div>
+<p>네이버클라우드 서버에는 SSL 인증서를 적용했는데, 톰캣 SSL 인증서 미적용 시<br />
+사이트에서 SSL 로그인 등으로 쿠키를 사용하려고 하면 거부되고 URL 뒤에 jsessionid가 붙는 경우가 있습니다.<br />
+톰캣 SSL 인증서 적용 후 HTTPS로 접속하면 보안 쿠키가 정상적으로 전달되어 정상 작동합니다.</p>
+
+<h3 id="중요정보-노출---에러메시지를-통한-정보노출">중요정보 노출 - 에러메시지를 통한 정보노출</h3>
+<p><mark>취약점 발생 예시</mark><br />
+사이트 URL 하위 존재하지 않는 페이지 접속 시도 시 HTTP 405 에러가 발생하는 경우입니다.<br />
+해당 페이지에서 서버 종류 및 버전 정보가 노출되어서 개선이 필요합니다.</p>
+
+<p><mark>취약점 발생 재연 방법</mark><br />
+포스트맨으로 허용되지 않는 DELETE 같은 메소드 요청 시 405 에러가 발생됩니다.</p>
+
+<p><mark>취약점 조치 방법</mark><br />
+400~500번대 에러 코드에 대해 별도로 생성한 에러 페이지로 Redirect 되도록 설정하면 됩니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;error-page&gt;
+  &lt;error-code&gt;404&lt;/error-code&gt;
+  &lt;location&gt;/code404.jsp&lt;/location&gt;
+&lt;/error-page&gt;
+
+&lt;error-page&gt;
+  &lt;error-code&gt;405&lt;/error-code&gt;
+  &lt;location&gt;/code405.jsp&lt;/location&gt;
+&lt;/error-page&gt;
+
+&lt;error-page&gt;
+  &lt;error-code&gt;500&lt;/error-code&gt;
+  &lt;location&gt;/code500.jsp&lt;/location&gt;
+&lt;/error-page&gt;
+</code></pre></div></div>
+<p>위와 같이, 프로젝트 WEB-INF 폴더 web.xml 파일에 에러코드에 대한 에러페이지를 설정합니다.<br />
+src/main/webapp 폴더가 웹 애플리케이션의 루트 경로 (/) 입니다.<br />
+error-page 하나당 한 개의 error-code만 인식합니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%9A%B4%EC%98%81" class="page__taxonomy-item" rel="tag">리눅스 / 운영</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-02-17">2025-02-17</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/web-dev/2025-02-07-1" class="pagination--pager" title="네이버 클라우드 OCR 사용법
+">Prev</a>
+    
+    
+      <a href="/web-dev/2025-03-10-1" class="pagination--pager" title="이클립스 스프링 배치 프로젝트 생성 및 스케줄링 실행 방법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

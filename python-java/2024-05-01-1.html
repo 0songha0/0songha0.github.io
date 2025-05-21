@@ -1,0 +1,1548 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>코딩테스트 필수 Java 문법 및 자료구조 정리 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="코딩테스트 필수 Java 문법 및 자료구조 정리">
+<meta property="og:url" content="https://0songha0.github.io/python-java/2024-05-01-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-05-01T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2024-05-01T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/python-java/2024-05-01-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="코딩테스트 필수 Java 문법 및 자료구조 정리">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2024-05-01T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2024-05-01T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">코딩테스트 필수 Java 문법 및 자료구조 정리
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2024-05-01T00:00:00+00:00">2024-05-01</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 코딩테스트 필수 Java 문법 및 자료구조 정리</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#java-문법-및-자료구조">Java 문법 및 자료구조</a><ul><li><a href="#숫자형">숫자형</a></li><li><a href="#문자형">문자형</a></li><li><a href="#문자열">문자열</a></li><li><a href="#배열-array">배열 (Array)</a></li><li><a href="#리스트-arraylist">리스트 (ArrayList)</a></li><li><a href="#연결리스트-linkedlist">연결리스트 (LinkedList)</a></li><li><a href="#스택-stack">스택 (Stack)</a></li><li><a href="#큐-queue">큐 (Queue)</a></li><li><a href="#덱-arraydeque-">덱 (ArrayDeque) ★</a></li><li><a href="#힙-heap">힙 (Heap)</a></li><li><a href="#우선순위-큐-priorityqueue">우선순위 큐 (PriorityQueue)</a></li><li><a href="#키-값-자료구조-map">키-값 자료구조 (Map)</a></li><li><a href="#집합-set">집합 (Set)</a></li><li><a href="#트리-tree">트리 (Tree)</a></li><li><a href="#그래프-graph">그래프 (Graph)</a></li></ul></li><li><a href="#java-코드-실행시간-계산-방법">Java 코드 실행시간 계산 방법</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="java-문법-및-자료구조">Java 문법 및 자료구조</h2>
+
+<p><mark>Java 변수 타입</mark></p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>프리미티브 타입</td>
+      <td>int, long, float, double, char 등</td>
+    </tr>
+    <tr>
+      <td>레퍼런스 타입</td>
+      <td>Integer, Long, Float, Double, Character 등</td>
+    </tr>
+  </tbody>
+</table>
+<p>참조형 변수인 레퍼런스 타입은 메모리에 직접 값을 저장하는 프리미티브 타입보다 연산 속도가 느리고,<br />
+컬렉션 프레임워크에 저장할 때 주로 사용됩니다.</p>
+
+<h3 id="숫자형">숫자형</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 더하기
+a + b
+
+// 빼기
+a - b
+
+// 곱하기
+a * b
+
+// 나누기 (소수점 버림)
+a / b
+
+// 나눈 나머지 반환 (소수점 버림)
+a % b
+
+// a가 b보다 크면 양수, 작으면 음수, 같으면 0 반환
+Integer.compare(a, b);
+
+// 이진수를 정수로 변환
+Integer.parseInt(이진수, 2);
+
+// 정수를 이진수 문자열로 변환
+Integer.toString(정수, 2);
+</code></pre></div></div>
+
+<p><mark>Math 함수</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 올림
+Math.ceil(숫자);
+
+// 올림 한 실수 값을 정수로 반환
+return (int) Math.ceil((double) 숫자1 / 숫자2);
+
+// 반올림
+Math.round(숫자);
+
+// 소수점 둘째 자리에서 반올림
+Math.round(1.234 * 100) / 100;
+// 100을 곱해서 소수점 둘째 자리까지 정수로 만들고, 반올림 후 원래 자리수로 되돌림
+
+// 내림
+Math.floor(숫자);
+
+// 거듭제곱
+Math.pow(2, 8); // 2의 8승 = 256.0
+
+// 제곱근
+Math.sqrt(숫자);
+
+// 제곱수 판별
+if (Math.sqrt(숫자) % 1 == 0)
+
+// 최대값 반환
+Math.max(숫자1, 숫자2);
+
+// 절대값 반환 (양수는 그대로, 음수를 양수로 반환)
+Math.abs(숫자);
+</code></pre></div></div>
+
+<h3 id="문자형">문자형</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 문자열을 char 배열로 변환하고 각 문자 반복
+for (char c : str.toCharArray()) { }
+
+// 문자열 i번째 문자 확인
+char c = str.charAt(i);
+
+// 대소문자 여부 확인
+Character.isUpperCase(c);
+
+// 대문자로 변환
+Character.toUpperCase(c);
+
+// 소문자로 변환
+Character.toLowerCase(c);
+
+// 문자형 배열을 문자열로 변환
+char[] cArr = {'H', 'e', 'l', 'l', 'o'};
+String str = String.valueOf(cArr);
+</code></pre></div></div>
+
+<h3 id="문자열">문자열</h3>
+<p>Java에서 String은 값을 변경할 수 없는 객체입니다.<br />
+문자열 수정 시 기존 객체를 수정하지 않고 새로운 객체를 반환합니다.</p>
+
+<p><mark>String</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 비효율적 문자열 더하기 (값 복사 n * 값 저장 n) : O(n²)
+String str = "문자열";
+System.out.println(System.identityHashCode(str)); // 객체 해시코드 : 1808253012
+str += "문자열2";
+System.out.println(System.identityHashCode(str)); // 객체 해시코드 : 589431969 (다른 객체가 됨)
+
+// 문자열 모두 삭제
+str = str.replace("1", ""); // 문자열에서 "1" 전체 삭제
+
+// 앞에서부터 처음 발견한 문자열 하나만 삭제
+str = str.replaceFirst("문자열", "");
+
+// replace 함수 : 정규표현식 사용 불가
+// replaceAll 함수 : 정규표현식 사용 가능
+
+// 정규표현식으로 해당하는 문자 모두 삭제
+str = str.replaceAll("[aeiou]", "");
+
+// 정규표현식으로 해당하는 문자가 1개 이상이면 공백 1개로 치환
+str = str.replaceAll("[aeiou]+", " ");
+
+// 정규표현식으로 모든 영어 소문자, 대문자, 한글, 숫자 삭제
+str = str.replaceAll("[a-zA-Z가-힣0-9]", "");
+
+// 정규표현식으로 영어 외 모두 제거
+str = str.replaceAll("[^a-zA-Z]", "");
+
+// 정규표현식으로 l~z에 해당하지 않는 문자 모두 변경
+str = str.replaceAll("[^l-z]", "l");
+
+// 문자열을 n번 반복한 문자열 생성
+str = str.repeat(n);
+
+// 0번째부터 5번째 앞까지 문자열 추출
+str.substring(0, 5);
+
+// 앞에서부터 탐색하여, 문자가 저장된 인덱스 반환 (없으면 -1 반환)
+str.indexOf(문자);
+
+// 뒤에서부터 탐색하여, 문자가 저장된 인덱스 반환 (없으면 -1 반환)
+str.lastIndexOf(문자);
+
+// 문자로 시작하는 문자열이면 true 반환
+str.startsWith(문자);
+
+// 문자로 끝나는 문자열이면 true 반환
+str.endsWith(문자);
+
+// 문자열이 포함되어 있는지 확인
+str.contains(문자열);
+
+// 정수를 문자열로 변환
+String str = String.valueOf(숫자);
+
+// 문자열을 int로 변환
+if (!str.isEmpty()) {
+  // String만 변환 가능 (문자형 배열은 변환 불가)
+  int i = Integer.parseInt(str);
+}
+
+// 문자열을 Integer로 변환
+if (!str.isEmpty()) {
+  Integer i = Integer.valueOf(str);
+}
+
+// 문자를 정수로 변환 ('1'은 아스키코드 49이므로, 아스키코드 48인 '0'을 빼야 정수 1로 변환)
+char character = '1';
+int i = character - '0';
+
+// 문자열을 문자열 배열로 변환
+String[] strArr = str.split("");
+
+// 정규표현식으로 1개 이상 공백을 기준하여 자르기
+String[] strArr = str.split("[ ]+");
+
+// 배열, Set 등 객체를 문자열로 이어붙이기
+String.join("구분자", 객체);
+
+// 문자열을 전부 소문자로 변환
+str.toLowerCase();
+
+// 문자열을 전부 대문자로 변환
+str.toUpperCase();
+</code></pre></div></div>
+
+<p><mark>StringBuilder</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// StringBuilder를 이용한 효율적 문자열 더하기
+StringBuilder sb = new StringBuilder("초기문자열");
+sb.append("문자열1");
+sb.append("문자열2");
+
+// StringBuilder를 이용한 문자열 오름차순 정렬
+char[] charArr = str.toCharArray();
+Arrays.sort(charArr);
+StringBuilder sb = new StringBuilder();
+for (char c : charArr) {
+  sb.append(c);
+}
+System.out.println(sb.toString());
+
+// 특정 문자가 있는 인덱스 반환
+sb.toString().indexOf("문자");
+
+// 3번째 문자열 삭제
+sb.deleteCharAt(3);
+
+// StringBuilder 값 삭제
+sb.setLength(0);
+또는
+sb.delete(0, sb.length());
+
+// 1번째 인덱스에 문자열 추가
+sb.insert(1, "문자열");
+
+// 문자열 역순으로 정렬
+sb = sb.reverse();
+
+// sb 문자열을 Long으로 변환
+long l = Long.parseLong(sb.toString());
+</code></pre></div></div>
+<p>멀티스레드 환경에서는 Thread-Safe 한 StringBuffer를 사용해야 합니다.</p>
+
+<h3 id="배열-array">배열 (Array)</h3>
+<p>생성한 배열 크기를 변경할 수 없으므로, 저장할 데이터의 개수를 알 수 있을 때 사용합니다.<br />
+보통 1차원 배열은 1,000만개, 2차원 배열은 3,000 * 3,000 크기를 넘으면 배열 할당이 실패될 수 있습니다.</p>
+
+<p><mark>1차원 배열 사용법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+
+    // 배열 생성
+    int[] arr = { 1, 2, 3, 4, 5 };
+    int[] arr = new int[] { 1, 3, 5, 7, 9 };
+    int[] arr = new int[5]; // { 0, 0, 0, 0, 0 }
+
+    // 2차원 배열 생성
+    int[][] arrs = new int[][] { {0, -1}, {0, 1}, {-1, 0}, {1, 0} };
+    int[][] arrs = { {0, -1}, {0, 1}, {-1, 0}, {1, 0} };
+    int[][] arrs = new int[3][]; // { null, null, null }
+    int[][] arrs = new int[3][3]; // { {0, 0, 0}, {0, 0, 0}, {0, 0, 0} }
+
+    // 배열의 모든 원소 값 변경
+    Arrays.fill(arr, 값);
+
+    // 0번째 원소 값을 1으로 변경 : O(1)
+    arr[0] = 1;
+
+    // 3번째 값 접근 : O(1)
+    System.out.println(arr[2]);
+
+    // 배열 전체 출력 : O(n)
+    System.out.println(Arrays.toString(arr));
+    // [1, 2, 3, 4, 5]
+
+    // 배열 데이터 개수
+    arr.length;
+
+    // 배열 오름차순 정렬 : O(nlogn)
+    Arrays.sort(arr);
+
+    // int[]는 내림차순 정렬이 어려워서, Integer[]로 변환
+    Integer[] int_array = new Integer[arr.length];
+    for (int i = 0; i &lt; arr.length; i++) {
+      int_array[i] = arr[i];
+    }
+    // 내림차순 정렬
+    Arrays.sort(int_array, Collections.reverseOrder());
+
+    // 배열의 인덱스 1부터 4까지의 요소를 정렬
+    Arrays.sort(arr, 1, 5);
+
+    // 람다식은 한 번만 실행할 목적으로 코드를 간결하게 표현하는 익명 함수입니다.
+    // 배열에 저장된 객체의 int 변수 값을 람다 함수로 받아서 비교 후 오름차순 정렬합니다.
+    Arrays.sort(배열, (객체명 o1, 객체명 o2) -&gt; Integer.compare(o1.int변수명, o2.int변수명));
+    // o1 &gt; o2면 1을 반환하여 서로의 위치를 변경합니다.
+    
+    // 배열 복제
+    int[] clone = arr.clone();
+
+    // 배열 자르기 (i번째부터 j번째까지)
+    int[] slicedArr = Arrays.copyOfRange(arr, i-1, j);
+    
+    // Integer 배열을 int 배열로 변환
+    int[] arr = new int[integer배열.length];
+
+    for (int i = 0; i &lt; integer배열.length; i++) {
+        arr[i] = integer배열[i].intValue();
+    }
+
+    // 배열 비교
+    if (Arrays.equals(arr1, arr2)) {
+      
+    }
+  }
+}
+</code></pre></div></div>
+
+<p><mark>2차원 배열 사용법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+
+public class Solution {
+  public static void main(String[] args) {
+
+    // 2차원 배열 생성
+    int[][] arr = { {1,2,3}, {4,5,6} }; // 2행 3열
+
+    // 1번째 배열의 2번째 값 변경
+    arr[1][2] = 7;
+
+    // 2차원 배열 값 출력
+    System.out.println(arr[1][2]);
+
+    2차원 배열 전체 출력
+    System.out.println(Arrays.deepToString(arr));
+  }
+}
+</code></pre></div></div>
+<p>배열은 차원과는 무관하게, 메모리에 연속 할당됩니다.</p>
+
+<h3 id="리스트-arraylist">리스트 (ArrayList)</h3>
+<p>가변 크기의 동적 배열이므로 데이터를 자유롭게 삽입/삭제할 수 있습니다.<br />
+데이터 접근은 시간복잡도가 O(1)으로 빠르고, 중간 데이터 삽입/삭제는 O(n)으로 느립니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+// import java.util.*; 으로 한번에 가능
+
+public class Solution {
+  public static void main(String[] args) {
+
+    // 리스트 객체 생성
+    ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+    ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;(Arrays.asList(1, 2, 3, 4, 5));
+
+    // 배열을 리스트로 변환
+    ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;(Arrays.asList(배열));
+
+    // 리스트를 배열로 변환
+    int[] arr = new int[list.size()];
+    
+    for (int i = 0; i &lt; list.size(); i++) {
+      arr[i] = list.get(i);
+    }
+
+    // 해시맵의 값으로 리스트 객체 생성
+    ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;(map.values());
+
+    // 리스트 마지막에 원소 추가 : O(1)
+    list.add(값);
+
+    // 리스트 첫번째에 원소 추가 : O(n)
+    list.add(0, 값);
+
+    // 리스트의 0번째 원소 출력 : O(1)
+    System.out.println(list.get(0));
+
+    // 리스트 마지막 원소 삭제 : O(1)
+    list.remove(list.size() -1);
+
+    // 리스트 첫번째 원소 삭제 : O(n)
+    list.remove(0);
+
+    // 리스트에서 값에 해당하는 첫번째 원소 삭제 : O(n)
+    list.remove("값");
+    또는
+    list.remove((Integer) 값);
+
+    // 리스트 전체 출력
+    System.out.println(list);
+
+    // 리스트 복사
+    ArrayList&lt;Integer&gt; list2 = new ArrayList&lt;&gt;(list);
+
+    // 리스트 데이터 개수
+    list.size();
+
+    // 리스트가 비어있는지 확인
+    if (list.isEmpty()) { }
+
+    // 리스트에 값이 있는지 확인
+    if (list.contains(값)) {}
+
+    // 리스트 오름차순 정렬 : O(nlogn)
+    Collections.sort(list);
+
+    // 리스트 내림차순 정렬 : O(nlogn)
+    Collections.sort(list, Collections.reverseOrder());
+
+    // 리스트의 인덱스 1부터 5 앞까지의 요소를 정렬
+    Collections.sort(list.subList(1, 5));
+  }
+}
+</code></pre></div></div>
+
+<h3 id="연결리스트-linkedlist">연결리스트 (LinkedList)</h3>
+<p>원소가 데이터-포인터로 구성되어 있고, 포인터는 다음 원소 메모리 위치를 가리킵니다.<br />
+데이터가 메모리 상 흩어져 저장되어, 앞 원소부터 순회해야 원하는 데이터에 접근할 수 있습니다.<br />
+데이터 추가는 추가할 위치의 앞/뒤 원소 포인터를 변경하면 되어서 O(1)으로 간단합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 연결리스트 객체 생성
+LinkedList&lt;String&gt; list = new LinkedList&lt;&gt;();
+
+// 연결리스트 마지막에 원소 추가 : O(1)
+list.add("값");
+
+// 연결리스트 원소 삭제 : O(n)
+list.remove("값");
+
+// 연결리스트 원소 인덱스 반환 : O(n)
+list.indexOf("값");
+
+// 연결리스트 3번째 원소 원소 탐색 : O(n)
+list.get(2);
+
+// 연결리스트 전체 삭제
+list.clear();
+</code></pre></div></div>
+
+<h3 id="스택-stack">스택 (Stack)</h3>
+<p>먼저 입력한 데이터를 나중에 꺼내는 선입후출(FILO) 자료구조입니다.<br />
+최근에 삽입한 데이터를 대상으로 연산할 때 사용하면 좋습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Deque를 구현한 스택 객체 생성
+Deque&lt;Integer&gt; stack = new ArrayDeque&lt;&gt;();
+// 또는 Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();
+// Stack보다 메모리 효율적이고 성능이 좋은 ArrayDeque 사용이 권장됩니다.
+
+// 스택에 데이터 삽입 : O(1)
+stack.push(1);
+
+// 스택에서 마지막 데이터를 제거하지 않고 반환
+stack.peek();
+
+// 스택이 비어있는지 확인 (스택이 비어있을 때 pop 하면 EmptyStackException 발생)
+if (stack.isEmpty()) {
+  // 스택에서 마지막 데이터 제거 후 반환 : O(1)
+  stack.pop();
+};
+
+// 스택 데이터 개수
+stack.size();
+
+// 스택 전체 삭제
+stack.clear();
+
+// 스택의 모든 요소를 문자열로 더하기 : O(n)
+StringBuilder sb = new StringBuilder();
+while (!stack.isEmpty()) {
+  sb.append(stack.pop());
+}
+</code></pre></div></div>
+
+<h3 id="큐-queue">큐 (Queue)</h3>
+<p>먼저 입력한 데이터를 먼저 꺼내는 선입선출(FIFO) 자료구조입니다.<br />
+작업 대기열이나 이벤트 처리에 사용하면 좋습니다.<br />
+Queue 인터페이스에 ArrayDeque 또는 LinkedList를 구현체로 사용하면 됩니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Queue를 구현한 큐 객체 생성
+Queue&lt;Integer&gt; queue = new ArrayDeque&lt;&gt;();
+// 또는 Queue&lt;Integer&gt; queue = new LinkedList&lt;&gt;();
+// Queue보다 메모리 효율적이고 빠른 연산이 가능한 ArrayDeque 사용이 권장됩니다.
+
+// 큐에 데이터 추가
+queue.offer(1); // queue.add(1);은 큐에 공간이 부족하면 Exception을 발생합니다.
+
+// 큐의 맨 앞 데이터를 제거하지 않고 반환
+queue.peek();
+
+// 큐의 맨 앞 데이터를 제거 후 반환
+queue.poll();
+
+// 큐가 비어있는지 확인
+queue.isEmpty();
+
+// 큐 전체 삭제
+queue.clear();
+</code></pre></div></div>
+
+<h3 id="덱-arraydeque-">덱 (ArrayDeque) ★</h3>
+<p>스택/큐와 달리, 양쪽에서 데이터를 삽입/삭제할 수 있는 자료구조입니다.<br />
+ArrayDeque를 응용하여 스택/큐를 구현하면 좋습니다.</p>
+
+<h3 id="힙-heap">힙 (Heap)</h3>
+<p>빠르게 최소값/최대값을 추출할 수 있으며, 중간 노드는 꺼낼 수 없는 자료구조입니다.<br />
+완전 이진트리로 구성되며, 최소힙/최대힙이 있습니다.<br />
+최소힙은 부모 노드의 수가 자식 노드의 수보다 작거나 같아야 합니다.</p>
+
+<p><mark>최소힙 원소 추가 예시</mark></p>
+<ol>
+  <li>추가한 수를 힙의 가장 후미에 저장합니다.</li>
+  <li>부모의 수가 자식의 수보다 크면 수를 교환합니다.</li>
+  <li>부모의 수가 자식의 수보다 크지 않을 때까지 부모와 비교 및 교환을 반복합니다.</li>
+</ol>
+
+<p><mark>최소힙 원소 삭제 예시</mark></p>
+<ol>
+  <li>가장 위에 있는 root 노드를 삭제합니다.</li>
+  <li>가장 후미에 있는 수를 root 노드로 이동합니다.</li>
+  <li>root의 수가 자식들의 수보다 작은 경우, 더 작은 자식과 위치를 교환합니다.</li>
+  <li>부모의 수가 자식의 수보다 크지 않을 때까지 자식과 비교 및 교환을 반복합니다.</li>
+</ol>
+
+<h3 id="우선순위-큐-priorityqueue">우선순위 큐 (PriorityQueue)</h3>
+<p>데이터 추가는 자유롭게 하고, 우선순위가 높은 데이터를 먼저 poll하는 자료구조입니다.<br />
+일반적으로 완전 이진 트리로 구성된 힙 자료구조를 사용하여 구현합니다.<br />
+작업 스케줄링, 응급실 대기열, 네트워크 트래픽 제어, 교통 네트워크 최적화 등에 활용됩니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 오름차순 정렬하는 우선순위 큐 객체 생성 (기본적으로 Min Heap이라서 작은 값부터 나옵니다.)
+PriorityQueue&lt;Integer&gt; pq = new PriorityQueue&lt;&gt;();
+
+// 내림차순 정렬하는 우선순위 큐 객체 생성
+PriorityQueue&lt;String&gt; pq = new PriorityQueue&lt;&gt;(Collections.reverseOrder());
+또는
+PriorityQueue&lt;Integer&gt; pq = new PriorityQueue&lt;&gt;((a, b) -&gt; Integer.compare(b, a));
+또는
+PriorityQueue&lt;Integer&gt; pq = new PriorityQueue&lt;&gt;((a, b) -&gt; { b - a });
+// b - a 방식은 결과값이 Integer 범위를 초과할 때 오버플로우가 발생하므로 지양하는 것이 좋습니다.
+
+// 값 추가 시, int 배열 인덱스에 해당하는 값을 기준으로 오름차순 정렬하는 우선순위 큐 객체 생성
+PriorityQueue&lt;Integer&gt; pq = new PriorityQueue&lt;&gt;((a, b) -&gt; Integer.compare(배열명[a], 배열먕[b]));
+또는
+PriorityQueue&lt;Integer&gt; pq = new PriorityQueue&lt;&gt;((a, b) -&gt; { 배열명[a] - 배열먕[b] });
+
+// 값 추가 시, int 배열 인덱스에 해당하는 값을 기준으로 내림차순 정렬하는 우선순위 큐 객체 생성
+PriorityQueue&lt;Integer&gt; pq = new PriorityQueue&lt;&gt;((a, b) -&gt; Integer.compare(배열명[b], 배열먕[a]));
+
+// 노드 추가 시, 노드의 cost 값에 따라 오름차순 정렬하는 우선순위 큐 객체 생성
+PriorityQueue&lt;Node&gt; pq = new PriorityQueue&lt;&gt;((o1, o2) -&gt; Integer.compare(o1.cost, o2.cost));
+
+// 노드 추가 시, 노드의 cost 값에 따라 오름차순 정렬하는 우선순위 큐 객체 생성
+PriorityQueue&lt;Node&gt; pq = new PriorityQueue&lt;&gt;((o1, o2) -&gt; Integer.compare(o2.cost, o1.cost));
+
+// 컬렉션 객체의 모든 데이터를 오름차순 정렬하여 담은 우선순위 큐 객체 생성
+PriorityQueue&lt;String&gt; pq = new PriorityQueue&lt;&gt;(list);
+
+// 컬렉션 객체의 모든 데이터를 우선순위 큐 객체에 삽입 : O(n)
+pq.addAll(list);
+
+// int 배열의 모든 데이터를 우선순위 큐 객체에 삽입 : O(n)
+for (int v : intArr) {
+  pq.add(v);
+}
+
+// 값을 우선순위 큐에 삽입 : O(logn)
+pq.add(값);
+
+// 우선순위가 높은 원소 제거 후 반환 : O(logn)
+pq.poll();
+
+// 우선순위 큐 객체의 모든 데이터를 배열에 삽입 : O(nlogn)
+int i = 0;
+while(!pq.isEmpty()) {
+  answer[i++] = pq.poll();
+}
+
+// 우선순위 큐 전체 출력 (우선순위 큐는 꺼내면서 정렬하므로, 삽입 후 pq는 정렬된 상태가 아닙니다.)
+System.out.println(pq);
+</code></pre></div></div>
+
+<h3 id="키-값-자료구조-map">키-값 자료구조 (Map)</h3>
+
+<p><mark>HashMap</mark><br />
+해시 함수로 얻은 키의 해시 값을 size로 나눈 나머지 인덱스에 값을 저장하여 검색/삽입/삭제가 빠른 자료구조입니다.<br />
+키-값 데이터 쌍을 버킷이라 하고, 키로 검색하면 값을 O(1)으로 찾을 수 있습니다.<br />
+비밀번호, DB 인덱싱, 블록체인 등 검색 횟수가 많거나 보안이 필요한 경우 사용합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 해시맵 객체 생성 (HashTable 클래스는 잘 사용되지 않습니다.)
+HashMap&lt;String, Integer&gt; map = new HashMap&lt;&gt;();
+
+// 해시맵 값 삽입 및 수정 : O(1) (같은 키 값으로 넣으면, 기존에 저장된 값이 수정됩니다.)
+map.put("키", 값);
+
+// 다른 맵 키-값 전체 복사
+map.putAll(다른맵객체);
+또는
+new HashMap&lt;&gt;(configProperties);
+
+// 해시맵에서 키-값 삭제 : O(1)
+map.remove("키");
+
+// 해시맵에서 모든 데이터 삭제
+map.clear();
+
+// 해시맵에 데이터가 있는지 확인
+map.isEmpty();
+
+// 해시맵 데이터 개수 확인
+map.size();
+
+// 해시맵에 키가 있는지 확인 : O(1)
+if (map.containsKey("키")) {
+  // 해시맵 값 출력
+  System.out.println(map.get("키"));
+}
+
+// 해시맵에 값이 있는지 확인 : O(1)
+if (map.containsValue(값)) {
+  System.out.println("값이 존재합니다."));
+}
+
+// 값이 없으면 기본값 출력
+map.getOrDefault("키", 기본값);
+
+// 해시맵 전체 출력
+System.out.println(map);
+
+// 해시맵 키셋 순회하며 값 출력
+Set&lt;String&gt; keySet = map.keySet();
+for (String key : keySet) {
+    System.out.println(map.get(key));
+}
+
+// 해시맵 값 순회하며 출력
+for (Integer val : map.values()) {
+    System.out.println(val);
+}
+</code></pre></div></div>
+
+<p><mark>해시테이블 충돌</mark><br />
+해시테이블의 배열 크기가 작을수록 충돌 가능성과 선형 탐색의 빈도가 높아지게 됩니다.<br />
+반대로 배열 크기가 너무 크면 빈 버킷이 많아져서 메모리를 낭비하게 됩니다.</p>
+
+<p><mark>해시테이블 충돌 해결 방법</mark></p>
+<ul>
+  <li>체이닝(연쇄법) : 각 버킷에 충돌된 데이터를 연결리스트 등으로 연결하여 저장하는 방법입니다.</li>
+</ul>
+
+<p><mark>TreeMap</mark><br />
+키-값 형태로 데이터를 저장하며, 키가 중복되면 덮어써서 중복을 제거하고 정렬 조건에 맞게 정렬합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 중복값 제거, 오름차순 정렬 세팅 (기본값)
+TreeMap&lt;String, String&gt; treeMap = new TreeMap&lt;&gt;();
+
+// 중복값 제거, 내림차순 정렬 세팅
+TreeMap&lt;String, String&gt; treeMap = new TreeMap&lt;&gt;(Collections.reverseOrder());
+
+// TreeMap에 데이터 추가 : O(logn)
+treeMap.put("키", "값");
+
+// 키-값 제거 : O(logn)
+treeMap.remove("키");
+
+// 키에 해당하는 값 반환 : O(logn)
+treeMap.get("키");
+
+// 특정 키가 있는지 확인
+if (treeMap.containsKey(키)) {
+
+}
+
+// treeMap이 비어있는지 확인
+if (treeMap.isEmpty()) {
+
+}
+
+// TreeMap 키 순회 (정렬된 순서대로 나옴)
+for (String key : treeMap.keySet()) {
+
+}
+
+// TreeMap 값 순회 (정렬된 순서대로 나옴)
+for (String value : treeMap.values()) {
+
+}
+
+// 값이 없으면 기본값 출력
+treeMap.getOrDefault("키", 기본값);
+</code></pre></div></div>
+
+<h3 id="집합-set">집합 (Set)</h3>
+<p>중복이 없는 원소들을 갖는 자료구조입니다.<br />
+HashMap처럼 키-값이 아니라, 키만 있는 경우 사용하면 좋습니다.</p>
+
+<p><mark>HashSet</mark> : 해시테이블 기반으로 구현 되어있으며, 순서가 없습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 중복을 허용하지 않는 Hash 집합(Set) 생성
+Set&lt;Integer&gt; set = new HashSet&lt;&gt;();
+
+// 배열을 List로 변환 후 HashSet 기본 값으로 생성
+Set&lt;String&gt; set = new HashSet&lt;&gt;(Arrays.asList(String배열));
+
+// List 원소 생성 후 HashSet 기본 값으로 생성
+Set&lt;Character&gt; set = new HashSet&lt;&gt;(Arrays.asList('a', 'e', 'i', 'o', 'u'));
+
+// set1 복제 후, set2에 없는 원소 제거 = 교집합 생성
+Set&lt;Integer&gt; interSet = new HashSet&lt;&gt;(set1);
+interSet.retainAll(set2);
+
+// set1에서 set2 전체 원소 제거 = 차집합 생성
+set1.removeAll(set2);
+
+// 배열 순회
+for (int i : arr) {
+  // 값이 해시셋에 있는지 확인 : O(1)
+  // List contains는 O(n)이므로, HashSet으로 변환하여 값을 찾으면 훨씬 효율적입니다.
+  if (set.contains(i)) {
+    return true;
+  }
+
+  // 해시셋에 현재 값 저장 : O(1)
+  set.add(i);
+}
+
+// 해시셋 데이터 개수 확인
+set.size();
+
+// 해시셋 데이터 삭제 : O(1)
+set.remove(값);
+</code></pre></div></div>
+<p>배열에서 두 수의 합이 특정한 값이 되는지 O(1)으로 확인할 수 있습니다.</p>
+
+<p><mark>LinkedHashSet</mark> : 중복을 제거하고 데이터를 추가한 순서대로 정렬합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// LinkedHashSet 생성
+Set&lt;Character&gt; set = new LinkedHashSet&lt;&gt;();
+
+// 배열을 List로 변환 후 LinkedHashSet 기본 값으로 생성
+Set&lt;String&gt; set = new LinkedHashSet&lt;&gt;(Arrays.asList(배열));
+     
+// 문자열의 문자를 set에 추가
+for (char c : str.toCharArray()) {
+    set.add(c);
+}
+
+// 순서를 유지하고, 중복이 제거된 문자열 생성
+String answer = "";
+for (char c : set) {
+    answer += c;
+}
+
+// LinkedHashSet은 특정 인덱스에 해당하는 원소에 접근할 수 없습니다.
+// Set 인터페이스는 인덱스 기반 접근을 지원하지 않습니다.
+List&lt;Integer&gt; list = new ArrayList&lt;&gt;(set);
+list.get(i);
+// 위와 같이, 리스트로 변환하면 인덱스로 접근이 가능합니다.
+</code></pre></div></div>
+
+<p><mark>TreeSet</mark> : 이진 검색 트리 기반으로 구현되어 있으며, 중복을 제거하고 정렬 조건에 맞게 정렬합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 중복값 제거, 오름차순 정렬 세팅 (기본값)
+TreeSet&lt;Integer&gt; set = new TreeSet&lt;&gt;();
+
+// 중복값 제거, 내림차순 정렬 세팅 : O(nlogn)
+TreeSet&lt;Integer&gt; set = new TreeSet&lt;&gt;(Collections.reverseOrder());
+for (int num : arr) {
+  set.add(num);
+}
+
+// int형 배열에 담기
+int[] result = new int[set.size()];
+int i = 0;
+for (int v : set) {
+    result[i++] = v;
+}
+
+// 트리셋이 비어있는지 확인
+set.isEmpty();
+
+// TreeSet은 특정 인덱스에 해당하는 원소에 접근할 수 없습니다.
+
+// 트리셋 데이터 삭제 : O(logn)
+set.remove(값);
+</code></pre></div></div>
+
+<h3 id="트리-tree">트리 (Tree)</h3>
+<p>계층 구조 데이터를 저장하고 표현하기 위한 자료구조입니다.<br />
+인공지능의 의사 결정 트리, 자동 완성 기능, 데이터베이스(B-트리, B+트리) 등에 사용합니다.<br />
+이진 트리는 모든 노드의 최대 차수(자식 노드 수)가 2인 트리입니다.</p>
+
+<p><mark>이진 탐색 트리</mark><br />
+왼쪽 가지의 모든 자식이 부모보다 작고, 오른쪽 가지의 모든 자식이 부모보다 큰 트리입니다.<br />
+왼쪽 가지의 끝에 최소 노드가 있고, 오른쪽 가지의 끝에 최대 노드가 있습니다.<br />
+트리가 직선에 가까워지면 선형 탐색처럼 성능이 나빠서, 자가균형 이진탐색트리로 탐색 효율을 유지하면 좋습니다.</p>
+
+<h3 id="그래프-graph">그래프 (Graph)</h3>
+<p>노드와 방향/무방향 간선을 이용한 비선형 자료구조입니다.<br />
+간선에는 가중치가 존재할 수 있습니다.</p>
+
+<hr />
+
+<h2 id="java-코드-실행시간-계산-방법">Java 코드 실행시간 계산 방법</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>long start = System.currentTimeMillis();
+
+// 실행시간을 계산할 코드 작성
+
+long end = System.currentTimeMillis();
+
+System.out.println(((end - start) / 1000.0) + "초");
+</code></pre></div></div>
+<p>컴퓨터가 초당 연산할 수 있는 최대 횟수는 1억입니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%ED%8C%8C%EC%9D%B4%EC%8D%AC-java" class="page__taxonomy-item" rel="tag">파이썬 / Java</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2024-05-01">2024-05-01</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/python-java/2024-04-30-1" class="pagination--pager" title="코딩테스트 대비 프로그래머스 55문제 Java 풀이
+">Prev</a>
+    
+    
+      <a href="/web-dev/2024-05-02-1" class="pagination--pager" title="CDN 사이트 먹통으로 인한 CSS, JS 라이브러리 내재화 방법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

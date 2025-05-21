@@ -1,0 +1,956 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>AWS EC2 서버 생성 방법 / EC2 인스턴스 유형 / AWS 보안그룹 설정 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="AWS EC2 서버 생성 방법 / EC2 인스턴스 유형 / AWS 보안그룹 설정">
+<meta property="og:url" content="https://0songha0.github.io/aws/2023-02-14-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-02-14T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2023-02-14T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/aws/2023-02-14-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="AWS EC2 서버 생성 방법 / EC2 인스턴스 유형 / AWS 보안그룹 설정">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2023-02-14T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2023-02-14T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">AWS EC2 서버 생성 방법 / EC2 인스턴스 유형 / AWS 보안그룹 설정
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2023-02-14T00:00:00+00:00">2023-02-14</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> AWS EC2 서버 생성 방법 / EC2 인스턴스 유형 / AWS 보안그룹 설정</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#aws-ec2-서버-생성-방법">AWS EC2 서버 생성 방법</a></li><li><a href="#아마존-ec2-인스턴스-유형">아마존 EC2 인스턴스 유형</a><ul><li><a href="#범용-인스턴스-t3-종류">범용 인스턴스 T3 종류</a></li></ul></li><li><a href="#aws-보안그룹-설정">AWS 보안그룹 설정</a><ul><li><a href="#인바운드-규칙-설정">인바운드 규칙 설정</a></li><li><a href="#아웃바운드-규칙-설정">아웃바운드 규칙 설정</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="aws-ec2-서버-생성-방법">AWS EC2 서버 생성 방법</h2>
+
+<p>EC2 &gt; 인스턴스 &gt; 인스턴스 시작</p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>이름</td>
+      <td>EC2 인스턴스명 입력 (한글 가능)</td>
+    </tr>
+    <tr>
+      <td>AMI</td>
+      <td>
+        운영체제 등이 설치된 이미지 템플릿입니다.<br /><br />
+        Quick Start &gt; Amazon Linux 선택,<br />
+        Amazon Linux 2 AMI (HVM) - Kernel 5.10, SSD Volume Type 선택,<br />
+        64-bit (x86) 선택
+      </td>
+    </tr>
+    <tr>
+      <td>인스턴스 유형</td>
+      <td>EC2 인스턴스 유형 선택</td>
+    </tr>
+    <tr>
+      <td>키 페어(로그인)</td>
+      <td>
+        EC2 서버에 인증서 없이 SSH 접근하려면  Proceed without a key pair (Not recommended) 선택<br /><br />
+        인증서(ppk) 넣고 접근하려면<br />새 키 페어 생성 &gt; 키 페어 이름 입력, RSA 유형 선택, .ppk 선택하여 키 페어 생성<br />
+        또는 EC2 &gt; 네트워크 및 보안 &gt; 키 페어에서 생성한 키 페어(서버 로그인 인증서) 선택<br /><br />
+        키 페어는 생성 시 다운로드 폴더에 저장되며, 다시 받을 수 없으니 백업해두면 좋습니다.
+      </td>
+    </tr>
+    <tr>
+      <td>네트워크 설정 &gt; 편집</td>
+      <td>
+        VPC : EC2가 위치할 VPC 선택,<br />
+        Subnet : EC2가 위치할 서브넷 선택,<br />
+        Auto-assign public IP : Enable 선택,<br />
+        방화벽(보안 그룹) : 보안 그룹 생성하여 아래 정보 입력 또는 기존 보안 그룹 선택 (default)<br />
+        Security group name : 보안그룹명 입력,<br />
+        Description : Web Server 입력,<br />
+        Security group rule 1 : ssh 선택 &gt; Custom 선택 &gt; 0.0.0.0/0 입력, <br />
+        Security group rule 2 : HTTP 선택 &gt; Custom 선택 &gt; 0.0.0.0/0 입력,<br />
+        Advanced details &gt; User Data : 아래 스크립트 입력
+      </td>
+    </tr>
+    <tr>
+      <td>스토리지 구성</td>
+      <td>
+        크기 : 30~500GiB 입력,<br />
+        볼륨 유형 :범용 SSD(gp3) 선택 또는<br />
+        EC2 &gt; Elastic Block Store &gt; 볼륨에서 생성한 EBS 볼륨(범용 SSD) 선택
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p>사내 보안으로 막혀서 방금 생성한 서버에 SSH 연결할 수 없는 경우, 보안팀에 요청하여 방화벽 허용해야 합니다.<br />
+리눅스 생성 후 서버 시간을 한국 시간 기준으로 변경해두는 것이 로그 보기 좋습니다.</p>
+
+<p><mark>AWS EC2 서버 인증서 발급 방법</mark><br />
+EC2 &gt; 네트워크 및 보안 &gt; 키 페어 &gt; 키 페어 생성</p>
+
+<hr />
+
+<h2 id="아마존-ec2-인스턴스-유형">아마존 EC2 인스턴스 유형</h2>
+
+<h3 id="범용-인스턴스-t3-종류">범용 인스턴스 T3 종류</h3>
+<table>
+  <thead>
+    <tr>
+      <th>인스턴스</th>
+      <th>CPU 개수</th>
+      <th>메모리 (GiB)</th>
+      <th>메모</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>t3.nano</td>
+      <td>2</td>
+      <td>0.5</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>t3.micro</td>
+      <td>2</td>
+      <td>1</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>t3.small</td>
+      <td>2</td>
+      <td>2</td>
+      <td>서버가 자꾸 죽어서 개발서버 사양으로 부적합합니다.</td>
+    </tr>
+    <tr>
+      <td>t3.medium</td>
+      <td>2</td>
+      <td>4</td>
+      <td>
+        개발서버 기본 사양으로 적합한 것 같습니다.<br />
+        대부분의 프로젝트 개발서버 사양으로 채택되었습니다.
+      </td>
+    </tr>
+    <tr>
+      <td>t3.large</td>
+      <td>2</td>
+      <td>8</td>
+      <td>ㄱㅊㄹ 운영서버 사양입니다.</td>
+    </tr>
+    <tr>
+      <td>t3.xlarge</td>
+      <td>4</td>
+      <td>16</td>
+      <td>
+        처리가 적당히 있는 개발서버 사양으로 적합한 것 같습니다.<br />
+        ㅇㅋㅇㅂ 엘라스틱서치 개발, 운영서버 사양입니다.
+      </td>
+    </tr>
+    <tr>
+      <td>t3.2xlarge</td>
+      <td>8</td>
+      <td>32</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>m6i.2xlarge</td>
+      <td>8</td>
+      <td>32</td>
+      <td>
+        처리가 많은 운영서버 사양으로 적합한 것 같습니다.<br />
+        ㅁㅎㅌ 엘라스티서치 운영서버 사양입니다.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="aws-보안그룹-설정">AWS 보안그룹 설정</h2>
+
+<h3 id="인바운드-규칙-설정">인바운드 규칙 설정</h3>
+
+<p>네트워크 및 보안 &gt; 보안 그룹 &gt; 인바운드 규칙</p>
+
+<p><mark>유형</mark></p>
+<table>
+  <tbody>
+    <tr>
+      <td>SSH</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <td>MSSQL</td>
+      <td>1433</td>
+    </tr>
+    <tr>
+      <td>HTTPS </td>
+      <td>443</td>
+    </tr>
+    <tr>
+      <td>MYSQL/Aurora</td>
+      <td>3306</td>
+    </tr>
+    <tr>
+      <td>사용자 지정 TCP </td>
+      <td>8080</td>
+    </tr>
+    <tr>
+      <td>HTTP</td>
+      <td>80</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><mark>공통</mark></p>
+<table>
+  <tbody>
+    <tr>
+      <td>IP 버전</td>
+      <td>IPV4</td>
+    </tr>
+    <tr>
+      <td>프로토콜</td>
+      <td>TCP</td>
+    </tr>
+    <tr>
+      <td>소스</td>
+      <td>0.0.0.0/0</td>
+    </tr>
+  </tbody>
+</table>
+<p>인바운드 규칙 수정 후 EC2 서버를 재시작하지 않아도 적용됩니다.</p>
+
+<h3 id="아웃바운드-규칙-설정">아웃바운드 규칙 설정</h3>
+<p>모든 트래픽 유형 (0.0.0.0/0 대상) 에 대하여 전체 프로토콜과 포트를 허용하면 됩니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#aws" class="page__taxonomy-item" rel="tag">AWS</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-02-14">2023-02-14</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/aws/2023-02-10-1" class="pagination--pager" title="클라우드 서버 장점 / AWS EC2, Naver Cloud Server 장점
+">Prev</a>
+    
+    
+      <a href="/web-dev/2023-02-14-1" class="pagination--pager" title="자주 쓰는 Mybatis 정리 / MariaDB bulk insert, update 방법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

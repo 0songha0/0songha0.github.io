@@ -1,0 +1,1083 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>시큐어코딩 점검툴 사용법 / 보안 취약점 보완 조치 방법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="시큐어코딩 점검툴 사용법 / 보안 취약점 보완 조치 방법">
+<meta property="og:url" content="https://0songha0.github.io/op/2025-01-23-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-01-23T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2025-01-23T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/op/2025-01-23-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 209</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">Kafka</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="시큐어코딩 점검툴 사용법 / 보안 취약점 보완 조치 방법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2025-01-23T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-01-23T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">시큐어코딩 점검툴 사용법 / 보안 취약점 보완 조치 방법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-01-23T00:00:00+00:00">2025-01-23</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 시큐어코딩 점검툴 사용법 / 보안 취약점 보완 조치 방법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
+              <ul class="toc__menu"><li><a href="#시큐어코딩-진단-방법">시큐어코딩 진단 방법</a><ul><li><a href="#code-ray-xg-pro-사용법">CODE-RAY XG PRO 사용법</a></li></ul></li><li><a href="#개선-불가-코드-제외-처리">개선 불가 코드 제외 처리</a><ul><li><a href="#폴더-제외-방법">폴더 제외 방법</a></li><li><a href="#파일-제외-방법">파일 제외 방법</a></li></ul></li><li><a href="#보안-취약점-보완-방법">보안 취약점 보완 방법</a><ul><li><a href="#http-응답-분할">HTTP 응답 분할</a></li><li><a href="#중요정보-평문전송-http">중요정보 평문전송 (HTTP)</a></li><li><a href="#취약한-암호화-알고리즘-사용">취약한 암호화 알고리즘 사용</a></li><li><a href="#private-배열에-public-데이터-할당">Private 배열에 Public 데이터 할당</a></li><li><a href="#public-메소드로부터-반환된-private-배열">Public 메소드로부터 반환된 Private 배열</a></li><li><a href="#오류메시지를-통한-정보노출">오류메시지를 통한 정보노출</a></li><li><a href="#오류-상황-대응-부재">오류 상황 대응 부재</a></li><li><a href="#주석문-안에-포함된-시스템-주요정보-jsp의-html-주석">주석문 안에 포함된 시스템 주요정보 (JSP의 HTML 주석)</a></li></ul></li><li><a href="#보안-취약점-보완-시-문제-해결">보안 취약점 보완 시 문제 해결</a><ul><li><a href="#bombyte-order-mark-문제">BOM(Byte Order Mark) 문제</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p>시큐어코딩 점검은 신규 서비스 안정화 기간 중 실시하고, 매년 정기적으로 점검을 실시합니다.</p>
+
+<hr />
+
+<h2 id="시큐어코딩-진단-방법">시큐어코딩 진단 방법</h2>
+
+<h3 id="code-ray-xg-pro-사용법">CODE-RAY XG PRO 사용법</h3>
+<p>제공 받은 exe 파일을 설치하여 실행 후 운영 브랜치를 바라보는 프로젝트폴더\src\main 경로로 지정합니다.<br />
+프로그램 기본 세팅 확인 후 우측 검사 시작 버튼을 누르면 30분 정도 소요됩니다.<br />
+시큐어코딩 점검 계획서에 첨부할 사진으로 점검 전, 점검 후, 취약점 보완 및 재점검 후 각각 캡쳐해두어야 합니다.</p>
+
+<p><mark>CODE-RAY 기본 세팅</mark></p>
+<ul>
+  <li>제외 파일 필터 : <em>.html, *.js, *.cubrid.xml, *.mysql.xml, java</em>.xml, pom.xml, sql*.xml</li>
+  <li>프리셋 목록 : 행안부 선택</li>
+  <li>파서 선택 : javascript, jsp, html, xml, java 체크</li>
+  <li>예외 항목 : 외부에서 제공받은 유틸 및 API 연동 파일 제외 (롤 관리 메뉴에서 추가)</li>
+</ul>
+
+<p><mark>CODE-RAY 단점</mark><br />
+제외된 폴더 내 파일들도 모두 검사해서 시간이 오래 걸립니다.</p>
+
+<hr />
+
+<h2 id="개선-불가-코드-제외-처리">개선 불가 코드 제외 처리</h2>
+<p>전자정부프레임워크(egovframework 폴더), 라이브러리 폴더 등은 수정할 수 없으니 제외처리 해야 합니다.</p>
+
+<h3 id="폴더-제외-방법">폴더 제외 방법</h3>
+<p>상단 룰 관리 탭 &gt; 예외 룰 관리 &gt; 추가 &gt; 예외 이름 작성 &gt; 예외 항목 추가 &gt; 폴더 &gt; 검사 결과의 파일별 리스트 참고해서 제외할 폴더 경로를 /로 구분하여 작성 (다중 폴더 추가 가능) &gt; 추가 &gt; 저장 &gt; 저장</p>
+
+<p><mark>제외 폴더 예시</mark></p>
+<ul>
+  <li>java/egovframework/*</li>
+  <li>resources/egovframework/*</li>
+  <li>webapp/WEB-INF/jsp/egovframework/*</li>
+</ul>
+
+<h3 id="파일-제외-방법">파일 제외 방법</h3>
+<p>상단 룰 관리 탭 &gt; 예외 룰 관리 &gt; 추가 &gt; 예외 이름 작성 &gt; 예외 항목 추가 &gt; 파일 &gt; 검사 결과 상세 목록 검출 파일 참고해서 제외할 파일명 작성 &gt; 추가 &gt; 저장 &gt; 저장<br />
+제외 폴더 필터로 제외되지 않은 파일은 새 예외 항목을 만들어서 제외합니다.</p>
+
+<p><mark>제외 파일 예시</mark></p>
+<ul>
+  <li>GeneratorController.java</li>
+  <li>GeneratorServiceImpl.java</li>
+  <li>IMFileUtil.java</li>
+</ul>
+
+<hr />
+
+<h2 id="보안-취약점-보완-방법">보안 취약점 보완 방법</h2>
+<p>시큐어코딩 점검 결과에서 낮음 등급은 제외하고 높음, 보통 등급만 보완합니다.<br />
+보안약점 설명 및 수정 방법을 참고하고, 구글링 해서 수정 후 계속 프로그램을 돌려보면서 확인합니다.<br />
+개발서버용 브랜치에서 먼저 수정 후 운영서버용 브랜치에 반영해야 합니다.</p>
+
+<h3 id="http-응답-분할">HTTP 응답 분할</h3>
+<p>JAVA 컨트롤러에서 HTTP 요청에 들어있는 파라미터를 HTTP 응답 헤더에 포함하여 다시 전달할 때,<br />
+입력값에 개행문자가 존재하면 HTTP 응답이 2개 이상으로 분리될 수 있습니다.<br />
+공격자가 개행문자를 이용하여 첫 번째 응답을 종료시키고, 두 번째 응답을 조작해서 공격할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String 쿠키값변수 = null;
+Cookie[] cookies = req.getCookies();
+
+// 쿠키 키 값 존재 여부 확인
+if (cookies != null) {
+    for (Cookie cookie : cookies) {
+        if ("쿠키키".equals(cookie.getName())) {
+            쿠키값변수 = cookie.getValue();
+
+            // 개행 문자 제거 (필터링 적용)
+            if (쿠키값변수 != null) {
+              쿠키값변수 = 쿠키값변수.replaceAll("[\r\n]", "");
+            }
+        }
+    }
+}
+
+// 쿠키가 없으면 새로운 쿠키 생성
+if (쿠키값변수 == null) {
+  Cookie newCookie = new Cookie("쿠키키", 쿠키값변수);
+  res.addCookie(newCookie);
+}
+
+// VO 입력 및 INSERT 처리
+</code></pre></div></div>
+<p>위와 같이, 개행 문자 (CR : \r, LF : \n) 필터링으로 보안 공격을 방어할 수 있습니다.</p>
+
+<h3 id="중요정보-평문전송-http">중요정보 평문전송 (HTTP)</h3>
+<p>HTTPS 보안 채널의 경우, 쿠키 객체에 setSecure 함수로 보안 속성을 설정하여 중요 정보 노출을 방지해야 합니다.<br />
+보안 속성이 설정된 쿠키는 HTTP에서 전송되지 않으므로, HTTPS 여부 체크 후 설정하는 것이 좋습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cookie cookie = new Cookie("쿠키키", 쿠키값);
+
+// 운영 HTTPS인 경우, 보안 속성 적용
+boolean isProduction = req.getScheme().equals("https");
+cookie.setSecure(isProduction);
+
+res.addCookie(cookie);
+</code></pre></div></div>
+<p>운영서버 https에서는 보안 속성 적용, 개발서버 http에서는 보안 속성 미적용하는 코드 예시입니다.</p>
+
+<h3 id="취약한-암호화-알고리즘-사용">취약한 암호화 알고리즘 사용</h3>
+
+<p><mark>보안에 취약한 DES 암호화 코드</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public static String encryptString(String str, String encryptKey) throws Exception {
+  if (str == null || str.length() == 0) {
+    return "";
+  }
+
+  Cipher cipher = Cipher.getInstance("DESede/ECB/PKCS5Padding");
+  SecretKeySpec keySpec = new SecretKeySpec(encryptKey.getBytes(), "DESede");
+  cipher.init(Cipher.ENCRYPT_MODE, keySpec);
+
+  byte[] plainText = str.getBytes("UTF-8");
+  byte[] cipherText = cipher.doFinal(plainText);
+  return encodeBase64Escape(cipherText);
+}
+
+public static String decryptString(String str, String decryptKey) throws Exception {
+  if (str == null || str.length() == 0) {
+    return "";
+  }
+  Cipher cipher = Cipher.getInstance("DESede/ECB/PKCS5Padding");
+  SecretKeySpec keySpec = new SecretKeySpec(decryptKey.getBytes(), "DESede");
+  cipher.init(Cipher.DECRYPT_MODE, keySpec);
+
+  byte[] cipherText = cipher.doFinal(decodeBase64Escape(str));
+  return new String(cipherText, "UTF-8");
+}
+</code></pre></div></div>
+
+<p><mark>AES 암호화 코드</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public static String encryptString(String str, String encryptKey) throws Exception {
+  if (str == null || str.length() == 0) {
+    return "";
+  }
+
+  Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+  SecretKeySpec keySpec = new SecretKeySpec(encryptKey.getBytes(), "AES");
+  cipher.init(Cipher.ENCRYPT_MODE, keySpec);
+
+  byte[] plainText = str.getBytes("UTF-8");
+  byte[] cipherText = cipher.doFinal(plainText);
+  return encodeBase64Escape(cipherText);
+}
+
+public static String decryptString(String str, String decryptKey) throws Exception {
+  if (str == null || str.length() == 0) {
+    return "";
+  }
+  Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+  SecretKeySpec keySpec = new SecretKeySpec(decryptKey.getBytes(), "AES");
+  cipher.init(Cipher.DECRYPT_MODE, keySpec);
+
+  byte[] cipherText = cipher.doFinal(decodeBase64Escape(str));
+  return new String(cipherText, "UTF-8");
+}
+</code></pre></div></div>
+<p>취약하다고 알려진 DES, RC5 등의 알고리즘을 대신하여 AES, SEED 등의 안전한 알고리즘으로 대체하여 사용합니다.<br />
+AES ECB 모드는 보안에 취약하므로 CBC 모드로 변경하고, IV(초기화 벡터)를 추가하면 보안이 더 강화됩니다.</p>
+
+<h3 id="private-배열에-public-데이터-할당">Private 배열에 Public 데이터 할당</h3>
+<p>Public 파라미터를 Private 배열에 저장하면, 외부에서 Private 배열에 접근할 수 있습니다.<br />
+파라미터 변수의 레퍼런스가 아닌 값 자체를 할당해야 정보 은닉이 가능합니다.</p>
+
+<p><mark>private 배열 할당 개선</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private String[] 배열명;
+
+public void set배열명(String[] 배열명) {
+  this.배열명 = 배열명;
+}
+</code></pre></div></div>
+<p>아래와 같이, 새로운 배열을 생성하고 값을 복사하면 보안이 강화됩니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public void set배열명(String[] 배열명) {
+  if (배열명 != null) {
+    this.배열명 = new String[배열명.length];
+    System.arraycopy(배열명, 0, this.배열명, 0, 배열명.length);
+  } else {
+    this.배열명 = null;
+  }
+}
+</code></pre></div></div>
+<p>System.arraycopy 함수를 사용하면 for문보다 빠르고 효율적으로 배열을 복사할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public void set배열명(String[] 배열명) {
+  this.배열명 = (배열명 == null) ? null : Arrays.copyOf(배열명, 배열명.length);
+}
+</code></pre></div></div>
+<p>Arrays.copyOf 함수는 System.arraycopy 함수와 같은 기능을 하면서 더 간결합니다.<br />
+null 체크도 삼항연산자로 해서 코드 길이를 더 간결하게 개선하였습니다.</p>
+
+<p><mark>private List<VO> 할당 개선 (얕은 복사)&lt;/mark&gt;</VO></mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private List&lt;VO명&gt; 리스트명;
+
+public void set리스트명(List&lt;VO명&gt; List명) {
+  this.리스트명 = 리스트명;
+}
+</code></pre></div></div>
+<p>아래와 같이, 새로운 리스트 객체를 생성하고 값을 복사하면 보안이 강화됩니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public void set리스트명(List&lt;VO명&gt; 리스트명) {
+  this.리스트명 = (리스트명 == null) ? null : new ArrayList&lt;&gt;(리스트명);
+}
+</code></pre></div></div>
+<p>이렇게만 변경해도 CODE-RAY에서는 보안 취약점이 제거되는 것을 확인할 수 있습니다.<br />
+얕은 복사 시 내부 값은 참조되므로, 깊은 복사를 해야 보안상 더 유리합니다.</p>
+
+<p><mark>private List<VO> 할당 개선 (깊은 복사)&lt;/mark&gt;</VO></mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class VO명 implements Cloneable {
+    private String 변수1;
+    private String 변수2;
+
+    public VO명(VO명 vo) {
+        this.변수1 = vo.변수1;
+        this.변수2 = vo.변수2;
+    }
+
+    @Override
+    public VO명 clone() {
+        return new VO명(this);
+    }
+}
+</code></pre></div></div>
+<p>위 VO 코드 예시처럼 생성자를 통해 각 변수 값을 복사하는 clone 함수를 정의하면 더 좋습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public void set리스트명(List&lt;VO명&gt; 리스트명) {
+  if (리스트명 == null) {
+    this.리스트명 = null;
+  } else {
+    this.리스트명 = new ArrayList&lt;&gt;();
+    for (VO명 item : 리스트명) {
+      this.리스트명.add(new VO명(item));
+    }
+  }
+}
+</code></pre></div></div>
+<p>new VO명(item) 또는 item.clone()으로 깊은 복사하면 내부 원소 참조가 아닌 값을 복사하여 보안이 강화됩니다.</p>
+
+<h3 id="public-메소드로부터-반환된-private-배열">Public 메소드로부터 반환된 Private 배열</h3>
+<p>VO에서 Public getter 함수를 통해 Private 변수를 리턴하면, 외부에서 값을 수정할 수 있습니다.<br />
+Private 변수 객체의 복제본을 만들어서 반환해야 외부 수정을 방지할 수 있습니다.</p>
+
+<p><mark>private 배열 반환 개선</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public String[] get배열명() {
+  if (this.배열명 == null) {
+    return null;
+  } else {
+    String[] tempData = Arrays.copyOf(배열명, 배열명.length);
+
+    return tempData;
+  }
+}
+</code></pre></div></div>
+<p>새로운 변수에 담아서 리턴해야 보안 취약점으로 탐지되지 않습니다.</p>
+
+<p><mark>private List<VO> 반환 개선 (얕은 복사)&lt;/mark&gt;</VO></mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public List&lt;VO명&gt; get리스트명() {
+  if (this.리스트명 == null) {
+    return null;
+  } else {
+    List&lt;VO명&gt; tempList = new ArrayList&lt;&gt;(리스트명);
+    
+    return tempList;
+  }
+}
+</code></pre></div></div>
+
+<h3 id="오류메시지를-통한-정보노출">오류메시지를 통한 정보노출</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>try {
+  // 예외 발생 가능 코드
+} catch (IllegalArgumentException e) {
+  LOGGER.error("잘못된 입력: {}", e.getMessage(), e);
+  mav.addObject("status", "fail");
+  mav.addObject("message", "잘못된 요청입니다."); 
+} catch (Exception e) {
+  LOGGER.error("서버 내부 오류: {}", e.getMessage(), e);
+  mav.addObject("status", "fail");
+  mav.addObject("message", "서버 내부 오류입니다.");
+}
+mav.addObject("result", result);
+mav.setViewName("jsonView");
+</code></pre></div></div>
+<p>LOGGER로 예외 메시지 출력 시 공격자가 프로그램 내부 구조를 쉽게 파악할 수 있습니다.<br />
+개발 완료 후 운영 이관 시 디버깅 코드를 제거하는 것이 좋습니다.</p>
+
+<p><mark>예외 출력 구분</mark></p>
+<ul>
+  <li>e.getMessage() : 예외 메시지만 출력</li>
+  <li>e.toString() : 예와 타입(클래스) + 예외 메시지 출력</li>
+  <li>e.printStackTrace() 또는 e : 예외 타입(클래스) + 예외 메시지 + 전체 스택 트레이스 출력</li>
+</ul>
+
+<h3 id="오류-상황-대응-부재">오류 상황 대응 부재</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>try {
+  // 예외 발생 가능 코드
+} catch (Exception e) {
+
+}
+</code></pre></div></div>
+<p>위와 같이, catch 문에서 아무런 처리를 하지 않으면 발생하는 보안 취약점입니다.<br />
+try catch 문을 지우고 throws Exception 처리하는 것도 방법입니다.</p>
+
+<h3 id="주석문-안에-포함된-시스템-주요정보-jsp의-html-주석">주석문 안에 포함된 시스템 주요정보 (JSP의 HTML 주석)</h3>
+<p>HTML 주석에 노출된 정보는 공격자가 시스템을 파악하고 공격 계획을 세우는데 도움이 됩니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- HTML 주석 --&gt;
+HTML 코드
+</code></pre></div></div>
+<p>아래처럼, JSP에서는 HTML 주석 대신 Java 주석을 사용하면 개발자 도구에서 보이지 않습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;% /* Java 주석 */ %&gt;
+</code></pre></div></div>
+<hr />
+
+<h2 id="보안-취약점-보완-시-문제-해결">보안 취약점 보완 시 문제 해결</h2>
+
+<h3 id="bombyte-order-mark-문제">BOM(Byte Order Mark) 문제</h3>
+<p>CODE-RAY 툴 내에서 코드 수정 시, 파일 인코딩에 BOM이 포함되어 war 빌드 시 아래의 오류가 발생합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:compile (default-compile) on project common: Compilation failure: Compilation failure: 
+[ERROR] /D:/new_intelliJ/eGovFrameDev-4.1.0-64bit/workspace/genia/src/main/java/com/intermorph/cmmn/imCase/web/IMCaseUserController.java:[1,1] illegal character: '\ufeff'
+[ERROR] /D:/new_intelliJ/eGovFrameDev-4.1.0-64bit/workspace/genia/src/main/java/com/intermorph/cmmn/imCase/web/IMCaseUserController.java:[1,10] class, interface, or enum expected
+[ERROR] -&gt; [Help 1]
+[ERROR]
+</code></pre></div></div>
+<p>BOM은 유니코드 텍스트 파일의 인코딩 방식을 표시하는 숨겨진 특수한 문자입니다.<br />
+파일 맨 앞에 \ufeff 같은 형식으로 저장되며, Java 컴파일러 등이 BOM을 이해하지 못하면 오류가 발생할 수 있습니다.</p>
+
+<p><mark>BOM 문자 제거 방법</mark><br />
+Notepad++ 실행 &gt; 문제 파일 열기 &gt; 인코딩 &gt; UTF-8 선택 &gt; 파일 저장</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories#%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%9A%B4%EC%98%81" class="page__taxonomy-item" rel="tag">리눅스 / 운영</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-01-23">2025-01-23</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/op/2025-01-16-1" class="pagination--pager" title="디딤365 DidimNow 콘솔 사용법
+">Prev</a>
+    
+    
+      <a href="/web-dev/2025-02-07-1" class="pagination--pager" title="네이버 클라우드 OCR 사용법
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-2" rel="permalink">Vue.js 개념 / Vue 개발환경 구성 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/categories/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>
