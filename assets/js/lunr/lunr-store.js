@@ -1242,7 +1242,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Git 블로그 카테고리 목록 페이징 기능 구현",
-        "excerpt":"★ 추후 다시 작성 예정입니다 ★ 현재 Git 블로그는 GitHub Pages를 통해 자동 빌드 및 배포가 되고 있습니다. *.github.io 리포지토리에 push 시 GitHub가 Jekyll로 빌드해서 정적 웹사이트로 배포합니다. GitHub Pages는 글 카테고리 목록 페이징 및 커스텀 플러그인을 지원하지 않습니다. GitHub Actions로 jekyll-paginate-v2 플러그인을 사용하면 카테고리별 페이징이 가능합니다. 수동 페이징 구현은...","categories": ["web-dev"],
+        "excerpt":"★ 추후 다시 작성 예정입니다 현재 Git 블로그는 GitHub Pages를 통해 자동 빌드 및 배포가 되고 있습니다. *.github.io 리포지토리에 push 시 GitHub가 Jekyll로 빌드해서 정적 웹사이트로 배포합니다. GitHub Pages는 글 카테고리 목록 페이징 및 커스텀 플러그인을 지원하지 않습니다. GitHub Actions로 jekyll-paginate-v2 플러그인을 사용하면 카테고리별 페이징이 가능합니다. 수동 페이징 구현은 반복...","categories": ["web-dev"],
         "tags": [],
         "url": "/categories/web-dev/2025-05-21-1",
         "teaser": null
