@@ -1,39 +1,43 @@
-{% if paginator.total_pages > 1 %}
-<nav id="pagination_button_list" class="pagination">
-  {% comment %} 이전 페이지 화살표 {% endcomment %}
-  {% if paginator.previous_page %}
-    <a class="arrow_button" href="{% if paginator.previous_page == 1 %}/{% else %}/page/{{ paginator.previous_page }}/{% endif %}">◀</a>
+{% if paginator.previous_page %}
+  {% if paginator.previous_page == 1 %}
+    <li><a href="/">{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</a></li>
   {% else %}
-    <span class="pagination not_button">◀</span>
+    <li><a href="/page/{{ paginator.previous_page }}">{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</a></li>
   {% endif %}
+{% else %}
+  <li><a href="#" class="disabled"><span aria-hidden="true">{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</span></a></li>
+{% endif %}
 
-  {% assign start = paginator.page | minus: 1 | divided_by: 10 | times: 10 | plus: 1 %}
-  {% assign end = start | plus: 9 %}
-  {% if paginator.total_pages < end %}
-    {% assign end = paginator.total_pages %}
-  {% endif %}
+<!-- 첫 페이지 -->
+{% if paginator.page == 1 %}
+  <li><a href="#" class="disabled current">1</a></li>
+{% else %}
+  <li><a href="/">1</a></li>
+{% endif %}
 
-  {% for i in (start..end) %}
-    {% if i == 1 %}
-      {% if paginator.page == 1 %}
-        <a class="current_page" href="/">1</a>
-      {% else %}
-        <a class="differ_page" href="/">1</a>
-      {% endif %}
+<!-- 중간 페이지들 -->
+{% for index in (page_start..page_end) %}
+  {% if index == paginator.page %}
+    <li><a href="#" class="disabled current">{{ index }}</a></li>
+  {% else %}
+    {% if index == 1 %}
+      <li><a href="/">1</a></li>
     {% else %}
-      {% if i == paginator.page %}
-        <a class="current_page" href="/page/{{ i }}">{{ i }}</a>
-      {% else %}
-        <a class="differ_page" href="/page/{{ i }}">{{ i }}</a>
-      {% endif %}
+      <li><a href="/page/{{ index }}">{{ index }}</a></li>
     {% endif %}
-  {% endfor %}
-
-  {% comment %} 다음 페이지 화살표 {% endcomment %}
-  {% if paginator.next_page %}
-    <a class="arrow_button" href="/page/{{ paginator.next_page }}">▶</a>
-  {% else %}
-    <span class="pagination not_button">▶</span>
   {% endif %}
-</nav>
+{% endfor %}
+
+<!-- 마지막 페이지 -->
+{% if paginator.page == paginator.total_pages %}
+  <li><a href="#" class="disabled current">{{ paginator.page }}</a></li>
+{% else %}
+  <li><a href="/page/{{ paginator.total_pages }}">{{ paginator.total_pages }}</a></li>
+{% endif %}
+
+<!-- 다음 페이지 -->
+{% if paginator.next_page %}
+  <li><a href="/page/{{ paginator.next_page }}">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</a></li>
+{% else %}
+  <li><a href="#" class="disabled"><span aria-hidden="true">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</span></a></li>
 {% endif %}
