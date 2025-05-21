@@ -26,11 +26,11 @@ layout: default
   <h3 class="archive__subtitle">{{ page.title }} 111</h3>
   {% endif %}
 
-{% elsif include.category_name %}
+{% if include.category_name %}
   <h3 class="archive__subtitle">{{ include.category_name }}  222 </h3>
   {% endif %}
 
-{% elsif paginator.posts and paginator.posts[0] and paginator.posts[0].categories and paginator.posts[0].categories[0] %}
+{% if paginator.posts and paginator.posts[0] and paginator.posts[0].categories and paginator.posts[0].categories[0] %}
   <h3 class="archive__subtitle">{{ paginator.posts[0].categories[0] }}   333</h3>
 {% endif %}
 
