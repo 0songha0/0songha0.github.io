@@ -462,7 +462,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Git 블로그 카테고리 목록 페이징 기능 구현</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
-              <ul class="toc__menu"><li><a href="#jekyll-paginate-v2-플러그인-추가">jekyll-paginate-v2 플러그인 추가</a><ul><li><a href="#gemfile-파일-수정">Gemfile 파일 수정</a></li><li><a href="#_configyml-설정-수정">_config.yml 설정 수정</a></li></ul></li><li><a href="#github-actions로-블로그-빌드">GitHub Actions로 블로그 빌드</a><ul><li><a href="#ruby-설치">Ruby 설치</a></li><li><a href="#bundler-설치">Bundler 설치</a></li><li><a href="#gemfilelock-생성">Gemfile.lock 생성</a></li><li><a href="#github-actions-워크플로우-생성">GitHub Actions 워크플로우 생성</a></li><li><a href="#archive-taxonomyhtml-파일-수정">archive-taxonomy.html 파일 수정</a></li><li><a href="#github-pages-빌드-설정-변경">GitHub Pages 빌드 설정 변경</a></li><li><a href="#github-actions-푸시-권한-설정">GitHub Actions 푸시 권한 설정</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#jekyll-paginate-v2-플러그인-추가">jekyll-paginate-v2 플러그인 추가</a><ul><li><a href="#gemfile-파일-수정">Gemfile 파일 수정</a></li><li><a href="#_configyml-설정-수정">_config.yml 설정 수정</a></li></ul></li><li><a href="#메인페이지-전체-목록-페이징">메인페이지 전체 목록 페이징</a><ul><li><a href="#메인페이지-페이징-활성화">메인페이지 페이징 활성화</a></li><li><a href="#메인페이지-페이징-코드-추가">메인페이지 페이징 코드 추가</a></li></ul></li><li><a href="#카테고리-목록-페이징">카테고리 목록 페이징</a><ul><li><a href="#카테고리-페이징-활성화">카테고리 페이징 활성화</a></li></ul></li><li><a href="#github-actions로-블로그-빌드">GitHub Actions로 블로그 빌드</a><ul><li><a href="#ruby-설치">Ruby 설치</a></li><li><a href="#bundler-설치">Bundler 설치</a></li><li><a href="#gemfilelock-생성">Gemfile.lock 생성</a></li><li><a href="#github-actions-워크플로우-생성">GitHub Actions 워크플로우 생성</a></li><li><a href="#archive-taxonomyhtml-파일-수정">archive-taxonomy.html 파일 수정</a></li><li><a href="#github-pages-빌드-설정-변경">GitHub Pages 빌드 설정 변경</a></li><li><a href="#github-actions-푸시-권한-설정">GitHub Actions 푸시 권한 설정</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -505,7 +505,7 @@ GitHub Pages 기본 빌드에서는 동작하지 않으므로, GitHub Actions로
 # paginate_path: /page:num/
 
 plugins:
-  - jekyll-paginate-v2 // jekyll-paginate에서 수정
+  - jekyll-paginate-v2 // jekyll-paginate를 수정
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-include-cache
@@ -530,6 +530,35 @@ autopages:
 </code></pre></div></div>
 <p>_config.yml 파일에서 jekyll-paginate-v2 플러그인을 활성화합니다.<br />
 /categories/카테고리명 페이지가 생기고, archive-taxonomy.html 레이아웃이 적용됩니다.</p>
+
+<hr />
+
+<h2 id="메인페이지-전체-목록-페이징">메인페이지 전체 목록 페이징</h2>
+
+<h3 id="메인페이지-페이징-활성화">메인페이지 페이징 활성화</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+pagination:
+  enabled: true
+</code></pre></div></div>
+<p>index.html 파일에 페이징 활성화 코드를 추가합니다.</p>
+
+<h3 id="메인페이지-페이징-코드-추가">메인페이지 페이징 코드 추가</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+<p>home.html 파일 하단에 페이징 로직을 작성한 html을 추가합니다.</p>
+
+<hr />
+
+<h2 id="카테고리-목록-페이징">카테고리 목록 페이징</h2>
+
+<h3 id="카테고리-페이징-활성화">카테고리 페이징 활성화</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pagination:
+  enabled: true
+  category: app-dev
+  per_page: 5
+  sort_reverse: true
+</code></pre></div></div>
+<p>_pages/categories/카테고리명.md 파일에 페이징 활성화 코드를 추가합니다.</p>
 
 <hr />
 
@@ -613,14 +642,14 @@ jobs:
           publish_dir: ./_site
 </code></pre></div></div>
 <p>Git 블로그 폴더에 /.github/workflows/jekyll.yml 폴더 및 파일을 생성합니다.<br />
-GitHub Actions 빌드 자동화 스크립트입니다.</p>
+이 파일은 GitHub Actions 빌드 자동화 스크립트입니다.<br />
+main 브랜치에 push 시 GitHub Actions를 통해 gh-pages 브랜치가 자동 생성되고 배포됩니다.</p>
 
 <h3 id="archive-taxonomyhtml-파일-수정">archive-taxonomy.html 파일 수정</h3>
 <p>카테고리 글 목록 페이지에 페이징 코드를 추가합니다.</p>
 
 <h3 id="github-pages-빌드-설정-변경">GitHub Pages 빌드 설정 변경</h3>
-<p>GitHub 페이지 &gt; 로그인 &gt; 우측 상단 프로필 아이콘 &gt; Your repositories &gt; *.github.io 블로그 리포지토리 선택 &gt; Settings &gt; Pages &gt; Source : GitHub Actions로 변경<br />
-이제 main 브랜치에 push 시 GitHub Actions를 통해 gh-pages 브랜치가 자동 생성되고 배포됩니다.</p>
+<p>GitHub 페이지 &gt; 로그인 &gt; 우측 상단 프로필 아이콘 &gt; Your repositories &gt; *.github.io 블로그 리포지토리 선택 &gt; Settings &gt; Pages &gt; Source : Deploy from a branch 선택 &gt; Branch : gh-pages 브랜치 선택 &gt; Save</p>
 
 <h3 id="github-actions-푸시-권한-설정">GitHub Actions 푸시 권한 설정</h3>
 <p>GitHub 페이지 &gt; 로그인 &gt; 우측 상단 프로필 아이콘 &gt; Your repositories &gt; Settings &gt; Actions &gt; General &gt; 하단 Workflow permission : Read and write permissions 선택 &gt; Save</p>
