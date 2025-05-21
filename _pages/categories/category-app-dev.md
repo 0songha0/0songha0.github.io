@@ -6,4 +6,9 @@ author_profile: true
 taxonomy: App 개발
 sidebar:
   nav: "categories"
+pagination:
+  enabled: true
+  category: app-dev
+  per_page: 5
+  sort_reverse: true
 ---

@@ -6,4 +6,9 @@ author_profile: true
 taxonomy: Web 개발
 sidebar:
   nav: "categories"
+pagination:
+  enabled: true
+  category: web-dev
+  per_page: 5
+  sort_reverse: true
 ---
