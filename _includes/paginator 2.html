@@ -1,0 +1,40 @@
+<div id="pagination_button_list">
+    {% if paginator.previous_page!=nil %}
+        <a class="arrow_button" href="{{paginator.previous_page_path}}">◀</a>
+    {% else %}
+        <span class="pagination not_button">
+            ◀
+        </span>
+    {% endif %}
+    
+    {% assign start=paginator.page | minus: 1 | divided_by: 10 | times: 10 | plus: 1 %}
+    {% assign end=start | plus: 9 %}
+ 
+    {% if paginator.total_pages < end %}
+        {% assign end=paginator.total_pages %}
+    {% endif %}
+ 
+    {% for i in (start..end) %}
+        {% if i==1 %}
+            {% if paginator.page==1 %}
+                <a class="current_page" href="/">1</a>
+            {% else %}
+                <a class="differ_page" href="/">1</a>
+            {% endif %}
+        {% else %}
+            {% if i==paginator.page %}
+                <a class="current_page" href="/page/{{i}}">{{i}}</a>
+            {% else %}
+                <a class="differ_page" href="/page/{{i}}">{{i}}</a>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+ 
+    {% if paginator.next_page!=nil %}
+        <a class="arrow_button" href="{{paginator.next_page_path}}">▶</a>
+    {% else %}
+        <span class="pagination not_button">
+            ▶
+        </span>
+    {% endif %}
+</div>
