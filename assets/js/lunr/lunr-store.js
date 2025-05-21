@@ -1,24 +1,24 @@
 var store = [{
         "title": "자주 쓰는 Javascript 정리 / Javascript 문법",
-        "excerpt":"자주 쓰는 Javascript 문자열 관련 처리 https://0songha0.github.io/web-dev/2022-03-10-1 Javascript로 CSS 스타일 변경 https://0songha0.github.io/web-dev/2022-03-13-1 서버 요청 전 처리 https://0songha0.github.io/web-dev/2022-03-24-1 Javascript로 HTML 요소 추가 https://0songha0.github.io/web-dev/2023-01-25-1 Javascript 정규표현식 https://0songha0.github.io/web-dev/2022-08-01-1 document ready 완료 후 실행 &lt;script&gt; document.addEventListener(\"DOMContentLoaded\", function() { // 실행 코드 }); &lt;/script&gt; 몇 초 지연 후 실행 console.log(\"시작\"); setTimeout(function() { console.log(\"3초 후 실행\");...","categories": ["Web 개발"],
+        "excerpt":"자주 쓰는 Javascript 문자열 관련 처리 https://0songha0.github.io/web-dev/2022-03-10-1 Javascript로 CSS 스타일 변경 https://0songha0.github.io/web-dev/2022-03-13-1 서버 요청 전 처리 https://0songha0.github.io/web-dev/2022-03-24-1 Javascript로 HTML 요소 추가 https://0songha0.github.io/web-dev/2023-01-25-1 Javascript 정규표현식 https://0songha0.github.io/web-dev/2022-08-01-1 document ready 완료 후 실행 &lt;script&gt; document.addEventListener(\"DOMContentLoaded\", function() { // 실행 코드 }); &lt;/script&gt; 몇 초 지연 후 실행 console.log(\"시작\"); setTimeout(function() { console.log(\"3초 후 실행\");...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2022-02-10-1",
         "teaser": null
       },{
         "title": "문자열 관련 Javascript 문법 / Json 문자열 변환 방법",
-        "excerpt":"Json 문자열 변환   javascript 객체를 json 문자열로 변환  JSON.stringify({     \"id\": \"hayoung\" })   json 문자열을 javascript 객체로 변환  JSON.parse('{\"id\":\"hayoung\"}');     문자열 추출   문자열을 잘라 배열로 만들고 첫번째 요소 반환  문자열.split(\"자를문자열\").shift();   문자열을 잘라 배열로 만들고 마지막 요소 반환  문자열.split(\"자를문자열\").pop();  ","categories": ["Web 개발"],
+        "excerpt":"Json 문자열 변환   javascript 객체를 json 문자열로 변환  JSON.stringify({     \"id\": \"hayoung\" })   json 문자열을 javascript 객체로 변환  JSON.parse('{\"id\":\"hayoung\"}');     문자열 추출   문자열을 잘라 배열로 만들고 첫번째 요소 반환  문자열.split(\"자를문자열\").shift();   문자열을 잘라 배열로 만들고 마지막 요소 반환  문자열.split(\"자를문자열\").pop();  ","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2022-03-10-1",
         "teaser": null
       },{
         "title": "Javascript로 CSS 스타일 변경 방법",
-        "excerpt":"Javascript로 CSS 스타일 변경 클래스명으로 찾은 요소 클래스 삭제 const domList = document.getElementsByClassName('클래스명'); if (domList &amp;&amp; domList.length &gt; 0) { domList[0].classList.remove('클래스명'); } ID로 찾은 요소 활용 방법 const dom = document.getElementById('ID명'); // 요소의 클래스 삭제 dom.classList.remove('클래스명'); // 요소의 스타일 속성 삭제 dom.style.removeProperty('삭제할CSS속성'); // 요소의 width, height 확인 dom.clientWidth; dom.clientHeight; display...","categories": ["Web 개발"],
+        "excerpt":"Javascript로 CSS 스타일 변경 클래스명으로 찾은 요소 클래스 삭제 const domList = document.getElementsByClassName('클래스명'); if (domList &amp;&amp; domList.length &gt; 0) { domList[0].classList.remove('클래스명'); } ID로 찾은 요소 활용 방법 const dom = document.getElementById('ID명'); // 요소의 클래스 삭제 dom.classList.remove('클래스명'); // 요소의 스타일 속성 삭제 dom.style.removeProperty('삭제할CSS속성'); // 요소의 width, height 확인 dom.clientWidth; dom.clientHeight; display...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2022-03-13-1",
         "teaser": null
       },{
         "title": "Javascript 서버 요청 전 처리 방법",
-        "excerpt":"Javascript Validation 체크 처리 전 확인 창 띄우기 const saveYn = confirm(\"~를 등록하시겠습니까?\"); if(saveYn == false) { return; } 1자리 이상 입력 필수 const id = document.getElementById('id'); if(!id.value) { alert(\"아이디를 입력해주세요.\"); id.focus(); return; } 파라미터 처리 및 서버 요청 fost 요청 시 formData에 List 담아 보내기 const ctgryList = document.getElementsByName(\"ctgryList\");...","categories": ["Web 개발"],
+        "excerpt":"Javascript Validation 체크 처리 전 확인 창 띄우기 const saveYn = confirm(\"~를 등록하시겠습니까?\"); if(saveYn == false) { return; } 1자리 이상 입력 필수 const id = document.getElementById('id'); if(!id.value) { alert(\"아이디를 입력해주세요.\"); id.focus(); return; } 파라미터 처리 및 서버 요청 fost 요청 시 formData에 List 담아 보내기 const ctgryList = document.getElementsByName(\"ctgryList\");...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2022-03-24-1",
         "teaser": null
@@ -78,7 +78,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Spring DB 연결 방법",
-        "excerpt":"Spring MariaDB 연결 방법 mariadb 추가 Maven 사용 시 &lt;dependency&gt; &lt;groupId&gt;org.mariadb.jdbc&lt;/groupId&gt; &lt;artifactId&gt;mariadb-java-client&lt;/artifactId&gt; &lt;version&gt;2.0.3&lt;/version&gt; &lt;/dependency&gt; pom.xml 파일에 mariadb 라이브러리 의존성을 추가합니다. context-datasource.xml &lt;bean id=\"dataSource\" class=\"org.springframework.jdbc.datasource.SimpleDriverDataSource\"&gt; &lt;property name=\"driverClass\" value=\"org.mariadb.jdbc.Driver\" /&gt; &lt;property name=\"url\" value=\"jdbc:mariadb://DB서버명.ck39dp9w2h39.ap-northeast-2.rds.amazonaws.com:3306/DB명\" /&gt; &lt;property name=\"username\" value=\"유저명\" /&gt; &lt;property name=\"password\" value=\"비밀번호\" /&gt; &lt;/bean&gt; url은 /DB명까지 써주어야 모든 xml 쿼리문의 테이블명 앞에 DB명.을...","categories": ["Web 개발"],
+        "excerpt":"Spring MariaDB 연결 방법 mariadb 추가 Maven 사용 시 &lt;dependency&gt; &lt;groupId&gt;org.mariadb.jdbc&lt;/groupId&gt; &lt;artifactId&gt;mariadb-java-client&lt;/artifactId&gt; &lt;version&gt;2.0.3&lt;/version&gt; &lt;/dependency&gt; pom.xml 파일에 mariadb 라이브러리 의존성을 추가합니다. context-datasource.xml &lt;bean id=\"dataSource\" class=\"org.springframework.jdbc.datasource.SimpleDriverDataSource\"&gt; &lt;property name=\"driverClass\" value=\"org.mariadb.jdbc.Driver\" /&gt; &lt;property name=\"url\" value=\"jdbc:mariadb://DB서버명.ck39dp9w2h39.ap-northeast-2.rds.amazonaws.com:3306/DB명\" /&gt; &lt;property name=\"username\" value=\"유저명\" /&gt; &lt;property name=\"password\" value=\"비밀번호\" /&gt; &lt;/bean&gt; url은 /DB명까지 써주어야 모든 xml 쿼리문의 테이블명 앞에 DB명.을...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2022-06-10-1",
         "teaser": null
@@ -96,7 +96,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Java 로깅 라이브러리 종류 / lombok 및 slf4j를 이용한 log4j2 사용 방법",
-        "excerpt":"System.out.println 대신 Logger 사용 이유 System.out.println은 IO 자원을 사용하기 때문에 리소스를 많이 사용하여 성능 저하가 올 수 있습니다. 그래서 System.out.println는 운영 반영 시 직접 전부 삭제하고 올려야 하기 때문에, 로그 레벨에 따라 출력 여부를 설정할 수 있고 로깅 성능이 좋은 Logger를 사용하여 개발하는 것이 좋습니다. Java 로깅 라이브러리 종류 log4j...","categories": ["Web 개발"],
+        "excerpt":"System.out.println 대신 Logger 사용 이유 System.out.println은 IO 자원을 사용하기 때문에 리소스를 많이 사용하여 성능 저하가 올 수 있습니다. 그래서 System.out.println는 운영 반영 시 직접 전부 삭제하고 올려야 하기 때문에, 로그 레벨에 따라 출력 여부를 설정할 수 있고 로깅 성능이 좋은 Logger를 사용하여 개발하는 것이 좋습니다. Java 로깅 라이브러리 종류 log4j...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2022-06-23-1",
         "teaser": null
@@ -138,7 +138,7 @@ var store = [{
         "teaser": null
       },{
         "title": "HTML input 정규표현식 및 Javascript 정규표현식 사용 예시",
-        "excerpt":"HTML input 정규표현식 숫자만 입력 input &lt;input type=\"text\" oninput=\"this.value = this.value.replace(/\\D/g, '');\"&gt; 숫자만 입력받는 input 예시입니다. 소수점 가능, 숫자만 입력 input &lt;input type=\"text\" oninput=\"this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\\..*)\\./g, '$1');\"&gt; .replace(/(\\.*)\\./g, '$1'); = .을 중복해서 입력받지 않도록 제어합니다. 가격 입력 input &lt;input id=\"price\" type=\"text\" value=\"0\" oninput=\"this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\\.*)\\./g, '$1').replace(/\\B(?=(\\d{3})+(?!\\d))/g, ',');\"&gt; 숫자와...","categories": ["Web 개발"],
+        "excerpt":"HTML input 정규표현식 숫자만 입력 input &lt;input type=\"text\" oninput=\"this.value = this.value.replace(/\\D/g, '');\"&gt; 숫자만 입력받는 input 예시입니다. 소수점 가능, 숫자만 입력 input &lt;input type=\"text\" oninput=\"this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\\..*)\\./g, '$1');\"&gt; .replace(/(\\.*)\\./g, '$1'); = .을 중복해서 입력받지 않도록 제어합니다. 가격 입력 input &lt;input id=\"price\" type=\"text\" value=\"0\" oninput=\"this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\\.*)\\./g, '$1').replace(/\\B(?=(\\d{3})+(?!\\d))/g, ',');\"&gt; 숫자와...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2022-08-01-1",
         "teaser": null
@@ -186,7 +186,7 @@ var store = [{
         "teaser": null
       },{
         "title": "티스토리 블로그 목록 더보기 무한스크롤 기능 구현 방법",
-        "excerpt":"무한스크롤 기능 사용자의 스크롤이 페이지 하단에 도달했을 때 다음 페이지 목록을 추가하는 것입니다. 무한스크롤 장점 일반 페이징보다 더 편한 사용자 경험을 제공합니다. 무한스크롤 단점 footer에 도달하기 어렵습니다. 사용자가 원치 않는 페이징이 발생할 수 있습니다. 이미지 등 보여줘야 하는 리소스가 많은 경우, 페이지가 점점 느려질 수 있습니다. 티스토리 블로그 무한스크롤 구현...","categories": ["Web 개발"],
+        "excerpt":"무한스크롤 기능 사용자의 스크롤이 페이지 하단에 도달했을 때 다음 페이지 목록을 추가하는 것입니다. 무한스크롤 장점 일반 페이징보다 더 편한 사용자 경험을 제공합니다. 무한스크롤 단점 footer에 도달하기 어렵습니다. 사용자가 원치 않는 페이징이 발생할 수 있습니다. 이미지 등 보여줘야 하는 리소스가 많은 경우, 페이지가 점점 느려질 수 있습니다. 티스토리 블로그 무한스크롤 구현...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2022-08-16-1",
         "teaser": null
@@ -264,7 +264,7 @@ var store = [{
         "teaser": null
       },{
         "title": "JAVA에서 HTML을 PDF 파일로 변환 및 다운로드하는 방법",
-        "excerpt":"wkhtmltopdf 웹 페이지 URL의 HTML, javascript를 해석하여 PDF 파일로 변환하는 실행파일입니다. jquery는 PDF로 변환되지 않고, javascript로 그린 화면만 정상 변환됩니다. wkhtmltopdf 설치 방법 https://wkhtmltopdf.org/downloads.html 윈도우 exe, 리눅스 rpm 등 OS에 맞는 설치파일로 wkhtmltopdf 실행파일을 설치합니다. rpm 파일 설치 yum localinstall 파일명.rpm 리눅스 서버의 경우, wget URL 명령어로 rpm 파일을 다운받고...","categories": ["Web 개발"],
+        "excerpt":"wkhtmltopdf 웹 페이지 URL의 HTML, javascript를 해석하여 PDF 파일로 변환하는 실행파일입니다. jquery는 PDF로 변환되지 않고, javascript로 그린 화면만 정상 변환됩니다. wkhtmltopdf 설치 방법 https://wkhtmltopdf.org/downloads.html 윈도우 exe, 리눅스 rpm 등 OS에 맞는 설치파일로 wkhtmltopdf 실행파일을 설치합니다. rpm 파일 설치 yum localinstall 파일명.rpm 리눅스 서버의 경우, wget URL 명령어로 rpm 파일을 다운받고...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2022-09-28-1",
         "teaser": null
@@ -276,37 +276,37 @@ var store = [{
         "teaser": null
       },{
         "title": "로그인 인증 방식 종류 / 로그인 기능 구현 방법 및 장단점",
-        "excerpt":"쿠키 기반 로그인 사용자의 로그인 정보를 쿠키에 저장하여 인증을 유지합니다. 쿠키는 브라우저에서 볼 수 있고, 사용자가 다른 유저 ID로 변경할 수 있어 보안에 취약합니다. 세션 기반 로그인 사용자의 로그인 정보를 세션에 저장하고, 세션 ID는 쿠키에 저장하여 인증을 유지합니다. 세션 로그인 단점 세션은 서버 메모리에 저장되어야 하므로, 사용자가 증가함에 따라 서버에...","categories": ["Web 개발"],
+        "excerpt":"쿠키 기반 로그인 사용자의 로그인 정보를 쿠키에 저장하여 인증을 유지합니다. 쿠키는 브라우저에서 볼 수 있고, 사용자가 다른 유저 ID로 변경할 수 있어 보안에 취약합니다. 세션 기반 로그인 사용자의 로그인 정보를 세션에 저장하고, 세션 ID는 쿠키에 저장하여 인증을 유지합니다. 세션 로그인 단점 세션은 서버 메모리에 저장되어야 하므로, 사용자가 증가함에 따라 서버에...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2022-10-21-1",
         "teaser": null
       },{
         "title": "스프링 시큐리티 사용 방법",
-        "excerpt":"스프링 시큐리티 적용 방법 스프링 시큐리티 의존성 추가 implementation 'org.springframework.boot:spring-boot-starter-security' build.gradle 파일에 위 Dependency를 추가하면 자동으로 스프링 시큐리티가 자동으로 설정됩니다. 스프링 시큐리티 비활성화 방법 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class }) public class 프로젝트명Application { public static void main(String[] args) { SpringApplication.run(SpringBootSecurityApplication.class, args); } } 위와 같이, 어플리케이션 main에서 SecurityAutoConfiguration을 제외 처리하면...","categories": ["Web 개발"],
+        "excerpt":"스프링 시큐리티 적용 방법 스프링 시큐리티 의존성 추가 implementation 'org.springframework.boot:spring-boot-starter-security' build.gradle 파일에 위 Dependency를 추가하면 자동으로 스프링 시큐리티가 자동으로 설정됩니다. 스프링 시큐리티 비활성화 방법 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class }) public class 프로젝트명Application { public static void main(String[] args) { SpringApplication.run(SpringBootSecurityApplication.class, args); } } 위와 같이, 어플리케이션 main에서 SecurityAutoConfiguration을 제외 처리하면...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2022-10-23-1",
         "teaser": null
       },{
         "title": "SpringBoot에서 Interceptor 활용 세션 로그인 구현 방법",
-        "excerpt":"Spring 세션 로그인 개발 LoginInterceptor.java 생성 import com.chunjae.archive_cms.common.util.SessionUtil; import lombok.extern.slf4j.Slf4j; import org.springframework.web.servlet.HandlerInterceptor; import org.springframework.web.servlet.ModelAndView; import javax.servlet.http.HttpServletRequest; import javax.servlet.http.HttpServletResponse; @Slf4j public class LoginInterceptor implements HandlerInterceptor { @Override public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception { if (SessionUtil.isLogin()) { return true; } else { // 로그인이 되어있지 않은 경우...","categories": ["Web 개발"],
+        "excerpt":"Spring 세션 로그인 개발 LoginInterceptor.java 생성 import com.chunjae.archive_cms.common.util.SessionUtil; import lombok.extern.slf4j.Slf4j; import org.springframework.web.servlet.HandlerInterceptor; import org.springframework.web.servlet.ModelAndView; import javax.servlet.http.HttpServletRequest; import javax.servlet.http.HttpServletResponse; @Slf4j public class LoginInterceptor implements HandlerInterceptor { @Override public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception { if (SessionUtil.isLogin()) { return true; } else { // 로그인이 되어있지 않은 경우...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2022-10-24-1",
         "teaser": null
       },{
         "title": "JAVA 이미지 리사이징 유틸 개발 / 썸네일 및 워터마크 이미지 생성 방법",
-        "excerpt":"썸네일 및 워터마크 이미지 생성 JAVA 이미지 리사이징 유틸 import lombok.extern.slf4j.Slf4j; import org.springframework.stereotype.Component; import javax.imageio.ImageIO; import java.awt.*; import java.awt.image.BufferedImage; import java.io.File; @Slf4j @Component public class ImageUtil { // 이미지 리사이징 함수 public File makeResizeImg(File sourceFile, Integer width, Integer height) throws Exception { // 확장자 String fileExt = getFileExt(sourceFile); BufferedImage sourceImage...","categories": ["Web 개발"],
+        "excerpt":"썸네일 및 워터마크 이미지 생성 JAVA 이미지 리사이징 유틸 import lombok.extern.slf4j.Slf4j; import org.springframework.stereotype.Component; import javax.imageio.ImageIO; import java.awt.*; import java.awt.image.BufferedImage; import java.io.File; @Slf4j @Component public class ImageUtil { // 이미지 리사이징 함수 public File makeResizeImg(File sourceFile, Integer width, Integer height) throws Exception { // 확장자 String fileExt = getFileExt(sourceFile); BufferedImage sourceImage...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2022-12-07-1",
         "teaser": null
       },{
         "title": "HTML 유튜브 영상 삽입 및 iframe 오류 해결 / 유튜브 썸네일 미리보기 방법",
-        "excerpt":"유튜브 영상 삽입 방법 HTML 유튜브 영상 iframe 삽입 &lt;iframe src=\"https://youtube.com/embed/${youtubeId}\" width=\"100%\" height=\"100%\" id=\"video-preview\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen&gt;&lt;/iframe&gt; 유튜브 영상은 iframe 태그로 쉽게 HTML에 삽입할 수 있습니다. 유튜브 iframe 오류 해결 if (link.includes(\"youtube.com/watch?v=\")) { link = \"https://www.youtube.com/embed/\" + link.split(\"=\")[1]; } ‘www.youtube.com에서 연결을 거부했습니다.’...","categories": ["Web 개발"],
+        "excerpt":"유튜브 영상 삽입 방법 HTML 유튜브 영상 iframe 삽입 &lt;iframe src=\"https://youtube.com/embed/${youtubeId}\" width=\"100%\" height=\"100%\" id=\"video-preview\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen&gt;&lt;/iframe&gt; 유튜브 영상은 iframe 태그로 쉽게 HTML에 삽입할 수 있습니다. 유튜브 iframe 오류 해결 if (link.includes(\"youtube.com/watch?v=\")) { link = \"https://www.youtube.com/embed/\" + link.split(\"=\")[1]; } ‘www.youtube.com에서 연결을 거부했습니다.’...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2022-12-12-1",
         "teaser": null
       },{
         "title": "Jquery로 로딩마스크 구현 방법 / 로딩중 표시 기능 개발",
-        "excerpt":"Jquery로 로딩마스크 구현 로딩마스크 적용 화면 예시 엑셀 일괄등록 fetch 요청이 끝날 때까지, 화면이 어두워지고 가운데 로딩중 CSS가 동글뱅이로 계속 돌게 됩니다. JSP head에 include &lt;link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\"&gt; &lt;!-- Jquery 사용 시 추가 --&gt; &lt;link rel=\"stylesheet\" href=\"https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css\"&gt; &lt;script src=\"https://code.jquery.com/jquery-1.12.4.min.js\" integrity=\"sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=\" crossorigin=\"anonymous\"&gt;&lt;/script&gt; &lt;script src=\"https://code.jquery.com/ui/1.13.1/jquery-ui.js\"&gt;&lt;/script&gt; font-awesome(로딩중 CSS), jquery를 헤더에 추가합니다. 공통 CSS...","categories": ["Web 개발"],
+        "excerpt":"Jquery로 로딩마스크 구현 로딩마스크 적용 화면 예시 엑셀 일괄등록 fetch 요청이 끝날 때까지, 화면이 어두워지고 가운데 로딩중 CSS가 동글뱅이로 계속 돌게 됩니다. JSP head에 include &lt;link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\"&gt; &lt;!-- Jquery 사용 시 추가 --&gt; &lt;link rel=\"stylesheet\" href=\"https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css\"&gt; &lt;script src=\"https://code.jquery.com/jquery-1.12.4.min.js\" integrity=\"sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=\" crossorigin=\"anonymous\"&gt;&lt;/script&gt; &lt;script src=\"https://code.jquery.com/ui/1.13.1/jquery-ui.js\"&gt;&lt;/script&gt; font-awesome(로딩중 CSS), jquery를 헤더에 추가합니다. 공통 CSS...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2022-12-13-1",
         "teaser": null
@@ -318,13 +318,13 @@ var store = [{
         "teaser": null
       },{
         "title": "HTML 테이블 Row 순서 이동 기능 개발 / TableDnD 사용법",
-        "excerpt":"TableDnD 사용법 TableDnD 라이브러리 추가 &lt;head&gt; &lt;script src=\"https://cdnjs.cloudflare.com/ajax/libs/TableDnD/0.9.1/jquery.tablednd.js\" integrity=\"sha256-d3rtug+Hg1GZPB7Y/yTcRixO/wlI78+2m08tosoRn7A=\" crossorigin=\"anonymous\"&gt;&lt;/script&gt; &lt;/head&gt; table이 있는 HTML 헤더에 javascript TableDnD 라이브러리를 추가합니다. HTML table 예시 &lt;table id=\"table-1\" class=\"table\"&gt; &lt;colgroup&gt; &lt;col width=\"6%\"&gt; &lt;col width=\"20%\"&gt; &lt;col width=\"9%\"&gt; &lt;col width=\"9%\"&gt; &lt;col width=\"*\"&gt; &lt;col width=\"8%\"&gt; &lt;col width=\"8%\"&gt; &lt;/colgroup&gt; &lt;thead&gt; &lt;tr&gt; &lt;th&gt;이동&lt;/th&gt; &lt;th&gt;상위 분류 이름&lt;/th&gt; &lt;th&gt;순서&lt;/th&gt; &lt;th&gt;ID&lt;/th&gt; &lt;th&gt;이름&lt;/th&gt;...","categories": ["Web 개발"],
+        "excerpt":"TableDnD 사용법 TableDnD 라이브러리 추가 &lt;head&gt; &lt;script src=\"https://cdnjs.cloudflare.com/ajax/libs/TableDnD/0.9.1/jquery.tablednd.js\" integrity=\"sha256-d3rtug+Hg1GZPB7Y/yTcRixO/wlI78+2m08tosoRn7A=\" crossorigin=\"anonymous\"&gt;&lt;/script&gt; &lt;/head&gt; table이 있는 HTML 헤더에 javascript TableDnD 라이브러리를 추가합니다. HTML table 예시 &lt;table id=\"table-1\" class=\"table\"&gt; &lt;colgroup&gt; &lt;col width=\"6%\"&gt; &lt;col width=\"20%\"&gt; &lt;col width=\"9%\"&gt; &lt;col width=\"9%\"&gt; &lt;col width=\"*\"&gt; &lt;col width=\"8%\"&gt; &lt;col width=\"8%\"&gt; &lt;/colgroup&gt; &lt;thead&gt; &lt;tr&gt; &lt;th&gt;이동&lt;/th&gt; &lt;th&gt;상위 분류 이름&lt;/th&gt; &lt;th&gt;순서&lt;/th&gt; &lt;th&gt;ID&lt;/th&gt; &lt;th&gt;이름&lt;/th&gt;...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-01-04-1",
         "teaser": null
       },{
         "title": "HTML 테이블 엑셀 다운로드 기능 개발 / Sheetjs 사용법",
-        "excerpt":"Sheetjs 사용법 Sheetjs 라이브러리 추가 &lt;script src=\"https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js\"&gt;&lt;/script&gt; head에 Sheetjs 라이브러리를 추가합니다. 엑셀 다운로드용 테이블 생성 &lt;table id=\"excelTable\" style=\"display:none;\"&gt; &lt;thead&gt; &lt;tr&gt; &lt;th&gt;분류1&lt;/th&gt; &lt;th&gt;분류2&lt;/th&gt; &lt;th&gt;분류3&lt;/th&gt; &lt;th&gt;분류4&lt;/th&gt; &lt;/tr&gt; &lt;/thead&gt; &lt;tbody id=\"excelTableBody\"&gt; &lt;/tbody&gt; &lt;/table&gt; tbody를 유동적으로 변경하고, 엑셀 다운로드하기 위한 HTML table을 생성합니다. 엑셀 다운로드 기능 구현 function downloadExcel() { const errMsg = \"엑셀파일...","categories": ["Web 개발"],
+        "excerpt":"Sheetjs 사용법 Sheetjs 라이브러리 추가 &lt;script src=\"https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js\"&gt;&lt;/script&gt; head에 Sheetjs 라이브러리를 추가합니다. 엑셀 다운로드용 테이블 생성 &lt;table id=\"excelTable\" style=\"display:none;\"&gt; &lt;thead&gt; &lt;tr&gt; &lt;th&gt;분류1&lt;/th&gt; &lt;th&gt;분류2&lt;/th&gt; &lt;th&gt;분류3&lt;/th&gt; &lt;th&gt;분류4&lt;/th&gt; &lt;/tr&gt; &lt;/thead&gt; &lt;tbody id=\"excelTableBody\"&gt; &lt;/tbody&gt; &lt;/table&gt; tbody를 유동적으로 변경하고, 엑셀 다운로드하기 위한 HTML table을 생성합니다. 엑셀 다운로드 기능 구현 function downloadExcel() { const errMsg = \"엑셀파일...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-01-05-1",
         "teaser": null
@@ -342,13 +342,13 @@ var store = [{
         "teaser": null
       },{
         "title": "Spring MySQL 이전글, 다음글 조회 기능 개발",
-        "excerpt":"MySQL 쿼리 이전글 조회 쿼리 &lt;select id=\"getPrevContentId\" parameterType=\"java.util.HashMap\" resultType=\"java.util.HashMap\"&gt; SELECT max(id) prevId FROM 테이블명 WHERE id &lt;![CDATA[&lt;]]&gt; #{현재글Id} ORDER BY create_date DESC LIMIT 1 &lt;/select&gt; 다음글 조회 쿼리 &lt;select id=\"getNextContentId\" parameterType=\"java.util.HashMap\" resultType=\"java.util.HashMap\"&gt; SELECT min(id) nextId FROM 테이블명 WHERE id &lt;![CDATA[&gt;]]&gt; #{현재글Id} ORDER BY create_date DESC LIMIT 1 &lt;/select&gt; Controller 이전글...","categories": ["Web 개발"],
+        "excerpt":"MySQL 쿼리 이전글 조회 쿼리 &lt;select id=\"getPrevContentId\" parameterType=\"java.util.HashMap\" resultType=\"java.util.HashMap\"&gt; SELECT max(id) prevId FROM 테이블명 WHERE id &lt;![CDATA[&lt;]]&gt; #{현재글Id} ORDER BY create_date DESC LIMIT 1 &lt;/select&gt; 다음글 조회 쿼리 &lt;select id=\"getNextContentId\" parameterType=\"java.util.HashMap\" resultType=\"java.util.HashMap\"&gt; SELECT min(id) nextId FROM 테이블명 WHERE id &lt;![CDATA[&gt;]]&gt; #{현재글Id} ORDER BY create_date DESC LIMIT 1 &lt;/select&gt; Controller 이전글...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-01-17-1",
         "teaser": null
       },{
         "title": "Javascript로 HTML 요소 추가 방법",
-        "excerpt":"Javascript로 HTML 요소 추가 innerHTML 사용 예시 let tableHtml = ''; if(data.resultList.length &gt; 0) { for (const map of data.resultList) { tableHtml += '&lt;li onclick=\"selectInternalSrc(' + map.id + ', \\'' + map.name + '\\');\"&gt;'; tableHtml += ' &lt;button&gt;' + map.name + '&lt;/button&gt;'; tableHtml += '&lt;/li&gt;'; } } else { tableHtml...","categories": ["Web 개발"],
+        "excerpt":"Javascript로 HTML 요소 추가 innerHTML 사용 예시 let tableHtml = ''; if(data.resultList.length &gt; 0) { for (const map of data.resultList) { tableHtml += '&lt;li onclick=\"selectInternalSrc(' + map.id + ', \\'' + map.name + '\\');\"&gt;'; tableHtml += ' &lt;button&gt;' + map.name + '&lt;/button&gt;'; tableHtml += '&lt;/li&gt;'; } } else { tableHtml...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-01-25-1",
         "teaser": null
@@ -402,7 +402,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Spring 어노테이션 정리",
-        "excerpt":"클래스 레벨 어노테이션 @RestController HTTP 응답 본문을 직렬화하여 반환하므로, RESTful API를 제공하는 컨트롤러 클래스에 지정하면 좋습니다. 일반 @Controller와 달리 내부적으로 모든 method에 @ResponseBody가 붙게 됩니다. @Component Bean을 따로 등록하지 않아도 클래스 자체를 스프링 Bean으로 자동 등록합니다. 컨트롤러 매핑 어노테이션 @RequestMapping @RequestMapping(value=\"/\", method = RequestMethod.GET) @RequestMapping(value=\"/\", method = RequestMethod.POST) @RequestMapping(value=\"/\", method...","categories": ["Web 개발"],
+        "excerpt":"클래스 레벨 어노테이션 @RestController HTTP 응답 본문을 직렬화하여 반환하므로, RESTful API를 제공하는 컨트롤러 클래스에 지정하면 좋습니다. 일반 @Controller와 달리 내부적으로 모든 method에 @ResponseBody가 붙게 됩니다. @Component Bean을 따로 등록하지 않아도 클래스 자체를 스프링 Bean으로 자동 등록합니다. 컨트롤러 매핑 어노테이션 @RequestMapping @RequestMapping(value=\"/\", method = RequestMethod.GET) @RequestMapping(value=\"/\", method = RequestMethod.POST) @RequestMapping(value=\"/\", method...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-02-08-1",
         "teaser": null
@@ -420,7 +420,7 @@ var store = [{
         "teaser": null
       },{
         "title": "자주 쓰는 Mybatis 정리 / MariaDB bulk insert, update 방법",
-        "excerpt":"Select 방법 Mybatis select 예시 &lt;select id=\"get쿼리명\" parameterType=\"java.util.HashMap\" resultType=\"java.util.HashMap\"&gt; SELECT a.컬럼명1 &lt;if test=\"파라미터1 != null and 파라미터1 != ''\"&gt; , (SELECT 컬럼명 FROM 테이블명2 WHERE id = #{파라미터1}) AS 컬럼명2 &lt;/if&gt; FROM 테이블명 a WHERE &lt;choose&gt; &lt;when test=\"파라미터2 != null and 파라미터2 != ''\"&gt; a.Key컬럼 = #{파라미터2} &lt;/when&gt; &lt;otherwise&gt; a.Key컬럼...","categories": ["Web 개발"],
+        "excerpt":"Select 방법 Mybatis select 예시 &lt;select id=\"get쿼리명\" parameterType=\"java.util.HashMap\" resultType=\"java.util.HashMap\"&gt; SELECT a.컬럼명1 &lt;if test=\"파라미터1 != null and 파라미터1 != ''\"&gt; , (SELECT 컬럼명 FROM 테이블명2 WHERE id = #{파라미터1}) AS 컬럼명2 &lt;/if&gt; FROM 테이블명 a WHERE &lt;choose&gt; &lt;when test=\"파라미터2 != null and 파라미터2 != ''\"&gt; a.Key컬럼 = #{파라미터2} &lt;/when&gt; &lt;otherwise&gt; a.Key컬럼...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-02-14-1",
         "teaser": null
@@ -486,7 +486,7 @@ var store = [{
         "teaser": null
       },{
         "title": "SpringBoot application.properties 설정 종류",
-        "excerpt":"기본 설정 서버 포트 설정 server.port:8081 viewResolver 설정 (JSP) spring.mvc.view.prefix=/WEB-INF/jsp/ spring.mvc.view.suffix=.jsp 프론트 페이지 파일 위치, 확장자를 지정할 수 있습니다. DB 접속 정보 설정 spring.datasource.driverClassName=net.sf.log4jdbc.sql.jdbcapi.DriverSpy spring.datasource.url=jdbc:log4jdbc:mariadb://RDS이름(DB서버명).ck39dp9w2h39.ap-northeast-2.rds.amazonaws.com:3306/DB명?serverTimezone=UTC&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;validationQuery=select 1 spring.datasource.username=DB유저명 spring.datasource.password=비밀번호 인증서 키를 입력해주는 옵션이 없기 때문에, 로컬에서는 운영 DB 접속이 불가합니다. Mybatis 설정 mybatis.mapper-locations=mappers/*.xml mybatis.config-location=classpath:mapper/config/mybatis-mapper-config.xml mybatis.type-aliases-package=com.도메인명.프로젝트명 업로드 파일 사이즈 설정 spring.servlet.multipart.max-file-size=1000MB spring.servlet.multipart.max-request-size=1000MB...","categories": ["Web 개발"],
+        "excerpt":"기본 설정 서버 포트 설정 server.port:8081 viewResolver 설정 (JSP) spring.mvc.view.prefix=/WEB-INF/jsp/ spring.mvc.view.suffix=.jsp 프론트 페이지 파일 위치, 확장자를 지정할 수 있습니다. DB 접속 정보 설정 spring.datasource.driverClassName=net.sf.log4jdbc.sql.jdbcapi.DriverSpy spring.datasource.url=jdbc:log4jdbc:mariadb://RDS이름(DB서버명).ck39dp9w2h39.ap-northeast-2.rds.amazonaws.com:3306/DB명?serverTimezone=UTC&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;validationQuery=select 1 spring.datasource.username=DB유저명 spring.datasource.password=비밀번호 인증서 키를 입력해주는 옵션이 없기 때문에, 로컬에서는 운영 DB 접속이 불가합니다. Mybatis 설정 mybatis.mapper-locations=mappers/*.xml mybatis.config-location=classpath:mapper/config/mybatis-mapper-config.xml mybatis.type-aliases-package=com.도메인명.프로젝트명 업로드 파일 사이즈 설정 spring.servlet.multipart.max-file-size=1000MB spring.servlet.multipart.max-request-size=1000MB...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-02-24-1",
         "teaser": null
@@ -534,7 +534,7 @@ var store = [{
         "teaser": null
       },{
         "title": "윈도우 Node.js 설치 방법 / nvm으로 노드 설치 및 버전 변경",
-        "excerpt":"nvm, npm 차이 NVM (Node Version Manager) Node.js 설치 및 버전 변경할 수 있는 도구입니다. NPM (Node Package Manager) Node.js 설치 시 자동 설치되며, 필요한 패키지를 추가로 설치할 수 있는 도구입니다. 윈도우 nvm 설치 방법 https://github.com/coreybutler/nvm-windows 위 깃허브 링크 &gt; readme.md &gt; Download Now! 버튼 &gt; Assets &gt; nvm-setup.exe 다운...","categories": ["Web 개발"],
+        "excerpt":"nvm, npm 차이 NVM (Node Version Manager) Node.js 설치 및 버전 변경할 수 있는 도구입니다. NPM (Node Package Manager) Node.js 설치 시 자동 설치되며, 필요한 패키지를 추가로 설치할 수 있는 도구입니다. 윈도우 nvm 설치 방법 https://github.com/coreybutler/nvm-windows 위 깃허브 링크 &gt; readme.md &gt; Download Now! 버튼 &gt; Assets &gt; nvm-setup.exe 다운...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-03-17-1",
         "teaser": null
@@ -546,7 +546,7 @@ var store = [{
         "teaser": null
       },{
         "title": "리액트 장단점 / 리액트, 리덕스 사용 초기 느낀점",
-        "excerpt":"리액트 장점 페이지 이동 시 깜빡임 없이 부드러워 한 페이지 내에 있는 것처럼 보입니다. 실제로 index.js 내에서 요청 URL에 따라 route 하여 컴포넌트만 바꿔서 index.html에 렌더링하고, 각 컴포넌트의 this.props 또는 this.state 값이 바뀌면 리렌더링 되는 방식입니다. 컴포넌트 재사용성이 좋다고 합니다. SPA 특성상 클라이언트 사이드 렌더링하고, 상태가 변경되는 일부 컴포넌트 데이터만...","categories": ["Web 개발"],
+        "excerpt":"리액트 장점 페이지 이동 시 깜빡임 없이 부드러워 한 페이지 내에 있는 것처럼 보입니다. 실제로 index.js 내에서 요청 URL에 따라 route 하여 컴포넌트만 바꿔서 index.html에 렌더링하고, 각 컴포넌트의 this.props 또는 this.state 값이 바뀌면 리렌더링 되는 방식입니다. 컴포넌트 재사용성이 좋다고 합니다. SPA 특성상 클라이언트 사이드 렌더링하고, 상태가 변경되는 일부 컴포넌트 데이터만...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-04-05-1",
         "teaser": null
@@ -558,13 +558,13 @@ var store = [{
         "teaser": null
       },{
         "title": "자주 쓰는 CSS 정리 / CSS 문법",
-        "excerpt":"자주 쓰는 CSS CSS 선택자 및 의사 클래스 https://0songha0.github.io/web-dev/2023-04-15-1 요소 클릭 이벤트 비활성화 pointer-events: none; 요소에서 클릭, 드래그, 호버 등 모든 커서 옵션을 비활성화합니다. 요소 클릭 이벤트 활성화 pointer-events: auto; none으로 비활성화 했던 클릭 이벤트를 다시 활성화합니다. div 테두리 모서리 둥글게 처리 border-radius: 10px; 줄바꿈 표시 white-space: pre; 태그 내...","categories": ["Web 개발"],
+        "excerpt":"자주 쓰는 CSS CSS 선택자 및 의사 클래스 https://0songha0.github.io/web-dev/2023-04-15-1 요소 클릭 이벤트 비활성화 pointer-events: none; 요소에서 클릭, 드래그, 호버 등 모든 커서 옵션을 비활성화합니다. 요소 클릭 이벤트 활성화 pointer-events: auto; none으로 비활성화 했던 클릭 이벤트를 다시 활성화합니다. div 테두리 모서리 둥글게 처리 border-radius: 10px; 줄바꿈 표시 white-space: pre; 태그 내...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-04-12-1",
         "teaser": null
       },{
         "title": "CSS 선택자 및 의사 클래스 정리",
-        "excerpt":"CSS 선택자 인접 형제 선택자 (+) 요소 + 형제요소 { 속성: 속성값; } 같은 계층에서 요소 바로 다음에 위치하는 형제요소 하나에만 CSS를 적용합니다. 일반 형제 선택자 (~) 요소 ~ 형제요소 { 속성: 속성값; } 같은 계층에서 요소 다음에 위치하는 모든 형제요소에 CSS를 적용합니다. CSS 의사 클래스 동적 의사 클래스 요소:link...","categories": ["Web 개발"],
+        "excerpt":"CSS 선택자 인접 형제 선택자 (+) 요소 + 형제요소 { 속성: 속성값; } 같은 계층에서 요소 바로 다음에 위치하는 형제요소 하나에만 CSS를 적용합니다. 일반 형제 선택자 (~) 요소 ~ 형제요소 { 속성: 속성값; } 같은 계층에서 요소 다음에 위치하는 모든 형제요소에 CSS를 적용합니다. CSS 의사 클래스 동적 의사 클래스 요소:link...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-04-15-1",
         "teaser": null
@@ -588,7 +588,7 @@ var store = [{
         "teaser": null
       },{
         "title": "리액트 프로젝트 실행 시 컴파일 에러 해결 방법",
-        "excerpt":"의존성 변경 필요 에러 ./node_modules/scroll-into-view-if-needed/es/index.js Attempted import error: 'compute-scroll-into-view' does not contain a default export (imported as 'compute'). 기존 node_modules 폴더 삭제, package-lock.json 변경한 뒤 npm install 실행하여 node_modules 재생성 후 다시 실행하면 정상적으로 실행됩니다. 의존성 모듈 미설치 에러 ./node_modules/styled-components/dist/styled-components.browser.esm.js Module not found: Can't resolve 'react-is' in 'C:\\Users\\사용자명\\프로젝트경로\\node_modules\\styled-components\\dist' 모듈 설치...","categories": ["Web 개발"],
+        "excerpt":"의존성 변경 필요 에러 ./node_modules/scroll-into-view-if-needed/es/index.js Attempted import error: 'compute-scroll-into-view' does not contain a default export (imported as 'compute'). 기존 node_modules 폴더 삭제, package-lock.json 변경한 뒤 npm install 실행하여 node_modules 재생성 후 다시 실행하면 정상적으로 실행됩니다. 의존성 모듈 미설치 에러 ./node_modules/styled-components/dist/styled-components.browser.esm.js Module not found: Can't resolve 'react-is' in 'C:\\Users\\사용자명\\프로젝트경로\\node_modules\\styled-components\\dist' 모듈 설치...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-04-27-1",
         "teaser": null
@@ -606,25 +606,25 @@ var store = [{
         "teaser": null
       },{
         "title": "리액트 노드 프로젝트 소스 분석 / React.js, Node.js 사용법 정리",
-        "excerpt":"학교에서 선생님과 학생이 실시간으로 소통하는 수업 도구 프로젝트를 맡게 되어 분석해 보았습니다. 외주사에서 프론트는 리액트, 백엔드는 노드로 개발한 프로젝트입니다. 리액트 프로젝트 분석 (프론트) 리액트는 실행 시 자동 빌드되는 public 폴더의 index.html 파일에서 url에 따라 컴포넌트만 바뀌며 동작합니다. index.js에서 ReactDom.render 시 첫 인자로 받은 컴포넌트(App.js)를 index.html의 &lt;div id=\"root\"&gt;&lt;/div&gt; 안에 렌더링하며, 각...","categories": ["Web 개발"],
+        "excerpt":"학교에서 선생님과 학생이 실시간으로 소통하는 수업 도구 프로젝트를 맡게 되어 분석해 보았습니다. 외주사에서 프론트는 리액트, 백엔드는 노드로 개발한 프로젝트입니다. 리액트 프로젝트 분석 (프론트) 리액트는 실행 시 자동 빌드되는 public 폴더의 index.html 파일에서 url에 따라 컴포넌트만 바뀌며 동작합니다. index.js에서 ReactDom.render 시 첫 인자로 받은 컴포넌트(App.js)를 index.html의 &lt;div id=\"root\"&gt;&lt;/div&gt; 안에 렌더링하며, 각...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-05-26-1",
         "teaser": null
       },{
         "title": "리액트 클래스형 컴포넌트 생명주기 및 사용법 정리",
-        "excerpt":"리액트 클래스형 컴포넌트 생명주기 클래스형 컴포넌트 예시 import React, { Component } from 'react'; class 컴포넌트명 extends Component { // 클래스 컴포넌트 생명주기 함수 작성 위치 render() { const { 변수명 } = this.props; return ( // 렌더링 시 화면에 그려줄 JSX 리턴 } } } export default 컴포넌트명; 공식...","categories": ["Web 개발"],
+        "excerpt":"리액트 클래스형 컴포넌트 생명주기 클래스형 컴포넌트 예시 import React, { Component } from 'react'; class 컴포넌트명 extends Component { // 클래스 컴포넌트 생명주기 함수 작성 위치 render() { const { 변수명 } = this.props; return ( // 렌더링 시 화면에 그려줄 JSX 리턴 } } } export default 컴포넌트명; 공식...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-05-27-1",
         "teaser": null
       },{
         "title": "리액트 함수형 컴포넌트 정리",
-        "excerpt":"리액트 함수형 컴포넌트 함수형 컴포넌트 예시 import React, { useState, useEffect } from 'react'; const 컴포넌트명 = ({ props명1, props함수명1 }) =&gt; { const [ state명1, setState명1 ] = useState(초기값); const [ state명2, setState명2 ] = useState(초기값); // Hook 작성 위치 return ( // 렌더링 시 화면에 그려줄 JSX 리턴...","categories": ["Web 개발"],
+        "excerpt":"리액트 함수형 컴포넌트 함수형 컴포넌트 예시 import React, { useState, useEffect } from 'react'; const 컴포넌트명 = ({ props명1, props함수명1 }) =&gt; { const [ state명1, setState명1 ] = useState(초기값); const [ state명2, setState명2 ] = useState(초기값); // Hook 작성 위치 return ( // 렌더링 시 화면에 그려줄 JSX 리턴...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-05-28-1",
         "teaser": null
       },{
         "title": "리액트 리덕스 사용법 정리",
-        "excerpt":"리액트 리덕스 리덕스는 모든 컴포넌트에 같은 데이터를 쉽게 전달해주기 위해 전역변수처럼 사용합니다. 리덕스 사용 프로세스 액션을 발생시키면 미들웨어 처리 이후 액션에 맞는 리듀서가 호출되어 스토어의 상태를 바꿀 수 있습니다. 리액트 컴포넌트에 리덕스 connect 방법 import actions from \"../../../redux/액션함수.js\"; // 리액트 컴포넌트 작성 위치 export default connect( (state) =&gt; ({ 받을props명:...","categories": ["Web 개발"],
+        "excerpt":"리액트 리덕스 리덕스는 모든 컴포넌트에 같은 데이터를 쉽게 전달해주기 위해 전역변수처럼 사용합니다. 리덕스 사용 프로세스 액션을 발생시키면 미들웨어 처리 이후 액션에 맞는 리듀서가 호출되어 스토어의 상태를 바꿀 수 있습니다. 리액트 컴포넌트에 리덕스 connect 방법 import actions from \"../../../redux/액션함수.js\"; // 리액트 컴포넌트 작성 위치 export default connect( (state) =&gt; ({ 받을props명:...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-05-29-1",
         "teaser": null
@@ -648,7 +648,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Javascript 비동기 요청 방식 종류 및 차이 / ajax, fetch 사용법",
-        "excerpt":"비동기 요청 방식 종류 Ajax Javascript 라이브러리인 Jquery에서 제공하는 서버 요청 함수입니다. XMLHttpRequest 객체를 이용하여 비동기적으로 서버와 통신하여 새로고침 없이 페이지 일부만 갱신합니다. Ajax는 fetch API가 나오기 전까지 주로 사용되었습니다. Promise Javascript에서 비동기 처리를 다루는 객체입니다. 비동기 작업이 완료되었을 때 결과를 처리하거나 오류를 처리하는 데 사용됩니다. Fetch promise 기반으로 서버에...","categories": ["Web 개발"],
+        "excerpt":"비동기 요청 방식 종류 Ajax Javascript 라이브러리인 Jquery에서 제공하는 서버 요청 함수입니다. XMLHttpRequest 객체를 이용하여 비동기적으로 서버와 통신하여 새로고침 없이 페이지 일부만 갱신합니다. Ajax는 fetch API가 나오기 전까지 주로 사용되었습니다. Promise Javascript에서 비동기 처리를 다루는 객체입니다. 비동기 작업이 완료되었을 때 결과를 처리하거나 오류를 처리하는 데 사용됩니다. Fetch promise 기반으로 서버에...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-06-29-1",
         "teaser": null
@@ -690,7 +690,7 @@ var store = [{
         "teaser": null
       },{
         "title": "eGovFramework 공통컴포넌트 테이블 사용",
-        "excerpt":"eGovFramework 공통컴포넌트 테이블 공통코드, 파일, 메뉴, 권한, 롤, 회원(사용자), 최근 검색어, 로그, 게시글, 게시글 통계, 템플릿 등 공통 테이블을 제공합니다. 테이블 생성 스크립트 https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:com:v3.8:init_table 공통 컴포넌트 테이블과 초기 데이터는 eGov에서 제공하는 스크립트로 DB에 생성할 수 있습니다. Row가 없는 테이블도 eGov 프로젝트 톰캣 실행 시 사용되니 삭제하면 안 됩니다. 메뉴 접근...","categories": ["Web 개발"],
+        "excerpt":"eGovFramework 공통컴포넌트 테이블 공통코드, 파일, 메뉴, 권한, 롤, 회원(사용자), 최근 검색어, 로그, 게시글, 게시글 통계, 템플릿 등 공통 테이블을 제공합니다. 테이블 생성 스크립트 https://www.egovframe.go.kr/wiki/doku.php?id=egovframework:com:v3.8:init_table 공통 컴포넌트 테이블과 초기 데이터는 eGov에서 제공하는 스크립트로 DB에 생성할 수 있습니다. Row가 없는 테이블도 eGov 프로젝트 톰캣 실행 시 사용되니 삭제하면 안 됩니다. 메뉴 접근...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-10-26-1",
         "teaser": null
@@ -744,7 +744,7 @@ var store = [{
         "teaser": null
       },{
         "title": "SpringBoot 커스텀 에러페이지 설정 방법",
-        "excerpt":"SpringBoot 기본 에러페이지 잘못된 URL 호출 시 위와 같은 404 에러페이지가 표출됩니다. 사용자가 보기에 미관상 좋지 않으므로, 커스텀 에러페이지로 변경하면 좋습니다. SpringBoot 커스텀 에러페이지 설정 커스텀 에러페이지 예시 application.properties 설정 server.error.path=/error 에러 발생 시 요청할 URL을 설정합니다. (기본값 /error 그대로 사용하면 설정하지 않아도 됩니다.) CustomErrorController 생성 package com.chunjae.archive_cms.common.error; import org.springframework.boot.web.servlet.error.ErrorController;...","categories": ["Web 개발"],
+        "excerpt":"SpringBoot 기본 에러페이지 잘못된 URL 호출 시 위와 같은 404 에러페이지가 표출됩니다. 사용자가 보기에 미관상 좋지 않으므로, 커스텀 에러페이지로 변경하면 좋습니다. SpringBoot 커스텀 에러페이지 설정 커스텀 에러페이지 예시 application.properties 설정 server.error.path=/error 에러 발생 시 요청할 URL을 설정합니다. (기본값 /error 그대로 사용하면 설정하지 않아도 됩니다.) CustomErrorController 생성 package com.chunjae.archive_cms.common.error; import org.springframework.boot.web.servlet.error.ErrorController;...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-11-09-1",
         "teaser": null
@@ -756,13 +756,13 @@ var store = [{
         "teaser": null
       },{
         "title": "Git 블로그 복제 및 커스텀 방법 / 깃허브 블로그 만드는 법",
-        "excerpt":"Git 블로그 복제 방법 Public Git 블로그 Clone 마음에 드는 Git 블로그 주인이 허락한다면, Fork 또는 Clone하여 나만의 블로그를 생성할 수 있습니다. git clone \"복사한Git주소\" git 프로젝트 페이지에서 Code 버튼 클릭 시 Clone URL을 복사할 수 있습니다. cmd에서 원하는 경로로 이동 후 위 명령어를 실행하여 Git 블로그 프로젝트를 내려받습니다. 기존...","categories": ["Web 개발"],
+        "excerpt":"Git 블로그 복제 방법 Public Git 블로그 Clone 마음에 드는 Git 블로그 주인이 허락한다면, Fork 또는 Clone하여 나만의 블로그를 생성할 수 있습니다. git clone \"복사한Git주소\" git 프로젝트 페이지에서 Code 버튼 클릭 시 Clone URL을 복사할 수 있습니다. cmd에서 원하는 경로로 이동 후 위 명령어를 실행하여 Git 블로그 프로젝트를 내려받습니다. 기존...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-11-14-1",
         "teaser": null
       },{
         "title": "Git 블로그 글 작성 방법 / 마크다운 문법",
-        "excerpt":"Git 블로그 글 작성 방법 _posts 폴더에 YYYY-MM-DD-제목.md 파일 생성후 포스트 front matter를 아래와 같이 작성합니다. --- title: \"글제목\" excerpt: \"\" categories: - 카테고리제목 tags: - [] permalink: /카테고리URL/글URL toc: true toc_sticky: true date: YYYY-MM-DD last_modified_at: YYYY-MM-DD --- 이 아래로 마크다운 문법을 이용해 글을 작성하시면 됩니다. 마크다운 문법 제목 #...","categories": ["Web 개발"],
+        "excerpt":"Git 블로그 글 작성 방법 _posts 폴더에 YYYY-MM-DD-제목.md 파일 생성후 포스트 front matter를 아래와 같이 작성합니다. --- title: \"글제목\" excerpt: \"\" categories: - 카테고리제목 tags: - [] permalink: /카테고리URL/글URL toc: true toc_sticky: true date: YYYY-MM-DD last_modified_at: YYYY-MM-DD --- 이 아래로 마크다운 문법을 이용해 글을 작성하시면 됩니다. 마크다운 문법 제목 #...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-11-16-1",
         "teaser": null
@@ -828,7 +828,7 @@ var store = [{
         "teaser": null
       },{
         "title": "eGovframework 세션 로그인 분석 / 통합 SSO 로그인 연동 기능 개발",
-        "excerpt":"eGovframework 세션 로그인 분석 jsp에서 로그인 요청 유저가 입력한 아이디, 비밀번호가 담긴 Form을 파라미터로 ajax 호출하여 서버에 요청합니다. ‘아이디 저장’ 체크박스 값이 checked이면 쿠키에 아이디를 30일 간 저장합니다. 서버에서 세션 로그인 처리 SSO 로그인 API 호출 Controller에서 ajax 요청을 받고, LoginAPIUtil의 login 함수를 호출합니다. SSO 로그인 API URL에 get 방식으로...","categories": ["Web 개발"],
+        "excerpt":"eGovframework 세션 로그인 분석 jsp에서 로그인 요청 유저가 입력한 아이디, 비밀번호가 담긴 Form을 파라미터로 ajax 호출하여 서버에 요청합니다. ‘아이디 저장’ 체크박스 값이 checked이면 쿠키에 아이디를 30일 간 저장합니다. 서버에서 세션 로그인 처리 SSO 로그인 API 호출 Controller에서 ajax 요청을 받고, LoginAPIUtil의 login 함수를 호출합니다. SSO 로그인 API URL에 get 방식으로...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-12-07-1",
         "teaser": null
@@ -840,31 +840,31 @@ var store = [{
         "teaser": null
       },{
         "title": "Java API 호출 유틸 개발 / HttpURLConnection 객체 사용법",
-        "excerpt":"API 호출 유틸 개발 통합 SSO 로그인 API, 타 팀 API 등 URL 연결이 많은 프로젝트라서 공통 유틸을 만들어보았습니다. URLConnectionUtil.java import java.io.BufferedReader; import java.io.InputStream; import java.io.InputStreamReader; import java.net.HttpURLConnection; import java.net.URL; public class URLConnectionUtil { // GET 방식으로 URL 요청 후 결과 String 반환 public String requestGetURL(String urlStr, String paramType) throws...","categories": ["Web 개발"],
+        "excerpt":"API 호출 유틸 개발 통합 SSO 로그인 API, 타 팀 API 등 URL 연결이 많은 프로젝트라서 공통 유틸을 만들어보았습니다. URLConnectionUtil.java import java.io.BufferedReader; import java.io.InputStream; import java.io.InputStreamReader; import java.net.HttpURLConnection; import java.net.URL; public class URLConnectionUtil { // GET 방식으로 URL 요청 후 결과 String 반환 public String requestGetURL(String urlStr, String paramType) throws...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-12-13-1",
         "teaser": null
       },{
         "title": "Java 특정 문자열 사이 추출 방법 / 정규표현식 사용법",
-        "excerpt":"Java 특정 문자열 사이 추출 방법 추출하려는 원본 문자열 \"_returnData = 'w6bO2i%2fghyCIx%2bEKccYOYVa1KafPHZEEXbaY3PxPsUXZTJ1s~~~';\" 문자열 사이 추출 코드 import java.util.regex.Pattern; import java.util.regex.Matcher; Pattern pattern = Pattern.compile(\"_returnData = '(.*)';\"); Matcher matcher = pattern.matcher(원본문자열변수); String data = \"\"; while (matcher.find()) { data = matcher.group(1); } 정규표현식을 이용하여 “_returnData = ‘“와 “’;” 사이의 문자열을 추출하는...","categories": ["Web 개발"],
+        "excerpt":"Java 특정 문자열 사이 추출 방법 추출하려는 원본 문자열 \"_returnData = 'w6bO2i%2fghyCIx%2bEKccYOYVa1KafPHZEEXbaY3PxPsUXZTJ1s~~~';\" 문자열 사이 추출 코드 import java.util.regex.Pattern; import java.util.regex.Matcher; Pattern pattern = Pattern.compile(\"_returnData = '(.*)';\"); Matcher matcher = pattern.matcher(원본문자열변수); String data = \"\"; while (matcher.find()) { data = matcher.group(1); } 정규표현식을 이용하여 “_returnData = ‘“와 “’;” 사이의 문자열을 추출하는...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-12-15-1",
         "teaser": null
       },{
         "title": "Java Gson 라이브러리 사용법 / JSON 파싱 및 변환 방법",
-        "excerpt":"Gson 라이브러리 JSON 문자열을 파싱하여 Java Object로 변환할 수 있는 구글 오픈소스입니다. Gson 라이브러리 추가 &lt;dependency&gt; &lt;groupId&gt;com.google.code.gson&lt;/groupId&gt; &lt;artifactId&gt;gson&lt;/artifactId&gt; &lt;version&gt;2.8.9&lt;/version&gt; &lt;/dependency&gt; Maven 사용 시 pom.xml에 위와 같이 dependency를 추가합니다. JSON을 Java Object로 변환 코드 import com.google.gson.Gson; Gson gson = new Gson(); 클래스명 result = gson.fromJson(JSON문자열, 클래스명.class); JSON 문자열의 값을 get, set...","categories": ["Web 개발"],
+        "excerpt":"Gson 라이브러리 JSON 문자열을 파싱하여 Java Object로 변환할 수 있는 구글 오픈소스입니다. Gson 라이브러리 추가 &lt;dependency&gt; &lt;groupId&gt;com.google.code.gson&lt;/groupId&gt; &lt;artifactId&gt;gson&lt;/artifactId&gt; &lt;version&gt;2.8.9&lt;/version&gt; &lt;/dependency&gt; Maven 사용 시 pom.xml에 위와 같이 dependency를 추가합니다. JSON을 Java Object로 변환 코드 import com.google.gson.Gson; Gson gson = new Gson(); 클래스명 result = gson.fromJson(JSON문자열, 클래스명.class); JSON 문자열의 값을 get, set...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-12-18-1",
         "teaser": null
       },{
         "title": "암호화 알고리즘 종류 / Java 암호화 유틸 개발 / AES256, Base64 등 암복호화 방법",
-        "excerpt":"단방향 암호화 복호화 불가하여 비밀번호 암호화에 적합합니다. SHA-256 사용자가 입력한 비밀번호를 암호화 후 SHA-256 해시 앞 16자리를 잘라서 유저 테이블 비밀번호 컬럼에 저장된 SHA-256 해시 앞 16자리와 비교하여 로그인하기도 합니다. SHA-512 SHA-256보다 자릿수가 훨씬 길고, 보안이 강화된 암호화 알고리즘입니다. MD5 128비트 고정 길이의 출력값을 가집니다. 양방향 암호화 복호화 가능합니다. 비밀키...","categories": ["Web 개발"],
+        "excerpt":"단방향 암호화 복호화 불가하여 비밀번호 암호화에 적합합니다. SHA-256 사용자가 입력한 비밀번호를 암호화 후 SHA-256 해시 앞 16자리를 잘라서 유저 테이블 비밀번호 컬럼에 저장된 SHA-256 해시 앞 16자리와 비교하여 로그인하기도 합니다. SHA-512 SHA-256보다 자릿수가 훨씬 길고, 보안이 강화된 암호화 알고리즘입니다. MD5 128비트 고정 길이의 출력값을 가집니다. 양방향 암호화 복호화 가능합니다. 비밀키...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-12-27-1",
         "teaser": null
       },{
         "title": "Javascript 쿠키 유틸 / Cookie 공통 함수 / 쿠키 생성 및 확인",
-        "excerpt":"Javascript 쿠키 유틸 CookieUtil.js /** * 쿠키를 생성한다. * @param name * @param value * @param exp */ function setCookie(name, value, exp) { const date = new Date(); date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000); document.cookie = name + '=' + value + ';expires=' + date.toUTCString()...","categories": ["Web 개발"],
+        "excerpt":"Javascript 쿠키 유틸 CookieUtil.js /** * 쿠키를 생성한다. * @param name * @param value * @param exp */ function setCookie(name, value, exp) { const date = new Date(); date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000); document.cookie = name + '=' + value + ';expires=' + date.toUTCString()...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2024-01-09-1",
         "teaser": null
@@ -876,25 +876,25 @@ var store = [{
         "teaser": null
       },{
         "title": "MathJax js 라이브러리 bbox 출력 오류 해결 방법",
-        "excerpt":"MathJax는 웹 브라우저에 수학 표기법을 표기하는 Javascript 라이브러리입니다. mathjax bbox 오류 해결 네모 박스가 \\bbox[5px, border:1pxsolidblack]이라는 텍스트로 출력되는 문제가 있었습니다. 에러 코드 Promise.allSettled([MathJax.typeset()]).then(function () { 이 부분에서 아래의 에러가 발생하였습니다. 에러 메시지 Uncaught (in promise) TypeError: Cannot read properties of null (reading 'replaceChild') at e.replace (tex-mml-chtml.js:1:10078) at e.updateDocument (tex-mml-chtml.js:1:198719) at...","categories": ["Web 개발"],
+        "excerpt":"MathJax는 웹 브라우저에 수학 표기법을 표기하는 Javascript 라이브러리입니다. mathjax bbox 오류 해결 네모 박스가 \\bbox[5px, border:1pxsolidblack]이라는 텍스트로 출력되는 문제가 있었습니다. 에러 코드 Promise.allSettled([MathJax.typeset()]).then(function () { 이 부분에서 아래의 에러가 발생하였습니다. 에러 메시지 Uncaught (in promise) TypeError: Cannot read properties of null (reading 'replaceChild') at e.replace (tex-mml-chtml.js:1:10078) at e.updateDocument (tex-mml-chtml.js:1:198719) at...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2024-02-05-2",
         "teaser": null
       },{
         "title": "자주 쓰는 Spring 정리 / Java 문법",
-        "excerpt":"자주 쓰는 Spring Spring DB 연결 방법 https://0songha0.github.io/web-dev/2022-06-10-1 Spring annotation 정리 https://0songha0.github.io/web-dev/2023-02-08-1 요청 도메인 주소 반환 함수 public String getDomain(HttpServletRequest req) { req.getSession().setAttribute(\"_paramReturnUrl\", req.getParameter(\"_paramReturnUrl\")); // 현재 요청의 URL 가져오기 StringBuffer url = req.getRequestURL(); // 요청 도메인 추출 String domain = url.substring(0, url.indexOf(\"/\", 8)); // 현재 접속한 URL이 IP면 IP, 도메인이면...","categories": ["Web 개발"],
+        "excerpt":"자주 쓰는 Spring Spring DB 연결 방법 https://0songha0.github.io/web-dev/2022-06-10-1 Spring annotation 정리 https://0songha0.github.io/web-dev/2023-02-08-1 요청 도메인 주소 반환 함수 public String getDomain(HttpServletRequest req) { req.getSession().setAttribute(\"_paramReturnUrl\", req.getParameter(\"_paramReturnUrl\")); // 현재 요청의 URL 가져오기 StringBuffer url = req.getRequestURL(); // 요청 도메인 추출 String domain = url.substring(0, url.indexOf(\"/\", 8)); // 현재 접속한 URL이 IP면 IP, 도메인이면...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2024-02-07-2",
         "teaser": null
       },{
         "title": "자주 쓰는 JSP 정리 / EL 문법 / JSTL 문법",
-        "excerpt":"자주 쓰는 JSP HTML 파일을 JSP로 바꾸는 법 1. HTML 파일 확장자를 .jsp로 변경합니다. 2. &lt;html&gt; 태그 위에 아래의 코드 중 사용할 taglib를 추가합니다. header에 추가해도 header가 포함된 페이지들에 공통 적용되지 않아서, 각 jsp에 개별적으로 추가해 줘야 합니다. &lt;%@ taglib prefix=\"c\" uri=\"http://java.sun.com/jsp/jstl/core\" %&gt; &lt;%@ taglib prefix=\"fmt\" uri=\"http://java.sun.com/jsp/jstl/fmt\" %&gt; &lt;%@ taglib...","categories": ["Web 개발"],
+        "excerpt":"자주 쓰는 JSP HTML 파일을 JSP로 바꾸는 법 1. HTML 파일 확장자를 .jsp로 변경합니다. 2. &lt;html&gt; 태그 위에 아래의 코드 중 사용할 taglib를 추가합니다. header에 추가해도 header가 포함된 페이지들에 공통 적용되지 않아서, 각 jsp에 개별적으로 추가해 줘야 합니다. &lt;%@ taglib prefix=\"c\" uri=\"http://java.sun.com/jsp/jstl/core\" %&gt; &lt;%@ taglib prefix=\"fmt\" uri=\"http://java.sun.com/jsp/jstl/fmt\" %&gt; &lt;%@ taglib...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2024-02-08-1",
         "teaser": null
       },{
         "title": "자주 쓰는 HTML 정리 / HTML 문법",
-        "excerpt":"자주 쓰는 HTML HTML 정규표현식 https://0songha0.github.io/web-dev/2022-08-01-1 CSS, Javascript 파일 추가 &lt;head&gt; &lt;script src=\"Javascript파일경로/파일명.js\"&gt;&lt;/script&gt; &lt;link rel=\"stylesheet\" href=\"CSS파일경로/파일명.css\"&gt; &lt;/had&gt; 라이브러리 파일은 https://도메인/파일경로/파일명으로도 추가할 수도 있지만, 사이트에서 파일 제공 서비스를 중단하면 에러날 수 있으니 내려받아서 프로젝트 내부 절대경로로 추가하는 것이 좋습니다. 라디오 버튼 구현 &lt;input type=\"radio\" id=\"useYn_Y\" name=\"useYn\" value=\"Y\"&gt; &lt;label for=\"useYn_Y\"&gt;사용&lt;/label&gt; &lt;input type=\"radio\"...","categories": ["Web 개발"],
+        "excerpt":"자주 쓰는 HTML HTML 정규표현식 https://0songha0.github.io/web-dev/2022-08-01-1 CSS, Javascript 파일 추가 &lt;head&gt; &lt;script src=\"Javascript파일경로/파일명.js\"&gt;&lt;/script&gt; &lt;link rel=\"stylesheet\" href=\"CSS파일경로/파일명.css\"&gt; &lt;/had&gt; 라이브러리 파일은 https://도메인/파일경로/파일명으로도 추가할 수도 있지만, 사이트에서 파일 제공 서비스를 중단하면 에러날 수 있으니 내려받아서 프로젝트 내부 절대경로로 추가하는 것이 좋습니다. 라디오 버튼 구현 &lt;input type=\"radio\" id=\"useYn_Y\" name=\"useYn\" value=\"Y\"&gt; &lt;label for=\"useYn_Y\"&gt;사용&lt;/label&gt; &lt;input type=\"radio\"...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2024-02-08-2",
         "teaser": null
@@ -918,7 +918,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Spring 에러 핸들러 처리 / 톰캣에 에러 로그 안 찍히는 경우",
-        "excerpt":"resources 폴더의 log4j2.xml에서 Logger level을 DEBUG로 설정하였고, 컨트롤러에서 throws Exception 해주었는데도 톰캣에 에러 로그가 안 찍히는 경우, @ExceptionHandler 어노테이션을 사용한 에러 핸들러를 생성하면 모든 에러가 톰캣에 출력됩니다. GlobalExceptionHandler 생성 import org.springframework.web.bind.annotation.ControllerAdvice; import org.springframework.web.bind.annotation.ExceptionHandler; @ControllerAdvice public class GlobalExceptionHandler { @ExceptionHandler(Exception.class) public void handleException(Exception e) { // 톰캣에 에러 출력 e.printStackTrace(); }...","categories": ["Web 개발"],
+        "excerpt":"resources 폴더의 log4j2.xml에서 Logger level을 DEBUG로 설정하였고, 컨트롤러에서 throws Exception 해주었는데도 톰캣에 에러 로그가 안 찍히는 경우, @ExceptionHandler 어노테이션을 사용한 에러 핸들러를 생성하면 모든 에러가 톰캣에 출력됩니다. GlobalExceptionHandler 생성 import org.springframework.web.bind.annotation.ControllerAdvice; import org.springframework.web.bind.annotation.ExceptionHandler; @ControllerAdvice public class GlobalExceptionHandler { @ExceptionHandler(Exception.class) public void handleException(Exception e) { // 톰캣에 에러 출력 e.printStackTrace(); }...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2024-03-05-1",
         "teaser": null
@@ -942,7 +942,7 @@ var store = [{
         "teaser": null
       },{
         "title": "자주 쓰는 Jquery 정리 / Jquery 문법",
-        "excerpt":"자주 쓰는 Jquery Jquery로 로딩마스크 구현 방법 https://0songha0.github.io/web-dev/2022-12-13-1 document ready 완료 후 실행 &lt;script&gt; $(document).ready(function(){ // 실행 코드 }); &lt;/script&gt; 축약된 형식 $(function() { // 실행 코드 }); 위/아래 슬라이드 숨김 효과 $('.클래스명').slideUp(\"fast\"); $('.클래스명').slideDown(\"slow\"); $('.클래스명').slideToggle({duration: 1000}); select botton 클릭 시 하단 ul을 보이고, 그 외 영역 클릭 시 display:none; 하는...","categories": ["Web 개발"],
+        "excerpt":"자주 쓰는 Jquery Jquery로 로딩마스크 구현 방법 https://0songha0.github.io/web-dev/2022-12-13-1 document ready 완료 후 실행 &lt;script&gt; $(document).ready(function(){ // 실행 코드 }); &lt;/script&gt; 축약된 형식 $(function() { // 실행 코드 }); 위/아래 슬라이드 숨김 효과 $('.클래스명').slideUp(\"fast\"); $('.클래스명').slideDown(\"slow\"); $('.클래스명').slideToggle({duration: 1000}); select botton 클릭 시 하단 ul을 보이고, 그 외 영역 클릭 시 display:none; 하는...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2024-03-13-1",
         "teaser": null
@@ -972,7 +972,7 @@ var store = [{
         "teaser": null
       },{
         "title": "egovFramework 헤더, 푸더 등 레이아웃 Tiles 설정 방법",
-        "excerpt":"레이아웃 Tiles 설정 방법 egov-com-servlet.xml 예시 &lt;bean id=\"tilesViewResolver\" class=\"org.springframework.web.servlet.view.UrlBasedViewResolver\"&gt; &lt;property name=\"viewClass\" value=\"org.springframework.web.servlet.view.tiles3.TilesView\" /&gt; &lt;property name=\"order\" value=\"1\" /&gt; &lt;/bean&gt; &lt;!-- Tiles Configurer --&gt; &lt;bean id=\"tilesConfigurer\" class=\"org.springframework.web.servlet.view.tiles3.TilesConfigurer\"&gt; &lt;property name=\"definitions\"&gt; &lt;list&gt; &lt;value&gt;/WEB-INF/config/egovframework/tiles/common-def.xml&lt;/value&gt; &lt;/list&gt; &lt;/property&gt; &lt;/bean&gt; common-def.xml 파일을 definitions 프로퍼티로 사용하는 tilesConfigurer를 정의합니다. common-def.xml 예시 &lt;tiles-definitions&gt; &lt;definition name=\"baseUser\" template=\"/WEB-INF/jsp/_tiles/user/layout.jsp\"&gt; &lt;put-attribute name=\"header\" value=\"/WEB-INF/jsp/_tiles/user/header.jsp\" /&gt; &lt;put-attribute...","categories": ["Web 개발"],
+        "excerpt":"레이아웃 Tiles 설정 방법 egov-com-servlet.xml 예시 &lt;bean id=\"tilesViewResolver\" class=\"org.springframework.web.servlet.view.UrlBasedViewResolver\"&gt; &lt;property name=\"viewClass\" value=\"org.springframework.web.servlet.view.tiles3.TilesView\" /&gt; &lt;property name=\"order\" value=\"1\" /&gt; &lt;/bean&gt; &lt;!-- Tiles Configurer --&gt; &lt;bean id=\"tilesConfigurer\" class=\"org.springframework.web.servlet.view.tiles3.TilesConfigurer\"&gt; &lt;property name=\"definitions\"&gt; &lt;list&gt; &lt;value&gt;/WEB-INF/config/egovframework/tiles/common-def.xml&lt;/value&gt; &lt;/list&gt; &lt;/property&gt; &lt;/bean&gt; common-def.xml 파일을 definitions 프로퍼티로 사용하는 tilesConfigurer를 정의합니다. common-def.xml 예시 &lt;tiles-definitions&gt; &lt;definition name=\"baseUser\" template=\"/WEB-INF/jsp/_tiles/user/layout.jsp\"&gt; &lt;put-attribute name=\"header\" value=\"/WEB-INF/jsp/_tiles/user/header.jsp\" /&gt; &lt;put-attribute...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2024-03-22-1",
         "teaser": null
@@ -996,7 +996,7 @@ var store = [{
         "teaser": null
       },{
         "title": "CSS 폰트 네트워크 지연 문제 해결 방법",
-        "excerpt":"CSS 폰트 로딩 속도 문제 기존 폰트 삽입 코드 @import url('https://webfontworld.github.io/gmarket/GmarketSans.css'); 기존에는 특정 깃허브에서 @font-face CSS 텍스트를 import 하는 방식이었습니다. 그래서, 학교 등 네트워크가 느린 곳에서는 폰트 로딩에 2~3분이나 걸리는 이슈가 생겼습니다. 폰트 삽입 방식 변경 @font-face { font-family: 'GmarketSans'; font-weight: 500; font-style: normal; src: url('../font/GmarketSansMedium.woff') format('woff'); font-display: swap; }...","categories": ["Web 개발"],
+        "excerpt":"CSS 폰트 로딩 속도 문제 기존 폰트 삽입 코드 @import url('https://webfontworld.github.io/gmarket/GmarketSans.css'); 기존에는 특정 깃허브에서 @font-face CSS 텍스트를 import 하는 방식이었습니다. 그래서, 학교 등 네트워크가 느린 곳에서는 폰트 로딩에 2~3분이나 걸리는 이슈가 생겼습니다. 폰트 삽입 방식 변경 @font-face { font-family: 'GmarketSans'; font-weight: 500; font-style: normal; src: url('../font/GmarketSansMedium.woff') format('woff'); font-display: swap; }...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2024-04-18-1",
         "teaser": null
@@ -1014,13 +1014,13 @@ var store = [{
         "teaser": null
       },{
         "title": "CDN 사이트 먹통으로 인한 CSS, JS 라이브러리 내재화 방법",
-        "excerpt":"CDN 사이트 먹통 발생 문제 라이브러리 스크립트 &lt;link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css\" /&gt; &lt;script src=\"https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js\"&gt;&lt;/script&gt; CDN 사이트를 통해 라이브러리를 import 한 jsp 페이지들이 정상 동작하지 않는 오류가 발생하였습니다. CSS, JS 등 라이브러리 파일은 다운받아 프로젝트 내에 두고 import 하는 것이 좋습니다. URL 링크로 import 하면, CDN 사이트가 정상 동작하지 않게 되었을 때...","categories": ["Web 개발"],
+        "excerpt":"CDN 사이트 먹통 발생 문제 라이브러리 스크립트 &lt;link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css\" /&gt; &lt;script src=\"https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js\"&gt;&lt;/script&gt; CDN 사이트를 통해 라이브러리를 import 한 jsp 페이지들이 정상 동작하지 않는 오류가 발생하였습니다. CSS, JS 등 라이브러리 파일은 다운받아 프로젝트 내에 두고 import 하는 것이 좋습니다. URL 링크로 import 하면, CDN 사이트가 정상 동작하지 않게 되었을 때...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2024-05-02-1",
         "teaser": null
       },{
         "title": "egovFramework에서 Java 캐시 라이브러리 Ehcache 사용 방법",
-        "excerpt":"API 요청 결과를 Ehcache와 같은 캐시 시스템에 저장하고 재활용하면, 요청이 많이 몰리는 시간에 조회 속도가 느려지는 성능 이슈를 해결할 수 있습니다. Ehcache 사용 시 주의사항 이중화된 운영서버 was 1에서 Ehcache로 저장한 캐시 데이터는 was 2에서 꺼낼 수 없습니다. Ehcache는 로컬 캐시로 동작하기 때문에, 각 WAS가 독립적인 캐시 영역을 가집니다. Terracotta,...","categories": ["Web 개발"],
+        "excerpt":"API 요청 결과를 Ehcache와 같은 캐시 시스템에 저장하고 재활용하면, 요청이 많이 몰리는 시간에 조회 속도가 느려지는 성능 이슈를 해결할 수 있습니다. Ehcache 사용 시 주의사항 이중화된 운영서버 was 1에서 Ehcache로 저장한 캐시 데이터는 was 2에서 꺼낼 수 없습니다. Ehcache는 로컬 캐시로 동작하기 때문에, 각 WAS가 독립적인 캐시 영역을 가집니다. Terracotta,...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2024-05-08-1",
         "teaser": null
@@ -1032,7 +1032,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Java 접근제어자 정의 및 종류",
-        "excerpt":"접근제어자란? Java에서 클래스, 변수, 함수에 대한 접근을 제어하는 데 사용됩니다. 외부로부터 불필요한 접근을 제한하고 코드를 캡슐화하여 재사용성을 높일 수 있습니다. Java 접근제어자 종류 private 같은 클래스 내에서만 접근할 수 있어 정보 은닉과 캡슐화를 지원합니다. private 변수는 public getter, setter 함수를 통해 접근할 수 있습니다. default (package-private) 같은 패키지 내의 클래스에서만...","categories": ["Web 개발"],
+        "excerpt":"접근제어자란? Java에서 클래스, 변수, 함수에 대한 접근을 제어하는 데 사용됩니다. 외부로부터 불필요한 접근을 제한하고 코드를 캡슐화하여 재사용성을 높일 수 있습니다. Java 접근제어자 종류 private 같은 클래스 내에서만 접근할 수 있어 정보 은닉과 캡슐화를 지원합니다. private 변수는 public getter, setter 함수를 통해 접근할 수 있습니다. default (package-private) 같은 패키지 내의 클래스에서만...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2024-05-15-1",
         "teaser": null
@@ -1062,13 +1062,13 @@ var store = [{
         "teaser": null
       },{
         "title": "IntelliJ에서 이클립스 Maven 프로젝트 사용 방법",
-        "excerpt":"이클립스 프로젝트 Import 프로젝트 복사 기존 이클립스 프로젝트에 영향이 가지 않게, 이클립스 프로젝트를 통째로 복사하고 이름을 변경합니다. IntelliJ에서 이클립스 프로젝트 열기 좌측 상단 File &gt; New &gt; Project from Existing Sources… &gt; 복사한 이클립스 폴더의 workscase에서 프로젝트 폴더 선택 &gt; OK &gt; import project from external model : Eclipse 선택...","categories": ["Web 개발"],
+        "excerpt":"이클립스 프로젝트 Import 프로젝트 복사 기존 이클립스 프로젝트에 영향이 가지 않게, 이클립스 프로젝트를 통째로 복사하고 이름을 변경합니다. IntelliJ에서 이클립스 프로젝트 열기 좌측 상단 File &gt; New &gt; Project from Existing Sources… &gt; 복사한 이클립스 폴더의 workscase에서 프로젝트 폴더 선택 &gt; OK &gt; import project from external model : Eclipse 선택...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2024-05-29-1",
         "teaser": null
       },{
         "title": "JSP에 Google Analytics (GA 코드) 삽입 방법",
-        "excerpt":"GA 코드 삽입 JSP GA 코드 위치 예시 &lt;!DOCTYPE html&gt; &lt;html lang=\"ko\"&gt; &lt;head&gt; &lt;meta charset=\"UTF-8\"&gt; &lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"&gt; &lt;title&gt;프로젝트명&lt;/title&gt; &lt;link rel=\"stylesheet\" href=\"/CSS경로/CSS명.css\"&gt; &lt;!-- Google Analytics --&gt; &lt;script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXXX-X\"&gt;&lt;/script&gt; &lt;script&gt; window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-XXXXXXXXX-X'); &lt;/script&gt; &lt;!-- End Google Analytics --&gt; &lt;script...","categories": ["Web 개발"],
+        "excerpt":"GA 코드 삽입 JSP GA 코드 위치 예시 &lt;!DOCTYPE html&gt; &lt;html lang=\"ko\"&gt; &lt;head&gt; &lt;meta charset=\"UTF-8\"&gt; &lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"&gt; &lt;title&gt;프로젝트명&lt;/title&gt; &lt;link rel=\"stylesheet\" href=\"/CSS경로/CSS명.css\"&gt; &lt;!-- Google Analytics --&gt; &lt;script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXXX-X\"&gt;&lt;/script&gt; &lt;script&gt; window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-XXXXXXXXX-X'); &lt;/script&gt; &lt;!-- End Google Analytics --&gt; &lt;script...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2024-05-31-1",
         "teaser": null
@@ -1104,7 +1104,7 @@ var store = [{
         "teaser": null
       },{
         "title": "egovFramework 관리자 화면 종류 및 데이터 조작 방법",
-        "excerpt":"관리자 계정 추가 방법 관리자 계정 목록 화면 /uss/umt/EgovUserManage.do comtnemplyrinfo 테이블의 관리자 계정 목록을 확인하고, 등록 및 수정 화면으로 이동 가능한 화면입니다. 관리자 권한 추가 SELECT * FROM comtnemplyrinfo ORDER BY ESNTL_ID DESC 위 쿼리로 신규 추가한 관리자 계정의 ESNTL_ID 컬럼 값을 확인하고, INSERT INTO comtnemplyrscrtyestbs ( SCRTY_DTRMN_TRGET_ID, MBER_TY_CODE, AUTHOR_CODE...","categories": ["Web 개발"],
+        "excerpt":"관리자 계정 추가 방법 관리자 계정 목록 화면 /uss/umt/EgovUserManage.do comtnemplyrinfo 테이블의 관리자 계정 목록을 확인하고, 등록 및 수정 화면으로 이동 가능한 화면입니다. 관리자 권한 추가 SELECT * FROM comtnemplyrinfo ORDER BY ESNTL_ID DESC 위 쿼리로 신규 추가한 관리자 계정의 ESNTL_ID 컬럼 값을 확인하고, INSERT INTO comtnemplyrscrtyestbs ( SCRTY_DTRMN_TRGET_ID, MBER_TY_CODE, AUTHOR_CODE...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2024-09-09-1",
         "teaser": null
@@ -1140,7 +1140,7 @@ var store = [{
         "teaser": null
       },{
         "title": "프로그래밍 명명 규칙 정리",
-        "excerpt":"일반적인 프로그래밍 명명 규칙을 정리하였습니다. 프로젝트에 따라 다른 규칙이 적용될 수 있고, 일관성이 가장 중요합니다. 파스칼 표기법 (Pascal Case) Java, TypeScript, C# 등에서 클래스명이나 타입명을 파스칼 케이스로 작성합니다. 예시) PascalCase 낙타 표기법 (Camel Case) Java, Javascript 등에서 변수명이나 함수명을 카멜 케이스로 작성합니다. HTML에서 id도 카멜 케이스로 작성하여 Javascript와 일관성을 유지하면...","categories": ["Web 개발"],
+        "excerpt":"일반적인 프로그래밍 명명 규칙을 정리하였습니다. 프로젝트에 따라 다른 규칙이 적용될 수 있고, 일관성이 가장 중요합니다. 파스칼 표기법 (Pascal Case) Java, TypeScript, C# 등에서 클래스명이나 타입명을 파스칼 케이스로 작성합니다. 예시) PascalCase 낙타 표기법 (Camel Case) Java, Javascript 등에서 변수명이나 함수명을 카멜 케이스로 작성합니다. HTML에서 id도 카멜 케이스로 작성하여 Javascript와 일관성을 유지하면...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-01-08-1",
         "teaser": null
@@ -1158,7 +1158,7 @@ var store = [{
         "teaser": null
       },{
         "title": "네이버 클라우드 OCR 사용법",
-        "excerpt":"JAVA 네이버 클라우드 OCR 사용법 네이버 클라우드 OCR 정보 추가 Globals.NaverOCR.Url = https://console.ncloud.com/ocr/domain Globals.NaverOCR.SecretKey = RWVaQUtWcWpOQlZnamZNRml5bG9H~시크릿키~ Globals.NaverOCR.InvokeUrl = https://5gip3zw***.apigw.ntruss.com/custom/v1/34037/6848b40e402f1330f37ae98b6538faa00a95b091eaa50f116515df8ccdf~~~~/general globals.properties 파일에 네이버 클라우드 OCR 정보를 추가합니다. 시크릿키는 네이버 클라우드 계정으로 발급받아야 합니다. OCR API 유틸 예시 public class 유틸명 { protected static final Logger logger = LoggerFactory.getLogger(ApiService.class); static final String...","categories": ["Web 개발"],
+        "excerpt":"JAVA 네이버 클라우드 OCR 사용법 네이버 클라우드 OCR 정보 추가 Globals.NaverOCR.Url = https://console.ncloud.com/ocr/domain Globals.NaverOCR.SecretKey = RWVaQUtWcWpOQlZnamZNRml5bG9H~시크릿키~ Globals.NaverOCR.InvokeUrl = https://5gip3zw***.apigw.ntruss.com/custom/v1/34037/6848b40e402f1330f37ae98b6538faa00a95b091eaa50f116515df8ccdf~~~~/general globals.properties 파일에 네이버 클라우드 OCR 정보를 추가합니다. 시크릿키는 네이버 클라우드 계정으로 발급받아야 합니다. OCR API 유틸 예시 public class 유틸명 { protected static final Logger logger = LoggerFactory.getLogger(ApiService.class); static final String...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-02-07-1",
         "teaser": null
@@ -1170,7 +1170,7 @@ var store = [{
         "teaser": null
       },{
         "title": "이클립스 스프링 배치 프로젝트 생성 및 스케줄링 실행 방법",
-        "excerpt":"이클립스 STS 사용법 STS는 이클립스에서 스프링 부트 프로젝트를 쉽게 관리하고 실행할 수 있게 도와주는 플러그인입니다. 독립형 STS 이클립스를 설치해도 되고, 기존 이클립스에 STS 플러그인을 설치해도 됩니다. 독립형 STS 이클립스 설치 방법 https://spring.io/tools Spring Tools for Eclipse - WINDOWS X86_64 선택하여 다운로드 후 압축 해제합니다. SpringToolSuite4.exe 파일을 실행하면 STS 이클립스가 실행됩니다....","categories": ["Web 개발"],
+        "excerpt":"이클립스 STS 사용법 STS는 이클립스에서 스프링 부트 프로젝트를 쉽게 관리하고 실행할 수 있게 도와주는 플러그인입니다. 독립형 STS 이클립스를 설치해도 되고, 기존 이클립스에 STS 플러그인을 설치해도 됩니다. 독립형 STS 이클립스 설치 방법 https://spring.io/tools Spring Tools for Eclipse - WINDOWS X86_64 선택하여 다운로드 후 압축 해제합니다. SpringToolSuite4.exe 파일을 실행하면 STS 이클립스가 실행됩니다....","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-03-10-1",
         "teaser": null
@@ -1182,7 +1182,7 @@ var store = [{
         "teaser": null
       },{
         "title": "IntelliJ SpringBoot + Vue 프로젝트, 소켓 + 카프카 프로젝트 세팅 방법",
-        "excerpt":"AIDT 실시간 퀴즈 프로젝트를 인수인계 받아 세팅하는 과정을 정리하였습니다. IntelliJ SpringBoot + Vue 프로젝트 세팅 Java 17 설치 및 설정 https://0songha0.github.io/tool/2024-05-29-1 위 글을 참고하여 JAVA 설치 및 환경변수 설정을 완료하면 됩니다. 현재 프로젝트를 잠시 열어서 Java 버전 확인하고 맞게 설치하는 것이 좋습니다. IDE가 아닌 터미널에서 SpringBoot Gradle/Maven 빌드 또는 Kafka...","categories": ["Web 개발"],
+        "excerpt":"AIDT 실시간 퀴즈 프로젝트를 인수인계 받아 세팅하는 과정을 정리하였습니다. IntelliJ SpringBoot + Vue 프로젝트 세팅 Java 17 설치 및 설정 https://0songha0.github.io/tool/2024-05-29-1 위 글을 참고하여 JAVA 설치 및 환경변수 설정을 완료하면 됩니다. 현재 프로젝트를 잠시 열어서 Java 버전 확인하고 맞게 설치하는 것이 좋습니다. IDE가 아닌 터미널에서 SpringBoot Gradle/Maven 빌드 또는 Kafka...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-04-21-1",
         "teaser": null
@@ -1244,11 +1244,11 @@ var store = [{
         "title": "Git 블로그 카테고리 목록 페이징 기능 구현",
         "excerpt":"★ 추후 다시 작성 예정입니다 현재 Git 블로그는 GitHub Pages를 통해 자동 빌드 및 배포가 되고 있습니다. *.github.io 리포지토리에 push 시 GitHub가 Jekyll로 빌드해서 정적 웹사이트로 배포합니다. GitHub Pages는 글 카테고리 목록 페이징 및 커스텀 플러그인을 지원하지 않습니다. GitHub Actions로 jekyll-paginate-v2 플러그인을 사용하면 카테고리별 페이징이 가능합니다. 수동 페이징 구현은 반복...","categories": ["web-dev"],
         "tags": [],
-        "url": "/categories/web-dev/2025-05-21-1",
+        "url": "/web-dev/2025-05-21-1",
         "teaser": null
       },{
         "title": "Vue.js 개념 / Vue 개발환경 구성 방법",
-        "excerpt":" ","categories": ["Web 개발"],
+        "excerpt":" ","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-05-21-2",
         "teaser": null
