@@ -34,6 +34,10 @@ layout: default
   <h3 class="archive__subtitle">{{ paginator.posts[0].categories[0] }}   333</h3>
 {% endif %}
 
+{% assign slug = page.category | default: page.categories[0] %}
+{% assign nav_item = site.data.navigation.categories | where: "url", "/" | append: slug | first %}
+<h1>{{ nav_item.title | default: slug }}  444</h1>
+
   <div class="archive home_archive">
     {% unless page.header.overlay_color or page.header.overlay_image %}
       <h3 class="archive__subtitle">{{ title }}</h3>
