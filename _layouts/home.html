@@ -2,6 +2,8 @@
 layout: home_archive
 ---
 
+{{ content }}
+
 <h3 class="archive__subtitle">{{ site.data.ui-text[site.locale].recent_posts | default: "Recent Posts" }}</h3>
 
 {% if paginator %}
@@ -17,4 +19,4 @@ layout: home_archive
   {% endfor %}
 </div>
 
-{% include paginator2.html %}
+{% include paginator-v2.html %}

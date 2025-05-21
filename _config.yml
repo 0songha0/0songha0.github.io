@@ -230,6 +230,7 @@ pagination:
   sort_field: 'date'
   sort_reverse: true
   permalink: "/page/:num/"
+  title: ""
 
 # Archives
 #  Type
