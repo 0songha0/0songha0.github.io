@@ -1,3 +1,11 @@
+{% if page.title %}
+  <h3 class="archive__subtitle">{{ page.title }}</h3>
+{% elsif include.category_name %}
+  <h3 class="archive__subtitle">{{ include.category_name }}</h3>
+{% elsif paginator.posts and paginator.posts[0] and paginator.posts[0].categories and paginator.posts[0].categories[0] %}
+  <h3 class="archive__subtitle">{{ paginator.posts[0].categories[0] }}</h3>
+{% endif %}
+
 {% if paginator.total_pages > 1 %}
 <nav class="pagination">
   {% assign first_page_path = paginator.first_page_path | default: "/" | relative_url %}
