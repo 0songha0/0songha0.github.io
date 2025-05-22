@@ -1,9 +1,9 @@
 ---
-title: "Kafka"
+title: "카프카"
 layout: category
 permalink: /kafka
 author_profile: true
-taxonomy: Kafka
+taxonomy: 카프카
 sidebar:
   nav: "categories"
 pagination:
