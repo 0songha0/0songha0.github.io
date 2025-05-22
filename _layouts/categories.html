@@ -32,7 +32,9 @@ layout: archive
   {% for category in site.categories %}
     {% if category[1].size == i %}
       <section id="{{ category[0] | slugify | downcase }}" class="taxonomy__section">
-        <h2 class="archive__subtitle">{{ category[0] }}</h2>
+        {% assign category_url = "/" | append: category[0] %}
+        {% assign navCategory = site.data.navigation.categories | where: "url", category_url | first %}
+        <h2 class="archive__subtitle">{{ navCategory.title | category[0] }}</h2>
         <div class="entries-{{ entries_layout }}">
           {% for post in category.last limit:5 %}
             {% include archive-single.html type=entries_layout %}
