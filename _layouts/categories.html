@@ -16,9 +16,9 @@ layout: archive
     {% for category in site.categories %}
       {% if category[1].size == i %}
         <li>
-          {% assign url_parts = category[1] | split: '/' %}
-          {% assign navCategory = site.data.navigation.categories | where: "url", "/" | append: category[0] | first %}
-          <a href="/{{ url_parts[3] }}">
+          {% assign category_url = "/" | append: category[0] %}
+          {% assign navCategory = site.data.navigation.categories | where: "url", category_url | first %}
+          <a href="{{ category_url }}">
             <strong>{{ navCategory.title | default: category[0] }}</strong> <span class="taxonomy__count">{{ i }}</span>
           </a>
         </li>
