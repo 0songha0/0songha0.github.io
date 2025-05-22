@@ -10,6 +10,6 @@ pagination:
   enabled: true
   category: elk
   permalink: /:num/
-  per_page: 5
+  per_page: 6
   sort_reverse: true
 ---

@@ -226,7 +226,7 @@ whitelist:
 
 pagination:
   enabled: true
-  per_page: 5
+  per_page: 6
   sort_field: 'date'
   sort_reverse: true
   permalink: '/page/:num/'
