@@ -4,9 +4,6 @@ layout: archive
 
 {{ content }}
 
-
-{{ site.categories }}  카테고리 변수 출력
-
 {% assign categories_max = 0 %}
 {% for category in site.categories %}
   {% if category[1].size > categories_max %}
@@ -20,8 +17,9 @@ layout: archive
       {% if category[1].size == i %}
         <li>
           {% assign url_parts = category[1] | split: '/' %}
+          {% assign navCategory = site.data.navigation.categories | where: "url", "/" | append: category[0] | first %}
           <a href="/{{ url_parts[3] }}">
-            <strong>{{ category[0] }}</strong> <span class="taxonomy__count">{{ i }}</span>
+            <strong>{{ navCategory.title | default: category[0] }}</strong> <span class="taxonomy__count">{{ i }}</span>
           </a>
         </li>
       {% endif %}
