@@ -1248,8 +1248,8 @@ var store = [{
         "teaser": null
       },{
         "title": "Vue.js 개념 / Vue 개발환경 구성 방법",
-        "excerpt":" ","categories": ["web-dev"],
+        "excerpt":"작성 예정입니다 ㅎㅎ  ","categories": ["web-dev"],
         "tags": [],
-        "url": "/web-dev/2025-05-21-2",
+        "url": "/web-dev/2025-05-22-1",
         "teaser": null
       }]
