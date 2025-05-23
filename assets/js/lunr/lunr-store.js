@@ -576,7 +576,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Visual Studio Code 설치 / VSCode 사용법",
-        "excerpt":"Visual Studio Code 설치 https://code.visualstudio.com/download VSCode 사용법 프로젝트 여는 방법 상단 File 메뉴 &gt; Open Folder &gt; 프로젝트 폴더 선택 파일 내 텍스트 검색 좌측 검색 아이콘 클릭 &gt; 검색어 입력 플러그인 설치 방법 좌측 EXTENSIONS &gt; 플러그인명 검색 &gt; 플러그인 선택 &gt; Install 파이썬 플러그인도 설치할 수 있습니다. 파이썬...","categories": ["tool"],
+        "excerpt":"Visual Studio Code 설치 https://code.visualstudio.com/download VSCode 사용법 프로젝트 여는 방법 상단 File 메뉴 &gt; Open Folder &gt; 프로젝트 폴더 선택 파일 내 텍스트 검색 좌측 검색 아이콘 클릭 &gt; 검색어 입력 플러그인 설치 방법 좌측 EXTENSIONS &gt; 플러그인명 검색 &gt; 플러그인 선택 &gt; Install 파이썬 플러그인도 설치할 수 있습니다. 유용한...","categories": ["tool"],
         "tags": [],
         "url": "/tool/2023-04-20-1",
         "teaser": null
@@ -1247,8 +1247,8 @@ var store = [{
         "url": "/web-dev/2025-05-21-1",
         "teaser": null
       },{
-        "title": "Vue.js 개념 / Vue 개발환경 구성 방법",
-        "excerpt":"작성 예정입니다 ㅎㅎ  ","categories": ["web-dev"],
+        "title": "Vue 개념 정리 / Vue.js 설치 및 실행 방법",
+        "excerpt":"Vue 개념 정리 컴포넌트 단위로 UI를 구성하는 프론트엔드 프레임워크입니다. 기존 Javascript와 달리, 컴포넌트를 재사용해 중복 코드를 줄일 수 있습니다. DOM을 직접 가져와서 데이터를 수동 할당 및 업데이트 해야 하는 Javascript와 달리, Vue는 data에 선언한 값을 템플릿 구문에 바인딩 해두면 DOM에 자동 반영하고 렌더링 합니다. 컴포넌트란? HTML, CSS, Javascript를 캡슐화하여 재사용...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-05-22-1",
         "teaser": null

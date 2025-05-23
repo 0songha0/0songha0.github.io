@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Vue.js 개념 / Vue 개발환경 구성 방법 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>Vue 개념 정리 / Vue.js 설치 및 실행 방법 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,7 +65,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="Vue.js 개념 / Vue 개발환경 구성 방법">
+<meta property="og:title" content="Vue 개념 정리 / Vue.js 설치 및 실행 방법">
 <meta property="og:url" content="https://0songha0.github.io/web-dev/2025-05-22-1">
 
 
@@ -425,7 +425,7 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Vue.js 개념 / Vue 개발환경 구성 방법">
+    <meta itemprop="headline" content="Vue 개념 정리 / Vue.js 설치 및 실행 방법">
     <meta itemprop="description" content="">
     <meta itemprop="datePublished" content="2025-05-22T00:00:00+00:00">
     <meta itemprop="dateModified" content="2025-05-22T00:00:00+00:00">
@@ -433,7 +433,7 @@
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Vue.js 개념 / Vue 개발환경 구성 방법
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Vue 개념 정리 / Vue.js 설치 및 실행 방법
 </h1>
           
 
@@ -460,14 +460,179 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue.js 개념 / Vue 개발환경 구성 방법</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue 개념 정리 / Vue.js 설치 및 실행 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              
+              <ul class="toc__menu"><li><a href="#vue-개념-정리">Vue 개념 정리</a><ul><li><a href="#컴포넌트란">컴포넌트란?</a></li><li><a href="#vue-api-종류">Vue API 종류</a></li><li><a href="#vue-프로젝트-기본-구조">Vue 프로젝트 기본 구조</a></li></ul></li><li><a href="#vue-설치-방법">Vue 설치 방법</a><ul><li><a href="#cdn으로-vue-설치">CDN으로 Vue 설치</a></li><li><a href="#npm으로-vue-설치-수동-세팅">npm으로 Vue 설치 (수동 세팅)</a></li><li><a href="#vite-cli로-vue-설치-자동-세팅">vite CLI로 Vue 설치 (자동 세팅)</a></li></ul></li><li><a href="#vue-프로젝트-실행">Vue 프로젝트 실행</a><ul><li><a href="#vue-실행-스크립트-추가">Vue 실행 스크립트 추가</a></li><li><a href="#vue-프로젝트-실행-1">Vue 프로젝트 실행</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <p>작성 예정입니다 ㅎㅎ</p>
+        <h2 id="vue-개념-정리">Vue 개념 정리</h2>
+
+<p>컴포넌트 단위로 UI를 구성하는 프론트엔드 프레임워크입니다.<br />
+기존 Javascript와 달리, 컴포넌트를 재사용해 중복 코드를 줄일 수 있습니다.</p>
+
+<p>DOM을 직접 가져와서 데이터를 수동 할당 및 업데이트 해야 하는 Javascript와 달리,<br />
+Vue는 data에 선언한 값을 템플릿 구문에 바인딩 해두면 DOM에 자동 반영하고 렌더링 합니다.</p>
+
+<h3 id="컴포넌트란">컴포넌트란?</h3>
+<p>HTML, CSS, Javascript를 캡슐화하여 재사용 가능한 UI 단위입니다.<br />
+SPA는 앱 루트 컴포넌트 안에 컴포넌트들을 배치해 화면을 구성하는 컴포넌트 기반 아키텍처입니다.</p>
+
+<h3 id="vue-api-종류">Vue API 종류</h3>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>Options API</td>
+      <td>
+        Vue 2에서 주로 사용되던 방식입니다.<br />
+        로직을 data, methods, mounted 등 별도의 옵션에 각각 구현합니다.
+        </td>
+    </tr>
+    <tr>
+      <td>Composition API</td>
+      <td>
+        Vue 3에서 도입되어 사용이 권장되는 API입니다.<br />
+        Options API의 로직 분산 문제가 개선되었습니다.<br />
+        setup 함수 내에서 ref, reactive, computed 등 함수를 조합해 기능을 구성합니다.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="vue-프로젝트-기본-구조">Vue 프로젝트 기본 구조</h3>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>node_modules</td>
+      <td>npm install 시 package.json 파일 내 의존성 라이브러리들이 설치되는 폴더입니다.</td>
+    </tr>
+    <tr>
+      <td>public</td>
+      <td>파비콘 등 빌드 없이 배포될 정적 리소스들을 저장하는 폴더입니다.</td>
+    </tr>
+    <tr>
+      <td>src/assets</td>
+      <td>Webpack, Vite 빌드 도구에 의해 처리될 수 있는 정적 리소스들을 저장하는 폴더입니다.</td>
+    </tr>
+    <tr>
+      <td>src/components</td>
+      <td>.vue 컴포넌트 파일들을 저장하는 폴더입니다.</td>
+    </tr>
+    <tr>
+      <td>src/App.vue</td>
+      <td>
+        Vue 앱 최상위 루트 컴포넌트입니다.<br />
+        다른 컴포넌트들이 App 컴포넌트 안에 포함됩니다.
+      </td>
+    </tr>
+    <tr>
+      <td>src/main.js</td>
+      <td>
+        Vite가 앱의 진입점으로 사용하는 JavaScript 모듈입니다.<br />
+        index.html 내부에 script 태그로 import 됩니다.<br />
+        main.js 내에서는 App.vue 루트 컴포넌트 정의를 import 하고 있습니다.<br />
+        CreateApp()으로 생성된 앱 인스턴스를 index.html의 #app div에 mount 합니다.
+        </td>
+    </tr>
+    <tr>
+      <td>.eslintrc.cjs</td>
+      <td>
+        ESLint 설정 파일입니다.<br />
+        코드 스타일 가이드 기반 문법 검사 규칙, 플러그인, 환경 등을 설정합니다.
+      </td>
+    </tr>
+    <tr>
+      <td>index.html</td>
+      <td>Vite 개발 서버가 HTML 진입점으로 사용하는 템플릿 파일입니다.</td>
+    </tr>
+    <tr>
+      <td>package-lock.json</td>
+      <td>npm install 시 자동 생성되는 의존성 버전, 트리 구조 기록 파일입니다.</td>
+    </tr>
+    <tr>
+      <td>package.json</td>
+      <td>
+        프로젝트 정보, 스크립트, 의존성 라이브러리 설정 파일입니다.
+      </td>
+    </tr>
+    <tr>
+      <td>vite.config.js</td>
+      <td>
+        vite 실행 시 참조되는 vite 설정 파일입니다.<br />
+        플러그인, 경로 alias, 서버 설정 등을 정의합니다.
+        </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="vue-설치-방법">Vue 설치 방법</h2>
+
+<h3 id="cdn으로-vue-설치">CDN으로 Vue 설치</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script src="https://unpkg.com/vue@3/dist/vue.global.js"&gt;&lt;/script&gt;
+</code></pre></div></div>
+<p>HTML에 Vue CDN script 추가 시 즉시 Vue 사용이 가능합니다.<br />
+작은 프로젝트 또는 간단한 테스트 시 적합한 방법입니다.</p>
+
+<h3 id="npm으로-vue-설치-수동-세팅">npm으로 Vue 설치 (수동 세팅)</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm init -y
+npm i vue
+npm i vite
+npm i @vitejs/plugin-vue
+</code></pre></div></div>
+<p>npm 명령어 사용 시에는 로컬에 Node.js가 설치되어 있어야 합니다.<br />
+프로젝트 루트에서 npm init 시 package.json 파일이 생성되고, npm 기반으로 프로젝트가 초기화됩니다.<br />
+이후 Vue.js 프레임워크, 개발서버 및 빌드 도구 vite, vite에서 vue 파일 처리를 위한 플러그인을 설치합니다.<br />
+이렇게 설치하면 프로젝트 구조, HTML 템플릿, vite 설정 파일을 수동으로 작성해야 합니다.</p>
+
+<p><mark>vite 설정 파일 생성</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite'
+
+import { fileURLToPath, URL } from 'url'
+
+export default defineConfig ({
+  plugins: [vue()],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  }
+})
+</code></pre></div></div>
+<p>Vue 프로젝트 루트에 vite.config.js 파일을 생성해야 vite 실행이 가능합니다.<br />
+alias 설정으로 ./src 경로를 @로 대체하여, import 시 경로를 간결하게 작성할 수 있습니다.</p>
+
+<h3 id="vite-cli로-vue-설치-자동-세팅">vite CLI로 Vue 설치 (자동 세팅)</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm init vue
+또는
+npm create vite@latest 프로젝트명 -- --template vue
+</code></pre></div></div>
+<p>vite가 Vue 프로젝트 구조 및 설정 파일들을 자동으로 생성해줍니다.</p>
+
+<p><mark>의존성 라이브러리 설치</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install
+</code></pre></div></div>
+<p>CLI로 설치 시, 프로젝트 폴더로 이동해서 node_modules 폴더를 생성합니다.<br />
+package.json 파일에 dependencies로 정의된 의존성 라이브러리들이 설치됩니다.</p>
+
+<hr />
+
+<h2 id="vue-프로젝트-실행">Vue 프로젝트 실행</h2>
+
+<h3 id="vue-실행-스크립트-추가">Vue 실행 스크립트 추가</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"scripts": {
+  "dev": "vite"
+}
+</code></pre></div></div>
+<p>package.json 파일에 dev 프로파일 실행 시 vite 개발서버 실행 스크립트를 등록합니다.</p>
+
+<h3 id="vue-프로젝트-실행-1">Vue 프로젝트 실행</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm run dev
+</code></pre></div></div>
+<p>로컬에서 vite 개발 서버를 실행하여 브라우저에서 Vue 프로젝트에 접근할 수 있습니다.</p>
 
         
       </section>
