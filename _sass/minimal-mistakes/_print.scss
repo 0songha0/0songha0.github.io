@@ -83,11 +83,13 @@
     display: table-header-group;
   }
 
+  /* 기존 테이블 테두리 제거
   table,
   th,
   td {
     border-bottom: 1px solid #000;
   }
+  */
 
   td,
   th {

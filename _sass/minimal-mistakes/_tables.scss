@@ -2,16 +2,28 @@
    TABLES
    ========================================================================== */
 
-.table_2_left tbody td:nth-child(2) {
-  text-align: left; /* 두 번째 열만 좌측 정렬 */
-}
+.table_2_left {
+  tbody {
+    /* 두 번째 열만 좌측 정렬 */
+    td:nth-child(2) {
+      text-align: left;
+    }
 
-.table_3_left tbody td:nth-child(3) {
-  text-align: left; /* 세 번째 열만 좌측 정렬 */
-}
+    /* 세 번째 열만 좌측 정렬 */
+    td:nth-child(3) {
+      text-align: left;
+    }
 
-.table_4_left tbody td:nth-child(4) {
-  text-align: left; /* 네 번째 열만 좌측 정렬 */
+    /* 네 번째 열만 좌측 정렬 */
+    td:nth-child(4) {
+      text-align: left;
+    }
+  }
+
+  /* 첫 번째 열 사이즈 지정 */
+  td:first-child {
+    width: 13em;
+  }
 }
 
 table {
@@ -45,6 +57,7 @@ th {
 td {
   padding: 0.5em;
   border-bottom: 1px solid mix(#000, $border-color, 25%);
+  border-top: 1px solid mix(#000, $border-color, 25%);
 }
 
 tr,
