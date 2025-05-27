@@ -1247,8 +1247,8 @@ var store = [{
         "url": "/web-dev/2025-05-21-1",
         "teaser": null
       },{
-        "title": "Vue 개념 정리 / Vue.js 설치 및 실행 방법",
-        "excerpt":"Vue 개념 정리 컴포넌트 단위로 UI를 구성하는 프론트엔드 프레임워크입니다. 기존 Javascript와 달리, 컴포넌트를 재사용해 중복 코드를 줄일 수 있습니다. DOM을 직접 가져와서 데이터를 수동 할당 및 업데이트 해야 하는 Javascript와 달리, Vue는 data에 선언한 값을 템플릿 구문에 바인딩 해두면 DOM에 자동 반영하고 렌더링 합니다. 컴포넌트란? HTML, CSS, Javascript를 캡슐화하여 재사용...","categories": ["web-dev"],
+        "title": "Vue 개념 및 구조 / Vue.js 설치 및 실행 방법",
+        "excerpt":"Vue.js 컴포넌트 단위로 UI를 구성하는 프론트엔드 프레임워크입니다. 기존 Javascript와 달리, 컴포넌트를 재사용해 중복 코드를 줄일 수 있습니다. DOM을 직접 가져와서 데이터를 수동 할당 및 업데이트 해야 하는 Javascript와 달리, Vue는 data에 선언한 값을 템플릿 구문에 바인딩 해두면 DOM에 자동 반영하고 렌더링 합니다. 컴포넌트란? HTML, CSS, Javascript를 캡슐화하여 재사용 가능한 UI...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-05-22-1",
         "teaser": null

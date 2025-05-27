@@ -476,10 +476,12 @@
 <p><strong>2) 키바나용 로드밸런서</strong><br />
 로드밸런서2 DNS name:80으로 들어오는 요청을 엘라스틱서치서버:5600으로 포워딩하는 ALB 로드밸런서2</p>
 
-<p><mark>로드밸런서 종류</mark><br />
-<code class="language-plaintext highlighter-rouge">CLB</code> : 이전 세대의 로드 밸런서로서, 현재는 사용이 권장되지 않습니다.<br />
-<code class="language-plaintext highlighter-rouge">ALB</code> : HTTP 및 HTTPS 트래픽을 처리합니다. 웹 애플리케이션을 더 효율적으로 관리할 수 있습니다.<br />
-<code class="language-plaintext highlighter-rouge">NLB</code>: TCP, UDP 및 HTTPS 트래픽을 처리합니다. 대규모 네트워크 트래픽 처리에 적합합니다.</p>
+<p><mark>로드밸런서 종류</mark></p>
+<ul>
+  <li>CLB : 이전 세대의 로드 밸런서로서, 현재는 사용이 권장되지 않습니다.</li>
+  <li>ALB : HTTP 및 HTTPS 트래픽을 처리합니다. 웹 애플리케이션을 더 효율적으로 관리할 수 있습니다.</li>
+  <li>NLB : TCP, UDP 및 HTTPS 트래픽을 처리합니다. 대규모 네트워크 트래픽 처리에 적합합니다.</li>
+</ul>
 
 <h3 id="aws-로드밸런서-대상-그룹-생성">AWS 로드밸런서 대상 그룹 생성</h3>
 
@@ -702,7 +704,7 @@ EC2 &gt; 로드 밸런싱 &gt; 로드밸런서 &gt; 로드밸런서 선택 &gt; 
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
-        <a href="/web-dev/2025-05-22-1" rel="permalink">Vue 개념 정리 / Vue.js 설치 및 실행 방법
+        <a href="/web-dev/2025-05-22-1" rel="permalink">Vue 개념 및 구조 / Vue.js 설치 및 실행 방법
 </a>
       
     </h2>
