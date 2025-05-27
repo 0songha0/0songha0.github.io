@@ -60,9 +60,11 @@ td {
   border-top: 1px solid mix(#000, $border-color, 25%);
 }
 
+/* 기존 테이블 테두리 제거
 tr,
 td,
 th {
   vertical-align: middle;
   border: 1px solid #e6e6e6;
 }
+*/
