@@ -1,0 +1,1216 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Vue 문법 정리 1 / Vue 3 템플릿 문법 (인터폴레이션, 디렉티브) | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="Vue 문법 정리 1 / Vue 3 템플릿 문법 (인터폴레이션, 디렉티브)">
+<meta property="og:url" content="https://0songha0.github.io/web-dev/2025-05-26-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-05-26T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2025-05-26T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/web-dev/2025-05-26-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 210</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">카프카</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Vue 문법 정리 1 / Vue 3 템플릿 문법 (인터폴레이션, 디렉티브)">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2025-05-26T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-05-26T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Vue 문법 정리 1 / Vue 3 템플릿 문법 (인터폴레이션, 디렉티브)
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-26T00:00:00+00:00">2025-05-26</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue 문법 정리 1 / Vue 3 템플릿 문법 (인터폴레이션, 디렉티브)</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
+              <ul class="toc__menu"><li><a href="#인터폴레이션-interpolation">인터폴레이션 (Interpolation)</a></li><li><a href="#디렉티브-directive">디렉티브 (Directive)</a><ul><li><a href="#v-text">v-text</a></li><li><a href="#v-html">v-html</a></li><li><a href="#v-once">v-once</a></li><li><a href="#v-bind-">v-bind (:)</a></li><li><a href="#v-on-">v-on (@)</a></li><li><a href="#v-model">v-model</a></li><li><a href="#v-slot-">v-slot (#)</a></li><li><a href="#v-pre">v-pre</a></li><li><a href="#v-memo">v-memo</a></li><li><a href="#v-if">v-if</a></li><li><a href="#v-else">v-else</a></li><li><a href="#v-else-if">v-else-if</a></li><li><a href="#v-show">v-show</a></li><li><a href="#v-for">v-for</a></li><li><a href="#v-cloak">v-cloak</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="인터폴레이션-interpolation">인터폴레이션 (Interpolation)</h2>
+
+<p>템플릿에서 데이터를 HTML이 아닌 일반 텍스트로 간단히 출력할 때 사용합니다.<br />
+Vue 데이터 바인딩 문법 중 하나이며, 데이터가 변경되면 템플릿이 다시 렌더링됩니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+<p>아래와 같이, 간단한 JS 표현식도 사용 가능합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;p&gt;9&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="디렉티브-directive">디렉티브 (Directive)</h2>
+
+<p>v- 접두사로 시작하는 Vue 내장 HTML 속성입니다.<br />
+컴포넌트 또는 DOM 요소에 특정 동작을 지시할 수 있습니다.</p>
+
+<p><mark>디렉티브 구성</mark><br />
+디렉티브명:전달인자.수식어=”값”<br />
+전달인자, 수식어는 생략 가능합니다.</p>
+
+<h3 id="v-text">v-text</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;span v-text="data변수명"&gt;&lt;/span&gt;
+</code></pre></div></div>
+<p>데이터를 텍스트로 렌더링하는 아래 인터폴레이션과 동일한 역할을 합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;span&gt;&lt;/span&gt;
+</code></pre></div></div>
+
+<h3 id="v-html">v-html</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;span v-html="data변수명"&gt;&lt;/span&gt;
+</code></pre></div></div>
+<p>데이터를 일반 텍스트가 아닌 HTML로 렌더링합니다.<br />
+HTML 동적 렌더링 시 XSS (스크립트 삽입 공격) 이슈에 주의해야 합니다.<br />
+일반 사용자가 작성하거나 제공한 콘텐츠를 렌더링하면 안 됩니다.</p>
+
+<h3 id="v-once">v-once</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;p v-once&gt;&lt;/p&gt;
+</code></pre></div></div>
+<p>데이터가 변경되어도 다시 렌더링되지 않는 일회성 바인딩입니다.</p>
+
+<h3 id="v-bind-">v-bind (:)</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div v-bind:title="data변수명"&gt;마우스오버&lt;/div&gt;
+또는
+&lt;input type="text" :disabled="data변수명"/&gt;
+</code></pre></div></div>
+<p>이중 중괄호와 달리, HTML에 속성에 동적으로 값을 바인딩할 수 있는 단방향 속성 바인딩입니다.<br />
+data가 변경되면 바인딩 된 DOM도 변경되지만, 사용자 입력으로 DOM이 변경되면 data는 변경되지 않습니다.</p>
+
+<p><mark>다중 속성 바인딩 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;input v-bind="attrs"&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import { ref } from 'vue'; 
+
+export default {
+  setup() {
+    const attrs = ref({
+      type: "text",
+      value: '123456',
+      disabled: false,
+    });
+
+    return {
+      attrs
+    }
+  }
+}
+&lt;/script&gt;
+</code></pre></div></div>
+<p>위와 같이, 여러 속성을 가진 data 객체로 한 번에 다중 속성 바인딩이 가능합니다.</p>
+
+<p><mark>다중 클래스 바인딩 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  // :class="클래스명: 조건"
+  &lt;div class="기존클래스" :class="{ active: isActive, 'text-danger' : hasError }"&gt;텍스트&lt;/div&gt;
+  
+  // :class="클래스객체명"
+  &lt;div class="기존클래스" :class="classObject"&gt;텍스트&lt;/div&gt;
+  또는
+  &lt;div class="기존클래스" :class="classObjectComputed"&gt;텍스트&lt;/div&gt;
+  
+  // :class="[클래스1, 클래스2, 클래스3]"
+  &lt;div class="기존클래스" :class="[isActive ? 'active-class' : 'class', errorClass, classObject]"&gt;텍스트&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import { ref, reactive, computed } from 'vue';
+
+export default {
+  setup() {
+    const isActive = ref(true);
+    const hasError = ref(false);
+
+    const classObject = reactive({
+      active: isActive.value,
+      'text-danger': hasError.value
+    });
+
+    // 각 class 조건이 여러개인 경우
+    const classObjectComputed = computed(() =&gt; {
+      return {
+        active: isActive.value,
+        'text-danger': hasError.value,
+        highlight: isActive.value &amp;&amp; !hasError.value,
+        'bg-gray': !isActive.value &amp;&amp; hasError.value
+      }
+    });
+
+    const errorClass = ref('error');
+
+    return { isActive, hasError, classObject, classObjectComputed };
+  }
+}
+&lt;/script&gt;
+&lt;style&gt;
+.active {
+  font-weight: 900;
+}
+.text-danger {
+  color: red;
+}
+.highlight {
+  background-color: yellow;
+  color: black;
+  font-weight: bold;
+}
+.bg-gray {
+  background-color: #d3d3d3;
+  color: white;
+}
+&lt;/style&gt;
+</code></pre></div></div>
+<p>위와 같이, 다양한 스타일을 입힐 수 있는 다중 클래스 바인딩도 가능합니다.<br />
+v-bind:class 내 클래스명에 특수문자가 있으면 ‘‘로 감싸야 합니다.</p>
+
+<p><mark>인라인 스타일 바인딩 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;div :style="styleObject"&gt;텍스트&lt;/div&gt;
+
+  &lt;button v-on:click="fontSize--"&gt;-&lt;/button&gt;
+  &lt;button v-on:click="fontSize++"&gt;+&lt;/button&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import { ref, computed } from 'vue';
+
+export default {
+  setup() {
+      const fontSize = ref(13);
+
+      const styleObject = computed(() =&gt; {
+        return {
+          color: 'red',
+          fontsize: fontsize.value + 'px',
+        }
+      });
+
+      return {
+        styleObject
+      }
+  }
+}
+&lt;/script&gt;
+</code></pre></div></div>
+<p>위와 같이, 인라인 스타일을 정의하고 바인딩 할 수도 있습니다.</p>
+
+<h3 id="v-on-">v-on (@)</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;button v-on:click="함수명"&gt;Click&lt;/button&gt;
+또는
+&lt;button @click="함수명"&gt;Click&lt;/button&gt;
+
+&lt;script&gt;
+const 함수명 = (event) =&gt; {
+  console.log(event.target);
+  console.log(event.target.tagName);
+}
+&lt;/script&gt;
+</code></pre></div></div>
+<p>v-on 디렉티브는 클릭, 마우스 오버, 키다운 등 다양한 이벤트 처리를 위해 사용됩니다.<br />
+이벤트 핸들러 함수 실행 시, 매개변수로 event 객체를 받을 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;button @click="함수명('매개변수', $event)"&gt;Click&lt;/button&gt;
+
+&lt;script&gt;
+const 함수명 = (변수명, event) =&gt; {
+  console.log(event.target);
+  console.log(event.target.tagName);
+}
+&lt;/script&gt;
+</code></pre></div></div>
+<p>위와 같이, 다른 매개변수와 함께 이벤트 객체를 넘길 수도 있습니다.</p>
+
+<p><mark>v-on 이벤트 수식어</mark></p>
+<ul>
+  <li>.stop : 겹쳐있는 요소들에 이벤트 전파를 막는 e.stopPropagation()과 같은 기능</li>
+  <li>.prevent : e.preventDefault()</li>
+  <li>.capture : 캡쳐모드 사용 시 이벤트 리스너 사용 가능</li>
+  <li>.self : 자기 자신만 호출 가능 (타깃 요소가 self 일 때 동작)</li>
+  <li>.once : 이벤트를 한 번만 실행</li>
+  <li>.passive : 모바일 장치 성능 개선을 위해 터치 이벤트 리스너와 함께 사용</li>
+</ul>
+
+<p><mark>토글 버튼 클릭 이벤트 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;button v-on:click="toggle"&gt;토글버튼&lt;/button&gt;
+  또는
+  &lt;button v-on:click="isActive = !isActive"&gt;토글버튼&lt;/button&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  import { ref } from 'vue';
+
+  export default {
+    setup() {
+      const isActive = ref(false);
+
+      const toggle = () =&gt; {
+        // 토글 상태 변경
+        isActive.value = !isActive.value;
+      };
+
+      return { toggle, isActive };
+    }
+  }
+&lt;/script&gt;
+</code></pre></div></div>
+<p>위와 같이, 토글 버튼 클릭 이벤트도 바인딩 할 수 있습니다.</p>
+
+<p><mark>keyup 이벤트 처리 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+&lt;input type="text" @keyup="onKeyupHandler" /&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  import { ref } from 'vue';
+
+  export default {
+    setup() {
+      const onKeyupHandler = event =&gt; {
+        console.log(event.key);
+      }
+
+      return { onKeyupHandler };
+    }
+  }
+&lt;/script&gt;
+</code></pre></div></div>
+<p>v-on:keyup으로 키보드 입력 시 어떤 키가 눌렸는지 확인 가능합니다.</p>
+
+<h3 id="v-model">v-model</h3>
+<p>양방향 바인딩입니다.<br />
+data가 변경되면 바인딩 된 DOM도 변경되고, 사용자 입력으로 DOM이 변경되면 data가 변경됩니다.</p>
+
+<h3 id="v-slot-">v-slot (#)</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;base-layout&gt;
+  &lt;template v-slot:header&gt;헤더 내용&lt;/template&gt;
+  &lt;p&gt;본문 내용&lt;/p&gt;
+&lt;/base-layout&gt;
+</code></pre></div></div>
+<p>컴포넌트의 템플릿 빈 자리 (Slot) 을 외부에서 삽입할 수 있습니다.</p>
+
+<h3 id="v-pre">v-pre</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div v-pre&gt;&lt;/div&gt;
+</code></pre></div></div>
+<p>템플릿 컴파일을 하지 않고, 바인딩 문법도 일반 텍스트 그대로 렌더링합니다.</p>
+
+<h3 id="v-memo">v-memo</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div v-memo="[ data변수명1, data변수명2 ]"&gt;
+&lt;/div&gt;
+</code></pre></div></div>
+<p>반응형 데이터 값이 변경될 때만 다시 렌더링합니다.<br />
+Vue 3.2 이상에서 추가된 디렉티브입니다.</p>
+
+<h3 id="v-if">v-if</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;h2 v-if="visible"&gt;텍스트&lt;/h2&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const visible = ref(false);
+    return { visible };
+  }
+}
+&lt;/script&gt;
+</code></pre></div></div>
+<p>조건에 따라 엘리먼트를 렌더링 할 때 사용합니다.</p>
+
+<p><mark>template v-if</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;template v-if="visible"&gt;
+    &lt;h1&gt;제목&lt;/h1&gt;
+    &lt;p&gt;본문&lt;/p&gt;
+  &lt;/template&gt;
+&lt;/template&gt;
+</code></pre></div></div>
+<p>템플릿을 사용하면 여러 HTML 요소를 조건에 따라 렌더링 할 수 있습니다.<br />
+template은 div와 달리 렌더링 결과에 포함되지 않습니다.</p>
+
+<h3 id="v-else">v-else</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;h1 v-if="조건"&gt;텍스트1&lt;/h1&gt;
+&lt;h1 v-else&gt;텍스트2&lt;/h1&gt;
+</code></pre></div></div>
+<p>조건에 따라 다른 엘리먼트를 렌더링 할 때 사용합니다.</p>
+
+<h3 id="v-else-if">v-else-if</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;h1 v-if="textType === 'A'"&gt;텍스트A&lt;/h1&gt;
+    &lt;h1 v-else-if="textType === 'B'"&gt;텍스트B&lt;/h1&gt;
+    &lt;h1 v-else-if="textType === 'C'"&gt;텍스트B&lt;/h1&gt;
+    &lt;h1 v-else&gt;A, B, C가 아닙니다.&lt;/h1&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const textType = ref('A');
+
+    return { textType };
+  }
+}
+&lt;/script&gt;
+</code></pre></div></div>
+
+<h3 id="v-show">v-show</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;h2 v-show="isShow"&gt;텍스트&lt;/h2&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const isShow = ref(true);
+    return { isShow };
+  }
+}
+&lt;/script&gt;
+</code></pre></div></div>
+<p>v-show는 엘리먼트 표시 여부를 지정할 때 사용합니다.<br />
+v-if와 달리, 조건이 false 시 엘리먼트를 렌더링하고 display:none 스타일을 부여합니다.</p>
+
+<h3 id="v-for">v-for</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;ul&gt;
+      // 배열 렌더링
+      &lt;li v-for="(item, index) in items" :key="item.id"&gt;
+        , 
+      &lt;/li&gt;
+
+      // 객체 렌더링
+      &lt;li v-for="(value, key, index) in myObject" :key="key"&gt;
+        , , 
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const items = reactive([
+      { id: 1, message: 'Java' },
+      { id: 2, message: 'HTML' },
+      { id: 3, message: 'CSS' },
+      { id: 4, message: 'JavaScript' },
+    ]);
+
+    const myObject = reactive({
+      // key: value 정의
+      title: '제목',
+      author: '작성자',
+      publishedAt: '2025-05-27',
+    })
+
+    return { items, myObject };
+  }
+}
+&lt;/script&gt;
+</code></pre></div></div>
+<p>배열/객체 항목을 반복 렌더링 할 수 있습니다.<br />
+v-for 사용 시에는 :key 옵션으로 반복 항목의 고유 식별자를 지정해야 합니다.</p>
+
+<p><mark>template v-for</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;ul&gt;
+    &lt;template v-for="user in users"&gt;
+      &lt;li v-if="user.isActive" :key="users.id"&gt;
+        
+      &lt;/li&gt;
+    &lt;/template&gt;
+  &lt;/ul&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const users = reactive([
+      { id: 1, name: '홍길동', isActive: true },
+      { id: 2, name: '김길수', isActive: false },
+      { id: 3, name: '지현아', isActive: true },
+      { id: 4, name: '한빛나', isActive: true },
+    ]);
+    return { users };
+  }
+}
+&lt;/script&gt;
+</code></pre></div></div>
+<p>하나의 엘리먼트에 v-for, v-if를 함께 사용하는 것은 권장되지 않습니다.<br />
+위와 같이, 템플릿을 사용하면 권장되는 형태로 출력할 수 있습니다.</p>
+
+<h3 id="v-cloak">v-cloak</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;html lang="ko"&gt;
+  &lt;head&gt;
+    &lt;script src="https://unpkg.com/vue@next"&gt;&lt;/script&gt;
+    &lt;style&gt;
+    [v-cloak] {
+      display: none;
+    }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="app"&gt;
+      &lt;p v-cloak&gt;&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+      const App = {
+        data() {
+          return {
+            message: '메세지'
+          }
+        }
+      };
+
+      setTimeout(() =&gt; {
+        Vue.createApp(App).mount('#app')
+      }, 3000);
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+<p>컴포넌트가 마운트되기 전, 데이터가 바인딩되지 않은 미완성 화면을 숨길 때 사용합니다.<br />
+마운트 시 v-cloak 속성이 제거되어 숨겨졌던 요소가 다시 보이게 됩니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories#web-dev" class="page__taxonomy-item" rel="tag">Web 개발</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-05-26">2025-05-26</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">❮</a>
+    
+    
+      <a href="/web-dev/2025-05-22-1" class="pagination--pager" title="Vue 개념 및 구조 / Vue.js 설치 및 실행 방법
+">❯</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">최신 글</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-22-1" rel="permalink">Vue 개념 및 구조 / Vue.js 설치 및 실행 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-22T00:00:00+00:00">2025-05-22</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

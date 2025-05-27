@@ -1252,4 +1252,10 @@ var store = [{
         "tags": [],
         "url": "/web-dev/2025-05-22-1",
         "teaser": null
+      },{
+        "title": "Vue 문법 정리 1 / Vue 3 템플릿 문법 (인터폴레이션, 디렉티브)",
+        "excerpt":"인터폴레이션 (Interpolation) 템플릿에서 데이터를 HTML이 아닌 일반 텍스트로 간단히 출력할 때 사용합니다. Vue 데이터 바인딩 문법 중 하나이며, 데이터가 변경되면 템플릿이 다시 렌더링됩니다. 아래와 같이, 간단한 JS 표현식도 사용 가능합니다. &lt;p&gt;9&lt;/p&gt; &lt;p&gt;&lt;/p&gt; &lt;p&gt;&lt;/p&gt; 디렉티브 (Directive) v- 접두사로 시작하는 Vue 내장 HTML 속성입니다. 컴포넌트 또는 DOM 요소에 특정 동작을 지시할 수...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-05-26-1",
+        "teaser": null
       }]
