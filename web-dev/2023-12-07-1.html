@@ -618,9 +618,22 @@ IE11이 아니면 SSO URL을 Jquery getScript 함수를 통해 실행한 뒤 해
 	&lt;/beans&gt;
 &lt;/beans&gt;
 </code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">mvc:mapping</code> : 인터셉터가 적용될 URL 패턴 설정<br />
-<code class="language-plaintext highlighter-rouge">mvc:exclude-mapping</code> : 인터셉터를 적용하지 않을 특정 URL 패턴 설정<br />
-<code class="language-plaintext highlighter-rouge">property</code> : 인터셉터에서 private 변수에 저장하고 사용할 속성</p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>mvc:mapping</td>
+      <td>인터셉터가 적용될 URL 패턴 설정</td>
+    </tr>
+    <tr>
+      <td>mvc:exclude-mapping</td>
+      <td>인터셉터를 적용하지 않을 특정 URL 패턴 설정</td>
+    </tr>
+    <tr>
+      <td>property</td>
+      <td>인터셉터에서 private 변수에 저장하고 사용할 속성</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><mark>Interceptor에서 로그인 여부 체크 예시</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();

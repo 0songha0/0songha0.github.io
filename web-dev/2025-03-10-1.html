@@ -553,10 +553,18 @@ mybatis.mapper-locations=classpath:mapper/**/*.xml
 <p>application.properties 파일에 DB 정보를 작성하고, Mapper 위치를 설정합니다.</p>
 
 <p><mark>개발/운영 환경별 프로파일 설정</mark></p>
-<ul>
-  <li><b>개발 설정 파일</b> : application.properties 또는 application-dev.properties</li>
-  <li><b>운영 설정 파일</b> : application-prod.properties</li>
-</ul>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>개발 설정 파일</td>
+      <td>application.properties 또는 application-dev.properties</td>
+    </tr>
+    <tr>
+      <td>운영 설정 파일</td>
+      <td>application-prod.properties</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="jdbc-드라이버-의존성-추가">JDBC 드라이버 의존성 추가</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;dependency&gt;
@@ -698,11 +706,18 @@ Boot Dashboard 탭 &gt; local &gt; 스프링배치 프로젝트 우클릭 &gt; O
 이후 재빌드 시에는 Run &gt; Run Congigurations… &gt; Maven Build 목록에서 프로젝트명 더블클릭 하면 됩니다.</p>
 
 <p><mark>서버 구분별 Goals 예시</mark></p>
-<ul>
-  <li><b>개발서버용 Goals</b> : clean package -D spring.profiles.active=dev</li>
-  <li><b>운영서버용 Goals</b> : clean package -D spring.profiles.active=prod -D skipTests</li>
-</ul>
-
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>개발서버용 Goals</td>
+      <td>clean package -D spring.profiles.active=dev</td>
+    </tr>
+    <tr>
+      <td>운영서버용 Goals</td>
+      <td>clean package -D spring.profiles.active=prod -D skipTests</td>
+    </tr>
+  </tbody>
+</table>
 <p>빌드 시 프로파일에 맞는 application.properties 로드 후 TEST 코드 실행이 성공하면 패키징이 진행됩니다.<br />
 -D skipTests 옵션을 추가하면 DB 연결 및 테스트 코드 실행 없이 바로 패키징 됩니다.</p>
 
