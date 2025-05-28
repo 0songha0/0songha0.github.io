@@ -462,7 +462,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue 문법 정리 1 / Vue 3 템플릿 문법 (인터폴레이션, 디렉티브)</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#인터폴레이션-interpolation">인터폴레이션 (Interpolation)</a></li><li><a href="#디렉티브-directive">디렉티브 (Directive)</a><ul><li><a href="#v-text">v-text</a></li><li><a href="#v-html">v-html</a></li><li><a href="#v-once">v-once</a></li><li><a href="#v-bind-">v-bind (:)</a></li><li><a href="#v-on-">v-on (@)</a></li><li><a href="#v-model">v-model</a></li><li><a href="#v-slot-">v-slot (#)</a></li><li><a href="#v-pre">v-pre</a></li><li><a href="#v-memo">v-memo</a></li><li><a href="#v-if">v-if</a></li><li><a href="#v-else">v-else</a></li><li><a href="#v-else-if">v-else-if</a></li><li><a href="#v-show">v-show</a></li><li><a href="#v-for">v-for</a></li><li><a href="#v-cloak">v-cloak</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#인터폴레이션-interpolation">인터폴레이션 (Interpolation)</a></li><li><a href="#디렉티브-directive">디렉티브 (Directive)</a><ul><li><a href="#v-text">v-text</a></li><li><a href="#v-html">v-html</a></li><li><a href="#v-once">v-once</a></li><li><a href="#v-bind-">v-bind (:)</a></li><li><a href="#v-model">v-model</a></li><li><a href="#v-on-">v-on (@)</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -522,7 +522,7 @@ HTML 동적 렌더링 시 XSS (스크립트 삽입 공격) 이슈에 주의해�
 또는
 &lt;input type="text" :disabled="data변수명"/&gt;
 </code></pre></div></div>
-<p>이중 중괄호와 달리, HTML에 속성에 동적으로 값을 바인딩할 수 있는 단방향 속성 바인딩입니다.<br />
+<p>이중 중괄호와 달리, HTML 속성에 동적으로 값을 바인딩할 수 있는 단방향 속성 바인딩입니다.<br />
 data가 변경되면 바인딩 된 DOM도 변경되지만, 사용자 입력으로 DOM이 변경되면 data는 변경되지 않습니다.</p>
 
 <p><mark>다중 속성 바인딩 예시</mark></p>
@@ -642,13 +642,70 @@ export default {
 </code></pre></div></div>
 <p>위와 같이, 인라인 스타일을 정의하고 바인딩 할 수도 있습니다.</p>
 
+<h3 id="v-model">v-model</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;input type="text" v-model="data변수명" /&gt;
+
+&lt;textarea v-model="data변수명"&gt;&lt;/textarea&gt;
+
+&lt;select v-model="data변수명"&gt;
+  &lt;option value="값1"&gt;값1&lt;option&gt;
+  &lt;option value="값2"&gt;값2&lt;option&gt;
+&lt;/select&gt;
+
+&lt;label&gt;
+  &lt;input type="radio" name="라디오분류" value="값1" v-model="data변수명" /&gt;
+  &lt;input type="radio" name="라디오분류" value="값2" v-model="data변수명" /&gt;
+&lt;label&gt;
+
+&lt;input type="checkbox" v-model="data변수명" true-value="체크" false-value="미체크" /&gt;
+
+&lt;label&gt;
+  &lt;input type="checkbox value="값1" v-model="배열data변수명" /&gt;
+  값1
+&lt;/label&gt;
+&lt;label&gt;
+  &lt;input type="checkbox value="값2" v-model="배열data변수명" /&gt;
+  값2
+&lt;/label&gt;
+&lt;label&gt;
+  &lt;input type="checkbox value="값2" v-model="배열data변수명" /&gt;
+  값2
+&lt;/label&gt;
+</code></pre></div></div>
+<p>Vue에서 반응형 상태와 DOM 입력을 동기화 할 수 있는 양방향 바인딩 디렉티브입니다.<br />
+data가 변경되면 바인딩 된 DOM도 변경되고, 사용자 입력으로 DOM이 변경되면 data가 변경됩니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;input type="text" :value="data변수" @input="event =&gt; { data변수 = event.target.value }" /&gt;
+</code></pre></div></div>
+<p>텍스트 인풋 v-model 예시의 경우, 위 코드와 동일한 효과입니다.</p>
+
+<p><mark>v-model 수식어 종류</mark></p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>.lazy</td>
+      <td> 
+        기본적으로 v-model은 input 이벤트 후 입력과 데이터를 동기화합니다.<br />
+        lazy 수식어를 사용하면 change 이벤트 후 (인풋에서 포커스가 나갔을 때) 동기화합니다.<br />
+      </td>
+    </tr>
+    <tr>
+      <td>.number</td>
+      <td> 사용자 입력 시 number 타입으로 형변환 처리</td>
+    </tr>
+    <tr>
+      <td>.trim</td>
+      <td> 사용자 입력 시 앞, 뒤 공백 제거 처리 </td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="v-on-">v-on (@)</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;button v-on:click="함수명"&gt;Click&lt;/button&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;button v-on:click="이벤트함수명"&gt;Click&lt;/button&gt;
 또는
-&lt;button @click="함수명"&gt;Click&lt;/button&gt;
+&lt;button @click="이벤트함수명"&gt;Click&lt;/button&gt;
 
 &lt;script&gt;
-const 함수명 = (event) =&gt; {
+const 이벤트함수명 = (event) =&gt; {
   console.log(event.target);
   console.log(event.target.tagName);
 }
@@ -656,10 +713,10 @@ const 함수명 = (event) =&gt; {
 </code></pre></div></div>
 <p>v-on 디렉티브는 클릭, 마우스 오버, 키다운 등 다양한 이벤트 처리를 위해 사용됩니다.<br />
 이벤트 핸들러 함수 실행 시, 매개변수로 event 객체를 받을 수 있습니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;button @click="함수명('매개변수', $event)"&gt;Click&lt;/button&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;button @click="이벤트함수명('매개변수', $event)"&gt;Click&lt;/button&gt;
 
 &lt;script&gt;
-const 함수명 = (변수명, event) =&gt; {
+const 이벤트함수명 = (변수명, event) =&gt; {
   console.log(event.target);
   console.log(event.target.tagName);
 }
@@ -672,49 +729,139 @@ const 함수명 = (변수명, event) =&gt; {
   <tbody>
     <tr>
       <td>.stop</td>
-      <td>겹쳐있는 요소들에 이벤트 전파를 막는 e.stopPropagation() 기능</td>
+      <td>겹쳐있는 요소들에 이벤트 전파를 방지하는 e.stopPropagation() 기능</td>
     </tr>
     <tr>
       <td>.prevent</td>
-      <td>요소가 가진 기본 기능을 막는 e.preventDefault() 기능</td>
+      <td>요소가 가진 기본 기능 동작을 방지하는 e.preventDefault() 기능</td>
     </tr>
     <tr>
       <td>.capture</td>
       <td>
-        이벤트 리스너를 캡처모드로 실행 가능<br /><br />
-        <b>캡처링</b> : 최상위 요소에서부터 현재 요소까지 내려가며 이벤트 전파<br />
-        <b>버블링</b> : 현재 요소에서부터 최상위 요소까지 올라가며 이벤트 전파
+        이벤트 리스너를 캡처링 모드로 실행 (캡처링 단계에서 이벤트 감지)<br /><br />
+        <b>캡처링</b> : 요소들이 겹친 경우, 최상위 요소부터 하위 요소까지 내려가며 이벤트 전파<br />
+        <b>버블링</b> : 요소들이 겹친 경우, 하위 요소부터 최상위 요소까지 올라가며 이벤트 전파
       </td>
     </tr>
     <tr>
       <td>.self</td>
-      <td>자기 자신만 호출 가능 (타깃 요소가 self 일 때 동작)</td>
+      <td>겹친 요소가 클릭되어도, 이벤트 타겟이 본인 요소일 때만 동작</td>
     </tr>
     <tr>
       <td>.once</td>
-      <td>이벤트를 한 번만 실행</td>
-    </tr>
+      <td>이벤트 함수가 한 번만 실행되고, 이후부터는 동작하지 않음&lt;/tr&gt;
     <tr>
       <td>.passive</td>
-      <td>모바일 장치 성능 개선을 위해 터치 이벤트 리스너와 함께 사용</td>
+      <td>
+        스크롤 등 모바일 터치 이벤트의 성능을 높이기 위해 사용<br />
+        이벤트 리스너가 preventDefault()를 호출하지 않도록 DOM 이벤트에 { passive: true } 속성 추가<br />
+        v-on:scroll.passive="onScroll" 형태로 자주 사용됨
+      </td>
+    </tr>
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+<mark>v-on 키 수식어 종류</mark>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>.enter</td>
+      <td>Enter 키 입력 시 동작</td>
+    </tr>
+    <tr>
+      <td>.tab</td>
+      <td>Tab 키 입력 시 동작</td>
+    </tr>
+    <tr>
+      <td>.delete</td>
+      <td>Delete 키 입력 시 동작</td>
+    </tr>
+    <tr>
+      <td>.esc</td>
+      <td>Esc 키 입력 시 동작</td>
+    </tr>
+    <tr>
+      <td>.space</td>
+      <td>Space 키 입력 시 동작</td>
+    </tr>
+    <tr>
+      <td>.up</td>
+      <td>PgUp 키 입력 시 동작</td>
+    </tr>
+    <tr>
+      <td>.down</td>
+      <td>PgDn 키 입력 시 동작</td>
+    </tr>
+    <tr>
+      <td>.left</td>
+      <td>왼쪽 방향키 입력 시 동작</td>
+    </tr>
+    <tr>
+      <td>.right</td>
+      <td>오른쪽 방향키 입력 시 동작</td>
     </tr>
   </tbody>
 </table>
+v-on:keyup 등 키보드 이벤트 수신 시, 특정 키 입력 시에만 동작하도록 하는 수식어들입니다.
 
-<p><mark>토글 버튼 클릭 이벤트 예시</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
-  &lt;button v-on:click="toggle"&gt;토글버튼&lt;/button&gt;
+<mark>시스템 키 수식어 종류</mark>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>.ctrl</td>
+      <td>Ctrl 키 입력 시 동작</td>
+    </tr>
+    <tr>
+      <td>.alt</td>
+      <td>Alt 키 입력 시 동작</td>
+    </tr>
+    <tr>
+      <td>.shift</td>
+      <td>Shift 키 입력 시 동작</td>
+    </tr>
+    <tr>
+      <td>.meta</td>
+      <td>Mac의 커맨드 키 또는 Windows의 윈도우 키 입력 시 동작</td>
+    </tr>
+  </tbody>
+</table>
+v-on:keyup 등 키보드 이벤트 수신 시, 특정 시스템 키 입력 시에만 동작하도록 하는 수식어들입니다.  
+키 수식어 등과 함께 이어붙여서 사용하는 것도 가능합니다.
+
+<mark>마우스 버튼 수식어 종류</mark>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>.left</td>
+      <td>마우스 왼쪽 버튼 클릭 시 동작</td>
+    </tr>
+    <tr>
+      <td>.right</td>
+      <td>마우스 오른쪽 버튼 클릭 시 동작</td>
+    </tr>
+    <tr>
+      <td>.middle</td>
+      <td>마우스 스크롤 버튼 클릭 시 동작</td>
+    </tr>
+  </tbody>
+</table>
+v-on:click 등 마우스 이벤트 수신 시, 특정 버튼 입력 시에만 동작하도록 하는 수식어들입니다.  
+
+<mark>토글 버튼 클릭 이벤트 예시</mark>
+```
+<template>
+  <button v-on:click="toggle">토글버튼</button>
   또는
-  &lt;button v-on:click="isActive = !isActive"&gt;토글버튼&lt;/button&gt;
-&lt;/template&gt;
-&lt;script&gt;
+  <button v-on:click="isActive = !isActive">토글버튼</button>
+</template>
+<script>
   import { ref } from 'vue';
 
   export default {
     setup() {
       const isActive = ref(false);
 
-      const toggle = () =&gt; {
+      const toggle = () => {
         // 토글 상태 변경
         isActive.value = !isActive.value;
       };
@@ -722,62 +869,67 @@ const 함수명 = (변수명, event) =&gt; {
       return { toggle, isActive };
     }
   }
-&lt;/script&gt;
-</code></pre></div></div>
-<p>위와 같이, 토글 버튼 클릭 이벤트도 바인딩 할 수 있습니다.</p>
+</script>
+```
+위와 같이, 토글 버튼 클릭 이벤트도 바인딩 할 수 있습니다.
 
-<p><mark>keyup 이벤트 처리 예시</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+<mark>keyup 이벤트 처리 예시</mark>
+```
+<template>
 &lt;input type="text" @keyup="onKeyupHandler" /&gt;
-&lt;/template&gt;
+</template>
 
-&lt;script&gt;
+<script>
   import { ref } from 'vue';
 
   export default {
     setup() {
-      const onKeyupHandler = event =&gt; {
-        console.log(event.key);
+      const onKeyupHandler = (event) => {
+        console.log(event.key); // 눌린 키
+        console.log(event.target.value); // 현재 입력된 값
+
+        // 인풋 포커스
+        event.target.focus();
       }
 
       return { onKeyupHandler };
     }
   }
-&lt;/script&gt;
-</code></pre></div></div>
-<p>v-on:keyup으로 키보드 입력 시 어떤 키가 눌렸는지 확인 가능합니다.</p>
+</script>
+```
+인풋에 v-on:keyup으로 키보드 입력 시 어떤 키가 눌렸는지 확인 가능합니다.
 
-<h3 id="v-model">v-model</h3>
-<p>양방향 바인딩입니다.<br />
-data가 변경되면 바인딩 된 DOM도 변경되고, 사용자 입력으로 DOM이 변경되면 data가 변경됩니다.</p>
+### v-slot (#)
+```
+<base-layout>
+  <template v-slot:header="">헤더 내용</template>
+  <p>본문 내용</p>
+</base-layout>
+```
+컴포넌트의 템플릿 빈 자리 (Slot) 을 외부에서 삽입할 수 있습니다.
 
-<h3 id="v-slot-">v-slot (#)</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;base-layout&gt;
-  &lt;template v-slot:header&gt;헤더 내용&lt;/template&gt;
-  &lt;p&gt;본문 내용&lt;/p&gt;
-&lt;/base-layout&gt;
-</code></pre></div></div>
-<p>컴포넌트의 템플릿 빈 자리 (Slot) 을 외부에서 삽입할 수 있습니다.</p>
+### v-pre
+```
+<div v-pre="">{{ data변수명 }}</div>
+```
+템플릿 컴파일을 하지 않고, 바인딩 문법도 일반 텍스트 그대로 렌더링합니다.
 
-<h3 id="v-pre">v-pre</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div v-pre&gt;{{ data변수명 }}&lt;/div&gt;
-</code></pre></div></div>
-<p>템플릿 컴파일을 하지 않고, 바인딩 문법도 일반 텍스트 그대로 렌더링합니다.</p>
+### v-memo
+```
+<div v-memo="[ data변수명1, data변수명2 ]">
+</div>
+```
+반응형 데이터 값이 변경될 때만 다시 렌더링합니다.  
+Vue 3.2 이상에서 추가된 디렉티브입니다.
 
-<h3 id="v-memo">v-memo</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div v-memo="[ data변수명1, data변수명2 ]"&gt;
-&lt;/div&gt;
-</code></pre></div></div>
-<p>반응형 데이터 값이 변경될 때만 다시 렌더링합니다.<br />
-Vue 3.2 이상에서 추가된 디렉티브입니다.</p>
-
-<h3 id="v-if">v-if</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
-  &lt;div&gt;
-    &lt;h2 v-if="visible"&gt;텍스트&lt;/h2&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
-&lt;script&gt;
+### v-if
+```
+<template>
+  <div>
+    <h2 v-if="visible">텍스트</h2>
+  </div>
+</template>
+<script>
 import { ref } from 'vue';
 
 export default {
@@ -786,37 +938,40 @@ export default {
     return { visible };
   }
 }
-&lt;/script&gt;
-</code></pre></div></div>
-<p>조건에 따라 엘리먼트를 렌더링 할 때 사용합니다.</p>
+</script>
+```
+조건에 따라 엘리먼트를 렌더링 할 때 사용합니다.
 
-<p><mark>template v-if</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
-  &lt;template v-if="visible"&gt;
-    &lt;h1&gt;제목&lt;/h1&gt;
-    &lt;p&gt;본문&lt;/p&gt;
-  &lt;/template&gt;
-&lt;/template&gt;
-</code></pre></div></div>
-<p>템플릿을 사용하면 여러 HTML 요소를 조건에 따라 렌더링 할 수 있습니다.<br />
-template은 div와 달리 렌더링 결과에 포함되지 않습니다.</p>
+<mark>template v-if</mark>
+```
+<template>
+  <template v-if="visible">
+    <h1>제목</h1>
+    <p>본문</p>
+  </template>
+</template>
+```
+템플릿을 사용하면 여러 HTML 요소를 조건에 따라 렌더링 할 수 있습니다.  
+template은 div와 달리 렌더링 결과에 포함되지 않습니다.
 
-<h3 id="v-else">v-else</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;h1 v-if="조건"&gt;텍스트1&lt;/h1&gt;
-&lt;h1 v-else&gt;텍스트2&lt;/h1&gt;
-</code></pre></div></div>
-<p>조건에 따라 다른 엘리먼트를 렌더링 할 때 사용합니다.</p>
+### v-else
+```
+<h1 v-if="조건">텍스트1</h1>
+<h1 v-else="">텍스트2</h1>
+```
+조건에 따라 다른 엘리먼트를 렌더링 할 때 사용합니다.
 
-<h3 id="v-else-if">v-else-if</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
-  &lt;div&gt;
-    &lt;h1 v-if="textType === 'A'"&gt;텍스트A&lt;/h1&gt;
-    &lt;h1 v-else-if="textType === 'B'"&gt;텍스트B&lt;/h1&gt;
-    &lt;h1 v-else-if="textType === 'C'"&gt;텍스트B&lt;/h1&gt;
-    &lt;h1 v-else&gt;A, B, C가 아닙니다.&lt;/h1&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
-&lt;script&gt;
+### v-else-if
+```
+<template>
+  <div>
+    <h1 v-if="textType === 'A'">텍스트A</h1>
+    <h1 v-else-if="textType === 'B'">텍스트B</h1>
+    <h1 v-else-if="textType === 'C'">텍스트B</h1>
+    <h1 v-else="">A, B, C가 아닙니다.</h1>
+  </div>
+</template>
+<script>
 import { ref } from 'vue';
 
 export default {
@@ -826,16 +981,17 @@ export default {
     return { textType };
   }
 }
-&lt;/script&gt;
-</code></pre></div></div>
+</script>
+```
 
-<h3 id="v-show">v-show</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
-  &lt;div&gt;
-    &lt;h2 v-show="isShow"&gt;텍스트&lt;/h2&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
-&lt;script&gt;
+### v-show
+```
+<template>
+  <div>
+    <h2 v-show="isShow">텍스트</h2>
+  </div>
+</template>
+<script>
 import { ref } from 'vue';
 
 export default {
@@ -844,15 +1000,16 @@ export default {
     return { isShow };
   }
 }
-&lt;/script&gt;
-</code></pre></div></div>
-<p>v-show는 엘리먼트 표시 여부를 지정할 때 사용합니다.<br />
-v-if와 달리, 조건이 false 시 엘리먼트를 렌더링하고 display:none 스타일을 부여합니다.</p>
+</script>
+```
+v-show는 엘리먼트 표시 여부를 지정할 때 사용합니다.  
+v-if와 달리, 조건이 false 시 엘리먼트를 렌더링하고 display:none 스타일을 부여합니다.
 
-<h3 id="v-for">v-for</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
-  &lt;div&gt;
-    &lt;ul&gt;
+### v-for
+```
+<template>
+  <div>
+    <ul>
       // 배열 렌더링
       &lt;li v-for="(item, index) in items" :key="item.id"&gt;
         {{ index }}, {{ item.message }}
@@ -862,10 +1019,10 @@ v-if와 달리, 조건이 false 시 엘리먼트를 렌더링하고 display:none
       &lt;li v-for="(value, key, index) in myObject" :key="key"&gt;
         {{ key }}, {{ value }}, {{ index }}
       &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
-&lt;script&gt;
+    </ul>
+  </div>
+</template>
+<script>
 import { ref } from 'vue';
 
 export default {
@@ -887,22 +1044,23 @@ export default {
     return { items, myObject };
   }
 }
-&lt;/script&gt;
-</code></pre></div></div>
-<p>배열/객체 항목을 반복 렌더링 할 수 있습니다.<br />
-v-for 사용 시에는 :key 옵션으로 반복 항목의 고유 식별자를 지정해야 합니다.</p>
+</script>
+```
+배열/객체 항목을 반복 렌더링 할 수 있습니다.  
+v-for 사용 시에는 :key 옵션으로 반복 항목의 고유 식별자를 지정해야 합니다.
 
-<p><mark>template v-for</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
-  &lt;ul&gt;
-    &lt;template v-for="user in users"&gt;
+<mark>template v-for</mark>
+```
+<template>
+  <ul>
+    <template v-for="user in users">
       &lt;li v-if="user.isActive" :key="users.id"&gt;
         {{ user.name }}
       &lt;/li&gt;
-    &lt;/template&gt;
-  &lt;/ul&gt;
-&lt;/template&gt;
-&lt;script&gt;
+    </template>
+  </ul>
+</template>
+<script>
 import { ref } from 'vue';
 
 export default {
@@ -916,26 +1074,27 @@ export default {
     return { users };
   }
 }
-&lt;/script&gt;
-</code></pre></div></div>
-<p>하나의 엘리먼트에 v-for, v-if를 함께 사용하는 것은 권장되지 않습니다.<br />
-위와 같이, 템플릿을 사용하면 권장되는 형태로 출력할 수 있습니다.</p>
+</script>
+```
+하나의 엘리먼트에 v-for, v-if를 함께 사용하는 것은 권장되지 않습니다.  
+위와 같이, 템플릿을 사용하면 권장되는 형태로 출력할 수 있습니다.
 
-<h3 id="v-cloak">v-cloak</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;html lang="ko"&gt;
-  &lt;head&gt;
-    &lt;script src="https://unpkg.com/vue@next"&gt;&lt;/script&gt;
-    &lt;style&gt;
+### v-cloak
+```
+<html lang="ko">
+  <head>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
     [v-cloak] {
       display: none;
     }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div id="app"&gt;
-      &lt;p v-cloak&gt;{{ data변수명 }}&lt;/p&gt;
-    &lt;/div&gt;
-    &lt;script&gt;
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <p v-cloak="">{{ data변수명 }}</p>
+    </div>
+    <script>
       const App = {
         data() {
           return {
@@ -944,16 +1103,17 @@ export default {
         }
       };
 
-      setTimeout(() =&gt; {
+      setTimeout(() => {
         Vue.createApp(App).mount('#app')
       }, 3000);
-    &lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre></div></div>
-<p>컴포넌트가 마운트되기 전, 데이터가 바인딩되지 않은 미완성 화면을 숨길 때 사용합니다.<br />
-마운트 시 v-cloak 속성이 제거되어 숨겨졌던 요소가 다시 보이게 됩니다.</p>
+    </script>
+  </body>
+</html>
+```
+컴포넌트가 마운트되기 전, 데이터가 바인딩되지 않은 미완성 화면을 숨길 때 사용합니다.  
+마운트 시 v-cloak 속성이 제거되어 숨겨졌던 요소가 다시 보이게 됩니다.
 
+</td></tr></tbody></table>
 
         
       </section>
