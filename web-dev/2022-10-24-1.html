@@ -503,9 +503,19 @@ public class LoginInterceptor implements HandlerInterceptor {
     }
 }
 </code></pre></div></div>
-<p>HandlerInterceptor를 구현하고, preHandle 함수를 오버라이딩 해서 로그인 여부 체크를 체크합니다.<br />
-<code class="language-plaintext highlighter-rouge">preHandle</code> :  모든 컨트롤러 호출 전 실행되는 함수입니다.<br />
-<code class="language-plaintext highlighter-rouge">postHandle</code> : 컨트롤러 실행 후 호출되는 함수입니다.</p>
+<p>HandlerInterceptor를 구현하고, preHandle 함수를 오버라이딩 해서 로그인 여부 체크를 체크합니다.</p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>preHandle</td>
+      <td>모든 컨트롤러 호출 전 실행되는 함수입니다.</td>
+    </tr>
+    <tr>
+      <td>postHandle</td>
+      <td>컨트롤러 실행 후 호출되는 함수입니다.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="webconfigjava-생성">WebConfig.java 생성</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import org.springframework.context.annotation.Configuration;

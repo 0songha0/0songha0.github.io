@@ -511,9 +511,22 @@ noMore 변수를 플래그로 사용해서 ‘목록 더보기’ 버튼 이벤�
 <h3 id="모바일-호환-처리-설명">모바일 호환 처리 설명</h3>
 <p>모바일에서는 상단바 및 하단바 등의 height가 있기 때문에 +100 정도 더하였습니다.</p>
 
-<p><code class="language-plaintext highlighter-rouge">현재 스크롤 상단 높이</code> : $(window).scrollTop()<br />
-<code class="language-plaintext highlighter-rouge">브라우저 창 높이</code> : $(window).height()<br />
-<code class="language-plaintext highlighter-rouge">전체 문서 높이</code> : $(document).height()</p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>현재 스크롤 상단 높이</td>
+      <td>$(window).scrollTop()</td>
+    </tr>
+    <tr>
+      <td>브라우저 창 높이</td>
+      <td>$(window).height()</td>
+    </tr>
+    <tr>
+      <td>전체 문서 높이</td>
+      <td>$(document).height()</td>
+    </tr>
+  </tbody>
+</table>
 
 <p>PC 웹에서는 정수로 나오지만 모바일에서 호출하면 소수점 형태로 나와서 parseInt 해주었습니다.</p>
 
