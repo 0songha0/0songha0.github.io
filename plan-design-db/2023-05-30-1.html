@@ -578,12 +578,26 @@ JDBC 타임아웃 설정이 더 일반적이나, 둘 다 설정하는 것이 안
 <h3 id="테이블-인덱스-조회-쿼리">테이블 인덱스 조회 쿼리</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SHOW INDEX FROM 테이블명;
 </code></pre></div></div>
-<ul>
-  <li>Key_name : PK 인덱스는 PRIMARY, 논클러스터드 인덱스는 인덱스명으로 표현</li>
-  <li>Seq_in_index : 인덱스 내에 현재 컬럼이 포함된 순서</li>
-  <li>Column_name : 인덱스가 적용된 컬럼명</li>
-  <li>Cardnality : 선택도 (선택도가 높은 = 유니크한 값이 많은 컬럼에 인덱스를 걸면 쿼리 성능이 더 좋습니다.)</li>
-</ul>
+<table class="table_2_left">
+	<tbody>
+	<tr>
+		<td>Key_name</td>
+		<td>PK 인덱스는 PRIMARY, 논클러스터드 인덱스는 인덱스명으로 표현</td>
+	</tr>
+	<tr>
+		<td>Seq_in_index</td>
+		<td>인덱스 내에 현재 컬럼이 포함된 순서</td>
+	</tr>
+	<tr>
+		<td>Column_name</td>
+		<td>인덱스가 적용된 컬럼명</td>
+	</tr>
+	<tr>
+		<td>Cardnality</td>
+		<td>선택도 (선택도가 높은 = 유니크한 값이 많은 컬럼에 인덱스를 걸면 쿼리 성능이 더 좋습니다.)</td>
+	</tr>
+	</tbody>
+</table>
 
 <h3 id="인덱스-생성-쿼리">인덱스 생성 쿼리</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE INDEX 인덱스명 ON 테이블명 (컬럼명);

@@ -497,15 +497,32 @@ advertised.listeners=PLAINTEXT://localhost:9092
 <p>도커에서는 docker-compose.yml 파일에 카프카 로그 세그먼트 저장 경로를 위와 같이 정의합니다.</p>
 
 <p><mark>토픽-파티션별 카프카 로그 파일 예시</mark></p>
-<ul>
-  <li>00000000000000000000.log : 오프셋, 타임스탬프, 헤더, 메시지 키, 메시지 값 등 실제 메시지 데이터 저장</li>
-  <li>00000000000000000000.index : 오프셋과 로그 파일 내 위치를 매핑한 인덱스 파일</li>
-  <li>00000000000000000000.timeindex : 타임스탬프와 로그 파일 내 위치를 매핑한 인덱스 파일</li>
-  <li>leader-epoch-checkpoint : 리더 에폭 정보 저장 (리더 변경 기록 관리)</li>
-  <li>partition.metadata : 파티션 설정 정보 저장
-파일명이 00000000000000000010.log면, 오프셋 10번부터의 데이터가 저장된 로그 파일입니다.<br />
-프로듀서에서 받은 메시지에 브로커가 오프셋을 부여하고, 타임스탬프를 지정하여 저장합니다.</li>
-</ul>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>00000000000000000000.log</td>
+      <td>오프셋, 타임스탬프, 헤더, 메시지 키, 메시지 값 등 실제 메시지 데이터 저장</td>
+    </tr>
+    <tr>
+      <td>00000000000000000000.index</td>
+      <td>오프셋과 로그 파일 내 위치를 매핑한 인덱스 파일</td>
+    </tr>
+    <tr>
+      <td>00000000000000000000.timeindex</td>
+      <td>타임스탬프와 로그 파일 내 위치를 매핑한 인덱스 파일</td>
+    </tr>
+    <tr>
+      <td>leader-epoch-checkpoint</td>
+      <td>리더 에폭 정보 저장 (리더 변경 기록 관리)</td>
+    </tr>
+    <tr>
+      <td>partition.metadata</td>
+      <td>파티션 설정 정보 저장</td>
+    </tr>
+  </tbody>
+</table>
+<p>파일명이 00000000000000000010.log면, 오프셋 10번부터의 데이터가 저장된 로그 파일입니다.<br />
+프로듀서에서 받은 메시지에 브로커가 오프셋을 부여하고, 타임스탬프를 지정하여 저장합니다.</p>
 
 <h3 id="로그-파일-생성주기-설정">로그 파일 생성주기 설정</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-- 로그 파일 (=세그먼트 파일) 최대 크기 지정
@@ -535,23 +552,49 @@ log.retention.check.interval.ms
 <h3 id="클린업-정책-설정">클린업 정책 설정</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cleanup.policy=compact
 </code></pre></div></div>
-<p>delete : 일정 시간 경과 또는 기준 크기 초과 시 세그먼트 전체를 삭제합니다.<br />
-compact : 액티브 세그먼트에서 각 메시지 키의 가장 최신 레코드만 남기고, 오래된 레코드들은 삭제하여 압축합니다.</p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>delete</td>
+      <td>일정 시간 경과 또는 기준 크기 초과 시 세그먼트 전체를 삭제합니다.</td>
+    </tr>
+    <tr>
+      <td>compact</td>
+      <td>액티브 세그먼트에서 각 메시지 키의 가장 최신 레코드만 남기고, 오래된 레코드들은 삭제하여 압축합니다.</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><mark>compact 정책 로그 상태 분류</mark></p>
-<ul>
-  <li>클린 로그 (테일 영역) : 압축이 완료된 로그 (중복 메시지 키 없음)</li>
-  <li>더티 로그 (헤드 영역) : 압축 정책 실행 전 로그 (중복 메시지 키 있음)</li>
-</ul>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>클린 로그 (테일 영역)</td>
+      <td>압축이 완료된 로그 (중복 메시지 키 없음)</td>
+    </tr>
+    <tr>
+      <td>더티 로그 (헤드 영역)</td>
+      <td>압축 정책 실행 전 로그 (중복 메시지 키 있음)</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><mark>압축 시작 시점 설정</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>min.cleanable.dirty.ratio
 </code></pre></div></div>
 <p>클린 레코드에 비한 더티 레코드 비율에 따라 압축 실행합니다.</p>
-<ul>
-  <li>0.9 : 압축 효과가 좋으나, 더티 레코드 0.9 비율이 될 때까지 용량 효율이 좋지 않습니다.</li>
-  <li>0.1 : 압축이 자주 일어나서 브로커에 부담이 되고, 최신 데이터만 유지할 수 있습니다.</li>
-</ul>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>0.9</td>
+      <td>압축 효과가 좋으나, 더티 레코드 0.9 비율이 될 때까지 용량 효율이 좋지 않습니다.</td>
+    </tr>
+    <tr>
+      <td>0.1</td>
+      <td>압축이 자주 일어나서 브로커에 부담이 되고, 최신 데이터만 유지할 수 있습니다.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="파티션-수-설정">파티션 수 설정</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>num.partitions=3
@@ -662,38 +705,38 @@ unclean.leader.election.enable=false
       <td>
         프로듀서가 보낸 데이터에 대해 브로커로부터 성공 응답을 받을 조건 설정<br />
         복제 강도를 높여서 성능 낮추고 신뢰성 높게 저장할지 여부<br />
-        복제 수가 많을수록 차이가 큼<br />
+        복제 수가 많을수록 차이가 큼<br /><br />
         기본값 : 1<br /><br />
-        0 : 데이터 전송 후 응답 확인 X (가장 빠르지만 브로커 장애 시 데이터 유실 위험 큼)<br />
-        1 : 리더 브로커에 레코드 저장 시 성공 응답<br />
-        all 또는 -1: 리더 + ISR에 포함된 팔로워들에 레코드 저장 시 성공 응답 (가장 느리고 신뢰성 높음)
+        <b>0</b> : 데이터 전송 후 응답 확인 X (가장 빠르지만 브로커 장애 시 데이터 유실 위험 큼)<br />
+        <b>1</b> : 리더 브로커에 레코드 저장 시 성공 응답<br />
+        <b>all 또는 -1</b> : 리더 + ISR에 포함된 팔로워들에 레코드 저장 시 성공 응답 (가장 느리고 신뢰성 높음)
       </td>
     </tr>
     <tr>
       <td>linger.ms</td>
       <td>
-        Accumulator에 모은 배치 데이터 전송 전 기다리는 최소 시간<br />
+        Accumulator에 모은 배치 데이터 전송 전 기다리는 최소 시간<br /><br />
         기본값 : 0 (Send 시 즉시 전송)
       </td>
     </tr>
     <tr>
       <td>retries</td>
       <td>
-        브로커 전송 실패 시 재전송 시도 횟수<br />
+        브로커 전송 실패 시 재전송 시도 횟수<br /><br />
         기본값 : Integer.MAX_VALUE (2147483647)
       </td>
     </tr>
     <tr>
       <td>max.in.flight.requests.per.connection</td>
       <td>
-        한 커넥션에서 동시 전송할 수 있는 최대 요청 수<br />
+        한 커넥션에서 동시 전송할 수 있는 최대 요청 수<br /><br />
         기본값 : 5 (순서 보장 필요 시 1로 설정)
       </td>
     </tr>
     <tr>
       <td>partitioner.class</td>
       <td>
-        레코드를 어느 파티션에 보낼지 결정하는 파티셔너 클래스 지정<br />
+        레코드를 어느 파티션에 보낼지 결정하는 파티셔너 클래스 지정<br /><br />
         기본값 : DefaultPartitioner (카프카 2.4 이상 : UniformStickyPartitioner)
       </td>
     </tr>
@@ -703,21 +746,21 @@ unclean.leader.election.enable=false
         네트워크 오류, 재시도 시에도 중복 없이 한 번만 레코드를 적재하는 멱등성 보장 여부<br />
         true 설정 시 acks=all 등으로 자동 변경되어 처리 속도가 느려질 수 있음<br />
         멱등성 프로듀서로 동작할 필요가 있는 경우 true 설정<br />
-        각 레코드에 프로듀서 ID, 파티션별 시퀀스 번호를 부여하여 중복 전송 방지 및 안정성 향상<br />
+        각 레코드에 프로듀서 ID, 파티션별 시퀀스 번호를 부여하여 중복 전송 방지 및 안정성 향상<br /><br />
         카프카 3.0 이상 기본값 : true
       </td>
     </tr>
     <tr>
       <td>transactional.id</td>
       <td>
-        레코드를 트랙잭션 단위로 묶어서 전송 여부<br />
+        레코드를 트랙잭션 단위로 묶어서 전송 여부<br /><br />
         기본값 : null (트랜잭션 프로듀서가 아닌, 기본 프로듀서로 동작)
       </td>
     </tr>
     <tr>
       <td>metadata.max.age.ms</td>
       <td>
-        클러스터 메타데이터 강제 갱신 요청 주기<br />
+        클러스터 메타데이터 강제 갱신 요청 주기<br /><br />
         기본값 : 5분<br /><br />
         카프카 프로듀서는 초기 메시지 전송 전 또는 메시지 전송 중 오류가 발생했을 때 클러스터에 메타데이터를 요청하고 응답 받아서 캐시에 저장합니다.<br />
         메타데이터로 각 토픽의 리더 파티션이 어떤 브로커에 있는지 알 수 있습니다.<br />
@@ -728,7 +771,7 @@ unclean.leader.election.enable=false
     <tr>
       <td>metadata.max.idle.ms</td>
       <td>
-        프로듀서 유휴 상태 시 메타데이터 캐시 유지 주기<br />
+        프로듀서 유휴 상태 시 메타데이터 캐시 유지 주기<br /><br />
         기본값 : 5분
       </td>
     </tr>
@@ -774,31 +817,31 @@ unclean.leader.election.enable=false
     <tr>
       <td>auto.offset.reset ★</td>
       <td>
-        컨슈머 그룹이 처음 시작되어 컨슈머 오프셋이 없는 경우, 어느 오프셋부터 읽을지 설정<br />
+        컨슈머 그룹이 처음 시작되어 컨슈머 오프셋이 없는 경우, 어느 오프셋부터 읽을지 설정<br /><br />
         기본값 : latest<br /><br />
-        latest : 가장 최근 오프셋부터 읽기 시작<br />
-        earliest : 가장 예전 오프셋부터 읽기 시작<br />
-        none : 커밋이 이후 오프셋부터 읽기 시작, 커밋 기록이 없으면 오류 반환
+        <b>latest</b> : 가장 최근 오프셋부터 읽기 시작<br />
+        <b>earliest</b> : 가장 예전 오프셋부터 읽기 시작<br />
+        <b>none</b> : 커밋이 이후 오프셋부터 읽기 시작, 커밋 기록이 없으면 오류 반환
       </td>
     </tr>
     <tr>
       <td>enable.auto.commit</td>
       <td>
-        자동 커밋 여부<br />
+        자동 커밋 여부<br /><br />
         기본값 : true
       </td>
     </tr>
     <tr>
       <td>auto.commit.interval.ms</td>
       <td>
-        자동 오프셋 커밋 주기<br />
+        자동 오프셋 커밋 주기<br /><br />
         기본값 : 5000 (5초)
       </td>
     </tr>
     <tr>
       <td>max.poll.records</td>
       <td>
-        poll() 시 반환되는 레코드 개수<br />
+        poll() 시 반환되는 레코드 개수<br /><br />
         기본값 : 500
       </td>
     </tr>
@@ -806,14 +849,14 @@ unclean.leader.election.enable=false
       <td>session.timeout.ms</td>
       <td>
         컨슈머-브로커 연결 타임아웃 시간<br />
-        설정한 시간 내 브로커에 컨슈머의 하트비트가 오지 않으면 리밸런싱 발생<br />
+        설정한 시간 내 브로커에 컨슈머의 하트비트가 오지 않으면 리밸런싱 발생<br /><br />
         기본값 : 10000 (10초)
       </td>
     </tr>
     <tr>
       <td>heartbeat.interval.ms</td>
       <td>
-        컨슈머가 브로커에게 하트비트 전송 주기<br />
+        컨슈머가 브로커에게 하트비트 전송 주기<br /><br />
         기본값 : 3000 (3초)
       </td>
     </tr>
@@ -822,7 +865,7 @@ unclean.leader.election.enable=false
       <td>
         poll() 호출 간격의 최대 허용 시간<br />
         리밸런싱 판단 기준 (시간 내 poll 호출이 없으면 컨슈머 세션 종료 후 리밸런싱)<br />
-        레코드 처리 속도가 느리면 늘리는게 좋음<br />
+        레코드 처리 속도가 느리면 늘리는게 좋음<br /><br />
         기본값 : 300000 (5분)
       </td>
     </tr>
@@ -830,7 +873,7 @@ unclean.leader.election.enable=false
       <td>isolation.level</td>
       <td>
         트랜잭션 메시지 처리 방식 설정<br />
-        트랜잭션 프로듀서가 트랜잭션 단위로 데이터 보낼 경우 사용<br />
+        트랜잭션 프로듀서가 트랜잭션 단위로 데이터 보낼 경우 사용<br /><br />
         기본값 : read_uncommitted<br /><br />
         read_uncommitted : 커밋 전 메시지도 읽음<br />
         read_committed : 커밋 된 메시지만 읽음
@@ -869,14 +912,14 @@ unclean.leader.election.enable=false
     <tr>
       <td>default.key.serde</td>
       <td>
-        레코드의 메시지 키 직렬화/역직렬화 클래스 지정<br />
+        레코드의 메시지 키 직렬화/역직렬화 클래스 지정<br /><br />
         기본값 : Serdes.ByteArray().getClass().getName()
       </td>
     </tr>
     <tr>
       <td>default.value.serde</td>
       <td>
-        레코드의 메시지 값 직렬화/역직렬화 클래스 지정<br />
+        레코드의 메시지 값 직렬화/역직렬화 클래스 지정<br /><br />
         기본값 : Serdes.ByteArray().getClass().getName()
       </td>
     </tr>
@@ -885,7 +928,7 @@ unclean.leader.election.enable=false
       <td>
         스트림 프로세스 실행 시 스레드 수 지정<br />
         한 프로세스에서 병렬 처리할 태스크 수 늘려서 스케일 업 가능<br />
-        병렬도는 입력 토픽의 파티션 수를 초과할 수 없음<br />
+        병렬도는 입력 토픽의 파티션 수를 초과할 수 없음<br /><br />
         기본값 : 1
       </td>
     </tr>
@@ -893,7 +936,7 @@ unclean.leader.election.enable=false
       <td>state.dir</td>
       <td>
         상태 기반 데이터 처리 시 내장 RocksDB에 상태 데이터를 저장할 디렉토리 지정<br />
-        /tmp는 재부팅 시 초기화되는 휘발성 디렉토리이므로, 운영에서는 영속적인 디렉토리 사용 권장<br />
+        /tmp는 재부팅 시 초기화되는 휘발성 디렉토리이므로, 운영에서는 영속적인 디렉토리 사용 권장<br /><br />
         기본값 : /tmp/kafka-streams
       </td>
     </tr>

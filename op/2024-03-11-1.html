@@ -536,10 +536,22 @@ WhaTap 서버 설치형 대신 WhaTap SaaS형 사용 시, 서버 및 LB 비용�
 </code></pre></div></div>
 
 <p><mark>아마존 봇 유저 에이전트 차단 방법</mark></p>
-<ul>
-  <li>VPC 앞에 NCP WAF가 있는 경우 : NCP에 요청하여 WAF에서 특정 문자열이 포함된 유저 에이전트 차단 가능합니다.</li>
-  <li>WAS 서버 앞에 WEB 서버가 있는 경우 : 웹사이트 루트 디렉터리 (apache WEB 서버의 경우, httpd.conf 파일에 설정된 DocumentRoot)에 robots.txt 파일을 만들고 크롤러명, 접근하면 안 되는 URL (/)을 명시하면 됩니다. 웹사이트URL/robots.txt에 해당 파일이 위치해야 하며, 웹 서버를 재기동할 필요는 없습니다.</li>
-</ul>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>VPC 앞에 NCP WAF가 있는 경우</td>
+      <td>NCP에 요청하여 WAF에서 특정 문자열이 포함된 유저 에이전트 차단 가능합니다.</td>
+    </tr>
+    <tr>
+      <td>WAS 서버 앞에 WEB 서버가 있는 경우</td>
+      <td>
+        웹사이트 루트 디렉터리 (apache WEB 서버의 경우,<br />
+        httpd.conf 파일에 설정된 DocumentRoot)에 robots.txt 파일을 만들고 크롤러명, 접근하면 안 되는 URL (/)을 명시하면 됩니다.<br />
+        웹사이트URL/robots.txt에 해당 파일이 위치해야 하며, 웹 서버를 재기동할 필요는 없습니다.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <hr />
 

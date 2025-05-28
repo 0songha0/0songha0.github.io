@@ -553,16 +553,19 @@ Beats는 Elastic Stack 필수 요소가 아닙니다.</p>
 <p>파일, DB, Beats 등에서 데이터를 수집하고 변환(전처리) 후 Elasticsearch로 전송하는 ETL 도구입니다.<br />
 데이터 소스가 있는 모든 장비들에 설치해야 합니다.</p>
 
-<p>영속성 큐 사용으로 이벤트 최소 1회 전송을 보장해 주고, 부하 상황에서도 안정성을 보장해줍니다.<br />
-<code class="language-plaintext highlighter-rouge">로그스태시 기본 포트</code> : 5000 / 9600</p>
+<p>영속성 큐 사용으로 이벤트 최소 1회 전송을 보장해 주고, 부하 상황에서도 안정성을 보장해줍니다.</p>
+
+<p><b>로그스태시 기본 포트</b> : 5000 / 9600</p>
 
 <h3 id="elasticsearch">Elasticsearch</h3>
-<p>엘라스틱서치에 데이터를 색인(인덱싱) 후 저장하고, 검색 및 분석이 가능합니다.<br />
-<code class="language-plaintext highlighter-rouge">엘라스틱서치 기본 포트</code> : 9200~ (외부 HTTP 통신) / 9300~ (내부 노드 간 전송 통신)</p>
+<p>엘라스틱서치에 데이터를 색인(인덱싱) 후 저장하고, 검색 및 분석이 가능합니다.</p>
+
+<p><b>엘라스틱서치 기본 포트</b> : 9200~ (외부 HTTP 통신) / 9300~ (내부 노드 간 전송 통신)</p>
 
 <h3 id="kibana">Kibana</h3>
-<p>저장된 엘라스틱서치 데이터를 시각화, 모니터링 및 관리하기 위한 웹 기반 플랫폼입니다.<br />
-<code class="language-plaintext highlighter-rouge">키바나 기본 포트</code> : 5601</p>
+<p>저장된 엘라스틱서치 데이터를 시각화, 모니터링 및 관리하기 위한 웹 기반 플랫폼입니다.</p>
+
+<p><b>키바나 기본 포트</b> : 5601</p>
 
 <hr />
 
@@ -573,13 +576,26 @@ Beats는 Elastic Stack 필수 요소가 아닙니다.</p>
 <hr />
 
 <h2 id="elk-권장-하드웨어-사양">ELK 권장 하드웨어 사양</h2>
-
-<ul>
-  <li>RAM : 64GB</li>
-  <li>CPU : 2 ~ 8 core</li>
-  <li>SSD : 200GB</li>
-  <li>RAID 0</li>
-</ul>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>RAM</td>
+      <td>64GB</td>
+    </tr>
+    <tr>
+      <td>CPU</td>
+      <td>2 ~ 8 core</td>
+    </tr>
+    <tr>
+      <td>SSD</td>
+      <td>200GB</td>
+    </tr>
+    <tr>
+      <td>디스크 구성 방식</td>
+      <td>RAID 0</td>
+    </tr>
+  </tbody>
+</table>
 
 <hr />
 

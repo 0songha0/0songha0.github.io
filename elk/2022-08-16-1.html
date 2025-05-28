@@ -483,23 +483,48 @@
 <h3 id="전문-쿼리">전문 쿼리</h3>
 <p>전문 검색에 사용하며, 인덱스 매핑 시 텍스트 타입으로 매핑 권장합니다.</p>
 
-<p><mark>종류</mark></p>
-<ul>
-  <li>match : 가장 기본이 되는 검색</li>
-  <li>match_phrase : 용어의 순서까지 완전 일치하는 검색</li>
-  <li>multi_match : 다중 필드에서 검색. 필드에 가중치 부여 가능</li>
-  <li>query string : 연산자를 중심으로 텍스트를 분할하여 검색</li>
-</ul>
+<p><mark>전문 쿼리 종류</mark></p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>match</td>
+      <td>가장 기본이 되는 검색</td>
+    </tr>
+    <tr>
+      <td>match_phrase</td>
+      <td>용어의 순서까지 완전 일치하는 검색</td>
+    </tr>
+    <tr>
+      <td>multi_match</td>
+      <td>다중 필드에서 검색. 필드에 가중치 부여 가능</td>
+    </tr>
+    <tr>
+      <td>query string</td>
+      <td>연산자를 중심으로 텍스트를 분할하여 검색</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="용어-수준-쿼리">용어 수준 쿼리</h3>
 <p>대소문자까지 정확히 일치하는 용어(term) 검색에 사용하며, 인덱스 매핑 시 키워드 타입으로 매핑 권장합니다.</p>
 
-<p><mark>종류</mark></p>
-<ul>
-  <li>term</li>
-  <li>terms</li>
-  <li>fuzzy : 유사한 알파벳까지 검색 쿼리 (한국어X)</li>
-</ul>
+<p><mark>용어 수준 쿼리 종류</mark></p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>term</td>
+      <td>정확히 일치하는 단어를 검색</td>
+    </tr>
+    <tr>
+      <td>terms</td>
+      <td>여러 단어 중 하나라도 일치하면 검색</td>
+    </tr>
+    <tr>
+      <td>fuzzy</td>
+      <td>유사한 알파벳까지 검색 (한국어X)</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="범위-쿼리">범위 쿼리</h3>
 <p>날짜, 숫자 등 범위를 지정한 검색에 사용합니다.</p>
@@ -512,13 +537,27 @@
 <h3 id="논리-쿼리-복합-쿼리--bool">논리 쿼리 (복합 쿼리 = bool)</h3>
 <p>쿼리들을 조합해 사용하는 쿼리입니다.</p>
 
-<p><mark>종류</mark></p>
-<ul>
-  <li>must : AND</li>
-  <li>must_not : 거짓</li>
-  <li>should : OR</li>
-  <li>filter : 예/아니오 (필터 컨텍스트로 동작 주의)</li>
-</ul>
+<p><mark>논리 쿼리 종류</mark></p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>must</td>
+      <td>AND</td>
+    </tr>
+    <tr>
+      <td>must_not</td>
+      <td>거짓</td>
+    </tr>
+    <tr>
+      <td>should</td>
+      <td>OR</td>
+    </tr>
+    <tr>
+      <td>filter</td>
+      <td>예/아니오 (필터 컨텍스트로 동작 주의)</td>
+    </tr>
+  </tbody>
+</table>
 
 <hr />
 

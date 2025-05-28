@@ -474,19 +474,44 @@
 온프레미스, IaaS, PaaS, SaaS 개념을 정리한 글입니다.</p>
 
 <h3 id="운영-카프카-권장-하드웨어-사양">운영 카프카 권장 하드웨어 사양</h3>
-<ul>
-  <li>RAM : 32GB (브로커 프로세스용 힙 메모리 6GB, 나머지는 데이터 입출력을 위한 OS 페이지 캐시 영역으로 활용)</li>
-  <li>CPU : 24 core (SSL 암호화 및 압축 기능 사용 시 더 높은 사양 필요)</li>
-  <li>디스크 : RAID 10 디스크 (지연 및 데이터 손실 위험이 있어 NAS는 권장하지 않음)</li>
-  <li>디스크 용량 : 하루 1TB 데이터 적재 시, 7일 7TB x 복제 수 용량 필요</li>
-  <li>파일시스템 : XFS 또는 ext4</li>
-</ul>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>RAM</td>
+      <td>32GB (브로커 프로세스용 힙 메모리 6GB, 나머지는 데이터 입출력을 위한 OS 페이지 캐시 영역으로 활용)</td>
+    </tr>
+    <tr>
+      <td>CPU</td>
+      <td>24 core (SSL 암호화 및 압축 기능 사용 시 더 높은 사양 필요)</td>
+    </tr>
+    <tr>
+      <td>디스크</td>
+      <td>RAID 10 디스크 (지연 및 데이터 손실 위험이 있어 NAS는 권장하지 않음)</td>
+    </tr>
+    <tr>
+      <td>디스크 용량</td>
+      <td>하루 1TB 데이터 적재 시, 7일 7TB x 복제 수 용량 필요</td>
+    </tr>
+    <tr>
+      <td>파일시스템</td>
+      <td>XFS 또는 ext4</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="개발용-카프카-권장-하드웨어-사양">개발용 카프카 권장 하드웨어 사양</h3>
-<ul>
-  <li>RAM : 16GB (브로커 프로세스용 힙 메모리 6GB)</li>
-  <li>CPU : 16 core</li>
-</ul>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>RAM</td>
+      <td>16GB (브로커 프로세스용 힙 메모리 6GB)</td>
+    </tr>
+    <tr>
+      <td>CPU</td>
+      <td>16 core</td>
+    </tr>
+  </tbody>
+</table>
 
 <hr />
 
@@ -512,10 +537,18 @@ JMX Exporter + Prometheus + Grafana 오픈소스 설치 및 구축이 필요합�
 카프카 토픽 데이터를 SQL로 조회 및 처리할 수 있는 ksqlDB, 모니터링 툴 등은 옵션에 따라 제공합니다.</p>
 
 <h3 id="saas형-카프카-종류">SaaS형 카프카 종류</h3>
-<ul>
-  <li>컨플루언트 클라우드 : 엔터프라이즈 수준 보안 수준 제공, 데이터 적재 제한 없음 (디스크 용량 고민 X)</li>
-  <li>AWS MSK : AWS에서 제공하는 아파치 카프카 기반 SaaS. 모니터링 대시보드 제공, TLS인증 보안 설정 가능</li>
-</ul>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>컨플루언트 클라우드</td>
+      <td>엔터프라이즈 수준 보안 수준 제공, 데이터 적재 제한 없음 (디스크 용량 고민 X)</td>
+    </tr>
+    <tr>
+      <td>AWS MSK</td>
+      <td>AWS에서 제공하는 아파치 카프카 기반 SaaS. 모니터링 대시보드 제공, TLS인증 보안 설정 가능</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="saas형-카프카-장점">SaaS형 카프카 장점</h3>
 <ul>

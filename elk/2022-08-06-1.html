@@ -473,11 +473,22 @@
 <p>logstash로 데이터 수집 시 인덱스가 없다면 기본 매핑으로 엘라스틱서치에서 인덱스를 자동 생성해주는 것입니다.</p>
 
 <p><mark>기본 매핑 종류</mark></p>
-<ul>
-  <li>숫자 : long 타입</li>
-  <li>날짜 : date 타입</li>
-  <li>문자열 : text 타입 + keyword 타입 (멀티 필드)</li>
-</ul>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>숫자</td>
+      <td>long 타입</td>
+    </tr>
+    <tr>
+      <td>날짜</td>
+      <td>date 타입</td>
+    </tr>
+    <tr>
+      <td>문자열</td>
+      <td>text 타입 + keyword 타입 (멀티 필드)</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="명시적-매핑">명시적 매핑</h3>
 <p>개발자가 미리 인덱스 매핑정보를 정의해두는 것입니다.<br />
@@ -583,13 +594,13 @@ sudo bin/logstash -f /etc/logstash/logstash-테이블명.conf
 
 <h3 id="discover-화면에서-테이블로-확인">Discover 화면에서 테이블로 확인</h3>
 
-<p><strong>1. </strong>Management 메뉴 &gt; Data &gt; Index Management<br />
+<p><b>1. </b>Management 메뉴 &gt; Data &gt; Index Management<br />
 logstash로 수집 시 자동 생성된 index명을 확인합니다.</p>
 
-<p><strong>2. </strong>Management 메뉴 &gt; Kibana &gt; Data Views &gt; 우측 Create data view 버튼<br />
+<p><b>2. </b>Management 메뉴 &gt; Kibana &gt; Data Views &gt; 우측 Create data view 버튼<br />
 Name : index명* 으로 Data Views를 생성합니다.</p>
 
-<p><strong>3. </strong>Analytics 메뉴 &gt; Discover<br />
+<p><b>3. </b>Analytics 메뉴 &gt; Discover<br />
 좌측 상단에서 index명* Data View를 선택하면 하단에 document 테이블이 조회됩니다.</p>
 
 <p>데이터 수집 중 Discover 화면 띄우면 각 row의 document가 {}로 비어보이는 버그가 있습니다.<br />
@@ -655,8 +666,19 @@ Name : index명* 으로 Data Views를 생성합니다.</p>
 
 <p>개발 엘라스틱서치 서버의 로그스태시에 개발/운영 데이터 수집용 파이프라인을 각각 두었습니다.</p>
 
-<p><code class="language-plaintext highlighter-rouge">개발 데이터 수집용 파이프라인</code> : pipelines_dev.yml<br />
-<code class="language-plaintext highlighter-rouge">운영 데이터 수집용 파이프라인</code> : pipelines_op.yml</p>
+<p><mark>파이프라인 파일 예시</mark></p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>개발 데이터 수집용 파이프라인</td>
+      <td>pipelines_dev.yml</td>
+    </tr>
+    <tr>
+      <td>운영 데이터 수집용 파이프라인</td>
+      <td>pipelines_op.yml</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="파이프라인-변경-예시">파이프라인 변경 예시</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp pipelines_dev.yml pipelines.yml

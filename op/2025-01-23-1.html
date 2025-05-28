@@ -479,12 +479,26 @@
 시큐어코딩 점검 계획서에 첨부할 사진으로 점검 전, 점검 후, 취약점 보완 및 재점검 후 각각 캡쳐해두어야 합니다.</p>
 
 <p><mark>CODE-RAY 기본 세팅</mark></p>
-<ul>
-  <li>제외 파일 필터 : <em>.html, *.js, *.cubrid.xml, *.mysql.xml, java</em>.xml, pom.xml, sql*.xml</li>
-  <li>프리셋 목록 : 행안부 선택</li>
-  <li>파서 선택 : javascript, jsp, html, xml, java 체크</li>
-  <li>예외 항목 : 외부에서 제공받은 유틸 및 API 연동 파일 제외 (롤 관리 메뉴에서 추가)</li>
-</ul>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>제외 파일 필터</td>
+      <td>*.html, *.js, *.cubrid.xml, *.mysql.xml, java*.xml, pom.xml, sql*.xml</td>
+    </tr>
+    <tr>
+      <td>프리셋 목록</td>
+      <td>행안부 선택</td>
+    </tr>
+    <tr>
+      <td>파서 선택</td>
+      <td>javascript, jsp, html, xml, java 체크</td>
+    </tr>
+    <tr>
+      <td>예외 항목</td>
+      <td>외부에서 제공받은 유틸 및 API 연동 파일 제외 (롤 관리 메뉴에서 추가)</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><mark>CODE-RAY 단점</mark><br />
 제외된 폴더 내 파일들도 모두 검사해서 시간이 오래 걸립니다.</p>
@@ -748,11 +762,22 @@ mav.setViewName("jsonView");
 개발 완료 후 운영 이관 시 디버깅 코드를 제거하는 것이 좋습니다.</p>
 
 <p><mark>예외 출력 구분</mark></p>
-<ul>
-  <li>e.getMessage() : 예외 메시지만 출력</li>
-  <li>e.toString() : 예와 타입(클래스) + 예외 메시지 출력</li>
-  <li>e.printStackTrace() 또는 e : 예외 타입(클래스) + 예외 메시지 + 전체 스택 트레이스 출력</li>
-</ul>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>e.getMessage()</td>
+      <td>예외 메시지만 출력</td>
+    </tr>
+    <tr>
+      <td>e.toString()</td>
+      <td>예외 타입(클래스) + 예외 메시지 출력</td>
+    </tr>
+    <tr>
+      <td>e.printStackTrace() 또는 e</td>
+      <td>예외 타입(클래스) + 예외 메시지 + 전체 스택 트레이스 출력</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="오류-상황-대응-부재">오류 상황 대응 부재</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>try {

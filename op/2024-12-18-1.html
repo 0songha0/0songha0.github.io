@@ -556,10 +556,18 @@ UPDATE 대신 메뉴 로그 테이블에 INSERT 후 주기적으로 통계 테�
 
 <h3 id="ncp-db-백업-설정-확인">NCP DB 백업 설정 확인</h3>
 <p>NCP Console 좌측 Services 메뉴 &gt; Cloud DB for MySQL &gt; Bakup 메뉴</p>
-<ul>
-  <li>Backup 보관일 : 14 DAY (백업 삭제 주기 14일)</li>
-  <li>Backup 시작시간 : 00:00 (매일 자정 증분 백업)</li>
-</ul>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>Backup 보관일</td>
+      <td>14 DAY (백업 삭제 주기 14일)</td>
+    </tr>
+    <tr>
+      <td>Backup 시작시간</td>
+      <td>00:00 (매일 자정 증분 백업)</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><mark>증분 백업이란?</mark><br />
 마지막 백업 이후에 변경된 데이터만 백업하는 방법입니다.<br />

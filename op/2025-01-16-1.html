@@ -473,10 +473,23 @@
 <p>DidimNow 로그인 &gt; 고객지원 &gt; AS 요청 &gt; 글쓰기<br />
 운영서버 장애 원인 확인 요청, WAS 서버 또는 DB 커넥션 풀 설정 확인 및 변경 요청, VM 서버 ACG 인바운드 방화벽 정책 하용 요청 등이 가능합니다.</p>
 
-<p><mark>DB 커넥션 설정 값</mark><br />
-maxTotal : WAS 서버 커넥션 풀 최대 연결 수 (변경 시 톰캣 재기동 필요)<br />
-max_connection : DB 커넥션 풀 최대 연결 수<br />
-Max_used_connections : DB 활성 커넥션 수 (현재 실시간 연결 수)</p>
+<p><mark>DB 커넥션 설정 값</mark></p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>maxTotal</td>
+      <td>WAS 서버 커넥션 풀 최대 연결 수 (변경 시 톰캣 재기동 필요)</td>
+    </tr>
+    <tr>
+      <td>max_connection</td>
+      <td>DB 커넥션 풀 최대 연결 수</td>
+    </tr>
+    <tr>
+      <td>Max_used_connections</td>
+      <td>DB 활성 커넥션 수 (현재 실시간 연결 수)</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><mark>방화벽 허용 요청 시</mark><br />
 네이버 클라우드 서버에 접근하려면 출발지 공인 IP를 허용해야 합니다.<br />
