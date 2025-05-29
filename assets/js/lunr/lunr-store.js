@@ -1247,7 +1247,7 @@ var store = [{
         "url": "/web-dev/2025-05-21-1",
         "teaser": null
       },{
-        "title": "Vue 개념 및 구조 / Vue.js 설치 및 실행 방법",
+        "title": "Vue 개념 및 구조 / Vue.js 설치 및 실행 방법 / Vue 디버깅 방법",
         "excerpt":"Vue.js 컴포넌트 단위로 UI를 구성하는 프론트엔드 프레임워크입니다. 기존 Javascript와 달리, 컴포넌트를 재사용해 중복 코드를 줄일 수 있습니다. DOM을 직접 가져와서 데이터를 수동 할당 및 업데이트 해야 하는 Javascript와 달리, Vue는 data에 선언한 값을 템플릿 구문에 바인딩 해두면 DOM에 자동 반영하고 렌더링 합니다. 컴포넌트란? HTML, CSS, Javascript를 캡슐화하여 재사용 가능한 UI...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-05-22-1",
@@ -1257,6 +1257,12 @@ var store = [{
         "excerpt":"인터폴레이션 (Interpolation) 템플릿에서 데이터를 HTML이 아닌 일반 텍스트로 간단히 출력할 때 사용합니다. Vue 데이터 바인딩 문법 중 하나이며, 데이터가 변경되면 템플릿이 다시 렌더링됩니다. {{ data변수명 }} 아래와 같이, 간단한 JS 표현식도 사용 가능합니다. &lt;p&gt;{{ count + 1 }}&lt;/p&gt; &lt;p&gt;{{ isTrue ? '참' : '거짓' }}&lt;/p&gt; &lt;p&gt;{{ data변수명.split('').reverse().join('') }}&lt;/p&gt; 디렉티브 (Directive)...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-05-26-1",
+        "teaser": null
+      },{
+        "title": "Vue 문법 정리 2 / Vue 3 Composition API 종류 및 사용법",
+        "excerpt":"setup() 컴포넌트 인스턴스가 생성되기 전 호출되는 함수이며, Composition API의 진입점입니다. setup 함수 사용 예시 &lt;template&gt; &lt;p&gt; {{ counter }} &lt;/p&gt; &lt;button @click=\"increment\"&gt;click!&lt;/button&gt; &lt;/template&gt; &lt;script&gt; import { ref } from 'vue'; export default { setup(props, context) { const counter = ref(0); // 초기값 0 세팅 const increment = () =&gt; {...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-05-28-1",
         "teaser": null
       },{
         "title": "Bootstrap 개념 / Vue 프로젝트에서 Bootstrap 설치 및 사용 방법",

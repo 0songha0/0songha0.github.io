@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 211</span>
+      <span class="nav__total">🌴 Total Posts: 212</span>
     </li> -->
     
     
@@ -529,6 +529,7 @@ data가 변경되면 바인딩 된 DOM도 변경되지만, 사용자 입력으�
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
   &lt;input v-bind="attrs"&gt;
 &lt;/template&gt;
+
 &lt;script&gt;
 import { ref } from 'vue'; 
 
@@ -562,6 +563,7 @@ export default {
   // :class="[클래스1, 클래스2, 클래스3]"
   &lt;div class="기존클래스" :class="[isActive ? 'active-class' : 'class', errorClass, classObject]"&gt;텍스트&lt;/div&gt;
 &lt;/template&gt;
+
 &lt;script&gt;
 import { ref, reactive, computed } from 'vue';
 
@@ -591,6 +593,7 @@ export default {
   }
 }
 &lt;/script&gt;
+
 &lt;style&gt;
 .active {
   font-weight: 900;
@@ -619,6 +622,7 @@ v-bind:class 내 클래스명에 특수문자가 있으면 ‘‘로 감싸야 �
   &lt;button v-on:click="fontSize--"&gt;-&lt;/button&gt;
   &lt;button v-on:click="fontSize++"&gt;+&lt;/button&gt;
 &lt;/template&gt;
+
 &lt;script&gt;
 import { ref, computed } from 'vue';
 
@@ -854,6 +858,7 @@ v-on:click 등 마우스 이벤트 수신 시, 특정 버튼 입력 시에만 �
   또는
   <button v-on:click="isActive = !isActive">토글버튼</button>
 </template>
+
 <script>
   import { ref } from 'vue';
 
@@ -929,6 +934,7 @@ Vue 3.2 이상에서 추가된 디렉티브입니다.
     <h2 v-if="visible">텍스트</h2>
   </div>
 </template>
+
 <script>
 import { ref } from 'vue';
 
@@ -971,6 +977,7 @@ template은 div와 달리 렌더링 결과에 포함되지 않습니다.
     <h1 v-else="">A, B, C가 아닙니다.</h1>
   </div>
 </template>
+
 <script>
 import { ref } from 'vue';
 
@@ -991,6 +998,7 @@ export default {
     <h2 v-show="isShow">텍스트</h2>
   </div>
 </template>
+
 <script>
 import { ref } from 'vue';
 
@@ -1022,6 +1030,7 @@ v-if와 달리, 조건이 false 시 엘리먼트를 렌더링하고 display:none
     </ul>
   </div>
 </template>
+
 <script>
 import { ref } from 'vue';
 
@@ -1060,6 +1069,7 @@ v-for 사용 시에는 :key 옵션으로 반복 항목의 고유 식별자를 �
     </template>
   </ul>
 </template>
+
 <script>
 import { ref } from 'vue';
 
@@ -1084,6 +1094,7 @@ export default {
 <html lang="ko">
   <head>
     <script src="https://unpkg.com/vue@next"></script>
+
     <style>
     [v-cloak] {
       display: none;
@@ -1151,11 +1162,11 @@ export default {
       
   <nav class="pagination">
     
-      <a href="/web-dev/2025-05-29-1" class="pagination--pager" title="Bootstrap 개념 / Vue 프로젝트에서 Bootstrap 설치 및 사용 방법
+      <a href="/web-dev/2025-05-28-1" class="pagination--pager" title="Vue 문법 정리 2 / Vue 3 Composition API 종류 및 사용법
 ">❮</a>
     
     
-      <a href="/web-dev/2025-05-22-1" class="pagination--pager" title="Vue 개념 및 구조 / Vue.js 설치 및 실행 방법
+      <a href="/web-dev/2025-05-22-1" class="pagination--pager" title="Vue 개념 및 구조 / Vue.js 설치 및 실행 방법 / Vue 디버깅 방법
 ">❯</a>
     
   </nav>
@@ -1217,7 +1228,43 @@ export default {
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
-        <a href="/web-dev/2025-05-22-1" rel="permalink">Vue 개념 및 구조 / Vue.js 설치 및 실행 방법
+        <a href="/web-dev/2025-05-28-1" rel="permalink">Vue 문법 정리 2 / Vue 3 Composition API 종류 및 사용법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-28T00:00:00+00:00">2025-05-28</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-22-1" rel="permalink">Vue 개념 및 구조 / Vue.js 설치 및 실행 방법 / Vue 디버깅 방법
 </a>
       
     </h2>
@@ -1265,42 +1312,6 @@ export default {
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/kafka/2025-05-12-1" rel="permalink">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-05-12T00:00:00+00:00">2025-05-12</time>
       </span>
     
 

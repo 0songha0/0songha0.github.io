@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>비수익형 티스토리 블로그 광고 차단 방법 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>Vue 문법 정리 2 / Vue 3 Composition API 종류 및 사용법 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,8 +65,8 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="비수익형 티스토리 블로그 광고 차단 방법">
-<meta property="og:url" content="https://0songha0.github.io/it-tip/2023-11-10-1">
+<meta property="og:title" content="Vue 문법 정리 2 / Vue 3 Composition API 종류 및 사용법">
+<meta property="og:url" content="https://0songha0.github.io/web-dev/2025-05-28-1">
 
 
   <meta property="og:description" content="송하영 개발 블로그">
@@ -77,11 +77,11 @@
 
 
 
-  <meta property="article:published_time" content="2023-11-10T00:00:00+00:00">
+  <meta property="article:published_time" content="2025-05-28T00:00:00+00:00">
 
 
 
-  <meta property="article:modified_time" content="2023-11-10T00:00:00+00:00">
+  <meta property="article:modified_time" content="2025-05-28T00:00:00+00:00">
 
 
 
@@ -90,7 +90,7 @@
   
 
 
-<link rel="canonical" href="https://0songha0.github.io/it-tip/2023-11-10-1">
+<link rel="canonical" href="https://0songha0.github.io/web-dev/2025-05-28-1">
 
 
 
@@ -425,15 +425,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="비수익형 티스토리 블로그 광고 차단 방법">
+    <meta itemprop="headline" content="Vue 문법 정리 2 / Vue 3 Composition API 종류 및 사용법">
     <meta itemprop="description" content="">
-    <meta itemprop="datePublished" content="2023-11-10T00:00:00+00:00">
-    <meta itemprop="dateModified" content="2023-11-10T00:00:00+00:00">
+    <meta itemprop="datePublished" content="2025-05-28T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-05-28T00:00:00+00:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">비수익형 티스토리 블로그 광고 차단 방법
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Vue 문법 정리 2 / Vue 3 Composition API 종류 및 사용법
 </h1>
           
 
@@ -442,7 +442,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2023-11-10T00:00:00+00:00">2023-11-10</time>
+        <time datetime="2025-05-28T00:00:00+00:00">2025-05-28</time>
       </span>
     
 
@@ -460,36 +460,337 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 비수익형 티스토리 블로그 광고 차단 방법</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue 문법 정리 2 / Vue 3 Composition API 종류 및 사용법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#티스토리-광고-연동-해제">티스토리 광고 연동 해제</a></li><li><a href="#구글-애드센스-광고-삭제">구글 애드센스 광고 삭제</a><ul><li><a href="#구글-애드센스-html-코드-삭제">구글 애드센스 HTML 코드 삭제</a></li><li><a href="#구글-애드센스-자동-광고-해제">구글 애드센스 자동 광고 해제</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#setup">setup()</a><ul><li><a href="#setup-함수-사용-예시">setup 함수 사용 예시</a></li></ul></li><li><a href="#reactivity">Reactivity</a><ul><li><a href="#ref">ref()</a></li><li><a href="#reactive">reactive()</a></li><li><a href="#toref">toRef()</a></li><li><a href="#torefs">toRefs()</a></li><li><a href="#readonly">readonly()</a></li><li><a href="#computed">computed()</a></li><li><a href="#watch">Watch</a></li><li><a href="#watcheffect">WatchEffect</a></li></ul></li><li><a href="#lifecycle-hooks">Lifecycle Hooks</a><ul><li><a href="#라이프사이클-단계">라이프사이클 단계</a></li></ul></li><li><a href="#dependency-injection">Dependency Injection</a></li></ul>
 
             </nav>
           </aside>
         
-        <p>최근 티스토리 블로그에 자체 광고와 애드센스 광고가 중복적으로 나와서 굉장히 보기 안 좋게 되었습니다.<br />
-개발 블로그는 수익이 많이 발생하기 어렵기에, 기존 티스토리 블로그 수익을 포기하기로 했습니다.</p>
+        
+<h2 id="setup">setup()</h2>
+<p>컴포넌트 인스턴스가 생성되기 전 호출되는 함수이며, Composition API의 진입점입니다.</p>
 
-<p>수익이 발생하지 않는 비수익형 블로그가 되면 티스토리 자체 광고가 자동으로 차단됩니다.</p>
+<h3 id="setup-함수-사용-예시">setup 함수 사용 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;p&gt;
+    {{ counter }}
+  &lt;/p&gt;
+  &lt;button @click="increment"&gt;click!&lt;/button&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  import { ref } from 'vue';
+
+  export default {
+    setup(props, context) {
+      const counter = ref(0); // 초기값 0 세팅
+      const increment = () =&gt; {
+        counter.value++;
+      }
+      return {
+        counter,
+        increment
+      }
+    },
+    mounted() {
+      console.log(this.count);
+    }
+  }
+&lt;/&gt;
+</code></pre></div></div>
+<p>setup 함수 내에서 정의한 반응형 상태, 함수를 return 하면 template에서 사용할 수 있습니다.<br />
+mounted() 같은 Options API 함수 내에서도 this 키워드로 컴포넌트 인스턴스에 접근할 수 있습니다.</p>
 
 <hr />
 
-<h2 id="티스토리-광고-연동-해제">티스토리 광고 연동 해제</h2>
-<p>티스토리 블로그 관리 &gt; 수익 메뉴의 모든 광고 연동을 삭제합니다.</p>
+<h2 id="reactivity">Reactivity</h2>
+<p>상태를 반응형으로 만들어 데이터 변경 시 UI가 자동 업데이트 되도록 돕는 반응형 API들입니다.</p>
 
-<hr />
+<h3 id="ref">ref()</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;button v-on:click="addMessage"&gt;Click : {{ message }}&lt;/button&gt;
+&lt;/template&gt;
 
-<h2 id="구글-애드센스-광고-삭제">구글 애드센스 광고 삭제</h2>
+&lt;script&gt;
+import { ref } from 'vue';
 
-<h3 id="구글-애드센스-html-코드-삭제">구글 애드센스 HTML 코드 삭제</h3>
-<p>티스토리 블로그 관리 &gt; 꾸미기 &gt; 스킨 편집 &gt; 애드센스 HTML 코드 삭제</p>
+export default {
+  setup() {
+    let message = ref('Hello Vue!');
 
-<p><mark>HTML 코드 예시</mark></p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">async</span> <span class="na">src=</span><span class="s">"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-851700~~"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    const addMessage = () =&gt; {
+      message.value = message.value + '!';
+    }
+
+    return {
+        message,
+        addMessage
+    }
+  }
+}
+&lt;/script&gt;
+</code></pre></div></div>
+<p>String, Number, boolean 등 단일 프리미티브 값을 반응형 객체로 생성하는 API입니다.<br />
+프리미티브 값을 레퍼런스 객체로 매핑해서 .value로 값에 접근할 수 있습니다.<br />
+Vue 3.3 이상에서 $ref()로 선언하면 .value 없이도 값에 바로 접근할 수 있습니다.</p>
+
+<h3 id="reactive">reactive()</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;button v-on:click="increment"&gt;Click : {{ state.count }}&lt;/button&gt;
+  &lt;button v-on:click="increment"&gt;Deep Click : {{ state.deep.count }}&lt;/button&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import { reactive } from 'vue';
+
+export default {
+  setup() {
+    const state = reactive({
+      count: 0,
+      deep: {
+        count: 0,
+      }
+    });
+    const increment = () =&gt; {
+      state.count++;
+      state.deep.count++;
+    }
+    return {
+      state,
+      increment,
+    }
+  }
+}
+&lt;/&gt;
+</code></pre></div></div>
+<p>객체, 배열 등 레퍼런스 타입을 깊은 반응형 객체로 생성하는 API입니다.<br />
+프리미티브 타입으로 만들면 반응형이 동작하지 않습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script&gt;
+import { reactive, ref } from 'vue';
+
+export default {
+  setup() {
+    const count = ref(0);
+    const state = reactive({
+      count, // count: count 단축
+    });
+
+    // 동일 값 출력
+    console.log(count.value);
+    console.log(state.count);
+
+    // undefined
+    console.log(state.count.value);
+
+    return {};
+  }
+}
+&lt;/script&gt;
+</code></pre></div></div>
+<p>위와 같이, ref로 선언한 데이터를 reactive 객체의 속성으로 주입하면 .value가 자동으로 언래핑됩니다.<br />
+ref로 선언한 데이터를 reactive 배열의 요소로 주입하면 .value를 붙여서 접근해야 합니다.</p>
+
+<h3 id="toref">toRef()</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;templeat&gt;
+  &lt;div&gt;
+    &lt;p&gt;{{ author }}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/templeat&gt;
+&lt;script&gt;
+import { reactive, toRef } from 'vue';
+
+export default {
+  setup() {
+    const book = reactive({
+      author: 'Vue Team',
+      year: '2020',
+      title: 'Vue 3 Guide',
+      description: '책 설명',
+      price: '무료',
+    });
+
+    // 반응형 유지하며 구조분해 할당
+    const author = toRef(book, 'author');
+
+    // 반응형 유지 안되는 구조분해 할당 예시
+    // const author = book;
+
+    return { author };
+  }
+}
+&lt;/script&gt;
+</code></pre></div></div>
+<p>reactive 객체의 단일 속성을 ref 형태로 반환해서 반응형을 유지하며 구조분해 할당하는 API입니다.<br />
+toRef 또는 toRefs를 사용하지 않고 ES6 비구조화 할당으로 추출 시 반응성을 잃게 됩니다.</p>
+
+<h3 id="torefs">toRefs()</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;templeat&gt;
+  &lt;div&gt;
+    &lt;p&gt;{{ author }}&lt;/p&gt;
+    &lt;p&gt;{{ title }}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/templeat&gt;
+&lt;script&gt;
+import { reactive, toRefs } from 'vue';
+
+export default {
+  setup() {
+    const book = reactive({
+      author: 'Vue Team',
+      year: '2020',
+      title: 'Vue 3 Guide',
+      description: '책 설명',
+      price: '무료',
+    });
+
+    // 반응형 유지하며 구조분해 할당
+    const { author, title } = toRefs(book);
+
+    // 반응형 유지 안되는 구조분해 할당 예시
+    // const { author, title } = book;
+
+    return { author, title, book };
+  }
+}
+&lt;/script&gt;
+</code></pre></div></div>
+<p>reactive 객체의 모든 속성을 각각 ref 형태로 반환해서 반응형을 유지하며 구조분해 할당하는 API입니다.</p>
+
+<h3 id="readonly">readonly()</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script&gt;
+import { reactive, readonly } from 'vue';
+
+const original = reactive({ count: 0 });
+
+const copy = readonly(original);
+
+// 원본 변경 시 복사본도 변경 (최신 상태 유지)
+original.count++;
+
+// 복사본 변경 시 콘솔 에러 및 실패
+copy.count++;
+&lt;/script&gt;
+</code></pre></div></div>
+<p>반응형 객체를 읽기 전용으로 만들어서, 복사본을 통한 상태 변경을 방지하는 API입니다.</p>
+
+<h3 id="computed">computed()</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;p&gt;{{ reversedMessage }}&lt;/p&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import { ref, computed } from 'vue';
+
+export default {
+  setup() {
+    const message = ref('Hello Vue!');
+
+    const reversedMessage = computed(() =&gt; 
+      message.value.split('').reverse().join('') // 리턴 값 (한 줄이어서 중괄호, return 생략)
+    );
+
+    return { reversedMessage };
+  }
+}
+&lt;/script&gt;
+</code></pre></div></div>
+<p>템플릿 문법 내 계산식이 길어질 때 computed() 함수로 변경하면 좋습니다.<br />
+계산한 결과 값을 캐시에 저장 후 반환하므로, 반복 호출 시 일반 함수보다 효율적입니다.<br />
+의존하는 반응형 데이터가 변경되면 다시 계산해서 최신 값을 유지합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;p&gt;{{ fullName }}&lt;/p&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import { ref, computed } from 'vue';
+const firstName = ref('홍');
+const lastName = ref('길동');
+
+const fullName = computed({
+  get() {
+    return firstName.value + lastName.value;
+  },
+  set(value) {
+    // 이름 배열을 구조분해 할당
+    [ firstName.value, lastName.value ] = value.split(' ');
+  },
+});
+
+// setter가 없으면 값 변경 시 에러
+fullName.value = '송 하영';
+&lt;/script&gt;
+</code></pre></div></div>
+<p>computed 함수로 반환한 value는 읽기 전용이라서 값 변경 시 에러가 납니다.<br />
+위와 같이 getter/setter를 정의하면 쓰기 가능한 computed가 됩니다.</p>
+
+<h3 id="watch">Watch</h3>
+<p>반응형 데이터 변경 시 콜백 함수를 실행하는 API입니다.<br />
+DOM 변경, 비동기 작업, 사이드 이펙트 등을 수행할 수 있습니다.</p>
+
+<p><mark>Watch 사용 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const data변수명 = ref('텍스트');
+
+watch(data변수명, (newValue, oldValue) =&gt; {
+  // 데이터 변경 시 특정 작업 수행
+});
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const data변수명1 = ref('텍스트');
+const data변수명2 = ref(숫자);
+
+watch([ data변수명1, data변수명2 ], (newValues, oldValues) =&gt; {
+  // 배열 내 데이터 변경 시 특정 작업 수행
+});
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const obj = reactive({
+  count: 0,
+  name: '송하영',
+  hobby: '주식',
+});
+
+watch(obj, (newValue, oldValue) =&gt; {
+  // 객체 내 모든 속성 변경 시 특정 작업 수행
+}, { deep: true });
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const obj = reactive({
+  count: 0,
+});
+
+watch(() =&gt; obj.count, (newValue, oldValue) =&gt; {
+  // getter 함수로 받은 obj.count 변경 시에만 특정 작업 수행
+});
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const data변수명 = ref('텍스트');
+
+watch(data변수명, (newValue, oldValue) =&gt; {
+  // 처음 렌더링 시 즉시 실행, 데이터 변경 시 특정 작업 수행
+}, { immediate: true });
 </code></pre></div></div>
 
-<h3 id="구글-애드센스-자동-광고-해제">구글 애드센스 자동 광고 해제</h3>
-<p>구글 애드센스 좌측 메뉴 &gt; 광고 &gt; 하단 사이트 목록 &gt; 수정 &gt; 광고 설정 &gt; 자동 광고 &gt; 자동 광고 비활성화 &gt; 사이트에 적용</p>
+<h3 id="watcheffect">WatchEffect</h3>
+<p>콜백함수에서 사용된 반응형 데이터들 변경 시 실행되는 API입니다.<br />
+Watch와 달리, 렌더링 시 최초 한번 즉시 실행됩니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const data변수명 = ref('텍스트');
+
+watchEffect(() =&gt; {
+  // WatchEffect 내에서 사용된 반응형 데이터 변경 시 특정 작업 수행
+  console.log(data변수명.value);
+});
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="lifecycle-hooks">Lifecycle Hooks</h2>
+<p>Vue 컴포넌트 인스턴스 생성 후 거치는 라이프사이클 단계에 따라 호출되는 함수들입니다.</p>
+
+<h3 id="라이프사이클-단계">라이프사이클 단계</h3>
+<p>create → mount (DOM에 부착) → update → destroy</p>
+
+<hr />
+
+<h2 id="dependency-injection">Dependency Injection</h2>
+<p>작성예정</p>
+
 
         
       </section>
@@ -510,14 +811,14 @@
     
       
       
-      <a href="/categories#it-tip" class="page__taxonomy-item" rel="tag">IT Tip</a>
+      <a href="/categories#web-dev" class="page__taxonomy-item" rel="tag">Web 개발</a>
     
     </span>
   </p>
 
 
         
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-11-10">2023-11-10</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-05-28">2025-05-28</time></p>
 
 
       </footer>
@@ -527,11 +828,11 @@
       
   <nav class="pagination">
     
-      <a href="/web-dev/2023-11-14-1" class="pagination--pager" title="Git 블로그 복제 및 커스텀 방법 / 깃허브 블로그 만드는 법
+      <a href="/web-dev/2025-05-29-1" class="pagination--pager" title="Bootstrap 개념 / Vue 프로젝트에서 Bootstrap 설치 및 사용 방법
 ">❮</a>
     
     
-      <a href="/web-dev/2023-11-09-1" class="pagination--pager" title="SpringBoot 커스텀 에러페이지 설정 방법
+      <a href="/web-dev/2025-05-26-1" class="pagination--pager" title="Vue 문법 정리 1 / Vue 3 템플릿 문법 (인터폴레이션, 디렉티브)
 ">❯</a>
     
   </nav>
@@ -569,42 +870,6 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-05-29T00:00:00+00:00">2025-05-29</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-05-28-1" rel="permalink">Vue 문법 정리 2 / Vue 3 Composition API 종류 및 사용법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-05-28T00:00:00+00:00">2025-05-28</time>
       </span>
     
 
@@ -677,6 +942,42 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-05-22T00:00:00+00:00">2025-05-22</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-21-1" rel="permalink">Git 블로그 카테고리 목록 페이징 기능 구현
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-21T00:00:00+00:00">2025-05-21</time>
       </span>
     
 
