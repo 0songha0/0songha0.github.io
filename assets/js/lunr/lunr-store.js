@@ -894,7 +894,7 @@ var store = [{
         "teaser": null
       },{
         "title": "자주 쓰는 HTML 정리 / HTML 문법",
-        "excerpt":"자주 쓰는 HTML HTML 정규표현식 https://0songha0.github.io/web-dev/2022-08-01-1 CSS, Javascript 파일 추가 &lt;head&gt; &lt;script src=\"Javascript파일경로/파일명.js\"&gt;&lt;/script&gt; &lt;link rel=\"stylesheet\" href=\"CSS파일경로/파일명.css\"&gt; &lt;/had&gt; 라이브러리 파일은 https://도메인/파일경로/파일명으로도 추가할 수도 있지만, 사이트에서 파일 제공 서비스를 중단하면 에러날 수 있으니 내려받아서 프로젝트 내부 절대경로로 추가하는 것이 좋습니다. 라디오 버튼 구현 &lt;input type=\"radio\" id=\"useYn_Y\" name=\"useYn\" value=\"Y\"&gt; &lt;label for=\"useYn_Y\"&gt;사용&lt;/label&gt; &lt;input type=\"radio\"...","categories": ["web-dev"],
+        "excerpt":"자주 쓰는 HTML HTML 정규표현식 https://0songha0.github.io/web-dev/2022-08-01-1 form submit &lt;form action=\"/컨트롤러경로\" method=\"post\"&gt; &lt;input type=\"text\" name=\"서버에서받을변수명\" /&gt; &lt;button&gt;저장&lt;/button&gt; &lt;/form&gt; button의 기본 type은 submit이므로, 버튼 클릭 시 form이 전송됩니다. CSS, Javascript 파일 추가 &lt;head&gt; &lt;script src=\"Javascript파일경로/파일명.js\"&gt;&lt;/script&gt; &lt;link rel=\"stylesheet\" href=\"CSS파일경로/파일명.css\"&gt; &lt;/had&gt; 라이브러리 파일은 https://도메인/파일경로/파일명으로도 추가할 수도 있지만, 사이트에서 파일 제공 서비스를 중단하면 에러날 수...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2024-02-08-2",
         "teaser": null
@@ -1257,5 +1257,11 @@ var store = [{
         "excerpt":"인터폴레이션 (Interpolation) 템플릿에서 데이터를 HTML이 아닌 일반 텍스트로 간단히 출력할 때 사용합니다. Vue 데이터 바인딩 문법 중 하나이며, 데이터가 변경되면 템플릿이 다시 렌더링됩니다. {{ data변수명 }} 아래와 같이, 간단한 JS 표현식도 사용 가능합니다. &lt;p&gt;{{ count + 1 }}&lt;/p&gt; &lt;p&gt;{{ isTrue ? '참' : '거짓' }}&lt;/p&gt; &lt;p&gt;{{ data변수명.split('').reverse().join('') }}&lt;/p&gt; 디렉티브 (Directive)...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-05-26-1",
+        "teaser": null
+      },{
+        "title": "Bootstrap 개념 / Vue 프로젝트에서 Bootstrap 설치 및 사용 방법",
+        "excerpt":"Bootstrap이란? 사전에 정의된 CSS 등을 사용하여 예쁜 HTML을 만들 수 있는 UI 프레임워크입니다. 반응형 웹 페이지 제작을 쉽게 도와줘서 한 페이지에서 PC 및 모바일 서비스가 가능합니다. Vue 프레임워크 사용 시 Vue에 특화된 BootstrapVue 또는 Vuetify 라이브러리도 활용 가능합니다. Bootstrap 설치 방법 CDN 방식 &lt;!-- Bootstrap CSS --&gt; &lt;link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css\"...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-05-29-1",
         "teaser": null
       }]
