@@ -360,7 +360,7 @@ var store = [{
         "teaser": null
       },{
         "title": "AWS EC2 엘라스틱서치 운영서버 로드밸런서 생성 및 보안그룹 설정 방법",
-        "excerpt":"엘라스틱서치 서버 로드밸런서 생성 생성 예정 로드밸런서 1) 엘라스틱서치용 로드밸런서&lt;/&gt; 로드밸런서1 DNS name:80으로 들어오는 요청을 엘라스틱서치서버:9200으로 포워딩하는 ALB 로드밸런서1 2) 키바나용 로드밸런서 로드밸런서2 DNS name:80으로 들어오는 요청을 엘라스틱서치서버:5600으로 포워딩하는 ALB 로드밸런서2 로드밸런서 종류 CLB 이전 세대의 로드 밸런서로서, 현재는 사용이 권장되지 않습니다. ALB HTTP 및 HTTPS 트래픽을 처리합니다. 웹 애플리케이션을...","categories": ["aws"],
+        "excerpt":"엘라스틱서치 서버 로드밸런서 생성 생성 예정 로드밸런서 1) 엘라스틱서치용 로드밸런서 로드밸런서1 DNS name:80으로 들어오는 요청을 엘라스틱서치서버:9200으로 포워딩하는 ALB 로드밸런서1 2) 키바나용 로드밸런서 로드밸런서2 DNS name:80으로 들어오는 요청을 엘라스틱서치서버:5600으로 포워딩하는 ALB 로드밸런서2 로드밸런서 종류 CLB 이전 세대의 로드 밸런서로서, 현재는 사용이 권장되지 않습니다. ALB HTTP 및 HTTPS 트래픽을 처리합니다. 웹 애플리케이션을...","categories": ["aws"],
         "tags": [],
         "url": "/aws/2023-02-01-1",
         "teaser": null
@@ -1269,5 +1269,11 @@ var store = [{
         "excerpt":"Bootstrap이란? 사전에 정의된 CSS 등을 사용하여 예쁜 HTML을 만들 수 있는 UI 프레임워크입니다. 반응형 웹 페이지 제작을 쉽게 도와줘서 한 페이지에서 PC 및 모바일 서비스가 가능합니다. Vue 프레임워크 사용 시 Vue에 특화된 BootstrapVue 또는 Vuetify 라이브러리도 활용 가능합니다. Bootstrap 설치 방법 CDN 방식 &lt;!-- Bootstrap CSS --&gt; &lt;link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css\"...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-05-29-1",
+        "teaser": null
+      },{
+        "title": "Vue 문법 정리 3 / 컴포넌트 정의 및 사용 방법",
+        "excerpt":"Vue 컴포넌트 정의 방법 문자열 템플릿 방식 // HTML 내부 script에 컴포넌트 정의 시 const App = { template: ` // HTML 코드 작성 ` } // js 파일로 컴포넌트 정의 시 export default { template: ` // HTML 코드 작성 ` } HTML에서 Vue 컴포넌트를 정의하고, script에서 벡틱(`) 등으로...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-05-30-1",
         "teaser": null
       }]

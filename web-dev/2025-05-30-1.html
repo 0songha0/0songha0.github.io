@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Vue 문법 정리 2 / Vue 3 Composition API 종류 및 사용법 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>Vue 문법 정리 3 / 컴포넌트 정의 및 사용 방법 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,8 +65,8 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="Vue 문법 정리 2 / Vue 3 Composition API 종류 및 사용법">
-<meta property="og:url" content="https://0songha0.github.io/web-dev/2025-05-28-1">
+<meta property="og:title" content="Vue 문법 정리 3 / 컴포넌트 정의 및 사용 방법">
+<meta property="og:url" content="https://0songha0.github.io/web-dev/2025-05-30-1">
 
 
   <meta property="og:description" content="송하영 개발 블로그">
@@ -77,11 +77,11 @@
 
 
 
-  <meta property="article:published_time" content="2025-05-28T00:00:00+00:00">
+  <meta property="article:published_time" content="2025-05-30T00:00:00+00:00">
 
 
 
-  <meta property="article:modified_time" content="2025-05-28T00:00:00+00:00">
+  <meta property="article:modified_time" content="2025-05-30T00:00:00+00:00">
 
 
 
@@ -90,7 +90,7 @@
   
 
 
-<link rel="canonical" href="https://0songha0.github.io/web-dev/2025-05-28-1">
+<link rel="canonical" href="https://0songha0.github.io/web-dev/2025-05-30-1">
 
 
 
@@ -425,15 +425,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Vue 문법 정리 2 / Vue 3 Composition API 종류 및 사용법">
+    <meta itemprop="headline" content="Vue 문법 정리 3 / 컴포넌트 정의 및 사용 방법">
     <meta itemprop="description" content="">
-    <meta itemprop="datePublished" content="2025-05-28T00:00:00+00:00">
-    <meta itemprop="dateModified" content="2025-05-28T00:00:00+00:00">
+    <meta itemprop="datePublished" content="2025-05-30T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-05-30T00:00:00+00:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Vue 문법 정리 2 / Vue 3 Composition API 종류 및 사용법
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Vue 문법 정리 3 / 컴포넌트 정의 및 사용 방법
 </h1>
           
 
@@ -442,7 +442,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-05-28T00:00:00+00:00">2025-05-28</time>
+        <time datetime="2025-05-30T00:00:00+00:00">2025-05-30</time>
       </span>
     
 
@@ -460,336 +460,339 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue 문법 정리 2 / Vue 3 Composition API 종류 및 사용법</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue 문법 정리 3 / 컴포넌트 정의 및 사용 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#setup">setup()</a><ul><li><a href="#setup-함수-사용-예시">setup 함수 사용 예시</a></li></ul></li><li><a href="#reactivity">Reactivity</a><ul><li><a href="#ref">ref()</a></li><li><a href="#reactive">reactive()</a></li><li><a href="#toref">toRef()</a></li><li><a href="#torefs">toRefs()</a></li><li><a href="#readonly">readonly()</a></li><li><a href="#computed">computed()</a></li><li><a href="#watch">Watch</a></li><li><a href="#watcheffect">WatchEffect</a></li></ul></li><li><a href="#lifecycle-hooks">Lifecycle Hooks</a><ul><li><a href="#라이프사이클-단계">라이프사이클 단계</a></li></ul></li><li><a href="#dependency-injection">Dependency Injection</a></li></ul>
+              <ul class="toc__menu"><li><a href="#vue-컴포넌트-정의-방법">Vue 컴포넌트 정의 방법</a><ul><li><a href="#문자열-템플릿-방식">문자열 템플릿 방식</a></li><li><a href="#single-file-component-sfc-방식">Single File Component (SFC) 방식</a></li></ul></li><li><a href="#vue-컴포넌트-생성-및-등록-방법">Vue 컴포넌트 생성 및 등록 방법</a><ul><li><a href="#vue-컴포넌트-import">Vue 컴포넌트 import</a></li><li><a href="#vue-루트-컴포넌트-인스턴스-생성">Vue 루트 컴포넌트 인스턴스 생성</a></li><li><a href="#컴포넌트-전역-등록">컴포넌트 전역 등록</a></li><li><a href="#컴포넌트-지역-등록">컴포넌트 지역 등록</a></li></ul></li><li><a href="#vue-컴포넌트-사용법">Vue 컴포넌트 사용법</a><ul><li><a href="#props-속성">Props 속성</a></li><li><a href="#emit-기능">emit 기능</a></li><li><a href="#non-props-속성-fallthrough-속성">Non-Props 속성 (fallthrough 속성)</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
         
-<h2 id="setup">setup()</h2>
-<p>컴포넌트 인스턴스가 생성되기 전 호출되는 함수이며, Composition API의 진입점입니다.</p>
+<h2 id="vue-컴포넌트-정의-방법">Vue 컴포넌트 정의 방법</h2>
 
-<h3 id="setup-함수-사용-예시">setup 함수 사용 예시</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
-  &lt;p&gt;
-    {{ counter }}
-  &lt;/p&gt;
-  &lt;button @click="increment"&gt;click!&lt;/button&gt;
+<h3 id="문자열-템플릿-방식">문자열 템플릿 방식</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// HTML 내부 script에 컴포넌트 정의 시
+const App = {
+  template: `
+    // HTML 코드 작성
+  `
+}
+
+// js 파일로 컴포넌트 정의 시
+export default {
+  template: `
+    // HTML 코드 작성
+  `  
+}
+</code></pre></div></div>
+<p>HTML에서 Vue 컴포넌트를 정의하고, script에서 벡틱(`) 등으로 감싼 문자열로 템플릿을 작성하는 방식입니다.<br />
+코드가 길어지면 가독성이 떨어지고 관리가 어려워서 실무에서 잘 사용되지는 않습니다.</p>
+
+<h3 id="single-file-component-sfc-방식">Single File Component (SFC) 방식</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// vue 파일로 컴포넌트 정의 시
+&lt;template&gt;
+  // HTML 코드 작성
 &lt;/template&gt;
 
 &lt;script&gt;
-  import { ref } from 'vue';
-
   export default {
-    setup(props, context) {
-      const counter = ref(0); // 초기값 0 세팅
-      const increment = () =&gt; {
-        counter.value++;
-      }
-      return {
-        counter,
-        increment
-      }
-    },
-    mounted() {
-      console.log(this.count);
-    }
-  }
+    // Javascript 코드 작성
+  };
 &lt;/script&gt;
+
+&lt;style&gt;
+  // CSS 작성
+
+  // CSS import 가능
+  @import './assets/CSS명.css';
+&lt;/style&gt;
 </code></pre></div></div>
-<p>setup 함수 내에서 정의한 반응형 상태, 함수를 return 하면 template에서 사용할 수 있습니다.<br />
-mounted() 같은 Options API 함수 내에서도 this 키워드로 컴포넌트 인스턴스에 접근할 수 있습니다.</p>
+<p>.vue 파일에 template, script, style 태그를 구분해 Vue 컴포넌트를 정의하는 가독성 좋은 방식입니다.<br />
+실무에서 컴포넌트 정의 시 일반적으로 사용하는 방법입니다.</p>
+
+<p><mark>Vue SFC 특수 속성</mark></p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>script setup</td>
+      <td>
+        setup() 함수 작성 및 data변수 return 없이 바로 템플릿에서 사용 가능합니다.<br />
+        자동으로 컴포넌트 setup 역할을 수행합니다.
+      </td>
+      <td>style scoped</td>
+      <td>
+        현재 컴포넌트에만 CSS가 적용되어 다른 컴포넌트와 스타일 충돌을 방지합니다.<br />
+        외부 컴포넌트에는 해당 CSS가 적용되지 않아서 사용할 수 없습니다.<br /><br />
+        CSS 사용 시 클래스명이 data-v-7c185b5e 등 고유한 선택자로 변환됩니다.
+      </td>
+      <td>style module</td>
+      <td>
+        CSS가 모듈 형태로 컴파일됩니다.<br />
+        컴포넌트 내부에서는 $style 객체로 CSS 클래스명을 바인딩할 수 있습니다.<br />
+        style module="이름" 이렇게 선언하면 $style 객체 이름을 변경할 수 있습니다.<br /><br />
+        CSS 사용 시 클래스명이 _red_1extt_2 등 고유한 이름으로 변환되어 충돌을 방지합니다.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <hr />
 
-<h2 id="reactivity">Reactivity</h2>
-<p>상태를 반응형으로 만들어 데이터 변경 시 UI가 자동 업데이트 되도록 돕는 반응형 API들입니다.</p>
+<h2 id="vue-컴포넌트-생성-및-등록-방법">Vue 컴포넌트 생성 및 등록 방법</h2>
 
-<h3 id="ref">ref()</h3>
+<h3 id="vue-컴포넌트-import">Vue 컴포넌트 import</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// js 파일 import 시
+import App from "./App.js";
+
+// vue 파일 import 시
+import App from "./App.vue";
+</code></pre></div></div>
+<p>파일에 작성된 컴포넌트를 const 변수에 import 해서 사용할 수 있습니다.<br />
+Vue 파일은 Vite 또는 Vue CLI, Webpack 같은 빌드 도구를 이용해야 import 가능합니다.<br />
+Vite는 Node.js 기반 도구이므로 npm으로 프로젝트를 관리해야 사용 가능합니다.</p>
+
+<p><mark>ES 모듈 사용 시 script 설정</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script type="module" src="./src/main.js"&gt;&lt;/script&gt;
+</code></pre></div></div>
+<p>export 한 js 파일을 import 하는 js 파일을 HTML에 추가하면 오류가 날 수 있습니다.<br />
+ES 모듈 문법 (import, export) 사용 시 script 태그에 type=”module” 속성을 지정해야 합니다.</p>
+
+<h3 id="vue-루트-컴포넌트-인스턴스-생성">Vue 루트 컴포넌트 인스턴스 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import App from "./App.vue";
+
+// CDN으로 Vue 설치한 경우
+const app = Vue.createApp(App);
+
+// npm으로 Vue 설치한 경우
+import { createApp } from 'vue';
+const app = createApp(App);
+</code></pre></div></div>
+<p>App 루트 컴포넌트는 주로 main.js에 정의합니다.</p>
+
+<h3 id="컴포넌트-전역-등록">컴포넌트 전역 등록</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import 컴포넌트명 from './components/컴포넌트명.vue';
+
+// 컴포넌트 전역 등록
+app.component('컴포넌트명', 컴포넌트명);
+app.mount('#app');
+</code></pre></div></div>
+<p>app.component 함수로 컴포넌트를 전역 등록하면, Vue 애플리케이션 전체에서 사용 가능합니다.<br />
+컴포넌트 전역 등록은 main.js에서 하는 것이 관리하기 편합니다.</p>
+
+<h3 id="컴포넌트-지역-등록">컴포넌트 지역 등록</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
-  &lt;button v-on:click="addMessage"&gt;Click : {{ message }}&lt;/button&gt;
+  &lt;div&gt;
+    &lt;하위컴포넌트명&gt;&lt;/하위컴포넌트명&gt;
+  &lt;div&gt;
 &lt;/template&gt;
 
 &lt;script&gt;
-import { ref } from 'vue';
+import 하위컴포넌트명 from './하위컴포넌트명.vue'
 
 export default {
+  components: { // 컴포넌트 지역 등록
+    하위컴포넌트명
+  },
   setup() {
-    let message = ref('Hello Vue!');
-
-    const addMessage = () =&gt; {
-      message.value = message.value + '!';
-    }
-
-    return {
-        message,
-        addMessage
-    }
+    return { };
   }
 }
 &lt;/script&gt;
 </code></pre></div></div>
-<p>String, Number, boolean 등 단일 프리미티브 값을 반응형 객체로 생성하는 API입니다.<br />
-프리미티브 값을 레퍼런스 객체로 매핑해서 .value로 값에 접근할 수 있습니다.<br />
-Vue 3.3 이상에서 $ref()로 선언하면 .value 없이도 값에 바로 접근할 수 있습니다.</p>
+<p>컴포넌트 지역 등록 시 현재 컴포넌트 영역에서만 사용할 수 있습니다.<br />
+자식 컴포넌트 script는 1회, setup 함수는 각 인수턴스 수만큼 실행됩니다.</p>
 
-<h3 id="reactive">reactive()</h3>
+<hr />
+
+<h2 id="vue-컴포넌트-사용법">Vue 컴포넌트 사용법</h2>
+
+<h3 id="props-속성">Props 속성</h3>
+<p>부모 컴포넌트에서 자식 컴포넌트로 단방향 데이터 전달하는 속성입니다.<br />
+props 선언 시 카멜케이스, 자식 컴포넌트로 전달 시 케밥케이스 사용이 권장됩니다.</p>
+
+<p><mark>props 전달하는 부모 컴포넌트 예시</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
-  &lt;button v-on:click="increment"&gt;Click : {{ state.count }}&lt;/button&gt;
-  &lt;button v-on:click="increment"&gt;Deep Click : {{ state.deep.count }}&lt;/button&gt;
+  &lt;하위컴포넌트명 props명1="텍스트" :props명2="data변수명"&gt;&lt;/하위컴포넌트명&gt;
+  
+  &lt;div v-for="post in data객체배열명" :key="post.id"&gt;
+    &lt;하위컴포넌트명 v-bind="post"&gt;&lt;/하위컴포넌트명&gt;
+  &lt;/div&gt;
+ 
+  &lt;하위컴포넌트명 v-model="data변수명"&gt;&lt;/하위컴포넌트명&gt;
+  또는
+  &lt;하위컴포넌트명 :model-value="data변수명" @update:model-value="함수명(하위컴포넌트emits파라미터명)"&gt;&lt;/하위컴포넌트명&gt;
+  // 하위컴포넌트에서 props는 'modelValue', emits 이벤트명은 'update:modelValue'로 받을 수 있습니다.
+
+  &lt;하위컴포넌트명 v-model:props명="data변수명"&gt;&lt;/하위컴포넌트명&gt;
+  // v-model에 전달인자로 props명 지정 시,
+  // 하위컴포넌트에서 props는 'props명', emits 이벤트명은 'update:props명'으로 받을 수 있습니다.
 &lt;/template&gt;
 
 &lt;script&gt;
-import { reactive } from 'vue';
-
-export default {
-  setup() {
-    const state = reactive({
-      count: 0,
-      deep: {
-        count: 0,
-      }
-    });
-    const increment = () =&gt; {
-      state.count++;
-      state.deep.count++;
-    }
-    return {
-      state,
-      increment,
-    }
-  }
-}
-&lt;/script&gt;
-</code></pre></div></div>
-<p>객체, 배열 등 레퍼런스 타입을 깊은 반응형 객체로 생성하는 API입니다.<br />
-프리미티브 타입으로 만들면 반응형이 동작하지 않습니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script&gt;
+import 하위컴포넌트명 from '@/components/하위컴포넌트명.vue';
 import { reactive, ref } from 'vue';
 
 export default {
+  components: {
+    하위컴포넌트명
+  },
   setup() {
-    const count = ref(0);
-    const state = reactive({
-      count, // count: count 단축
+    const data변수명 = ref(숫자);
+
+    const data객체배열명 = reactive([
+      { id: 1, props명1: "텍스트1", props명2: 숫자1 },
+      { id: 2, props명1: "텍스트2", props명2: 숫자2 },
+      { id: 3, props명1: "텍스트3", props명2: 숫자3 },
+    ]);
+
+    return { data변수명, data객체배열명 }
+  }
+}
+&lt;/script&gt;
+</code></pre></div></div>
+<p>부모 컴포넌트 템플릿에 자식 컴포넌트 선언 시 props 전달하는 예시입니다.<br />
+자식 컴포넌트에서는 props (readonly) 값을 변경할 수 없습니다.</p>
+
+<p><mark>props 전달받은 자식 컴포넌트 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  {{ props명1 }} {{ props명2 }} {{ isSmallNum }}
+&lt;/template&gt;
+
+&lt;script&gt;
+import { computed } from 'vue';
+
+export default {
+  // 배열 형태로 정의
+  props: [ 'props명1', 'props명2' ]
+  또는
+  // 객체 형태로 정의 (권장)
+  props: {
+    props명1: String,
+    props명2: {
+      type: Number,
+      required: true,
+      default: 100,
+      validator: (value) =&gt; {
+        return 0 &lt; value &amp;&amp; value &lt; 1000;
+      }
+    },
+    props명3: {
+      type: Object,
+      default: () =&gt; {
+        return { 기본값키 : '기본값' };
+      }
+    }
+  }
+
+  setup(props) {
+    // props 가공
+    const isSmallNum = computed(() =&gt; {
+      return props.props명2 &lt; 50 ? '작다' : '크다'
     });
 
-    // 동일 값 출력
-    console.log(count.value);
-    console.log(state.count);
+    return { isSmallNum };
+  }
+}
+&lt;/script&gt;
+</code></pre></div></div>
+<p>자식 컴포넌트 스크립트에서 props 받아서 사용하는 예시입니다.</p>
 
-    // undefined
-    console.log(state.count.value);
+<h3 id="emit-기능">emit 기능</h3>
+<p>자식 컴포넌트에서 부모 컴포넌트로 props 변경 요청 등 이벤트를 발생시키는 기능입니다.</p>
 
+<p><mark>emit 이벤트 발생시키는 자식 컴포넌트 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;button @click="함수명"&gt;버튼&lt;/button&gt;
+  또는
+  &lt;button @click="$emit('이벤트명', 파라미터변수)"&gt;버튼&lt;/button&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+// 이벤트명 배열 선언
+const emit = defineEmits(['이벤트명']);
+또는
+// 이벤트명: 이벤트 유효성검사 객체 선언
+const emit = defineEmits({
+  '이벤트명': (파라미터변수1, 파라미터변수2) =&gt; {
+    if (!파라미터변수1) {
+      return false;
+    } else if (!파라미터변수2) {
+      return false;
+    }
+    return true;
+  }
+});
+
+// 이벤트 발생시키는 함수 정의
+function 함수명() {
+  const 파라미터변수1 = 파라미터값;
+  const 파라미터변수2 = 파라미터값;
+
+  emit('이벤트명', 파라미터변수1, 파라미터변수2);
+}
+&lt;/script&gt;
+</code></pre></div></div>
+<p>Options API의 this.$emit, Composition API의 context.emit 방식보다 defineEmits 사용이 권장됩니다.<br />
+이벤트 선언 없이도 emit 이벤트 호출은 정상 작동합니다. 이벤트 선언은 선택사항입니다.</p>
+
+<p><mark>emit 이벤트 처리하는 부모 컴포넌트 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;Child @이벤트명="함수명" /&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import Child from './자식컴포넌트명.vue';
+
+function 함수명(파라미터명1, 파라미터명2) {
+  console.log('자식 컴포넌트가 보낸 파라미터1:', 파라미터명1);
+  console.log('자식 컴포넌트가 보낸 파라미터2:', 파라미터명2);
+}
+&lt;/script&gt;
+</code></pre></div></div>
+<p>자식 컴포넌트 emit 이벤트명은 부모 컴포넌트에서 케밥 케이스로 변환해서 받는 것을 권장합니다.</p>
+
+<h3 id="non-props-속성-fallthrough-속성">Non-Props 속성 (fallthrough 속성)</h3>
+<p>부모 컴포넌트에서 자식 컴포넌트에 전달하였으나, 자식 컴포넌트가 props에 정의하지 않은 속성 또는 이벤트입니다.<br />
+Non-Props 속성들은 자식 template의 최상위 요소에 자동 상속됩니다.</p>
+
+<p><mark>Non-Props 속성 예시</mark></p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>class</td>
+      <td>이미 최상위 요소에 class 속성이 있는 경우에는 병합됩니디.</td>
+    </tr>
+    <tr>
+      <td>style</td>
+      <td>이미 최상위 요소에 style 속성이 있는 경우에는 병합됩니디.</td>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>이미 최상위 요소에 id 속성이 있는 경우에는 부모에서 보낸 id로 덮어쓰기 됩니다.</td>
+    </tr>
+    <tr>
+      <td>이벤트 리스너 (@click 등)</td>
+      <td>
+        크롬 F12 개발자 도구 &gt; Elements 탭 &gt; 최상위 요소 선택 &gt; Event Listeners 탭 &gt; Ancestors All 체크 해제<br />
+        현재 요소에 직접 연결된 click 이벤트를 확인할 수 있습니다.<br />
+        remove 버튼 클릭 시 이벤트 삭제 테스트도 가능합니다.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><mark>Non-Props 속성 상속 비활성화 처리</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script&gt;
+export default {
+  inheritAttrs: false,
+  setup() {
     return {};
   }
 }
-&lt;/script&gt;
-</code></pre></div></div>
-<p>위와 같이, ref로 선언한 데이터를 reactive 객체의 속성으로 주입하면 .value가 자동으로 언래핑됩니다.<br />
-ref로 선언한 데이터를 reactive 배열의 요소로 주입하면 .value를 붙여서 접근해야 합니다.</p>
-
-<h3 id="toref">toRef()</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;templeat&gt;
-  &lt;div&gt;
-    &lt;p&gt;{{ author }}&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/templeat&gt;
 &lt;script&gt;
-import { reactive, toRef } from 'vue';
-
-export default {
-  setup() {
-    const book = reactive({
-      author: 'Vue Team',
-      year: '2020',
-      title: 'Vue 3 Guide',
-      description: '책 설명',
-      price: '무료',
-    });
-
-    // 반응형 유지하며 구조분해 할당
-    const author = toRef(book, 'author');
-
-    // 반응형 유지 안되는 구조분해 할당 예시
-    // const author = book;
-
-    return { author };
-  }
-}
-&lt;/script&gt;
 </code></pre></div></div>
-<p>reactive 객체의 단일 속성을 ref 형태로 반환해서 반응형을 유지하며 구조분해 할당하는 API입니다.<br />
-toRef 또는 toRefs를 사용하지 않고 ES6 비구조화 할당으로 추출 시 반응성을 잃게 됩니다.</p>
-
-<h3 id="torefs">toRefs()</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;templeat&gt;
-  &lt;div&gt;
-    &lt;p&gt;{{ author }}&lt;/p&gt;
-    &lt;p&gt;{{ title }}&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/templeat&gt;
-&lt;script&gt;
-import { reactive, toRefs } from 'vue';
-
-export default {
-  setup() {
-    const book = reactive({
-      author: 'Vue Team',
-      year: '2020',
-      title: 'Vue 3 Guide',
-      description: '책 설명',
-      price: '무료',
-    });
-
-    // 반응형 유지하며 구조분해 할당
-    const { author, title } = toRefs(book);
-
-    // 반응형 유지 안되는 구조분해 할당 예시
-    // const { author, title } = book;
-
-    return { author, title, book };
-  }
-}
-&lt;/script&gt;
-</code></pre></div></div>
-<p>reactive 객체의 모든 속성을 각각 ref 형태로 반환해서 반응형을 유지하며 구조분해 할당하는 API입니다.</p>
-
-<h3 id="readonly">readonly()</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script&gt;
-import { reactive, readonly } from 'vue';
-
-const original = reactive({ count: 0 });
-
-const copy = readonly(original);
-
-// 원본 변경 시 복사본도 변경 (최신 상태 유지)
-original.count++;
-
-// 복사본 변경 시 콘솔 에러 및 실패
-copy.count++;
-&lt;/script&gt;
-</code></pre></div></div>
-<p>반응형 객체를 읽기 전용으로 만들어서, 복사본을 통한 상태 변경을 방지하는 API입니다.</p>
-
-<h3 id="computed">computed()</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
-  &lt;p&gt;{{ reversedMessage }}&lt;/p&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-import { ref, computed } from 'vue';
-
-export default {
-  setup() {
-    const message = ref('Hello Vue!');
-
-    const reversedMessage = computed(() =&gt; 
-      message.value.split('').reverse().join('') // 리턴 값 (한 줄이어서 중괄호, return 생략)
-    );
-
-    return { reversedMessage };
-  }
-}
-&lt;/script&gt;
-</code></pre></div></div>
-<p>템플릿 문법 내 계산식이 길어질 때 computed() 함수로 변경하면 좋습니다.<br />
-계산한 결과 값을 캐시에 저장 후 반환하므로, 반복 호출 시 일반 함수보다 효율적입니다.<br />
-의존하는 반응형 데이터가 변경되면 다시 계산해서 최신 값을 유지합니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
-  &lt;p&gt;{{ fullName }}&lt;/p&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-import { ref, computed } from 'vue';
-const firstName = ref('홍');
-const lastName = ref('길동');
-
-const fullName = computed({
-  get() {
-    return firstName.value + lastName.value;
-  },
-  set(value) {
-    // 이름 배열을 구조분해 할당
-    [ firstName.value, lastName.value ] = value.split(' ');
-  },
-});
-
-// setter가 없으면 값 변경 시 에러
-fullName.value = '송 하영';
-&lt;/script&gt;
-</code></pre></div></div>
-<p>computed 함수로 반환한 value는 읽기 전용이라서 값 변경 시 에러가 납니다.<br />
-위와 같이 getter/setter를 정의하면 쓰기 가능한 computed가 됩니다.</p>
-
-<h3 id="watch">Watch</h3>
-<p>반응형 데이터 변경 시 콜백 함수를 실행하는 API입니다.<br />
-DOM 변경, 비동기 작업, 사이드 이펙트 등을 수행할 수 있습니다.</p>
-
-<p><mark>Watch 사용 예시</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const data변수명 = ref('텍스트');
-
-watch(data변수명, (newValue, oldValue) =&gt; {
-  // 데이터 변경 시 특정 작업 수행
-});
-</code></pre></div></div>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const data변수명1 = ref('텍스트');
-const data변수명2 = ref(숫자);
-
-watch([ data변수명1, data변수명2 ], (newValues, oldValues) =&gt; {
-  // 배열 내 데이터 변경 시 특정 작업 수행
-});
-</code></pre></div></div>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const obj = reactive({
-  count: 0,
-  name: '송하영',
-  hobby: '주식',
-});
-
-watch(obj, (newValue, oldValue) =&gt; {
-  // 객체 내 모든 속성 변경 시 특정 작업 수행
-}, { deep: true });
-</code></pre></div></div>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const obj = reactive({
-  count: 0,
-});
-
-watch(() =&gt; obj.count, (newValue, oldValue) =&gt; {
-  // getter 함수로 받은 obj.count 변경 시에만 특정 작업 수행
-});
-</code></pre></div></div>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const data변수명 = ref('텍스트');
-
-watch(data변수명, (newValue, oldValue) =&gt; {
-  // 처음 렌더링 시 즉시 실행, 데이터 변경 시 특정 작업 수행
-}, { immediate: true });
-</code></pre></div></div>
-
-<h3 id="watcheffect">WatchEffect</h3>
-<p>콜백함수에서 사용된 반응형 데이터들 변경 시 실행되는 API입니다.<br />
-Watch와 달리, 렌더링 시 최초 한번 즉시 실행됩니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const data변수명 = ref('텍스트');
-
-watchEffect(() =&gt; {
-  // WatchEffect 내에서 사용된 반응형 데이터 변경 시 특정 작업 수행
-  console.log(data변수명.value);
-});
-</code></pre></div></div>
-
-<hr />
-
-<h2 id="lifecycle-hooks">Lifecycle Hooks</h2>
-<p>Vue 컴포넌트 인스턴스 생성 후 거치는 라이프사이클 단계에 따라 호출되는 함수들입니다.</p>
-
-<h3 id="라이프사이클-단계">라이프사이클 단계</h3>
-<p>create → mount (DOM에 부착) → update → destroy</p>
-
-<hr />
-
-<h2 id="dependency-injection">Dependency Injection</h2>
-<p>작성예정</p>
+<p>하위 컴포넌트에서 inheritAttrs: false 옵션을 설정하면,<br />
+Non-Props 속성 최상위 요소 자동 상속을 비활성화 할 수 있습니다.</p>
 
 
         
@@ -818,7 +821,7 @@ watchEffect(() =&gt; {
 
 
         
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-05-28">2025-05-28</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-05-30">2025-05-30</time></p>
 
 
       </footer>
@@ -828,11 +831,10 @@ watchEffect(() =&gt; {
       
   <nav class="pagination">
     
+      <a href="#" class="pagination--pager disabled">❮</a>
+    
+    
       <a href="/web-dev/2025-05-29-1" class="pagination--pager" title="Bootstrap 개념 / Vue 프로젝트에서 Bootstrap 설치 및 사용 방법
-">❮</a>
-    
-    
-      <a href="/web-dev/2025-05-26-1" class="pagination--pager" title="Vue 문법 정리 1 / Vue 3 템플릿 문법 (인터폴레이션, 디렉티브)
 ">❯</a>
     
   </nav>
@@ -858,7 +860,7 @@ watchEffect(() =&gt; {
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
-        <a href="/web-dev/2025-05-30-1" rel="permalink">Vue 문법 정리 3 / 컴포넌트 정의 및 사용 방법
+        <a href="/web-dev/2025-05-29-1" rel="permalink">Bootstrap 개념 / Vue 프로젝트에서 Bootstrap 설치 및 사용 방법
 </a>
       
     </h2>
@@ -869,7 +871,7 @@ watchEffect(() =&gt; {
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-05-30T00:00:00+00:00">2025-05-30</time>
+        <time datetime="2025-05-29T00:00:00+00:00">2025-05-29</time>
       </span>
     
 
@@ -894,7 +896,7 @@ watchEffect(() =&gt; {
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
-        <a href="/web-dev/2025-05-29-1" rel="permalink">Bootstrap 개념 / Vue 프로젝트에서 Bootstrap 설치 및 사용 방법
+        <a href="/web-dev/2025-05-28-1" rel="permalink">Vue 문법 정리 2 / Vue 3 Composition API 종류 및 사용법
 </a>
       
     </h2>
@@ -905,7 +907,7 @@ watchEffect(() =&gt; {
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-05-29T00:00:00+00:00">2025-05-29</time>
+        <time datetime="2025-05-28T00:00:00+00:00">2025-05-28</time>
       </span>
     
 
