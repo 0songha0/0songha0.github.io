@@ -752,7 +752,7 @@ function 함수명(파라미터명1, 파라미터명2) {
 <p>자식 컴포넌트 emit 이벤트명은 부모 컴포넌트에서 케밥 케이스로 변환해서 받는 것을 권장합니다.</p>
 
 <h3 id="non-props-속성-fallthrough-속성">Non-Props 속성 (fallthrough 속성)</h3>
-<p>부모 컴포넌트에서 자식 컴포넌트에 전달하였으나, 자식 컴포넌트가 props에 정의하지 않은 속성 또는 이벤트입니다.<br />
+<p>부모 컴포넌트에서 자식 컴포넌트에 전달하였으나, 자식 컴포넌트가 선언하지 않은 속성 또는 이벤트입니다.<br />
 Non-Props 속성들은 자식 template의 최상위 요소에 자동 상속됩니다.</p>
 
 <p><mark>Non-Props 속성 예시</mark></p>
@@ -781,18 +781,31 @@ Non-Props 속성들은 자식 template의 최상위 요소에 자동 상속됩�
   </tbody>
 </table>
 
-<p><mark>Non-Props 속성 상속 비활성화 처리</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script&gt;
+<p><mark>Non-Props 속성 자동상속 비활성화 처리</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;div&gt;
+    // attrs 객체로 다중 속성 바인딩
+    &lt;button type="button" v-bind="$attrs"&gt;버튼&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
 export default {
+  // 최상위 요소 자동상속 비활성화
   inheritAttrs: false,
-  setup() {
+  setup(props, context) {
+    console.log(context.attrs);
     return {};
   }
 }
 &lt;script&gt;
 </code></pre></div></div>
 <p>하위 컴포넌트에서 inheritAttrs: false 옵션을 설정하면,<br />
-Non-Props 속성 최상위 요소 자동 상속을 비활성화 할 수 있습니다.</p>
+Non-Props 속성 최상위 요소 자동상속을 비활성화 할 수 있습니다.<br />
+context.attrs 객체를 사용해서 원하는 DOM 요소에 수동 상속하면 됩니다.</p>
+
+<p>Vue 2에서 속성은 &amp;attrs 객체, 이벤트는 listeners 객체에 포함하였으나<br />
+Vew 3는 listeners 객체가 삭제되어 모두 &amp;attrs 객체에 포함합니다.</p>
 
 
         
