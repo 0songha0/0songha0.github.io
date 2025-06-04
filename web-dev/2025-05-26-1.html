@@ -906,12 +906,120 @@ v-on:click 등 마우스 이벤트 수신 시, 특정 버튼 입력 시에만 �
 
 ### v-slot (#)
 ```
-<base-layout>
-  <template v-slot:header="">헤더 내용</template>
-  <p>본문 내용</p>
-</base-layout>
+// 부모 컴포넌트 예시
+<template>
+  <자식컴포넌트명>콘텐츠</자식컴포넌트명>
+</template>
+
+// 자식 컴포넌트 예시
+<template>
+  <button>
+    <slot>Fallback 콘텐츠</slot>
+  </button>
+</template>
 ```
-컴포넌트의 템플릿 빈 자리 (Slot) 을 외부에서 삽입할 수 있습니다.
+하위 컴포넌트 템플릿 빈 자리 (Slot) 에 부모 컴포넌트 콘텐츠를 삽입할 수 있습니다.  
+부모 컴포넌트에서 슬롯 콘텐츠가 제공되지 않으면 보여줄 폴백 콘텐츠도 지정할 수 있습니다.
+
+<mark>Named Slots 사용 예시</mark>
+```
+// 부모 컴포넌트 예시
+<template>
+  <자식컴포넌트명>
+    <template v-slot:header="">헤더 콘텐츠</template>
+    <template v-slot:default="">본문 콘텐츠</template>
+    <template v-slot:footer="">푸터 콘텐츠</template>
+    또는
+    &lt;template #header&gt;헤더 콘텐츠&lt;/template&gt;
+    &lt;template #default&gt;본문 콘텐츠&lt;/template&gt;
+    &lt;template #footer&gt;푸터 콘텐츠&lt;/template&gt;
+  </자식컴포넌트명>
+</template>
+
+// 자식 컴포넌트 예시
+<template>
+  <button>
+    <slot name="header">기본 헤더 콘텐츠</slot>
+
+    <slot>기본 본문 콘텐츠</slot>
+    또는
+    기본 본문 콘텐츠
+
+    <slot name="footer">기본 푸터 콘텐츠</slot>
+  </button>
+</template>
+```
+v-slot 디렉티브를 통해 특정 콘텐츠가 들어갈 slot 이름을 지정할 수 있습니다.
+```
+<template>
+  <자식컴포넌트명>
+    &lt;template #[data변수명]&gt;슬롯 콘텐츠&lt;/template&gt;
+  </자식컴포넌트명>
+</template>
+```
+위와 같이, 부모 컴포넌트에서 동적으로 슬롯명 지정도 가능합니다.  
+부모 컴포넌트에 슬롯 콘텐츠를 지정하지 않으면, 자식 컴포넌트에 작성된 기본 콘텐츠가 렌더링됩니다.
+
+<mark>Scoped Slots 사용 예시</mark>
+```
+// 부모 컴포넌트 예시
+<template>
+  <자식컴포넌트명>
+    &lt;template #슬롯명="{ data변수명, 변수명 }"&gt;
+      {{ data변수명 }}
+      {{ 변수명 }}
+      슬롯 콘텐츠
+    &lt;/template&gt;
+  </자식컴포넌트명>
+</template>
+
+// 자식 컴포넌트 예시
+<template>
+  &lt;slot name="슬롯명" :data변수명="data변수명" 변수명="텍스트"&gt;&lt;/slot&gt;
+</template>
+```
+자식 컴포넌트 변수를 부모 컴포넌트에서 사용할 수 있도록 슬롯 콘텐츠에 전달합니다.  
+객체로 받아도 되고, 위와 같이 구조분해 할당으로 받아도 됩니다.
+
+<mark>부모 슬롯 미정의 시 미렌더링 처리</mark>
+```
+// 부모 컴포넌트 예시
+<template>
+  <자식컴포넌트명>
+    &lt;template #header&gt;헤더 콘텐츠&lt;/template&gt;
+  </자식컴포넌트명>
+</template>
+
+// 자식 컴포넌트 예시
+<template>
+  <div v-if="$slots.header">
+    <slot name="header">기본 헤더 콘텐츠</slot>
+  </div>
+
+  <div v-if="$slots.default">
+    <slot>기본 본문 콘텐츠</slot>
+    또는
+    기본 본문 콘텐츠
+  </div>
+
+  <div v-if="hasFooter">
+    <slot name="footer">기본 푸터 콘텐츠</slot>
+  </div>
+</template>
+
+<script>
+import { ref } from 'vue';
+import { computed } from '@vue/reactivity';
+
+export default {
+  setup(props, { slots }) {
+    const hasFooter = computed(() => !!slots.footer);
+    return { hasFooter };
+  }
+}
+</script>
+```
+부모 컴포넌트에 header 슬롯만 정의해서, 자식 컴포넌트에서 header 슬롯 div만 렌더링 됩니다.
 
 ### v-pre
 ```
