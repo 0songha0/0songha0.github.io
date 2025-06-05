@@ -462,7 +462,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue 문법 정리 2 / Vue 3 Composition API 종류 및 사용법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#setup">setup()</a><ul><li><a href="#setup-함수-사용-예시">setup 함수 사용 예시</a></li></ul></li><li><a href="#reactivity">Reactivity</a><ul><li><a href="#ref">ref()</a></li><li><a href="#reactive">reactive()</a></li><li><a href="#toref">toRef()</a></li><li><a href="#torefs">toRefs()</a></li><li><a href="#readonly">readonly()</a></li><li><a href="#computed">computed()</a></li><li><a href="#watch">Watch</a></li><li><a href="#watcheffect">WatchEffect</a></li></ul></li><li><a href="#lifecycle-hooks">Lifecycle Hooks</a><ul><li><a href="#컴포넌트-라이프사이클-단계">컴포넌트 라이프사이클 단계</a></li><li><a href="#lifecycle-hooks-종류">Lifecycle Hooks 종류</a></li></ul></li><li><a href="#template-refs">Template Refs</a></li><li><a href="#template-refs-사용-예시">Template Refs 사용 예시</a></li></ul>
+              <ul class="toc__menu"><li><a href="#setup">setup()</a><ul><li><a href="#setup-함수-사용-예시">setup 함수 사용 예시</a></li></ul></li><li><a href="#reactivity">Reactivity</a><ul><li><a href="#ref">ref()</a></li><li><a href="#reactive">reactive()</a></li><li><a href="#toref">toRef()</a></li><li><a href="#torefs">toRefs()</a></li><li><a href="#readonly">readonly()</a></li><li><a href="#computed">computed()</a></li><li><a href="#watch">Watch</a></li><li><a href="#watcheffect">WatchEffect</a></li></ul></li><li><a href="#lifecycle-hooks">Lifecycle Hooks</a><ul><li><a href="#컴포넌트-라이프사이클-단계">컴포넌트 라이프사이클 단계</a></li><li><a href="#lifecycle-hooks-종류">Lifecycle Hooks 종류</a></li></ul></li><li><a href="#template-refs">Template Refs</a><ul><li><a href="#template-refs-사용-예시">Template Refs 사용 예시</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -845,7 +845,7 @@ watchEffect(() =&gt; {
       <td>onMounted</td>
       <td>
         컴포넌트가 DOM에 마운트(부착)된 후 호출<br /><br />
-        Options API에서는 this로 app 인스턴스에 접근할 수 있습니다.<br />
+        Options API에서는 this로 app 인스턴스에 접근`할 수 있습니다.<br />
         DOM 요소 접근이 가능합니다.
       </td>
     </tr>
@@ -956,7 +956,7 @@ export default {
 <p>template DOM 요소나 컴포넌트에 직접 접근할 때 사용합니다.
 ref()와 함께 사용되며, setup() 함수 안에서 정의합니다.</p>
 
-<h2 id="template-refs-사용-예시">Template Refs 사용 예시</h2>
+<h3 id="template-refs-사용-예시">Template Refs 사용 예시</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
   &lt;input ref="inputRef" /&gt;
   &lt;button @click="focusInput"&gt;Focus&lt;/button&gt;
