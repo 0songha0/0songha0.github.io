@@ -12,18 +12,30 @@
     td:nth-child(2) {
       text-align: left;
     }
+  }
+}
 
+.table_3_left {
+  tbody {
     /* 세 번째 열만 좌측 정렬 */
     td:nth-child(3) {
       text-align: left;
     }
+  }
+}
 
+.table_4_left {
+  tbody {
     /* 네 번째 열만 좌측 정렬 */
     td:nth-child(4) {
       text-align: left;
     }
   }
+}
 
+.table_2_left,
+.table_3_left,
+.table_4_left {
   /* 첫 번째 열 사이즈 지정 */
   td:first-child {
     width: 13em;
