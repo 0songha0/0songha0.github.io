@@ -462,7 +462,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue 문법 정리 2 / Vue 3 Composition API 종류 및 사용법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#setup">setup()</a><ul><li><a href="#setup-함수-사용-예시">setup 함수 사용 예시</a></li></ul></li><li><a href="#reactivity">Reactivity</a><ul><li><a href="#ref">ref()</a></li><li><a href="#reactive">reactive()</a></li><li><a href="#toref">toRef()</a></li><li><a href="#torefs">toRefs()</a></li><li><a href="#readonly">readonly()</a></li><li><a href="#computed">computed()</a></li><li><a href="#watch">Watch</a></li><li><a href="#watcheffect">WatchEffect</a></li></ul></li><li><a href="#lifecycle-hooks">Lifecycle Hooks</a><ul><li><a href="#컴포넌트-라이프사이클-단계">컴포넌트 라이프사이클 단계</a></li><li><a href="#lifecycle-hooks-종류">Lifecycle Hooks 종류</a></li></ul></li><li><a href="#template-refs">Template Refs</a><ul><li><a href="#template-refs-사용-예시">Template Refs 사용 예시</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#setup">setup()</a><ul><li><a href="#setup-함수-사용-예시">setup 함수 사용 예시</a></li></ul></li><li><a href="#reactivity">Reactivity</a><ul><li><a href="#ref">ref()</a></li><li><a href="#reactive">reactive()</a></li><li><a href="#toref">toRef()</a></li><li><a href="#torefs">toRefs()</a></li><li><a href="#readonly">readonly()</a></li><li><a href="#computed">computed()</a></li><li><a href="#watch">Watch</a></li><li><a href="#watcheffect">WatchEffect</a></li></ul></li><li><a href="#lifecycle-hooks">Lifecycle Hooks</a><ul><li><a href="#컴포넌트-라이프사이클-단계">컴포넌트 라이프사이클 단계</a></li><li><a href="#lifecycle-hooks-종류">Lifecycle Hooks 종류</a></li></ul></li><li><a href="#template-refs">Template Refs</a><ul><li><a href="#template-refs-사용-예시">Template Refs 사용 예시</a></li><li><a href="#template-refs-배열-바인딩-예시">Template Refs 배열 바인딩 예시</a></li><li><a href="#template-refs-함수-바인딩-예시">Template Refs 함수 바인딩 예시</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -796,7 +796,7 @@ watchEffect(() =&gt; {
     </tr>
     <tr>
       <td>update</td>
-      <td>반응형 상태 변경 시 컴포넌트 업데이트 (재렌더링)</td>
+      <td>반응형 상태 변경 시 컴포넌트 업데이트(재렌더링)</td>
     </tr>
     <tr>
       <td>unmount</td>
@@ -820,7 +820,7 @@ watchEffect(() =&gt; {
       <td>(Setup 함수로 대체)</td>
       <td>
         컴포넌트 인스턴스 생성 전 호출<br /><br />
-        아직 this를 사용할 수 없습니다.
+        아직 this, DOM 요소를 사용할 수 없습니다.
       </td>
     </tr>
     <tr>
@@ -829,45 +829,51 @@ watchEffect(() =&gt; {
       <td>
         컴포넌트 인스턴스 생성 후 호출<br /><br />
         created 훅은 this 및 data 등에 접근할 수 있어 반응형 상태 사용이 가능합니다.<br />
-        setup 함수 내에서는 아직 this를 사용할 수 없습니다.
+        setup 함수 내에서는 아직 this, DOM 요소를 사용할 수 없습니다.
       </td>
     </tr>
     <tr>
       <td>beforeMount</td>
       <td>onBeforeMount</td>
       <td>
-        DOM에 컴포넌트가 마운트(부착)되기 전 호출<br /><br />
-        DOM 요소 접근 시 null 출력됩니다.
+        DOM에 컴포넌트가 마운트(부착) 되기 전 호출<br /><br />
+        DOM 요소 접근 시 null이 출력됩니다.
       </td>
     </tr>
     <tr>
       <td>mounted</td>
       <td>onMounted</td>
       <td>
-        컴포넌트가 DOM에 마운트(부착)된 후 호출<br /><br />
-        Options API에서는 this로 app 인스턴스에 접근`할 수 있습니다.<br />
-        DOM 요소 접근이 가능합니다.
+        컴포넌트가 DOM에 마운트(부착) 된 후 호출<br /><br />
+        Options API에서는 this로 app 인스턴스에 접근할 수 있습니다.<br />
+        이제 DOM 요소 접근이 가능합니다.
       </td>
     </tr>
     <tr>
       <td>beforeUpdate</td>
       <td>onBeforeUpdate</td>
-      <td>반응형 상태 변경으로 DOM 업데이트 전 호출</td>
+      <td>반응형 상태 변경 시 DOM 업데이트(재렌더링) 전 호출</td>
     </tr>
     <tr>
       <td>updated</td>
       <td>onUpdated</td>
-      <td>DOM 업데이트 완료 후 호출</td>
+      <td>DOM 업데이트(재렌더링) 완료 후 호출</td>
     </tr>
     <tr>
       <td>beforeUnmount</td>
       <td>onBeforeUnmount</td>
-      <td>컴포넌트가 제거되기 전 호출</td>
+      <td>
+        컴포넌트가 제거되기 전 호출<br />
+        아직 DOM 요소 접근이 가능합니다.
+      </td>
     </tr>
     <tr>
       <td>unmounted</td>
       <td>onUnmounted</td>
-      <td>컴포넌트가 제거된 후 호출</td>
+      <td>
+        컴포넌트가 제거된 후 호출<br />
+        DOM 요소 접근 시 null이 출력됩니다.
+      </td>
     </tr>
     <tr>
       <td>errorCaptured</td>
@@ -904,6 +910,7 @@ watchEffect(() =&gt; {
     </tr>
   </tbody>
 </table>
+<p>Vue 컴포넌트 인스턴스 생명 주기에서 실행되는 함수들입니다.</p>
 
 <p><mark>Options API Lifecycle Hooks 사용 예시</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script&gt;
@@ -939,7 +946,12 @@ export default {
     });
 
     onMounted(() =&gt; {
+      console.log('모든 자식 컴포넌트 onMounted 후');
       console.log('onMounted 호출');
+    });
+
+    onUnmounted(() =&gt; {
+      console.log('onUnmounted 호출');
     });
 
     return {};
@@ -953,13 +965,26 @@ export default {
 
 <h2 id="template-refs">Template Refs</h2>
 
-<p>template DOM 요소나 컴포넌트에 직접 접근할 때 사용합니다.<br />
+<p>template DOM 요소에 직접 접근할 때 사용합니다.<br />
 ref()와 함께 사용되며, setup() 함수 안에서 정의합니다.</p>
+
+<p>자식 컴포넌트 DOM 요소를 ref로 참조하는 것은 컴포넌트 간 의존성을 높여서 권장되지 않습니다.<br />
+자식 컴포넌트에서 부모 컴포넌트에 접근할 수 있는 $parent 내장 객체도 권장되지 않습니다.<br />
+부모/자식 컴포넌트 상호작용은 props, emit으로 구현하는 것이 좋습니다.</p>
 
 <h3 id="template-refs-사용-예시">Template Refs 사용 예시</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  // DOM 요소를 ref 변수에 추가
   &lt;input ref="inputRef" /&gt;
+
   &lt;button @click="focusInput"&gt;Focus&lt;/button&gt;
+
+  // input DOM 출력
+  &lt;p&gt;{{ inputRef }}&lt;/p&gt;
+
+  // input DOM 값 출력
+  // 마운트 전까지 inputRef는 null이기 때문에 v-if 없으면 에러
+  &lt;p v-if="inputRef"&gt;{{ inputRef.value }} 또는 {{ $refs.inputRef.value }}&lt;/p&gt;
 &lt;/template&gt;
 
 &lt;script&gt;
@@ -976,8 +1001,9 @@ export default {
     };
 
     onMounted(() =&gt; {
-      // 컴포넌트 마운트 후, DOM 요소 출력
+      // 컴포넌트 마운트 후, DOM 요소 및 값 출력
       console.log(inputRef.value);
+      console.log(inputRef.value.value);
     });
 
     return { inputRef, focusInput };
@@ -985,7 +1011,67 @@ export default {
 };
 &lt;/script&gt;
 </code></pre></div></div>
-<p>setup 함수 내에서 input 요소에 접근하는 Template ref 사용 예시입니다.</p>
+<p>setup 함수 내에서 input 요소에 접근하는 Template ref 사용 예시입니다.<br />
+DOM ref 속성 값과 return 반응형 상태 객체 키를 동일하게 선언해야 합니다.</p>
+
+<h3 id="template-refs-배열-바인딩-예시">Template Refs 배열 바인딩 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;ul&gt;
+    // v-for문으로 출력하며 DOM 요소를 ref 배열에 추가
+    &lt;li v-for="fruit in fruits" :key="fruit" ref="itemRefs"&gt;{{ fruit }}&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import { ref, onMounted } from 'vue';
+
+export default {
+  setup() {
+    onMounted(() =&gt; {
+      // ref 배열 내 DOM 요소들 출력
+      itemRefs.value.forEach(item =&gt; console.log(item));
+
+      // ref 배열 내 DOM 요소들 값 출력
+      itemRefs.value.forEach(item =&gt; console.log(item.textContent));
+    });
+    
+    const fruits = ref(['사과', '딸기', '포도']);
+    const itemRefs = ref([]);
+
+    return { fruits, itemRefs };
+  },
+};
+&lt;/script&gt;
+</code></pre></div></div>
+<p>위와 같이, v-for문과 ref 속성을 이용해서 DOM 요소들을 ref 배열에 추가할 수도 있습니다.</p>
+
+<h3 id="template-refs-함수-바인딩-예시">Template Refs 함수 바인딩 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;ul&gt;
+    // 현재 DOM 엘리먼트를 받아서 내부 값을 ref 배열에 추가
+    &lt;li v-for="(fruit, i) in fruits" :key="fruit" :ref="(el) =&gt; el &amp;&amp; (itemRefs.value[i] = el.textContent)"&gt;{{ fruit }}&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import { ref, onMounted } from 'vue';
+
+export default {
+  setup() {
+    onMounted(() =&gt; {
+      // ref 배열 내 값 출력
+      itemRefs.value.forEach(item =&gt; console.log(item));
+    });
+    
+    const fruits = ref(['사과', '딸기', '포도']);
+    const itemRefs = ref([]);
+
+    return { fruits, itemRefs };
+  },
+};
+&lt;/script&gt;
+</code></pre></div></div>
+<p>위와 같이, v-for문으로 출력한 요소 내부 값을 ref 배열에 추가할 수도 있습니다.</p>
 
 
         
