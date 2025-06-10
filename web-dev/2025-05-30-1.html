@@ -586,16 +586,16 @@ app.mount('#app');
 <h3 id="컴포넌트-지역-등록">컴포넌트 지역 등록</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
   &lt;div&gt;
-    &lt;하위컴포넌트명&gt;&lt;/하위컴포넌트명&gt;
+    &lt;자식컴포넌트명&gt;&lt;/자식컴포넌트명&gt;
   &lt;div&gt;
 &lt;/template&gt;
 
 &lt;script&gt;
-import 하위컴포넌트명 from './하위컴포넌트명.vue'
+import 자식컴포넌트명 from './자식컴포넌트명.vue'
 
 export default {
   components: { // 컴포넌트 지역 등록
-    하위컴포넌트명
+    자식컴포넌트명
   },
   setup() {
     return { };
@@ -616,29 +616,29 @@ props 선언 시 카멜케이스, 자식 컴포넌트로 전달 시 케밥케이
 
 <p><mark>props 전달하는 부모 컴포넌트 예시</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
-  &lt;하위컴포넌트명 props명1="텍스트" :props명2="data변수명"&gt;&lt;/하위컴포넌트명&gt;
+  &lt;자식컴포넌트명 props명1="텍스트" :props명2="data변수명"&gt;&lt;/자식컴포넌트명&gt;
   
   &lt;div v-for="post in data객체배열명" :key="post.id"&gt;
-    &lt;하위컴포넌트명 v-bind="post"&gt;&lt;/하위컴포넌트명&gt;
+    &lt;자식컴포넌트명 v-bind="post"&gt;&lt;/자식컴포넌트명&gt;
   &lt;/div&gt;
  
-  &lt;하위컴포넌트명 v-model="data변수명"&gt;&lt;/하위컴포넌트명&gt;
+  &lt;자식컴포넌트명 v-model="data변수명"&gt;&lt;/자식컴포넌트명&gt;
   또는
-  &lt;하위컴포넌트명 :model-value="data변수명" @update:model-value="함수명(하위컴포넌트emits파라미터명)"&gt;&lt;/하위컴포넌트명&gt;
-  // 하위컴포넌트에서 props는 'modelValue', emits 이벤트명은 'update:modelValue'로 받을 수 있습니다.
+  &lt;자식컴포넌트명 :model-value="data변수명" @update:model-value="함수명(자식컴포넌트emits파라미터명)"&gt;&lt;/자식컴포넌트명&gt;
+  // 자식컴포넌트에서 props는 'modelValue', emits 이벤트명은 'update:modelValue'로 받을 수 있습니다.
 
-  &lt;하위컴포넌트명 v-model:props명="data변수명"&gt;&lt;/하위컴포넌트명&gt;
+  &lt;자식컴포넌트명 v-model:props명="data변수명"&gt;&lt;/자식컴포넌트명&gt;
   // v-model에 전달인자로 props명 지정 시,
-  // 하위컴포넌트에서 props는 'props명', emits 이벤트명은 'update:props명'으로 받을 수 있습니다.
+  // 자식컴포넌트에서 props는 'props명', emits 이벤트명은 'update:props명'으로 받을 수 있습니다.
 &lt;/template&gt;
 
 &lt;script&gt;
-import 하위컴포넌트명 from '@/components/하위컴포넌트명.vue';
+import 자식컴포넌트명 from '@/components/자식컴포넌트명.vue';
 import { reactive, ref } from 'vue';
 
 export default {
   components: {
-    하위컴포넌트명
+    자식컴포넌트명
   },
   setup() {
     const data변수명 = ref(숫자);
@@ -827,7 +827,7 @@ import 자식컴포넌트명 from './자식컴포넌트명.vue';
 
 export default {
   components: {
-    DeepChild,
+    자식컴포넌트명,
   },
   setup() {
     const count = ref(0);
@@ -888,28 +888,126 @@ Vue 3의 app.provide 함수는 Vue2의 globalProperties 또는 Vue.prototype 단
 
 <h3 id="script-setup-속성">script setup 속성</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script setup&gt;
+import { useSlots, useAttrs } from 'vue';
+
+import 자식컴포넌트명 from '@/components/자식컴포넌트명.vue';
+
+const props = defineProps({
+  키: {
+    type: String,
+    default: '기본값' // 필수X
+  },
+});
+
+const emit = defineEmits(['이벤트명1', '이벤트명2']);
+
 const count = ref(0);
 
 function increment() {
   count.value++;
 }
+
+const slots = useSlots();
+const attrs = useAttrs();
 &lt;/script&gt;
 </code></pre></div></div>
-<p>위 script setup 속성 코드는 아래 코드와 동일한 기능을 합니다.</p>
+<p>위 간결한 script setup 코드는 아래 코드와 동일한 기능을 합니다.<br />
+defineProps, defineEmits는 script setup 전용 컴파일러 매크로 함수입니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script&gt;
 import { ref } from 'vue';
+import 자식컴포넌트명 from '@/components/자식컴포넌트명.vue';
 
 export default {
-  setup() {
+  components: {
+    자식컴포넌트명,
+  },
+  props: {
+    키: {
+      type: String,
+      default: '기본값' // 필수X
+    },
+  },
+  emits: ['이벤트명1', '이벤트명2'],
+  setup(props, { emit, attrs, slots }) {
     const count = ref(0);
 
     function increment() {
       count.value++;
     }
 
-    return { count, increment };
+    return { count, increment, attrs, slots };
   },
 };
+&lt;/script&gt;
+</code></pre></div></div>
+
+<p><mark>script setup 특징</mark><br />
+script setup으로 정의된 부모 컴포넌트는 자식 컴포넌트에서 $parent로 접근할 수 없습니다.<br />
+script setup으로 정의된 자식 컴포넌트는 부모 컴포넌트에서 template ref로 접근할 수 없습니다.<br />
+그러나, defineExpose로 노출한 변수는 참조하는 컴포넌트에서도 접근이 가능합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 자식 컴포넌트 예시
+&lt;script setup&gt;
+const secret = '값'; // 부모에서 접근 불가능
+
+const sayHi = () =&gt; console.log('안녕!');
+
+defineExpose({
+  sayHi, // 부모에서 접근 가능
+});
+&lt;/script&gt;
+
+// 부모 컴포넌트 예시
+&lt;template&gt;
+  &lt;자식컴포넌트명 ref="childRef" /&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import { ref, onMounted } from 'vue';
+import 자식컴포넌트명 from './자식컴포넌트명.vue';
+
+const childRef = ref(null);
+
+onMounted(() =&gt; {
+  console.log(childRef.value.secret) // // 접근 불가능
+  childRef.value.sayHi() // 접근 가능
+});
+&lt;/script&gt;
+</code></pre></div></div>
+<p>위 코드는 script setup으로 정의한 자식 컴포넌트에서 defineExpose 함수를 사용하여 부모 컴포넌트에 변수를 노출하는 예시입니다.</p>
+
+<p><mark>script setup, script 혼용 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script&gt;
+  // 컴포넌트 첫 import 시 한 번만 실행 (모듈 스코프)
+  함수명();
+
+  export default {
+    inheritAttrs: false, // template에서 $attrs 수동 바인딩 필요
+    customOptions: { 옵션명: '값' }
+  }
+&lt;/script&gt;
+&lt;script setup&gt;
+  // setup() 내부 로직 : 컴포넌트 인스턴스 생성 시마다 실행
+&lt;/script&gt;
+</code></pre></div></div>
+<p>setup() 밖에서 한 번만 실행되어야 하는 코드, inheritAttrs 옵션, 플러그인으로 활성화된 커스텀 옵션 등 사용 시 script를 함께 선언할 수 있습니다.</p>
+
+<p><mark>비동기 API 호출 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm i axios
+</code></pre></div></div>
+<p>프로젝트 경로에서 위 명령어로 axios 통신 모듈 설치 후, script setup 안에서 API 호출이 가능합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script setup&gt;
+import axios from 'axios';
+import { onMounted } from 'vue';
+
+const response = await axios('https://서버도메인/URI');
+또는
+onMounted(() =&gt; {
+  async function callApi() {
+    const response = await axios.get('https://서버도메인/URI');
+  }
+
+  callApi();
+});
 &lt;/script&gt;
 </code></pre></div></div>
 

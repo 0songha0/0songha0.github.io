@@ -646,6 +646,13 @@ export default {
 </code></pre></div></div>
 <p>위와 같이, 인라인 스타일을 정의하고 바인딩 할 수도 있습니다.</p>
 
+<p><mark>동적 컴포넌트 (Dynamic Component)</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;component :is="현재보여줄컴포넌트명"&gt;&lt;/component&gt;
+</code></pre></div></div>
+<p>v-bind:is 속성을 사용하면 동적으로 컴포넌트를 전환할 수 있습니다.<br />
+현재 컴포넌트명을 저장하는 변수를 shallowRef 함수로 정의하면 성능이 더 좋습니다.<br />
+shallowRef는 객체 내부 값 변동을 추적하지 않기 때문입니다.</p>
+
 <h3 id="v-model">v-model</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;input type="text" v-model="data변수명" /&gt;
 
