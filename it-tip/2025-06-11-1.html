@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>사내 내부망에서 아웃바운드 보안 방화벽 포트 허용 신청 방법 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>모니터 동적 밝기 조절 기능 비활성화 방법 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,8 +65,8 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="사내 내부망에서 아웃바운드 보안 방화벽 포트 허용 신청 방법">
-<meta property="og:url" content="https://0songha0.github.io/network/2024-03-17-1">
+<meta property="og:title" content="모니터 동적 밝기 조절 기능 비활성화 방법">
+<meta property="og:url" content="https://0songha0.github.io/it-tip/2025-06-11-1">
 
 
   <meta property="og:description" content="송하영 개발 블로그">
@@ -77,11 +77,11 @@
 
 
 
-  <meta property="article:published_time" content="2024-03-17T00:00:00+00:00">
+  <meta property="article:published_time" content="2025-06-11T00:00:00+00:00">
 
 
 
-  <meta property="article:modified_time" content="2024-03-17T00:00:00+00:00">
+  <meta property="article:modified_time" content="2025-06-11T00:00:00+00:00">
 
 
 
@@ -90,7 +90,7 @@
   
 
 
-<link rel="canonical" href="https://0songha0.github.io/network/2024-03-17-1">
+<link rel="canonical" href="https://0songha0.github.io/it-tip/2025-06-11-1">
 
 
 
@@ -425,15 +425,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="사내 내부망에서 아웃바운드 보안 방화벽 포트 허용 신청 방법">
+    <meta itemprop="headline" content="모니터 동적 밝기 조절 기능 비활성화 방법">
     <meta itemprop="description" content="">
-    <meta itemprop="datePublished" content="2024-03-17T00:00:00+00:00">
-    <meta itemprop="dateModified" content="2024-03-17T00:00:00+00:00">
+    <meta itemprop="datePublished" content="2025-06-11T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-06-11T00:00:00+00:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">사내 내부망에서 아웃바운드 보안 방화벽 포트 허용 신청 방법
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">모니터 동적 밝기 조절 기능 비활성화 방법
 </h1>
           
 
@@ -442,7 +442,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2024-03-17T00:00:00+00:00">2024-03-17</time>
+        <time datetime="2025-06-11T00:00:00+00:00">2025-06-11</time>
       </span>
     
 
@@ -460,87 +460,19 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 사내 내부망에서 아웃바운드 보안 방화벽 포트 허용 신청 방법</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 모니터 동적 밝기 조절 기능 비활성화 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#사내-정보보안팀이-있는-경우">사내 정보보안팀이 있는 경우</a><ul><li><a href="#방화벽-허용-요청-예시">방화벽 허용 요청 예시</a></li><li><a href="#기본-포트-목록-참고">기본 포트 목록 참고</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#cabc란">CABC란?</a><ul><li><a href="#삼성-모니터-cabc-기능-해제-방법">삼성 모니터 CABC 기능 해제 방법</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h2 id="사내-정보보안팀이-있는-경우">사내 정보보안팀이 있는 경우</h2>
+        <h2 id="cabc란">CABC란?</h2>
+<p>화면에 표시되는 콘텐츠 밝기/색상에 따라 자동으로 모니터 밝기를 조절하는 기능입니다.<br />
+다크모드를 적용한 크롬 화면, IntelliJ 화면 등이 어두워지니까 불편하여 비활성화 하였습니다.</p>
 
-<p>현재 회사는 모든 IP, 포트에 대해 아웃바운드가 막혀있어 따로 허용하지 않으면 대부분 접근할 수 없습니다.</p>
-
-<p>AWS Codecommit Git은 방화벽 개방 없이도 접근이 가능하지만,<br />
-AWS EC2 서버 등은 정보보안팀 담당자에게 요청해서 방화벽을 뚫어줘야 접근할 수 있습니다.</p>
-
-<p>기존에는 메일로 요청했었으나, 정보보안팀 요청 게시판이 생겨 더 간편하게 요청할 수 있게 되었습니다.</p>
-
-<h3 id="방화벽-허용-요청-예시">방화벽 허용 요청 예시</h3>
-<table class="table_2_left">
-  <tbody>
-    <tr>
-      <td>제목</td>
-      <td>~ 프로젝트 개발을 위한 DB/개발서버/운영VPN 접근 허용 요청의 건</td>
-    </tr>
-    <tr>
-      <td>출발지 IP</td>
-      <td>192.168.17.~ (서비스개발팀 송하영)</td>
-    </tr>
-    <tr>
-      <td>목적지 IP</td>
-      <td>
-        DB서버명.ck39dp9w2h39.ap-northeast-2.rds.amazonaws.com (MySQL 개발 DB)<br />
-        3.37.191.~ (AWS EC2 개발서버)<br />
-        https://sslvpn-kr-vpc-~.gov-ncloud.com (네이버클라우드 운영서버 VPN)
-      </td>
-    </tr>
-    <tr>
-      <td>Port</td>
-      <td>
-        TCP_3306 (MySQL 개발 DB)<br />
-        TCP_22, TCP_8080 관리자, TCP_8081 사용자, TCP_8082 API (AWS EC2 개발서버)<br />
-        TCP_8443, TCP_443, TCP_12000~13000 (네이버클라우드 운영서버 VPN)
-      </td>
-    </tr>
-    <tr>
-      <td>기간</td>
-      <td>2023-01-03 13:40 ~ 2029-12-31 00:00</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><mark>Public 망 NCP 서버 → API 서버 아웃바운드 통신 방화벽 허용 시 참고</mark><br />
-Public 망에 있는 NCP 서버 공인 IP를 기준으로 방화벽 허용하면 됩니다.</p>
-
-<p>NCP 서버 ACG Outbound 규칙은 프로토콜 : TCP, 목적지 : 0.0.0.0/0, 허용 포트 1-65535로 설정해야 합니다.</p>
-
-<p><mark>API 서버 → Public 망 NCP 서버 인바운드 통신 방화벽 허용 시 참고</mark><br />
-API 서버 방화벽 아웃바운드 설정에서 NCP 서버 공인 IP를 허용해야 통신이 가능합니다.</p>
-
-<p>NCP 서버 ACG inbound 규칙은 프로토콜 : TCP, 목적지 : APIReal서버IP/0, 허용 포트 1-65535로 설정해야 합니다.<br />
-API 서버 앞 VIP(=로드밸런서) IP가 아니라, Real IP 각각에 대해 ACG 방화벽 허용해야 요청받을 수 있습니다.</p>
-
-<p><mark>Private 망 NCP 서버 → API 서버 아웃바운드 통신 방화벽 허용 시 참고</mark><br />
-Private 망에 있는 네이버클라우드 서버에서 API 서버로 요청 시 NAT Gateway 공인 IP를 통해 전송됩니다.<br />
-API 서버 방화벽 인바운드 설정에서 NCP 서버 NAT Gateway 공인IP를 허용해야 통신이 가능합니다.<br />
-NCP 서버 앞 로드밸런서는 인바운드 시 요청 분기 역할이므로, 로드밸러서 IP를 허용할 필요는 없습니다.</p>
-
-<p>NCP 서버 ACG Outbound 규칙은 프로토콜 : TCP, 목적지 : 0.0.0.0/0, 허용 포트 1-65535로 설정해야 합니다.<br />
-프로토콜 : ICMP, 목적지 : 0.0.0.0/0 설정은 없어도 정상적으로 통신이 되는 것을 확인하였습니다.</p>
-
-<p><mark>API 서버 → Private 망 NCP 서버 인바운드 통신 방화벽 허용 시 참고</mark><br />
-API 서버 방화벽 아웃바운드 설정에서 NCP 서버 앞, LB 앞에 위치한 WAF LB IP를 허용해야 합니다.<br />
-Private 망 NCP 서버는 공인IP가 없으므로, 로드밸런서 IP 또는 WAF LB IP를 통해서 통신합니다.<br />
-WAF Security 상품 사용 시, 로드밸런서 앞에 추가된 WAF LB IP를 통해 통신합니다.<br />
-이 경우 nslookup NCP서버도메인 시 나오는 공인 IP가 WAF LB 공인 IP입니다.<br />
-WAF IP에 대한 방화벽 허용 시, NCP 서버 도메인으로 요청이 가능합니다.</p>
-
-<p>NCP 서버 ACG inbound 규칙은 프로토콜 : TCP, 목적지 : APIReal서버IP/0, 허용 포트 1-65535로 설정해야 합니다.<br />
-API 서버 앞 VIP(=로드밸런서) IP가 아니라, Real IP 각각에 대해 ACG 방화벽 허용해야 요청받을 수 있습니다.</p>
-
-<h3 id="기본-포트-목록-참고">기본 포트 목록 참고</h3>
-<p><a href="https://0songha0.github.io/network/2023-01-03-1" target="_blank">https://0songha0.github.io/network/2023-01-03-1</a></p>
+<h3 id="삼성-모니터-cabc-기능-해제-방법">삼성 모니터 CABC 기능 해제 방법</h3>
+<p>모니터 메뉴 &gt; 시스템 &gt; 동적 밝기 조정 : 해제</p>
 
         
       </section>
@@ -561,14 +493,14 @@ API 서버 앞 VIP(=로드밸런서) IP가 아니라, Real IP 각각에 대해 A
     
       
       
-      <a href="/categories#network" class="page__taxonomy-item" rel="tag">네트워크 / 보안</a>
+      <a href="/categories#it-tip" class="page__taxonomy-item" rel="tag">IT Tip</a>
     
     </span>
   </p>
 
 
         
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2024-03-17">2024-03-17</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-06-11">2025-06-11</time></p>
 
 
       </footer>
@@ -578,11 +510,10 @@ API 서버 앞 VIP(=로드밸런서) IP가 아니라, Real IP 각각에 대해 A
       
   <nav class="pagination">
     
-      <a href="/plan-design-db/2024-03-18-1" class="pagination--pager" title="프로그램 메뉴 테이블 및 유저 권한 테이블 설계
-">❮</a>
+      <a href="#" class="pagination--pager disabled">❮</a>
     
     
-      <a href="/it-tip/2024-03-16-1" class="pagination--pager" title="바탕화면에 특정 URL 웹 페이지 바로가기 만들기
+      <a href="/web-dev/2025-05-30-1" class="pagination--pager" title="Vue 문법 정리 3 / 컴포넌트 정의 및 사용 방법
 ">❯</a>
     
   </nav>
@@ -598,42 +529,6 @@ API 서버 앞 VIP(=로드밸런서) IP가 아니라, Real IP 각각에 대해 A
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/it-tip/2025-06-11-1" rel="permalink">모니터 동적 밝기 조절 기능 비활성화 방법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-06-11T00:00:00+00:00">2025-06-11</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
         
           
 
@@ -728,6 +623,42 @@ API 서버 앞 VIP(=로드밸런서) IP가 아니라, Real IP 각각에 대해 A
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-05-28T00:00:00+00:00">2025-05-28</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-26-1" rel="permalink">Vue 문법 정리 1 / Vue 3 템플릿 문법 (인터폴레이션, 디렉티브)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-26T00:00:00+00:00">2025-05-26</time>
       </span>
     
 

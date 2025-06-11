@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 213</span>
+      <span class="nav__total">🌴 Total Posts: 214</span>
     </li> -->
     
     
@@ -462,7 +462,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 크롬 F12 디버깅 및 소스 분석 방법 / 크롬 개발자도구 사용법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#크롬-f12-디버깅-방법">크롬 F12 디버깅 방법</a><ul><li><a href="#html-javascript-디버깅">HTML, Javascript 디버깅</a></li></ul></li><li><a href="#elements-탭-사용법">Elements 탭 사용법</a><ul><li><a href="#html-요소-검사">HTML 요소 검사</a></li><li><a href="#html-요소-값-변경">HTML 요소 값 변경</a></li><li><a href="#html-소스-검색">HTML 소스 검색</a></li></ul></li><li><a href="#sources-탭-사용법">Sources 탭 사용법</a><ul><li><a href="#정적-리소스-분석">정적 리소스 분석</a></li><li><a href="#정적-리소스-전체-검색">정적 리소스 전체 검색</a></li></ul></li><li><a href="#network-탭-사용법">Network 탭 사용법</a><ul><li><a href="#네트워크-정적-리소스-분석">네트워크 정적 리소스 분석</a></li></ul></li><li><a href="#console-탭-사용법">Console 탭 사용법</a><ul><li><a href="#form에-저장된-값-출력">form에 저장된 값 출력</a></li></ul></li><li><a href="#application-탭-사용법">Application 탭 사용법</a><ul><li><a href="#브라우저에-저장된-값-확인-방법">브라우저에 저장된 값 확인 방법</a></li></ul></li><li><a href="#f12-유용한-기능">F12 유용한 기능</a><ul><li><a href="#브라우저-캐시-삭제-방법">브라우저 캐시 삭제 방법</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#크롬-f12-디버깅-방법">크롬 F12 디버깅 방법</a><ul><li><a href="#html-javascript-디버깅">HTML, Javascript 디버깅</a></li></ul></li><li><a href="#elements-탭-사용법">Elements 탭 사용법</a><ul><li><a href="#html-요소-검사">HTML 요소 검사</a></li><li><a href="#html-요소-값-변경">HTML 요소 값 변경</a></li><li><a href="#html-소스-검색">HTML 소스 검색</a></li></ul></li><li><a href="#sources-탭-사용법">Sources 탭 사용법</a><ul><li><a href="#정적-리소스-분석">정적 리소스 분석</a></li><li><a href="#정적-리소스-전체-검색">정적 리소스 전체 검색</a></li></ul></li><li><a href="#network-탭-사용법">Network 탭 사용법</a><ul><li><a href="#네트워크-정적-리소스-분석">네트워크 정적 리소스 분석</a></li><li><a href="#새-창-팝업이-열릴-때-f12-열기-설정">새 창 팝업이 열릴 때 F12 열기 설정</a></li></ul></li><li><a href="#console-탭-사용법">Console 탭 사용법</a><ul><li><a href="#form에-저장된-값-출력">form에 저장된 값 출력</a></li></ul></li><li><a href="#application-탭-사용법">Application 탭 사용법</a><ul><li><a href="#브라우저에-저장된-값-확인-방법">브라우저에 저장된 값 확인 방법</a></li></ul></li><li><a href="#f12-유용한-기능">F12 유용한 기능</a><ul><li><a href="#브라우저-캐시-삭제-방법">브라우저 캐시 삭제 방법</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -560,6 +560,14 @@ Selector, declaration 모두 복사하고 싶다면 Copy rule 하면 됩니다.<
   </tbody>
 </table>
 <p>네트워크 요청 순서대로 정렬된 정적 리소스 파일을 선택하면 볼 수 있는 정보입니다.</p>
+
+<h3 id="새-창-팝업이-열릴-때-f12-열기-설정">새 창 팝업이 열릴 때 F12 열기 설정</h3>
+<p>F12 우측 상단 설정 아이콘 &gt; Preferances 메뉴 &gt; 우측 하단 Global &gt; Auto-open DevTools for popups 체크<br />
+새 창으로 팝업이 열릴 때, F12 Network 탭이 열려서 어떤 URL 파라미터로 들어왔는지 분석할 수 있습니다.</p>
+
+<p><mark>팝업 Request URL 확인 방법</mark><br />
+Network 탭 &gt; 첫 번째 네트워크 요청 클릭 &gt; Headers 탭 &gt; General &gt; Request URL에서 현재 팝업이 열릴 때 들어온 URL 전체를 확인할 수 있습니다.<br />
+특히 Vue, React 팝업에서 URL을 라우팅 했을 경우, 초기 요청 URL 및 파라미터를 확인할 수 있어 디버깅 및 소스 분석에 유용합니다.</p>
 
 <hr />
 
@@ -689,6 +697,42 @@ for (var pair of formData.entries()) {
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
+        <a href="/it-tip/2025-06-11-1" rel="permalink">모니터 동적 밝기 조절 기능 비활성화 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-06-11T00:00:00+00:00">2025-06-11</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
         <a href="/web-dev/2025-05-30-1" rel="permalink">Vue 문법 정리 3 / 컴포넌트 정의 및 사용 방법
 </a>
       
@@ -773,42 +817,6 @@ for (var pair of formData.entries()) {
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-05-28T00:00:00+00:00">2025-05-28</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-05-26-1" rel="permalink">Vue 문법 정리 1 / Vue 3 템플릿 문법 (인터폴레이션, 디렉티브)
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-05-26T00:00:00+00:00">2025-05-26</time>
       </span>
     
 
