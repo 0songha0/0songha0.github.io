@@ -1008,7 +1008,7 @@ var store = [{
         "teaser": null
       },{
         "title": "코딩테스트 필수 Java 문법 및 자료구조 정리",
-        "excerpt":"Java 문법 및 자료구조 Java 변수 타입 프리미티브 타입 int, long, float, double, char 등 레퍼런스 타입 Integer, Long, Float, Double, Character 등 참조형 변수인 레퍼런스 타입은 메모리에 직접 값을 저장하는 프리미티브 타입보다 연산 속도가 느리고, 컬렉션 프레임워크에 저장할 때 주로 사용됩니다. 숫자형 // 더하기 a + b // 빼기...","categories": ["python-java"],
+        "excerpt":"Java 문법 및 자료구조 Java 변수 타입 프리미티브 타입 (기본형) 값을 메모리에 직접 저장해서 연산 속도가 빠릅니다. 예시 : int, long, float, double, char 등 레퍼런스 타입 (참조형) 값이 들어있는 객체 주소를 메모리에 저장합니다. 컬렉션 프레임워크에는 래퍼 클래스 객체처럼 레퍼런스 타입 데이터가 저장됩니다. 예시 : Integer, Long, Float, Double, Character...","categories": ["python-java"],
         "tags": [],
         "url": "/python-java/2024-05-01-1",
         "teaser": null
