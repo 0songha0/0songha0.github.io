@@ -1277,7 +1277,7 @@ var store = [{
         "url": "/web-dev/2025-05-29-1",
         "teaser": null
       },{
-        "title": "Vue 문법 정리 3 / 컴포넌트 정의 및 사용 방법",
+        "title": "Vue 문법 정리 3 / 컴포넌트 정의 방법 및 사용법",
         "excerpt":"Vue 컴포넌트 정의 방법 문자열 템플릿 방식 // HTML 내부 script에 컴포넌트 정의 시 const App = { template: ` // HTML 코드 작성 ` } // js 파일로 컴포넌트 정의 시 export default { template: ` // HTML 코드 작성 ` } HTML에서 Vue 컴포넌트를 정의하고, script에서 벡틱(`) 등으로...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-05-30-1",
