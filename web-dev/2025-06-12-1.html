@@ -486,6 +486,7 @@
 import View컴포넌트명1 from '@/views/View컴포넌트명1.vue';
 import View컴포넌트명2 from '@/views/View컴포넌트명2.vue';
 import View컴포넌트명3 from '@/views/View컴포넌트명3.vue';
+import View컴포넌트명4 from '@/views/View컴포넌트명4.vue';
 
 const routes = [
   {
@@ -500,6 +501,10 @@ const routes = [
   {
     path: '/URL경로/하위경로',
     component: View컴포넌트명3
+  },
+  {
+    path: '/URL경로/:id', // 동적 세그먼트를 통한 동적 라우팅 (여러 URL을 하나의 컴포넌트에 매핑)
+    component: View컴포넌트명4
   },
 ]
 
@@ -587,10 +592,13 @@ router.push()로 전체 페이지 리로딩 없이 페이지를 이동할 수 �
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
-console.log(route.path);
-console.log(route.params);
-console.log(route.query);
-console.log(route.name); // 필수값 X
+
+console.log(route.path); // 현재 URL 경로 객체
+console.log(route.name); // 라우트에 설정된 페이지 이름 (없으면 undefined)
+console.log(route.params); // URL로 받은 동적 세그먼트 파라미터 객체
+console.log(route.query); // URL로 받은 쿼리스트링 파라미터 객체
+console.log(route.query.파라미터키); // 특정 쿼리 파라미터 값 추출
+console.log(route.hash); // URL로 받은 해시태그 파라미터 객체
 &lt;/script&gt;
 </code></pre></div></div>
 <p>Options API의 this.$route는 Composition API의 useRoute() 훅과 같은 기능을 합니다.<br />
