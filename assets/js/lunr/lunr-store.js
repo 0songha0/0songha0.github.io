@@ -1290,7 +1290,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Vue 문법 정리 4 / Vue Router URL 컴포넌트 매핑 방법",
-        "excerpt":"Vue 라우터란? URL 경로에 따라 화면에 렌더링할 컴포넌트를 매핑할 수 있는 라우팅 라이브러리입니다. Vue 프로젝트 라우터 적용 방법 Vue 라우터 라이브러리 설치 npm install vue-router 프로젝트 경로에서 위 명령어를 통해 Vue Router를 설치할 수 있습니다. 라우트 설정 (URL, 컴포넌트 매핑) import { createRouter, createWebHistory } from 'vue-router'; import View컴포넌트명1 from...","categories": ["web-dev"],
+        "excerpt":"Vue 라우터란? URL 경로에 따라 화면에 렌더링할 컴포넌트를 매핑할 수 있는 라우팅 라이브러리입니다. Vue 프로젝트 라우터 적용 방법 Vue 라우터 라이브러리 설치 npm install vue-router 프로젝트 경로에서 위 명령어를 통해 Vue Router를 설치할 수 있습니다. 라우트 설정 (URL, 페이지 컴포넌트 매핑) import { createRouter, createWebHistory } from 'vue-router'; import View컴포넌트명1...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-06-12-1",
         "teaser": null

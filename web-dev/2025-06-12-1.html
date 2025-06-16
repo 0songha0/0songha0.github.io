@@ -462,7 +462,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue 문법 정리 4 / Vue Router URL 컴포넌트 매핑 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#vue-라우터란">Vue 라우터란?</a></li><li><a href="#vue-프로젝트-라우터-적용-방법">Vue 프로젝트 라우터 적용 방법</a><ul><li><a href="#vue-라우터-라이브러리-설치">Vue 라우터 라이브러리 설치</a></li><li><a href="#라우트-설정-url-컴포넌트-매핑">라우트 설정 (URL, 컴포넌트 매핑)</a></li><li><a href="#vue-라우팅-기능-사용-설정">Vue 라우팅 기능 사용 설정</a></li></ul></li><li><a href="#vue-라우터-사용법">Vue 라우터 사용법</a><ul><li><a href="#routerview-렌더링-방법">RouterView 렌더링 방법</a></li><li><a href="#html에서-페이지-이동-방법">HTML에서 페이지 이동 방법</a></li><li><a href="#javascript에서-페이지-이동-방법">Javascript에서 페이지 이동 방법</a></li><li><a href="#라우트-정보-접근-방법">라우트 정보 접근 방법</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#vue-라우터란">Vue 라우터란?</a></li><li><a href="#vue-프로젝트-라우터-적용-방법">Vue 프로젝트 라우터 적용 방법</a><ul><li><a href="#vue-라우터-라이브러리-설치">Vue 라우터 라이브러리 설치</a></li><li><a href="#라우트-설정-url-페이지-컴포넌트-매핑">라우트 설정 (URL, 페이지 컴포넌트 매핑)</a></li><li><a href="#vue-라우팅-기능-사용-설정">Vue 라우팅 기능 사용 설정</a></li></ul></li><li><a href="#vue-라우터-사용법">Vue 라우터 사용법</a><ul><li><a href="#routerview-렌더링-방법">RouterView 렌더링 방법</a></li><li><a href="#html에서-페이지-이동-방법">HTML에서 페이지 이동 방법</a></li><li><a href="#javascript에서-페이지-이동-방법">Javascript에서 페이지 이동 방법</a></li><li><a href="#라우트-정보-접근-방법">라우트 정보 접근 방법</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -480,18 +480,23 @@
 </code></pre></div></div>
 <p>프로젝트 경로에서 위 명령어를 통해 Vue Router를 설치할 수 있습니다.</p>
 
-<h3 id="라우트-설정-url-컴포넌트-매핑">라우트 설정 (URL, 컴포넌트 매핑)</h3>
+<h3 id="라우트-설정-url-페이지-컴포넌트-매핑">라우트 설정 (URL, 페이지 컴포넌트 매핑)</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { createRouter, createWebHistory } from 'vue-router';
 
 import View컴포넌트명1 from '@/views/View컴포넌트명1.vue';
 import View컴포넌트명2 from '@/views/View컴포넌트명2.vue';
 import View컴포넌트명3 from '@/views/View컴포넌트명3.vue';
 import View컴포넌트명4 from '@/views/View컴포넌트명4.vue';
+import 상위컴포넌트명 from '@/views/상위컴포넌트명.vue';
+import 중첩컴포넌트명0 from '@/views/중첩컴포넌트명0.vue';
+import 중첩컴포넌트명1 from '@/views/중첩컴포넌트명1.vue';
+import 중첩컴포넌트명2 from '@/views/중첩컴포넌트명2.vue';
+import 에러페이지컴포넌트명 from '@/views/에러페이지컴포넌트명.vue';
 
 const routes = [
   {
     path: '/',
-    name: '페이지명1' // 필수값 X
+    name: '경로별칭' // 필수값 X
     component: View컴포넌트명1
   },
   {
@@ -506,6 +511,29 @@ const routes = [
     path: '/URL경로/:id', // 동적 세그먼트를 통한 동적 라우팅 (여러 URL을 하나의 컴포넌트에 매핑)
     component: View컴포넌트명4
   },
+  { // Vue 중첩 라우트 설정 예시
+    path: '/nested',
+    component: 상위컴포넌트명, // /nested~ 접근 시 상위 RouterView에 렌더링
+    children: [
+      {
+        path: '', // 상대경로
+        component: 중첩컴포넌트명0, // /nested 접근 시 상위 RouterView 내부 RouterView에 렌더링
+      },
+      {
+        path: 'one',
+        component: 중첩컴포넌트명1, // /nested/one 접근 시 상위 RouterView 내부 RouterView에 렌더링
+      },
+      {
+        path: 'two',
+        component: 중첩컴포넌트명2,
+      }
+    ]
+  },
+  {
+    path: '/:pathMatch(.*)*', // 정규표현식으로 위 경로 외 모든 URL은 Vue 에러페이지 라우팅
+    name: 'NotFound',
+    component: 에러페이지컴포넌트명
+  },
 ]
 
 const router = createRouter({
@@ -517,6 +545,35 @@ export default router;
 </code></pre></div></div>
 <p>src/router 폴더에 index.js 파일 생성 후, 위와 같이 라우터 객체를 생성하고 내보내면 됩니다.<br />
 createWebHistory 함수 파라미터 경로를 기준으로 라우터가 URL 히스토리를 관리합니다.</p>
+
+<p><mark>라우트 시 props 전달</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const routes = [
+  {
+    path: '/경로/:id',
+    component: 컴포넌트명,
+    props: true // route.params.id를 컴포넌트에 props로 전달
+    또는
+    props: route =&gt; {
+      id: parseInt(route.params.id),
+    }
+  },
+  {
+    path: '/경로',
+    component: 컴포넌트명,
+    props: route =&gt; ({ 객체명: route.query, }) // URL 뒤 쿼리스트링 객체를 컴포넌트에 props로 전달
+  },
+]
+</code></pre></div></div>
+<p>페이지 컴포넌트에 props를 전달해서, 컴포넌트가 직접 route 객체를 사용하여 의존하지 않도록 합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script setup&gt;
+const id = defineProps({
+  id: Number,
+});
+
+const props = defineProps(['객체명']);
+&lt;/script&gt;
+</code></pre></div></div>
+<p>위와 같이, 컴포넌트에서 전달 받은 props를 사용할 수 있습니다.</p>
 
 <h3 id="vue-라우팅-기능-사용-설정">Vue 라우팅 기능 사용 설정</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import router from '@/router';
@@ -547,11 +604,18 @@ createApp(App).use(router).mount('#app');
   &lt;nav&gt;
     &lt;RouterLink to="/"&gt;Home&lt;/RouterLink&gt;
     &lt;RouterLink to="/URL경로"&gt;페이지명&lt;/RouterLink&gt;
+    
+    &lt;RouterLink to="/URL경로"&gt;
+      &lt;button&gt;버튼명&lt;/button&gt;
+    &lt;/RouterLink&gt;
+
+    // 신규 히스토리 남기지 않고 현재 기록 대체하여 이동 (이전 페이지 뒤로가기 방지)
+    &lt;RouterLink :to="{name: '경로별칭', replace: true}"&gt;페이지명&lt;/RouterLink&gt; // 객체 바인딩 (v-bind)
   &lt;/nav&gt;
 &lt;/template&gt;
 </code></pre></div></div>
 <p>일반 a 태그 대신 RouterLink 커스텀 컴포넌트를 사용하면,<br />
-전체 페이지 리로딩 없이 URL에 매핑된 페이지 컴포넌트를 렌더링할 수 있습니다.</p>
+전체 페이지 리로딩 없이 SPA 방식으로 URL에 매핑된 페이지 컴포넌트를 렌더링할 수 있습니다.</p>
 
 <p><mark>RouterLink 활성화 시 클래스 지정</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
@@ -566,23 +630,52 @@ createApp(App).use(router).mount('#app');
 Vue 3 이상은 active-class가 지원되지 않고, 활성화된 링크에 자동으로 붙는 router-link-active, router-link-exact-active 클래스에 스타일을 지정합니다.</p>
 
 <h3 id="javascript에서-페이지-이동-방법">Javascript에서 페이지 이동 방법</h3>
+<p><mark>router.push()</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
   &lt;button @click="$router.push('/경로')"&gt;버튼명&lt;/button&gt;
   또는
-  &lt;button @click="goOrderPage"&gt;버튼명&lt;/button&gt;
+  &lt;button @click="goOrderPage()"&gt;버튼명&lt;/button&gt;
 &lt;/template&gt;
 &lt;script setup&gt;
 import { useRouter } from 'vue-router';
 
+const route = useRoute();
 const router = useRouter();
 
+const goOrderPage = (id) =&gt; {
+  router.push(`/경로/${id}`);
+}
+또는
 const goOrderPage = () =&gt; {
-  router.push('/경로');
+  const id = route.params.id;
+  router.push({
+    name: '경로별칭',
+    params: {
+      id: id, // 동적 세그먼트에 따라 다른 URL로 이동
+    }
+  });
+}
+또는
+const goOrderPage = () =&gt; {
+  router.push({
+    path: '/경로',
+    query: { 파라미터명: '값' } // 페이지 이동 시 쿼리스트링 파라미터 지정
+  });
 }
 &lt;/script&gt;
 </code></pre></div></div>
 <p>Options API의 this.$router는 Composition API의 useRouter() 훅과 같은 기능을 합니다.<br />
-router.push()로 전체 페이지 리로딩 없이 페이지를 이동할 수 있습니다.</p>
+router.push()는 전체 페이지 리로딩 없이 SPA 방식으로 페이지를 이동할 수 있습니다.</p>
+
+<p><mark>router.replace()</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const router = useRouter();
+
+router.push({ path: '경로', replace: true });
+또는
+router.replace({ path: '/경로' });
+</code></pre></div></div>
+<p>router.replace는 브라우저 히스토리 스택에 새 기록을 추가하지 않고 페이지 이동합니다.<br />
+로그인 후 페이지 이동 시 사용하면, 뒤로가기 눌렀을 때 다시 로그인 페이지로 안 가도록 할 수 있습니다.</p>
 
 <h3 id="라우트-정보-접근-방법">라우트 정보 접근 방법</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;

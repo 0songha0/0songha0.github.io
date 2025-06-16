@@ -894,8 +894,15 @@ import 자식컴포넌트명 from '@/components/자식컴포넌트명.vue';
 
 const props = defineProps({
   키: {
+    type: String, // 필수
+    default: '기본값'
+  },
+  키: {
     type: String,
-    default: '기본값' // 필수X
+    required: true,
+  },
+  키: {
+    type: [String, Date, Number],
   },
 });
 

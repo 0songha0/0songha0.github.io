@@ -535,6 +535,14 @@ export default {
 프리미티브 값을 레퍼런스 객체로 매핑해서 .value로 값에 접근할 수 있습니다.<br />
 Vue 3.3 이상에서 $ref()로 선언하면 .value 없이도 값에 바로 접근할 수 있습니다.</p>
 
+<p><mark>ref 변수에 객체 얕은 복사</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const form = ref({});
+
+form.value = { ...object객체명 };
+</code></pre></div></div>
+<p>최상위 속성들은 값을 복사하고, 중첩된 내부 객체들은 참조만 복사합니다.<br />
+reactive 변수에 객체 할당 시에는 각 속성을 수동 복사해야 반응성을 유지할 수 있습니다.</p>
+
 <h3 id="reactive">reactive()</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
   &lt;button v-on:click="increment"&gt;Click : {{ state.count }}&lt;/button&gt;
@@ -565,7 +573,8 @@ export default {
 &lt;/script&gt;
 </code></pre></div></div>
 <p>객체, 배열 등 레퍼런스 타입을 깊은 반응형 객체로 생성하는 API입니다.<br />
-프리미티브 타입으로 만들면 반응형이 동작하지 않습니다.</p>
+ref 변수는 프리미티브 타입, 레퍼런스 타입 모두 할당 가능하지만,<br />
+reactive 변수는 프리미티브 타입을 넣으면 반응형이 동작하지 않습니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script&gt;
 import { reactive, ref } from 'vue';
 
