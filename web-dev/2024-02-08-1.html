@@ -613,7 +613,7 @@ public String getListPage(@RequestParam Map&lt;String,Object&gt; params, Model m
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;input type="radio" id="useYn_Y" name="useYn" value="Y" &lt;c:if test="${VO명.컬렴명 eq 'Y'}"&gt;checked&lt;/c:if&gt;&gt;
 &lt;label for="useYn_Y"&gt;사용&lt;/label&gt;
 &lt;input type="radio" id="useYn_N" name="useYn" value="N" &lt;c:if test="${VO명.컬렴명 ne 'Y'}"&gt;checked&lt;/c:if&gt;&gt;
-&lt;label for="u_useYn_N"&gt;미사용&lt;/label&gt;
+&lt;label for="useYn_N"&gt;미사용&lt;/label&gt;
 </code></pre></div></div>
 <p>DB에서 조회한 컬럼 값에 따라 checked 여부를 변경하여 렌더링 할 수 있습니다.</p>
 
