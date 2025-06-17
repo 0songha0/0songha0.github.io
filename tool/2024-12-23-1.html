@@ -513,7 +513,7 @@ Binaries의 zip 파일 다운로드 후 압축을 풀고, bin 폴더 내의 jmet
     </tr>
     <tr>
       <td>HTTP Method</td>
-      <td>원하는 HTTP 메서드 선택 (GET, POST, PUT 등)</td>
+      <td>원하는 HTTP 메서드 선택 (GET, POST, PUT, PATCH 등)</td>
     </tr>
     <tr>
       <td>Path</td>
@@ -521,6 +521,44 @@ Binaries의 zip 파일 다운로드 후 압축을 풀고, bin 폴더 내의 jmet
     </tr>
   </tbody>
 </table>
+
+<p><mark>HTTP 메서드 종류<mark></mark></mark></p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>GET</td>
+      <td>데이터 조회</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td>데이터 생성</td>
+    </tr>
+    <tr>
+      <td>PUT</td>
+      <td>데이터 전체 필드 수정</td>
+    </tr>
+    <tr>
+      <td>PATCH</td>
+      <td>데이터 일부 필드 수정</td>
+    </tr>
+    <tr>
+      <td>DELETE</td>
+      <td>데이터 삭제</td>
+    </tr>
+    <tr>
+      <td>OPTIONS</td>
+      <td>허용된 HTTP 메서드 확인</td>
+    </tr>
+    <tr>
+      <td>HEAD</td>
+      <td>
+        GET 요청과 유사하나 응답 본문 (body) 없이 헤더만 반환<br />
+        리소스 존재 여부, 메타데이터 확인 시 사용
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p>동작(HTTP 메서드), 자원(URL)을 조합하여 RESTful 규칙을 따르는 API를 설계할 수 있습니다.</p>
 
 <h3 id="listener-추가">Listener 추가</h3>
 <p>좌측 Thread Group 우클릭 &gt; Add &gt; Listener &gt; View Results in Table 선택<br />
