@@ -89,7 +89,7 @@ var store = [{
         "url": "/app-dev/2022-06-22-1",
         "teaser": null
       },{
-        "title": "크롬 F12 디버깅 및 소스 분석 방법 / 크롬 개발자도구 사용법",
+        "title": "크롬 F12 개발자도구 사용법 / 크롬 디버깅 및 소스 분석 방법",
         "excerpt":"크롬 F12 디버깅 방법 HTML, Javascript 디버깅 F12 &gt; Sources 탭 &gt; HTML, Javascript 파일 선택 &gt; 소스 좌측 클릭하여 디버그포인트를 걸면 새로고침해도 사라지지 않습니다. 디버그포인트 타서 멈추면, 변수에 마우스 올리거나 Console에서 변수명 입력 시 현재 들어있는 값 확인 가능합니다. 크롬 F12 디버깅 단축키 F8 다음 디버깅 포인트로 이동 F10...","categories": ["it-tip"],
         "tags": [],
         "url": "/it-tip/2022-06-22-1",
@@ -1254,7 +1254,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Vue 개념 및 구조 / Vue.js 설치 및 실행 방법 / Vue 디버깅 방법",
-        "excerpt":"Vue.js 컴포넌트 단위로 UI를 구성하는 프론트엔드 프레임워크입니다. 기존 Javascript와 달리, 컴포넌트를 재사용해 중복 코드를 줄일 수 있습니다. DOM을 직접 가져와서 데이터를 수동 할당 및 업데이트 해야 하는 Javascript와 달리, Vue는 data에 선언한 값을 템플릿 구문에 바인딩 해두면 DOM에 자동 반영하고 렌더링 합니다. 컴포넌트란? HTML, CSS, Javascript를 캡슐화하여 재사용 가능한 UI...","categories": ["web-dev"],
+        "excerpt":"Vue.js 컴포넌트 단위로 UI를 구성하는 프론트엔드 프레임워크입니다. 기존 Javascript와 달리, 컴포넌트를 재사용해 중복 코드를 줄일 수 있습니다. DOM을 직접 가져와서 데이터를 수동 할당 및 업데이트 해야 하는 Javascript와 달리, Vue는 data에 선언한 값을 템플릿 구문에 바인딩 해두면 DOM에 자동 반영하고 렌더링 합니다. Vue는 하나의 페이지에서 Javascript로 동작하는 SPA (싱글 페이지...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-05-22-1",
         "teaser": null
