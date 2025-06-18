@@ -710,6 +710,29 @@ data가 변경되면 바인딩 된 DOM도 변경되고, 사용자 입력으로 D
   </tbody>
 </table>
 
+<p><mark>컴포넌트 props 여러개 양방향 바인딩 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;하위컴포넌트명 v-model:props명1="data변수명1" v-model:props명2="data변수명2"&gt;&lt;/하위컴포넌트명&gt;
+</code></pre></div></div>
+<p>v-model 전달인자로 props명을 지정할 수 있습니다.<br />
+하위 컴포넌트에서는 아래와 같이 받아서 사용할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;input :value="props명1" @input="$emit('update:props명1', $event.target.value)" type="text" id="props명1" /&gt;
+  &lt;input :value="props명2" @input="$emit('update:props명2', $event.target.value)" type="text" id="props명2" /&gt;
+&lt;/template&gt;
+&lt;script setup&gt;
+defineProps({
+  props명1: String,
+  props명2: String
+});
+
+const emit = defineEmits(['update:props명1', 'update:props명2']);
+
+// 스크립트에서도 emit 이벤트 발생 가능
+const updateProps명1 = () =&gt; {
+  emit('update:props명1', 변경값);
+};
+</code></pre></div></div>
+
 <h3 id="v-on-">v-on (@)</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;button v-on:click="이벤트함수명"&gt;Click&lt;/button&gt;
 또는
@@ -730,6 +753,7 @@ const 이벤트함수명 = (event) =&gt; {
 const 이벤트함수명 = (변수명, event) =&gt; {
   console.log(event.target);
   console.log(event.target.tagName);
+  console.log(event.target.value);
 }
 &lt;/script&gt;
 </code></pre></div></div>

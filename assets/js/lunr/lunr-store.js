@@ -36,7 +36,7 @@ var store = [{
         "teaser": null
       },{
         "title": "IntelliJ 사용법 / IntelliJ 단축키 / IntelliJ 디버깅 방법",
-        "excerpt":"IntelliJ 사용법 기존 프로젝트 열기 file &gt; Open &gt; 프로젝트명 &gt; OK 최근 작업한 프로젝트 열기 File &gt; Open Recent &gt; 프로젝트명 프로젝트 Type 보는 법 프로젝트 &gt; 우클릭 &gt; Open Module Settings &gt; Artifacts &gt; Type : Web Application: Archive 프로젝트 Clean File &gt; Invalidate Caches &gt; Clear file...","categories": ["tool"],
+        "excerpt":"IntelliJ 사용법 기존 프로젝트 열기 File &gt; Open &gt; 프로젝트폴더 선택 &gt; OK 또는 File &gt; Project Structure &gt; Project Settings &gt; Modules &gt; + &gt; import Module &gt; 프로젝트폴더 선택 &gt; OK &gt; import module from external model : Gradle 선택 (프로젝트에 맞게 선택) &gt; Create 아래 방법은 프로젝트...","categories": ["tool"],
         "tags": [],
         "url": "/tool/2022-05-25-1",
         "teaser": null
