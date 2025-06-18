@@ -1294,4 +1294,10 @@ var store = [{
         "tags": [],
         "url": "/web-dev/2025-06-12-1",
         "teaser": null
+      },{
+        "title": "Vue 문법 정리 5 / Vue HTTP API 통신 방법 / json-server, axios 사용하여 게시판 구현",
+        "excerpt":"테스트용 JSON API 서버 설치 json-server 라이브러리 설치 npm install -D json-server@0.17.4 -D 옵션은 개발용 의존성으로 설치하며, devDependencies에 추가합니다. -G 옵션은 전역으로 설치되어 모든 프로젝트에서 CLI 명령어로 사용할 수 있습니다. JSON Server 실행 npx json-server --watch db.json --port 5000 프로젝트 루트 경로에 db.json 자동 생성 후, 5000번 포트로 JSON 서버가...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-06-16-1",
+        "teaser": null
       }]

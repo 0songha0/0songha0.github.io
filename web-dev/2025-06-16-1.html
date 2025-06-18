@@ -1,0 +1,1587 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Vue 문법 정리 5 / Vue HTTP API 통신 방법 / json-server, axios 사용하여 게시판 구현 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="Vue 문법 정리 5 / Vue HTTP API 통신 방법 / json-server, axios 사용하여 게시판 구현">
+<meta property="og:url" content="https://0songha0.github.io/web-dev/2025-06-16-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-06-16T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2025-06-16T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/web-dev/2025-06-16-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 217</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">카프카</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Vue 문법 정리 5 / Vue HTTP API 통신 방법 / json-server, axios 사용하여 게시판 구현">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2025-06-16T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-06-16T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Vue 문법 정리 5 / Vue HTTP API 통신 방법 / json-server, axios 사용하여 게시판 구현
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-06-16T00:00:00+00:00">2025-06-16</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue 문법 정리 5 / Vue HTTP API 통신 방법 / json-server, axios 사용하여 게시판 구현</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
+              <ul class="toc__menu"><li><a href="#테스트용-json-api-서버-설치">테스트용 JSON API 서버 설치</a><ul><li><a href="#json-server-라이브러리-설치">json-server 라이브러리 설치</a></li><li><a href="#json-server-실행">JSON Server 실행</a></li><li><a href="#dbjson-파일-예시">db.json 파일 예시</a></li></ul></li><li><a href="#vue-http-api-통신-방법">Vue HTTP API 통신 방법</a><ul><li><a href="#api-통신-모듈-설치">API 통신 모듈 설치</a></li><li><a href="#axios-api-통신-js-코드-작성">axios API 통신 js 코드 작성</a></li><li><a href="#데이터-전체-조회-api-함수-호출-vue-코드">데이터 전체 조회 API 함수 호출 Vue 코드</a></li><li><a href="#데이터-단건-조회-api-함수-호출-vue-코드">데이터 단건 조회 API 함수 호출 Vue 코드</a></li><li><a href="#데이터-저장-api-함수-호출-vue-코드">데이터 저장 API 함수 호출 Vue 코드</a></li><li><a href="#데이터-수정-api-함수-호출-vue-코드">데이터 수정 API 함수 호출 Vue 코드</a></li><li><a href="#데이터-삭제-api-함수-호출-vue-코드">데이터 삭제 API 함수 호출 Vue 코드</a></li></ul></li><li><a href="#json-server-api-활용">JSON Server API 활용</a><ul><li><a href="#페이징-기능-구현">페이징 기능 구현</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="테스트용-json-api-서버-설치">테스트용 JSON API 서버 설치</h2>
+
+<h3 id="json-server-라이브러리-설치">json-server 라이브러리 설치</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install -D json-server@0.17.4
+</code></pre></div></div>
+<p>-D 옵션은 개발용 의존성으로 설치하며, devDependencies에 추가합니다.<br />
+-G 옵션은 전역으로 설치되어 모든 프로젝트에서 CLI 명령어로 사용할 수 있습니다.</p>
+
+<h3 id="json-server-실행">JSON Server 실행</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx json-server --watch db.json --port 5000
+</code></pre></div></div>
+<p>프로젝트 루트 경로에 db.json 자동 생성 후, 5000번 포트로 JSON 서버가 실행됩니다.<br />
+터미널에서 ctrl + c로 종료할 수 있습니다.</p>
+
+<p><mark>JSON Server 실행 스크립트 등록</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"scripts": {
+  "db": "json-server --watch db.json --port 5000"
+}
+</code></pre></div></div>
+<p>package.json 파일에 JSON Server 실행 명령어를 스크립트로 등록할 수 있습니다.<br />
+npm run db 명령어로 JSON 서버를 쉽게 실행할 수 있게 됩니다.</p>
+
+<h3 id="dbjson-파일-예시">db.json 파일 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "posts": [
+    { "id": 1, "title": "제목1", "content": "내용1", "createdAt": "2022-01-04" },
+    { "id": 2, "title": "제목2", "content": "내용2", "createdAt": "2024-05-12" },
+    { "id": 3, "title": "제목3", "content": "내용3", "createdAt": "2024-07-15" },
+    { "id": 4, "title": "제목4", "content": "내용4", "createdAt": "2025-10-06" },
+    { "id": 5, "title": "제목5", "content": "내용5", "createdAt": "2025-12-12" }
+  ]
+}
+</code></pre></div></div>
+<p>게시글 객체들을 저장하고 있는 JSON server 데이터 파일 예시입니다.</p>
+
+<hr />
+
+<h2 id="vue-http-api-통신-방법">Vue HTTP API 통신 방법</h2>
+
+<h3 id="api-통신-모듈-설치">API 통신 모듈 설치</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install axios
+또는
+npm i axios
+</code></pre></div></div>
+<p>서버와 통신하기 위한 비동기 통신 모듈 axios를 설치합니다.</p>
+
+<h3 id="axios-api-통신-js-코드-작성">axios API 통신 js 코드 작성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import axios from 'axios';
+
+// db.json 파일에 작성한 posts 전체 데이터 조회
+export function getPosts(params) {
+  return axios.get('http://localhost:5000/posts', { params });
+}
+
+export function getPostById(id) {
+  return axios.get(`http://localhost:5000/posts/${id}`);
+}
+
+export function createPost(data) {
+  return axios.post('http://localhost:5000/posts', data);
+}
+
+export function updatePost(id, data) {
+  return axios.put(`http://localhost:5000/posts/${id}`, data);
+}
+
+export function deletePost(id) {
+  return axios.delete(`http://localhost:5000/posts/${id}`);
+}
+</code></pre></div></div>
+<p>src/api 폴더 내에 js 파일 생성 후 위와 같이 작성합니다.</p>
+
+<h3 id="데이터-전체-조회-api-함수-호출-vue-코드">데이터 전체 조회 API 함수 호출 Vue 코드</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script setup&gt;
+import { ref } from 'vue';
+import { getPosts } from '@api/JS파일명';
+
+const posts = ref([]);
+
+// 날짜 내림차순 정렬 파라미터 정의
+const params = ref({
+  _sort: 'createdAt',
+  _order: 'desc'
+})
+
+// 데이터 전체 조회 API 호출 함수 정의
+const fetchPosts = async () =&gt; {
+  try {
+    const { data } = await getPosts(params.value);
+    posts.value = data;
+    또는
+    ({ data: posts.value } = await getPosts(params.value));
+
+  } catch (error) {
+		console.error(error);
+	}
+}
+
+// 데이터 전체 조회 API 호출
+fetchPosts();
+</code></pre></div></div>
+<p>API 호출 응답을 반응형 데이터로 관리하고, template에 출력할 수 있습니다.<br />
+async await은 then()처럼 promise 기반 비동기 처리를 수행합니다.</p>
+
+<h3 id="데이터-단건-조회-api-함수-호출-vue-코드">데이터 단건 조회 API 함수 호출 Vue 코드</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script setup&gt;
+import { ref } from 'vue';
+import { getPostById } from '@api/JS파일명';
+import { onMounted } from 'vue';
+
+// Route로 전달된 :id를 props로 받음
+const props = defineProps(['id']);
+
+const post = ref({});
+
+// 데이터 단건 조회 API 호출 함수 정의
+const fetchPost = async () =&gt; {
+  try {
+    const { data } = await getPostById(props.id);
+    setPost(data);
+
+  } catch (error) {
+		console.error(error);
+	}
+}
+
+// 데이터 객체 저장 함수
+const setPost = ({ title, content, createdAt }) =&gt; {
+  post.value.title = title;
+  post.value.content = content;
+  post.value.createdAt = createdAt;
+}
+
+// 데이터 단건 조회 API 호출
+onMounted(() =&gt; {
+  fetchPost();
+});
+</code></pre></div></div>
+
+<h3 id="데이터-저장-api-함수-호출-vue-코드">데이터 저장 API 함수 호출 Vue 코드</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;form @submit.prevent="save"&gt;
+      &lt;input v-model="form.title" type="text" id="title" /&gt;
+      &lt;input v-model="form.content" type="text" id="content" /&gt;
+
+      &lt;button&gt;저장&lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script setup&gt;
+import { ref } from 'vue';
+import { createPost } from '@api/JS파일명';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const form = ref({
+  title: null,
+  content: null,
+});
+
+// 데이터 생성 API 호출 함수 정의
+const save = async () =&gt; {
+	try {
+		await createPost({
+			...form.value, // form 객체 복사
+			createdAt: Date.now(),
+		});
+
+		router.push({ name: '이동할페이지별칭' });
+
+	} catch (error) {
+		console.error(error);
+	}
+};
+&lt;/script&gt;
+</code></pre></div></div>
+
+<h3 id="데이터-수정-api-함수-호출-vue-코드">데이터 수정 API 함수 호출 Vue 코드</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;form @submit.prevent="edit"&gt;
+      &lt;input v-model="form.title" type="text" id="title" /&gt;
+      &lt;input v-model="form.content" type="text" id="content" /&gt;
+
+      &lt;button&gt;수정&lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script setup&gt;
+import { ref } from 'vue';
+import { getPostById, updatePost } from '@api/JS파일명';
+import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+// Route로 전달된 :id를 props로 받음
+const props = defineProps(['id']);
+
+const form = ref({
+  title: null,
+  content: null,
+});
+
+// 데이터 단건 조회 API 호출 함수 정의
+const fetchPost = async () =&gt; {
+  try {
+    const { data } = await getPostById(props.id);
+    setForm(data);
+
+  } catch (error) {
+		console.error(error);
+	}
+}
+
+// 데이터 수정 API 호출 함수 정의
+const edit = async () =&gt; {
+  try {
+    await updatePost(props.id, { ...form.value });
+
+    router.push({ name: '이동할페이지별칭', params: { id: props.id } });
+
+  } catch (error) {
+		console.error(error);
+	}
+}
+
+// 데이터 객체 저장 함수
+const setForm = ({ title, content }) =&gt; {
+  form.value.title = title;
+  form.value.content = content;
+}
+
+// 데이터 단건 조회 API 호출
+onMounted(() =&gt; {
+  fetchPost();
+});
+</code></pre></div></div>
+<p>게시글 상세 페이지에서 데이터 수정 API 호출하는 Vue 코드 예시입니다.</p>
+
+<h3 id="데이터-삭제-api-함수-호출-vue-코드">데이터 삭제 API 함수 호출 Vue 코드</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;form @submit.prevent="remove"&gt;
+      &lt;input v-model="form.title" type="text" id="title" /&gt;
+      &lt;input v-model="form.content" type="text" id="content" /&gt;
+
+      &lt;button&gt;삭제&lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script setup&gt;
+import { ref } from 'vue';
+import { getPostById, deletePost } from '@api/JS파일명';
+import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+// Route로 전달된 :id를 props로 받음
+const props = defineProps(['id']);
+
+const form = ref({
+  title: null,
+  content: null,
+});
+
+// 데이터 단건 조회 API 호출 함수 정의
+const fetchPost = async () =&gt; {
+  try {
+    const { data } = await getPostById(props.id);
+    setForm(data);
+
+  } catch (error) {
+		console.error(error);
+	}
+}
+
+// 데이터 삭제 API 호출 함수 정의
+const remove = async () =&gt; {
+  try {
+    if (confirm('삭제하시겠습니까?') === false) {
+      return;
+    }
+
+    await deletePost(props.id);
+    router.push({ name: '이동할페이지별칭' });
+
+  } catch (error) {
+		console.error(error);
+	}
+}
+
+// 데이터 객체 저장 함수
+const setForm = ({ title, content }) =&gt; {
+  form.value.title = title;
+  form.value.content = content;
+}
+
+// 데이터 단건 조회 API 호출
+onMounted(() =&gt; {
+  fetchPost();
+});
+</code></pre></div></div>
+<p>게시글 상세 페이지에서 데이터 삭제 API 호출하는 Vue 코드 예시입니다.</p>
+
+<hr />
+
+<h2 id="json-server-api-활용">JSON Server API 활용</h2>
+
+<h3 id="페이징-기능-구현">페이징 기능 구현</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  // 부트스트랩 네비게이션 바
+  &lt;nav class="mt-5" aria-label="Page navigation example"&gt;
+    &lt;ul class="pagination justify-content-center"&gt;
+      // 이전 페이지
+      &lt;li class="page-item" :class="{ disabled: !(params._page &gt; 1) }"&gt;
+        &lt;a class="page-link" href="#" aria-label="Previous" @click.prevent="goPrevPage"&gt;
+          &lt;span aria-hidden="true"&gt;&amp;laquo;&lt;/span&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+
+      // 페이지 번호 반복
+      &lt;li v-for="page in pageCount" :key="page" class="page-item" :class="{ active: params._page === page }"&gt;
+        &lt;a class="page-link" href="#" @click.prevent="goPage(page)"&gt;## 테스트용 JSON API 서버 설치
+
+### json-server 라이브러리 설치
+</code></pre></div></div>
+<p>npm install -D json-server@0.17.4</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-D 옵션은 개발용 의존성으로 설치하며, devDependencies에 추가합니다.  
+-G 옵션은 전역으로 설치되어 모든 프로젝트에서 CLI 명령어로 사용할 수 있습니다.
+
+### JSON Server 실행
+</code></pre></div></div>
+<p>npx json-server –watch db.json –port 5000</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>프로젝트 루트 경로에 db.json 자동 생성 후, 5000번 포트로 JSON 서버가 실행됩니다.  
+터미널에서 ctrl + c로 종료할 수 있습니다.
+
+&lt;mark&gt;JSON Server 실행 스크립트 등록&lt;/mark&gt;
+</code></pre></div></div>
+<p>“scripts”: {
+  “db”: “json-server –watch db.json –port 5000”
+}</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package.json 파일에 JSON Server 실행 명령어를 스크립트로 등록할 수 있습니다.  
+npm run db 명령어로 JSON 서버를 쉽게 실행할 수 있게 됩니다.
+
+### db.json 파일 예시
+</code></pre></div></div>
+<p>{
+  “posts”: [
+    { “id”: 1, “title”: “제목1”, “content”: “내용1”, “createdAt”: “2022-01-04” },
+    { “id”: 2, “title”: “제목2”, “content”: “내용2”, “createdAt”: “2024-05-12” },
+    { “id”: 3, “title”: “제목3”, “content”: “내용3”, “createdAt”: “2024-07-15” },
+    { “id”: 4, “title”: “제목4”, “content”: “내용4”, “createdAt”: “2025-10-06” },
+    { “id”: 5, “title”: “제목5”, “content”: “내용5”, “createdAt”: “2025-12-12” }
+  ]
+}</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>게시글 객체들을 저장하고 있는 JSON server 데이터 파일 예시입니다.
+
+---
+
+## Vue HTTP API 통신 방법
+
+### API 통신 모듈 설치
+</code></pre></div></div>
+<p>npm install axios
+또는
+npm i axios</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>서버와 통신하기 위한 비동기 통신 모듈 axios를 설치합니다.
+
+### axios API 통신 js 코드 작성
+</code></pre></div></div>
+<p>import axios from ‘axios’;</p>
+
+<p>// db.json 파일에 작성한 posts 전체 데이터 조회
+export function getPosts(params) {
+  return axios.get(‘http://localhost:5000/posts’, { params });
+}</p>
+
+<p>export function getPostById(id) {
+  return axios.get(<code class="language-plaintext highlighter-rouge">http://localhost:5000/posts/${id}</code>);
+}</p>
+
+<p>export function createPost(data) {
+  return axios.post(‘http://localhost:5000/posts’, data);
+}</p>
+
+<p>export function updatePost(id, data) {
+  return axios.put(<code class="language-plaintext highlighter-rouge">http://localhost:5000/posts/${id}</code>, data);
+}</p>
+
+<p>export function deletePost(id) {
+  return axios.delete(<code class="language-plaintext highlighter-rouge">http://localhost:5000/posts/${id}</code>);
+}</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src/api 폴더 내에 js 파일 생성 후 위와 같이 작성합니다.
+
+### 데이터 전체 조회 API 함수 호출 Vue 코드
+</code></pre></div></div>
+<script setup="">
+import { ref } from 'vue';
+import { getPosts } from '@api/JS파일명';
+
+const posts = ref([]);
+
+// 날짜 내림차순 정렬 파라미터 정의
+const params = ref({
+  _sort: 'createdAt',
+  _order: 'desc'
+})
+
+// 데이터 전체 조회 API 호출 함수 정의
+const fetchPosts = async () => {
+  try {
+    const { data } = await getPosts(params.value);
+    posts.value = data;
+    또는
+    ({ data: posts.value } = await getPosts(params.value));
+
+  } catch (error) {
+		console.error(error);
+	}
+}
+
+// 데이터 전체 조회 API 호출
+fetchPosts();
+```
+API 호출 응답을 반응형 데이터로 관리하고, template에 출력할 수 있습니다.  
+async await은 then()처럼 promise 기반 비동기 처리를 수행합니다.
+
+### 데이터 단건 조회 API 함수 호출 Vue 코드
+```
+<script setup>
+import { ref } from 'vue';
+import { getPostById } from '@api/JS파일명';
+import { onMounted } from 'vue';
+
+// Route로 전달된 :id를 props로 받음
+const props = defineProps(['id']);
+
+const post = ref({});
+
+// 데이터 단건 조회 API 호출 함수 정의
+const fetchPost = async () => {
+  try {
+    const { data } = await getPostById(props.id);
+    setPost(data);
+
+  } catch (error) {
+		console.error(error);
+	}
+}
+
+// 데이터 객체 저장 함수
+const setPost = ({ title, content, createdAt }) => {
+  post.value.title = title;
+  post.value.content = content;
+  post.value.createdAt = createdAt;
+}
+
+// 데이터 단건 조회 API 호출
+onMounted(() => {
+  fetchPost();
+});
+```
+
+### 데이터 저장 API 함수 호출 Vue 코드
+```
+<template>
+  <div>
+    <form @submit.prevent="save">
+      <input v-model="form.title" type="text" id="title" />
+      <input v-model="form.content" type="text" id="content" />
+
+      <button>저장</button>
+    </form>
+  </div>
+</template>
+<script setup>
+import { ref } from 'vue';
+import { createPost } from '@api/JS파일명';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const form = ref({
+  title: null,
+  content: null,
+});
+
+// 데이터 생성 API 호출 함수 정의
+const save = async () => {
+	try {
+		await createPost({
+			...form.value, // form 객체 복사
+			createdAt: Date.now(),
+		});
+
+		router.push({ name: '이동할페이지별칭' });
+
+	} catch (error) {
+		console.error(error);
+	}
+};
+</script>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+### 데이터 수정 API 함수 호출 Vue 코드
+</code></pre></div></div>
+<template>
+  <div>
+    &lt;form @submit.prevent="edit"&gt;
+      <input v-model="form.title" type="text" id="title" />
+      <input v-model="form.content" type="text" id="content" />
+
+      <button>수정</button>
+    &lt;/form&gt;
+  </div>
+</template>
+<script setup="">
+import { ref } from 'vue';
+import { getPostById, updatePost } from '@api/JS파일명';
+import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+// Route로 전달된 :id를 props로 받음
+const props = defineProps(['id']);
+
+const form = ref({
+  title: null,
+  content: null,
+});
+
+// 데이터 단건 조회 API 호출 함수 정의
+const fetchPost = async () => {
+  try {
+    const { data } = await getPostById(props.id);
+    setForm(data);
+
+  } catch (error) {
+		console.error(error);
+	}
+}
+
+// 데이터 수정 API 호출 함수 정의
+const edit = async () => {
+  try {
+    await updatePost(props.id, { ...form.value });
+
+    router.push({ name: '이동할페이지별칭', params: { id: props.id } });
+
+  } catch (error) {
+		console.error(error);
+	}
+}
+
+// 데이터 객체 저장 함수
+const setForm = ({ title, content }) => {
+  form.value.title = title;
+  form.value.content = content;
+}
+
+// 데이터 단건 조회 API 호출
+onMounted(() => {
+  fetchPost();
+});
+```
+게시글 상세 페이지에서 데이터 수정 API 호출하는 Vue 코드 예시입니다.
+
+### 데이터 삭제 API 함수 호출 Vue 코드
+```
+<template>
+  <div>
+    <form @submit.prevent="remove">
+      <input v-model="form.title" type="text" id="title" />
+      <input v-model="form.content" type="text" id="content" />
+
+      <button>삭제</button>
+    </form>
+  </div>
+</template>
+<script setup>
+import { ref } from 'vue';
+import { getPostById, deletePost } from '@api/JS파일명';
+import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+// Route로 전달된 :id를 props로 받음
+const props = defineProps(['id']);
+
+const form = ref({
+  title: null,
+  content: null,
+});
+
+// 데이터 단건 조회 API 호출 함수 정의
+const fetchPost = async () => {
+  try {
+    const { data } = await getPostById(props.id);
+    setForm(data);
+
+  } catch (error) {
+		console.error(error);
+	}
+}
+
+// 데이터 삭제 API 호출 함수 정의
+const remove = async () => {
+  try {
+    if (confirm('삭제하시겠습니까?') === false) {
+      return;
+    }
+
+    await deletePost(props.id);
+    router.push({ name: '이동할페이지별칭' });
+
+  } catch (error) {
+		console.error(error);
+	}
+}
+
+// 데이터 객체 저장 함수
+const setForm = ({ title, content }) => {
+  form.value.title = title;
+  form.value.content = content;
+}
+
+// 데이터 단건 조회 API 호출
+onMounted(() => {
+  fetchPost();
+});
+```
+게시글 상세 페이지에서 데이터 삭제 API 호출하는 Vue 코드 예시입니다.
+
+---
+
+## JSON Server API 활용
+
+### 페이징 기능 구현
+```
+<template>
+  // 부트스트랩 네비게이션 바
+  <nav class="mt-5" aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      // 이전 페이지
+      <li class="page-item" :class="{ disabled: !(params._page > 1) }">
+        <a class="page-link" href="#" aria-label="Previous" @click.prevent="goPrevPage">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+
+      // 페이지 번호 반복
+      <li v-for="page in pageCount" :key="page" class="page-item" :class="{ active: params._page === page }">
+        <a class="page-link" href="#" @click.prevent="goPage(page)">{{ page }}</a>
+      </li>
+
+      // 다음 페이지
+      <li class="page-item" :class="{ disabled: !(params._page < pageCount) }">
+        <a class="page-link" href="#" aria-label="Next" @click.prevent="goNextPage">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</template>
+<script setup>
+import { ref, computed, onMounted } from 'vue';
+import { getPosts } from '@api/JS파일명';
+
+const posts = ref([]);
+
+// API 조회 시 파라미터 정의
+const params = ref({
+  _sort: 'createdAt', // 정렬 기준
+  _order: 'desc', // 내림차순
+  _limit: 3, // 페이지당 글 수
+  _page: 1, // 현재 페이지
+})
+
+const totalCount = ref(0);
+
+// 총 페이지 수 구하는 함수 : (전체 글 수 / 페이지당 글 수) 올림 처리
+const pageCount = computed(() => Math.ceil(totalCount.value / params.value._limit));
+
+// 데이터 전체 조회 API 호출 함수 정의
+const fetchPosts = async () => {
+  try {
+    const { data, headers } = await getPosts(params.value);
+    posts.value = data;
+
+    // JSON Server가 응답 헤더에 담아준 전체 글 수 저장
+    totalCount.value = Number(headers['x-total-count']);
+
+  } catch (error) {
+		console.error(error);
+	}
+}
+
+// 페이지 이동 함수 정의
+const goPage = (page) => {
+  params.value._page = page;
+  fetchPosts();
+};
+
+// 이전 페이지 이동 함수 정의
+const goPrevPage = () => {
+  if (params.value._page > 1) {
+    goPage(params.value._page - 1);
+  }
+};
+
+// 다음 페이지 이동 함수 정의
+const goNextPage = () => {
+  if (params.value._page < pageCount.value) {
+    goPage(params.value._page + 1);
+  }
+};
+
+// 컴포넌트 초기 마운트 시 데이터 전체 조회 API 호출
+onMounted(() => {
+  fetchPosts();
+});
+```
+JSON Server 데이터 조회 후 총 페이지 수를 받아와서 페이징하는 Vue 코드 예시입니다.
+
+### 필터링 검색 파라미터
+```
+const params = ref({
+  필드명_like: '검색어',
+});
+```
+데이터 조회 시, 특정 필드에 검색어가 포함된 데이터만 필터링 가능합니다.  
+JSON Server에 요청되는 쿼리는 아래와 같습니다.
+```
+GET /posts?title_like=검색어
+```
+</a>
+      </li>
+
+      // 다음 페이지
+      <li class="page-item" :class="{ disabled: !(params._page < pageCount) }">
+        <a class="page-link" href="#" aria-label="Next" @click.prevent="goNextPage">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</template>
+<script setup>
+import { ref, computed, onMounted } from 'vue';
+import { getPosts } from '@api/JS파일명';
+
+const posts = ref([]);
+
+// API 조회 시 파라미터 정의
+const params = ref({
+  _sort: 'createdAt', // 정렬 기준
+  _order: 'desc', // 내림차순
+  _limit: 3, // 페이지당 글 수
+  _page: 1, // 현재 페이지
+})
+
+const totalCount = ref(0);
+
+// 총 페이지 수 구하는 함수 : (전체 글 수 / 페이지당 글 수) 올림 처리
+const pageCount = computed(() => Math.ceil(totalCount.value / params.value._limit));
+
+// 데이터 전체 조회 API 호출 함수 정의
+const fetchPosts = async () => {
+  try {
+    const { data, headers } = await getPosts(params.value);
+    posts.value = data;
+
+    // JSON Server가 응답 헤더에 담아준 전체 글 수 저장
+    totalCount.value = Number(headers['x-total-count']);
+
+  } catch (error) {
+		console.error(error);
+	}
+}
+
+// 페이지 이동 함수 정의
+const goPage = (page) => {
+  params.value._page = page;
+  fetchPosts();
+};
+
+// 이전 페이지 이동 함수 정의
+const goPrevPage = () => {
+  if (params.value._page > 1) {
+    goPage(params.value._page - 1);
+  }
+};
+
+// 다음 페이지 이동 함수 정의
+const goNextPage = () => {
+  if (params.value._page < pageCount.value) {
+    goPage(params.value._page + 1);
+  }
+};
+
+// 컴포넌트 초기 마운트 시 데이터 전체 조회 API 호출
+onMounted(() => {
+  fetchPosts();
+});
+```
+JSON Server 데이터 조회 후 총 페이지 수를 받아와서 페이징하는 Vue 코드 예시입니다.
+
+### 필터링 검색 파라미터
+```
+const params = ref({
+  필드명_like: '검색어',
+});
+```
+데이터 조회 시, 특정 필드에 검색어가 포함된 데이터만 필터링 가능합니다.  
+JSON Server에 요청되는 쿼리는 아래와 같습니다.
+```
+GET /posts?title_like=검색어
+```
+</script>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories#web-dev" class="page__taxonomy-item" rel="tag">Web 개발</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-06-16">2025-06-16</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">❮</a>
+    
+    
+      <a href="/web-dev/2025-06-12-1" class="pagination--pager" title="Vue 문법 정리 4 / Vue Router URL 컴포넌트 매핑 방법
+">❯</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">최신 글</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-06-12-1" rel="permalink">Vue 문법 정리 4 / Vue Router URL 컴포넌트 매핑 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-06-12T00:00:00+00:00">2025-06-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/it-tip/2025-06-11-1" rel="permalink">모니터 동적 밝기 조절 기능 비활성화 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-06-11T00:00:00+00:00">2025-06-11</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-30-1" rel="permalink">Vue 문법 정리 3 / 컴포넌트 정의 방법 및 사용법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-30T00:00:00+00:00">2025-05-30</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-29-1" rel="permalink">Bootstrap 개념 / Vue 프로젝트에서 Bootstrap 설치 및 사용 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-29T00:00:00+00:00">2025-05-29</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>
