@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>엘라스틱서치 검색 쿼리 종류 및 사용 예시 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>Vue 문법 정리 6 / Vue 환경변수 사용 방법 / 서버벌 env 분리 설정 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,8 +65,8 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="엘라스틱서치 검색 쿼리 종류 및 사용 예시">
-<meta property="og:url" content="https://0songha0.github.io/elk/2022-08-16-1">
+<meta property="og:title" content="Vue 문법 정리 6 / Vue 환경변수 사용 방법 / 서버벌 env 분리 설정">
+<meta property="og:url" content="https://0songha0.github.io/web-dev/2025-06-17-1">
 
 
   <meta property="og:description" content="송하영 개발 블로그">
@@ -77,11 +77,11 @@
 
 
 
-  <meta property="article:published_time" content="2022-08-16T00:00:00+00:00">
+  <meta property="article:published_time" content="2025-06-17T00:00:00+00:00">
 
 
 
-  <meta property="article:modified_time" content="2022-08-16T00:00:00+00:00">
+  <meta property="article:modified_time" content="2025-06-17T00:00:00+00:00">
 
 
 
@@ -90,7 +90,7 @@
   
 
 
-<link rel="canonical" href="https://0songha0.github.io/elk/2022-08-16-1">
+<link rel="canonical" href="https://0songha0.github.io/web-dev/2025-06-17-1">
 
 
 
@@ -425,15 +425,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="엘라스틱서치 검색 쿼리 종류 및 사용 예시">
+    <meta itemprop="headline" content="Vue 문법 정리 6 / Vue 환경변수 사용 방법 / 서버벌 env 분리 설정">
     <meta itemprop="description" content="">
-    <meta itemprop="datePublished" content="2022-08-16T00:00:00+00:00">
-    <meta itemprop="dateModified" content="2022-08-16T00:00:00+00:00">
+    <meta itemprop="datePublished" content="2025-06-17T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-06-17T00:00:00+00:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">엘라스틱서치 검색 쿼리 종류 및 사용 예시
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Vue 문법 정리 6 / Vue 환경변수 사용 방법 / 서버벌 env 분리 설정
 </h1>
           
 
@@ -442,7 +442,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2022-08-16T00:00:00+00:00">2022-08-16</time>
+        <time datetime="2025-06-17T00:00:00+00:00">2025-06-17</time>
       </span>
     
 
@@ -460,258 +460,97 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 엘라스틱서치 검색 쿼리 종류 및 사용 예시</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue 문법 정리 6 / Vue 환경변수 사용 방법 / 서버벌 env 분리 설정</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#엘라스틱서치-검색-방식">엘라스틱서치 검색 방식</a><ul><li><a href="#쿼리-컨텍스트">쿼리 컨텍스트</a></li><li><a href="#필터-컨텍스트">필터 컨텍스트</a></li></ul></li><li><a href="#엘라스틱서치-검색-쿼리-종류">엘라스틱서치 검색 쿼리 종류</a><ul><li><a href="#전문-쿼리">전문 쿼리</a></li><li><a href="#용어-수준-쿼리">용어 수준 쿼리</a></li><li><a href="#범위-쿼리">범위 쿼리</a></li><li><a href="#논리-쿼리-복합-쿼리--bool">논리 쿼리 (복합 쿼리 = bool)</a></li></ul></li><li><a href="#검색-쿼리-사용-예시">검색 쿼리 사용 예시</a><ul><li><a href="#도큐먼트-검색-쿼리">도큐먼트 검색 쿼리</a></li><li><a href="#도큐먼트-1개-조회-쿼리">도큐먼트 1개 조회 쿼리</a></li><li><a href="#100000개-이상-도큐먼트-검색-쿼리">100000개 이상 도큐먼트 검색 쿼리</a></li><li><a href="#조회-가능한-도큐먼트-수-늘리기">조회 가능한 도큐먼트 수 늘리기</a></li><li><a href="#검색어-완전-일치하는-도큐먼트-검색-쿼리">검색어 완전 일치하는 도큐먼트 검색 쿼리</a></li><li><a href="#다중-컬럼에서-검색어-부분-일치하는-도큐먼트-검색-쿼리">다중 컬럼에서 검색어 부분 일치하는 도큐먼트 검색 쿼리</a></li><li><a href="#다중-검색-조건으로-검색어-부분-일치하는-도큐먼트-검색-쿼리">다중 검색 조건으로 검색어 부분 일치하는 도큐먼트 검색 쿼리</a></li><li><a href="#검색어-사이에-and-operator-적용">검색어 사이에 AND operator 적용</a></li><li><a href="#검색-쿼리-결과-페이징">검색 쿼리 결과 페이징</a></li><li><a href="#검색-쿼리-결과-다중-정렬">검색 쿼리 결과 다중 정렬</a></li><li><a href="#키워드-필드-통계-검색-쿼리">키워드 필드 통계 검색 쿼리</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#vue-환경변수-설정">Vue 환경변수 설정</a><ul><li><a href="#서버별-env-파일-분리">서버별 env 파일 분리</a></li><li><a href="#env-파일-환경변수-작성-예시">env 파일 환경변수 작성 예시</a></li></ul></li><li><a href="#vue-환경변수-사용법">Vue 환경변수 사용법</a><ul><li><a href="#env-환경변수-import">env 환경변수 import</a></li><li><a href="#vite-기본-환경-변수-사용">Vite 기본 환경 변수 사용</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h2 id="엘라스틱서치-검색-방식">엘라스틱서치 검색 방식</h2>
+        <h2 id="vue-환경변수-설정">Vue 환경변수 설정</h2>
 
-<h3 id="쿼리-컨텍스트">쿼리 컨텍스트</h3>
-<p>유사도 스코어를 계산해 검색어와 연관성이 높은 도큐먼트들을 매칭해줍니다.</p>
+<h3 id="서버별-env-파일-분리">서버별 env 파일 분리</h3>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>.env</td>
+      <td>
+        모든 모드에서 공통으로 사용되는 env 파일입니다.<br />
+        특정 모드 env 파일이 적용되면, 기본 env 파일 값을 덮어쓰며 병합됩니다.
+      </td>
+    </tr>
+    <tr>
+      <td>.env.local</td>
+      <td>
+        로컬에서 사용되는 env 파일입니다.<br /><br />
+        *.local 파일은 git에서 제외됩니다.
+      </td>
+    </tr>
+    <tr>
+      <td>.env.[mode]</td>
+      <td>
+        실행 모드에 따라 적용되는 env 파일입니다.<br /><br />
+        mode 예시 : development, staging, production
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p>프로젝트 루트 경로에 실행 모드별 .env 파일들을 생성하고 환경변수를 작성하면 됩니다.</p>
 
-<h3 id="필터-컨텍스트">필터 컨텍스트</h3>
-<p>검색어를 참/거짓 결과로 제공할 뿐, 유사도 스코어는 0.0으로 나옵니다.<br />
-불필요한 스코어 계산을 줄여서 쿼리 속도와 검색 효율을 높일 수 있습니다.</p>
+<h3 id="env-파일-환경변수-작성-예시">env 파일 환경변수 작성 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>VITE_APP_API_URL=http://localhost:5000
+
+VITE_SOCKET_URL=http://127.0.0.1:8082
+</code></pre></div></div>
+<p>VITE에서 환경변수를 읽기 위해서는, 환경변수 앞에 프리픽스로 ‘VITE_‘가 붙어야 합니다.</p>
+
+<p><mark>env prefix 변경 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export default defineConfig({
+  plugins: [vue()],
+  envPrefix: '변경값',
+  resolve: {
+      alias: {
+        '@': fileURLToPath(new URL("./src", import.meta.url)),
+      }
+    }
+});
+</code></pre></div></div>
+<p>프로젝트 루트 경로 vite.config.js 파일에서 환경변수 프리픽스 값을 변경할 수 있습니다.<br />
+프리픽스를 없애면 모든 환경변수를 노출시켜서 보안상 위험할 수 있습니다.</p>
 
 <hr />
 
-<h2 id="엘라스틱서치-검색-쿼리-종류">엘라스틱서치 검색 쿼리 종류</h2>
+<h2 id="vue-환경변수-사용법">Vue 환경변수 사용법</h2>
 
-<h3 id="전문-쿼리">전문 쿼리</h3>
-<p>전문 검색에 사용하며, 인덱스 매핑 시 텍스트 타입으로 매핑 권장합니다.</p>
-
-<p><mark>전문 쿼리 종류</mark></p>
-<table class="table_2_left">
-  <tbody>
-    <tr>
-      <td>match</td>
-      <td>가장 기본이 되는 검색</td>
-    </tr>
-    <tr>
-      <td>match_phrase</td>
-      <td>용어의 순서까지 완전 일치하는 검색</td>
-    </tr>
-    <tr>
-      <td>multi_match</td>
-      <td>다중 필드에서 검색. 필드에 가중치 부여 가능</td>
-    </tr>
-    <tr>
-      <td>query string</td>
-      <td>연산자를 중심으로 텍스트를 분할하여 검색</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="용어-수준-쿼리">용어 수준 쿼리</h3>
-<p>대소문자까지 정확히 일치하는 용어(term) 검색에 사용하며, 인덱스 매핑 시 키워드 타입으로 매핑 권장합니다.</p>
-
-<p><mark>용어 수준 쿼리 종류</mark></p>
-<table class="table_2_left">
-  <tbody>
-    <tr>
-      <td>term</td>
-      <td>정확히 일치하는 단어를 검색</td>
-    </tr>
-    <tr>
-      <td>terms</td>
-      <td>여러 단어 중 하나라도 일치하면 검색</td>
-    </tr>
-    <tr>
-      <td>fuzzy</td>
-      <td>유사한 알파벳까지 검색 (한국어X)</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="범위-쿼리">범위 쿼리</h3>
-<p>날짜, 숫자 등 범위를 지정한 검색에 사용합니다.</p>
-
-<p><mark>종류</mark></p>
-<ul>
-  <li>range</li>
-</ul>
-
-<h3 id="논리-쿼리-복합-쿼리--bool">논리 쿼리 (복합 쿼리 = bool)</h3>
-<p>쿼리들을 조합해 사용하는 쿼리입니다.</p>
-
-<p><mark>논리 쿼리 종류</mark></p>
-<table class="table_2_left">
-  <tbody>
-    <tr>
-      <td>must</td>
-      <td>AND</td>
-    </tr>
-    <tr>
-      <td>must_not</td>
-      <td>거짓</td>
-    </tr>
-    <tr>
-      <td>should</td>
-      <td>OR</td>
-    </tr>
-    <tr>
-      <td>filter</td>
-      <td>예/아니오 (필터 컨텍스트로 동작 주의)</td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<h2 id="검색-쿼리-사용-예시">검색 쿼리 사용 예시</h2>
-
-<h3 id="도큐먼트-검색-쿼리">도큐먼트 검색 쿼리</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET 인덱스명/_search
+<h3 id="env-환경변수-import">env 환경변수 import</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const 변수명 = import.meta.env.환경변수명;
 </code></pre></div></div>
-<p>기본적으로 10000개 이하 도큐먼트만 조회 가능하고, 화면에는 10개만 표현됩니다.</p>
+<p>Vue 애플리케이션 빌드 도구가 Vite인 경우 사용할 수 있는 방법입니다.</p>
 
-<h3 id="도큐먼트-1개-조회-쿼리">도큐먼트 1개 조회 쿼리</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET 인덱스명/_doc/ID
+<h3 id="vite-기본-환경-변수-사용">Vite 기본 환경 변수 사용</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>console.log(import.meta.env.MODE); // 현재 모드 출력 (기본값 : 개발 development, 운영 production)
+console.log(import.meta.env.BASE_URL); // 프로젝트 베이스 URL
+console.log(import.meta.env.PROD); // 현재 운영 모드인 경우 true
+console.log(import.meta.env.DEV); // 현재 개발 모드인 경우 true
 </code></pre></div></div>
+<p>env 파일에 설정하지 않아도 사용할 수 있는 기본 환경 변수들입니다.</p>
 
-<h3 id="100000개-이상-도큐먼트-검색-쿼리">100000개 이상 도큐먼트 검색 쿼리</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET 인덱스명/_search
-{
-  "query" : {
-    "match_all": {}
-  },
-  "size": "100000",
-  "track_total_hits": true # 10000개 이상 검색
-}
-</code></pre></div></div>
+<p><mark>Vite 설정파일에서 env 모드 접근 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export default defineConfig(({ mode }) =&gt; {
+  const isDevelopment = mode === "development";
+  console.log('현재 개발 모드 : ', isDevelopment);
 
-<p><mark>"track_total_hits": true 없이 100000개 검색 시 에러</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>illegal_argument_exception
-
-Result window is too large, from + size must be less than or equal to: [10000] but was [100000].
-</code></pre></div></div>
-
-<h3 id="조회-가능한-도큐먼트-수-늘리기">조회 가능한 도큐먼트 수 늘리기</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PUT 인덱스명/_settings
-{
-  "max_result_window": 100000
-}
-</code></pre></div></div>
-
-<h3 id="검색어-완전-일치하는-도큐먼트-검색-쿼리">검색어 완전 일치하는 도큐먼트 검색 쿼리</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET 인덱스명/_search
-{
-  "_source" : ["필드명1", "필드명2"], # 검색 결과로 보여줄 컬럼
-  "query" : {
-    "bool": {
-      "must" : {
-        "match_phrase": { "필드명" : "검색어" }
-      }
-    }
-  },
-  "size": "20",
-  "track_total_hits": true
-}
-</code></pre></div></div>
-<p>유사도 점수가 높은 순으로 자동 정렬됩니다. size : 20이면 유사도 Top 20개의 데이터만 추출됩니다.</p>
-
-<p>match_phrase는 용어의 순서까지 완전 일치해야 나오고, 검색 시 많은 리소스를 사용하기 때문에 자제해야 합니다.<br />
-검색어와 부분 일치하는 도큐먼트 검색 시에는 match_phrase 대신 match 속성을 사용합니다.</p>
-
-<h3 id="다중-컬럼에서-검색어-부분-일치하는-도큐먼트-검색-쿼리">다중 컬럼에서 검색어 부분 일치하는 도큐먼트 검색 쿼리</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET 인덱스명/_search
-{
-  "query" : {
-    "multi_match": {
-      "query": "검색어",
-      "fields": [ "필드명1", "필드명2" ]
-    }
-  },
-  "size": "10000",
-  "track_total_hits": true
-}
-</code></pre></div></div>
-
-<h3 id="다중-검색-조건으로-검색어-부분-일치하는-도큐먼트-검색-쿼리">다중 검색 조건으로 검색어 부분 일치하는 도큐먼트 검색 쿼리</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET 인덱스명/_search
-{
-  "query": {
-    "bool" : {
-      "must": [
-        { "match": { "필드명1": "검색어1"} },
-        { "match": { "필드명2": "검색어2"} }
-      ]
-    }
-  },
-  "size": 100000,
-  "track_total_hits": true
-}
-</code></pre></div></div>
-<p>논리 쿼리도 이용하였습니다.</p>
-
-<h3 id="검색어-사이에-and-operator-적용">검색어 사이에 AND operator 적용</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST 인덱스명/_search
-{
-  "query": {
-    "match": {
-      "컬렴명": {
-        "query": "하늘 다람쥐",
-        "operator": "and" # 하늘, 다람쥐 모두 1개 이상 들어간 도큐먼트 검색
+  return {
+    plugins: { vue() },
+    resolve: {
+      alias: {
+        '@': fileURLToPath(new URL("./src", import.meta.url)),
       }
     }
   }
-}
+});
 </code></pre></div></div>
-<p>operator 파라미터를 생략할 경우 기본값은 or입니다.</p>
-
-<h3 id="검색-쿼리-결과-페이징">검색 쿼리 결과 페이징</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET 인덱스명/_search
-{
-  "query" : {
-    "match": {
-      "필드명": "검색어"
-    }
-  },
-  "from": 0, # 0번째 페이지
-  "size": 5 # 한 페이지당 5개
-}
-</code></pre></div></div>
-
-<h3 id="검색-쿼리-결과-다중-정렬">검색 쿼리 결과 다중 정렬</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST 인덱스명/_search
-{
-   "query": {
-     "match": {
-       "필드명" : "검색어"
-     }
-   },
-   "sort" :{
-     "필드명1": {
-        "order": "asc" # 오름차순 정렬
-      },
-     "_score": {
-        "order": "desc" # 내림차순 정렬 (점수 높은 순)
-      }
-   }
-}
-</code></pre></div></div>
-
-<h3 id="키워드-필드-통계-검색-쿼리">키워드 필드 통계 검색 쿼리</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET 인덱스명/_search
-{
-  "size": 0,
-  "query": {
-    "match": {
-      "검색필드명": "검색어"
-    }
-  },
-  "aggs":{
-    "count":{
-      "terms": {
-        "field": "통계필드명.keyword" # 기본적으로 text 필드는 통계를 낼 수 없음
-      }
-    }
-  }
-}
-</code></pre></div></div>
+<p>프로젝트 루트 경로 vite.config.js 파일에서 현재 실행 모드를 확인하고 분기처리 할 수 있습니다.</p>
 
         
       </section>
@@ -732,14 +571,14 @@ Result window is too large, from + size must be less than or equal to: [10000] b
     
       
       
-      <a href="/categories#elk" class="page__taxonomy-item" rel="tag">엘라스틱서치</a>
+      <a href="/categories#web-dev" class="page__taxonomy-item" rel="tag">Web 개발</a>
     
     </span>
   </p>
 
 
         
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-08-16">2022-08-16</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-06-17">2025-06-17</time></p>
 
 
       </footer>
@@ -749,11 +588,10 @@ Result window is too large, from + size must be less than or equal to: [10000] b
       
   <nav class="pagination">
     
-      <a href="/op/2022-08-16-1" class="pagination--pager" title="리눅스 파일 및 폴더 관련 명령어
-">❮</a>
+      <a href="#" class="pagination--pager disabled">❮</a>
     
     
-      <a href="/elk/2022-08-10-1" class="pagination--pager" title="엘라스틱서치 Query String, Query DSL 문법 정리
+      <a href="/web-dev/2025-06-16-1" class="pagination--pager" title="Vue 문법 정리 5 / Vue HTTP API 통신 방법 / json-server, axios 사용하여 게시판 구현
 ">❯</a>
     
   </nav>
@@ -769,42 +607,6 @@ Result window is too large, from + size must be less than or equal to: [10000] b
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-06-17-1" rel="permalink">Vue 문법 정리 6 / Vue 환경변수 사용 방법 / 서버벌 env 분리 설정
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-06-17T00:00:00+00:00">2025-06-17</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
         
           
 
@@ -899,6 +701,42 @@ Result window is too large, from + size must be less than or equal to: [10000] b
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-06-11T00:00:00+00:00">2025-06-11</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-05-30-1" rel="permalink">Vue 문법 정리 3 / 컴포넌트 정의 방법 및 사용법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-30T00:00:00+00:00">2025-05-30</time>
       </span>
     
 

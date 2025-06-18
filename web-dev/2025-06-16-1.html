@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 217</span>
+      <span class="nav__total">🌴 Total Posts: 218</span>
     </li> -->
     
     
@@ -469,6 +469,8 @@
         
         <h2 id="테스트용-json-api-서버-설치">테스트용 JSON API 서버 설치</h2>
 
+<p>API 호출 테스트를 위한 가상 API 서버를 구축합니다.</p>
+
 <h3 id="json-server-라이브러리-설치">json-server 라이브러리 설치</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install -D json-server@0.17.4
 </code></pre></div></div>
@@ -538,6 +540,39 @@ export function deletePost(id) {
 }
 </code></pre></div></div>
 <p>src/api 폴더 내에 js 파일 생성 후 위와 같이 작성합니다.</p>
+
+<p><mark>axios 모듈화 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import axios from 'axios';
+
+function create(baseURL, options) {
+  const instance = axios.create({
+    baseURL: baseURL,
+    ...options
+  });
+  또는
+  const instance = axios.create(Object.assign({ baseURL }, options));
+  // { baseURL } 객체 = { baseURL: baseURL } 객체 (ES6 단축 속성명 문법)
+
+  return instance;
+}
+
+export const posts = create('http://localhost:5000/posts');
+
+export const users = create('http://localhost:5000/users');
+</code></pre></div></div>
+<p>baseURL, 파라미터 옵션을 파라미터로 받아서 axios 인스턴스를 생성하는 JS 모듈을 생성합니다.<br />
+해당 모듈은 아래와 같이 import 후 사용할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 현재 경로의 index.js 모듈 파일 import
+import { posts } from '.';
+
+export function getPosts(params) {
+  return posts.get('/', { params });
+}
+
+export function getPostById(id) {
+  return posts.get(`/${id}`); // id type이 Number인 경우, String으로 변환
+}
+</code></pre></div></div>
 
 <h3 id="데이터-전체-조회-api-함수-호출-vue-코드">데이터 전체 조회 API 함수 호출 Vue 코드</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script setup&gt;
@@ -795,6 +830,8 @@ onMounted(() =&gt; {
       &lt;li v-for="page in pageCount" :key="page" class="page-item" :class="{ active: params._page === page }"&gt;
         &lt;a class="page-link" href="#" @click.prevent="goPage(page)"&gt;## 테스트용 JSON API 서버 설치
 
+API 호출 테스트를 위한 가상 API 서버를 구축합니다.
+
 ### json-server 라이브러리 설치
 </code></pre></div></div>
 <p>npm install -D json-server@0.17.4</p>
@@ -865,6 +902,39 @@ export function getPosts(params) {
 }</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src/api 폴더 내에 js 파일 생성 후 위와 같이 작성합니다.
 
+&lt;mark&gt;axios 모듈화 방법&lt;/mark&gt;
+</code></pre></div></div>
+<p>import axios from ‘axios’;</p>
+
+<p>function create(baseURL, options) {
+  const instance = axios.create({
+    baseURL: baseURL,
+    …options
+  });
+  또는
+  const instance = axios.create(Object.assign({ baseURL }, options));
+  // { baseURL } 객체 = { baseURL: baseURL } 객체 (ES6 단축 속성명 문법)</p>
+
+<p>return instance;
+}</p>
+
+<p>export const posts = create(‘http://localhost:5000/posts’);</p>
+
+<p>export const users = create(‘http://localhost:5000/users’);</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>baseURL, 파라미터 옵션을 파라미터로 받아서 axios 인스턴스를 생성하는 JS 모듈을 생성합니다.  
+해당 모듈은 아래와 같이 import 후 사용할 수 있습니다.
+</code></pre></div></div>
+<p>// 현재 경로의 index.js 모듈 파일 import
+import { posts } from ‘.’;</p>
+
+<p>export function getPosts(params) {
+  return posts.get(‘/’, { params });
+}</p>
+
+<p>export function getPostById(id) {
+  return posts.get(<code class="language-plaintext highlighter-rouge">/${id}</code>); // id type이 Number인 경우, String으로 변환
+}</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 ### 데이터 전체 조회 API 함수 호출 Vue 코드
 </code></pre></div></div>
 <script setup="">
@@ -1329,7 +1399,8 @@ GET /posts?title_like=검색어
       
   <nav class="pagination">
     
-      <a href="#" class="pagination--pager disabled">❮</a>
+      <a href="/web-dev/2025-06-17-1" class="pagination--pager" title="Vue 문법 정리 6 / Vue 환경변수 사용 방법 / 서버벌 env 분리 설정
+">❮</a>
     
     
       <a href="/web-dev/2025-06-12-1" class="pagination--pager" title="Vue 문법 정리 4 / Vue Router URL 컴포넌트 매핑 방법
@@ -1348,6 +1419,42 @@ GET /posts?title_like=검색어
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-06-17-1" rel="permalink">Vue 문법 정리 6 / Vue 환경변수 사용 방법 / 서버벌 env 분리 설정
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-06-17T00:00:00+00:00">2025-06-17</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
         
           
 
@@ -1442,42 +1549,6 @@ GET /posts?title_like=검색어
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-05-30T00:00:00+00:00">2025-05-30</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-05-29-1" rel="permalink">Bootstrap 개념 / Vue 프로젝트에서 Bootstrap 설치 및 사용 방법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-05-29T00:00:00+00:00">2025-05-29</time>
       </span>
     
 

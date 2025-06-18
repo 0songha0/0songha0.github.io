@@ -1296,8 +1296,14 @@ var store = [{
         "teaser": null
       },{
         "title": "Vue 문법 정리 5 / Vue HTTP API 통신 방법 / json-server, axios 사용하여 게시판 구현",
-        "excerpt":"테스트용 JSON API 서버 설치 json-server 라이브러리 설치 npm install -D json-server@0.17.4 -D 옵션은 개발용 의존성으로 설치하며, devDependencies에 추가합니다. -G 옵션은 전역으로 설치되어 모든 프로젝트에서 CLI 명령어로 사용할 수 있습니다. JSON Server 실행 npx json-server --watch db.json --port 5000 프로젝트 루트 경로에 db.json 자동 생성 후, 5000번 포트로 JSON 서버가...","categories": ["web-dev"],
+        "excerpt":"테스트용 JSON API 서버 설치 API 호출 테스트를 위한 가상 API 서버를 구축합니다. json-server 라이브러리 설치 npm install -D json-server@0.17.4 -D 옵션은 개발용 의존성으로 설치하며, devDependencies에 추가합니다. -G 옵션은 전역으로 설치되어 모든 프로젝트에서 CLI 명령어로 사용할 수 있습니다. JSON Server 실행 npx json-server --watch db.json --port 5000 프로젝트 루트 경로에...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-06-16-1",
+        "teaser": null
+      },{
+        "title": "Vue 문법 정리 6 / Vue 환경변수 사용 방법 / 서버벌 env 분리 설정",
+        "excerpt":"Vue 환경변수 설정 서버별 env 파일 분리 .env 모든 모드에서 공통으로 사용되는 env 파일입니다. 특정 모드 env 파일이 적용되면, 기본 env 파일 값을 덮어쓰며 병합됩니다. .env.local 로컬에서 사용되는 env 파일입니다. *.local 파일은 git에서 제외됩니다. .env.[mode] 실행 모드에 따라 적용되는 env 파일입니다. mode 예시 : development, staging, production 프로젝트 루트 경로에...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-06-17-1",
         "teaser": null
       }]
