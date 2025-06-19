@@ -713,25 +713,31 @@ data가 변경되면 바인딩 된 DOM도 변경되고, 사용자 입력으로 D
 <p><mark>컴포넌트 props 여러개 양방향 바인딩 방법</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;하위컴포넌트명 v-model:props명1="data변수명1" v-model:props명2="data변수명2"&gt;&lt;/하위컴포넌트명&gt;
 </code></pre></div></div>
-<p>v-model 전달인자로 props명을 지정할 수 있습니다.<br />
-하위 컴포넌트에서는 아래와 같이 받아서 사용할 수 있습니다.</p>
+<p>양방향 바인딩 v-model 전달인자로 props명을 지정할 수 있습니다.<br />
+하위 컴포넌트에서는 아래와 같이 받아서 양방향 바인딩을 구현할 수 있습니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  // input에 값 입력 시 자동 emit 이벤트 발생
   &lt;input :value="props명1" @input="$emit('update:props명1', $event.target.value)" type="text" id="props명1" /&gt;
   &lt;input :value="props명2" @input="$emit('update:props명2', $event.target.value)" type="text" id="props명2" /&gt;
 &lt;/template&gt;
 &lt;script setup&gt;
 defineProps({
-  props명1: String,
-  props명2: String
+  props명1: {
+    type: String,
+    required: true // 필수값 처리
+  },
+  props명2: String // 축약형
 });
 
+// 부모컴포넌트에서 받은 props 변경 emit 이벤트 정의
 const emit = defineEmits(['update:props명1', 'update:props명2']);
 
-// 스크립트에서도 emit 이벤트 발생 가능
+// 스크립트에서도 수동 emit 이벤트 발생 가능
 const updateProps명1 = () =&gt; {
-  emit('update:props명1', 변경값);
+  emit('update:props명1', 변경값); // 기존 값은 props.props명1 로 접근 가능
 };
 </code></pre></div></div>
+<p>v-model 양방향 바인딩을 풀어서 v-bind(:), emit으로 구현할 수 있습니다.</p>
 
 <h3 id="v-on-">v-on (@)</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;button v-on:click="이벤트함수명"&gt;Click&lt;/button&gt;
@@ -959,9 +965,9 @@ v-on:click 등 마우스 이벤트 수신 시, 특정 버튼 입력 시에만 �
 ```
 // 부모 컴포넌트 예시
 <template>
-  <자식컴포넌트명>
+  <자식컴포넌트명> // 자식컴포넌트 DOM 자체에도 v-slot 지정 가능합니다.
     <template v-slot:header="">헤더 콘텐츠</template>
-    <template v-slot:default="">본문 콘텐츠</template>
+    <template v-slot:default="" 또는="" v-slot="">본문 콘텐츠</template>
     <template v-slot:footer="">푸터 콘텐츠</template>
     또는
     &lt;template #header&gt;헤더 콘텐츠&lt;/template&gt;
@@ -1012,7 +1018,7 @@ v-slot 디렉티브를 통해 특정 콘텐츠가 들어갈 slot 이름을 지�
   &lt;slot name="슬롯명" :data변수명="data변수명" 변수명="텍스트"&gt;&lt;/slot&gt;
 </template>
 ```
-자식 컴포넌트 변수를 부모 컴포넌트에서 사용할 수 있도록 슬롯 콘텐츠에 전달합니다.  
+자식 컴포넌트 변수를 부모 컴포넌트에서 사용하도록 슬롯 콘텐츠에 전달하는 Scoped Slots 예시입니다.  
 객체로 받아도 되고, 위와 같이 구조분해 할당으로 받아도 됩니다.
 
 <mark>부모 슬롯 미정의 시 미렌더링 처리</mark>

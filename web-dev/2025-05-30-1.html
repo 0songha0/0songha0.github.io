@@ -616,6 +616,7 @@ props 선언 시 카멜케이스, 자식 컴포넌트로 전달 시 케밥케이
 
 <p><mark>props 전달하는 부모 컴포넌트 예시</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  // 텍스트는 그대로 전달, 변수는 동적 바인딩으로 전달
   &lt;자식컴포넌트명 props명1="텍스트" :props명2="data변수명"&gt;&lt;/자식컴포넌트명&gt;
   
   &lt;div v-for="post in data객체배열명" :key="post.id"&gt;
@@ -624,7 +625,8 @@ props 선언 시 카멜케이스, 자식 컴포넌트로 전달 시 케밥케이
  
   &lt;자식컴포넌트명 v-model="data변수명"&gt;&lt;/자식컴포넌트명&gt;
   또는
-  &lt;자식컴포넌트명 :model-value="data변수명" @update:model-value="함수명(자식컴포넌트emits파라미터명)"&gt;&lt;/자식컴포넌트명&gt;
+  &lt;자식컴포넌트명 :model-value="data변수명" @update:model-value="함수명(emits파라미터명)"&gt;&lt;/자식컴포넌트명&gt;
+  // @update:model-value="emits파라미터명 =&gt; { 처리 }" 형태로도 이벤트를 받을 수 있습니다.
   // 자식컴포넌트에서 props는 'modelValue', emits 이벤트명은 'update:modelValue'로 받을 수 있습니다.
 
   &lt;자식컴포넌트명 v-model:props명="data변수명"&gt;&lt;/자식컴포넌트명&gt;
@@ -756,7 +758,7 @@ function 함수명(파라미터명1, 파라미터명2) {
 <p>자식 컴포넌트 emit 이벤트명은 부모 컴포넌트에서 케밥 케이스로 변환해서 받는 것을 권장합니다.</p>
 
 <h3 id="non-props-속성-fallthrough-속성">Non-Props 속성 (fallthrough 속성)</h3>
-<p>부모 컴포넌트에서 자식 컴포넌트에 전달하였으나, 자식 컴포넌트가 선언하지 않은 속성 또는 이벤트입니다.<br />
+<p>부모 컴포넌트에서 자식 컴포넌트에 전달하였으나, 자식 컴포넌트에서 선언하지 않은 속성 또는 이벤트입니다.<br />
 Non-Props 속성들은 자식 template의 최상위 요소에 자동 상속됩니다.</p>
 
 <p><mark>Non-Props 속성 예시</mark></p>
@@ -898,7 +900,7 @@ const props = defineProps({
     default: '기본값'
   },
   키: {
-    type: String,
+    type: Array,
     required: true,
   },
   키: {
