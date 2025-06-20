@@ -1308,7 +1308,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Vue 문법 정리 7 / Vue 내장 컴포넌트 Transition, Teleport 사용법",
-        "excerpt":"Transition 컴포넌트 DOM 또는 컴포넌트가 삽입/제거될 때 애니메이션을 적용하는 컴포넌트입니다. Transition 컴포넌트 클래스 종류 v-enter-from 요소가 나타나기 시작할 때 적용되는 클래스 v-enter-active 요소가 나타나는 동안 적용되는 트랜지션 (애니메이션) 클래스 v-enter-to 요소가 나타난 후 적용되는 클래스 v-leave-from 요소가 사라지기 시작할 때 적용되는 클래스 v-leave-active 요소가 사라지는 동안 적용되는 트랜지션 (애니메이션) 클래스...","categories": ["web-dev"],
+        "excerpt":"Transition 컴포넌트 DOM 또는 컴포넌트가 추가/제거될 때 애니메이션을 적용하는 트랜지션 컴포넌트입니다. v-if, v-show, 동적 컴포넌트 등 조건부 렌더링되는 단일 자식 요소에 효과가 적용됩니다. Transition 컴포넌트 클래스 종류 v-enter-from 요소가 나타나기 시작할 때 적용되는 클래스 v-enter-active 요소가 나타나는 동안 적용되는 트랜지션 (애니메이션) 클래스 v-enter-to 요소가 나타난 후 적용되는 클래스 v-leave-from 요소가...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-06-19-1",
         "teaser": null

@@ -462,13 +462,14 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue 문법 정리 7 / Vue 내장 컴포넌트 Transition, Teleport 사용법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#transition-컴포넌트">Transition 컴포넌트</a><ul><li><a href="#transition-컴포넌트-클래스-종류">Transition 컴포넌트 클래스 종류</a></li><li><a href="#부드러운-transition-효과-예시">부드러운 Transition 효과 예시</a></li><li><a href="#named-transitions-예시">Named Transitions 예시</a></li></ul></li><li><a href="#transitiongroup-컴포넌트">TransitionGroup 컴포넌트</a><ul><li><a href="#transitiongroup-컴포넌트-사용-예시">TransitionGroup 컴포넌트 사용 예시</a></li></ul></li><li><a href="#teleport-컴포넌트">Teleport 컴포넌트</a></li></ul>
+              <ul class="toc__menu"><li><a href="#transition-컴포넌트">Transition 컴포넌트</a><ul><li><a href="#transition-컴포넌트-클래스-종류">Transition 컴포넌트 클래스 종류</a></li><li><a href="#부드러운-transition-효과">부드러운 Transition 효과</a></li><li><a href="#named-transitions-예시">Named Transitions 예시</a></li></ul></li><li><a href="#transitiongroup-컴포넌트">TransitionGroup 컴포넌트</a><ul><li><a href="#transitiongroup-컴포넌트-사용">TransitionGroup 컴포넌트 사용</a></li></ul></li><li><a href="#teleport-컴포넌트">Teleport 컴포넌트</a><ul><li><a href="#vue-모달-팝업-텔레포트">Vue 모달 팝업 텔레포트</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
         <h2 id="transition-컴포넌트">Transition 컴포넌트</h2>
-<p>DOM 또는 컴포넌트가 삽입/제거될 때 애니메이션을 적용하는 컴포넌트입니다.</p>
+<p>DOM 또는 컴포넌트가 추가/제거될 때 애니메이션을 적용하는 트랜지션 컴포넌트입니다.<br />
+v-if, v-show, 동적 컴포넌트 등 조건부 렌더링되는 단일 자식 요소에 효과가 적용됩니다.</p>
 
 <h3 id="transition-컴포넌트-클래스-종류">Transition 컴포넌트 클래스 종류</h3>
 <table class="table_2_left">
@@ -500,7 +501,7 @@
   </tbody>
 </table>
 
-<h3 id="부드러운-transition-효과-예시">부드러운 Transition 효과 예시</h3>
+<h3 id="부드러운-transition-효과">부드러운 Transition 효과</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
   &lt;Transition&gt;
     &lt;div v-if="isShow"&gt;애니메이션 효과 적용 테스트&lt;/div&gt;
@@ -571,9 +572,9 @@ const isShow = ref(true);
 <hr />
 
 <h2 id="transitiongroup-컴포넌트">TransitionGroup 컴포넌트</h2>
-<p>리스트 항목들이 삽입/제거/순서 변경될 때 각각 애니메이션을 적용해주는 컴포넌트입니다.</p>
+<p>리스트 등 여러 자식 요소가 추가/제거/순서 변경될 때 각각 애니메이션을 적용해주는 컴포넌트입니다.</p>
 
-<h3 id="transitiongroup-컴포넌트-사용-예시">TransitionGroup 컴포넌트 사용 예시</h3>
+<h3 id="transitiongroup-컴포넌트-사용">TransitionGroup 컴포넌트 사용</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
 &lt;TransitionGroup name="애니메이션명"&gt;
   &lt;div v-for="({ message, type }, index) in items" :key="index" class="alert" :class="alertStyle(type)"&gt;
@@ -608,7 +609,7 @@ const alertStyle = type =&gt; (type === 'error' ? 'alert-danger' : 'alert-primar
 </code></pre></div></div>
 <p>TransitionGroup 컴포넌트 내부 요소들에 각각 애니메이션을 적용합니다.</p>
 
-<p><mark>alert Array 추가 및 삭제 예시</mark></p>
+<p><mark>alert Array 추가 및 삭제</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
   &lt;하위컴포넌트 :items="alerts"&gt;&lt;/하위컴포넌트&gt;
 &lt;/template&gt;
@@ -632,7 +633,20 @@ const vAlert = (message, type = 'error') =&gt; {
 <hr />
 
 <h2 id="teleport-컴포넌트">Teleport 컴포넌트</h2>
-<p>현재 컴포넌트가 아닌 다른 위치에 요소를 렌더링할 수 있는 컴포넌트입니다.</p>
+<p>현재 컴포넌트가 아닌 다른 위치에 요소를 렌더링할 수 있는 텔레포트 컴포넌트입니다.<br />
+모달, 툴팁, 드롭다운 등 부모컴포넌트 외부에 렌더링되어야 하는 UI 요소를 만들 때 사용합니다.</p>
+
+<h3 id="vue-모달-팝업-텔레포트">Vue 모달 팝업 텔레포트</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 모달 호출하는 자식컴포넌트 예시
+&lt;Teleport to="#modal"&gt;
+  &lt;모달컴포넌트명 v-model="show" :data변수명="data변수명"&gt;
+  &lt;/모달컴포넌트명&gt;
+&lt;/Teleport&gt;
+
+// index.html 또는 부모컴포넌트 예시
+&lt;div id="modal"&gt;&lt;/div&gt;
+</code></pre></div></div>
+<p>모달이 특정 컴포넌트 내부에 속해서 CSS가 깨질 때, 상위 DOM 위치에 렌더링하여 해결할 수 있습니다.</p>
 
         
       </section>
