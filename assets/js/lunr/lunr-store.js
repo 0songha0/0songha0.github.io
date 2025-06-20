@@ -1312,4 +1312,10 @@ var store = [{
         "tags": [],
         "url": "/web-dev/2025-06-19-1",
         "teaser": null
+      },{
+        "title": "Vue 문법 정리 7 / Vue 상태관리 라이브러리 Pinia 사용밥",
+        "excerpt":"Pinia 용어 정리 Pinia란? Vue 2에서는 Vuex, Vue3에서는 Pinia가 공식 상태 관리 라이브러리입니다. 앱 전역에서 사용되는 상태 데이터를 중앙저장소 Pinia 스토어에서 관리할 수 있습니다. state 앱 전역에서 공유되는 반응형 상태 데이터입니다. getters state로 계산한 값을 반환하는 전역 computed 속성입니다. 읽기 전용이며, 캐싱 기능을 갑고 있습니다. actions state를 변경하거나 비동기 작업을...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-06-20-1",
+        "teaser": null
       }]
