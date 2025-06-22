@@ -1259,13 +1259,13 @@ var store = [{
         "url": "/web-dev/2025-05-22-1",
         "teaser": null
       },{
-        "title": "Vue 문법 정리 1 / Vue 3 템플릿 문법 (인터폴레이션, 디렉티브)",
+        "title": "Vue 3 템플릿 문법 정리 (인터폴레이션, 디렉티브)",
         "excerpt":"인터폴레이션 (Interpolation) 템플릿에서 데이터를 HTML이 아닌 일반 텍스트로 간단히 출력할 때 사용합니다. Vue 데이터 바인딩 문법 중 하나이며, 데이터가 변경되면 템플릿이 다시 렌더링됩니다. {{ data변수명 }} 아래와 같이, 간단한 JS 표현식도 사용 가능합니다. &lt;p&gt;{{ count + 1 }}&lt;/p&gt; &lt;p&gt;{{ isTrue ? '참' : '거짓' }}&lt;/p&gt; &lt;p&gt;{{ data변수명.split('').reverse().join('') }}&lt;/p&gt; 디렉티브 (Directive)...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-05-26-1",
         "teaser": null
       },{
-        "title": "Vue 문법 정리 2 / Vue 3 Composition API 종류 및 사용법",
+        "title": "Vue 3 Composition API 종류 및 사용법",
         "excerpt":"setup() 컴포넌트 인스턴스가 생성되기 전 호출되는 함수이며, Composition API의 진입점입니다. setup 함수 사용 예시 &lt;template&gt; &lt;p&gt; {{ counter }} &lt;/p&gt; &lt;button @click=\"increment\"&gt;click!&lt;/button&gt; &lt;/template&gt; &lt;script&gt; import { ref } from 'vue'; export default { setup(props, context) { const counter = ref(0); // 초기값 0 세팅 const increment = () =&gt; {...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-05-28-1",
@@ -1277,7 +1277,7 @@ var store = [{
         "url": "/web-dev/2025-05-29-1",
         "teaser": null
       },{
-        "title": "Vue 문법 정리 3 / 컴포넌트 정의 방법 및 사용법",
+        "title": "Vue 컴포넌트 정의 방법 및 사용법",
         "excerpt":"Vue 컴포넌트 정의 방법 문자열 템플릿 방식 // HTML 내부 script에 컴포넌트 정의 시 const App = { template: ` // HTML 코드 작성 ` } // js 파일로 컴포넌트 정의 시 export default { template: ` // HTML 코드 작성 ` } HTML에서 Vue 컴포넌트를 정의하고, script에서 벡틱(`) 등으로...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-05-30-1",
@@ -1289,31 +1289,31 @@ var store = [{
         "url": "/it-tip/2025-06-11-1",
         "teaser": null
       },{
-        "title": "Vue 문법 정리 4 / Vue Router URL 컴포넌트 매핑 방법",
+        "title": "Vue Router URL 컴포넌트 매핑 방법",
         "excerpt":"Vue 라우터란? URL 경로에 따라 화면에 렌더링할 컴포넌트를 매핑할 수 있는 라우팅 라이브러리입니다. Vue 프로젝트 라우터 적용 방법 Vue 라우터 라이브러리 설치 npm install vue-router 프로젝트 경로에서 위 명령어를 통해 Vue Router를 설치할 수 있습니다. 라우트 설정 (URL, 페이지 컴포넌트 매핑) import { createRouter, createWebHistory } from 'vue-router'; import View컴포넌트명1...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-06-12-1",
         "teaser": null
       },{
-        "title": "Vue 문법 정리 5 / Vue HTTP API 통신 방법 / json-server, axios 사용하여 게시판 구현",
+        "title": "Vue HTTP API 통신 방법 / json-server, axios 사용하여 게시판 구현",
         "excerpt":"테스트용 JSON API 서버 설치 API 호출 테스트를 위한 가상 API 서버를 구축합니다. json-server 라이브러리 설치 npm install -D json-server@0.17.4 -D 옵션은 개발용 의존성으로 설치하며, devDependencies에 추가합니다. -G 옵션은 전역으로 설치되어 모든 프로젝트에서 CLI 명령어로 사용할 수 있습니다. JSON Server 실행 npx json-server --watch db.json --port 5000 프로젝트 루트 경로에...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-06-16-1",
         "teaser": null
       },{
-        "title": "Vue 문법 정리 6 / Vue 환경변수 사용 방법 / 서버벌 env 분리 설정",
+        "title": "Vue 환경변수 사용 방법 / 서버벌 env 분리 설정",
         "excerpt":"Vue 환경변수 설정 서버별 env 파일 분리 .env 모든 모드에서 공통으로 사용되는 env 파일입니다. 특정 모드 env 파일이 적용되면, 기본 env 파일 값을 덮어쓰며 병합됩니다. .env.local 로컬에서 사용되는 env 파일입니다. *.local 파일은 git에서 제외됩니다. .env.[mode] 실행 모드에 따라 적용되는 env 파일입니다. mode 예시 : development, staging, production 프로젝트 루트 경로에...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-06-17-1",
         "teaser": null
       },{
-        "title": "Vue 문법 정리 7 / Vue 내장 컴포넌트 Transition, Teleport 사용법",
+        "title": "Vue 내장 컴포넌트 Transition, Teleport 사용법",
         "excerpt":"Transition 컴포넌트 DOM 또는 컴포넌트가 추가/제거될 때 애니메이션을 적용하는 트랜지션 컴포넌트입니다. v-if, v-show, 동적 컴포넌트 등 조건부 렌더링되는 단일 자식 요소에 효과가 적용됩니다. Transition 컴포넌트 클래스 종류 v-enter-from 요소가 나타나기 시작할 때 적용되는 클래스 v-enter-active 요소가 나타나는 동안 적용되는 트랜지션 (애니메이션) 클래스 v-enter-to 요소가 나타난 후 적용되는 클래스 v-leave-from 요소가...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-06-19-1",
         "teaser": null
       },{
-        "title": "Vue 문법 정리 7 / Vue 상태관리 라이브러리 Pinia 사용밥",
+        "title": "Vue 상태관리 라이브러리 Pinia 사용밥",
         "excerpt":"Pinia 용어 정리 Pinia란? Vue 2에서는 Vuex, Vue3에서는 Pinia가 공식 상태 관리 라이브러리입니다. 앱 전역에서 사용되는 상태 데이터를 중앙저장소 Pinia 스토어에서 관리할 수 있습니다. state 앱 전역에서 공유되는 반응형 상태 데이터입니다. getters state로 계산한 값을 반환하는 전역 computed 속성입니다. 읽기 전용이며, 캐싱 기능을 갑고 있습니다. actions state를 변경하거나 비동기 작업을...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-06-20-1",
