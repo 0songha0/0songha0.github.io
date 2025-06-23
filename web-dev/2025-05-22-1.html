@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 221</span>
+      <span class="nav__total">🌴 Total Posts: 222</span>
     </li> -->
     
     
@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue 개념 및 구조 / Vue.js 설치 및 실행 방법 / Vue 디버깅 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#vuejs">Vue.js</a><ul><li><a href="#컴포넌트란">컴포넌트란?</a></li><li><a href="#vue-api-종류">Vue API 종류</a></li><li><a href="#vue-프로젝트-기본-구조">Vue 프로젝트 기본 구조</a></li></ul></li><li><a href="#vue-설치-방법">Vue 설치 방법</a><ul><li><a href="#cdn으로-vue-설치">CDN으로 Vue 설치</a></li><li><a href="#npm으로-vue-설치-수동-세팅">npm으로 Vue 설치 (수동 세팅)</a></li><li><a href="#vite-cli로-vue-설치-자동-세팅">vite CLI로 Vue 설치 (자동 세팅)</a></li></ul></li><li><a href="#vue-프로젝트-실행-방법">Vue 프로젝트 실행 방법</a><ul><li><a href="#vue-실행-스크립트-추가">Vue 실행 스크립트 추가</a></li><li><a href="#vue-프로젝트-실행">Vue 프로젝트 실행</a></li></ul></li><li><a href="#vue-프로젝트-빌드-방법">Vue 프로젝트 빌드 방법</a><ul><li><a href="#vue-빌드-스크립트-추가">Vue 빌드 스크립트 추가</a></li><li><a href="#vue-프로젝트-빌드">Vue 프로젝트 빌드</a></li></ul></li><li><a href="#크롬-vue-devtools-디버깅-방법">크롬 Vue Devtools 디버깅 방법</a><ul><li><a href="#vue-devtools-확장프로그램-추가">vue Devtools 확장프로그램 추가</a></li><li><a href="#vue-변수-확인">vue 변수 확인</a></li><li><a href="#렌더링-영역-표시">렌더링 영역 표시</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#vuejs">Vue.js</a><ul><li><a href="#컴포넌트란">컴포넌트란?</a></li><li><a href="#vue-api-종류">Vue API 종류</a></li><li><a href="#vue-프로젝트-기본-구조">Vue 프로젝트 기본 구조</a></li></ul></li><li><a href="#vue-설치-방법">Vue 설치 방법</a><ul><li><a href="#cdn으로-vue-설치">CDN으로 Vue 설치</a></li><li><a href="#npm으로-vue-설치-수동-세팅">npm으로 Vue 설치 (수동 세팅)</a></li><li><a href="#vite-cli로-vue-설치-자동-세팅">vite CLI로 Vue 설치 (자동 세팅)</a></li></ul></li><li><a href="#vue-프로젝트-실행-방법">Vue 프로젝트 실행 방법</a><ul><li><a href="#vue-실행-스크립트-추가">Vue 실행 스크립트 추가</a></li><li><a href="#vue-프로젝트-실행">Vue 프로젝트 실행</a></li></ul></li><li><a href="#vue-프로젝트-빌드-방법">Vue 프로젝트 빌드 방법</a><ul><li><a href="#vue-빌드-스크립트-추가">Vue 빌드 스크립트 추가</a></li><li><a href="#vue-프로젝트-빌드">Vue 프로젝트 빌드</a></li></ul></li><li><a href="#크롬-vue-devtools-디버깅-방법">크롬 Vue Devtools 디버깅 방법</a><ul><li><a href="#vue-devtools-확장프로그램-추가">vue Devtools 확장프로그램 추가</a></li><li><a href="#vue-컴포넌트-구조-및-상태-확인">Vue 컴포넌트 구조 및 상태 확인</a></li><li><a href="#전체-라우터-정보-확인">전체 라우터 정보 확인</a></li><li><a href="#pinia-스토어-상태-확인">Pinia 스토어 상태 확인</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -718,12 +718,17 @@ Nginx, Apache, Netlify, Vercel, GitHub Pages 등 정적 서버에 배포할 수 
 <h3 id="vue-devtools-확장프로그램-추가">vue Devtools 확장프로그램 추가</h3>
 <p>구글 &gt; Chrome 웹 스토어 &gt; vue.js devtools 검색 &gt; Vue.js devtools 선택 &gt; Chrome에 추가 &gt; 확장 프로그램 추가</p>
 
-<h3 id="vue-변수-확인">vue 변수 확인</h3>
-<p>크롬 F12 &gt; Vue 탭 &gt; …</p>
+<h3 id="vue-컴포넌트-구조-및-상태-확인">Vue 컴포넌트 구조 및 상태 확인</h3>
+<p>Vue 페이지 &gt; 크롬 F12 &gt; 우측 Vue 탭 &gt; 좌측 Components 메뉴<br />
+현재 페이지 컴포넌트 구조를 DOM 형태로 보고, 각 컴포넌트 내부 변수 값들을 확인할 수 있습니다.</p>
 
-<h3 id="렌더링-영역-표시">렌더링 영역 표시</h3>
-<p>크롬 F12 &gt; Vue 탭 &gt; 가장 안쪽 탭 우측 점 3개 &gt; Highlight updates 토글 ON<br />
-Vue 컴포넌트 렌더링 시 하이라이트 표시되는 설정입니다.</p>
+<h3 id="전체-라우터-정보-확인">전체 라우터 정보 확인</h3>
+<p>Vue 페이지 &gt; 크롬 F12 &gt; 우측 Vue 탭 &gt; 좌측 Pages 메뉴<br />
+현재 사이트 전체 라우터 URL 정보, 현재 위치한 URL을 확인할 수 있습니다.</p>
+
+<h3 id="pinia-스토어-상태-확인">Pinia 스토어 상태 확인</h3>
+<p>Vue 페이지 &gt; 크롬 F12 &gt; 우측 Vue 탭 &gt; 좌측 Pinia 메뉴<br />
+현재 사이트 Pinia 스토어에 저장된 상태 변수 값들을 확인할 수 있습니다.</p>
 
         
       </section>
@@ -781,6 +786,42 @@ Vue 컴포넌트 렌더링 시 하이라이트 표시되는 설정입니다.</p>
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/english/2025-06-23-1" rel="permalink">영단어 최중요 어근 공부
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-06-23T00:00:00+00:00">2025-06-23</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
         
           
 
@@ -875,42 +916,6 @@ Vue 컴포넌트 렌더링 시 하이라이트 표시되는 설정입니다.</p>
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-06-19T00:00:00+00:00">2025-06-19</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-06-17-1" rel="permalink">Vue 환경변수 사용 방법 / 서버벌 env 분리 설정
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-06-17T00:00:00+00:00">2025-06-17</time>
       </span>
     
 

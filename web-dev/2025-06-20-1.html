@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 221</span>
+      <span class="nav__total">🌴 Total Posts: 222</span>
     </li> -->
     
     
@@ -490,7 +490,8 @@
 
 <h3 id="actions">actions</h3>
 <p>state를 변경하거나 비동기 작업을 수행하는 함수입니다.<br />
-사용자 이벤트 핸들러로도 사용됩니다.</p>
+사용자 이벤트 핸들러로도 사용됩니다.<br />
+Pinia는 Vuex와 달리 Mutations 개념이 없고, actions로 상태 변경을 처리합니다.</p>
 
 <hr />
 
@@ -531,6 +532,10 @@ export const use데이터분류명Store = defineStore('데이터분류명Store',
     getters함수명1: (state) =&gt; {
       return state.state변수명1 * 2;
     },
+    getters함수명2() {
+      // 화살표 함수가 아닌, 일반 함수에서는 this 키워드로 스토어 인스턴스 접근 가능
+      return this.state변수명1 + 1;
+    }
   },
   actions: {
     actions함수명1() {
@@ -570,16 +575,48 @@ export const use데이터분류명Store = defineStore('데이터분류명Store',
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
   &lt;p&gt;&lt;/p&gt;
   &lt;p&gt;&lt;/p&gt;
+  &lt;p&gt;&lt;/p&gt;
+  &lt;button @click="store.actions함수명1()"&gt;액션 실행&lt;/button&gt;
 &lt;/template&gt;
 &lt;script setup&gt;
+import { storeToRefs } from 'pinia';
 import { use데이터분류명Store } from '@/stores/데이터분류명Store';
 
 const store = use데이터분류명Store();
 
-store.actions함수명1();
+// storeToRefs로 상태 변수, getters 구조분해 할당
+const { state변수명2, getters함수명1 } = storeToRefs(store);
+
+// actions 구조분해 할당
+const { actions함수명1 } = store;
 &lt;/script&gt;
 </code></pre></div></div>
-<p>스토어를 사용하려는 컴포넌트에서 스토어 파일 import 후 사용할 수 있습니다.</p>
+<p>스토어를 사용하려는 컴포넌트 또는 컴포저블 함수에서 스토어 파일 import 후 사용하면 됩니다.<br />
+storeToRefs 함수를 사용하면 state 변수, getters 구조분해 할당 시 반응성을 유지할 수 있습니다.</p>
+
+<p><mark>컴포저블 함수 스토어 사용 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { use데이터분류명Store } from '@/stores/데이터분류명Store';
+import { storeToRefs } from 'pinia';
+
+export const use함수명 = () =&gt; {
+  const store = use데이터분류명Store();
+
+  const { state변수명1 } = storeToRefs(store);
+  const { actions함수명1 } = store;
+
+  return {
+    state변수명1,
+    actions함수명1,
+  }
+}
+</code></pre></div></div>
+<p>위 컴포저블 함수는 아래와 같이 컴포넌트에서 import 후 사용할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script setup&gt;
+import { use함수명 } from '@/composables/파일명';
+
+const { state변수명1 } = use함수명();
+&lt;/script&gt;
+</code></pre></div></div>
 
         
       </section>
@@ -637,6 +674,42 @@ store.actions함수명1();
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/english/2025-06-23-1" rel="permalink">영단어 최중요 어근 공부
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-06-23T00:00:00+00:00">2025-06-23</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
         
           
 
@@ -731,42 +804,6 @@ store.actions함수명1();
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-06-17T00:00:00+00:00">2025-06-17</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-06-16-1" rel="permalink">Vue HTTP API 통신 방법 / json-server, axios 사용하여 게시판 구현
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-06-16T00:00:00+00:00">2025-06-16</time>
       </span>
     
 

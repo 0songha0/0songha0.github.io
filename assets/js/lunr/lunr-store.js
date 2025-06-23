@@ -1324,4 +1324,10 @@ var store = [{
         "tags": [],
         "url": "/english/2025-06-22-1",
         "teaser": null
+      },{
+        "title": "영단어 최중요 어근 공부",
+        "excerpt":"cap¹     잡다   (생각을) 취하다    ","categories": ["english"],
+        "tags": [],
+        "url": "/english/2025-06-23-1",
+        "teaser": null
       }]
