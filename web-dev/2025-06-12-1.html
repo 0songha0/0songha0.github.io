@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue Router URL 컴포넌트 매핑 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#vue-라우터란">Vue 라우터란?</a></li><li><a href="#vue-프로젝트-라우터-적용-방법">Vue 프로젝트 라우터 적용 방법</a><ul><li><a href="#vue-라우터-라이브러리-설치">Vue 라우터 라이브러리 설치</a></li><li><a href="#라우트-설정-url-페이지-컴포넌트-매핑">라우트 설정 (URL, 페이지 컴포넌트 매핑)</a></li><li><a href="#vue-라우터-사용-설정">Vue 라우터 사용 설정</a></li></ul></li><li><a href="#vue-라우터-사용법">Vue 라우터 사용법</a><ul><li><a href="#routerview-렌더링-방법">RouterView 렌더링 방법</a></li><li><a href="#html에서-페이지-이동-방법">HTML에서 페이지 이동 방법</a></li><li><a href="#javascript에서-페이지-이동-방법">Javascript에서 페이지 이동 방법</a></li><li><a href="#라우트-정보-접근-방법">라우트 정보 접근 방법</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#vue-라우터란">Vue 라우터란?</a></li><li><a href="#vue-프로젝트-라우터-적용-방법">Vue 프로젝트 라우터 적용 방법</a><ul><li><a href="#vue-라우터-라이브러리-설치">Vue 라우터 라이브러리 설치</a></li><li><a href="#라우트-설정-url-페이지-컴포넌트-매핑">라우트 설정 (URL, 페이지 컴포넌트 매핑)</a></li><li><a href="#vue-라우터-사용-설정">Vue 라우터 사용 설정</a></li></ul></li><li><a href="#vue-라우터-사용법">Vue 라우터 사용법</a><ul><li><a href="#routerview-렌더링-방법">RouterView 렌더링 방법</a></li><li><a href="#html에서-페이지-이동-방법">HTML에서 페이지 이동 방법</a></li><li><a href="#javascript에서-페이지-이동-방법">Javascript에서 페이지 이동 방법</a></li><li><a href="#라우트-정보-접근-방법">라우트 정보 접근 방법</a></li></ul></li><li><a href="#vue-router-네비게이션-가드">Vue Router 네비게이션 가드</a><ul><li><a href="#전역가드-등록-방법">전역가드 등록 방법</a></li><li><a href="#라우트-가드-등록-방법">라우트 가드 등록 방법</a></li><li><a href="#컴포넌트-내-가드-등록-방법">컴포넌트 내 가드 등록 방법</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -736,6 +736,102 @@ console.log(route.hash); // URL로 받은 해시태그 파라미터 객체
 </code></pre></div></div>
 <p>Options API의 this.$route는 Composition API의 useRoute() 훅과 같은 기능을 합니다.<br />
 현재 활성화된 URL 경로, URL 파라미터 등 라우트 정보를 확인할 수 있습니다.</p>
+
+<hr />
+
+<h2 id="vue-router-네비게이션-가드">Vue Router 네비게이션 가드</h2>
+
+<p>사용자가 특정 라우트로 이동하려면 조건 검사를 통과해야 하는 기능입니다.<br />
+미로그인 시 /mypage 등 보호된 페이지 접근을 막고 로그인 페이지로 리다이렉트 할 수 있습니다.</p>
+
+<h3 id="전역가드-등록-방법">전역가드 등록 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 라우터 인스턴스 생성
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+})
+
+// 전역 가드 등록
+router.beforeEach((to, from) =&gt; {
+  // to : 이동할 페이지 라우트 정보 객체
+  // from : 이동하기 전 페이지 라우트 정보 객체
+  
+  // 로그인 여부 확인
+  const isLoggedIn = false;
+
+  if (to.meta.requiresAuth &amp;&amp; !isLoggedIn) {
+    // 로그인 필요 페이지인데 로그인 안 한 경우, 로그인 페이지로 리다이렉트
+    return { name: '로그인페이지라우트별칭' } 또는 '/로그인경로';
+    또는
+    // 현재 라우팅(네비게이션) 취소. 페이지 이동 불가
+    return false;
+  }
+
+  // 현재 라우팅 허용. 페이지 이동
+  return true;
+})
+
+export default router;
+</code></pre></div></div>
+<p>router/index.js 하단에 beforeEach를 사용하여 모든 페이지에 전역 가드를 등록할 수 있습니다.</p>
+
+<h3 id="라우트-가드-등록-방법">라우트 가드 등록 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const routes = [
+  {
+    path: '/경로',
+    component: 컴포넌트명,
+    beforeEnter: (to, from) =&gt; {
+      // 쿼리스트링이 있다면, 제거 후 이동
+      if (Object.keys(to.query).length &gt; 0) {
+        return { path: to.path, query: {} };
+      }
+    }
+  }
+]
+</code></pre></div></div>
+<p>라우트 객체를 통해, 특정 라우트 진입 시에만 라우트 가드를 설정할 수 있습니다.</p>
+
+<h3 id="컴포넌트-내-가드-등록-방법">컴포넌트 내 가드 등록 방법</h3>
+<p><mark>Options API 라우트 가드 사용 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const 컴포넌트명 = {
+  template: '&lt;div&gt;내용&lt;/div&gt;',
+  beforeRouteEnter(to, from) {
+    // 네비게이션 이동 후, 컴포넌트 생성 전 실행되는 가드 (this 사용 불가)
+  },
+  beforeRouteUpdate(to, from) {
+    // 현재 컴포넌트를 렌더링하는 경로가 변경되면 호출되는 가드
+  },
+  beforeRouteLeave(to, from) {
+    // 현재 라우트를 떠나기 전 실행되는 가드
+  }
+}
+</code></pre></div></div>
+<p>Options API를 사용하여 컴포넌트 렌더링 시 가드를 구현할 수 있습니다.</p>
+
+<p><mark>Composition API 라우트 가드 사용 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script setup&gt;
+import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router';
+
+onBeforeRouteUpdate((to, from) =&gt; {
+  // 현재 컴포넌트를 렌더링하는 경로가 변경되면 호출되는 가드
+});
+
+onBeforeRouteLeave((to, from) =&gt; {
+  // 현재 라우트를 떠나기 전 실행되는 가드
+  const answer = window.confirm('정말 나가시겠습니까?');
+  return answer;
+});
+&lt;/script&gt;
+&lt;script&gt;
+export default {
+  beforeRouteEnter() {
+    // 네비게이션 이동 후, 컴포넌트 생성 전 실행되는 가드 (this 사용 불가)
+  },
+};
+&lt;/script&gt;
+</code></pre></div></div>
+<p>Composition API를 사용하여 컴포넌트 렌더링 시 가드를 구현할 수 있습니다.<br />
+beforeRouteEnter는 Options API에서만 지원합니다.</p>
 
         
       </section>
