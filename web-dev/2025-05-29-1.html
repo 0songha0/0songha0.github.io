@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Bootstrap 개념 / Vue 프로젝트에서 Bootstrap 설치 및 사용 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#부트스트랩이란">부트스트랩이란?</a></li><li><a href="#bootstrap-설치-방법">Bootstrap 설치 방법</a><ul><li><a href="#cdn-방식">CDN 방식</a></li><li><a href="#정적-리소스-방식">정적 리소스 방식</a></li><li><a href="#vue-프로젝트에-bootstrap-설치">Vue 프로젝트에 Bootstrap 설치</a></li></ul></li><li><a href="#bootstrap-사용법">Bootstrap 사용법</a><ul><li><a href="#bootstrap-docs">Bootstrap Docs</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#부트스트랩이란">부트스트랩이란?</a></li><li><a href="#bootstrap-설치-방법">Bootstrap 설치 방법</a><ul><li><a href="#cdn-방식">CDN 방식</a></li><li><a href="#정적-리소스-방식">정적 리소스 방식</a></li><li><a href="#vue-프로젝트에-bootstrap-설치">Vue 프로젝트에 Bootstrap 설치</a></li></ul></li><li><a href="#bootstrap-사용법">Bootstrap 사용법</a><ul><li><a href="#bootstrap-docs">Bootstrap Docs</a></li><li><a href="#텍스트-말줄임표-ellipsis-적용">텍스트 말줄임표 (ellipsis) 적용</a></li><li><a href="#부트스트랩-그리드-반응형-적용">부트스트랩 그리드 반응형 적용</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -548,6 +548,85 @@ HTML 코드 우측 상단 번개 아이콘을 누르면 실제 모습 및 동작
 
 <p>각 요소의 클래스명을 약간씩 수정해서 CSS를 변경할 수도 있습니다.<br />
 자세한 내용은 가이드 문서를 참고하는 것이 좋습니다.</p>
+
+<h3 id="텍스트-말줄임표-ellipsis-적용">텍스트 말줄임표 (ellipsis) 적용</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Block 요소
+&lt;div class="text-truncate"&gt;텍스트&lt;/div&gt;
+
+// Inline 요소
+&lt;span class="d-inline-block text-truncate" style="max-width: 150px;"&gt;
+</code></pre></div></div>
+<p>위와 같이, Block/Inline 요소 구분에 따라 속성을 다르게 적용해야 합니다.</p>
+
+<p><mark>말줄임표 CSS 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.text-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</code></pre></div></div>
+
+<h3 id="부트스트랩-그리드-반응형-적용">부트스트랩 그리드 반응형 적용</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div class="container"&gt;
+  &lt;div class="row g-3"&gt;
+    &lt;div class="col-12 col-sm-6 col-md-4 col-lg-3"&gt;
+      &lt;div class="p-3 border bg-light"&gt;내부 요소 1&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="col-12 col-sm-6 col-md-4 col-lg-3"&gt;
+      &lt;div class="p-3 border bg-light"&gt;내부 요소 2&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="col-12 col-sm-6 col-md-4 col-lg-3"&gt;
+      &lt;div class="p-3 border bg-light"&gt;내부 요소 3&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="col-12 col-sm-6 col-md-4 col-lg-3"&gt;
+      &lt;div class="p-3 border bg-light"&gt;내부 요소 4&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></div>
+<p>기본 모바일 크기에서는 한 줄에 1개, 작은 화면 (sm) 에서는 한 줄에 2개, 중간 화면 (md) 에서는 한 줄에 3개, 큰 화면 (lg) 이상에서는 한 줄에 4개씩 요소를 보여주는 그리드 반응형 예시입니다.</p>
+
+<p><mark>부트스트랩 그리드 브레이크포인트 참고</mark></p>
+<table>
+  <thead>
+    <tr>
+      <th>브레이크포인트</th>
+      <th>접두어</th>
+      <th>화면 크기 기준</th>
+    </tr></thead>
+  <tbody>
+    <tr>
+      <td>Extra small</td>
+      <td>없음</td>
+      <td>&lt;576px</td>
+    </tr>
+    <tr>
+      <td>Small</td>
+      <td>sm</td>
+      <td>≥576px</td>
+    </tr>
+    <tr>
+      <td>Medium</td>
+      <td>md</td>
+      <td>≥768px</td>
+    </tr>
+    <tr>
+      <td>Large</td>
+      <td>lg</td>
+      <td>≥992px</td>
+    </tr>
+    <tr>
+      <td>Extra large</td>
+      <td>xl</td>
+      <td>≥1200px</td>
+    </tr>
+    <tr>
+      <td>Extra Extra large</td>
+      <td>xxl</td>
+      <td>≥1400px</td>
+    </tr>
+  </tbody>
+</table>
 
         
       </section>
