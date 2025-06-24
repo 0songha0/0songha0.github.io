@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Vue 플러그인 생성 및 추가 방법 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>Vue 플러그인 사용법 / 전역 컴포넌트, 리소스, 커스텀 디렉티브 등록 방법 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,7 +65,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="Vue 플러그인 생성 및 추가 방법">
+<meta property="og:title" content="Vue 플러그인 사용법 / 전역 컴포넌트, 리소스, 커스텀 디렉티브 등록 방법">
 <meta property="og:url" content="https://0songha0.github.io/web-dev/2025-06-24-1">
 
 
@@ -433,7 +433,7 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Vue 플러그인 생성 및 추가 방법">
+    <meta itemprop="headline" content="Vue 플러그인 사용법 / 전역 컴포넌트, 리소스, 커스텀 디렉티브 등록 방법">
     <meta itemprop="description" content="">
     <meta itemprop="datePublished" content="2025-06-24T00:00:00+00:00">
     <meta itemprop="dateModified" content="2025-06-24T00:00:00+00:00">
@@ -441,7 +441,7 @@
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Vue 플러그인 생성 및 추가 방법
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Vue 플러그인 사용법 / 전역 컴포넌트, 리소스, 커스텀 디렉티브 등록 방법
 </h1>
           
 
@@ -468,14 +468,199 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue 플러그인 생성 및 추가 방법</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue 플러그인 사용법 / 전역 컴포넌트, 리소스, 커스텀 디렉티브 등록 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              
+              <ul class="toc__menu"><li><a href="#vue-플러그인이란">Vue 플러그인이란?</a></li><li><a href="#vue-커스텀-플러그인-생성-방법">Vue 커스텀 플러그인 생성 방법</a><ul><li><a href="#플러그인-객체-정의-방법">플러그인 객체 정의 방법</a></li><li><a href="#플러그인-함수-정의-방법">플러그인 함수 정의 방법</a></li></ul></li><li><a href="#vue-플러그인-설치-방법">Vue 플러그인 설치 방법</a></li><li><a href="#vue-플러그인-사용법">Vue 플러그인 사용법</a><ul><li><a href="#전역-속성-및-메서드-추가-방법">전역 속성 및 메서드 추가 방법</a></li><li><a href="#전역-리소스-추가-방법">전역 리소스 추가 방법</a></li><li><a href="#글로벌-컴포넌트-추가-방법">글로벌 컴포넌트 추가 방법</a></li><li><a href="#전역-커스텀-디렉티브-추가-방법">전역 커스텀 디렉티브 추가 방법</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <p>##</p>
+        <h2 id="vue-플러그인이란">Vue 플러그인이란?</h2>
+
+<p>Vue 애플리케이션에 전역 기능 및 객체 등을 추가하는 확장 도구입니다.<br />
+Vue Router, Vuex, Pinia 등도 Vue 플러그인입니다.</p>
+
+<hr />
+
+<h2 id="vue-커스텀-플러그인-생성-방법">Vue 커스텀 플러그인 생성 방법</h2>
+
+<p>Vue 플러그인 JS 파일은 /src/plugins 폴더 안에 작성하는 것이 관례입니다.</p>
+
+<h3 id="플러그인-객체-정의-방법">플러그인 객체 정의 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const 플러그인객체명 = {
+  install(app, options) {
+    // app : Vue 애플리케이션 인스턴스
+    // options : 플러그인 설치 시 넘긴 옵션 파라미터
+
+    // 플러그인 설치 시 자동 실행
+  }
+}
+
+export default 플러그인객체명;
+</code></pre></div></div>
+<p>Vue 플러그인을 객체 형태로 작성 시, install 함수를 파라미터로 사용해야 합니다.</p>
+
+<h3 id="플러그인-함수-정의-방법">플러그인 함수 정의 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function 플러그인함수명(app, options) {
+  // 플러그인 설치 시 자동 실행
+}
+
+export default 플러그인함수명;
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="vue-플러그인-설치-방법">Vue 플러그인 설치 방법</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { createApp } from 'vue';
+import App from './App.vue';
+import 플러그인객체명 from './plugins/플러그인객체파일명';
+import 플러그인함수명 from './plugins/플러그인함수파일명';
+
+const app = createApp(App);
+app.use(플러그인객체명); 또는 app.use(플러그인객체명, {파라미터키 : 값});
+app.use(플러그인함수명);
+app.mount('#app');
+</code></pre></div></div>
+<p>main.js 파일 app 인스턴스에 플러그인 사용 등록하면 전역에서 사용할 수 있습니다.</p>
+
+<hr />
+
+<h2 id="vue-플러그인-사용법">Vue 플러그인 사용법</h2>
+
+<h3 id="전역-속성-및-메서드-추가-방법">전역 속성 및 메서드 추가 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const 플러그인객체명 = {
+  install(app, options) {
+    // 플러그인 설치 시 자동 실행
+
+    const 객체명 = {
+      키: '값',
+      함수명() {
+        console.log(this.키);
+      },
+      ...options // 플러그인 설치 시 받은 파라미터도 객체에 등록 가능 (기존에 같은 키가 있으면 값이 덮어씌워짐)
+    };
+
+    app.config.globalProperties.$객체명 = 객체명;
+  }
+}
+</code></pre></div></div>
+<p>위와 같이, app.config.globalProperties 속성에 객체를 추가하여 플러그인을 정의합니다.<br />
+해당 플러그인을 Vue 앱 인스턴스에 사용 등록하면 앱 실행 시 자동 실행됩니다.</p>
+
+<p><mark>전역 속성 및 메서드 사용법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;h2&gt;&lt;/h2&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  created() {
+    // Options API created 라이프사이쿨 훅에서 전역 속성 사용 예시
+    console.log(this.$객체명.키);
+
+    this.$객체명.함수명();
+  }
+}
+&lt;/script&gt;
+&lt;script setup&gt;
+&lt;/script&gt;
+</code></pre></div></div>
+<p>Options API에서 setup 이후, 컴포넌트가 생성되면 this로 전역 속성을 사용할 수 있습니다.</p>
+
+<h3 id="전역-리소스-추가-방법">전역 리소스 추가 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const 플러그인객체명 = {
+  install(app, options) {
+    // 플러그인 설치 시 자동 실행
+
+    const 객체명 = {
+      키: '값',
+      함수명() {
+        console.log(this.키);
+      }
+    };
+
+    app.provide('객체명', 객체명);
+  }
+}
+</code></pre></div></div>
+<p>위와 같이, app 인스턴스 provide 함수로도 전역 리소스를 등록할 수 있습니다.<br />
+main.js에서 앱 인스턴스에 플러그인을 설치하면 적용됩니다.</p>
+
+<p><mark>전역 리소스 사용법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+  &lt;h2&gt;&lt;/h2&gt;
+  &lt;button @click="객체명.함수명"&gt;버튼명&lt;/button&gt;
+&lt;/template&gt;
+&lt;script setup&gt;
+const 객체명 = inject('객체명');
+console.log(객체명.키);
+&lt;/script&gt;
+</code></pre></div></div>
+<p>플러그인에서 provide로 등록한 전역 리소스는 inject 함수로 받을 수 있습니다.</p>
+
+<h3 id="글로벌-컴포넌트-추가-방법">글로벌 컴포넌트 추가 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import App컴포넌트명1 from '@/components/app/App컴포넌트명1.vue';
+import App컴포넌트명2 from '@/components/app/App컴포넌트명2.vue';
+
+export default {
+  install(app) {
+    app.component('App컴포넌트명1', App컴포넌트명1);
+    app.component('App컴포넌트명2', App컴포넌트명2);
+  },
+}
+</code></pre></div></div>
+<p>/src/plugins 폴더 안에 global-components.js 플러그인 파일 생성 후,<br />
+app 인스턴스 component 함수로 여러 컴포넌트에서 사용할 전역 컴포넌트들을 등록합니다.<br />
+main.js에서 플러그인을 설치하면, 각 컴포넌트에서 전역 컴포넌트들을 import문 없이 사용할 수 있습니다.</p>
+
+<h3 id="전역-커스텀-디렉티브-추가-방법">전역 커스텀 디렉티브 추가 방법</h3>
+<p><mark>전역 커스텀 디렉티브 객체 정의 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export default {
+  mounted(el) {
+    // mounted 시, input DOM 엘리먼트를 받아서 포커스 시키는 커스텀 디렉티브 예시
+    el.focus();
+  }
+}
+</code></pre></div></div>
+<p>src/directives 폴더 안에 커스텀디렉티브명.js 파일을 정의합니다.<br />
+커스텀 디렉티브를 객체 형태로 정의하면 mounted, updated 등 여러 훅을 사용할 수 있습니다.</p>
+
+<p><mark>전역 커스텀 디렉티브 함수 정의 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export default function(el, binding) {
+  // v-커스텀디렉티브명="값" 형태로 넘긴 값을 DOM 엘리먼트 CSS로 적용하는 커스텀 디렉티브 예시
+  el.style.color = binding.value;
+
+  // 객체 값 사용 : binding.value.키1, binding.value.키2
+  // 전달인자 사용 : binding.arg
+  // 수식어 사용 : binding.modifiers
+}
+</code></pre></div></div>
+<p>src/directives 폴더 안에 커스텀디렉티브명.js 파일을 정의합니다.<br />
+커스텀 디렉티브를 함수 형태로 정의하면 mounted 훅만 사용할 수 있습니다.</p>
+
+<p><mark>전역 커스텀 디렉티브 등록 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { createApp } from 'vue';
+import App from './App.vue';
+import 커스텀디렉티브명 from './directives/커스텀디렉티브명.js';
+
+const app = createApp(App);
+app.directive('커스텀디렉티브명', 커스텀디렉티브명);
+app.mount('#app');
+</code></pre></div></div>
+<p>위와 같이, main.js에서 app 인스턴스 directive 함수로 커스텀 디렉티브를 전역 등록할 수 있습니다.</p>
+
+<p><mark>전역 커스텀 디렉티브 다중 등록 플러그인 정의</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import 커스텀디렉티브명1 from './directives/커스텀디렉티브명1.js';
+import 커스텀디렉티브명2 from './directives/커스텀디렉티브명2.js';
+
+export default{
+  install(app) {
+    app.directive('커스텀디렉티브명1', 커스텀디렉티브명1);
+    app.directive('커스텀디렉티브명2', 커스텀디렉티브명2);
+  }
+}
+</code></pre></div></div>
+<p>src/plugins 폴더 안에 global-directives.js 플러그인 파일을 정의합니다.<br />
+main.js에서 플러그인을 설치하면, 여러 커스텀 디렉티브를 한번에 전역 등록할 수 있습니다.</p>
 
         
       </section>

@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue 개념 및 구조 / Vue.js 설치 및 실행 방법 / Vue 디버깅 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#vuejs">Vue.js</a><ul><li><a href="#컴포넌트란">컴포넌트란?</a></li><li><a href="#vue-api-종류">Vue API 종류</a></li><li><a href="#vue-프로젝트-기본-구조">Vue 프로젝트 기본 구조</a></li></ul></li><li><a href="#vue-설치-방법">Vue 설치 방법</a><ul><li><a href="#cdn으로-vue-설치">CDN으로 Vue 설치</a></li><li><a href="#npm으로-vue-설치-수동-세팅">npm으로 Vue 설치 (수동 세팅)</a></li><li><a href="#vite-cli로-vue-설치-자동-세팅">vite CLI로 Vue 설치 (자동 세팅)</a></li></ul></li><li><a href="#vue-프로젝트-실행-방법">Vue 프로젝트 실행 방법</a><ul><li><a href="#vue-실행-스크립트-추가">Vue 실행 스크립트 추가</a></li><li><a href="#vue-프로젝트-실행">Vue 프로젝트 실행</a></li></ul></li><li><a href="#vue-프로젝트-빌드-방법">Vue 프로젝트 빌드 방법</a><ul><li><a href="#vue-빌드-스크립트-추가">Vue 빌드 스크립트 추가</a></li><li><a href="#vue-프로젝트-빌드">Vue 프로젝트 빌드</a></li></ul></li><li><a href="#크롬-vue-devtools-디버깅-방법">크롬 Vue Devtools 디버깅 방법</a><ul><li><a href="#vue-devtools-확장프로그램-추가">vue Devtools 확장프로그램 추가</a></li><li><a href="#vue-컴포넌트-구조-및-상태-확인">Vue 컴포넌트 구조 및 상태 확인</a></li><li><a href="#전체-라우터-정보-확인">전체 라우터 정보 확인</a></li><li><a href="#pinia-스토어-상태-확인">Pinia 스토어 상태 확인</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#vuejs">Vue.js</a><ul><li><a href="#컴포넌트란">컴포넌트란?</a></li><li><a href="#vue-api-종류">Vue API 종류</a></li><li><a href="#vue-프로젝트-폴더-구조">Vue 프로젝트 폴더 구조</a></li></ul></li><li><a href="#vue-설치-방법">Vue 설치 방법</a><ul><li><a href="#cdn으로-vue-설치">CDN으로 Vue 설치</a></li><li><a href="#npm으로-vue-설치-수동-세팅">npm으로 Vue 설치 (수동 세팅)</a></li><li><a href="#vite-cli로-vue-설치-자동-세팅">vite CLI로 Vue 설치 (자동 세팅)</a></li></ul></li><li><a href="#vue-프로젝트-실행-방법">Vue 프로젝트 실행 방법</a><ul><li><a href="#vue-실행-스크립트-추가">Vue 실행 스크립트 추가</a></li><li><a href="#vue-프로젝트-실행">Vue 프로젝트 실행</a></li></ul></li><li><a href="#vue-프로젝트-빌드-방법">Vue 프로젝트 빌드 방법</a><ul><li><a href="#vue-빌드-스크립트-추가">Vue 빌드 스크립트 추가</a></li><li><a href="#vue-프로젝트-빌드">Vue 프로젝트 빌드</a></li></ul></li><li><a href="#크롬-vue-devtools-디버깅-방법">크롬 Vue Devtools 디버깅 방법</a><ul><li><a href="#vue-devtools-확장프로그램-추가">vue Devtools 확장프로그램 추가</a></li><li><a href="#vue-컴포넌트-구조-및-상태-확인">Vue 컴포넌트 구조 및 상태 확인</a></li><li><a href="#전체-라우터-정보-확인">전체 라우터 정보 확인</a></li><li><a href="#pinia-스토어-상태-확인">Pinia 스토어 상태 확인</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -542,7 +542,7 @@ SPA는 앱 루트 컴포넌트 안에 컴포넌트들을 배치해 화면을 구
 좌측 상단 토글 이용 시 Options API, Composition API 예제를 번갈아 볼 수 있습니다.</li>
 </ul>
 
-<h3 id="vue-프로젝트-기본-구조">Vue 프로젝트 기본 구조</h3>
+<h3 id="vue-프로젝트-폴더-구조">Vue 프로젝트 폴더 구조</h3>
 <table class="table_2_left">
   <tbody>
     <tr>
@@ -560,20 +560,34 @@ SPA는 앱 루트 컴포넌트 안에 컴포넌트들을 배치해 화면을 구
     <tr>
       <td>src/components</td>
       <td>
-        여러 페이지에서 재사용할 수 있는 .vue 컴포넌트 파일들을 저장하는 폴더입니다.<br />
+        여러 페이지에서 재사용할 수 있는 .vue 컴포넌트 파일들을 저장하는 폴더입니다.
+      </td>
+    </tr>
+    <tr>
+      <td>src/components/app (global, layout, common)</td>
+      <td>
+        앱 전역에서 재사용하는 UI 컴포넌트들을 저장하는 폴더입니다.<br />
+        전역 컴포넌트명 앞에는 'App'을 접두사로 붙이는 것이 관례입니다.
+      </td>
+    </tr>
+    <tr>
+      <td>src/directives</td>
+      <td>
+        전역 커스텀 디렉티브 파일들을 저장하는 폴더입니다.<br />
+        v-focus, v-scroll 등 여러 컴포넌트에서 공통으로 사용할 디렉티브를 정의합니다.
       </td>
     </tr>
     <tr>
       <td>src/layouts</td>
-      <td>
-        헤더, 푸터 등 공통 레이아웃 .vue 컴포넌트 파일들을 저장하는 폴더입니다.<br />
-      </td>
+      <td>헤더, 푸터 등 공통 레이아웃 .vue 컴포넌트 파일들을 저장하는 폴더입니다.</td>
+    </tr>
+    <tr>
+      <td>src/plugins</td>
+      <td>앱 전역에서 사용할 플러그인 파일들을 저장하는 폴더입니다.</td>
     </tr>
     <tr>
       <td>src/views</td>
-      <td>
-        라우터에 연결되는 페이지 단위 .vue 컴포넌트 파일들을 저장하는 폴더입니다.<br />
-      </td>
+      <td>라우터에 연결되는 페이지 단위 .vue 컴포넌트 파일들을 저장하는 폴더입니다.</td>
     </tr>
     <tr>
       <td>src/App.vue</td>
@@ -608,9 +622,7 @@ SPA는 앱 루트 컴포넌트 안에 컴포넌트들을 배치해 화면을 구
     </tr>
     <tr>
       <td>package.json</td>
-      <td>
-        프로젝트 정보, 스크립트, 의존성 라이브러리 설정 파일입니다.
-      </td>
+      <td>프로젝트 정보, 스크립트, 의존성 라이브러리 설정 파일입니다.</td>
     </tr>
     <tr>
       <td>vite.config.js</td>
@@ -796,7 +808,7 @@ Nginx, Apache, Netlify, Vercel, GitHub Pages 등 정적 서버에 배포할 수 
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
-        <a href="/web-dev/2025-06-24-1" rel="permalink">Vue 플러그인 생성 및 추가 방법
+        <a href="/web-dev/2025-06-24-1" rel="permalink">Vue 플러그인 사용법 / 전역 컴포넌트, 리소스, 커스텀 디렉티브 등록 방법
 </a>
       
     </h2>

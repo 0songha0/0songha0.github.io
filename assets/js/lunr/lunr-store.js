@@ -1290,7 +1290,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Vue Router URL 컴포넌트 매핑 방법",
-        "excerpt":"Vue 라우터란? URL 경로에 따라 화면에 렌더링할 컴포넌트를 매핑할 수 있는 라우팅 라이브러리입니다. Vue 프로젝트 라우터 적용 방법 Vue 라우터 라이브러리 설치 npm install vue-router 프로젝트 경로에서 위 명령어를 통해 Vue Router를 설치할 수 있습니다. 라우트 설정 (URL, 페이지 컴포넌트 매핑) import { createRouter, createWebHistory } from 'vue-router'; import View컴포넌트명1...","categories": ["web-dev"],
+        "excerpt":"Vue 라우터, 라우트 차이 Vue 라우터 URL 경로에 따라 화면에 렌더링할 컴포넌트를 매핑하는 라우팅 라이브러리 객체입니다. 앱에 전역 등록되어 다른 페이지 이동, URL 추적, 히스토리 관리를 수행합니다. Vue 라우트 현재 URL 경로, 동적 파라미터, 쿼리, 컴포넌트 정보 등을 담는 객체입니다. Vue 프로젝트 라우터 적용 방법 Vue 라우터 라이브러리 설치 npm...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-06-12-1",
         "teaser": null
@@ -1331,8 +1331,8 @@ var store = [{
         "url": "/english/2025-06-23-1",
         "teaser": null
       },{
-        "title": "Vue 플러그인 생성 및 추가 방법",
-        "excerpt":"##  ","categories": ["web-dev"],
+        "title": "Vue 플러그인 사용법 / 전역 컴포넌트, 리소스, 커스텀 디렉티브 등록 방법",
+        "excerpt":"Vue 플러그인이란? Vue 애플리케이션에 전역 기능 및 객체 등을 추가하는 확장 도구입니다. Vue Router, Vuex, Pinia 등도 Vue 플러그인입니다. Vue 커스텀 플러그인 생성 방법 Vue 플러그인 JS 파일은 /src/plugins 폴더 안에 작성하는 것이 관례입니다. 플러그인 객체 정의 방법 const 플러그인객체명 = { install(app, options) { // app : Vue 애플리케이션...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-06-24-1",
         "teaser": null
