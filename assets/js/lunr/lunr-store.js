@@ -1326,8 +1326,14 @@ var store = [{
         "teaser": null
       },{
         "title": "영단어 최중요 어근 공부",
-        "excerpt":"cap¹ (cip, ceive, cept)                 cap       잡다(hold) 생각을 취하다(take)                 capable       할 수 있는, 유능한                 capability       능력, 역량                 capacity       용량, 수용력, 능력                 capture       포획하다, 사로잡다 생포, 포획, 억류                 captive       사로잡힌, 억류된 포로, 인질                 captivity       감금, 억류                 captivate       (~의 마음을) 사로잡다             ","categories": ["english"],
+        "excerpt":"cap¹ (cip, ceive, cept) cap 잡다(hold) 생각을 취하다(take) capable 할 수 있는, 유능한 (cap : 잡다) (able : 할 수 있는) capability 능력, 역량 capacity 용량, 수용력, 능력 capture 포획하다, 사로잡다 생포, 포획, 억류 captive 사로잡힌, 억류된 포로, 인질 captivity 감금, 억류 captivate (~의 마음을) 사로잡다 anticipate 예측하다, 예상하다 (anti...","categories": ["english"],
         "tags": [],
         "url": "/english/2025-06-23-1",
+        "teaser": null
+      },{
+        "title": "Vue 플러그인 생성 및 추가 방법",
+        "excerpt":"##  ","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-06-24-1",
         "teaser": null
       }]
