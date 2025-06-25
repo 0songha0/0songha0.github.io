@@ -894,7 +894,7 @@ var store = [{
         "teaser": null
       },{
         "title": "자주 쓰는 HTML 정리 / HTML 문법",
-        "excerpt":"자주 쓰는 HTML HTML 정규표현식 https://0songha0.github.io/web-dev/2022-08-01-1 form submit &lt;form action=\"/컨트롤러경로\" method=\"post\"&gt; &lt;input type=\"text\" name=\"서버에서받을변수명\" /&gt; &lt;button&gt;저장&lt;/button&gt; &lt;/form&gt; button의 기본 type은 submit이므로, 버튼 클릭 시 form이 전송됩니다. CSS, Javascript 파일 추가 &lt;head&gt; &lt;script src=\"Javascript파일경로/파일명.js\"&gt;&lt;/script&gt; &lt;link rel=\"stylesheet\" href=\"CSS파일경로/파일명.css\"&gt; &lt;/had&gt; 라이브러리 파일은 https://도메인/파일경로/파일명으로도 추가할 수도 있지만, 사이트에서 파일 제공 서비스를 중단하면 에러날 수...","categories": ["web-dev"],
+        "excerpt":"자주 쓰는 HTML HTML 정규표현식 https://0songha0.github.io/web-dev/2022-08-01-1 button 클릭 시 form submit &lt;form action=\"/컨트롤러경로\" method=\"post\"&gt; &lt;input type=\"text\" name=\"서버에서받을변수명\" /&gt; &lt;button&gt;저장&lt;/button&gt; &lt;/form&gt; button의 기본 type은 submit이므로, 버튼 클릭 시 form이 전송됩니다. button type=”button”으로 변경 시 submit이 동작하지 않습니다. CSS, Javascript 파일 추가 &lt;head&gt; &lt;script src=\"Javascript파일경로/파일명.js\"&gt;&lt;/script&gt; &lt;link rel=\"stylesheet\" href=\"CSS파일경로/파일명.css\"&gt; &lt;/had&gt; 라이브러리 파일은 https://도메인/파일경로/파일명으로도...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2024-02-08-2",
         "teaser": null
@@ -1335,5 +1335,11 @@ var store = [{
         "excerpt":"Vue 플러그인이란? Vue 애플리케이션에 전역 기능 및 객체 등을 추가하는 확장 도구입니다. Vue Router, Vuex, Pinia 등도 Vue 플러그인입니다. Vue 커스텀 플러그인 생성 방법 Vue 플러그인 JS 파일은 /src/plugins 폴더 안에 작성하는 것이 관례입니다. 플러그인 객체 정의 방법 const 플러그인객체명 = { install(app, options) { // app : Vue 애플리케이션...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-06-24-1",
+        "teaser": null
+      },{
+        "title": "Vue 컴포저블 함수 구현 및 사용 방법",
+        "excerpt":"컴포저블 함수 (Composable) 상태 관리 및 비즈니스 로직을 캡슐화하여, 여러 컴포넌트에서 재사용할 수 있는 함수형 모듈입니다. axios로 서버 API 호출하는 함수도 컴포저블 함수로 만들 수 있습니다. 컴포저블 함수 정의 방법 import { ref } from 'vue'; // 상태 변수는 모듈 범위에 정의하거나, 상태 관리 스토어 Pinia 사용 필요 // 함수...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-06-25-1",
         "teaser": null
       }]

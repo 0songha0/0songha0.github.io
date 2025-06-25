@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 223</span>
+      <span class="nav__total">🌴 Total Posts: 224</span>
     </li> -->
     
     
@@ -654,7 +654,8 @@ const vAlert = (message, type = 'error') =&gt; {
 // index.html 또는 부모컴포넌트 예시
 &lt;div id="modal"&gt;&lt;/div&gt;
 </code></pre></div></div>
-<p>모달이 특정 컴포넌트 내부에 속해서 CSS가 깨질 때, 상위 DOM 위치에 렌더링하여 해결할 수 있습니다.</p>
+<p>모달이 특정 컴포넌트 내부에 속해서 CSS가 깨질 때, 상위 DOM 위치에 렌더링하여 해결할 수 있습니다.<br />
+헤더, 푸터, 전역 로딩 스피너, 모달, 알림, 초기 앱 설정 등은 App.Vue에 정의하는 것이 좋습니다.</p>
 
         
       </section>
@@ -712,6 +713,42 @@ const vAlert = (message, type = 'error') =&gt; {
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-06-25-1" rel="permalink">Vue 컴포저블 함수 구현 및 사용 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-06-25T00:00:00+00:00">2025-06-25</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
         
           
 
@@ -806,42 +843,6 @@ const vAlert = (message, type = 'error') =&gt; {
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-06-22T00:00:00+00:00">2025-06-22</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-06-20-1" rel="permalink">Vue 상태관리 라이브러리 Pinia 사용밥
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-06-20T00:00:00+00:00">2025-06-20</time>
       </span>
     
 

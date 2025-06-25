@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 223</span>
+      <span class="nav__total">🌴 Total Posts: 224</span>
     </li> -->
     
     
@@ -497,7 +497,8 @@
 }
 </code></pre></div></div>
 <p>package.json 파일에 JSON Server 실행 명령어를 스크립트로 등록할 수 있습니다.<br />
-npm run db 명령어로 JSON 서버를 쉽게 실행할 수 있게 됩니다.</p>
+npm run db 명령어로 JSON 서버를 쉽게 실행할 수 있게 됩니다.<br />
+뒤에 –delay 1000 옵션을 추가하면, API 서버 응답을 1초 지연시켜 로딩 테스트 시 유용합니다.</p>
 
 <h3 id="dbjson-파일-예시">db.json 파일 예시</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
@@ -615,7 +616,7 @@ fetchPosts();
 &lt;/script&gt;
 </code></pre></div></div>
 <p>API 호출 응답을 반응형 데이터로 관리하고, template에 출력할 수 있습니다.<br />
-async await은 then()처럼 promise 기반 비동기 처리를 수행합니다.</p>
+async await은 then()처럼 promise 기반 비동기 처리를 수행하며, 응답을 기다립니다.</p>
 
 <p><mark>게시글이 없는 경우 분기처리</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
@@ -876,7 +877,8 @@ API 호출 테스트를 위한 가상 API 서버를 구축합니다.
   “db”: “json-server –watch db.json –port 5000”
 }</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package.json 파일에 JSON Server 실행 명령어를 스크립트로 등록할 수 있습니다.  
-npm run db 명령어로 JSON 서버를 쉽게 실행할 수 있게 됩니다.
+npm run db 명령어로 JSON 서버를 쉽게 실행할 수 있게 됩니다.  
+뒤에 --delay 1000 옵션을 추가하면, API 서버 응답을 1초 지연시켜 로딩 테스트 시 유용합니다.
 
 ### db.json 파일 예시
 </code></pre></div></div>
@@ -995,7 +997,7 @@ fetchPosts();
 </script>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>API 호출 응답을 반응형 데이터로 관리하고, template에 출력할 수 있습니다.  
-async await은 then()처럼 promise 기반 비동기 처리를 수행합니다.
+async await은 then()처럼 promise 기반 비동기 처리를 수행하며, 응답을 기다립니다.
 
 &lt;mark&gt;게시글이 없는 경우 분기처리&lt;/mark&gt;
 </code></pre></div></div>
@@ -1493,6 +1495,42 @@ GET /posts?title_like=검색어
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
+        <a href="/web-dev/2025-06-25-1" rel="permalink">Vue 컴포저블 함수 구현 및 사용 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-06-25T00:00:00+00:00">2025-06-25</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
         <a href="/web-dev/2025-06-24-1" rel="permalink">Vue 플러그인 사용법 / 전역 컴포넌트, 리소스, 커스텀 디렉티브 등록 방법
 </a>
       
@@ -1577,42 +1615,6 @@ GET /posts?title_like=검색어
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-06-22T00:00:00+00:00">2025-06-22</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-06-20-1" rel="permalink">Vue 상태관리 라이브러리 Pinia 사용밥
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-06-20T00:00:00+00:00">2025-06-20</time>
       </span>
     
 
