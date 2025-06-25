@@ -1272,7 +1272,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Bootstrap 개념 / Vue 프로젝트에서 부트스트랩 설치 및 사용 방법",
-        "excerpt":"부트스트랩이란? 사전에 정의된 CSS 등을 사용하여 예쁜 HTML을 만들 수 있는 UI 프레임워크입니다. 반응형 웹 페이지 제작을 쉽게 도와줘서 한 페이지에서 PC 및 모바일 서비스가 가능합니다. Vue 프레임워크 사용 시 Vue에 특화된 BootstrapVue 또는 Vuetify 라이브러리도 활용 가능합니다. 부트스트랩 설치 방법 CDN 방식 &lt;!-- Bootstrap CSS --&gt; &lt;link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css\"...","categories": ["web-dev"],
+        "excerpt":"부트스트랩이란? 사전에 정의된 CSS 등을 사용하여 예쁜 HTML을 만들 수 있는 UI 프레임워크입니다. 반응형 웹 페이지 제작을 쉽게 도와줘서 한 페이지에서 PC 및 모바일 서비스가 가능합니다. Vue 프레임워크 사용 시 Vue에 특화된 BootstrapVue 또는 Vuetify 라이브러리도 활용 가능합니다. 부트스트랩 설치 CDN 방식 설치 방법 &lt;!-- Bootstrap CSS --&gt; &lt;link rel=\"stylesheet\"...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-05-29-1",
         "teaser": null
