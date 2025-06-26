@@ -674,6 +674,28 @@ export default {
 </code></pre></div></div>
 <p>reactive 객체의 모든 속성을 각각 ref 형태로 반환해서 반응형을 유지하며 구조분해 할당하는 API입니다.</p>
 
+<p><mark>unref()</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { ref, unref } from 'vue';
+
+const 반응형상태변수명 = ref(100);
+
+const 일반변수명 = unref(반응형상태변수명);
+</code></pre></div></div>
+<p>ref 등 반응성 래퍼 내부 value 값을 꺼내서 반환하는 언래핑 함수입니다.<br />
+원본 객체 반응성은 유지되며, 꺼낸 값에는 반응성이 없습니다.<br />
+만약 반응형 상태가 아닌 값이라면 그대로 반환합니다.</p>
+
+<p><mark>isRef()</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const 반응형상태변수명 = ref(0);
+
+if(isRef(반응형상태변수명)) {
+  // 반응형 상태 변수 관련 로직
+} else {
+  // 일반 변수 관련 로직
+}
+</code></pre></div></div>
+<p>isRef() 함수를 통해 변수가 반응형 상태인지, 일반 변수인지 알 수 있습니다.</p>
+
 <h3 id="readonly">readonly()</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script&gt;
 import { reactive, readonly } from 'vue';

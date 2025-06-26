@@ -585,6 +585,18 @@ export function getPostById(id) {
 }
 </code></pre></div></div>
 
+<p><mark>axios 기본 URL 설정</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import axios from 'axios';
+
+axios.defaults.baseURL = import.meta.env.VITE_APP_API_URL;
+
+export const API호출함수 = () =&gt; {
+  return axios.get('/경로');
+}
+</code></pre></div></div>
+<p>위와 같이, axios 객체에 baseURL을 설정해두면 더 간편하게 사용할 수 있습니다.<br />
+API 주소 변경 시에도 환경변수 값만 수정하면 됩니다.</p>
+
 <h3 id="데이터-전체-조회-api-함수-호출-vue-코드">데이터 전체 조회 API 함수 호출 Vue 코드</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script setup&gt;
 import { ref } from 'vue';
@@ -965,6 +977,18 @@ import { posts } from ‘.’;</p>
   return posts.get(<code class="language-plaintext highlighter-rouge">/${id}</code>); // id type이 Number인 경우, String으로 변환
 }</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+&lt;mark&gt;axios 기본 URL 설정&lt;/mark&gt;
+</code></pre></div></div>
+<p>import axios from ‘axios’;</p>
+
+<p>axios.defaults.baseURL = import.meta.env.VITE_APP_API_URL;</p>
+
+<p>export const API호출함수 = () =&gt; {
+  return axios.get(‘/경로’);
+}</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>위와 같이, axios 객체에 baseURL을 설정해두면 더 간편하게 사용할 수 있습니다.  
+API 주소 변경 시에도 환경변수 값만 수정하면 됩니다.
+
 ### 데이터 전체 조회 API 함수 호출 Vue 코드
 </code></pre></div></div>
 <script setup="">

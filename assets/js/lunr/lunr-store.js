@@ -1338,7 +1338,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Vue 컴포저블 함수 구현 및 사용 방법",
-        "excerpt":"컴포저블 함수 (Composable) 상태 관리 및 비즈니스 로직을 캡슐화하여, 여러 컴포넌트에서 재사용할 수 있는 함수형 모듈입니다. axios로 서버 API 호출하는 함수도 컴포저블 함수로 만들 수 있습니다. 컴포저블 함수 정의 방법 import { ref } from 'vue'; // 상태 변수는 모듈 범위에 정의하거나, 상태 관리 스토어 Pinia 사용 필요 // 함수...","categories": ["web-dev"],
+        "excerpt":"컴포저블 함수 (Composable) 반응형 상태 관리 로직을 캡슐화하여, 여러 컴포넌트에서 재사용할 수 있는 함수형 모듈입니다. axios로 서버 API 호출하는 로직도 컴포저블 함수로 만들 수 있습니다. 컴포저블 함수 정의 방법 import { ref } from 'vue'; // 상태 변수는 모듈 범위에 정의하거나, 상태 관리 스토어 Pinia 사용 필요 // 함수 범위에...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-06-25-1",
         "teaser": null
