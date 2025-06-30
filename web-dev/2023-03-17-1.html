@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 윈도우 Node.js 설치 방법 / nvm으로 노드 설치 및 버전 변경</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#nvm-npm-차이">nvm, npm 차이</a></li><li><a href="#윈도우-nvm-설치-방법">윈도우 nvm 설치 방법</a></li><li><a href="#nvm-사용법">nvm 사용법</a><ul><li><a href="#nvm으로-nodejs-설치">nvm으로 Node.js 설치</a></li><li><a href="#설치된-nodejs-버전-목록-확인">설치된 Node.js 버전 목록 확인</a></li><li><a href="#사용할-nodejs-버전-변경">사용할 Node.js 버전 변경</a></li><li><a href="#현재-사용중-nodejs-버전-확인">현재 사용중 Node.js 버전 확인</a></li><li><a href="#설치한-nodejs-버전-삭제">설치한 Node.js 버전 삭제</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#nvm-npm-차이">nvm, npm 차이</a></li><li><a href="#윈도우-nvm-설치-방법">윈도우 nvm 설치 방법</a></li><li><a href="#nvm-사용법">nvm 사용법</a><ul><li><a href="#nvm으로-nodejs-설치">nvm으로 Node.js 설치</a></li><li><a href="#설치된-nodejs-버전-목록-확인">설치된 Node.js 버전 목록 확인</a></li><li><a href="#사용할-nodejs-버전-변경">사용할 Node.js 버전 변경</a></li><li><a href="#현재-사용중-nodejs-버전-확인">현재 사용중 Node.js 버전 확인</a></li><li><a href="#설치한-nodejs-버전-삭제">설치한 Node.js 버전 삭제</a></li></ul></li><li><a href="#nvm-없이-nodejs-설치-방법">nvm 없이 node.js 설치 방법</a><ul><li><a href="#nodejs-단독-설치">node.js 단독 설치</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -511,7 +511,8 @@
 <h3 id="nvm으로-nodejs-설치">nvm으로 Node.js 설치</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm install 노드버전
 </code></pre></div></div>
-<p>nvm, Node 설치 후 IntelliJ에서 명령어 사용을 위해서는 IntelliJ 재실행이 필요합니다.</p>
+<p>nvm, Node 설치 후 IntelliJ에서 명령어 사용을 위해서는 IntelliJ 재실행이 필요합니다.<br />
+변경된 환경변수는 IDE 재시작 시 반영되기 때문입니다.</p>
 
 <p><mark>Node.js 설치 성공 메시지</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Downloading node.js version 14.16.0 (64-bit)...
@@ -557,9 +558,21 @@ NVM_HOME 및 Path 환경 변수가 자동 등록되어 터미널에서 사용이
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node -v
 </code></pre></div></div>
 
+<p><mark>npm 버전 확인</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm -v
+</code></pre></div></div>
+
 <h3 id="설치한-nodejs-버전-삭제">설치한 Node.js 버전 삭제</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm uninstall 노드버전
 </code></pre></div></div>
+
+<hr />
+
+<h2 id="nvm-없이-nodejs-설치-방법">nvm 없이 node.js 설치 방법</h2>
+
+<h3 id="nodejs-단독-설치">node.js 단독 설치</h3>
+<p><a href="https://nodejs.org/ko/download" target="_blank">https://nodejs.org/ko/download</a><br />
+위 링크에서 안정성이 높은 LTS (Long Term Support) 버전 선택 후 설치 프로그램 다운해서 설치하면 됩니다.</p>
 
         
       </section>

@@ -576,7 +576,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Visual Studio Code 설치 / VSCode 사용법",
-        "excerpt":"Visual Studio Code 설치 https://code.visualstudio.com/download VSCode 사용법 프로젝트 여는 방법 상단 File 메뉴 &gt; Open Folder &gt; 프로젝트 폴더 선택 파일 내 텍스트 검색 좌측 검색 아이콘 클릭 &gt; 검색어 입력 플러그인 설치 방법 좌측 EXTENSIONS &gt; 플러그인명 검색 &gt; 플러그인 선택 &gt; Install 파이썬 플러그인도 설치할 수 있습니다. 유용한...","categories": ["tool"],
+        "excerpt":"Visual Studio Code 설치 https://code.visualstudio.com/download 운영체제에 맞는 VSCode 설치가 필요합니다. VSCode 사용법 프로젝트 여는 방법 상단 File 메뉴 &gt; Open Folder &gt; 프로젝트 폴더 선택 파일 내 텍스트 검색 좌측 검색 아이콘 클릭 &gt; 검색어 입력 플러그인 설치 방법 좌측 EXTENSIONS &gt; 플러그인명 검색 &gt; 플러그인 선택 &gt; Install 파이썬...","categories": ["tool"],
         "tags": [],
         "url": "/tool/2023-04-20-1",
         "teaser": null
