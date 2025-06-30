@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue 3 Composition API 종류 및 사용법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#setup">setup()</a><ul><li><a href="#setup-함수-사용-예시">setup 함수 사용 예시</a></li></ul></li><li><a href="#reactivity">Reactivity</a><ul><li><a href="#ref">ref()</a></li><li><a href="#reactive">reactive()</a></li><li><a href="#toref">toRef()</a></li><li><a href="#torefs">toRefs()</a></li><li><a href="#readonly">readonly()</a></li><li><a href="#computed">computed()</a></li><li><a href="#watch">Watch</a></li><li><a href="#watcheffect">WatchEffect</a></li></ul></li><li><a href="#lifecycle-hooks">Lifecycle Hooks</a><ul><li><a href="#컴포넌트-라이프사이클-단계">컴포넌트 라이프사이클 단계</a></li><li><a href="#lifecycle-hooks-종류">Lifecycle Hooks 종류</a></li></ul></li><li><a href="#template-refs">Template Refs</a><ul><li><a href="#template-refs-사용-예시">Template Refs 사용 예시</a></li><li><a href="#template-refs-배열-바인딩-예시">Template Refs 배열 바인딩 예시</a></li><li><a href="#template-refs-함수-바인딩-예시">Template Refs 함수 바인딩 예시</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#setup">setup()</a><ul><li><a href="#setup-함수-사용-예시">setup 함수 사용 예시</a></li></ul></li><li><a href="#reactivity">Reactivity</a><ul><li><a href="#ref">ref()</a></li><li><a href="#reactive">reactive()</a></li><li><a href="#toref">toRef()</a></li><li><a href="#torefs">toRefs()</a></li><li><a href="#unref">unref()</a></li><li><a href="#isref">isRef()</a></li><li><a href="#readonly">readonly()</a></li><li><a href="#computed">computed()</a></li><li><a href="#watch">Watch</a></li><li><a href="#watcheffect">WatchEffect</a></li></ul></li><li><a href="#lifecycle-hooks">Lifecycle Hooks</a><ul><li><a href="#컴포넌트-라이프사이클-단계">컴포넌트 라이프사이클 단계</a></li><li><a href="#lifecycle-hooks-종류">Lifecycle Hooks 종류</a></li></ul></li><li><a href="#template-refs">Template Refs</a><ul><li><a href="#template-refs-사용-예시">Template Refs 사용 예시</a></li><li><a href="#template-refs-배열-바인딩-예시">Template Refs 배열 바인딩 예시</a></li><li><a href="#template-refs-함수-바인딩-예시">Template Refs 함수 바인딩 예시</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -609,11 +609,11 @@ export default {
 ref로 선언한 데이터를 reactive 배열의 요소로 주입하면 .value를 붙여서 접근해야 합니다.</p>
 
 <h3 id="toref">toRef()</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;templeat&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
   &lt;div&gt;
     &lt;p&gt;{{ author }}&lt;/p&gt;
   &lt;/div&gt;
-&lt;/templeat&gt;
+&lt;/template&gt;
 &lt;script&gt;
 import { reactive, toRef } from 'vue';
 
@@ -627,10 +627,10 @@ export default {
       price: '무료',
     });
 
-    // 반응형 유지하며 구조분해 할당
+    // 반응형 유지하며 값 할당
     const author = toRef(book, 'author');
 
-    // 반응형 유지 안되는 구조분해 할당 예시
+    // 반응형 유지 안되는 값 할당 예시
     // const author = book;
 
     return { author };
@@ -638,16 +638,16 @@ export default {
 }
 &lt;/script&gt;
 </code></pre></div></div>
-<p>reactive 객체의 단일 속성을 ref 형태로 반환해서 반응형을 유지하며 구조분해 할당하는 API입니다.<br />
+<p>reactive 객체의 단일 속성을 ref 형태로 반환해서 기존 반응성을 유지하며 할당하는 API입니다.<br />
 toRef 또는 toRefs를 사용하지 않고 ES6 비구조화 할당으로 추출 시 반응성을 잃게 됩니다.</p>
 
 <h3 id="torefs">toRefs()</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;templeat&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
   &lt;div&gt;
     &lt;p&gt;{{ author }}&lt;/p&gt;
     &lt;p&gt;{{ title }}&lt;/p&gt;
   &lt;/div&gt;
-&lt;/templeat&gt;
+&lt;/template&gt;
 &lt;script&gt;
 import { reactive, toRefs } from 'vue';
 
@@ -672,9 +672,9 @@ export default {
 }
 &lt;/script&gt;
 </code></pre></div></div>
-<p>reactive 객체의 모든 속성을 각각 ref 형태로 반환해서 반응형을 유지하며 구조분해 할당하는 API입니다.</p>
+<p>reactive 객체의 모든 속성을 각각 ref 형태로 반환해서 기존 반응성을 유지하며 구조분해 할당하는 API입니다.</p>
 
-<p><mark>unref()</mark></p>
+<h3 id="unref">unref()</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { ref, unref } from 'vue';
 
 const 반응형상태변수명 = ref(100);
@@ -685,7 +685,7 @@ const 일반변수명 = unref(반응형상태변수명);
 원본 객체 반응성은 유지되며, 꺼낸 값에는 반응성이 없습니다.<br />
 만약 반응형 상태가 아닌 값이라면 그대로 반환합니다.</p>
 
-<p><mark>isRef()</mark></p>
+<h3 id="isref">isRef()</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const 반응형상태변수명 = ref(0);
 
 if(isRef(반응형상태변수명)) {
