@@ -540,7 +540,7 @@ var store = [{
         "teaser": null
       },{
         "title": "자주 쓰는 윈도우 명령어 정리 / 윈도우 cmd 명령어 사용법",
-        "excerpt":"cmd 명령어 정리 설정한 환경변수 확인 echo %환경변수명% 현재 디렉터리 파일 및 폴더 확인 dir 특정 포트 프로세스 PID 확인 netstat -ano | findstr :포트번호 프로세스가 LISTENING 상태이면 정상 동작 중이라는 뜻입니다. 프로세스 강제 종료 taskkill /PID PID번호 /F 조회된 프로세스 중 0.0.0.0:포트번호 우측 PID를 입력하면 됩니다. 같은 JVM 프로세스...","categories": ["tool"],
+        "excerpt":"cmd 명령어 정리 설정한 환경변수 확인 echo %환경변수명% 전체 환경변수 확인 path 현재 세션에서 설정된 Path 환경변수 값 전체를 확인할 수 있습니다. 현재 디렉터리 파일 및 폴더 확인 dir 특정 포트 프로세스 PID 확인 netstat -ano | findstr :포트번호 프로세스가 LISTENING 상태이면 정상 동작 중이라는 뜻입니다. 프로세스 강제 종료 taskkill...","categories": ["tool"],
         "tags": [],
         "url": "/tool/2023-03-20-1",
         "teaser": null
