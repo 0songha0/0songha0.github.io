@@ -534,7 +534,7 @@ var store = [{
         "teaser": null
       },{
         "title": "윈도우 Node.js 설치 방법 / nvm으로 노드 설치 및 버전 변경",
-        "excerpt":"nvm, npm 차이 NVM (Node Version Manager) Node.js 설치 및 버전 변경할 수 있는 도구입니다. NPM (Node Package Manager) Node.js 설치 시 자동 설치되며, 필요한 패키지를 추가로 설치할 수 있는 도구입니다. 윈도우 nvm 설치 방법 https://github.com/coreybutler/nvm-windows 위 깃허브 링크 &gt; readme.md &gt; Download Now! 버튼 &gt; Assets &gt; nvm-setup.exe 다운...","categories": ["web-dev"],
+        "excerpt":"Node.js란? Javascript를 브라우저 밖에서 실행할 수 있게 해주는 런타임 (실행 환경) 입니다. Node.js를 통해 자바스크립트로 개발한 서버 사이드 애플리케이션을 실행할 수 있습니다. nvm, npm 차이 NVM (Node Version Manager) Node.js 설치 및 버전 변경할 수 있는 도구입니다. NPM (Node Package Manager) Node.js 설치 시 자동 설치되며, 필요한 패키지를 추가로 설치할...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-03-17-1",
         "teaser": null
