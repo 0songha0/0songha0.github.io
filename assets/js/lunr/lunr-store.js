@@ -1342,4 +1342,10 @@ var store = [{
         "tags": [],
         "url": "/web-dev/2025-06-25-1",
         "teaser": null
+      },{
+        "title": "TypeScript 개념 정리 / 타입스크립트 설치 및 컴파일 옵션 설정 방법",
+        "excerpt":"TypeScript란? Javascript를 안전하게 사용할 수 있도록 타입 관련 기능들을 추가한 확장 언어입니다. 타입스크립트 코드는 컴파일 시 타입 검사를 성공하면 Javascript로 변환됩니다. 컴파일 된 Javascript에는 타입 관련 코드들이 포함되지 않아 성능에 영향을 주지 않습니다. 코드 실행 전 타입 오류를 미리 발견하므로 일반 Javascript보다 안정성이 높습니다. 언어별 타입 시스템 차이 정적 타입...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-06-30-1",
+        "teaser": null
       }]

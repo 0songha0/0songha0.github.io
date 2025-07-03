@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Figma 설치 / 디자인, 기획 협업 툴 피그마 사용법 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>TypeScript 개념 정리 / 타입스크립트 설치 및 컴파일 옵션 설정 방법 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,8 +65,8 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="Figma 설치 / 디자인, 기획 협업 툴 피그마 사용법">
-<meta property="og:url" content="https://0songha0.github.io/tool/2023-11-09-1">
+<meta property="og:title" content="TypeScript 개념 정리 / 타입스크립트 설치 및 컴파일 옵션 설정 방법">
+<meta property="og:url" content="https://0songha0.github.io/web-dev/2025-06-30-1">
 
 
   <meta property="og:description" content="송하영 개발 블로그">
@@ -77,11 +77,11 @@
 
 
 
-  <meta property="article:published_time" content="2023-11-09T00:00:00+00:00">
+  <meta property="article:published_time" content="2025-06-30T00:00:00+00:00">
 
 
 
-  <meta property="article:modified_time" content="2023-11-09T00:00:00+00:00">
+  <meta property="article:modified_time" content="2025-06-30T00:00:00+00:00">
 
 
 
@@ -90,7 +90,7 @@
   
 
 
-<link rel="canonical" href="https://0songha0.github.io/tool/2023-11-09-1">
+<link rel="canonical" href="https://0songha0.github.io/web-dev/2025-06-30-1">
 
 
 
@@ -433,15 +433,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Figma 설치 / 디자인, 기획 협업 툴 피그마 사용법">
+    <meta itemprop="headline" content="TypeScript 개념 정리 / 타입스크립트 설치 및 컴파일 옵션 설정 방법">
     <meta itemprop="description" content="">
-    <meta itemprop="datePublished" content="2023-11-09T00:00:00+00:00">
-    <meta itemprop="dateModified" content="2023-11-09T00:00:00+00:00">
+    <meta itemprop="datePublished" content="2025-06-30T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-06-30T00:00:00+00:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Figma 설치 / 디자인, 기획 협업 툴 피그마 사용법
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">TypeScript 개념 정리 / 타입스크립트 설치 및 컴파일 옵션 설정 방법
 </h1>
           
 
@@ -450,7 +450,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2023-11-09T00:00:00+00:00">2023-11-09</time>
+        <time datetime="2025-06-30T00:00:00+00:00">2025-06-30</time>
       </span>
     
 
@@ -468,42 +468,158 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Figma 설치 / 디자인, 기획 협업 툴 피그마 사용법</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> TypeScript 개념 정리 / 타입스크립트 설치 및 컴파일 옵션 설정 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#피그마-설치">피그마 설치</a></li><li><a href="#피그마-사용법">피그마 사용법</a><ul><li><a href="#디자인-모드-보기">디자인 모드 보기</a></li><li><a href="#프로토타입-모드-보기">프로토타입 모드 보기</a></li><li><a href="#마우스-모드-변경">마우스 모드 변경</a></li></ul></li><li><a href="#피그마-단축키">피그마 단축키</a></li></ul>
+              <ul class="toc__menu"><li><a href="#typescript란">TypeScript란?</a><ul><li><a href="#언어별-타입-시스템-차이">언어별 타입 시스템 차이</a></li></ul></li><li><a href="#타입스크립트-설치-및-실행-방법">타입스크립트 설치 및 실행 방법</a><ul><li><a href="#nodejs-패키지-초기화">Node.js 패키지 초기화</a></li><li><a href="#nodejs-내장-모듈-타입-정보-제공-npm-라이브러리-설치">Node.js 내장 모듈 타입 정보 제공 npm 라이브러리 설치</a></li><li><a href="#타입스크립트-컴파일러-설치">타입스크립트 컴파일러 설치</a></li><li><a href="#tsx-라이브러리-설치">tsx 라이브러리 설치</a></li></ul></li><li><a href="#타입스크립트-옵션-설정">타입스크립트 옵션 설정</a><ul><li><a href="#타입스크립트-컴파일러-옵션-설정-파일-생성">타입스크립트 컴파일러 옵션 설정 파일 생성</a></li><li><a href="#타입스크립트-컴파일러-옵션-설정-파일-수정">타입스크립트 컴파일러 옵션 설정 파일 수정</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h2 id="피그마-설치">피그마 설치</h2>
+        <h2 id="typescript란">TypeScript란?</h2>
 
-<p><a href="https://www.figma.com/downloads" target="_blank">https://www.figma.com/downloads</a></p>
+<p>Javascript를 안전하게 사용할 수 있도록 타입 관련 기능들을 추가한 확장 언어입니다.</p>
 
-<hr />
+<p>타입스크립트 코드는 컴파일 시 타입 검사를 성공하면 Javascript로 변환됩니다.<br />
+컴파일 된 Javascript에는 타입 관련 코드들이 포함되지 않아 성능에 영향을 주지 않습니다.<br />
+코드 실행 전 타입 오류를 미리 발견하므로 일반 Javascript보다 안정성이 높습니다.</p>
 
-<h2 id="피그마-사용법">피그마 사용법</h2>
-
-<h3 id="디자인-모드-보기">디자인 모드 보기</h3>
-<p>우측 상단 삼각화살표 버튼 &gt; Present 클릭 &gt; 좌측 Flows 선택 &gt; 우측 피그마 화면 클릭 시 연결된 화면이나 기능이 있는 요소에 파란색 박스 활성화 &gt; 활성화 요소 클릭하여 화면 이동</p>
-
-<h3 id="프로토타입-모드-보기">프로토타입 모드 보기</h3>
-<p>우측 상단 삼각화살표 버튼 &gt; Preview 클릭 &gt; 새로 뜨는 창에서 좌측 위 화살표로 이동 또는 활성화 요소 클릭하여 화면 이동</p>
-
-<h3 id="마우스-모드-변경">마우스 모드 변경</h3>
-<p>좌측 상단 마우스(선택모드), 손(이동모드), 말풍선(코멘트모드) 아이콘 선택</p>
-
-<hr />
-
-<h2 id="피그마-단축키">피그마 단축키</h2>
-
-<table>
+<h3 id="언어별-타입-시스템-차이">언어별 타입 시스템 차이</h3>
+<table class="table_3_left">
   <tbody>
     <tr>
-      <td>닫은 탭 살리기</td>
-      <td>Ctrl + Shift + T</td>
+      <td>정적 타입 시스템</td>
+      <td>C, Java</td>
+      <td>
+        코드 실행 전 컴파일 타임에 모든 변수 타입을 고정<br />
+        컴파일 시 타입 검사 수행 및 오류 검출로 안정성 높음<br />
+        변수 선언 시 타입 명시 필수
+        </td>
+    </tr>
+    <tr>
+      <td>동적 타입 시스템</td>
+      <td>JavaScript, Python</td>
+      <td>
+        코드 실행 중 런타임에 변수 타입을 유동적으로 결정<br />
+        타입 오류를 미리 검사할 수 없어 예기치 못한 오류 발생 가능<br />
+        변수 선언 시 타입 명시 불필요
+        </td>
+    </tr>
+    <tr>
+      <td>점진적 타입 시스템</td>
+      <td>TypeScript</td>
+      <td>
+        타입을 명시한 변수는 변수 타입을 고정<br />
+        타입이 명시되지 않은 변수는 타입 추론을 통해 검사 수행
+      </td>
     </tr>
   </tbody>
 </table>
+
+<hr />
+
+<h2 id="타입스크립트-설치-및-실행-방법">타입스크립트 설치 및 실행 방법</h2>
+
+<h3 id="nodejs-패키지-초기화">Node.js 패키지 초기화</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm init
+</code></pre></div></div>
+<p>타입스크립트 폴더 생성 후 Node.js 패키지 초기화 명령어를 실행합니다.<br />
+-y 옵션 또는 엔터로 기본값을 설정할 수 있습니다.<br />
+패키지가 초기화되면 package.json 파일이 생성됩니다.</p>
+
+<h3 id="nodejs-내장-모듈-타입-정보-제공-npm-라이브러리-설치">Node.js 내장 모듈 타입 정보 제공 npm 라이브러리 설치</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install @types/node --save-dev
+</code></pre></div></div>
+<p>fs, path, process 같은 Node.js 내장 모듈 사용 시 타입 검사에 필요한 라이브러리를 추가합니다.<br />
+라이브러리 설치 시 package.json 파일 devDependencies에 의존성이 추가됩니다.<br />
+node_modules 폴더에도 라이브러리 폴더 및 파일들이 설치됩니다.</p>
+
+<h3 id="타입스크립트-컴파일러-설치">타입스크립트 컴파일러 설치</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install typescript --save-dev
+</code></pre></div></div>
+<p>-g 옵션으로 전역 설치도 가능하지만, 버전 충돌 위험이 있어 프로젝트에만 설치하는 것이 권장됩니다.</p>
+
+<p><mark>타입스크립트 컴파일러 설치 확인</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tsc -v
+</code></pre></div></div>
+<p>타입스크립트 컴파일러 버전이 나오면 정상 설치된 것입니다.</p>
+
+<p><mark>타입스크립트 파일 컴파일 명령어</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tsc src/타입스크립트파일명.ts
+</code></pre></div></div>
+<p>코드 검사를 통과하면, 현재 폴더에 컴파일 된 Javascript 파일이 생성됩니다.</p>
+
+<p><mark>컴파일 된 Javascript 실행 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node src/자바스크립트파일명.js
+</code></pre></div></div>
+<p>타입스크립트를 컴파일하여 생성된 Javascript 파일을 node로 실행할 수 있습니다.</p>
+
+<h3 id="tsx-라이브러리-설치">tsx 라이브러리 설치</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install tsx --save-dev
+</code></pre></div></div>
+<p>타입스크립트 컴파일 및 실행을 동시에 할 수 있는 라이브러리를 설치합니다.<br />
+tsx는 기존 ts-node 라이브러리 대체재로 떠오르고 있습니다.</p>
+
+<p><mark>타입스크립트 컴파일 및 실행</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tsx src/타입스크립트파일명.ts
+</code></pre></div></div>
+<p>tsx를 통해 타입스크립트 파일 컴파일 및 실행을 동시에 합니다.<br />
+위 명령어 사용 시, 별도의 js 파일은 생성되지 않습니다.</p>
+
+<p><mark>타입스크립트 실행 시 에러메세지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(node:11830) Warning: To load an ES module, Set "type": "module" in the pacage.json or use the .mjs extension.
+</code></pre></div></div>
+<p>위와 같은 오류가 나오는 경우, package.json에 “type”: “module”을 지정하면 됩니다.<br />
+node.js로 ES 모듈 시스템을 사용하는 Javascript 파일을 실행하기 위해 필요한 설정입니다.</p>
+
+<hr />
+
+<h2 id="타입스크립트-옵션-설정">타입스크립트 옵션 설정</h2>
+
+<p>TypeScript 파일을 JavaScript 파일로 컴파일할 때 사용되는 컴파일러 옵션을 설정합니다.<br />
+타입 오류 검사 규칙, JavaScript 버전, 경로 매핑 등을 지정할 수 있습니다.</p>
+
+<h3 id="타입스크립트-컴파일러-옵션-설정-파일-생성">타입스크립트 컴파일러 옵션 설정 파일 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tsc --init
+</code></pre></div></div>
+<p>현재 프로젝트 폴더에 기본 설정이 담긴 tsconfig.json 파일을 생성합니다.</p>
+
+<h3 id="타입스크립트-컴파일러-옵션-설정-파일-수정">타입스크립트 컴파일러 옵션 설정 파일 수정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "compilerOptions": {
+    // 컴파일 결과 JavaScript 코드 버전 설정
+    "target": "ES6 또는 ESNext (최신버전)",
+
+    // 컴파일 결과 JavaScript 코드 모듈 시스템 설정 
+    "module": "CommonJS 또는 ESNext (ES 모듈 시스템)",
+
+    // 컴파일 결과 JavaScript 파일들이 생성될 폴더명 설정
+    "outDir": "dist",
+
+    // 엄격한 타입 오류 검사 모드 설정
+    // 타입 추론이 되지 않는 매개변수 오류 표시
+    "strict": true,
+
+    // 외부 라이브러리 타입 정의 파일 (.d.ts 파일) 타입 검사 생략
+    // undici-types 관련 오류 방지
+    "skipLibCheck": true,
+
+    // 각 타입스크립트 파일을 독립된 모듈로 인식 설정
+    "moduleDetection": "force"
+    // auto (기본값) : import / export 코드가 있어야 모듈로 인식
+    // force : 모든 .ts 파일 모듈 처리 (컴파일 시 하단에 export {}; 강제 삽입)
+  },
+
+  // src 폴더 내 모든 파일 컴파일
+  "include": ["src"]
+}
+</code></pre></div></div>
+<p>tsconfig.json 파일에 타입스크립트 컴파일 옵션을 정의할 수 있습니다.</p>
+
+<p><mark>타입스크립트 컴파일 명령어</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tsc
+</code></pre></div></div>
+<p>tsconfig.json 파일에 include 속성에 src 폴더를 지정했기 때문에,<br />
+파일명을 입력하지 않아도 src 폴더 내 모든 타입스크립트 파일들이 컴파일됩니다.</p>
 
         
       </section>
@@ -524,14 +640,14 @@
     
       
       
-      <a href="/categories#tool" class="page__taxonomy-item" rel="tag">윈도우 / Tool</a>
+      <a href="/categories#web-dev" class="page__taxonomy-item" rel="tag">Web 개발</a>
     
     </span>
   </p>
 
 
         
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-11-09">2023-11-09</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-06-30">2025-06-30</time></p>
 
 
       </footer>
@@ -541,11 +657,10 @@
       
   <nav class="pagination">
     
-      <a href="/web-dev/2023-11-09-1" class="pagination--pager" title="SpringBoot 커스텀 에러페이지 설정 방법
-">❮</a>
+      <a href="#" class="pagination--pager disabled">❮</a>
     
     
-      <a href="/tool/2023-11-08-1" class="pagination--pager" title="윈도우 창 잡고 흔들면 모든 창 최소화되는 기능 끄기
+      <a href="/web-dev/2025-06-25-1" class="pagination--pager" title="Vue 컴포저블 함수 구현 및 사용 방법
 ">❯</a>
     
   </nav>
@@ -561,42 +676,6 @@
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-06-30-1" rel="permalink">TypeScript 개념 정리 / 타입스크립트 설치 및 컴파일 옵션 설정 방법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-06-30T00:00:00+00:00">2025-06-30</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
         
           
 
@@ -691,6 +770,42 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-06-23T00:00:00+00:00">2025-06-23</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/english/2025-06-22-1" rel="permalink">영단어 기본 구조 정리 / 접두사, 어근, 접미사 요약
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-06-22T00:00:00+00:00">2025-06-22</time>
       </span>
     
 
