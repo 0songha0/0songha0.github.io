@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 225</span>
+      <span class="nav__total">🌴 Total Posts: 226</span>
     </li> -->
     
     
@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> TypeScript 개념 정리 / 타입스크립트 설치 및 컴파일 옵션 설정 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#typescript란">TypeScript란?</a><ul><li><a href="#언어별-타입-시스템-차이">언어별 타입 시스템 차이</a></li></ul></li><li><a href="#타입스크립트-설치-및-실행-방법">타입스크립트 설치 및 실행 방법</a><ul><li><a href="#nodejs-패키지-초기화">Node.js 패키지 초기화</a></li><li><a href="#nodejs-내장-모듈-타입-정보-제공-npm-라이브러리-설치">Node.js 내장 모듈 타입 정보 제공 npm 라이브러리 설치</a></li><li><a href="#타입스크립트-컴파일러-설치">타입스크립트 컴파일러 설치</a></li><li><a href="#tsx-라이브러리-설치">tsx 라이브러리 설치</a></li></ul></li><li><a href="#타입스크립트-옵션-설정">타입스크립트 옵션 설정</a><ul><li><a href="#타입스크립트-컴파일러-옵션-설정-파일-생성">타입스크립트 컴파일러 옵션 설정 파일 생성</a></li><li><a href="#타입스크립트-컴파일러-옵션-설정-파일-수정">타입스크립트 컴파일러 옵션 설정 파일 수정</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#typescript란">TypeScript란?</a><ul><li><a href="#언어별-타입-시스템-차이">언어별 타입 시스템 차이</a></li></ul></li><li><a href="#타입스크립트-설치-및-실행-방법">타입스크립트 설치 및 실행 방법</a><ul><li><a href="#nodejs-패키지-초기화">Node.js 패키지 초기화</a></li><li><a href="#nodejs-내장-모듈-타입-정보-제공-npm-라이브러리-설치">Node.js 내장 모듈 타입 정보 제공 npm 라이브러리 설치</a></li><li><a href="#타입스크립트-컴파일러-설치">타입스크립트 컴파일러 설치</a></li><li><a href="#컴파일-된-javascript-실행-방법">컴파일 된 Javascript 실행 방법</a></li><li><a href="#tsx-라이브러리-설치">tsx 라이브러리 설치</a></li></ul></li><li><a href="#타입스크립트-옵션-설정">타입스크립트 옵션 설정</a><ul><li><a href="#타입스크립트-컴파일러-옵션-설정-파일-생성">타입스크립트 컴파일러 옵션 설정 파일 생성</a></li><li><a href="#타입스크립트-컴파일러-옵션-설정-파일-수정">타입스크립트 컴파일러 옵션 설정 파일 수정</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -548,10 +548,16 @@ node_modules 폴더에도 라이브러리 폴더 및 파일들이 설치됩니�
 </code></pre></div></div>
 <p>코드 검사를 통과하면, 현재 폴더에 컴파일 된 Javascript 파일이 생성됩니다.</p>
 
-<p><mark>컴파일 된 Javascript 실행 방법</mark></p>
+<h3 id="컴파일-된-javascript-실행-방법">컴파일 된 Javascript 실행 방법</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node src/자바스크립트파일명.js
 </code></pre></div></div>
 <p>타입스크립트를 컴파일하여 생성된 Javascript 파일을 node로 실행할 수 있습니다.</p>
+
+<p><mark>타입스크립트 실행 시 에러메세지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(node:11830) Warning: To load an ES module, Set "type": "module" in the pacage.json or use the .mjs extension.
+</code></pre></div></div>
+<p>위와 같은 오류가 나오는 경우, package.json에 “type”: “module”을 지정하면 됩니다.<br />
+node.js로 ES 모듈 시스템을 사용하는 Javascript 파일을 실행하기 위해 필요한 설정입니다.</p>
 
 <h3 id="tsx-라이브러리-설치">tsx 라이브러리 설치</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install tsx --save-dev
@@ -564,12 +570,6 @@ tsx는 기존 ts-node 라이브러리 대체재로 떠오르고 있습니다.</p
 </code></pre></div></div>
 <p>tsx를 통해 타입스크립트 파일 컴파일 및 실행을 동시에 합니다.<br />
 위 명령어 사용 시, 별도의 js 파일은 생성되지 않습니다.</p>
-
-<p><mark>타입스크립트 실행 시 에러메세지</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(node:11830) Warning: To load an ES module, Set "type": "module" in the pacage.json or use the .mjs extension.
-</code></pre></div></div>
-<p>위와 같은 오류가 나오는 경우, package.json에 “type”: “module”을 지정하면 됩니다.<br />
-node.js로 ES 모듈 시스템을 사용하는 Javascript 파일을 실행하기 위해 필요한 설정입니다.</p>
 
 <hr />
 
@@ -599,14 +599,19 @@ node.js로 ES 모듈 시스템을 사용하는 Javascript 파일을 실행하기
     // 타입 추론이 되지 않는 매개변수 오류 표시
     "strict": true,
 
+    // 엄격한 null 검사 여부 설정
+    // false : 타입 변수에 null 할당 허용
+    // strict 옵션의 하위 옵션이므로, strict false 설정 시 strictNullCheckes도 false 됨
+    "strictNullCheckes": false,
+
     // 외부 라이브러리 타입 정의 파일 (.d.ts 파일) 타입 검사 생략
     // undici-types 관련 오류 방지
     "skipLibCheck": true,
 
-    // 각 타입스크립트 파일을 독립된 모듈로 인식 설정
+    // 각 타입스크립트 파일을 독립된 모듈로 인식하는 기준 설정
     "moduleDetection": "force"
     // auto (기본값) : import / export 코드가 있어야 모듈로 인식
-    // force : 모든 .ts 파일 모듈 처리 (컴파일 시 하단에 export {}; 강제 삽입)
+    // force : 모든 .ts 파일을 개별 모듈로 인식 (컴파일 결과 .js 하단에 export {}; 강제 삽입)
   },
 
   // src 폴더 내 모든 파일 컴파일
@@ -657,7 +662,8 @@ node.js로 ES 모듈 시스템을 사용하는 Javascript 파일을 실행하기
       
   <nav class="pagination">
     
-      <a href="#" class="pagination--pager disabled">❮</a>
+      <a href="/web-dev/2025-07-01-1" class="pagination--pager" title="TypeScript 타입 종류 및 타입 정의 방법
+">❮</a>
     
     
       <a href="/web-dev/2025-06-25-1" class="pagination--pager" title="Vue 컴포저블 함수 구현 및 사용 방법
@@ -676,6 +682,42 @@ node.js로 ES 모듈 시스템을 사용하는 Javascript 파일을 실행하기
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-07-01-1" rel="permalink">TypeScript 타입 종류 및 타입 정의 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-07-01T00:00:00+00:00">2025-07-01</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
         
           
 
@@ -770,42 +812,6 @@ node.js로 ES 모듈 시스템을 사용하는 Javascript 파일을 실행하기
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-06-23T00:00:00+00:00">2025-06-23</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/english/2025-06-22-1" rel="permalink">영단어 기본 구조 정리 / 접두사, 어근, 접미사 요약
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-06-22T00:00:00+00:00">2025-06-22</time>
       </span>
     
 
