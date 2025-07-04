@@ -1350,7 +1350,7 @@ var store = [{
         "teaser": null
       },{
         "title": "TypeScript 타입 종류 및 타입 정의 방법",
-        "excerpt":"TypeScript 타입 종류 및 문법 기본 원시 타입 (Primitive Types) // 문자열만 저장 허용 let 변수명: string = \"문자\"; // 숫자만 저장 허용 (정수, 실수 모두 포함) let 변수명: number = 숫자; // 아주 큰 정수 저장 허용 let 변수명: bigint = 123456789012345678901234567890n; // 참/거짓만 저장 허용 let 변수명: boolean...","categories": ["web-dev"],
+        "excerpt":"TypeScript 타입 종류 및 문법 정리 기본 원시 타입 (Primitive Types) // 문자열만 저장 허용 let 변수명: string = \"문자\"; // 숫자만 저장 허용 (정수, 실수 모두 포함) let 변수명: number = 숫자; // 아주 큰 정수 저장 허용 let 변수명: bigint = 123456789012345678901234567890n; // 참/거짓만 저장 허용 let 변수명:...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-07-01-1",
         "teaser": null
