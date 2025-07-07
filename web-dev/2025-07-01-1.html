@@ -470,15 +470,15 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> TypeScript 타입 종류 및 타입 정의 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#typescript-타입-종류-및-문법-정리">TypeScript 타입 종류 및 문법 정리</a><ul><li><a href="#기본-원시-타입-primitive-types">기본 원시 타입 (Primitive Types)</a></li><li><a href="#리터럴-타입">리터럴 타입</a></li><li><a href="#배열-타입-array">배열 타입 (Array)</a></li><li><a href="#튜플-타입">튜플 타입</a></li><li><a href="#객체-타입-object">객체 타입 (Object)</a></li><li><a href="#enum-타입">Enum 타입</a></li><li><a href="#any-타입">any 타입</a></li><li><a href="#unknown-타입">unknown 타입</a></li><li><a href="#void-타입">void 타입</a></li><li><a href="#never-타입">never 타입</a></li><li><a href="#함수-타입">함수 타입</a></li><li><a href="#union-타입">Union 타입</a></li><li><a href="#인터섹션-타입">인터섹션 타입</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#typescript-기본-타입-종류">TypeScript 기본 타입 종류</a><ul><li><a href="#기본-원시-타입-primitive-types">기본 원시 타입 (Primitive Types)</a></li><li><a href="#리터럴-타입">리터럴 타입</a></li><li><a href="#배열-타입-array">배열 타입 (Array)</a></li><li><a href="#튜플-타입">튜플 타입</a></li><li><a href="#객체-타입-object">객체 타입 (Object)</a></li><li><a href="#enum-타입">Enum 타입</a></li><li><a href="#any-타입">any 타입</a></li><li><a href="#unknown-타입">unknown 타입</a></li><li><a href="#void-타입">void 타입</a></li><li><a href="#never-타입">never 타입</a></li><li><a href="#함수-타입">함수 타입</a></li></ul></li><li><a href="#대수-타입">대수 타입</a><ul><li><a href="#합집합-타입-union-타입">합집합 타입 (Union 타입)</a></li><li><a href="#교집합-타입-intersection-타입">교집합 타입 (Intersection 타입)</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h2 id="typescript-타입-종류-및-문법-정리">TypeScript 타입 종류 및 문법 정리</h2>
+        <h2 id="typescript-기본-타입-종류">TypeScript 기본 타입 종류</h2>
 
 <h3 id="기본-원시-타입-primitive-types">기본 원시 타입 (Primitive Types)</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 문자열만 저장 허용
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 문자만 저장 허용
 let 변수명: string = "문자";
 
 // 숫자만 저장 허용 (정수, 실수 모두 포함)
@@ -506,6 +506,9 @@ let 변수명: symbol = Symbol("id"); // 고유한 식별자 생성 함수 (객�
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let 변수명: 값 = 값;
 </code></pre></div></div>
 <p>리터럴 타입은 특정 프리미티브 타입 값 하나만 허용하는 타입입니다.</p>
+
+<p>number 리터럴 타입은 number 타입의 하위 타입이므로,<br />
+number 타입 변수에 업캐스팅하여 할당 가능합니다.</p>
 
 <h3 id="배열-타입-array">배열 타입 (Array)</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 타입 어노테이션 문법으로 배열 타입 정의
@@ -569,6 +572,8 @@ let 변수명: {
 변수명.id;
 </code></pre></div></div>
 <p>프로퍼티명, 프로퍼티 타입이 정해진 객체입니다.</p>
+
+<p>객체 타입은 모든 필드를 포함하고, 추가 프로퍼티가 있는 타입이 서브 타입입니다.</p>
 
 <p><mark>타입 별칭으로 객체 타입 정의</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 타입 별칭 정의
@@ -640,6 +645,9 @@ num = 변수명;
 <p>모든 타입 값을 허용해서, 특정 변수 타입을 모를 때 사용할 수 있는 타입입니다.<br />
 타입 검사를 하지 않으므로 런타임 에러가 발생할 수 있어 사용이 지양되는 타입입니다.</p>
 
+<p>any 타입 변수는 모든 타입 변수에 할당할 수 있고,<br />
+모든 타입 변수를 할당 받을 수 있는 특수한 타입입니다.</p>
+
 <h3 id="unknown-타입">unknown 타입</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 모든 타입 허용하는 unknown 타입 변수 정의
 let 변수명: unknown = 값;
@@ -661,6 +669,9 @@ if (typeof 변수명 === "number") {
 <p>모든 타입 값을 허용하지만, 다른 타입에 할당 시 타입 검사가 진행되는 타입입니다.<br />
 특정 변수 타입을 모를 때 any 타입보다 unknown 타입 사용이 더 권장됩니다.</p>
 
+<p>unknown은 모든 타입의 슈퍼 타입이어서 어떤 타입 변수든 업캐스팅하여 할당할 수 있지만,<br />
+모든 서브 타입 변수에는 타입 검사 없이 unknown 타입을 다운캐스팅하여 직접 할당할 수 없습니다.</p>
+
 <h3 id="void-타입">void 타입</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 함수 반환 값 없음 명시
 function 함수명(): void {
@@ -675,6 +686,9 @@ let 변수명: void;
 </code></pre></div></div>
 <p>void 타입은 아무것도 없음을 의미하는 타입입니다.<br />
 주로 void 변수보다는 반환값이 없는 함수로 사용됩니다.</p>
+
+<p>void 타입은 undefined 타입의 슈퍼 타입이므로, undefined 타입 값을 할당할 수 있습니다.<br />
+void 타입 변수는 undefined 값을 가지기 때문에, undefined 타입에도 할당 가능합니다.</p>
 
 <h3 id="never-타입">never 타입</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 함수 반환 값 존재할 수 없음 명시
@@ -693,6 +707,9 @@ let 변수명: never;
 </code></pre></div></div>
 <p>반환 값을 절대 반환하지 않는 함수, 예외 발생 함수 등에 사용하는 타입입니다.</p>
 
+<p>never 타입 변수는 any 타입 등 어떤 타입 값도 직접 할당할 수 없는 공집합입니다.<br />
+모든 타입의 하위 타입인 never 타입 변수는 어떤 타입 변수에든 업캐스팅하여 할당할 수 있습니다.</p>
+
 <h3 id="함수-타입">함수 타입</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 한수 매개변수 타입 지정
 function 함수명(매개변수명1: string, 매개변수명2: number) {
@@ -706,15 +723,64 @@ function 함수명(): string {
 </code></pre></div></div>
 <p>함수의 매개변수 타입, 반환값 타입 지정이 가능합니다.</p>
 
-<h3 id="union-타입">Union 타입</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let 변수명: (string | number) = 값;
-</code></pre></div></div>
-<p>여러 타입 중 하나를 지정 가능한 타입입니다.</p>
+<hr />
 
-<h3 id="인터섹션-타입">인터섹션 타입</h3>
+<h2 id="대수-타입">대수 타입</h2>
+
+<p>여러 타입을 조합해 만드는 새로운 타입입니다.</p>
+
+<h3 id="합집합-타입-union-타입">합집합 타입 (Union 타입)</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let 변수명: (string | number) = 값;
+
+// Union 타입을 이용한 배열 타입 정의
+let 변수명: (number | string | boolean)[] = [1, "hello", true];
+</code></pre></div></div>
+<p>여러 타입 중 하나를 만족하면 저장할 수 있는 유니온 타입 예시입니다.</p>
+
+<p><mark>유니온 타입 객체 정의 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Dog = {
+  name: string;
+  color: string;
+}
+
+type Person = {
+  name: string;
+  language: string;
+}
+
+type UnionType = Dog | Person;
+
+// Dog 타입 집합에 포함되므로 선언 가능
+let 변수명: UnionType = {
+  name: "",
+  color: "",
+};
+
+// Person 타입 집합에 포함되므로 선언 가능
+let 변수명: UnionType = {
+  name: "",
+  language: "",
+};
+
+// Dog 타입, Person 타입 교집합에 포함되므로 선언 가능
+let 변수명: UnionType = {
+  name: "",
+  color: "",
+  language: "",
+}
+
+// Dog 타입, Person 타입 집합 등 어디에도 포함되지 않으므로 선언 불가
+let 변수명: UnionType = {
+  name: ""
+};
+</code></pre></div></div>
+<p>Union 타입을 사용한 객체 정의 방법 예시입니다.</p>
+
+<h3 id="교집합-타입-intersection-타입">교집합 타입 (Intersection 타입)</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Admin = { role: "admin" };
 type User = { name: string };
 
+// 교집합 타입 정의
 type AdminUser = Admin &amp; User;
 
 const person: AdminUser = {
@@ -722,7 +788,29 @@ const person: AdminUser = {
   name: "지후"
 };
 </code></pre></div></div>
-<p>여러 타입을 동시에 만족해야 하는 타입입니다.</p>
+<p>여러 타입의 모든 속성을 포함해야 저장할 수 있는 인터섹션 타입 예시입니다.</p>
+
+<p><mark>인터섹션 타입 객체 정의 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Dog = {
+  name: string;
+  color: string;
+}
+
+type Person = {
+  name: string;
+  language: string;
+}
+
+type IntersectionType = Dog &amp; Person;
+
+// Dog 타입, Person 타입 교집합에 포함되므로 선언 가능
+let 변수명: IntersectionType = {
+  name: "",
+  color: "",
+  language: ""
+}
+</code></pre></div></div>
+<p>Intersection 타입을 사용한 객체 정의 방법 예시입니다.</p>
 
         
       </section>
