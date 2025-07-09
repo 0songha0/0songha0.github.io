@@ -1343,13 +1343,13 @@ var store = [{
         "url": "/web-dev/2025-06-25-1",
         "teaser": null
       },{
-        "title": "TypeScript 개념 정리 / 타입스크립트 설치 및 컴파일 옵션 설정 방법",
+        "title": "타입스크립트 개념 정리 / 타입스크립트 설치 및 컴파일 옵션 설정 방법",
         "excerpt":"TypeScript란? Javascript를 안전하게 사용할 수 있도록 타입 관련 기능들을 추가한 확장 언어입니다. 타입스크립트 코드는 컴파일 시 타입 검사를 성공하면 Javascript로 변환됩니다. 컴파일 된 Javascript에는 타입 관련 코드들이 포함되지 않아 성능에 영향을 주지 않습니다. 코드 실행 전 타입 오류를 미리 발견하므로 일반 Javascript보다 안정성이 높습니다. 언어별 타입 시스템 차이 정적 타입...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-06-30-1",
         "teaser": null
       },{
-        "title": "TypeScript 타입 종류 및 타입 정의 방법",
+        "title": "타입스크립트 타입 종류 및 타입 정의 방법",
         "excerpt":"TypeScript 기본 타입 종류 기본 원시 타입 (Primitive Types) // 문자만 저장 허용 let 변수명: string = \"문자\"; // 숫자만 저장 허용 (정수, 실수 모두 포함) let 변수명: number = 숫자; // 아주 큰 정수 저장 허용 let 변수명: bigint = 123456789012345678901234567890n; // 참/거짓만 저장 허용 let 변수명: boolean =...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-07-01-1",
