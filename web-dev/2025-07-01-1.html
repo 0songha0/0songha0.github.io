@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>TypeScript 타입 종류 및 타입 정의 방법 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>타입스크립트 타입 제어 기법 정리 / 타입 추론, 타입 단언, 타입 좁히기 등 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,7 +65,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="TypeScript 타입 종류 및 타입 정의 방법">
+<meta property="og:title" content="타입스크립트 타입 제어 기법 정리 / 타입 추론, 타입 단언, 타입 좁히기 등">
 <meta property="og:url" content="https://0songha0.github.io/web-dev/2025-07-01-1">
 
 
@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 226</span>
+      <span class="nav__total">🌴 Total Posts: 227</span>
     </li> -->
     
     
@@ -433,7 +433,7 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="TypeScript 타입 종류 및 타입 정의 방법">
+    <meta itemprop="headline" content="타입스크립트 타입 제어 기법 정리 / 타입 추론, 타입 단언, 타입 좁히기 등">
     <meta itemprop="description" content="">
     <meta itemprop="datePublished" content="2025-07-01T00:00:00+00:00">
     <meta itemprop="dateModified" content="2025-07-01T00:00:00+00:00">
@@ -441,7 +441,7 @@
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">TypeScript 타입 종류 및 타입 정의 방법
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">타입스크립트 타입 제어 기법 정리 / 타입 추론, 타입 단언, 타입 좁히기 등
 </h1>
           
 
@@ -468,349 +468,147 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> TypeScript 타입 종류 및 타입 정의 방법</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 타입스크립트 타입 제어 기법 정리 / 타입 추론, 타입 단언, 타입 좁히기 등</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#typescript-기본-타입-종류">TypeScript 기본 타입 종류</a><ul><li><a href="#기본-원시-타입-primitive-types">기본 원시 타입 (Primitive Types)</a></li><li><a href="#리터럴-타입">리터럴 타입</a></li><li><a href="#배열-타입-array">배열 타입 (Array)</a></li><li><a href="#튜플-타입">튜플 타입</a></li><li><a href="#객체-타입-object">객체 타입 (Object)</a></li><li><a href="#enum-타입">Enum 타입</a></li><li><a href="#any-타입">any 타입</a></li><li><a href="#unknown-타입">unknown 타입</a></li><li><a href="#void-타입">void 타입</a></li><li><a href="#never-타입">never 타입</a></li><li><a href="#함수-타입">함수 타입</a></li></ul></li><li><a href="#대수-타입">대수 타입</a><ul><li><a href="#합집합-타입-union-타입">합집합 타입 (Union 타입)</a></li><li><a href="#교집합-타입-intersection-타입">교집합 타입 (Intersection 타입)</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#타입-추론">타입 추론</a><ul><li><a href="#타입-넓히기를-통한-타입-추론">타입 넓히기를 통한 타입 추론</a></li></ul></li><li><a href="#타입-단언-as">타입 단언 (as)</a><ul><li><a href="#타입-단언으로-객체-정의-방법">타입 단언으로 객체 정의 방법</a></li><li><a href="#타입-단언으로-초과-프로퍼티-검사-우회-방법">타입 단언으로 초과 프로퍼티 검사 우회 방법</a></li><li><a href="#const-단언-방법">Const 단언 방법</a></li><li><a href="#non-null-단언-방법">Non Null 단언 방법</a></li></ul></li><li><a href="#타입-좁히기-타입-가드">타입 좁히기 (타입 가드)</a><ul><li><a href="#조건문을-이용한-타입-좁히기">조건문을 이용한 타입 좁히기</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h2 id="typescript-기본-타입-종류">TypeScript 기본 타입 종류</h2>
+        <h2 id="타입-추론">타입 추론</h2>
+<p>변수 타입이 정의되지 않은 경우, 타입스크립트가 자동으로 변수 타입을 추론합니다.<br />
+타입스크립트는 변수의 초기값을 기준으로 타입을 추론합니다.<br />
+초기값이 없는 변수는 암묵적 any 타입이므로, 어떤 타입 값이든 할당할 수 있습니다.</p>
 
-<h3 id="기본-원시-타입-primitive-types">기본 원시 타입 (Primitive Types)</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 문자만 저장 허용
-let 변수명: string = "문자";
+<h3 id="타입-넓히기를-통한-타입-추론">타입 넓히기를 통한 타입 추론</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// a : number 타입
+let a = 10;
 
-// 숫자만 저장 허용 (정수, 실수 모두 포함)
-let 변수명: number = 숫자;
-
-// 아주 큰 정수 저장 허용
-let 변수명: bigint = 123456789012345678901234567890n;
-
-// 참/거짓만 저장 허용
-let 변수명: boolean = true;
-
-// null 값만 저장 허용
-let 변수명: null = null;
-
-// undefined 값만 저장 허용 (값이 할당되지 않음)
-let 변수명: undefined = undefined;
-
-// 고유한 식별자만 저장 허용
-let 변수명: symbol = Symbol("id"); // 고유한 식별자 생성 함수 (객체 키로 사용 가능)
+// a : 10 (number 리터럴 타입)
+const a = 10;
 </code></pre></div></div>
-<p>원시 타입 변수는 객체 참조가 아닌, 단일 프리미티브 값 자체를 저장합니다.<br />
-‘: 타입명’ 처럼 타입 주석 (타입 어노테이션) 형태로 변수 타입을 정의할 수 있습니다.</p>
-
-<h3 id="리터럴-타입">리터럴 타입</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let 변수명: 값 = 값;
-</code></pre></div></div>
-<p>리터럴 타입은 특정 프리미티브 타입 값 하나만 허용하는 타입입니다.</p>
-
-<p>number 리터럴 타입은 number 타입의 하위 타입이므로,<br />
-number 타입 변수에 업캐스팅하여 할당 가능합니다.</p>
-
-<h3 id="배열-타입-array">배열 타입 (Array)</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 타입 어노테이션 문법으로 배열 타입 정의
-let 변수명: number[] = [1, 2, 3];
-let 변수명: string[] = ["문자1", "문자2"];
-
-// 제네릭 문법으로 배열 타입 정의
-let 변수명: Array&lt;boolean&gt; = [true, false];
-
-// 유니온 타입 배열 정의 (다양한 타입 값 저장 배열)
-let 변수명: (string | number)[] = ["문자", 30, 40];
-</code></pre></div></div>
-<p>배열은 주로 동일한 타입 값들의 집합입니다.<br />
-다양한 타입 값을 저장할 수 있는 유니온 타입 배열도 정의 가능합니다.</p>
-
-<p><mark>다차원 배열 정의 방법</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let 변수명: number[][] = [
-  [1, 2, 3],
-  [4, 5]
-]
-</code></pre></div></div>
-<p>number 타입 변수를 담는 2차원 배열 예시입니다.</p>
-
-<p><mark>배열 값 추가 및 제거 방법</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 배열 값 추가
-배열명.push(값);
-
-// 배열 값 삭제
-배열명.pop();
-</code></pre></div></div>
-<p>위와 같이 배열 값을 추가하거나 삭제할 수 있습니다.</p>
-
-<h3 id="튜플-타입">튜플 타입</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let 변수명: [string, number] = ["나이", 30];
-</code></pre></div></div>
-<p>튜플은 다른 타입을 함께 저장할 수 있고, 길이와 타입이 고정된 배열입니다.<br />
-튜플도 배열이므로, push/pop 함수 사용 가능하지만 타입 체크가 안될 수 있어 주의가 필요합니다.</p>
-
-<p><mark>튜플 요소를 갖는 배열 정의 방법</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const 변수명: [string, number][] = [
-  ["홍길동", 1],
-  ["김지후", 2],
-  ["한빛나", 3]
-]
-</code></pre></div></div>
-<p>string, number 타입 순서의 튜플을 담는 2차원 배열 예시입니다.</p>
-
-<h3 id="객체-타입-object">객체 타입 (Object)</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 객체 리터럴 타입 정의
-let 변수명: {
-  id?: number; // ? : 옵셔널 프로퍼티 (있어도 되고, 없어도 됨)
-  name: string; // 필수 프로퍼티
-  readonly pw: string; // 읽기 전용 프로퍼티 (값 수정 불가)
-} = {
-  id: 1,
-  name: "오시후",
-  pw: '!@#asj'
-}
-
-// 객체 속성 접근 가능
-변수명.id;
-</code></pre></div></div>
-<p>프로퍼티명, 프로퍼티 타입이 정해진 객체입니다.</p>
-
-<p>객체 타입은 모든 필드를 포함하고, 추가 프로퍼티가 있는 타입이 서브 타입입니다.</p>
-
-<p><mark>타입 별칭으로 객체 타입 정의</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 타입 별칭 정의
-type 타입별칭명 = {
-  id: number;
-  name: string;
-  pw: string;
-}
-
-// 타입 별칭으로 객체 타입 정의
-let 변수명1: 타입별칭명 = {
-  id: 1,
-  name: "오시후",
-  pw: '!@#asj'
-}
-let 변수명2: 타입별칭명 = {
-  id: 2,
-  name: "한지연",
-  pw: 'fgh%$2!'
-}
-</code></pre></div></div>
-<p>타입 별칭 정의 후, 동일한 객체 타입을 여러 객체에 재사용할 수 있습니다.<br />
-중복된 타입 정의 로직을 줄일 수 있다는 장점이 있습니다.</p>
-
-<p><mark>인덱스 시그니처로 객체 타입 정의</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type 타입별칭명 = {
-  [key: string]: string;
-  키1: string // 고정 프로퍼티 작성 가능 (변수 선언 시 키1 값이 필수인 경우)
-}
-
-let 변수명: 타입별칭명 = {
-  키1: "값",
-  키2: "값",
-  키3: "값"
-}
-</code></pre></div></div>
-<p>키, 값 타입이 모두 동일하게 들어오는 경우 인덱스 시그니처를 활용하면 좋습니다.</p>
-
-<h3 id="enum-타입">Enum 타입</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 열거형 타입 정의
-enum Role {
-  ADMIN = 0,
-  USER = 1,
-  GUEST // 숫자 생략 시 자동 숫자 할당 (+1)
-}
-
-// 객체 값으로 열거형 타입 사용
-const 변수명 = {
-  name: "김정호",
-  role: Role.ADMIN
-}
-</code></pre></div></div>
-<p>열거형으로 값 집합을 정의합니다.<br />
-enum 타입은 컴파일 시 양방향 매핑이 된 JavaScript 객체로 변환됩니다.</p>
-
-<h3 id="any-타입">any 타입</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 모든 타입 허용하는 any 타입 변수 정의
-let 변수명:any = 10;
-
-// 모든 타입 값 저장 가능
-변수명 = "10";
-변수명 = () =&gt; {};
-
-// 다른 타입 변수에 any 타입 변수 저장 가능
-// 컴파일 시 정상, 런타임 에러 발생 가능
-let num: number = 12;
-num = 변수명;
-</code></pre></div></div>
-<p>모든 타입 값을 허용해서, 특정 변수 타입을 모를 때 사용할 수 있는 타입입니다.<br />
-타입 검사를 하지 않으므로 런타임 에러가 발생할 수 있어 사용이 지양되는 타입입니다.</p>
-
-<p>any 타입 변수는 모든 타입 변수에 할당할 수 있고,<br />
-모든 타입 변수를 할당 받을 수 있는 특수한 타입입니다.</p>
-
-<h3 id="unknown-타입">unknown 타입</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 모든 타입 허용하는 unknown 타입 변수 정의
-let 변수명: unknown = 값;
-
-// 모든 타입 값 저장 가능
-변수명 = "";
-변수명 = 1;
-변수명 = () =&gt; {};
-
-// 다른 타입 변수에 unknown 타입 변수 저장 불가
-let num: number = 12;
-num = 변수명;
-
-// 타입 정제 시, 다른 타입 변수에 unknown 타입 변수 저장 가능
-if (typeof 변수명 === "number") {
-  num = 변수명;
-}
-</code></pre></div></div>
-<p>모든 타입 값을 허용하지만, 다른 타입에 할당 시 타입 검사가 진행되는 타입입니다.<br />
-특정 변수 타입을 모를 때 any 타입보다 unknown 타입 사용이 더 권장됩니다.</p>
-
-<p>unknown은 모든 타입의 슈퍼 타입이어서 어떤 타입 변수든 업캐스팅하여 할당할 수 있지만,<br />
-모든 서브 타입 변수에는 타입 검사 없이 unknown 타입을 다운캐스팅하여 직접 할당할 수 없습니다.</p>
-
-<h3 id="void-타입">void 타입</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 함수 반환 값 없음 명시
-function 함수명(): void {
-  console.log("로그 출력");
-}
-
-// 변수 값 없음 명시
-let 변수명: void;
-
-변수명 = 1; // 변수 값 지정 불가
-변수명 = undefined; // 변수 값 undefined 저장 가능
-</code></pre></div></div>
-<p>void 타입은 아무것도 없음을 의미하는 타입입니다.<br />
-주로 void 변수보다는 반환값이 없는 함수로 사용됩니다.</p>
-
-<p>void 타입은 undefined 타입의 슈퍼 타입이므로, undefined 타입 값을 할당할 수 있습니다.<br />
-void 타입 변수는 undefined 값을 가지기 때문에, undefined 타입에도 할당 가능합니다.</p>
-
-<h3 id="never-타입">never 타입</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 함수 반환 값 존재할 수 없음 명시
-function 함수명(): never {
-  while (true) {}
-}
-
-// 변수 값 존재할 수 없음 명시
-let 변수명: never;
-
-// 모든 변수 값 할당 불가 (전부 에러 발생)
-변수명 = 1;
-변수명 = {};
-변수명 = undefined;
-변수명 = null;
-</code></pre></div></div>
-<p>반환 값을 절대 반환하지 않는 함수, 예외 발생 함수 등에 사용하는 타입입니다.</p>
-
-<p>never 타입 변수는 any 타입 등 어떤 타입 값도 직접 할당할 수 없는 공집합입니다.<br />
-모든 타입의 하위 타입인 never 타입 변수는 어떤 타입 변수에든 업캐스팅하여 할당할 수 있습니다.</p>
-
-<h3 id="함수-타입">함수 타입</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 한수 매개변수 타입 지정
-function 함수명(매개변수명1: string, 매개변수명2: number) {
-  
-}
-
-// 함수 반환 값 타입 지정
-function 함수명(): string {
-  return "값";
-}
-</code></pre></div></div>
-<p>함수의 매개변수 타입, 반환값 타입 지정이 가능합니다.</p>
+<p>타입스크립트는 타입 넓히기를 통해 더 범용적인 타입을 추론합니다.<br />
+const로 선언된 변수는 재할당이 불가하므로 리터럴 타입 그대로 추론됩니다.</p>
 
 <hr />
 
-<h2 id="대수-타입">대수 타입</h2>
+<h2 id="타입-단언-as">타입 단언 (as)</h2>
+<p>타입스크립트 컴파일러에게 개발자가 타입을 지정해서 알려주는 기능입니다.</p>
 
-<p>여러 타입을 조합해 만드는 새로운 타입입니다.</p>
+<p><mark>타입 단언 규칙</mark><br />
+단언하는 타입이 값의 슈퍼 타입 또는 서브 타입이어야 타입 단언이 가능합니다.<br />
+다중 단언 시 타입 단언 규칙을 우회할 수 있지만, 안전하지 않아 권장되지 않습니다.</p>
 
-<h3 id="합집합-타입-union-타입">합집합 타입 (Union 타입)</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let 변수명: (string | number) = 값;
+<h3 id="타입-단언으로-객체-정의-방법">타입 단언으로 객체 정의 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Person = {
+  name: string;
+  age: number;
+}
 
-// Union 타입을 이용한 배열 타입 정의
-let 변수명: (number | string | boolean)[] = [1, "hello", true];
+// 초기값 {}에 name, age 속성이 없어서 타입 오류 발생
+let person: Person = {};
+person.name = "하지후";
+person.age = 21;
+
+// 타입 단언으로 객체 생성 후 ame, age 속성 부여
+let person = {} as Person;
+person.name = "하지후";
+person.age = 21;
 </code></pre></div></div>
-<p>여러 타입 중 하나를 만족하면 저장할 수 있는 유니온 타입 예시입니다.</p>
+<p>객체 뒤에 as 타입명을 붙이면 해당 타입으로 간주하도록 타입 단언을 할 수 있습니다.</p>
 
-<p><mark>유니온 타입 객체 정의 방법</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Dog = {
+<h3 id="타입-단언으로-초과-프로퍼티-검사-우회-방법">타입 단언으로 초과 프로퍼티 검사 우회 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type User = {
   name: string;
-  color: string;
-}
-
-type Person = {
-  name: string;
-  language: string;
-}
-
-type UnionType = Dog | Person;
-
-// Dog 타입 집합에 포함되므로 선언 가능
-let 변수명: UnionType = {
-  name: "",
-  color: "",
+  age: number;
 };
 
-// Person 타입 집합에 포함되므로 선언 가능
-let 변수명: UnionType = {
-  name: "",
-  language: "",
+// User 타입에 없는 속성이 있어서 타입 오류 발생
+let user: User = {
+  name: "하영",
+  age: 30,
+  nickname: "하롱베이"
 };
 
-// Dog 타입, Person 타입 교집합에 포함되므로 선언 가능
-let 변수명: UnionType = {
-  name: "",
-  color: "",
-  language: "",
+// User 타입 단언으로 초과 프로퍼티 검사 우회
+let user = {
+  name: "하영",
+  age: 30,
+  nickname: "하롱베이"
+} as User;
+</code></pre></div></div>
+<p>변수에 객체 리터럴 타입 할당 시, 타입에 정의되지 않은 초과 속성이 있으면 오류를 발생시킵니다.<br />
+이러한 초과 프로퍼티 검사를 타입 단언으로 우회할 수 있으나, 안전하지는 않습니다.</p>
+
+<h3 id="const-단언-방법">Const 단언 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// number가 아니라, number 리터럴 타입으로 추론되도록 단언
+let 변수명 = 10 as const;
+// let 변수명: 10 = 10; 와 동일한 효과
+
+// 객체의 모든 프로퍼티가 읽기 전용 속성으로 추론되도록 단언
+let 변수명 = {
+  count: 10,
+  enabled: true
+} as const;
+</code></pre></div></div>
+
+<h3 id="non-null-단언-방법">Non Null 단언 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Post = {
+  title: string;
+  author?: string;
 }
 
-// Dog 타입, Person 타입 집합 등 어디에도 포함되지 않으므로 선언 불가
-let 변수명: UnionType = {
-  name: ""
-};
+let post: Post = {
+  title : "게시글 제목",
+  author: "송현주"
+}
+
+// 옵셔널 체이닝 문법
+// author 프로퍼티가 없으면 자동으로 전체가 undefined 되는 연산자
+// number 타입에 undefined 타입 할당 불가, 타입 오류 발생 
+const len: number = post.author?.length;
+
+// Non Null 단언 사용하여 타입 오류 제거
+const len: number = post.author!.length;
 </code></pre></div></div>
-<p>Union 타입을 사용한 객체 정의 방법 예시입니다.</p>
+<p>옵셔널 프로퍼티 값이지만, 반드시 값이 있을 것이라고 단언할 수 있습니다.<br />
+실제로 값이 없으면 런타임 에러가 발생할 수 있으니 확실한 경우에만 사용해야 합니다.</p>
 
-<h3 id="교집합-타입-intersection-타입">교집합 타입 (Intersection 타입)</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Admin = { role: "admin" };
-type User = { name: string };
+<hr />
 
-// 교집합 타입 정의
-type AdminUser = Admin &amp; User;
+<h2 id="타입-좁히기-타입-가드">타입 좁히기 (타입 가드)</h2>
 
-const person: AdminUser = {
-  role: "admin",
-  name: "지후"
-};
+<p>조건문 등을 이용해 넓은 타입에서 좁은 타입으로 좁히는 기법입니다.<br />
+타입스크립트가 더 구체적인 타입을 추론하도록 도웁니다.</p>
+
+<h3 id="조건문을-이용한-타입-좁히기">조건문을 이용한 타입 좁히기</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function 함수명(value: number | string | Date | null) {
+  if (typeof value === "number") {
+    console.log(value.toFixed());
+  } else if (typeof value === "string"){
+    console.log(value.toUpperCase());
+  } else if (value instanceof Date) {
+    console.log(value.getTime());
+  }
+}
 </code></pre></div></div>
-<p>여러 타입의 모든 속성을 포함해야 저장할 수 있는 인터섹션 타입 예시입니다.</p>
+<p>매개변수 타입을 조건문으로 체크하면, 타입에 맞는 함수를 호출할 수 있습니다.</p>
 
-<p><mark>인터섹션 타입 객체 정의 방법</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Dog = {
+<p><mark>타입스크립트 타입 검사</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Person = {
   name: string;
-  color: string;
-}
+  age: number;
+};
 
-type Person = {
-  name: string;
-  language: string;
-}
-
-type IntersectionType = Dog &amp; Person;
-
-// Dog 타입, Person 타입 교집합에 포함되므로 선언 가능
-let 변수명: IntersectionType = {
-  name: "",
-  color: "",
-  language: ""
+function 함수명(value: number | string | Date | null | Person) {
+  if (value &amp;&amp; typeof value === "object" &amp;&amp; "name" in value &amp;&amp; "age" in value) {
+    // Person 타입처럼 취급
+  }
 }
 </code></pre></div></div>
-<p>Intersection 타입을 사용한 객체 정의 방법 예시입니다.</p>
+<p>타입스크립트 타입은 런타임에 존재하지 않아 typeof로 검사할 수 없습니다.<br />
+in 연산자로 특정 프로퍼티가 있는지 검사하여 타입을 판별합니다.<br />
+타입에 tag 프로퍼티를 정의하고 value.tag를 검사하면 더 간결해집니다.</p>
 
         
       </section>
@@ -851,7 +649,7 @@ let 변수명: IntersectionType = {
       <a href="#" class="pagination--pager disabled">❮</a>
     
     
-      <a href="/web-dev/2025-06-30-1" class="pagination--pager" title="TypeScript 개념 정리 / 타입스크립트 설치 및 컴파일 옵션 설정 방법
+      <a href="/web-dev/2025-07-01-1" class="pagination--pager" title="TypeScript 타입 종류 및 타입 정의 방법
 ">❯</a>
     
   </nav>
@@ -867,6 +665,42 @@ let 변수명: IntersectionType = {
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-07-01-1" rel="permalink">TypeScript 타입 종류 및 타입 정의 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-07-01T00:00:00+00:00">2025-07-01</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
         
           
 
@@ -961,42 +795,6 @@ let 변수명: IntersectionType = {
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-06-24T00:00:00+00:00">2025-06-24</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/english/2025-06-23-1" rel="permalink">영단어 최중요 어근 공부
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-06-23T00:00:00+00:00">2025-06-23</time>
       </span>
     
 
