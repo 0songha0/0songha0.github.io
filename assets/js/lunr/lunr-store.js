@@ -810,7 +810,7 @@ var store = [{
         "teaser": null
       },{
         "title": "윈도우 cmd에서 Git 사용법 / Git 명령어 정리 / Git 에러 해결",
-        "excerpt":"Git Clone이나 간단한 커밋 시에는 cmd에서 명령어로 하는 것이 빠를 수 있습니다. 소스 비교나 체리픽은 소스트리, IntelliJ 같은 GUI 툴 사용이 훨씬 편합니다. 윈도우 cmd에서 Git 사용법 Git 원격 브랜치 소스 가져오기 Default 브랜치 복제 git clone \"https://Git주소\" 특정 브랜치 복제 git clone -b 브랜치명 \"https://Git주소\" Git Clone 시 에러...","categories": ["tool"],
+        "excerpt":"Git Clone이나 간단한 커밋 시에는 cmd에서 명령어로 하는 것이 빠를 수 있습니다. 소스 비교나 체리픽은 소스트리, IntelliJ 같은 GUI 툴 사용이 훨씬 편합니다. 윈도우 cmd에서 Git 사용법 Git 원격 브랜치 소스 가져오기 Default 브랜치 복제 git clone \"https://Git주소\" github 저장소 &gt; code 탭 &gt; code 버튼 &gt; clone 모달 &gt;...","categories": ["tool"],
         "tags": [],
         "url": "/tool/2023-12-01-2",
         "teaser": null
