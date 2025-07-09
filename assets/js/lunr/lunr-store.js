@@ -1320,7 +1320,7 @@ var store = [{
         "teaser": null
       },{
         "title": "영단어 기본 구조 정리 / 접두사, 어근, 접미사 요약",
-        "excerpt":"영단어 기본 구조 접두사 단어 앞에 붙어 방향, 부정, 강조 등 의미 추가 어근 단어의 핵심 의미를 담는 부분 접미사 단어 뒤에 붙어 품사를 바꾸거나, 의미 변형 접두사 요약 최중요 접두사 pro 앞에(forth) pre 미리(already) 전에(before) re 뒤로(back) 다시(again) in¹ (im, il, ir) 아닌(not) ex (es, e) 밖으로(out) out 밖으로(out)...","categories": ["english"],
+        "excerpt":"영단어 기본 구조 접두사 단어 앞에 붙어 방향, 부정, 강조 등 의미 추가 어근 단어의 핵심 의미를 담는 부분 접미사 단어 뒤에 붙어 품사를 바꾸거나, 의미 변형 접두사 요약 최중요 접두사 pro 앞에 (forth) pre 미리 (already) 전에 (before) re 뒤로 (back) 다시 (again) in¹ (im) 안에 (in) ex (es,...","categories": ["english"],
         "tags": [],
         "url": "/english/2025-06-22-1",
         "teaser": null
