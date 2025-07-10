@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 타입스크립트 타입 제어 기법 정리 / 타입 추론, 타입 단언, 타입 좁히기 등</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#타입-추론">타입 추론</a><ul><li><a href="#타입-넓히기를-통한-타입-추론">타입 넓히기를 통한 타입 추론</a></li></ul></li><li><a href="#타입-단언-as">타입 단언 (as)</a><ul><li><a href="#타입-단언으로-객체-정의-방법">타입 단언으로 객체 정의 방법</a></li><li><a href="#타입-단언으로-초과-프로퍼티-검사-우회-방법">타입 단언으로 초과 프로퍼티 검사 우회 방법</a></li><li><a href="#const-단언-방법">Const 단언 방법</a></li><li><a href="#non-null-단언-방법">Non Null 단언 방법</a></li></ul></li><li><a href="#타입-좁히기-타입-가드">타입 좁히기 (타입 가드)</a><ul><li><a href="#조건문을-이용한-타입-좁히기">조건문을 이용한 타입 좁히기</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#타입-추론">타입 추론</a><ul><li><a href="#타입-넓히기를-통한-타입-추론">타입 넓히기를 통한 타입 추론</a></li></ul></li><li><a href="#타입-단언-as">타입 단언 (as)</a><ul><li><a href="#타입-단언으로-객체-정의-방법">타입 단언으로 객체 정의 방법</a></li><li><a href="#타입-단언으로-초과-프로퍼티-검사-우회-방법">타입 단언으로 초과 프로퍼티 검사 우회 방법</a></li><li><a href="#const-단언-방법">Const 단언 방법</a></li><li><a href="#non-null-단언-방법">Non Null 단언 방법</a></li></ul></li><li><a href="#타입-좁히기-타입-가드">타입 좁히기 (타입 가드)</a><ul><li><a href="#조건문을-이용한-타입-좁히기">조건문을 이용한 타입 좁히기</a></li><li><a href="#사용자-정의-타입-가드">사용자 정의 타입 가드</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -609,6 +609,58 @@ function 함수명(value: number | string | Date | null | Person) {
 <p>타입스크립트 타입은 런타임에 존재하지 않아 typeof로 검사할 수 없습니다.<br />
 in 연산자로 특정 프로퍼티가 있는지 검사하여 타입을 판별합니다.<br />
 타입에 tag 프로퍼티를 정의하고 value.tag를 검사하면 더 간결해집니다.</p>
+
+<h3 id="사용자-정의-타입-가드">사용자 정의 타입 가드</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Dog = {
+  name: string;
+  isBark: boolean;
+}
+
+type Cat = {
+  name: string;
+  isScratch: boolean;
+}
+
+type Animal = Dog | Cat;
+
+// 타입 가드 문법으로 타입 좁히기
+function warning(animal: Animal) {
+  if ("isBark" in animal) {
+    // 강아지 타입 매개변수 처리
+  } else {
+    // 고양이 타입 매개변수 처리
+  }
+}
+</code></pre></div></div>
+<p>위와 같이, 타입 가드 문법으로 타입 좁히기가 완벽하게 되지 않는 경우<br />
+아래처럼 사용자 정의 타입 가드 함수를 사용하면 좋습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Dog = {
+  name: string;
+  isBark: boolean;
+}
+
+type Cat = {
+  name: string;
+  isScratch: boolean;
+}
+
+type Animal = Dog | Cat;
+
+// 반환값이 true이면 좁은 타입으로 추론
+function isDog(animal: Animal): animal is Dog {
+  return 'isBark' in animal;
+}
+
+// 사용자 정의 타입 가드 함수로 타입 좁히기
+function warning(animal: Animal) {
+  if (isDog(animal)) {
+    // 강아지 타입 매개변수 처리
+  } else {
+    // 고양이 타입 매개변수 처리
+  }
+}
+</code></pre></div></div>
+<p>사용자 정의 타입 가드 함수로 타입스크립트가 매개변수의 좁은 타입을 추론할 수 있도록 도와줍니다.</p>
 
         
       </section>
