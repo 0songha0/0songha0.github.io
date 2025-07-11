@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>클라우드 서비스 모델 종류 / 온프레미스, IaaS, PaaS, SaaS 개념 정리 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>타입스크립트 타입 제어 기법 정리 / 타입 추론, 타입 단언, 타입 좁히기 등 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,8 +65,8 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="클라우드 서비스 모델 종류 / 온프레미스, IaaS, PaaS, SaaS 개념 정리">
-<meta property="og:url" content="https://0songha0.github.io/op/2025-04-30-1">
+<meta property="og:title" content="타입스크립트 타입 제어 기법 정리 / 타입 추론, 타입 단언, 타입 좁히기 등">
+<meta property="og:url" content="https://0songha0.github.io/web-dev/2025-07-07-1">
 
 
   <meta property="og:description" content="송하영 개발 블로그">
@@ -77,11 +77,11 @@
 
 
 
-  <meta property="article:published_time" content="2025-04-30T00:00:00+00:00">
+  <meta property="article:published_time" content="2025-07-07T00:00:00+00:00">
 
 
 
-  <meta property="article:modified_time" content="2025-04-30T00:00:00+00:00">
+  <meta property="article:modified_time" content="2025-07-07T00:00:00+00:00">
 
 
 
@@ -90,7 +90,7 @@
   
 
 
-<link rel="canonical" href="https://0songha0.github.io/op/2025-04-30-1">
+<link rel="canonical" href="https://0songha0.github.io/web-dev/2025-07-07-1">
 
 
 
@@ -433,15 +433,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="클라우드 서비스 모델 종류 / 온프레미스, IaaS, PaaS, SaaS 개념 정리">
+    <meta itemprop="headline" content="타입스크립트 타입 제어 기법 정리 / 타입 추론, 타입 단언, 타입 좁히기 등">
     <meta itemprop="description" content="">
-    <meta itemprop="datePublished" content="2025-04-30T00:00:00+00:00">
-    <meta itemprop="dateModified" content="2025-04-30T00:00:00+00:00">
+    <meta itemprop="datePublished" content="2025-07-07T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-07-07T00:00:00+00:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">클라우드 서비스 모델 종류 / 온프레미스, IaaS, PaaS, SaaS 개념 정리
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">타입스크립트 타입 제어 기법 정리 / 타입 추론, 타입 단언, 타입 좁히기 등
 </h1>
           
 
@@ -450,7 +450,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-04-30T00:00:00+00:00">2025-04-30</time>
+        <time datetime="2025-07-07T00:00:00+00:00">2025-07-07</time>
       </span>
     
 
@@ -468,32 +468,199 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 클라우드 서비스 모델 종류 / 온프레미스, IaaS, PaaS, SaaS 개념 정리</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 타입스크립트 타입 제어 기법 정리 / 타입 추론, 타입 단언, 타입 좁히기 등</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#클라우드-서비스-모델-종류">클라우드 서비스 모델 종류</a><ul><li><a href="#기존-온프레미스">기존 온프레미스</a></li><li><a href="#iaas-infrastructure-as-a-service">IaaS (Infrastructure as a Service)</a></li><li><a href="#paas-platform-as-a-service">PaaS (Platform as a Service)</a></li><li><a href="#saas-software-as-a-service">SaaS (Software as a Service)</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#타입-추론">타입 추론</a><ul><li><a href="#타입-넓히기를-통한-타입-추론">타입 넓히기를 통한 타입 추론</a></li></ul></li><li><a href="#타입-단언-as">타입 단언 (as)</a><ul><li><a href="#타입-단언으로-객체-정의-방법">타입 단언으로 객체 정의 방법</a></li><li><a href="#타입-단언으로-초과-프로퍼티-검사-우회-방법">타입 단언으로 초과 프로퍼티 검사 우회 방법</a></li><li><a href="#const-단언-방법">Const 단언 방법</a></li><li><a href="#non-null-단언-방법">Non Null 단언 방법</a></li></ul></li><li><a href="#타입-좁히기-타입-가드">타입 좁히기 (타입 가드)</a><ul><li><a href="#조건문을-이용한-타입-좁히기">조건문을 이용한 타입 좁히기</a></li><li><a href="#사용자-정의-타입-가드">사용자 정의 타입 가드</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h2 id="클라우드-서비스-모델-종류">클라우드 서비스 모델 종류</h2>
+        <h2 id="타입-추론">타입 추론</h2>
+<p>변수 타입이 정의되지 않은 경우, 타입스크립트가 자동으로 변수 타입을 추론합니다.<br />
+타입스크립트는 변수의 초기값을 기준으로 타입을 추론합니다.<br />
+초기값이 없는 변수는 암묵적 any 타입이므로, 어떤 타입 값이든 할당할 수 있습니다.</p>
 
-<h3 id="기존-온프레미스">기존 온프레미스</h3>
-<p>애플리케이션, 데이터, 런타임, 미들웨어, 운영체제, 가상화, 서버, 스토리지, 네트워크 모두 직접 구축 및 관리합니다.<br />
-<code class="language-plaintext highlighter-rouge">예시)</code> 기업 자체 데이터센터, 직접 운영하는 서버</p>
+<h3 id="타입-넓히기를-통한-타입-추론">타입 넓히기를 통한 타입 추론</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// a : number 타입
+let a = 10;
 
-<h3 id="iaas-infrastructure-as-a-service">IaaS (Infrastructure as a Service)</h3>
-<p>애플리케이션, 데이터, 런타임, 미들웨어, 운영체제만 직접 구축 및 관리합니다.<br />
-인프라 (가상화, 서버, 스토리지, 네트워크) 는 클라우드 서비스 제공 업체에서 관리합니다.<br />
-<code class="language-plaintext highlighter-rouge">예시)</code> AWS EC2, GCP Compute Engine, Azure VM 등 사용자가 인스턴스 생성 및 OS 설치</p>
+// a : 10 (number 리터럴 타입)
+const a = 10;
+</code></pre></div></div>
+<p>타입스크립트는 타입 넓히기를 통해 더 범용적인 타입을 추론합니다.<br />
+const로 선언된 변수는 재할당이 불가하므로 리터럴 타입 그대로 추론됩니다.</p>
 
-<h3 id="paas-platform-as-a-service">PaaS (Platform as a Service)</h3>
-<p>애플리케이션, 데이터만 직접 구축 및 관리합니다.<br />
-플랫폼 (런타임, 미들웨어, 운영체제, 가상화, 서버, 스토리지, 네트워크) 은 클라우드 서비스 제공 업체에서 관리합니다.<br />
-<code class="language-plaintext highlighter-rouge">예시)</code> Google App Engine, AWS Elastic Beanstalk, Heroku 등 코드 배포만으로 실행 환경 자동 제공</p>
+<hr />
 
-<h3 id="saas-software-as-a-service">SaaS (Software as a Service)</h3>
-<p>애플리케이션, 데이터, 런타임, 미들웨어, 운영체제, 가상화, 서버, 스토리지, 네트워크 모두 클라우드 서비스 제공 업체에서 관리합니다.<br />
-<code class="language-plaintext highlighter-rouge">예시)</code> Gmail, Google Docs, Salesforce, Slack 등 설치나 운영 없이 바로 사용 가능한 소프트웨어로 제공</p>
+<h2 id="타입-단언-as">타입 단언 (as)</h2>
+<p>타입스크립트 컴파일러에게 개발자가 타입을 지정해서 알려주는 기능입니다.</p>
+
+<p><mark>타입 단언 규칙</mark><br />
+단언하는 타입이 값의 슈퍼 타입 또는 서브 타입이어야 타입 단언이 가능합니다.<br />
+다중 단언 시 타입 단언 규칙을 우회할 수 있지만, 안전하지 않아 권장되지 않습니다.</p>
+
+<h3 id="타입-단언으로-객체-정의-방법">타입 단언으로 객체 정의 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Person = {
+  name: string;
+  age: number;
+}
+
+// 초기값 {}에 name, age 속성이 없어서 타입 오류 발생
+let person: Person = {};
+person.name = "하지후";
+person.age = 21;
+
+// 타입 단언으로 객체 생성 후 ame, age 속성 부여
+let person = {} as Person;
+person.name = "하지후";
+person.age = 21;
+</code></pre></div></div>
+<p>객체 뒤에 as 타입명을 붙이면 해당 타입으로 간주하도록 타입 단언을 할 수 있습니다.</p>
+
+<h3 id="타입-단언으로-초과-프로퍼티-검사-우회-방법">타입 단언으로 초과 프로퍼티 검사 우회 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type User = {
+  name: string;
+  age: number;
+};
+
+// User 타입에 없는 속성이 있어서 타입 오류 발생
+let user: User = {
+  name: "하영",
+  age: 30,
+  nickname: "하롱베이"
+};
+
+// User 타입 단언으로 초과 프로퍼티 검사 우회
+let user = {
+  name: "하영",
+  age: 30,
+  nickname: "하롱베이"
+} as User;
+</code></pre></div></div>
+<p>변수에 객체 리터럴 타입 할당 시, 타입에 정의되지 않은 초과 속성이 있으면 오류를 발생시킵니다.<br />
+이러한 초과 프로퍼티 검사를 타입 단언으로 우회할 수 있으나, 안전하지는 않습니다.</p>
+
+<h3 id="const-단언-방법">Const 단언 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// number가 아니라, number 리터럴 타입으로 추론되도록 단언
+let 변수명 = 10 as const;
+// let 변수명: 10 = 10; 와 동일한 효과
+
+// 객체의 모든 프로퍼티가 읽기 전용 속성으로 추론되도록 단언
+let 변수명 = {
+  count: 10,
+  enabled: true
+} as const;
+</code></pre></div></div>
+
+<h3 id="non-null-단언-방법">Non Null 단언 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Post = {
+  title: string;
+  author?: string;
+}
+
+let post: Post = {
+  title : "게시글 제목",
+  author: "송현주"
+}
+
+// 옵셔널 체이닝 문법
+// author 프로퍼티가 없으면 자동으로 전체가 undefined 되는 연산자
+// number 타입에 undefined 타입 할당 불가, 타입 오류 발생 
+const len: number = post.author?.length;
+
+// Non Null 단언 사용하여 타입 오류 제거
+const len: number = post.author!.length;
+</code></pre></div></div>
+<p>옵셔널 프로퍼티 값이지만, 반드시 값이 있을 것이라고 단언할 수 있습니다.<br />
+실제로 값이 없으면 런타임 에러가 발생할 수 있으니 확실한 경우에만 사용해야 합니다.</p>
+
+<hr />
+
+<h2 id="타입-좁히기-타입-가드">타입 좁히기 (타입 가드)</h2>
+
+<p>조건문 등을 이용해 넓은 타입에서 좁은 타입으로 좁히는 기법입니다.<br />
+타입스크립트가 더 구체적인 타입을 추론하도록 도웁니다.</p>
+
+<h3 id="조건문을-이용한-타입-좁히기">조건문을 이용한 타입 좁히기</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function 함수명(value: number | string | Date | null) {
+  if (typeof value === "number") {
+    console.log(value.toFixed());
+  } else if (typeof value === "string"){
+    console.log(value.toUpperCase());
+  } else if (value instanceof Date) {
+    console.log(value.getTime());
+  }
+}
+</code></pre></div></div>
+<p>매개변수 타입을 조건문으로 체크하면, 타입에 맞는 함수를 호출할 수 있습니다.</p>
+
+<p><mark>타입스크립트 타입 검사</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Person = {
+  name: string;
+  age: number;
+};
+
+function 함수명(value: number | string | Date | null | Person) {
+  if (value &amp;&amp; typeof value === "object" &amp;&amp; "name" in value &amp;&amp; "age" in value) {
+    // Person 타입처럼 취급
+  }
+}
+</code></pre></div></div>
+<p>타입스크립트 타입은 런타임에 존재하지 않아 typeof로 검사할 수 없습니다.<br />
+in 연산자로 특정 프로퍼티가 있는지 검사하여 타입을 판별합니다.<br />
+타입에 tag 프로퍼티를 정의하고 value.tag를 검사하면 더 간결해집니다.</p>
+
+<h3 id="사용자-정의-타입-가드">사용자 정의 타입 가드</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Dog = {
+  name: string;
+  isBark: boolean;
+}
+
+type Cat = {
+  name: string;
+  isScratch: boolean;
+}
+
+type Animal = Dog | Cat;
+
+// 타입 가드 문법으로 타입 좁히기
+function warning(animal: Animal) {
+  if ("isBark" in animal) {
+    // 강아지 타입 매개변수 처리
+  } else {
+    // 고양이 타입 매개변수 처리
+  }
+}
+</code></pre></div></div>
+<p>위와 같이, 타입 가드 문법으로 타입 좁히기가 완벽하게 되지 않는 경우<br />
+아래처럼 사용자 정의 타입 가드 함수를 사용하면 좋습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Dog = {
+  name: string;
+  isBark: boolean;
+}
+
+type Cat = {
+  name: string;
+  isScratch: boolean;
+}
+
+type Animal = Dog | Cat;
+
+// 반환값이 true이면 좁은 타입으로 추론
+function isDog(animal: Animal): animal is Dog {
+  return 'isBark' in animal;
+}
+
+// 사용자 정의 타입 가드 함수로 타입 좁히기
+function warning(animal: Animal) {
+  if (isDog(animal)) {
+    // 강아지 타입 매개변수 처리
+  } else {
+    // 고양이 타입 매개변수 처리
+  }
+}
+</code></pre></div></div>
+<p>사용자 정의 타입 가드 함수로 타입스크립트가 매개변수의 좁은 타입을 추론할 수 있도록 도와줍니다.</p>
 
         
       </section>
@@ -514,14 +681,14 @@
     
       
       
-      <a href="/categories#op" class="page__taxonomy-item" rel="tag">리눅스 / 운영</a>
+      <a href="/categories#web-dev" class="page__taxonomy-item" rel="tag">Web 개발</a>
     
     </span>
   </p>
 
 
         
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-04-30">2025-04-30</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-07-07">2025-07-07</time></p>
 
 
       </footer>
@@ -531,11 +698,11 @@
       
   <nav class="pagination">
     
-      <a href="/kafka/2025-05-02-1" class="pagination--pager" title="카프카 쉘 스크립트 CLI 종류 및 사용법
+      <a href="/tool/2025-07-11-1" class="pagination--pager" title="이클립스 설치 및 Java 애플리케이션 생성 방법
 ">❮</a>
     
     
-      <a href="/kafka/2025-04-30-1" class="pagination--pager" title="카프카 구축 시 참고사항 / 설치형 카프카, SaaS형 카프카 차이 및 장단점
+      <a href="/web-dev/2025-07-01-1" class="pagination--pager" title="타입스크립트 타입 종류 및 타입 정의 방법
 ">❯</a>
     
   </nav>
@@ -573,42 +740,6 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-07-11T00:00:00+00:00">2025-07-11</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-07-07-1" rel="permalink">타입스크립트 타입 제어 기법 정리 / 타입 추론, 타입 단언, 타입 좁히기 등
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-07-07T00:00:00+00:00">2025-07-07</time>
       </span>
     
 
@@ -681,6 +812,42 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-06-30T00:00:00+00:00">2025-06-30</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-06-25-1" rel="permalink">Vue 컴포저블 함수 구현 및 사용 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-06-25T00:00:00+00:00">2025-06-25</time>
       </span>
     
 
