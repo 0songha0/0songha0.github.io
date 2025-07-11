@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>AWS S3 버킷 활용하여 AWS RDS DB .bak 파일 복원 및 백업 방법 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>이클립스 설치 및 Java 애플리케이션 생성 방법 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,8 +65,8 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="AWS S3 버킷 활용하여 AWS RDS DB .bak 파일 복원 및 백업 방법">
-<meta property="og:url" content="https://0songha0.github.io/aws/2023-10-24-1">
+<meta property="og:title" content="이클립스 설치 및 Java 애플리케이션 생성 방법">
+<meta property="og:url" content="https://0songha0.github.io/tool/2025-07-11-1">
 
 
   <meta property="og:description" content="송하영 개발 블로그">
@@ -77,11 +77,11 @@
 
 
 
-  <meta property="article:published_time" content="2023-10-24T00:00:00+00:00">
+  <meta property="article:published_time" content="2025-07-11T00:00:00+00:00">
 
 
 
-  <meta property="article:modified_time" content="2023-10-24T00:00:00+00:00">
+  <meta property="article:modified_time" content="2025-07-11T00:00:00+00:00">
 
 
 
@@ -90,7 +90,7 @@
   
 
 
-<link rel="canonical" href="https://0songha0.github.io/aws/2023-10-24-1">
+<link rel="canonical" href="https://0songha0.github.io/tool/2025-07-11-1">
 
 
 
@@ -433,15 +433,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="AWS S3 버킷 활용하여 AWS RDS DB .bak 파일 복원 및 백업 방법">
+    <meta itemprop="headline" content="이클립스 설치 및 Java 애플리케이션 생성 방법">
     <meta itemprop="description" content="">
-    <meta itemprop="datePublished" content="2023-10-24T00:00:00+00:00">
-    <meta itemprop="dateModified" content="2023-10-24T00:00:00+00:00">
+    <meta itemprop="datePublished" content="2025-07-11T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-07-11T00:00:00+00:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">AWS S3 버킷 활용하여 AWS RDS DB .bak 파일 복원 및 백업 방법
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">이클립스 설치 및 Java 애플리케이션 생성 방법
 </h1>
           
 
@@ -450,7 +450,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2023-10-24T00:00:00+00:00">2023-10-24</time>
+        <time datetime="2025-07-11T00:00:00+00:00">2025-07-11</time>
       </span>
     
 
@@ -468,108 +468,34 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> AWS S3 버킷 활용하여 AWS RDS DB .bak 파일 복원 및 백업 방법</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 이클립스 설치 및 Java 애플리케이션 생성 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#aws-rds-db-복원-및-백업-방법">AWS RDS DB 복원 및 백업 방법</a><ul><li><a href="#bak-파일-업로드용-s3-버킷-생성">.bak 파일 업로드용 S3 버킷 생성</a></li><li><a href="#rds에서-s3에-접근-가능한-공용-iam-역할-생성">RDS에서 S3에 접근 가능한 공용 IAM 역할 생성</a></li><li><a href="#rds-옵션-그룹-생성">RDS 옵션 그룹 생성</a></li><li><a href="#생성된-옵션-그룹-선택-후-옵션-추가">생성된 옵션 그룹 선택 후 옵션 추가</a></li><li><a href="#rds-db-옵션-그룹-변경">RDS DB 옵션 그룹 변경</a></li><li><a href="#s3-버킷에-bak-파일-업로드">S3 버킷에 .bak 파일 업로드</a></li><li><a href="#s3-버킷에서-bak-파일-복원">S3 버킷에서 .bak 파일 복원</a></li><li><a href="#s3-버킷에-bak-파일-백업">S3 버킷에 .bak 파일 백업</a></li></ul></li><li><a href="#백업-및-복원-상태-확인">백업 및 복원 상태 확인</a></li></ul>
+              <ul class="toc__menu"><li><a href="#이클립스-설치">이클립스 설치</a><ul><li><a href="#윈도우-이클립스-설치-방법">윈도우 이클립스 설치 방법</a></li></ul></li><li><a href="#이클립스-java-애플리케이션-개발">이클립스 Java 애플리케이션 개발</a><ul><li><a href="#java-애플리케이션-생성-방법">Java 애플리케이션 생성 방법</a></li><li><a href="#java-main-클래스-생성-방법">Java Main 클래스 생성 방법</a></li><li><a href="#java-애플리케이션-실행-방법">Java 애플리케이션 실행 방법</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h2 id="aws-rds-db-복원-및-백업-방법">AWS RDS DB 복원 및 백업 방법</h2>
+        <h2 id="이클립스-설치">이클립스 설치</h2>
 
-<h3 id="bak-파일-업로드용-s3-버킷-생성">.bak 파일 업로드용 S3 버킷 생성</h3>
-<p>버킷명 입력 &gt; RDS DB의 리전(ap-northeast-2b : 서울)과 같은 리전 선택 &gt; 퍼블릭 액세스 차단 전부 풀고 &gt; 암호화 키 유형 : Amazon S3 관리형 키(SSE-S3) 선택 &gt; 버킷 키 비활성화 &gt;  객체 잠금 비활성화 &gt; 버킷 만들기</p>
-
-<h3 id="rds에서-s3에-접근-가능한-공용-iam-역할-생성">RDS에서 S3에 접근 가능한 공용 IAM 역할 생성</h3>
-<p>IAM &gt; 액세스 관리 &gt; 역할 &gt; 역할 만들기</p>
-<table>
-  <tbody>
-    <tr>
-      <td>신뢰할 수 있는 엔터티 유형</td>
-      <td>AWS 서비스 선택</td>
-    </tr>
-    <tr>
-      <td>다른 AWS 서비스의 사용 사례</td>
-      <td>사용 사례를 조회할 서비스 선택 &gt; RDS &gt; RDS - Add Role to Database 선택</td>
-    </tr>
-  </tbody>
-</table>
-<p>위와 같이 선택 후 다음 &gt; AmazonS3FullAccess (모든 S3 리소스에 대한 모든 액세스 가능 정책) 검색하여 선택 후 다음 &gt; 역할 이름 : AddDatabaseRoleRDS-S3 입력 후 저장</p>
-
-<h3 id="rds-옵션-그룹-생성">RDS 옵션 그룹 생성</h3>
-<p>RDS &gt; 옵션 그룹 &gt; 그룹 생성</p>
-<table>
-  <tbody>
-    <tr>
-      <td>이름</td>
-      <td>NativeBackupRestore-프로젝트명 입력</td>
-    </tr>
-    <tr>
-      <td>설명</td>
-      <td>Option group to restore backup from S3 bucket 입력</td>
-    </tr>
-    <tr>
-      <td>엔진</td>
-      <td>sqlserver-ex 선택</td>
-    </tr>
-    <tr>
-      <td>메이저 엔진 버전</td>
-      <td>12.00 선택</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="생성된-옵션-그룹-선택-후-옵션-추가">생성된 옵션 그룹 선택 후 옵션 추가</h3>
-<table>
-  <tbody>
-    <tr>
-      <td>옵션 이름</td>
-      <td>SQLSERVER_BACKUP_RESTORE (SQL Server의 기본 백업/복원에 대해 사용합니다. 백업 파일을 저장하려는 S3 위치에 대한 액세스 권한을 IAM 역할을 통해 DB 인스턴스에 부여합니다.) 선택</td>
-    </tr>
-    <tr>
-      <td>IAM 역할</td>
-      <td>생성했던 IAM 역할 AddDatabaseRoleRDS-S3 선택</td>
-    </tr>
-    <tr>
-      <td>옵션 추가 예약</td>
-      <td>즉시 선택</td>
-    </tr>
-  </tbody>
-</table>
-<p>위와 같이, 옵션 그룹에 SQLSERVER_BACKUP_RESTORE 옵션 활성화, IAM 역할 부여가 필요합니다.</p>
-
-<h3 id="rds-db-옵션-그룹-변경">RDS DB 옵션 그룹 변경</h3>
-<p>RDS &gt; 데이터베이스 &gt; DB 선택 &gt; 수정 &gt; 추가구성 &gt; 옵션 그룹 : NativeBackupRestore-프로젝트명 선택 후 계속 &gt; 즉시 적용 선택 &gt; DB 인스턴스 수정</p>
-
-<h3 id="s3-버킷에-bak-파일-업로드">S3 버킷에 .bak 파일 업로드</h3>
-<p>S3 &gt; 생성했던 S3 버킷 선택 &gt; 업로드 &gt; 파일 추가 후 .bak 파일 추가</p>
-
-<h3 id="s3-버킷에서-bak-파일-복원">S3 버킷에서 .bak 파일 복원</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exec msdb.dbo.rds_restore_database
-@restore_db_name='복원할DB명',
-@s3_arn_to_restore_from='arn:aws:s3:::S3버킷명/DB백업파일명.bak';
-</code></pre></div></div>
-<p>DBeaver 또는 SSMS에서 위 명령어 실행하면 복원이 완료됩니다.</p>
-
-<h3 id="s3-버킷에-bak-파일-백업">S3 버킷에 .bak 파일 백업</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exec msdb.dbo.rds_backup_database 
-@source_db_name='백업할DB명', 
-@s3_arn_to_backup_to='arn:aws:s3:::S3버킷명/DB백업파일명.bak',
-@overwrite_S3_backup_file=1;
-</code></pre></div></div>
-<p>S3 버킷에 RDS DB를 백업할 수 있는 명령어입니다.</p>
+<h3 id="윈도우-이클립스-설치-방법">윈도우 이클립스 설치 방법</h3>
+<p><a href="https://www.eclipse.org/downloads/" target="_blank">https://www.eclipse.org/downloads/</a><br />
+위 링크에서 이클립스 IDE를 다운로드합니다.<br />
+윈도우 64비트 사용 시, ‘Download x86_64’ 버튼을 선택하면 됩니다.<br />
+이클립스는 Java로 개발된 프로그램이므로, 설치된 JDK 경로가 환경 변수에 등록되어 있어야 실행할 수 있습니다.</p>
 
 <hr />
 
-<h2 id="백업-및-복원-상태-확인">백업 및 복원 상태 확인</h2>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exec msdb.dbo.rds_task_status @db_name='DB명';
-</code></pre></div></div>
-<p>complete : 100%, lifecycle : SUCCESS로 나오면 복원 성공입니다.</p>
+<h2 id="이클립스-java-애플리케이션-개발">이클립스 Java 애플리케이션 개발</h2>
 
-<p><mark>옵션 미설정 시 에러메시지</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Database backup/restore option is not enabled yet or is in the process of being enabled. Please try again later.
-</code></pre></div></div>
-<p>복원 실패하면 RDS에 옵션 설정이 제대로 되어있는지 확인해야 합니다.</p>
+<h3 id="java-애플리케이션-생성-방법">Java 애플리케이션 생성 방법</h3>
+<p>File &gt; New &gt; Project… &gt; Java Project &gt; Project name: 프로젝트명 작성 &gt; 프로젝트 JRE 버전 선택 &gt; Next &gt; Finish</p>
+
+<h3 id="java-main-클래스-생성-방법">Java Main 클래스 생성 방법</h3>
+<p>생성된 프로젝트 폴더 하위 src 폴더 우클릭 &gt; New &gt; Other… &gt; Class 선택 &gt; Next &gt; Name: 클래스명 입력 &gt; Package: 패키지 구조가 필요한 경우 작성 &gt; public static void main(String[] args) 체크 &gt; Finish</p>
+
+<h3 id="java-애플리케이션-실행-방법">Java 애플리케이션 실행 방법</h3>
+<p>Main 클래스 코드 작성 &gt; 상단 ▶ 버튼 클랙하여 Java 애플리케이션 실행<br />
+Scanner 사용 시, 하단 Console 탭에 텍스트를 입력하면 입력 값을 받을 수 있습니다.</p>
 
         
       </section>
@@ -590,14 +516,14 @@
     
       
       
-      <a href="/categories#aws" class="page__taxonomy-item" rel="tag">AWS</a>
+      <a href="/categories#tool" class="page__taxonomy-item" rel="tag">윈도우 / Tool</a>
     
     </span>
   </p>
 
 
         
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-10-24">2023-10-24</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-07-11">2025-07-11</time></p>
 
 
       </footer>
@@ -607,11 +533,10 @@
       
   <nav class="pagination">
     
-      <a href="/tool/2023-10-26-1" class="pagination--pager" title="이클립스 사용법 / 이클립스 단축키 / 이클립스 에러 해결
-">❮</a>
+      <a href="#" class="pagination--pager disabled">❮</a>
     
     
-      <a href="/python-java/2023-08-18-1" class="pagination--pager" title="프로그래머스 코딩테스트 입문 Lv.0 100문제 파이썬 풀이
+      <a href="/web-dev/2025-07-01-1" class="pagination--pager" title="타입스크립트 타입 제어 기법 정리 / 타입 추론, 타입 단언, 타입 좁히기 등
 ">❯</a>
     
   </nav>
@@ -627,42 +552,6 @@
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/tool/2025-07-11-1" rel="permalink">이클립스 설치 및 Java 애플리케이션 생성 방법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-07-11T00:00:00+00:00">2025-07-11</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
         
           
 
@@ -757,6 +646,42 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-06-30T00:00:00+00:00">2025-06-30</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-06-25-1" rel="permalink">Vue 컴포저블 함수 구현 및 사용 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-06-25T00:00:00+00:00">2025-06-25</time>
       </span>
     
 

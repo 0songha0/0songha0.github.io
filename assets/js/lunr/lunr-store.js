@@ -684,7 +684,7 @@ var store = [{
         "teaser": null
       },{
         "title": "이클립스 사용법 / 이클립스 단축키 / 이클립스 에러 해결",
-        "excerpt":"이클립스 사용법 프로젝트 Open 방법 File &gt; Open Projects from File System… &gt; Directory… &gt; 프로젝트 폴더 선택 &gt; Finish Project Explorer에 같은 이름의 프로젝트가 없어야 Open 가능합니다. 프로젝트 import 방법 Project Explorer 우클릭 &gt; import &gt; import… &gt; General &gt; Existing Projects into Workspace &gt; Next &gt; Select root...","categories": ["tool"],
+        "excerpt":"이클립스 설치 및 Java 애플리케이션 생성 방법 https://0songha0.github.io/tool/2025-07-11-1 이클립스 설정 방법 https://0songha0.github.io/tool/2023-10-27-1 이클립스 톰캣 사용 방법 https://0songha0.github.io/tool/2023-10-28-1 이클립스 Git 사용 방법 https://0songha0.github.io/tool/2023-11-01-1 이클립스 스프링배치 사용법 https://0songha0.github.io/web-dev/2025-03-10-1 이클립스 사용법 프로젝트 Open 방법 File &gt; Open Projects from File System… &gt; Directory… &gt; 프로젝트 폴더 선택 &gt; Finish Project Explorer에 같은 이름의...","categories": ["tool"],
         "tags": [],
         "url": "/tool/2023-10-26-1",
         "teaser": null
@@ -1359,5 +1359,11 @@ var store = [{
         "excerpt":"타입 추론 변수 타입이 정의되지 않은 경우, 타입스크립트가 자동으로 변수 타입을 추론합니다. 타입스크립트는 변수의 초기값을 기준으로 타입을 추론합니다. 초기값이 없는 변수는 암묵적 any 타입이므로, 어떤 타입 값이든 할당할 수 있습니다. 타입 넓히기를 통한 타입 추론 // a : number 타입 let a = 10; // a : 10 (number 리터럴...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-07-01-1",
+        "teaser": null
+      },{
+        "title": "이클립스 설치 및 Java 애플리케이션 생성 방법",
+        "excerpt":"이클립스 설치 윈도우 이클립스 설치 방법 https://www.eclipse.org/downloads/ 위 링크에서 이클립스 IDE를 다운로드합니다. 윈도우 64비트 사용 시, ‘Download x86_64’ 버튼을 선택하면 됩니다. 이클립스는 Java로 개발된 프로그램이므로, 설치된 JDK 경로가 환경 변수에 등록되어 있어야 실행할 수 있습니다. 이클립스 Java 애플리케이션 개발 Java 애플리케이션 생성 방법 File &gt; New &gt; Project… &gt; Java...","categories": ["tool"],
+        "tags": [],
+        "url": "/tool/2025-07-11-1",
         "teaser": null
       }]
