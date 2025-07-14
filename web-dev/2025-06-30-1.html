@@ -603,16 +603,19 @@ tsx는 기존 ts-node 라이브러리 대체재로 떠오르고 있습니다.</p
     // 엄격한 null 검사 여부 설정
     // false : 타입 변수에 null 할당 허용
     // strict 옵션의 하위 옵션이므로, strict false 설정 시 strictNullCheckes도 false 됨
-    "strictNullCheckes": false,
+    "strictNullChecks": false,
 
     // 외부 라이브러리 타입 정의 파일 (.d.ts 파일) 타입 검사 생략
     // undici-types 관련 오류 방지
     "skipLibCheck": true,
 
     // 각 타입스크립트 파일을 독립된 모듈로 인식하는 기준 설정
-    "moduleDetection": "force"
+    "moduleDetection": "force",
     // auto (기본값) : import / export 코드가 있어야 모듈로 인식
     // force : 모든 .ts 파일을 개별 모듈로 인식 (컴파일 결과 .js 하단에 export {}; 강제 삽입)
+
+    // 타입스크립트 폴더 내 js 파일 생성 허용
+    "allowJs": true
   },
 
   // src 폴더 내 모든 파일 컴파일
