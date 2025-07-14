@@ -1,6 +1,6 @@
 var store = [{
         "title": "자주 쓰는 Javascript 정리 / Javascript 문법",
-        "excerpt":"자주 쓰는 Javascript 문자열 관련 처리 https://0songha0.github.io/web-dev/2022-03-10-1 Javascript로 CSS 스타일 변경 https://0songha0.github.io/web-dev/2022-03-13-1 서버 요청 전 처리 https://0songha0.github.io/web-dev/2022-03-24-1 Javascript로 HTML 요소 추가 https://0songha0.github.io/web-dev/2023-01-25-1 Javascript 정규표현식 https://0songha0.github.io/web-dev/2022-08-01-1 document ready 완료 후 실행 &lt;script&gt; document.addEventListener(\"DOMContentLoaded\", function() { // 실행 코드 }); &lt;/script&gt; 몇 초 지연 후 실행 console.log(\"시작\"); setTimeout(function() { console.log(\"3초 후 실행\");...","categories": ["web-dev"],
+        "excerpt":"자주 쓰는 Javascript Javascript 기초 문법 정리 https://0songha0.github.io/web-dev/2025-07-14-1 문자열 관련 처리 https://0songha0.github.io/web-dev/2022-03-10-1 Javascript로 CSS 스타일 변경 https://0songha0.github.io/web-dev/2022-03-13-1 서버 요청 전 처리 https://0songha0.github.io/web-dev/2022-03-24-1 Javascript로 HTML 요소 추가 https://0songha0.github.io/web-dev/2023-01-25-1 Javascript 정규표현식 https://0songha0.github.io/web-dev/2022-08-01-1 document ready 완료 후 실행 &lt;script&gt; document.addEventListener(\"DOMContentLoaded\", function() { // 실행 코드 }); &lt;/script&gt; 몇 초 지연 후 실행 console.log(\"시작\");...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2022-02-10-1",
         "teaser": null
@@ -1365,5 +1365,11 @@ var store = [{
         "excerpt":"이클립스 설치 윈도우 이클립스 설치 방법 https://www.eclipse.org/downloads/ 위 링크에서 이클립스 IDE를 다운로드합니다. 윈도우 64비트 사용 시, ‘Download x86_64’ 버튼을 선택하면 됩니다. 이클립스는 Java로 개발된 프로그램이므로, 설치된 JDK 경로가 환경 변수에 등록되어 있어야 실행할 수 있습니다. 이클립스 Java 애플리케이션 개발 Java 애플리케이션 생성 방법 File &gt; New &gt; Project… &gt; Java...","categories": ["tool"],
         "tags": [],
         "url": "/tool/2025-07-11-1",
+        "teaser": null
+      },{
+        "title": "Javascript 기초 문법 정리",
+        "excerpt":"javascript 기초 문법 자료형 확인 typeof 변수명또는값 또는 typeof(변수명또는값) Javascript 객체 또는 값의 자료형을 확인할 수 있는 단항 연산자입니다. 변수 값 비교 // 변수 값 자동 형변환 후 비교 // 타입이 달라도 값이 같으면 true if (변수명1 == 변수명2) // 변수 값 자동 형변환 없이 비교 // 타입, 값이 모두...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-07-14-1",
         "teaser": null
       }]
