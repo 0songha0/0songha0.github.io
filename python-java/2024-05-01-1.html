@@ -1110,6 +1110,9 @@ for (String key : keySet) {
 for (Integer val : map.values()) {
     System.out.println(val);
 }
+
+// 해시맵 비교 (키, 값이 모두 같으면 true 반환)
+map1.equals(map2);
 </code></pre></div></div>
 
 <p><mark>해시테이블 충돌</mark><br />
@@ -1252,6 +1255,10 @@ set.isEmpty();
 
 // 트리셋 데이터 삭제 : O(logn)
 set.remove(값);
+
+// 오름차순 트리셋의 경우, 최소값/최대값 조회
+int min = set.first();
+int max = set.last();
 </code></pre></div></div>
 
 <h3 id="트리-tree">트리 (Tree)</h3>
