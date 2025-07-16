@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Javascript 비동기 요청 방식 종류 및 차이 / ajax, fetch 사용법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#비동기-요청-방식-종류">비동기 요청 방식 종류</a><ul><li><a href="#ajax">Ajax</a></li><li><a href="#promise">Promise</a></li><li><a href="#fetch">Fetch</a></li><li><a href="#axios">Axios</a></li></ul></li><li><a href="#ajax-사용법">ajax 사용법</a><ul><li><a href="#jquery로-get-요청-예시">Jquery로 GET 요청 예시</a></li><li><a href="#jquery로-post-요청-예시">Jquery로 POST 요청 예시</a></li></ul></li><li><a href="#fetch-사용법">fetch 사용법</a><ul><li><a href="#fetch로-get-요청-예시">fetch로 GET 요청 예시</a></li><li><a href="#fetch로-post-요청-예시">fetch로 POST 요청 예시</a></li><li><a href="#fetch-동기-처리-방법">fetch 동기 처리 방법</a></li></ul></li><li><a href="#서버-spring-controller-참고">서버 Spring Controller 참고</a><ul><li><a href="#json-요청-받는-예시">JSON 요청 받는 예시</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#비동기-요청-방식-종류">비동기 요청 방식 종류</a><ul><li><a href="#ajax">Ajax</a></li><li><a href="#promise">Promise</a></li><li><a href="#fetch">Fetch</a></li><li><a href="#axios">Axios</a></li></ul></li><li><a href="#ajax-사용법">ajax 사용법</a><ul><li><a href="#jquery로-get-요청-예시">Jquery로 GET 요청 예시</a></li><li><a href="#jquery로-post-요청-예시">Jquery로 POST 요청 예시</a></li></ul></li><li><a href="#fetch-사용법">fetch 사용법</a><ul><li><a href="#fetch로-get-요청-예시">fetch로 GET 요청 예시</a></li><li><a href="#fetch로-post-요청-예시">fetch로 POST 요청 예시</a></li><li><a href="#fetch-동기-처리-방법">fetch 동기 처리 방법</a></li></ul></li><li><a href="#서버-spring-controller-참고">서버 Spring Controller 참고</a><ul><li><a href="#json-요청-받는-예시">JSON 요청 받는 예시</a></li></ul></li><li><a href="#서버-응답-로컬-테스트">서버 응답 로컬 테스트</a><ul><li><a href="#javascript-api-응답-json-생성">Javascript API 응답 JSON 생성</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -573,7 +573,7 @@ contentType: “application/json”은 JSON을 문자열로 변환한 data 객�
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fetch('/요청URL', {
     method: 'POST',
     headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json" // 요청 본문 타입 JSON 명시
     },
     body: JSON.stringify({
         "파라미터명1": 파라미터,
@@ -681,6 +681,37 @@ public ModelAndView resetStdTest(HttpServletRequest req, HttpServletResponse res
 </code></pre></div></div>
 <p>JSON으로 요청 데이터를 받고, JSON으로 응답 데이터를 보내는 예시들입니다.</p>
 
+<hr />
+
+<h2 id="서버-응답-로컬-테스트">서버 응답 로컬 테스트</h2>
+
+<h3 id="javascript-api-응답-json-생성">Javascript API 응답 JSON 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const jsonString = `[
+    {
+    "id": 4,
+    "role": 1,
+    "nickname": "user1"
+    },
+    {
+    "id": 5,
+    "role": 2,
+    "nickname": "user2"
+    },
+    {
+    "id": 6,
+    "role": 2,
+    "nickname": "진유나"
+    }
+]`;
+
+// 응답 JSON 객체 생성
+const res = JSON.parse(jsonString);
+
+console.log(res[2].nickname); // "진유나" 출력
+</code></pre></div></div>
+<p>Javascript에서 서버 API 호출 응답을 기준으로 화면 구현해야 하는데,<br />
+아직 API가 개발되지 않았거나 개발 서버가 구축되지 않은 경우<br />
+직접 JSON 객체를 생성하면 이후 로직을 미리 구현해둘 수 있습니다.</p>
 
         
       </section>

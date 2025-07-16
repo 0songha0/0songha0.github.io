@@ -90,7 +90,7 @@ var store = [{
         "teaser": null
       },{
         "title": "크롬 F12 개발자도구 사용법 / 크롬 디버깅 및 소스 분석 방법",
-        "excerpt":"크롬 F12 디버깅 방법 HTML, Javascript 디버깅 F12 &gt; Sources 탭 &gt; HTML, Javascript 파일 선택 &gt; 소스 좌측 클릭하여 디버그포인트를 걸면 새로고침해도 사라지지 않습니다. 디버그포인트 타서 멈추면, 변수에 마우스 올리거나 Console에서 변수명 입력 시 현재 들어있는 값 확인 가능합니다. 크롬 F12 디버깅 단축키 F8 다음 디버깅 포인트로 이동 F10...","categories": ["it-tip"],
+        "excerpt":"크롬 개발자 도구 사용법 크롬 개발자 도구 실행 방법 F12 (단축키) 크롬 우측 상단 점 3개 &gt; 도구 더보기 &gt; 개발자 도구 크롬 브라우저 우클릭 &gt; 검사 개발자 도구 위치 변경 F12 &gt; 우측 상단 점 3개 &gt; Dock side: 팝업창/좌측/하단/우측 중 선택 크롬 디버깅 방법 HTML, Javascript 디버깅 F12...","categories": ["it-tip"],
         "tags": [],
         "url": "/it-tip/2022-06-22-1",
         "teaser": null
