@@ -66,7 +66,7 @@ var store = [{
         "teaser": null
       },{
         "title": "IntelliJ에서 Git 사용하는 방법",
-        "excerpt":"IntelliJ에서 Git 사용법 새로운 Git 저장소에 첫 소스 올리기 신규 프로젝트 만들고 상단 VCS &gt; Enable Version Control Integration… &gt; Git 선택 &gt; OK &gt; 좌측 Git 메뉴 &gt; Unversioned Files 우클릭 &gt; Add to VCS &gt; Changes 목록 체크 &gt; Commit Message 작성 &gt; Commit &gt; 상단 Git &gt;...","categories": ["tool"],
+        "excerpt":"IntelliJ에서 Git 사용법 Git 프로젝트 Open 시 Git 프로젝트로 인식되지 않는 경우 File &gt; Settings… &gt; Version Control &gt; Directory Mappings &gt; + 버튼 &gt; Directory: Git 프로젝트 루트 폴더 선택 &gt; VCS: Git 선택 &gt; OK &gt; Apply &gt; OK 현재 프로젝트에서 Git으로 관리되는 루트 폴더를 설정하면 Git 프로젝트로...","categories": ["tool"],
         "tags": [],
         "url": "/tool/2022-06-05-1",
         "teaser": null

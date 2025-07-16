@@ -470,12 +470,16 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> IntelliJ에서 Git 사용하는 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#intellij에서-git-사용법">IntelliJ에서 Git 사용법</a><ul><li><a href="#새로운-git-저장소에-첫-소스-올리기">새로운 Git 저장소에 첫 소스 올리기</a></li><li><a href="#git-프로젝트-가져오기">Git 프로젝트 가져오기</a></li><li><a href="#git-remote-branch-내려받기">Git Remote branch 내려받기</a></li><li><a href="#git-branch-복제">Git branch 복제</a></li><li><a href="#git-fetch-pull">Git Fetch, Pull</a></li><li><a href="#git-commit-push">Git Commit, Push</a></li><li><a href="#프로젝트-git-url-확인">프로젝트 Git URL 확인</a></li></ul></li><li><a href="#intellij-git-아이콘-구분">IntelliJ Git 아이콘 구분</a></li><li><a href="#checkout">Checkout</a><ul><li><a href="#intellij-checkout-방법">IntelliJ Checkout 방법</a></li></ul></li><li><a href="#stash">Stash</a><ul><li><a href="#stash-사용하는-경우">Stash 사용하는 경우</a></li><li><a href="#intellij-stash-방법">IntelliJ Stash 방법</a></li><li><a href="#unstash-방법">Unstash 방법</a></li></ul></li><li><a href="#merge">Merge</a><ul><li><a href="#intellij-merge-방법">IntelliJ Merge 방법</a></li></ul></li><li><a href="#cherry-pick">Cherry-Pick</a><ul><li><a href="#intellij-cherry-pick-방법">IntelliJ Cherry-Pick 방법</a></li></ul></li><li><a href="#작업한-소스-올리는-순서">작업한 소스 올리는 순서</a></li><li><a href="#소스-복원-방법">소스 복원 방법</a><ul><li><a href="#마지막-커밋-소스로-되돌리기">마지막 커밋 소스로 되돌리기</a></li><li><a href="#이전-커밋-취소">이전 커밋 취소</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#intellij에서-git-사용법">IntelliJ에서 Git 사용법</a><ul><li><a href="#git-프로젝트-open-시-git-프로젝트로-인식되지-않는-경우">Git 프로젝트 Open 시 Git 프로젝트로 인식되지 않는 경우</a></li><li><a href="#새로운-git-저장소에-첫-소스-올리기">새로운 Git 저장소에 첫 소스 올리기</a></li><li><a href="#git-프로젝트-가져오기">Git 프로젝트 가져오기</a></li><li><a href="#git-remote-branch-내려받기">Git Remote branch 내려받기</a></li><li><a href="#git-branch-복제">Git branch 복제</a></li><li><a href="#git-fetch-pull">Git Fetch, Pull</a></li><li><a href="#git-commit-push">Git Commit, Push</a></li><li><a href="#git-히스토리-확인-방법">Git 히스토리 확인 방법</a></li><li><a href="#프로젝트-git-url-확인">프로젝트 Git URL 확인</a></li></ul></li><li><a href="#intellij-git-아이콘-구분">IntelliJ Git 아이콘 구분</a></li><li><a href="#checkout">Checkout</a><ul><li><a href="#intellij-checkout-방법">IntelliJ Checkout 방법</a></li></ul></li><li><a href="#stash">Stash</a><ul><li><a href="#stash-사용하는-경우">Stash 사용하는 경우</a></li><li><a href="#intellij-stash-방법">IntelliJ Stash 방법</a></li><li><a href="#unstash-방법">Unstash 방법</a></li></ul></li><li><a href="#merge">Merge</a><ul><li><a href="#intellij-merge-방법">IntelliJ Merge 방법</a></li></ul></li><li><a href="#cherry-pick">Cherry-Pick</a><ul><li><a href="#intellij-cherry-pick-방법">IntelliJ Cherry-Pick 방법</a></li></ul></li><li><a href="#작업한-소스-올리는-순서">작업한 소스 올리는 순서</a></li><li><a href="#소스-복원-방법">소스 복원 방법</a><ul><li><a href="#마지막-커밋-소스로-되돌리기">마지막 커밋 소스로 되돌리기</a></li><li><a href="#이전-커밋-취소">이전 커밋 취소</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
         <h2 id="intellij에서-git-사용법">IntelliJ에서 Git 사용법</h2>
+
+<h3 id="git-프로젝트-open-시-git-프로젝트로-인식되지-않는-경우">Git 프로젝트 Open 시 Git 프로젝트로 인식되지 않는 경우</h3>
+<p>File &gt; Settings… &gt; Version Control &gt; Directory Mappings &gt; + 버튼 &gt; Directory: Git 프로젝트 루트 폴더 선택 &gt; VCS: Git 선택 &gt; OK &gt; Apply &gt; OK<br />
+현재 프로젝트에서 Git으로 관리되는 루트 폴더를 설정하면 Git 프로젝트로 인식됩니다.</p>
 
 <h3 id="새로운-git-저장소에-첫-소스-올리기">새로운 Git 저장소에 첫 소스 올리기</h3>
 <p>신규 프로젝트 만들고 상단 VCS &gt; Enable Version Control Integration… &gt; Git 선택 &gt; OK &gt; 좌측 Git 메뉴 &gt; Unversioned Files 우클릭 &gt; Add to VCS &gt; Changes 목록 체크 &gt; Commit Message 작성 &gt; Commit &gt; 상단 Git &gt; push &gt; Define remote &gt; 아래와 같이 입력 후 push</p>
@@ -523,6 +527,9 @@ Git &gt; Clone… &gt; Get from Version Control &gt;</p>
 <h3 id="git-commit-push">Git Commit, Push</h3>
 <p>좌측 Commit 메뉴 &gt; Changes 목록에서 Commit 할 파일들 선택 &gt; Commit Message 작성 &gt; Commit &gt; 좌측 하단 Git &gt; Log &gt; ↗ 아이콘이 생겨있는 Git Local branch 우클릭 &gt; push<br />
 Git history로 파일 비교해서 보면 왼쪽이 이전 소스, 오른쪽이 변경된 소스입니다.</p>
+
+<h3 id="git-히스토리-확인-방법">Git 히스토리 확인 방법</h3>
+<p>파일 우클릭 &gt; Git &gt; Show History</p>
 
 <h3 id="프로젝트-git-url-확인">프로젝트 Git URL 확인</h3>
 <p>좌측 하단 Git &gt; Log &gt; Remote 우클릭 &gt; Manage Remotes<br />
