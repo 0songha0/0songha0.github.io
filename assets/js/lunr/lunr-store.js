@@ -1344,12 +1344,12 @@ var store = [{
         "teaser": null
       },{
         "title": "타입스크립트 개념 정리 / 타입스크립트 설치 및 컴파일 옵션 설정 방법",
-        "excerpt":"TypeScript란? Javascript를 안전하게 사용할 수 있도록 타입 관련 기능들을 추가한 확장 언어입니다. 타입스크립트 코드는 컴파일 시 타입 검사를 성공하면 Javascript로 변환됩니다. 컴파일 된 Javascript에는 타입 관련 코드들이 포함되지 않아 성능에 영향을 주지 않습니다. 코드 실행 전 타입 오류를 미리 발견하므로 일반 Javascript보다 안정성이 높습니다. 언어별 타입 시스템 차이 정적 타입...","categories": ["web-dev"],
+        "excerpt":"TypeScript란? Javascript를 안전하게 사용할 수 있도록 타입 관련 기능들을 추가한 확장 언어입니다. 타입스크립트 코드는 컴파일 시 타입 검사를 성공하면 Javascript로 변환됩니다. 컴파일 된 Javascript에는 타입 관련 코드들이 포함되지 않아 성능에 영향을 주지 않습니다. 타입스크립트 장점 코드 실행 전, 컴파일 시점에 타입 오류를 미리 발견하므로 일반 Javascript보다 안정성이 높습니다. 언어별 타입...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-06-30-1",
         "teaser": null
       },{
-        "title": "타입스크립트 타입 종류 및 타입 정의 방법",
+        "title": "타입스크립트 타입 종류 / 타입스크립트 기본 타입 정의 방법",
         "excerpt":"TypeScript 기본 타입 종류 기본 원시 타입 (Primitive Types) // 문자만 저장 허용 let 변수명: string = \"문자\"; // 숫자만 저장 허용 (정수, 실수 모두 포함) let 변수명: number = 숫자; // 아주 큰 정수 저장 허용 let 변수명: bigint = 123456789012345678901234567890n; // 참/거짓만 저장 허용 let 변수명: boolean =...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-07-01-1",
@@ -1365,6 +1365,12 @@ var store = [{
         "excerpt":"이클립스 설치 윈도우 이클립스 설치 방법 https://www.eclipse.org/downloads/ 위 링크에서 이클립스 IDE를 다운로드합니다. 윈도우 64비트 사용 시, ‘Download x86_64’ 버튼을 선택하면 됩니다. 이클립스는 Java로 개발된 프로그램이므로, 설치된 JDK 경로가 환경 변수에 등록되어 있어야 실행할 수 있습니다. 이클립스 Java 애플리케이션 개발 Java 애플리케이션 생성 방법 File &gt; New &gt; Project… &gt; Java...","categories": ["tool"],
         "tags": [],
         "url": "/tool/2025-07-11-1",
+        "teaser": null
+      },{
+        "title": "타입스크립트 고급 타입 정의 방법 / 인터페이스, 클래스, 제네릭 타입 등",
+        "excerpt":"인터페이스 인터페이스는 클래스가 구현해야 할 속성 및 메서드 구조를 정의하는 설계도 역할입니다. 인터페이스 타입 정의 // 인터페이스로 객체 타입 정의 interface 인터페이스명 { 프로퍼티명1: string; 프로퍼티명2: number; } // 인터페이스 타입에 맞는 객체 정의 const 변수명: 인터페이스명 = { 프로퍼티명1: \"한서윤\", 프로퍼티명2: 25 } 인터페이스로 객체 타입 정의 시 상속,...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-07-11-1",
         "teaser": null
       },{
         "title": "Javascript 기초 문법 정리",

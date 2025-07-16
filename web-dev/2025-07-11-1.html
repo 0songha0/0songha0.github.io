@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>이클립스에서 톰캣 사용하는 방법 / 톰캣 에러 해결 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>타입스크립트 고급 타입 정의 방법 / 인터페이스, 클래스, 제네릭 타입 등 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,8 +65,8 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="이클립스에서 톰캣 사용하는 방법 / 톰캣 에러 해결">
-<meta property="og:url" content="https://0songha0.github.io/tool/2023-10-28-1">
+<meta property="og:title" content="타입스크립트 고급 타입 정의 방법 / 인터페이스, 클래스, 제네릭 타입 등">
+<meta property="og:url" content="https://0songha0.github.io/web-dev/2025-07-11-1">
 
 
   <meta property="og:description" content="송하영 개발 블로그">
@@ -77,11 +77,11 @@
 
 
 
-  <meta property="article:published_time" content="2023-10-28T00:00:00+00:00">
+  <meta property="article:published_time" content="2025-07-11T00:00:00+00:00">
 
 
 
-  <meta property="article:modified_time" content="2023-10-28T00:00:00+00:00">
+  <meta property="article:modified_time" content="2025-07-11T00:00:00+00:00">
 
 
 
@@ -90,7 +90,7 @@
   
 
 
-<link rel="canonical" href="https://0songha0.github.io/tool/2023-10-28-1">
+<link rel="canonical" href="https://0songha0.github.io/web-dev/2025-07-11-1">
 
 
 
@@ -433,15 +433,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="이클립스에서 톰캣 사용하는 방법 / 톰캣 에러 해결">
+    <meta itemprop="headline" content="타입스크립트 고급 타입 정의 방법 / 인터페이스, 클래스, 제네릭 타입 등">
     <meta itemprop="description" content="">
-    <meta itemprop="datePublished" content="2023-10-28T00:00:00+00:00">
-    <meta itemprop="dateModified" content="2023-10-28T00:00:00+00:00">
+    <meta itemprop="datePublished" content="2025-07-11T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-07-11T00:00:00+00:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">이클립스에서 톰캣 사용하는 방법 / 톰캣 에러 해결
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">타입스크립트 고급 타입 정의 방법 / 인터페이스, 클래스, 제네릭 타입 등
 </h1>
           
 
@@ -450,7 +450,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2023-10-28T00:00:00+00:00">2023-10-28</time>
+        <time datetime="2025-07-11T00:00:00+00:00">2025-07-11</time>
       </span>
     
 
@@ -468,130 +468,238 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 이클립스에서 톰캣 사용하는 방법 / 톰캣 에러 해결</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 타입스크립트 고급 타입 정의 방법 / 인터페이스, 클래스, 제네릭 타입 등</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#이클립스에서-톰캣-사용-방법">이클립스에서 톰캣 사용 방법</a><ul><li><a href="#윈도우-톰캣-설치">윈도우 톰캣 설치</a></li><li><a href="#이클립스에-톰캣-연동-방법">이클립스에 톰캣 연동 방법</a></li><li><a href="#톰캣에-프로젝트-추가-방법">톰캣에 프로젝트 추가 방법</a></li><li><a href="#톰캣-경로-수정-방법">톰캣 경로 수정 방법</a></li><li><a href="#프로젝트에-톰캣-라이브러리-추가-방법">프로젝트에 톰캣 라이브러리 추가 방법</a></li></ul></li><li><a href="#톰캣-설정-방법">톰캣 설정 방법</a><ul><li><a href="#serverxml-db-설정-방법">server.xml DB 설정 방법</a></li><li><a href="#serverxml-프로젝트-경로-설정-방법">server.xml 프로젝트 경로 설정 방법</a></li><li><a href="#contextxml-설정-방법">context.xml 설정 방법</a></li></ul></li><li><a href="#이클립스-톰캣-에러-해결-방법">이클립스 톰캣 에러 해결 방법</a><ul><li><a href="#add-and-remove-시-에러">Add and Remove 시 에러</a></li><li><a href="#톰캣-실행-시-에러">톰캣 실행 시 에러</a></li><li><a href="#운영-중-db-연결-실패-에러">운영 중 DB 연결 실패 에러</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#인터페이스">인터페이스</a><ul><li><a href="#인터페이스-타입-정의">인터페이스 타입 정의</a></li><li><a href="#인터페이스-상속-extends">인터페이스 상속 (extends)</a></li><li><a href="#인터페이스-선언-병합">인터페이스 선언 병합</a></li></ul></li><li><a href="#클래스">클래스</a><ul><li><a href="#클래스-타입-정의">클래스 타입 정의</a></li><li><a href="#typescript-클래스-상속-방법">Typescript 클래스 상속 방법</a></li><li><a href="#객체-인스턴스-생성">객체 인스턴스 생성</a></li><li><a href="#클래스-접근제어자">클래스 접근제어자</a></li><li><a href="#인터페이스를-구현한-클래스-정의">인터페이스를 구현한 클래스 정의</a></li></ul></li><li><a href="#제네릭">제네릭</a><ul><li><a href="#제네릭-타입-정의">제네릭 타입 정의</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h2 id="이클립스에서-톰캣-사용-방법">이클립스에서 톰캣 사용 방법</h2>
+        <h2 id="인터페이스">인터페이스</h2>
 
-<h3 id="윈도우-톰캣-설치">윈도우 톰캣 설치</h3>
-<p><a href="https://tomcat.apache.org" target="_blank">https://tomcat.apache.org</a><br />
-프로젝트에 맞는 버전의 톰캣 선택 &gt; 64-bit Windows zip으로 다운로드 &gt; 압축 해제하면 설치 완료입니다.</p>
+<p>인터페이스는 클래스가 구현해야 할 속성 및 메서드 구조를 정의하는 설계도 역할입니다.</p>
 
-<h3 id="이클립스에-톰캣-연동-방법">이클립스에 톰캣 연동 방법</h3>
-<p>이클립스 하단 Servers 탭 내부 우클릭 &gt; New &gt; Server &gt; Apache &gt; Tomcat v(설치한 버전) Server 선택 &gt; Next &gt; Tomcat installation directory: Browse…를 통해 설치한 톰캣 폴더 선택 &gt; JRE: 프로젝트에 맞는 버전의 JRE 선택 &gt; Finish</p>
+<h3 id="인터페이스-타입-정의">인터페이스 타입 정의</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 인터페이스로 객체 타입 정의
+interface 인터페이스명 {
+  프로퍼티명1: string;
+  프로퍼티명2: number;
+}
 
-<h3 id="톰캣에-프로젝트-추가-방법">톰캣에 프로젝트 추가 방법</h3>
-<p>이클립스 하단 Servers 탭에서 톰캣 우클릭 &gt; Add and Remove… &gt; Available: 목록의 프로젝트 더블클릭 &gt; 프로젝트가 Configured: 목록으로 이동한 것 확인 &gt; Finish</p>
+// 인터페이스 타입에 맞는 객체 정의
+const 변수명: 인터페이스명 = {
+  프로퍼티명1: "한서윤",
+  프로퍼티명2: 25
+}
+</code></pre></div></div>
+<p>인터페이스로 객체 타입 정의 시 상속, 선언 병합 기능을 이용할 수 있습니다.</p>
 
-<p><mark>톰캣 프로젝트 Path 변경 방법</mark><br />
-이클립스 하단 Servers 탭에서 톰캣 더블클릭 &gt; 하단 Modules 탭 &gt; Web Modules 선택 &gt; Edit… &gt; Path : /로 수정 &gt; OK : Ctrl + S로 저장</p>
+<p><mark>인터페이스 정의 시 함수 프로퍼티 추가</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 인터페이스로 객체 타입 정의
+interface 인터페이스명 {
+  프로퍼티명: () =&gt; void; // 함수 타입 표현식으로 함수 프로퍼티 선언 가능 (1개만 선언 가능. 오버로드 불가)
+  또는
+  프로퍼티명(): void; // 함수 호출 시그니처 형태로 함수 프로퍼티 선언 가능
+  프로퍼티명(매개변수명: number): void; // 함수 호출 시그니처 문법 이용 시 여러 오버로드 시그니처 정의 가능
+}
 
-<h3 id="톰캣-경로-수정-방법">톰캣 경로 수정 방법</h3>
-<p>Windows &gt; Preferences &gt; Server &gt; Runtime Environments &gt; 톰캣 선택 &gt; Edit &gt; Browse &gt; 톰캣 폴더 선택 &gt; Finish &gt; Apply and Close</p>
+// 인터페이스 타입에 맞는 객체 정의
+const 변수명: 인터페이스명 = {
+  프로퍼티명: function () {
+    console.log("Hi");
+  }
+};
+</code></pre></div></div>
+<p>함수 프로퍼티를 갖는 인터페이스 정의할 수 있습니다.</p>
 
-<h3 id="프로젝트에-톰캣-라이브러리-추가-방법">프로젝트에 톰캣 라이브러리 추가 방법</h3>
-<p>프로젝트 우클릭 &gt; Java Build Path &gt; Libraries &gt; Add Library &gt; Server Runtime &gt; Next &gt; 이클립스에 연동한 Apache Tomcat v(버전) 선택 &gt; Finish 합니다.</p>
+<h3 id="인터페이스-상속-extends">인터페이스 상속 (extends)</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 부모 인터페이스 타입 정의
+interface Person {
+  name: string;
+}
+또는
+// 부모 객체 타입 정의
+type Person = {
+  name: string;
+}
+
+// 자식 인터페이스 타입 정의
+// 부모 인터페이스 타입 또는 부모 객체 타입 프로퍼티 상속
+interface Student extends Person {
+  grade: number;
+}
+interface Developer extends Person {
+  name: "개발자"; // 스트링 리터럴 타입 (부모 타입 string의 서브 타입)
+  grade: number;
+}
+</code></pre></div></div>
+<p>부모 인터페이스 타입 프로퍼티들을 상속한 자식 인터페이스 타입을 정의할 수 있습니다.<br />
+상속을 이용하면 자식 타입 정의 시 중복  속성 코드 작성을 최소화할 수 있습니다.<br />
+부모에서 상속받은 프로퍼티 재정의 시, 원본 타입의 서브타입이어야 합니다.</p>
+
+<p><mark>인터페이스 다중 상속</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface 자식인터페이스명 extends 부모인터페이스명1, 부모인터페이스명2 {
+  // 프로퍼티 정의
+}
+
+const 변수명: 자식인터페이스명 = {
+  // 모든 부모, 자식 필수 프로퍼티 값 정의 필요
+}
+</code></pre></div></div>
+<p>여러 부모 인터페이스 타입 프로퍼티들을 모두 갖는 자식 인터페이스 타입을 정의할 수 있습니다.</p>
+
+<h3 id="인터페이스-선언-병합">인터페이스 선언 병합</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface User {
+  name: string;
+}
+
+interface User {
+  age: number;
+}
+
+// 인터페이스 선언 병합 결과
+interface User {
+  name: string;
+  age: number;
+}
+</code></pre></div></div>
+<p>동일한 인터페이스명으로 인터페이스 타입들을 선언하면, 모든 프로퍼티들이 병합됩니다.<br />
+각 인터페이스에 같은 프로퍼티 정의 시에는 반드시 타입이 같아야 합니다.</p>
 
 <hr />
 
-<h2 id="톰캣-설정-방법">톰캣 설정 방법</h2>
+<h2 id="클래스">클래스</h2>
 
-<h3 id="serverxml-db-설정-방법">server.xml DB 설정 방법</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;Resource auth="Container" factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" driverClassName="com.mysql.cj.jdbc.Driver" global="jdbc/DB명" maxTotal="400" maxIdle="400" maxWaitMillis="30000" name="jdbc/DB명" type="javax.sql.DataSource" url="jdbc:mysql://DB서버IP또는도메인:3306/DB명?characterEncoding=UTF-8&amp;amp;allowMultiQueries=true" username="DB계정명" password="DB계정비밀번호" statementTimeout="30" validationQuery="select 1" testOnBorrow="true" testOnReturn="false" testWhileIdle="true" timeBetweenEvictionRunsMillis="60000" minEvictableIdleTimeMillis="300000" /&gt;
-</code></pre></div></div>
-<p>위와 같이, &lt;GlobalNamingResources&gt; 태그 내부에 DB 리소스를 입력합니다.<br />
-개발 DB 정보를 쓰면 개발 DB에 연결되고, 운영 DB 정보를 쓰면 운영 DB에 연결됩니다.</p>
+<p>클래스는 동일한 속성과 기능을 가진 여러 객체를 생성할 때 설계도 역할을 합니다.<br />
+클래스 활용 시 객체 코드 중복을 최소화 할 수 있습니다.</p>
 
-<h3 id="serverxml-프로젝트-경로-설정-방법">server.xml 프로젝트 경로 설정 방법</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;Context docBase="프로젝트폴더명" path="URL시작경로" reloadable="true" source="org.eclipse.jst.jee.server:프로젝트명"/&gt;
-</code></pre></div></div>
-<p>server.xml 최하단 Engine 태그 안에서는 Add 한 프로젝트 Context 정보가 맞는지 확인합니다.<br />
-프로젝트 Context는 Add 시 최하단 &lt;/Host&gt; 위에 자동 생성되며, path를 /로 변경해주면 localhost:HTTP포트만으로 접근 가능합니다.</p>
+<h3 id="클래스-타입-정의">클래스 타입 정의</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class 클래스명 {
+  필드명1: number;
+  필드명2: string = ""; // 기본값 설정
+  필드명3?: boolean; // 선택적 프로퍼티
 
-<h3 id="contextxml-설정-방법">context.xml 설정 방법</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;ResourceLink global="jdbc/DB명" name="jdbc/DB명" type="javax.sql.DataSource"&gt;&lt;/ResourceLink&gt;
+  constructor(필드명1: number, 필드명2: string, 필드명3: boolean) {
+    this.필드명1 = 필드명1;
+    this.필드명2 = 필드명2;
+    this.필드명3 = 필드명3;
+  }
+
+  메서드명() {
+    
+  }
+}
 </code></pre></div></div>
-<p>최하단 &lt;/context&gt; 위에 DB 리소스 링크를 입력합니다.</p>
+<p>각 필드 타입이 명시된 클래스를 정의할 수 있습니다.<br />
+타입스크립트 클래스는 타입으로 사용되어 변수 타입 안정성을 높일 수 있습니다.</p>
+
+<h3 id="typescript-클래스-상속-방법">Typescript 클래스 상속 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class 자식클래스명 extends 부모클래스명 {
+  필드명4: number;
+
+  constructor(필드명1: number, 필드명2: string, 필드명3: boolean, 필드명4: number) {
+    super(필드명1, 필드명2, 필드명3);
+    this.필드명4 = 필드명4;
+  }
+}
+</code></pre></div></div>
+<p>생성자에서 부모 클래스 생성자를 호출하는 자식 클래스를 정의할 수 있습니다.</p>
+
+<h3 id="객체-인스턴스-생성">객체 인스턴스 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 클래스 생성자를 이용한 객체 인스턴스 생성
+const 변수명 = new 클래스명(필드1값, 필드2값, 필드3값);
+
+// 객체 정보 조회
+console.log(변수명);
+
+// 객체 필드 값 수정
+변수명.필드명1 = 값;
+
+// 객체 내 메서드 호출
+변수명.메서드명();
+</code></pre></div></div>
+<p>타입스크립트 클래스를 이용하여 객체 인스턴스를 생성할 수 있습니다.</p>
+
+<p><mark>클래스 타입에 맞춘 일반 객체 정의</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const 변수명: 클래스명 = {
+  필드명1: 필드1값,
+  필드명2: 필드2값,
+  필드명3: 필드3값,
+  메서드명() { }
+}
+</code></pre></div></div>
+<p>클래스를 타입처럼 사용하여 객체를 정의할 수 있습니다.<br />
+인스턴스가 생성되는 문법은 아닙니다.</p>
+
+<h3 id="클래스-접근제어자">클래스 접근제어자</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class 클래스명 {
+  // 어디에서든 접근 가능 (기본값)
+  public 필드명1;
+  필드명2; // 접근제어자 생략 시 public
+
+  // 현재 클래스에서만 접근 가능
+  // 외부 및 자식 클래스에서 필드 접근 불가
+  // 메서드를 통해서만 필드 접근 가능
+  private 필드명3;
+
+  // 현재 클래스 또는 자식 클래스에서만 필드 접근 가능
+  // java와 달리, 같은 폴더/파일에서는 접근 불가
+  protected 필드명4;
+
+  public 메서드명() {
+    // 클래스 내부에서는 private 필드 접근 가능
+    return this.필드명3;
+  }
+}
+</code></pre></div></div>
+<p>타입스크립트 접근제어자 사용 예시입니다.<br />
+Javascript에는 접근제어자가 없고, 타입스크립트에서만 제공하는 기능입니다.</p>
+
+<p><mark>클래스 생성자에서 접근제어자 사용</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class 클래스명 {
+  constructor(public 필드명1: string, private 필드명2: number) {
+    // 필드 값 초기화 로직 생략 가능
+  }
+}
+</code></pre></div></div>
+<p>위와 같이, 클래스 생성자에서 각 필드에 접근제어자 사용 시 필드를 정의하지 않아도 됩니다.<br />
+필드에 값을 할당하는 로직도 타입스크립트가 Javascript 파일로 컴파일 시 자동으로 생성해 줍니다.</p>
+
+<h3 id="인터페이스를-구현한-클래스-정의">인터페이스를 구현한 클래스 정의</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 인터페이스 정의
+interface 인터페이스명 {
+  필드명1: string; // 인터페이스에서는 public 필드만 정의 가능
+  필드명2: number;
+  메서드명(): void;
+}
+
+// 인터페이스를 구현한 클래스 정의
+// 인터페이스 내 필드 및 메서드 미구현 시 오류 발생
+class 클래스명 implements 인터페이스명 {
+  필드명1: string;
+  필드명2: number;
+  private 필드명3: string;
+
+  constructor(필드명1: string, 필드명2: number, 필드명3: string) {
+    this.필드명1 = 필드명1;
+    this.필드명2 = 필드명2;
+    this.필드명3 = 필드명3;
+  }
+
+  메서드명(): void {
+    console.log(`필드명1 : ${this.필드명1}`);
+  }
+}
+</code></pre></div></div>
+<p>인터페이스 정의 후, 인터페이스를 구현한 클래스를 정의할 수 있습니다.</p>
 
 <hr />
 
-<h2 id="이클립스-톰캣-에러-해결-방법">이클립스 톰캣 에러 해결 방법</h2>
+<h2 id="제네릭">제네릭</h2>
+<p>작성예정</p>
 
-<h3 id="add-and-remove-시-에러">Add and Remove 시 에러</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>There are no resources that can be added or removed from the server.
-</code></pre></div></div>
-<p>위 팝업이 나오면, 추가하거나 삭제할 프로젝트 리소스가 없다는 뜻입니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;Context docBase="프로젝트폴더명" path="URL시작경로" reloadable="true" source="org.eclipse.jst.jee.server:프로젝트명"/&gt;
-</code></pre></div></div>
-<p>톰캣 server.xml 최하단 &lt;/Host&gt; 위에 위와 같이 프로젝트 Context를 직접 추가하고 이클립스 workspace 폴더의 .metadata.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps 폴더 안에 프로젝트명\src\main\webapp 폴더와 유사한 폴더를 넣으면 실행은 되는데, jsp 수정 반영이 안됩니다.<br />
-이클립스와 톰캣을 아예 새로 설치하고 다시 Add 해주니까 잘 됩니다.</p>
-
-<h3 id="톰캣-실행-시-에러">톰캣 실행 시 에러</h3>
-<p><mark>Context 정보가 프로젝트 폴더와 매핑이 안 되는 에러</mark><br />
-server.xml에서 Context 태그의 docBase, source 정보가 맞는지 확인합니다.</p>
-
-<p><mark>DB 연결이 안 되는 에러</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SEVERE: 자식 컨테이너를 시작 중 실패했습니다.
-java.util.concurrent.ExecutionException: org.apache.catalina.LifecycleException: 구성요소 [StandardEngine[Catalina].StandardHost[localhost].StandardContext[]]을(를) 시작하지 못했습니다.
-	at java.base/java.util.concurrent.FutureTask.report(FutureTask.java:122)
-	at java.base/java.util.concurrent.FutureTask.get(FutureTask.java:191)
-	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:873)
-	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:794)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1332)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1322)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
-	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:140)
-	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:866)
-	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:248)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
-	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:433)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
-	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:921)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
-	at org.apache.catalina.startup.Catalina.start(Catalina.java:772)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:347)
-	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:478)
-</code></pre></div></div>
-<p>server.xml에서 Resource 태그의 DB 정보와 context.xml의 ResourceLink 정보가 맞는지 확인합니다.<br />
-DB 정보가 맞는데도 에러가 나서 Maven update 후 다시 시도했더니 톰캣 실행이 잘 되었습니다.</p>
-
-<p><mark>톰캣 시작 시간 초과 에러</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Server Tomcat v9.0 Server at localhost was unable to start within 45 seconds. If the server requires more time, try increasing the timeout in the server editor.
-</code></pre></div></div>
-<p>프로젝트 톰캣 실행 시 DB에서 많은 정보를 불러오거나 읽을 라이브러리가 많은 경우 시간 초과가 날 수 있습니다.<br />
-Servers 탭 &gt; 톰캣 더블 클릭 &gt; Overview &gt; Timeouts &gt; Start 시간을 180초로 변경하면 됩니다.</p>
-
-<h3 id="운영-중-db-연결-실패-에러">운영 중 DB 연결 실패 에러</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Communications link failure The last packet successfully received from the server was 4,708,795 milliseconds ago. The last packet sent successfully to the server was 4,708,796 milliseconds ago.
-</code></pre></div></div>
-<p>톰캣 JDBC 커넥션 풀이 세션이 종료된 커넥션을 재사용하면서 발생하는 문제입니다.<br />
-MySQL 서버가 wait_timeout 시간이 지난 세션을 종료해도, 커넥션 풀은 비활성화된 커넥션을 감지하지 못합니다.</p>
-
-<p><mark>DB 연결 실패 방지 설정</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SHOW VARIABLES LIKE 'wait_timeout';
-</code></pre></div></div>
-<p>위 쿼리로 DB wait_timeout 시간을 확인하고, 이보다 짧게 트리거를 설정하는 것이 좋습니다.<br />
-톰캣 server.xml DB Resource 설정 수정 시 톰캣 재기동 해야 반영이 됩니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>validationQuery="select 1"
-testOnBorrow="true" &lt;!-- 쿼리 실행 전 validationQuery 실행 활성화 --&gt;
-testOnReturn="false" &lt;!-- 커넥션 반환 전 validationQuery 실행 비활성화 --&gt;
-testWhileIdle="true" &lt;!-- 주기적으로 유휴 커넥션 검사 실행 활성화 --&gt;
-timeBetweenEvictionRunsMillis="60000"  &lt;!-- 1분마다 유휴 커넥션 검사 --&gt;
-minEvictableIdleTimeMillis="300000"  &lt;!-- 5분 이상 유휴 상태인 커넥션 제거 --&gt;
-</code></pre></div></div>
-<p>DB와 연결을 유지하고 있지만 사용되지 않고 대기 중인 유휴 커넥션 정리 설정 예시입니다.<br />
-testOnBorrow=”true”는 모든 쿼리 전 validationQuery를 실행하므로 트래픽이 많아지면 DB에 부하를 줄 수 있지만,<br />
-커넥션 풀에서 끊어진 커넥션을 즉시 걸러낼 수 있어 커넥션 실패 문제를 예방할 수 있는 가장 확실한 방법입니다.</p>
+<h3 id="제네릭-타입-정의">제네릭 타입 정의</h3>
+<p>작성예정</p>
 
         
       </section>
@@ -612,14 +720,14 @@ testOnBorrow=”true”는 모든 쿼리 전 validationQuery를 실행하므로 
     
       
       
-      <a href="/categories#tool" class="page__taxonomy-item" rel="tag">윈도우 / Tool</a>
+      <a href="/categories#web-dev" class="page__taxonomy-item" rel="tag">Web 개발</a>
     
     </span>
   </p>
 
 
         
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-10-28">2023-10-28</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-07-11">2025-07-11</time></p>
 
 
       </footer>
@@ -629,11 +737,11 @@ testOnBorrow=”true”는 모든 쿼리 전 validationQuery를 실행하므로 
       
   <nav class="pagination">
     
-      <a href="/tool/2023-10-29-1" class="pagination--pager" title="이클립스 테마 변경 방법 / 이클립스 다크 테마 설정 방법
+      <a href="/web-dev/2025-07-14-1" class="pagination--pager" title="Javascript 기초 문법 정리
 ">❮</a>
     
     
-      <a href="/tool/2023-10-27-1" class="pagination--pager" title="이클립스 설정 방법
+      <a href="/tool/2025-07-11-1" class="pagination--pager" title="이클립스 설치 및 Java 애플리케이션 생성 방법
 ">❯</a>
     
   </nav>
@@ -671,42 +779,6 @@ testOnBorrow=”true”는 모든 쿼리 전 validationQuery를 실행하므로 
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-07-14T00:00:00+00:00">2025-07-14</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-07-11-1" rel="permalink">타입스크립트 고급 타입 정의 방법 / 인터페이스, 클래스, 제네릭 타입 등
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-07-11T00:00:00+00:00">2025-07-11</time>
       </span>
     
 
@@ -779,6 +851,42 @@ testOnBorrow=”true”는 모든 쿼리 전 validationQuery를 실행하므로 
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-07-07T00:00:00+00:00">2025-07-07</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-07-01-1" rel="permalink">타입스크립트 타입 종류 / 타입스크립트 기본 타입 정의 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-07-01T00:00:00+00:00">2025-07-01</time>
       </span>
     
 

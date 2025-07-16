@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>타입스크립트 타입 종류 및 타입 정의 방법 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>타입스크립트 타입 종류 / 타입스크립트 기본 타입 정의 방법 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,7 +65,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="타입스크립트 타입 종류 및 타입 정의 방법">
+<meta property="og:title" content="타입스크립트 타입 종류 / 타입스크립트 기본 타입 정의 방법">
 <meta property="og:url" content="https://0songha0.github.io/web-dev/2025-07-01-1">
 
 
@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 229</span>
+      <span class="nav__total">🌴 Total Posts: 230</span>
     </li> -->
     
     
@@ -433,7 +433,7 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="타입스크립트 타입 종류 및 타입 정의 방법">
+    <meta itemprop="headline" content="타입스크립트 타입 종류 / 타입스크립트 기본 타입 정의 방법">
     <meta itemprop="description" content="">
     <meta itemprop="datePublished" content="2025-07-01T00:00:00+00:00">
     <meta itemprop="dateModified" content="2025-07-01T00:00:00+00:00">
@@ -441,7 +441,7 @@
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">타입스크립트 타입 종류 및 타입 정의 방법
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">타입스크립트 타입 종류 / 타입스크립트 기본 타입 정의 방법
 </h1>
           
 
@@ -468,9 +468,9 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 타입스크립트 타입 종류 및 타입 정의 방법</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 타입스크립트 타입 종류 / 타입스크립트 기본 타입 정의 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#typescript-기본-타입-종류">TypeScript 기본 타입 종류</a><ul><li><a href="#기본-원시-타입-primitive-types">기본 원시 타입 (Primitive Types)</a></li><li><a href="#리터럴-타입">리터럴 타입</a></li><li><a href="#배열-타입-array">배열 타입 (Array)</a></li><li><a href="#튜플-타입">튜플 타입</a></li><li><a href="#객체-타입-object">객체 타입 (Object)</a></li><li><a href="#enum-타입">Enum 타입</a></li><li><a href="#any-타입">any 타입</a></li><li><a href="#unknown-타입">unknown 타입</a></li><li><a href="#void-타입">void 타입</a></li><li><a href="#never-타입">never 타입</a></li></ul></li><li><a href="#대수-타입">대수 타입</a><ul><li><a href="#합집합-타입-union-타입">합집합 타입 (Union 타입)</a></li><li><a href="#교집합-타입-intersection-타입">교집합 타입 (Intersection 타입)</a></li></ul></li><li><a href="#함수-타입">함수 타입</a><ul><li><a href="#함수-타입-정의">함수 타입 정의</a></li><li><a href="#함수-타입-호환성">함수 타입 호환성</a></li><li><a href="#함수-오버로딩">함수 오버로딩</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#typescript-기본-타입-종류">TypeScript 기본 타입 종류</a><ul><li><a href="#기본-원시-타입-primitive-types">기본 원시 타입 (Primitive Types)</a></li><li><a href="#리터럴-타입">리터럴 타입</a></li><li><a href="#배열-타입-array">배열 타입 (Array)</a></li><li><a href="#튜플-타입">튜플 타입</a></li><li><a href="#객체-타입-object">객체 타입 (Object)</a></li><li><a href="#enum-타입">Enum 타입</a></li><li><a href="#any-타입">any 타입</a></li><li><a href="#unknown-타입">unknown 타입</a></li><li><a href="#void-타입">void 타입</a></li><li><a href="#never-타입">never 타입</a></li></ul></li><li><a href="#대수-타입">대수 타입</a><ul><li><a href="#합집합-타입-union-타입">합집합 타입 (Union 타입)</a></li><li><a href="#교집합-타입-intersection-타입">교집합 타입 (Intersection 타입)</a></li></ul></li><li><a href="#함수-타입">함수 타입</a><ul><li><a href="#함수-타입-정의">함수 타입 정의</a></li><li><a href="#함수-타입-호환성">함수 타입 호환성</a></li><li><a href="#함수-오버로딩">함수 오버로딩</a></li></ul></li><li><a href="#타입스크립트-고급-타입-정리">타입스크립트 고급 타입 정리</a></li></ul>
 
             </nav>
           </aside>
@@ -1033,6 +1033,12 @@ function 함수명(a, b, c) {
 </code></pre></div></div>
 <p>함수 오버로딩 시 매개변수 수가 다른 경우, 구현부는 선택적 매개변수로 작성해야 합니다.</p>
 
+<hr />
+
+<h2 id="타입스크립트-고급-타입-정리">타입스크립트 고급 타입 정리</h2>
+<p><a href="https://0songha0.github.io/web-dev/2025-07-11-1" target="_blank">https://0songha0.github.io/web-dev/2025-07-11-1</a><br />
+인터페이스, 클래스, 제네릭 타입 등 심화 타입들을 정의할 수 있습니다.</p>
+
         
       </section>
 
@@ -1135,6 +1141,42 @@ function 함수명(a, b, c) {
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
+        <a href="/web-dev/2025-07-11-1" rel="permalink">타입스크립트 고급 타입 정의 방법 / 인터페이스, 클래스, 제네릭 타입 등
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-07-11T00:00:00+00:00">2025-07-11</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
         <a href="/tool/2025-07-11-1" rel="permalink">이클립스 설치 및 Java 애플리케이션 생성 방법
 </a>
       
@@ -1183,42 +1225,6 @@ function 함수명(a, b, c) {
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-07-07T00:00:00+00:00">2025-07-07</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-06-30-1" rel="permalink">타입스크립트 개념 정리 / 타입스크립트 설치 및 컴파일 옵션 설정 방법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-06-30T00:00:00+00:00">2025-06-30</time>
       </span>
     
 
