@@ -678,19 +678,27 @@ alias 설정으로 ./src 경로를 @로 대체하여, import 시 경로를 간�
 <h3 id="vite-cli로-vue-설치-자동-세팅">vite CLI로 Vue 설치 (자동 세팅)</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm init vue@latest
 // 프로젝트명, TypeScript 사용 여부, JSX 사용 여부, Router 추가 여부, Pinia 상태관리 추가 여부, ESLint/Prettier 사용 여부 등 초기 설정을 지정할 수 있습니다.
-
-또는
-
-npm create vite@latest 프로젝트명 -- --template vue
+</code></pre></div></div>
+<p>또는</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm create vite@latest 프로젝트명 -- --template vue
 // vite가 Vue 프로젝트 구조 및 설정 파일들을 자동으로 생성해줍니다.
 </code></pre></div></div>
-<p>@latest 옵션은 최신 버전 설치 및 실행을 뜻합니다.</p>
+<p>@latest 옵션은 최신 버전 create-vite 패키지로 설치 및 실행을 뜻합니다.</p>
+
+<p><mark>설치 가능 패키지 버전 확인</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm show create-vite versions
+</code></pre></div></div>
+<p>설치 가능한 패키지 버전 목록을 확인하고, @버전으로 특정 버전을 명시하여 설치할 수 있습니다.</p>
 
 <p><mark>의존성 모듈 설치 ★</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install
+또는
+npm i
 </code></pre></div></div>
-<p>CLI로 설치 시, 프로젝트 폴더로 이동해서 node_modules 폴더를 생성합니다.<br />
-package.json 파일에 dependencies로 정의된 의존성 라이브러리들이 설치됩니다.</p>
+<p>CLI로 설치 시, 프로젝트 폴더에서 위 명령어로 node_modules 폴더를 생성해야 합니다.<br />
+package.json 파일에 dependencies 또는 devDependencies로 정의된 의존성 라이브러리들이 설치됩니다.<br />
+package.json 파일 수정 시에는 위 명령어를 재실행해 의존성을 업데이트해야 합니다.<br />
+충돌이 발생하면 node_modules 폴더, package.lock.json 파일 삭제 후 다시 설치해야 합니다.</p>
 
 <hr />
 
