@@ -514,9 +514,19 @@ Node.js를 통해 자바스크립트로 개발한 서버 사이드 애플리케�
 
 <h3 id="nvm으로-nodejs-설치">nvm으로 Node.js 설치</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm install 노드버전
+또는
+nvm install node // 최신 버전 설치
 </code></pre></div></div>
 <p>nvm, Node 설치 후 IntelliJ에서 명령어 사용을 위해서는 IntelliJ 재실행이 필요합니다.<br />
 변경된 환경변수는 IDE 재시작 시 반영되기 때문입니다.</p>
+
+<p><mark>설치 가능한 노드버전 목록 확인</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm ls-remote
+또는
+nvm ls-remote --lts
+</code></pre></div></div>
+<p>nvm으로 설치 가능한 Node.js 버전 목록을 원격 저장소에서 불러와 출력합니다.<br />
+lts 버전은 장기 지원 버전으로, 안정성이 높은 버전입니다.</p>
 
 <p><mark>Node.js 설치 성공 메시지</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Downloading node.js version 14.16.0 (64-bit)...
@@ -535,7 +545,10 @@ NVM_HOME 및 Path 환경 변수가 자동 등록되어 터미널에서 사용이
 
 <h3 id="설치된-nodejs-버전-목록-확인">설치된 Node.js 버전 목록 확인</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm list
+또는
+nvm ls
 </code></pre></div></div>
+<p>현재 컴퓨터에 설치된 모든 노드 버전 목록을 확인할 수 있습니다.</p>
 
 <p><mark>현재 사용중 Node.js 버전 예시</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  20.13.0
@@ -548,6 +561,11 @@ NVM_HOME 및 Path 환경 변수가 자동 등록되어 터미널에서 사용이
 <h3 id="사용할-nodejs-버전-변경">사용할 Node.js 버전 변경</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm use 노드버전
 </code></pre></div></div>
+<p>현재 터미널에서 사용할 노드버전을 use 명령어로 변경할 수 있습니다.<br />
+터미널을 껐다 켜도 원하는 버전이 유지되게 하려면 아래처럼 alias를 설정해야 합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm alias default 노드버전
+</code></pre></div></div>
+<p>모든 터미널에서 사용할 기본 노드버전을 alias 명령어로 설정할 수 있습니다.</p>
 
 <p><mark>Node.js 버전 변경 성공 메시지</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Now using node v14.16.0 (64-bit)
@@ -560,7 +578,11 @@ NVM_HOME 및 Path 환경 변수가 자동 등록되어 터미널에서 사용이
 
 <h3 id="현재-사용중-nodejs-버전-확인">현재 사용중 Node.js 버전 확인</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node -v
+또는
+nvm current
 </code></pre></div></div>
+<p>사용 중 노드 버전 변경 후 이전 버전이 출력되면, 환경변수 적용이 되지 않은 것입니다.<br />
+툴 또는 터미널 재실행 후 다시 확인하면 환경변수가 정상 반영됩니다.</p>
 
 <p><mark>npm 버전 확인</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm -v
@@ -569,6 +591,7 @@ NVM_HOME 및 Path 환경 변수가 자동 등록되어 터미널에서 사용이
 <h3 id="설치한-nodejs-버전-삭제">설치한 Node.js 버전 삭제</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm uninstall 노드버전
 </code></pre></div></div>
+<p>현재 사용중인 버전은 삭제할 수 없습니다.</p>
 
 <hr />
 
