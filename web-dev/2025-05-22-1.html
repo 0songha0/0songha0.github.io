@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue 개념 및 구조 / Vue.js 설치 및 실행 방법 / Vue 디버깅 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#vuejs">Vue.js</a><ul><li><a href="#컴포넌트란">컴포넌트란?</a></li><li><a href="#vue-api-종류">Vue API 종류</a></li><li><a href="#vue-프로젝트-폴더-구조">Vue 프로젝트 폴더 구조</a></li></ul></li><li><a href="#vue-설치-방법">Vue 설치 방법</a><ul><li><a href="#cdn으로-vue-설치">CDN으로 Vue 설치</a></li><li><a href="#npm으로-vue-설치-수동-세팅">npm으로 Vue 설치 (수동 세팅)</a></li><li><a href="#vite-cli로-vue-설치-자동-세팅">vite CLI로 Vue 설치 (자동 세팅)</a></li></ul></li><li><a href="#vue-프로젝트-실행-방법">Vue 프로젝트 실행 방법</a><ul><li><a href="#vue-실행-스크립트-추가">Vue 실행 스크립트 추가</a></li><li><a href="#vue-프로젝트-실행">Vue 프로젝트 실행</a></li></ul></li><li><a href="#vue-프로젝트-빌드-방법">Vue 프로젝트 빌드 방법</a><ul><li><a href="#vue-빌드-스크립트-추가">Vue 빌드 스크립트 추가</a></li><li><a href="#vue-프로젝트-빌드">Vue 프로젝트 빌드</a></li></ul></li><li><a href="#크롬-vue-디버깅-방법">크롬 Vue 디버깅 방법</a><ul><li><a href="#vue-devtools-확장프로그램-설치">vue Devtools 확장프로그램 설치</a></li><li><a href="#vue-컴포넌트-구조-및-상태-확인">Vue 컴포넌트 구조 및 상태 확인</a></li><li><a href="#전체-라우터-정보-확인">전체 라우터 정보 확인</a></li><li><a href="#pinia-스토어-상태-확인">Pinia 스토어 상태 확인</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#vuejs">Vue.js</a><ul><li><a href="#컴포넌트란">컴포넌트란?</a></li><li><a href="#vue-api-종류">Vue API 종류</a></li><li><a href="#vue-프로젝트-폴더-구조">Vue 프로젝트 폴더 구조</a></li></ul></li><li><a href="#vue-설치-방법">Vue 설치 방법</a><ul><li><a href="#cdn으로-vue-설치">CDN으로 Vue 설치</a></li><li><a href="#npm으로-vue-설치-수동-세팅">npm으로 Vue 설치 (수동 세팅)</a></li><li><a href="#cli로-vue-설치-자동-세팅">CLI로 Vue 설치 (자동 세팅)</a></li></ul></li><li><a href="#vue-프로젝트-실행-방법">Vue 프로젝트 실행 방법</a><ul><li><a href="#의존성-패키지-설치-필수">의존성 패키지 설치 (필수★)</a></li><li><a href="#vue-실행-스크립트-추가">Vue 실행 스크립트 추가</a></li><li><a href="#vue-프로젝트-실행">Vue 프로젝트 실행</a></li></ul></li><li><a href="#vue-프로젝트-빌드-방법">Vue 프로젝트 빌드 방법</a><ul><li><a href="#vue-빌드-스크립트-추가">Vue 빌드 스크립트 추가</a></li><li><a href="#vue-프로젝트-빌드">Vue 프로젝트 빌드</a></li></ul></li><li><a href="#크롬-vue-디버깅-방법">크롬 Vue 디버깅 방법</a><ul><li><a href="#vue-devtools-확장프로그램-설치">vue Devtools 확장프로그램 설치</a></li><li><a href="#vue-컴포넌트-구조-및-상태-확인">Vue 컴포넌트 구조 및 상태 확인</a></li><li><a href="#전체-라우터-정보-확인">전체 라우터 정보 확인</a></li><li><a href="#pinia-스토어-상태-확인">Pinia 스토어 상태 확인</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -675,22 +675,32 @@ export default defineConfig ({
 <p>Vue 프로젝트 루트에 vite.config.js 파일을 생성해야 vite 실행이 가능합니다.<br />
 alias 설정으로 ./src 경로를 @로 대체하여, import 시 경로를 간결하게 작성할 수 있습니다.</p>
 
-<h3 id="vite-cli로-vue-설치-자동-세팅">vite CLI로 Vue 설치 (자동 세팅)</h3>
+<h3 id="cli로-vue-설치-자동-세팅">CLI로 Vue 설치 (자동 세팅)</h3>
+<p><mark>Vue 공식 템플릿 CLI로 Vue 프로젝트 생성 방법</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm init vue@latest
-// 프로젝트명, TypeScript 사용 여부, JSX 사용 여부, Router 추가 여부, Pinia 상태관리 추가 여부, ESLint/Prettier 사용 여부 등 초기 설정을 지정할 수 있습니다.
+또는
+npm create vue@3.11.2
 </code></pre></div></div>
-<p>또는</p>
+<p>전통적인 npm init 명령어보다 npm create 명령어가 요즘 더 자주 사용되는 방식입니다.<br />
+특정 create-vue 패키지 버전으로 Vue 프로젝트 생성이 가능합니다.<br />
+프로젝트명, TypeScript 사용 여부, JSX 사용 여부, Router 추가 여부, Pinia 상태관리 추가 여부, ESLint/Prettier 사용 여부 등 초기 설정을 지정할 수 있습니다.</p>
+
+<p><mark>Vite CLI로 Vue 프로젝트 생성 방법</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm create vite@latest 프로젝트명 -- --template vue
-// vite가 Vue 프로젝트 구조 및 설정 파일들을 자동으로 생성해줍니다.
 </code></pre></div></div>
-<p>@latest 옵션은 최신 버전 create-vite 패키지로 설치 및 실행을 뜻합니다.</p>
+<p>vite가 Vue 프로젝트 구조 및 설정 파일들을 자동으로 생성해줍니다.<br />
+@latest 옵션은 최신 버전 create-vite 패키지로 설치 및 실행을 뜻합니다.</p>
 
 <p><mark>설치 가능 패키지 버전 확인</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm show create-vite versions
 </code></pre></div></div>
 <p>설치 가능한 패키지 버전 목록을 확인하고, @버전으로 특정 버전을 명시하여 설치할 수 있습니다.</p>
 
-<p><mark>의존성 모듈 설치 ★</mark></p>
+<hr />
+
+<h2 id="vue-프로젝트-실행-방법">Vue 프로젝트 실행 방법</h2>
+
+<h3 id="의존성-패키지-설치-필수">의존성 패키지 설치 (필수★)</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install
 또는
 npm i
@@ -699,10 +709,6 @@ npm i
 package.json 파일에 dependencies 또는 devDependencies로 정의된 의존성 라이브러리들이 설치됩니다.<br />
 package.json 파일 수정 시에는 위 명령어를 재실행해 의존성을 업데이트해야 합니다.<br />
 충돌이 발생하면 node_modules 폴더, package.lock.json 파일 삭제 후 다시 설치해야 합니다.</p>
-
-<hr />
-
-<h2 id="vue-프로젝트-실행-방법">Vue 프로젝트 실행 방법</h2>
 
 <h3 id="vue-실행-스크립트-추가">Vue 실행 스크립트 추가</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"scripts": {
