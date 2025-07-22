@@ -336,7 +336,7 @@ var store = [{
         "teaser": null
       },{
         "title": "파이썬 개발환경 종류",
-        "excerpt":"파이썬 개발환경 종류   파이참 (PyCharm)  파이썬 개발에 특화된 통합 개발 환경입니다.   VSCode (Visual Studio Code)  VSCode에서도 확장 기능 설치를 통해 파이썬 개발이 가능합니다.  좌측 상단 EXTENSIONS에서 Python 설치하고 EXPLORER에서 .py 파일 생성하여 개발 후 실행 시 지침대로 Microsoft Store에서 Python 인터프리터 다운하면 됩니다.   온라인 개발 환경  https://replit.com/new/python-java3  ","categories": ["python-java"],
+        "excerpt":"파이썬 개발환경 종류   파이참 (PyCharm)  파이썬 개발에 특화된 통합 개발 환경입니다.   VS Code (Visual Studio Code)  VS Code에서도 확장 기능 설치를 통해 파이썬 개발이 가능합니다.  좌측 상단 EXTENSIONS에서 Python 설치하고 EXPLORER에서 .py 파일 생성하여 개발 후 실행 시 지침대로 Microsoft Store에서 Python 인터프리터 다운하면 됩니다.   온라인 개발 환경  https://replit.com/new/python-java3  ","categories": ["python-java"],
         "tags": [],
         "url": "/python-java/2023-01-10-1",
         "teaser": null
@@ -575,14 +575,14 @@ var store = [{
         "url": "/aws/2023-04-18-1",
         "teaser": null
       },{
-        "title": "Visual Studio Code 설치 / VSCode 사용법",
-        "excerpt":"Visual Studio Code 설치 https://code.visualstudio.com/download 운영체제에 맞는 VSCode 설치가 필요합니다. VSCode 사용법 프로젝트 여는 방법 상단 File 메뉴 &gt; Open Folder &gt; 프로젝트 폴더 선택 파일 내 텍스트 검색 좌측 검색 아이콘 클릭 &gt; 검색어 입력 플러그인 설치 방법 좌측 EXTENSIONS &gt; 플러그인명 검색 &gt; 플러그인 선택 &gt; Install 파이썬...","categories": ["tool"],
+        "title": "Visual Studio Code 설치 / VS Code 사용법",
+        "excerpt":"Visual Studio Code 설치 https://code.visualstudio.com/download 운영체제에 맞는 VS Code 설치가 필요합니다. VS Code 사용법 프로젝트 여는 방법 상단 File 메뉴 &gt; Open Folder &gt; 프로젝트 폴더 선택 파일 내 텍스트 검색 좌측 검색 아이콘 클릭 &gt; 검색어 입력 플러그인 설치 방법 좌측 EXTENSIONS &gt; 플러그인명 검색 &gt; 플러그인 선택 &gt;...","categories": ["tool"],
         "tags": [],
         "url": "/tool/2023-04-20-1",
         "teaser": null
       },{
-        "title": "VSCode에서 파이썬 주피터 노트북 사용 방법",
-        "excerpt":"주피터 노트북 파이썬 코드 작성 후 섹션마다 단계적으로 실행하여 결과를 확인할 수 있게 도와주는 소스 편집 도구입니다. VSCode에서 주피터 사용 방법 VSCode 좌측 EXTENSIONS 아이콘 &gt; Jupyter 검색하여 설치 &gt; 좌측 EXPLORER에서 .ipynb 파일 생성 시 주피터 노트북으로 편집할 수 있습니다. 주피터 문법 제목 ## 본문 #### 들여쓰기가 있는 점...","categories": ["python-java"],
+        "title": "VS Code에서 파이썬 주피터 노트북 사용 방법",
+        "excerpt":"주피터 노트북 파이썬 코드 작성 후 섹션마다 단계적으로 실행하여 결과를 확인할 수 있게 도와주는 소스 편집 도구입니다. VS Code에서 주피터 사용 방법 VS Code 좌측 EXTENSIONS 아이콘 &gt; Jupyter 검색하여 설치 &gt; 좌측 EXPLORER에서 .ipynb 파일 생성 시 주피터 노트북으로 편집할 수 있습니다. 주피터 문법 제목 ## 본문 #### 들여쓰기가...","categories": ["python-java"],
         "tags": [],
         "url": "/python-java/2023-04-21-1",
         "teaser": null
@@ -1182,7 +1182,7 @@ var store = [{
         "teaser": null
       },{
         "title": "에디트플러스 사용법 / 에디트플러스 Java 실행 방법",
-        "excerpt":"에디트플러스는 30일 무료 평가판 사용 후 라이선스 구매가 필요한 유료 툴입니다. 간단하고 가벼운 코드 편집기이며, VSCode로 대체가 가능합니다. 에디트플러스 사용법 에디트플러스 Java 컴파일 방법 상단 도구 &gt; 기본 설정 &gt; 도구 &gt; 사용자 도구 &gt; 추가 &gt; C드라이브에 설치된 Javac.exe 추가 &gt; 단축키 실행 도구 추가 시, Ctrl + 1,...","categories": ["tool"],
+        "excerpt":"에디트플러스는 30일 무료 평가판 사용 후 라이선스 구매가 필요한 유료 툴입니다. 간단하고 가벼운 코드 편집기이며, VS Code로 대체가 가능합니다. 에디트플러스 사용법 에디트플러스 Java 컴파일 방법 상단 도구 &gt; 기본 설정 &gt; 도구 &gt; 사용자 도구 &gt; 추가 &gt; C드라이브에 설치된 Javac.exe 추가 &gt; 단축키 실행 도구 추가 시, Ctrl +...","categories": ["tool"],
         "tags": [],
         "url": "/tool/2025-04-20-1",
         "teaser": null
