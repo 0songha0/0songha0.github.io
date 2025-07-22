@@ -477,17 +477,20 @@
         
         <h2 id="컴포저블-함수-composable">컴포저블 함수 (Composable)</h2>
 
-<p>반응형 상태 관리 로직을 캡슐화하여, 여러 컴포넌트에서 재사용할 수 있는 함수형 모듈입니다.<br />
+<p>반응형 상태 관리 로직을 캡슐화하여, 여러 컴포넌트에서 재사용하기 위한 함수형 모듈입니다.<br />
 axios로 서버 API 호출하는 로직도 컴포저블 함수로 만들 수 있습니다.</p>
 
 <h3 id="컴포저블-함수-정의-방법">컴포저블 함수 정의 방법</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { ref } from 'vue';
 
 // 상태 변수는 모듈 범위에 정의하거나, 상태 관리 스토어 Pinia 사용 필요
-// 함수 범위에 정의하면 함수를 호출하는 각 컴포넌트에서 변수가 생성되기 때문에 정상 동작 X
+// 모듈 범위에 상태 정의 시, 모든 컴포넌트가 공유하는 전역 상태로 동작
 const data변수명1 = ref([]);
 
 export function use컴포저블함수명() {
+
+  // 함수 범위에 상태 정의 시, 함수를 호출하는 각 컴포넌트에서 독립된 상태 변수 생성
+  const data변수명2 = ref('');
 
   // 상태 변경 함수 정의
   const 함수명1 = (파라미터1, 파라미터2) =&gt; {

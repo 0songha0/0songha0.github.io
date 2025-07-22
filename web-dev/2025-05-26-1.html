@@ -533,6 +533,11 @@ HTML 동적 렌더링 시 XSS (스크립트 삽입 공격) 이슈에 주의해�
 <p>이중 중괄호와 달리, HTML 속성에 동적으로 값을 바인딩할 수 있는 단방향 속성 바인딩입니다.<br />
 data가 변경되면 바인딩 된 DOM도 변경되지만, 사용자 입력으로 DOM이 변경되면 data는 변경되지 않습니다.</p>
 
+<p><mark>v-bind 동일 이름 단축 문법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;img :id="id"&gt; // 속성명과 변수명이 같은 경우
+&lt;img :id&gt; // 축약 가능
+</code></pre></div></div>
+
 <p><mark>다중 속성 바인딩 예시</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
   &lt;input v-bind="attrs"&gt;
@@ -723,11 +728,12 @@ data가 변경되면 바인딩 된 DOM도 변경되고, 사용자 입력으로 D
   </tbody>
 </table>
 
-<p><mark>컴포넌트 props 여러개 양방향 바인딩 방법</mark></p>
+<p><mark>컴포넌트 props 양방향 바인딩 방법</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;하위컴포넌트명 v-model:props명1="data변수명1" v-model:props명2="data변수명2"&gt;&lt;/하위컴포넌트명&gt;
 </code></pre></div></div>
 <p>양방향 바인딩 v-model 전달인자로 props명을 지정할 수 있습니다.<br />
-하위 컴포넌트에서는 아래와 같이 받아서 양방향 바인딩을 구현할 수 있습니다.</p>
+하위 컴포넌트에서는 아래와 같이 받아서 양방향 바인딩을 구현할 수 있습니다.<br />
+v-model에 props명을 지정하지 않으면, 기본 키 값인 modelValue로 props를 받게 됩니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
   // input에 값 입력 시 자동 emit 이벤트 발생
   &lt;input :value="props명1" @input="$emit('update:props명1', $event.target.value)" type="text" id="props명1" /&gt;
@@ -751,6 +757,66 @@ const updateProps명1 = () =&gt; {
 };
 </code></pre></div></div>
 <p>v-model 양방향 바인딩을 풀어서 v-bind(:), emit으로 구현할 수 있습니다.</p>
+
+<p><mark>useModel() 함수</mark><br />
+useModel()은 defineModel()의 기반이 되는 헬퍼 함수입니다.<br />
+script setup 사용 시에는 useModel()보다 defineModel() 사용이 권장됩니다.</p>
+
+<p><mark>defineModel() 함수로 양방향 바인딩</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 부모 컴포넌트에서 v-model 전달 예시
+&lt;template&gt;
+  &lt;자식컴포넌트명 v-model="data변수명1"&gt;
+  또는
+  &lt;자식컴포넌트명 v-model:변수명="data변수명1"&gt;
+&lt;/template&gt;
+&lt;script setup&gt;
+const data변수명1 = ref('');
+&lt;script&gt;
+
+// 자식 컴포넌트에서 v-model 바인딩 예시
+&lt;template&gt;
+  &lt;input v-model="model" type="text" /&gt;
+&lt;/template&gt;
+&lt;script setup&gt;
+const model = defineModel(); // ref 형태로 부모 v-model 바인딩
+또는
+const model = defineModel('변수명');
+const model = defineModel('변수명', { type: "String", default: "" }); // 변수 타입 및 기본값 설정 가능 (기본값은 부모와 동기화되지 않을 수 있어 주의 필요)
+&lt;/script&gt;
+</code></pre></div></div>
+<p>부모 컴포넌트에서 v-model로 전달한 props 값을 ref로 받고, 양방향 바인딩 구현을 도와주는 매크로 함수입니다.<br />
+defineModel은 자식 컴포넌트에 defineProps, defineEmits 선언 및 바인딩을 자동 생성합니다.</p>
+
+<p><mark>defineModel() Modifier 접근 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 부모 컴포넌트 예시
+&lt;template&gt;
+  &lt;자식컴포넌트명 v-model.trim="data변수명1"&gt;
+&lt;/template&gt;
+&lt;script setup&gt;
+const data변수명1 = ref('');
+&lt;script&gt;
+
+// 자식 컴포넌트 예시
+&lt;template&gt;
+  &lt;input v-model="model" type="text" /&gt;
+&lt;/template&gt;
+&lt;script setup&gt;
+// 구조분해 할당으로 v-model Modifier 접근 가능
+const [model, modelModifiers] = defineModel({
+  // set Transformers 옵션으로 부모에게 동기화 시 값 설정 가능
+  set(value) {
+    if (modelModifiers.trim) {
+      // trim Modifier가 존재하는 경우, 값 trim 후 반환
+      return value.trim();
+    } else {
+      // trim Modifier가 존재하지 않는 경우, 값 그대로 반환
+      return value;
+    }
+  }
+});
+&lt;/script&gt;
+</code></pre></div></div>
+<p>부모 컴포넌트가 전달한 v-model 수정자에 defineModel()로 접근할 수 있습니다.</p>
 
 <h3 id="v-on-">v-on (@)</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;button v-on:click="이벤트함수명"&gt;Click&lt;/button&gt;
@@ -934,7 +1000,7 @@ v-on:click 등 마우스 이벤트 수신 시, 특정 버튼 입력 시에만 �
 <mark>keyup 이벤트 처리 예시</mark>
 ```
 <template>
-&lt;input type="text" @keyup="onKeyupHandler" /&gt;
+  &lt;input type="text" @keyup="onKeyupHandler" /&gt;
 </template>
 
 <script>
@@ -956,6 +1022,27 @@ v-on:click 등 마우스 이벤트 수신 시, 특정 버튼 입력 시에만 �
 </script>
 ```
 인풋에 v-on:keyup으로 키보드 입력 시 어떤 키가 눌렸는지 확인 가능합니다.
+
+<mark>엔터키 keyup 이벤트 처리 예시</mark>
+```
+
+<template>
+  &lt;input type="text" @keyup.enter="onEnterKeyupHandler" /&gt;
+</template>
+
+<script setup="">
+import { ref } from 'vue';
+
+const 객체배열명 = ref([]);
+  
+const onEnterKeyupHandler = (event) => {
+  객체배열명.value.push({
+    text: event.target.value
+  });
+}
+</script>
+```
+input에 엔터 키 입력 시마다 배열에 객체 값을 추가하는 예시입니다.
 
 ### v-slot (#)
 ```
