@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 230</span>
+      <span class="nav__total">🌴 Total Posts: 231</span>
     </li> -->
     
     
@@ -480,12 +480,12 @@
 <h3 id="viteconfigjs-파일-설정-vite-사용-시">vite.config.js 파일 설정 (Vite 사용 시)</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export default defineConfig({
   server: {
-    host: true,
+    host: true, // 추가
     port: 8082,
     cors: true,
     proxy:{
       '/api':{
-        target: "http://localhost:8087",
+        target: "http://localhost:8087", // 프론트에서 http://localhost:8082/api/~ 요청 시 http://localhost:8087/api/~ 로 자동 중계 (proxy) 되는 CORS 우회 처리
         secure: false,
       },
     },
@@ -510,13 +510,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Value("${vue-port}")
-    private String[] vuePort;
+    @Value("${allowed-origins}")
+    private String[] allowedOrigins;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOriginPatterns(vuePort)
+                .allowedOriginPatterns(allowedOrigins)
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);
@@ -569,7 +569,8 @@ allowedOrigin 또는 allowedOriginPatterns 함수 파라미터로 백엔드에 �
       
   <nav class="pagination">
     
-      <a href="#" class="pagination--pager disabled">❮</a>
+      <a href="/web-dev/2025-07-24-2" class="pagination--pager" title="Vue + SpringBoot 프로젝트 소켓 통신 구현 방법
+">❮</a>
     
     
       <a href="/web-dev/2025-07-14-1" class="pagination--pager" title="Javascript 기초 문법 정리
@@ -588,6 +589,42 @@ allowedOrigin 또는 allowedOriginPatterns 함수 파라미터로 백엔드에 �
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-07-24-2" rel="permalink">Vue + SpringBoot 프로젝트 소켓 통신 구현 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-07-24T00:00:00+00:00">2025-07-24</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
         
           
 
@@ -682,42 +719,6 @@ allowedOrigin 또는 allowedOriginPatterns 함수 파라미터로 백엔드에 �
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-07-11T00:00:00+00:00">2025-07-11</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-07-07-1" rel="permalink">타입스크립트 타입 제어 기법 정리 / 타입 추론, 타입 단언, 타입 좁히기 등
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-07-07T00:00:00+00:00">2025-07-07</time>
       </span>
     
 

@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>스프링 시큐리티 사용 방법 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>Vue + SpringBoot 프로젝트 소켓 통신 구현 방법 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,8 +65,8 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="스프링 시큐리티 사용 방법">
-<meta property="og:url" content="https://0songha0.github.io/web-dev/2022-10-23-1">
+<meta property="og:title" content="Vue + SpringBoot 프로젝트 소켓 통신 구현 방법">
+<meta property="og:url" content="https://0songha0.github.io/web-dev/2025-07-24-2">
 
 
   <meta property="og:description" content="송하영 개발 블로그">
@@ -77,11 +77,11 @@
 
 
 
-  <meta property="article:published_time" content="2022-10-23T00:00:00+00:00">
+  <meta property="article:published_time" content="2025-07-24T00:00:00+00:00">
 
 
 
-  <meta property="article:modified_time" content="2022-10-23T00:00:00+00:00">
+  <meta property="article:modified_time" content="2025-07-24T00:00:00+00:00">
 
 
 
@@ -90,7 +90,7 @@
   
 
 
-<link rel="canonical" href="https://0songha0.github.io/web-dev/2022-10-23-1">
+<link rel="canonical" href="https://0songha0.github.io/web-dev/2025-07-24-2">
 
 
 
@@ -433,15 +433,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="스프링 시큐리티 사용 방법">
+    <meta itemprop="headline" content="Vue + SpringBoot 프로젝트 소켓 통신 구현 방법">
     <meta itemprop="description" content="">
-    <meta itemprop="datePublished" content="2022-10-23T00:00:00+00:00">
-    <meta itemprop="dateModified" content="2022-10-23T00:00:00+00:00">
+    <meta itemprop="datePublished" content="2025-07-24T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-07-24T00:00:00+00:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">스프링 시큐리티 사용 방법
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Vue + SpringBoot 프로젝트 소켓 통신 구현 방법
 </h1>
           
 
@@ -450,7 +450,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2022-10-23T00:00:00+00:00">2022-10-23</time>
+        <time datetime="2025-07-24T00:00:00+00:00">2025-07-24</time>
       </span>
     
 
@@ -468,31 +468,219 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 스프링 시큐리티 사용 방법</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Vue + SpringBoot 프로젝트 소켓 통신 구현 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#스프링-시큐리티-적용-방법">스프링 시큐리티 적용 방법</a><ul><li><a href="#스프링-시큐리티-의존성-추가">스프링 시큐리티 의존성 추가</a></li></ul></li><li><a href="#스프링-시큐리티-비활성화-방법">스프링 시큐리티 비활성화 방법</a></li></ul>
+              <ul class="toc__menu"><li><a href="#springboot-프로젝트-소켓-서버-구현">SpringBoot 프로젝트 소켓 서버 구현</a><ul><li><a href="#웹소켓-라이브러리-추가">웹소켓 라이브러리 추가</a></li><li><a href="#vue-url-소켓-서버-url-설정">Vue URL, 소켓 서버 URL 설정</a></li><li><a href="#netty-웹소켓-서버-생성">netty 웹소켓 서버 생성</a></li><li><a href="#소켓-자동-실행-및-종료-처리">소켓 자동 실행 및 종료 처리</a></li></ul></li><li><a href="#vue-프로젝트-소켓-연결">Vue 프로젝트 소켓 연결</a><ul><li><a href="#소켓-서버-url-환경변수-설정">소켓 서버 URL 환경변수 설정</a></li></ul></li><li><a href="#백엔드-프로젝트에서-소켓-톰캣-서버-요청">백엔드 프로젝트에서 소켓 톰캣 서버 요청</a><ul><li><a href="#application-서버구분yml-설정">application-서버구분.yml 설정</a></li><li><a href="#웹소켓-서버-요청-코드">웹소켓 서버 요청 코드</a></li><li><a href="#웹소켓-서버-요청-예시">웹소켓 서버 요청 예시</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h2 id="스프링-시큐리티-적용-방법">스프링 시큐리티 적용 방법</h2>
+        <h2 id="springboot-프로젝트-소켓-서버-구현">SpringBoot 프로젝트 소켓 서버 구현</h2>
 
-<h3 id="스프링-시큐리티-의존성-추가">스프링 시큐리티 의존성 추가</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implementation 'org.springframework.boot:spring-boot-starter-security'
+<h3 id="웹소켓-라이브러리-추가">웹소켓 라이브러리 추가</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dependencies {
+  implementation 'com.corundumstudio.socketio:netty-socketio:2.0.12'
+}
 </code></pre></div></div>
-<p>build.gradle 파일에 위 Dependency를 추가하면 자동으로 스프링 시큐리티가 자동으로 설정됩니다.</p>
+<p>build.gradle 파일에 netty 소켓 IO 라이브러리를 추가합니다.</p>
 
-<hr />
+<h3 id="vue-url-소켓-서버-url-설정">Vue URL, 소켓 서버 URL 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 톰캣 서버 포트 설정 (HTTP 통신용)
+server:
+  port: 8088
+  error:
+    whitelabel:
+      enabled: false
+    include-exception: false
+    include-stacktrace: never
+    include-message: never
+    path: "/custom-error"
 
-<h2 id="스프링-시큐리티-비활성화-방법">스프링 시큐리티 비활성화 방법</h2>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
-public class 프로젝트명Application {
-    public static void main(String[] args) {
-        SpringApplication.run(SpringBootSecurityApplication.class, args);
+// 통신을 주고받을 Vue URL 설정
+vue-port: "http://10.10.1.87:8082"
+
+// netty 소켓 서버 포트 설정 (웹소켓 통신용)
+socket:
+  io:
+    server: 0.0.0.0 // 모든 IP에서 오는 요청 수신 대기
+    port: 8084 // 다른 서비스와 같은 포트 사용 시 충돌 에러 발생
+</code></pre></div></div>
+<p>application-서버구분.yml 파일에 소켓 서버 포트, 통신을 주고받을 Vue URL, 소켓 포트를 작성합니다.</p>
+
+<h3 id="netty-웹소켓-서버-생성">netty 웹소켓 서버 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package kr.co.rtboardsocketkafka.socket.config;
+
+import com.corundumstudio.socketio.SocketIOServer;
+import com.corundumstudio.socketio.Transport;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class SocketIOConfig {
+
+    @Value("${socket.io.server}")
+    private String server;
+    @Value("${socket.io.port}")
+    private int port;
+    @Value("${vue-port}")
+    private String vuePort;
+
+    @Bean
+    public SocketIOServer socketIOServer() {
+        com.corundumstudio.socketio.Configuration config = new com.corundumstudio.socketio.Configuration();
+        config.setHostname(server);
+        config.setPort(port);
+        config.setMaxFramePayloadLength(1024 * 1024);  // 1MB로 설정 예시
+        config.setEnableCors(true);
+        config.setAllowCustomRequests(true);
+        config.setOrigin("*"); // CORS 설정 : 운영 환경에서는 운영 도메인 지정 필요
+        config.setTransports(Transport.WEBSOCKET, Transport.POLLING);
+        SocketIOServer server = new SocketIOServer(config);
+        return server;
     }
 }
 </code></pre></div></div>
-<p>위와 같이, 어플리케이션 main에서 SecurityAutoConfiguration을 제외 처리하면 비활성화됩니다.</p>
+<p>SocketIOConfig를 Bean으로 등록하여, 톰캣 서버와 별도로 실행되는 Netty 웹소켓 서버를 생성합니다.</p>
+
+<h3 id="소켓-자동-실행-및-종료-처리">소켓 자동 실행 및 종료 처리</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package kr.co.rtboardsocketkafka.socket.lifeCycle;
+
+import com.corundumstudio.socketio.SocketIOServer;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+@Component
+@Slf4j
+@RequiredArgsConstructor
+public class SocketIOServerLifeCycle {
+
+    private final SocketIOServer server;
+
+    private boolean isServerRunning = false;
+
+    @PostConstruct
+    public void start(){
+        if (!isServerRunning) {
+            server.start();
+            isServerRunning = true;
+            log.info("소켓 서버 시작 {}", server.getConfiguration().toString());
+            return;
+        }
+        log.info("이미 시작중 {}", server.getConfiguration().toString());
+    }
+
+    @PreDestroy
+    public void stop(){
+        server.stop();
+        log.info("소켓 서버 DIE");
+    }
+}
+</code></pre></div></div>
+<p>@PostConstruct, @PreDestroy 어노테이션을 이용하여 스프링부트 시작 및 종료 시 소켓이 자동 시작 및 종료되도록 설정합니다.</p>
+
+<hr />
+
+<h2 id="vue-프로젝트-소켓-연결">Vue 프로젝트 소켓 연결</h2>
+
+<h3 id="소켓-서버-url-환경변수-설정">소켓 서버 URL 환경변수 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>VITE_SOCKET_URL=http://10.10.1.87:8084
+</code></pre></div></div>
+<p>.env.서버구분 파일에 SpringBoot 소켓 서버 URL을 작성합니다.<br />
+백엔드 서버 application-서버구분.yml 파일에 socket io 정보로 작성된 포트와 동일해야 통신이 가능합니다.</p>
+
+<hr />
+
+<h2 id="백엔드-프로젝트에서-소켓-톰캣-서버-요청">백엔드 프로젝트에서 소켓 톰캣 서버 요청</h2>
+
+<p>Vue 프로젝트의 백엔드 프로젝트인 SpringBoot 프로젝트에서 소켓 프로젝트에 HTTP 요청할 수 있습니다.</p>
+
+<h3 id="application-서버구분yml-설정">application-서버구분.yml 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>customSocket:
+  server: "http://10.10.1.87:8088"
+</code></pre></div></div>
+<p>위와 같이, 소켓 포트가 아닌 소켓 프로젝트 포트를 작성해야 합니다.<br />
+웹소켓 통신이 아니라 HTTP 통신을 하기 위함입니다.</p>
+
+<h3 id="웹소켓-서버-요청-코드">웹소켓 서버 요청 코드</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package kr.co.chunjae.backend.service;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import kr.co.chunjae.backend.dto.*;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
+
+@Service
+@RequiredArgsConstructor
+@Slf4j
+public class ClassroomService {
+
+    private final HttpClient httpClient = HttpClient.newHttpClient();
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
+    @Value("${customSocket.server}")
+    private String socketServer;
+
+    public boolean sendSocketServer(User userInfo) {
+
+        try {
+            String jsonBody = objectMapper.writeValueAsString(userInfo);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(socketServer+"/socket/join"))
+                    .POST(HttpRequest
+                            .BodyPublishers
+                            .ofString(jsonBody, StandardCharsets.UTF_8))
+                    .header("Content-Type", "application/json")  // 📌 Content-Type 추가
+                    .build();
+            log.info("보낸 uri {}",request);
+            
+            // 동기 방식으로 변경
+            HttpResponse&lt;String&gt; response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+            int statusCode = response.statusCode();
+            if (statusCode == 200) {
+                return true;
+            } else {
+                log.error("서버 응답 실패, 상태 코드: {}", statusCode);
+                return false;
+            }
+
+        } catch (JsonProcessingException jpe) {
+            log.error("웹소켓 서버로 보내기 전 User 객체 JSON 직렬화 실패");
+        } catch (IOException ioe) {
+            log.error("웹소켓 서버로 보내기 전 웹소켓 서버 통신 중 입출력 오류 발생");
+        } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt(); // 인터럽트 플래그 복원
+            log.error("웹소켓 서버로 보내기 전 웹소켓 서버 통신 중 인터럽트 발생");
+        } catch (RuntimeException re) {
+            log.error("웹소켓 서버로 보내기 전 웹소켓 통신 중 예기치 못한 오류 발생");
+        }
+        return false;
+    }
+}
+</code></pre></div></div>
+<p>위와 같이, 웹소켓 서버에 HttpRequest를 보낼 수 있습니다.</p>
+
+<h3 id="웹소켓-서버-요청-예시">웹소켓 서버 요청 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private final ClassroomService classroomService;
+
+boolean isOK = classroomService.sendSocketServer(userInfo);
+</code></pre></div></div>
+<p>웹소켓 서버에 URL 호출하는 서비스 사용 예시입니다.</p>
 
         
       </section>
@@ -520,7 +708,7 @@ public class 프로젝트명Application {
 
 
         
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-10-23">2022-10-23</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-07-24">2025-07-24</time></p>
 
 
       </footer>
@@ -530,11 +718,10 @@ public class 프로젝트명Application {
       
   <nav class="pagination">
     
-      <a href="/web-dev/2022-10-24-1" class="pagination--pager" title="SpringBoot에서 Interceptor 활용 세션 로그인 구현 방법
-">❮</a>
+      <a href="#" class="pagination--pager disabled">❮</a>
     
     
-      <a href="/web-dev/2022-10-21-1" class="pagination--pager" title="로그인 인증 방식 종류 / 로그인 기능 구현 방법 및 장단점
+      <a href="/web-dev/2025-07-24-1" class="pagination--pager" title="Vue + SpringBoot 프로젝트 외부 접근 방법 / CORS 설정 방법
 ">❯</a>
     
   </nav>
@@ -550,42 +737,6 @@ public class 프로젝트명Application {
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-07-24-2" rel="permalink">Vue + SpringBoot 프로젝트 소켓 통신 구현 방법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-07-24T00:00:00+00:00">2025-07-24</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
         
           
 
@@ -669,6 +820,42 @@ public class 프로젝트명Application {
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
         <a href="/web-dev/2025-07-11-1" rel="permalink">타입스크립트 고급 타입 정의 방법 / 인터페이스, 클래스, 제네릭 타입 등
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-07-11T00:00:00+00:00">2025-07-11</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/tool/2025-07-11-1" rel="permalink">이클립스 설치 및 Java 애플리케이션 생성 방법
 </a>
       
     </h2>

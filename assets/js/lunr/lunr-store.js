@@ -1374,8 +1374,14 @@ var store = [{
         "teaser": null
       },{
         "title": "Vue + SpringBoot 프로젝트 외부 접근 방법 / CORS 설정 방법",
-        "excerpt":"Vue 프로젝트 외부 접근 허용 설정 vite.config.js 파일 설정 (Vite 사용 시) export default defineConfig({ server: { host: true, port: 8082, cors: true, proxy:{ '/api':{ target: \"http://localhost:8087\", secure: false, }, }, }, }); 기본적으로 Vite는 localhost (127.0.0.1) 에서만 접근 가능하도록 띄워집니다. PC 내부 IP로 Vue 페이지에 접근하려면, 모든 IP 접근도...","categories": ["web-dev"],
+        "excerpt":"Vue 프로젝트 외부 접근 허용 설정 vite.config.js 파일 설정 (Vite 사용 시) export default defineConfig({ server: { host: true, // 추가 port: 8082, cors: true, proxy:{ '/api':{ target: \"http://localhost:8087\", // 프론트에서 http://localhost:8082/api/~ 요청 시 http://localhost:8087/api/~ 로 자동 중계 (proxy) 되는 CORS 우회 처리 secure: false, }, }, }, }); 기본적으로...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-07-24-1",
+        "teaser": null
+      },{
+        "title": "Vue + SpringBoot 프로젝트 소켓 통신 구현 방법",
+        "excerpt":"SpringBoot 프로젝트 소켓 서버 구현 웹소켓 라이브러리 추가 dependencies { implementation 'com.corundumstudio.socketio:netty-socketio:2.0.12' } build.gradle 파일에 netty 소켓 IO 라이브러리를 추가합니다. Vue URL, 소켓 서버 URL 설정 // 톰캣 서버 포트 설정 (HTTP 통신용) server: port: 8088 error: whitelabel: enabled: false include-exception: false include-stacktrace: never include-message: never path: \"/custom-error\" // 통신을...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-07-24-2",
         "teaser": null
       }]
