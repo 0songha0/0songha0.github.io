@@ -1372,4 +1372,10 @@ var store = [{
         "tags": [],
         "url": "/web-dev/2025-07-14-1",
         "teaser": null
+      },{
+        "title": "Vue + SpringBoot 프로젝트 외부 접근 방법 / CORS 설정 방법",
+        "excerpt":"Vue 프로젝트 외부 접근 허용 설정 vite.config.js 파일 설정 (Vite 사용 시) export default defineConfig({ server: { host: true, port: 8082, cors: true, proxy:{ '/api':{ target: \"http://localhost:8087\", secure: false, }, }, }, }); 기본적으로 Vite는 localhost (127.0.0.1) 에서만 접근 가능하도록 띄워집니다. PC 내부 IP로 Vue 페이지에 접근하려면, 모든 IP 접근도...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-07-24-1",
+        "teaser": null
       }]
