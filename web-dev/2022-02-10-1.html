@@ -664,6 +664,9 @@ const 객체명 = JSON.parse(localStorage.getItem("키"));
 
 // 로컬스토리지에 저장된 키-값 삭제
 localStorage.removeItem("키");
+
+// 로컬스토리지 키-값 개수 확인
+localStorage.length;
 </code></pre></div></div>
 <p>로컬스토리지는 전역 객체이므로, Javascript에서 import 없이 사용할 수 있습니다.<br />
 window 객체의 속성이라 window.localStorage로도 접근 가능합니다.</p>
@@ -680,6 +683,9 @@ const 객체명 = JSON.parse(sessionStorage.getItem("키"));
 
 // 세션스토리지에 저장된 키-값 삭제
 sessionStorage.removeItem("키");
+
+// 세션스토리지 키-값 개수 확인
+sessionStorage.length;
 </code></pre></div></div>
 <p>세션스토리지는 전역 객체이므로, Javascript에서 import 없이 사용할 수 있습니다.<br />
 window 객체의 속성이라 window.sessionStorage 접근 가능합니다.</p>
