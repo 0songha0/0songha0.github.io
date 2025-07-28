@@ -475,7 +475,8 @@
             </nav>
           </aside>
         
-        <h2 id="pinia-용어-정리">Pinia 용어 정리</h2>
+        
+<h2 id="pinia-용어-정리">Pinia 용어 정리</h2>
 
 <h3 id="pinia란">Pinia란?</h3>
 <p>Vue 2에서는 Vuex, Vue3에서는 Pinia가 공식 상태 관리 라이브러리입니다.<br />
@@ -573,9 +574,9 @@ export const use데이터분류명Store = defineStore('데이터분류명Store',
 
 <h3 id="pinia-스토어-사용-방법">Pinia 스토어 사용 방법</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
-  &lt;p&gt;&lt;/p&gt;
-  &lt;p&gt;&lt;/p&gt;
-  &lt;p&gt;&lt;/p&gt;
+  &lt;p&gt;{{ store.state변수명1 }}&lt;/p&gt;
+  &lt;p&gt;{{ state변수명2 }}&lt;/p&gt;
+  &lt;p&gt;{{ getters함수명1 }}&lt;/p&gt;
   &lt;button @click="store.actions함수명1()"&gt;액션 실행&lt;/button&gt;
 &lt;/template&gt;
 &lt;script setup&gt;
@@ -620,6 +621,7 @@ import { use함수명 } from '@/composables/파일명';
 const { state변수명1 } = use함수명();
 &lt;/script&gt;
 </code></pre></div></div>
+
 
         
       </section>

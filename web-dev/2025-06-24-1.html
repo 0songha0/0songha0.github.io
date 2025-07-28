@@ -475,7 +475,8 @@
             </nav>
           </aside>
         
-        <h2 id="vue-플러그인이란">Vue 플러그인이란?</h2>
+        
+<h2 id="vue-플러그인이란">Vue 플러그인이란?</h2>
 
 <p>Vue 애플리케이션에 전역 기능 및 객체 등을 추가하는 확장 도구입니다.<br />
 Vue Router, Vuex, Pinia 등도 Vue 플러그인입니다.</p>
@@ -549,7 +550,7 @@ app.mount('#app');
 
 <p><mark>전역 속성 및 메서드 사용법</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
-  &lt;h2&gt;&lt;/h2&gt;
+  &lt;h2&gt;{{ $객체명.키 }}&lt;/h2&gt;
 &lt;/template&gt;
 &lt;script&gt;
 export default {
@@ -587,7 +588,7 @@ main.js에서 앱 인스턴스에 플러그인을 설치하면 적용됩니다.<
 
 <p><mark>전역 리소스 사용법</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
-  &lt;h2&gt;&lt;/h2&gt;
+  &lt;h2&gt;{{ 객체명.키 }}&lt;/h2&gt;
   &lt;button @click="객체명.함수명"&gt;버튼명&lt;/button&gt;
 &lt;/template&gt;
 &lt;script setup&gt;
@@ -661,6 +662,7 @@ export default{
 </code></pre></div></div>
 <p>src/plugins 폴더 안에 global-directives.js 플러그인 파일을 정의합니다.<br />
 main.js에서 플러그인을 설치하면, 여러 커스텀 디렉티브를 한번에 전역 등록할 수 있습니다.</p>
+
 
         
       </section>
