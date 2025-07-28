@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,7 +65,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법">
+<meta property="og:title" content="카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법">
 <meta property="og:url" content="https://0songha0.github.io/kafka/2025-05-12-1">
 
 
@@ -433,7 +433,7 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법">
+    <meta itemprop="headline" content="카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법">
     <meta itemprop="description" content="">
     <meta itemprop="datePublished" content="2025-05-12T00:00:00+00:00">
     <meta itemprop="dateModified" content="2025-05-12T00:00:00+00:00">
@@ -441,7 +441,7 @@
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
 </h1>
           
 
@@ -468,583 +468,301 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#카프카-커넥트-개념-정리">카프카 커넥트 개념 정리</a></li><li><a href="#카프카-커넥트-운영">카프카 커넥트 운영</a><ul><li><a href="#단일-모드-커넥트">단일 모드 커넥트</a></li><li><a href="#분산-모드-커넥트">분산 모드 커넥트</a></li><li><a href="#커넥트-rest-api-사용법">커넥트 REST API 사용법</a></li></ul></li><li><a href="#커스텀-소스-커넥터-개발-예시">커스텀 소스 커넥터 개발 예시</a><ul><li><a href="#디펜던시-추가">디펜던시 추가</a></li><li><a href="#파일-소스-커넥터-설정-정의">파일 소스 커넥터 설정 정의</a></li><li><a href="#파일-소스-커넥터-개발">파일 소스 커넥터 개발</a></li><li><a href="#파일-소스-태스크-개발">파일 소스 태스크 개발</a></li><li><a href="#커넥트에-추가할-커넥터-jar-빌드">커넥트에 추가할 커넥터 jar 빌드</a></li></ul></li><li><a href="#커스텀-싱크-커넥터-개발-예시">커스텀 싱크 커넥터 개발 예시</a><ul><li><a href="#디펜던시-추가-1">디펜던시 추가</a></li><li><a href="#파일-싱크-커넥터-설정-정의">파일 싱크 커넥터 설정 정의</a></li><li><a href="#파일-싱크-커넥터-개발">파일 싱크 커넥터 개발</a></li><li><a href="#파일-싱크-태스크-개발">파일 싱크 태스크 개발</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#카프카-스트림즈-개념-정리">카프카 스트림즈 개념 정리</a><ul><li><a href="#스트림즈-dsl">스트림즈 DSL</a></li><li><a href="#프로세서-api">프로세서 API</a></li></ul></li><li><a href="#카프카-스트림즈-dsl-애플리케이션-개발">카프카 스트림즈 DSL 애플리케이션 개발</a><ul><li><a href="#카프카-스트림즈-라이브러리-추가">카프카 스트림즈 라이브러리 추가</a></li><li><a href="#kstream-필터링-스트림즈-애플리케이션-예시">KStream 필터링 스트림즈 애플리케이션 예시</a></li><li><a href="#kstream-ktable-조인-예시">KStream, KTable 조인 예시</a></li><li><a href="#kstream-globalktable-조인-예시">KStream, GlobalKTable 조인 예시</a></li><li><a href="#ktable-키-값-스토어-활용-예시">KTable 키-값 스토어 활용 예시</a></li></ul></li><li><a href="#스트림즈-dsl-윈도우-프로세싱">스트림즈 DSL 윈도우 프로세싱</a><ul><li><a href="#텀블링-윈도우-프로세싱">텀블링 윈도우 프로세싱</a></li><li><a href="#호핑-윈도우-프로세싱">호핑 윈도우 프로세싱</a></li><li><a href="#슬라이딩-윈도우-프로세싱">슬라이딩 윈도우 프로세싱</a></li><li><a href="#세션-윈도우-프로세싱">세션 윈도우 프로세싱</a></li></ul></li><li><a href="#프로세서-api-사용한-스트림즈-애플리케이션-개발">프로세서 API 사용한 스트림즈 애플리케이션 개발</a><ul><li><a href="#processor-인터페이스-구현-예시">Processor 인터페이스 구현 예시</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h2 id="카프카-커넥트-개념-정리">카프카 커넥트 개념 정리</h2>
+        <h2 id="카프카-스트림즈-개념-정리">카프카 스트림즈 개념 정리</h2>
 
-<p>카프카 커넥트를 이용하면 외부 시스템과 카프카 토픽 간<br />
-반복적인 데이터 수집 및 전송 파이프라인을 자동화할 수 있습니다.<br />
-멀티 스레드로 실행되어 병렬 처리를 지원합니다.<br />
-데이터 수집량, 처리량, 오류율 등은 JMX를 통해 모니터링 할 수 있습니다.</p>
+<p>카프카 스트림즈를 이용하면 토픽 스트림 데이터 처리 후, 토픽 또는 외부 시스템에 저장할 수 있습니다.</p>
 
-<p>커넥트 내부 커넥터는 태스크들을 설정 및 관리하고, 태스크는 데이터 처리를 합니다.</p>
+<p>처리할 토픽 파티션이 3개면 스트림즈 애플리케이션 내부에 3개의 태스크가 자동으로 할당됩니다.<br />
+파티션 수만큼 생성된 태스크들이 병렬로 데이터를 처리하므로 성능이 좋습니다.</p>
 
-<p>MySQL, MongoDB, S3, Elasticsearch 등 외부 시스템용 오픈소스 커넥터들이 많습니다.<br />
-Java 커넥트 라이브러리를 이용해 커스텀 커넥트 jar를 개발해야 할 수도 있습니다.<br />
-커넥터 플러그인 jar 파일을 플러그인 디렉토리에 추가하여 사용하면 됩니다.</p>
+<p>같은 application.id로 스트림즈 애플리케이션들을 실행하면,<br />
+프로세스-스레드가 분리되어 일부 프로세스에 장애가 발생해도 안정적인 운영이 가능합니다.</p>
 
-<p><mark>커넥터 내부 기능</mark></p>
+<p>스파크 스트리밍은 여러 데이터 소스로부터 데이터를 입력받을 수 있지만,<br />
+카프카 스트림즈는 카프카 토픽만 입력 소스로 사용합니다.</p>
+
+<p><mark>스트림즈 프로세서 종류</mark></p>
 <table class="table_2_left">
   <tbody>
     <tr>
-      <td>컨버터</td>
-      <td>바이트 배열 메시지를 외부 시스템 포맷으로 직렬화/역직렬화 시 사용</td>
+      <td>소스 프로세서</td>
+      <td>토픽에서 데이터를 가져오는 역할</td>
     </tr>
     <tr>
-      <td>트랜스폼</td>
-      <td>메시지 단위 전처리/후처리 시 사용 (JSON 메시지 특정 키 삭제, 값 변경 등)</td>
+      <td>스트림즈 프로세서</td>
+      <td>다른 프로세서가 반환한 데이터를 처리하는 역할</td>
+    </tr>
+    <tr>
+      <td>싱크 프로세서</td>
+      <td>처리가 완료된 데이터를 다른 토픽에 저장하는 역할</td>
     </tr>
   </tbody>
 </table>
 
-<hr />
+<h3 id="스트림즈-dsl">스트림즈 DSL</h3>
+<p>스트림즈 애플리케이션 개발 시 주로 사용되는 고수준 추상화 API입니다.<br />
+메시지 값을 기반으로 토픽 분기, 지난 10분간 들어온 데이터 수 집계 등이 가능합니다.</p>
 
-<h2 id="카프카-커넥트-운영">카프카 커넥트 운영</h2>
+<p><mark>KStream</mark>
+컨슈머처럼 토픽을 실시간으로 구독하고, 레코드를 순차적으로 하나씩 처리하는 비상태 스트림 처리 모델입니다.</p>
 
-<h3 id="단일-모드-커넥트">단일 모드 커넥트</h3>
-<p>커넥트를 단일 JVM 프로세스로 실행하는 방식입니다.<br />
-주로 개발 환경이나 중요도가 낮은 파이프라인 운영 시 사용합니다.</p>
+<p><mark>KTable</mark>
+토픽의 메시지 키 기준으로 가장 최신 값만 유지하는 상태 기반 테이블 모델입니다.<br />
+각 스트림즈 태스크가 일부 파티션 데이터를 로컬 상태 저장소에 Materialized View (구체화된 뷰) 로 저장합니다.<br />
+KTable 조인 시에는 반드시 코파티셔닝이 필요합니다.<br />
+KTable 데이터를 keyValueStore로 조회하면, 로컬 캐시처럼 키-값 상태 저장소로 활용 가능합니다.</p>
 
-<p><mark>단일 모드 커넥트 설정</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-- 카프카 브로커 주소 목록 설정
-bootstrap.servers=localhost:9092
+<p><mark>GlobalKTable</mark>
+토픽의 메시지 키 기준으로 가장 최신 값만 유지하는 전역 상태 기반 테이블 모델입니다.<br />
+각 스트림즈 태스크가 전체 파티션 데이터를 로컬 상태 저장소에 Materialized View (구체화된 뷰) 로 저장합니다.<br />
+조인 대상 테이블 파티션 수가 다르거나 코파티셔닝이 어려운 경우 사용하면 좋습니다.<br />
+너무 많은 데이터를 가진 토픽으로 GlobalKTable 선언해서 조인하면 부하가 생길 수 있습니다.</p>
 
--- 메시지 카/값 직렬화/역직렬화 컨버터 클래스 설정
-key.converter=org.apache.kafka.connect.json.JsonConverter
-value.converter=org.apache.kafka.connect.json.JsonConverter
+<h3 id="프로세서-api">프로세서 API</h3>
+<p>스트림즈 애플리케이션 개발 시 스트림즈 DSL 보다 세밀한 커스텀 로직 구현이 가능한 API입니다.<br />
+스트림즈 DSL과 사용하면 KStream, KTable, GlobalKTable 개념도 연동할 수 있습니다.<br />
+메시지 값 종류에 따라 동적으로 토픽 전송, 일정한 시간 간격으로 데이터 처리 등이 가능합니다.</p>
 
--- 메시지 키/값 스키마 정보 포함 여부 (스키마 정보 없이 메시지 처리)
-key.converter.schemas.enable=false
-value.converter.schemas.enable=false
+<p><mark>Processor 인터페이스</mark>
+입력 데이터 처리 후 다음 프로세서로 데이터를 자동 전달하지 않고 직접 제어할 때 사용합니다.<br />
+ProcessorContext를 이용하면 필요한 시점에만 데이터를 전달할 수 있습니다.</p>
 
--- 오프셋 파일 저장 경로
-offset.storage.file.filename=/tmp/connect.offsets
-
--- 오프셋 정보 디스크 기록 주기 (10초)
-offset.flush.interval.ms=10000
-
--- 커넥터 플러그인 JAR 파일 경로
-plugin.path=/usr/local/share/kafka/plugins
-</code></pre></div></div>
-<p>단일 모드 커넥트 설정 파일 (connect-standalone.properties) 수정 예시입니다.</p>
-
-<p><mark>단일 모드 커넥터 설정</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-- 커넥터명 설정
-name=local-file-source
-
--- 사용할 커넥터 클래스 (파일 읽는 Source 커넥터)
-connector.class=FileStreamSource
-
--- 동시 실행할 태스크 수 설정 (1 = 단일 스레드)
--- 싱크 커넥터 태스크 수는 토픽 파티션 수와 같게 설정하는 것이 좋음
-tasks.max=1
-
--- 읽을 파일 경로
-file=/tmp/test.txt
-
--- 커넥터가 파일 데이터를 전송할 카프카 토픽 이름
-topic=토픽명
-</code></pre></div></div>
-<p>단일 모드 커넥터 설정 파일 (connect-file-source.properties) 수정 예시입니다.</p>
-
-<p><mark>단일 모드 커넥트 실행 명령어</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties
-</code></pre></div></div>
-<p>단일 모드 커넥트 워커 실행 시 커넥트 설정파일, 커넥터 설정파일들을 파라미터로 넣으면 됩니다.</p>
-
-<h3 id="분산-모드-커넥트">분산 모드 커넥트</h3>
-<p>2대 이상의 서버에서 같은 그룹 ID의 여러 커넥트 프로세스가 하나의 클러스터로 동작하는 방식입니다.<br />
-데이터 양에 따라 커넥트 프로세스 무중단 스케일 아웃, 스케일 인이 가능합니다.<br />
-커넥터 내 스레드(태스크) 개수도 REST API로 조절 가능합니다.</p>
-
-<p><mark>분산 모드 커넥트 설정</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-- 카프카 브로커 주소 목록 설정
-bootstrap.servers=localhost:9092
-
--- 메시지 카/값 직렬화/역직렬화 컨버터 클래스 설정
-key.converter=org.apache.kafka.connect.storage.StringConverter
-value.converter=org.apache.kafka.connect.storage.StringConverter
-
--- 메시지 키/값 스키마 정보 포함 여부 (스키마 정보 없이 메시지 처리)
-key.converter.schemas.enable=false
-value.converter.schemas.enable=false
-
--- 오프셋 정보 디스크 기록 주기 (10초)
-offset.flush.interval.ms=10000
-
--- 커넥터 플러그인 JAR 파일 경로
-plugin.path=/usr/local/share/java/usr/local/share/kafka/plugins
-
--- 커넥트 클러스터 그룹 ID
-group.id=connect-cluster
-
--- 커넥트가 저장할 오프셋/정보/상태 내부 토픽명 (그룹 ID마다 별도 생성 필요)
--- 브로커 토픽에 모든 상태를 저장하여 장애 복구 가능
-offset.storage.topic=connect-offsets
-offset.storage.replication.factor=3
-config.storage.topic=connect-config
-config.storage.replication.factor=3
-status.storage.topic=connect-status
-status.storage.replication.factor=3
-</code></pre></div></div>
-<p>분산 모드 커넥트 설정 파일 (connect-distributed.properties) 수정 예시입니다.</p>
-
-<p><mark>분산 모드 커넥트 실행 명령어</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bin/connect-distributed.sh config/connect-distributed.properties
-</code></pre></div></div>
-<p>분산 모드 커넥트 워커 실행 시 커넥트 설정파일을 파라미터로 넣으면 됩니다.<br />
-커넥터 인스턴스는 REST API 요청으로 생성 시 실행됩니다.</p>
-
-<h3 id="커넥트-rest-api-사용법">커넥트 REST API 사용법</h3>
-<table class="table_2_left">
-  <tbody>
-    <tr>
-      <td>GET</td>
-      <td>/</td>
-      <td>커넥트 클러스터 정보 확인</td>
-    </tr>
-    <tr>
-      <td>GET</td>
-      <td>/connectors</td>
-      <td>현재 실행중 커넥터 목록 확인</td>
-    </tr>
-    <tr>
-      <td>POST</td>
-      <td>/connectors</td>
-      <td>새 커넥터 생성 및 실행</td>
-    </tr>
-    <tr>
-      <td>GET</td>
-      <td>/connectors/커넥터명</td>
-      <td>특정 커넥터 상세 정보 확인</td>
-    </tr>
-    <tr>
-      <td>GET</td>
-      <td>/connectors/커넥터명/config</td>
-      <td>커넥터 설정 확인</td>
-    </tr>
-    <tr>
-      <td>PUT</td>
-      <td>/connectors/커넥터명/config</td>
-      <td>커넥터 설정 변경</td>
-    </tr>
-    <tr>
-      <td>GET</td>
-      <td>/connectors/커넥터명/status</td>
-      <td>커넥터 상태 확인</td>
-    </tr>
-    <tr>
-      <td>DELETE</td>
-      <td>/connectors/커넥터명</td>
-      <td>커넥터 종료</td>
-    </tr>
-    <tr>
-      <td>POST</td>
-      <td>/connectors/커넥터명/restart</td>
-      <td>커넥터 재시작</td>
-    </tr>
-    <tr>
-      <td>GET</td>
-      <td>/connector-plugins</td>
-      <td>현재 사용할 수 있는 카프카 커넥터 플러그인 목록 조회</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><mark>싱크 커넥터 생성 요청 예시</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -X POST http://localhost:8083/connectors
--H 'Content-Type: application/json'
--d '{
-  "name": "file-sink-test",
-  "config":
-  {
-    "topics":"test",
-    "connector.class":"org.apache.kafka.connect.file.FileStreamSinkConnector",
-    "tasks.max":1,
-    "file":"/파일경로/파일명.확장자"
-  }
-}'
-</code></pre></div></div>
-<p>싱크 커넥터 태스크 수를 파티션 수와 같게 설정하면 병렬 처리가 최대화되어 가장 빠릅니다.<br />
-데이터 처리가 느리면 태스크 수, 파티션 수를 늘려서 처리량 확장이 가능합니다.</p>
-
-<p><mark>커넥터 상태 확인</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://localhost:8083/connectors/커넥터명/status
-</code></pre></div></div>
-<p>아래와 같이 커넥터 실행 상태 및 주소, 태스크 실행 상태 및 주소를 확인할 수 있습니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
-  "name":"file-sink-test",
-  "connector": {
-    "state":"RUNNING",
-    "worker_id":"127.0.0.1:8083"
-  },
-  "tasks": [
-    {
-      "id":0,
-      "state":"RUNNING",
-      "worker_id":"127.0.0.1:8083"
-    }
-  ],
-  "type":"sink"
-}
-</code></pre></div></div>
+<p><mark>Transformer 인터페이스</mark><br />
+입력 데이터 처리 후 다음 프로세서로 데이터를 전달할 때 사용합니다.</p>
 
 <hr />
 
-<h2 id="커스텀-소스-커넥터-개발-예시">커스텀 소스 커넥터 개발 예시</h2>
+<h2 id="카프카-스트림즈-dsl-애플리케이션-개발">카프카 스트림즈 DSL 애플리케이션 개발</h2>
 
-<h3 id="디펜던시-추가">디펜던시 추가</h3>
+<p>Java 프로젝트 생성 후 아래와 같이 구현하고 Java 프로세스를 실행하면 됩니다.</p>
+
+<h3 id="카프카-스트림즈-라이브러리-추가">카프카 스트림즈 라이브러리 추가</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dependencies {
-  implementation 'org.apache.kafka:connect-api:2.5.0'
+    implementation 'org.apache.kafka:kafka-streams:2.5.0'
+    implementation 'org.slf4j:slf4j-simple:1.7.30'
 }
 </code></pre></div></div>
-<p>소스 커넥터 개발에 필요한 라이브러리를 추가합니다.</p>
+<p>java 프로젝트 내 build.gradle 파일에 카프카 브로커와 동일한 버전의 스트림즈 라이브러리를 추가합니다.<br />
+카프카 스트림즈 로그 출력을 위해 slf4j 라이브러리 의존성도 추가합니다.</p>
 
-<h3 id="파일-소스-커넥터-설정-정의">파일 소스 커넥터 설정 정의</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class SingleFileSourceConnectorConfig extends AbstractConfig {
+<h3 id="kstream-필터링-스트림즈-애플리케이션-예시">KStream 필터링 스트림즈 애플리케이션 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class StreamsFilter {
+  private final static Logger LOGGER = LoggerFactory.getLogger(StreamsFilter.class);
+  private final static String BOOTSTRAP_SERVERS = "localhost:9092";
+  private final static String APPLICATION_ID = "스트림즈애플리케이션그룹ID";
 
-  // 읽을 파일 정보
-  public static final String DIR_FILE_NAME = "file";
-  private static final String DIR_FILE_NAME_DEFAULT_VALUE = "/tmp/kafka.txt";  // file 옵션 미지정 시 사용할 기본 파일 경로
-  private static final String DIR_FILE_NAME_DOC = "파일경로/파일명.확장자"; // 문서화용 파일 설명 문구
+  public static void main(String[] args) {
 
-  // 전송할 토픽 정보
-  public static final String TOPIC_NAME = "topic";
-  private static final String TOPIC_NAME_DEFAULT_VALUE = "test-topic"; // topic 옵션 미지정 시 사용할 기본 토픽명
-  private static final String TOPIC_NAME_DOC = "토픽명";
+    // 스트림즈 DSL 필수 옵션 설정
+    Properties props = new Properties();
+    props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
+    props.put(StreamsConfig.APPLICATION_ID_CONFIG, APPLICATION_ID);
+	
+	  // 스트림즈 DSL 선택 옵션 설정
+    props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+    props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
 
-  // 파일 소스 커넥터 설정 기본값 정의
-  public static final ConfigDef CONFIG = new ConfigDef()
-      .define(
-        DIR_FILE_NAME,
-        ConfigDef.Type.STRING,
-        DIR_FILE_NAME_DEFAULT_VALUE,
-        ConfigDef.Importance.HIGH,
-        DIR_FILE_NAME_DOC
-      )
-      .define(
-        TOPIC_NAME,
-        ConfigDef.Type.STRING,
-        TOPIC_NAME_DEFAULT_VALUE,
-        ConfigDef.Importance.HIGH,
-        TOPIC_NAME_DOC
-      );
+    // 스트림즈 빌더 생성
+    StreamsBuilder builder = new StreamsBuilder();
 
-  // 파일 소스 커넥터 설정 참조
-  public SingleFileSourceConnectorConfig(Map&lt;String, String&gt; props) {
-    super(CONFIG, props);
-  }
-}
-</code></pre></div></div>
-<p>파일 소스 커넥터에서 사용할 모든 설정을 정의합니다.</p>
+    // 토픽 KStream 생성
+    KStream&lt;String, String&gt; streamLog = builder.stream("소스토픽명");
 
-<h3 id="파일-소스-커넥터-개발">파일 소스 커넥터 개발</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class SingleFileSourceConnector extends SourceConnector {
-  private Map&lt;String, String&gt; configProperties;
-
-  @Override
-  public String version() {
-    // 커넥터 버전 정의
-    return "1.0";
-  }
-
-  @Override
-  public void start(Map&lt;String, String&gt; props) {
-    this.configProperties = props;
-
-    try {
-      // 파일 소스 커넥터 설정 정의
-      new SingleFileSourceConnectorConfig(props);
-
-    } catch (ConfigException e) {
-      // 설정 누락 시 에러 발생
-      throw new ConnectException(e.getMessage(), e);
-    }
-  }
-
-  @Override
-  public Class&lt;? extends Task&gt; taskClass() {
-    // 파일 소스 태스크 클래스 리턴
-    return SingleFileSourceTask.class;
-  }
-
-  @Override
-  public List&lt;Map&lt;String, String&gt;&gt; taskConfigs(int maxTasks) {
-    // 태스크 설정 리스트에 파일 소스 커넥터 설정값 추가
-    // 파일 읽기 시에는 태스크 1개가 일반적이어서, singletonList 생성
-    return Collections.singletonList(new HashMap&lt;&gt;(configProperties));
-  }
-
-  @Override
-  public ConfigDef config() {
-    // 파일 소스 커넥터 설정 정의 반환
-    return SingleFileSourceConnectorConfig.CONFIG;
-  }
-
-  @Override
-  public void stop() {
-    // 커넥터 종료 시 리소스 정리
-  }
-}
-</code></pre></div></div>
-<p>소스 태스크 실행 전 커넥터 설정파일 초기화, 태스크 클래스 정의하는 소스 커넥터 예시입니다.</p>
-
-<h3 id="파일-소스-태스크-개발">파일 소스 태스크 개발</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class SingleFileSourceTask extends SourceTask {
-  private static final Logger logger = LoggerFactory.getLogger(SingleFileSourceTask.class);
-
-  private static final String FILENAME_FIELD = "파일명";
-  private static final String POSITION_FIELD = "포지션명";
-
-  private Map&lt;String, String&gt; fileNamePartition;
-  private Map&lt;String, Object&gt; offset;
-  private String topic;
-  private String file;
-  private long position = 0L;
-
-  @Override
-  public void start(Map&lt;String, String&gt; props) {
-    try {
-      // 파일 소스 커넥터 설정
-      SingleFileSourceConnectorConfig config = new SingleFileSourceConnectorConfig(props);
-      topic = config.getString(SingleFileSourceConnectorConfig.TOPIC_NAME); // 토픽명 가져오기
-      file = config.getString(SingleFileSourceConnectorConfig.DIR_FILE_NAME); // 파일명 가져오기
-
-      // 파티션 구분 기준 설정
-      fileNamePartition = Collections.singletonMap(FILENAME_FIELD, file);
-
-      // 소스 커넥터로 저장된 파일 내부 번호 기록용 오프셋 가져오기
-      offset = context.offsetStorageReader().offset(fileNamePartition);
-
-      if (offset != null) {
-        Object lastReadFileOffset = offset.get(POSITION_FIELD);
-
-        if (lastReadFileOffset != null) {
-          // 마지막으로 읽은 오프셋 번호 세팅
-          position = (Long) lastReadFileOffset;
-        }
-      } else {
-        // 저장된 오프셋이 없는 경우, 0 세팅
-        position = 0;
-      }
-    }
-  }
-
-  @Override
-  public List&lt;SourceRecord&gt; poll() { // 외부 시스템에서 새로운 데이터를 가져오기 위해 주기적으로 호출되는 메서드
-    List&lt;SourceRecord&gt; results = new ArrayList&lt;&gt;();
-
-    try {
-      // 1초마다 읽기
-      Thread.sleep(1000);
-
-      // 오프셋 라인 가져오기
-      List&lt;String&gt; lines = getLines(position);
-
-      // 읽을 라인이 있다면
-      if (!lines.isEmpty()) {
-        lines.forEach(line -&gt; {
-          // 오프셋 +1 라인 읽어서 레코드 생성 후 추가
-          Map&lt;String, Long&gt; sourceOffset = Collections.singletonMap(POSITION_FIELD, ++position);
-          SourceRecord sourceRecord = new SourceRecord(
-            fileNamePartition,
-            sourceOffset,
-            topic,
-            Schema.STRING_SCHEMA,
-            null,
-            Schema.STRING_SCHEMA,
-            line
-          );
-          results.add(sourceRecord);
-        });
-      }
-
-      // 커넥트 내부에서 토픽으로 send 될 List 반환
-      return results;
-
-    } catch (Exception e) {
-      logger.error(e.getMessage(), e);
-      throw new ConnectException(e.getMessage());
-    }
-  }
-
-  @Override
-  public void stop() {
-    // 태스크 종료 시 리소스 정리
-  }
-}
-</code></pre></div></div>
-<p>파일에서 데이터를 가져와서 카프카 토픽으로 전송하는 소스 태스크 개발 예시입니다.<br />
-커넥터당 1개의 태스크를 실행하는 것이 일반적이고, 퍼일 읽기는 병렬처리 하지 않습니다.</p>
-
-<h3 id="커넥트에-추가할-커넥터-jar-빌드">커넥트에 추가할 커넥터 jar 빌드</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jar {
-  from {
-    configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-  }
-}
-</code></pre></div></div>
-<p>런타임에 필요한 모든 클래스, 의존성을 포함해 빌드하는 우버 jar 스크립트 작성 후 빌드합니다.<br />
-빌드하여 jar 파일 생성 후 커넥트 플러그인 디렉토리에 추가하고 사용하면 됩니다.</p>
-
-<hr />
-
-<h2 id="커스텀-싱크-커넥터-개발-예시">커스텀 싱크 커넥터 개발 예시</h2>
-
-<h3 id="디펜던시-추가-1">디펜던시 추가</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dependencies {
-  implementation 'org.apache.kafka:connect-api:2.5.0'
-}
-</code></pre></div></div>
-<p>싱크 커넥터 개발에 필요한 라이브러리를 추가합니다.</p>
-
-<h3 id="파일-싱크-커넥터-설정-정의">파일 싱크 커넥터 설정 정의</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class SingleFileSinkConnectorConfig extends AbstractConfig {
-
-  public static final String DIR_FILE_NAME = "file";
-  private static final String DIR_FILE_NAME_DEFAULT_VALUE = "/tmp/kafka.txt"; // file 옵션 미지정 시 사용할 기본 파일 경로
-  private static final String DIR_FILE_NAME_DOC = "파일경로/파일명.확장자"; // 문서화용 파일 설명 문구
-
-  public static ConfigDef CONFIG = new ConfigDef()
-    .define(
-      DIR_FILE_NAME,
-      Type.STRING,
-      DIR_FILE_NAME_DEFAULT_VALUE,
-      Importance.HIGH,
-      DIR_FILE_NAME_DOC
+    // 소스 토픽 필터링
+    KStream&lt;String, String&gt; filteredStream = streamLog.filter(
+      (key, value) -&gt; value != null &amp;&amp; value.length() &gt; 5
     );
 
-  public SingleFileSinkConnectorConfig(Map&lt;String, String&gt; props) {
-      super(CONFIG, props);
+    // 필터링 결과 싱크 토픽에 저장
+    filteredStream.to("싱크토픽명");
+
+    // 카프카 스트림즈 실행
+    KafkaStreams streams = new KafkaStreams(builder.build(), props);
+    streams.start();
+
+    // 카프카 스트림즈 종료 셧다운 훅
+    Runtime.getRuntime().addShutdownHook(new Thread(streams::close));
   }
 }
 </code></pre></div></div>
-<p>파일 싱크 커넥터에서 사용할 모든 설정을 정의합니다.<br />
-토픽 정보는 싱크 커넥터 실행 시 파라미터로 받아야 합니다.</p>
+<p>토픽에 들어온 레코드의 메시지 키 또는 값을 필터링하는 비상태 스트림즈 애플리케이션 예시입니다.<br />
+실시간으로 소스 프로세서에서 받은 소스 토픽 레코드를 스트림 프로세서에서 필터링합니다.<br />
+조건에 맞는 레코드만 싱크 프로세서로 전달하여 싱크 토픽에 저장합니다.</p>
 
-<h3 id="파일-싱크-커넥터-개발">파일 싱크 커넥터 개발</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class SingleFileSinkConnector extends SinkConnector {
+<h3 id="kstream-ktable-조인-예시">KStream, KTable 조인 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 스트림즈 빌더 생성
+StreamsBuilder builder = new StreamsBuilder();
 
-  private Map&lt;String, String&gt; configProperties;
+// 소스 프로세서 이용하여 토픽 KStream, KTable 생성
+KStream&lt;String, String&gt; orderStream = builder.stream("주문_소스토픽명");
+KTable&lt;String, String&gt; addressTable = builder.table("주소_소스토픽명");
+
+// KStream, KTable 조인 후 싱크토픽으로 전송
+orderStream.join(addressTable, (order, adress) -&gt; order + "send to" + address)
+           .to("싱크토픽명");
+
+// 카프카 스트림즈 실행
+KafkaStreams streams = new KafkaStreams(builder.build(), props);
+streams.start();
+</code></pre></div></div>
+<p>주문 소스토픽에 데이터가 들어오면 최신 주소만 유지하는 주소 소스토픽 KTable과 조인하고,<br />
+조인 결과를 싱크 토픽에 저장하는 스트림즈 애플리케이션 예시입니다.<br />
+메시지 키가 동일한 데이터만 실시간으로 조인되며, 메시지 키가 null이면 조인되지 않습니다.</p>
+
+<p>KStream, KTable 조인 시에는 두 토픽이 반드시 코파티셔닝 되어 있어야 합니다.</p>
+
+<h3 id="kstream-globalktable-조인-예시">KStream, GlobalKTable 조인 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 스트림즈 빌더 생성
+StreamsBuilder builder = new StreamsBuilder();
+
+// 소스 프로세서 이용하여 토픽 KStream, GlobalKTable 생성
+KStream&lt;String, String&gt; orderStream = builder.stream("주문_소스토픽명");
+GlobalKTable&lt;String, String&gt; addressGlobalTable = builder.globalTable("주소_소스토픽명");
+
+// KStream, GlobalKTable 조인 후 싱크 토픽으로 전송
+orderStream.join(
+              addressGlobalTable,
+              (orderKey, orderValue) -&gt; orderKey,
+              (order, address) -&gt; order + "send to" + address)
+            ).to("싱크토픽명");
+
+// 카프카 스트림즈 실행
+KafkaStreams streams = new KafkaStreams(builder.build(), props);
+streams.start();
+</code></pre></div></div>
+<p>GlobalKTable과 조인 시에는 조인 기준 메시지 키 지정 함수가 필요합니다.<br />
+GlobalKTable은 모든 파티션에 접근할 수 있어서 두 토픽 간 코파티셔닝이 필요하지 않습니다.</p>
+
+<h3 id="ktable-키-값-스토어-활용-예시">KTable 키-값 스토어 활용 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 토픽 KTable 생성 및 상태저장소명 지정
+StreamsBuilder builder = new StreamsBuilder();
+KTable&lt;String, String&gt; addressTable = builder.table("주소_소스토픽명", Materialized.as("상태저장소명"));
+
+// 카프카 스트림즈 객체 생성
+KafkaStreams streams = new KafkaStreams(builder.build(), props);
+
+// 키-값 스토어 생성
+ReadOnlyKeyValueStore&lt;String, String&gt; keyValueStore;
+
+// KTable이 저장된 상태 저장소에서 keyValueStore 조회
+keyValueStore = streams.store(StoreQueryParameters.fromNameAndType("상태저장소명"), QueryableStoreTypes.keyValueStore());
+
+// keyValueStore에서 모든 키, 값 쌍 가져오기
+KeyValueIterator&lt;String, String&gt; address = keyValueStore.all();
+
+// 반복하며 전체 값 출력
+address.forEachRemaining(keyValue -&gt; log.info(keyValue.toString()));
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="스트림즈-dsl-윈도우-프로세싱">스트림즈 DSL 윈도우 프로세싱</h2>
+
+<p>윈도우 프로세싱은 시간 기반으로 스트림 데이터를 분석할 때 많이 활용됩니다.<br />
+특정 시간 동안의 집계, 평균 계산, 카운트 등을 할 수 있습니다.<br />
+모든 프로세싱은 메시지 키를 기준으로 취합됩니다.<br />
+커스텀 파티셔너를 사용하면 정확한 취합이 어려울 수 있습니다.</p>
+
+<h3 id="텀블링-윈도우-프로세싱">텀블링 윈도우 프로세싱</h3>
+<p>고정된 시간 간격으로 윈도우를 서로 겹치지 않게 나누어 데이터를 집계합니다.<br />
+하나의 이벤트는 하나의 윈도우에만 포함됩니다.</p>
+
+<p><mark>스트림즈 DSL 텀블링 윈도우 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 스트림즈 빌더 생성
+StreamsBuilder builder = new StreamsBuilder();
+
+// 토픽 KTable 생성
+KStream&lt;String, String&gt; stream = builder.stream("로그_소스토픽명");
+
+// 메시지 키 그룹화 후 텀블링 윈도우로 5초 단위 데이터 집계
+KTable&lt;Windowed&lt;String&gt;, Long&gt; countTable = stream.groupByKey()
+                               .windowedBy(TimeWindows.of(Duration.ofSeconds(5)))
+                               .count(); // 각 윈도우 내 레코드 수 카운트
+
+// 윈도우 시작 시간, 종료 시간, 카운트 출력
+countTable.toStream().foreach((key, value) -&gt; {
+  log.info("[" + key.window().startTime() + " ~ " + key.window().endTime() + "] " + key.key() + " count : " + value);
+});
+</code></pre></div></div>
+<p>로그 토픽으로 들어오는 동일 메시지 키 데이터가 5초에 몇 개인지 지속적으로 카운트해서,<br />
+KTable로 저장하고 출력하는 텀플링 윈도우 프로세싱 예시입니다.<br />
+실제 출력 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[2025-05-15T00:00:00Z ~ 2025-05-15T00:00:05Z] userA count : 1
+[2025-05-15T00:00:00Z ~ 2025-05-15T00:00:05Z] userA count : 2
+[2025-05-15T00:00:00Z ~ 2025-05-15T00:00:05Z] userB count : 1
+[2025-05-15T00:00:05Z ~ 2025-05-15T00:00:10Z] userA count : 1
+[2025-05-15T00:00:05Z ~ 2025-05-15T00:00:10Z] userA count : 2
+</code></pre></div></div>
+<p>중간 집계 결과가 출력되므로, 동일 윈도우 데이터는 나중에 출력된 데이터로 덮어써야 합니다.</p>
+
+<h3 id="호핑-윈도우-프로세싱">호핑 윈도우 프로세싱</h3>
+<p>일정 시간 간격으로 윈도우를 서로 겹치게 나누어 데이터를 처리합니다.<br />
+동일 메시지 키를 가진 레코드는 여러 윈도우에 포함될 수 있습니다.</p>
+
+<h3 id="슬라이딩-윈도우-프로세싱">슬라이딩 윈도우 프로세싱</h3>
+<p>레코드 타임스탬프 기준으로 윈도우를 서로 겹치게 나누어 데이터를 처리합니다.<br />
+이벤트의 발생 시점에 따라 윈도우가 겹칠 수 있습니다.</p>
+
+<h3 id="세션-윈도우-프로세싱">세션 윈도우 프로세싱</h3>
+<p>동일 메시지 키를 가진 레코드를 한 세션에 묶어 연산할 때 사용합니다.<br />
+세션 만료 시간에 따라 윈도우 사이즈가 달라지며, 사용자 행동 분석 등에 적합합니다.</p>
+
+<hr />
+
+<h2 id="프로세서-api-사용한-스트림즈-애플리케이션-개발">프로세서 API 사용한 스트림즈 애플리케이션 개발</h2>
+
+<h3 id="processor-인터페이스-구현-예시">Processor 인터페이스 구현 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class FilterProcessor implements Processor&lt;String, String&gt; { // 메시지 키, 메시지 값 타입 지정
+  private ProcessorContext context;
 
   @Override
-  public String version() {
-    return "1.0";
+  public void init(ProcessorContext context) {
+    // 컨텍스트 초기화
+    this.context = context;
   }
 
   @Override
-  public void start(Map&lt;String, String&gt; props) {
-    this.configProperties = props;
-    try {
-      // 파일 싱크 커넥터 설정 정의
-      new SingleFileSinkConnectorConfig(props);
-    } catch (ConfigException e) {
-
-      // 설정 누락 시 에러 발생
-      throw new ConnectException(e.getMessage(), e);
+  public void process(String key, String value) {
+    if (value.length() &gt; 5) {
+      // 컨텍스트 이용해서 다음 프로세서로 데이터 전달
+      context.forward(key, value);
     }
+
+    // 오프셋 커밋 (필요 시 호출)
+    context.commit();
   }
 
   @Override
-  public Class&lt;? extends Task&gt; taskClass() {
-    // 파일 싱크 태스크 클래스 리턴
-    return SingleFileSinkTask.class;
-  }
-
-  @Override
-  public List&lt;Map&lt;String, String&gt;&gt; taskConfigs(int maxTasks) {
-    List&lt;Map&lt;String, String&gt;&gt; taskConfigs = new ArrayList&lt;&gt;();
-    Map&lt;String, String&gt; taskProps = new HashMap&lt;&gt;();
-    taskProps.putAll(configProperties);
-
-    // 태스크 설정 리스트에 파일 싱크 커넥터 설정값 추가
-    for (int i = 0; i &lt; maxTasks; i++) {
-      taskConfigs.add(taskProps);
-    }
-
-    return taskConfigs;
-  }
-
-  @Override
-  public ConfigDef config() {
-    // 파일 싱크 커넥터 설정 정의 반환
-    return SingleFileSinkConnectorConfig.CONFIG;
-  }
-
-  @Override
-  public void stop() {
-    // 커넥터 종료 시 리소스 정리
+  public void close() {
+    // 리소스 해제 처리
   }
 }
 </code></pre></div></div>
-<p>싱크 태스크 실행 전 커넥터 설정파일 초기화, 태스크 클래스 정의하는 싱크 커넥터 예시입니다.</p>
+<p>메시지 처리 흐름을 제어하는 Processor 인터페이스를 구현합니다.<br />
+아래와 같이, 구현한 Processor 클래스를 스트림 Processor 노드로 지정하면 됩니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 토폴로지 생성
+Topology topology = new Topology();
 
-<h3 id="파일-싱크-태스크-개발">파일 싱크 태스크 개발</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class SingleFileSinkTask extends SinkTask {
-  private SingleFileSinkConnectorConfig config;
-  private File file;
-  private FileWriter fileWriter;
+// 소스 프로세서, 스트림 프로세서, 싱크 프로세서 지정
+topology.addSource("Source", 소스토픽명)
+        .addProcessor("Process",
+                      () -&gt; new FilterProcessor(),
+                      "Source")
+        .addSink("Sink", 싱크토픽명, "Process");
 
-  @Override
-  public String version() {
-    return "1.0";
-  }
+// 카프카 스트림즈 인스턴스 생성
+KafkaStreams streaming = new KafkaStreams(topology, props);
 
-  @Override
-  public void start(Map&lt;String, String&gt; props) {
-    try {
-      // 파일 싱크 커넥터 설정
-      config = new SingleFileSinkConnectorConfig(props);
-
-      // 파일 쓰기 객체 초기화
-      file = new File(config.getString(config.DIR_FILE_NAME));
-      fileWriter = new FileWriter(file, true);
-
-    } catch (Exception e) {
-      throw new ConnectException(e.getMessage(), e);
-    }
-  }
-
-  @Override
-  public void put(Collection&lt;SinkRecord&gt; records) { // 토픽에서 읽은 새로운 데이터를 외부 시스템에 전송하기 위해 호출되는 메서드
-    try {
-      // 토픽 레코드 데이터를 파일에 쓰기 (실시간)
-      for (SinkRecord record : records) {
-        fileWriter.write(record.value().toString() + "\n");
-      }
-    } catch (IOException e) {
-      throw new ConnectException(e.getMessage(), e);
-    }
-  }
-
-  @Override
-  public void flush(Map&lt;TopicPartition, OffsetAndMetadata&gt; offsets) { // 커밋 시점마다 호출되는 메서드
-    try {
-      // 버퍼에 전송 대기 중인 데이터 쓰기
-      fileWriter.flush();
-
-    } catch (IOException e) {
-      throw new ConnectException(e.getMessage(), e);
-    }
-  }
-
-  @Override
-  public void stop() {
-    try {
-      // 태스크 종료 시 리소스 정리
-      fileWriter.close();
-    } catch (IOException e) {
-      throw new ConnectException(e.getMessage(), e);
-    }
-  }
-}
+// 스트림즈 애플리케이션 실행
+streaming.start();
 </code></pre></div></div>
-<p>카프카 토픽에서 데이터를 가져와서 파일에 쓰는 싱크 태스크 개발 예시입니다.</p>
 
         
       </section>
@@ -1082,11 +800,11 @@ status.storage.replication.factor=3
       
   <nav class="pagination">
     
-      <a href="/web-dev/2025-05-21-1" class="pagination--pager" title="Git 블로그 카테고리 목록 페이징 기능 구현
+      <a href="/kafka/2025-05-13-1" class="pagination--pager" title="카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
 ">❮</a>
     
     
-      <a href="/kafka/2025-05-12-1" class="pagination--pager" title="카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+      <a href="/kafka/2025-05-07-1" class="pagination--pager" title="Java 카프카 프로듀서, 컨슈머 애플리케이션 개발 방법
 ">❯</a>
     
   </nav>

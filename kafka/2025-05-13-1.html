@@ -1,0 +1,1341 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법">
+<meta property="og:url" content="https://0songha0.github.io/kafka/2025-05-13-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-05-13T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2025-05-13T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/kafka/2025-05-13-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 231</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">카프카</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/english"><span class="nav__sub-title">English</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2025-05-13T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-05-13T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-05-13T00:00:00+00:00">2025-05-13</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
+              <ul class="toc__menu"><li><a href="#카프카-커넥트-개념-정리">카프카 커넥트 개념 정리</a></li><li><a href="#카프카-커넥트-운영">카프카 커넥트 운영</a><ul><li><a href="#단일-모드-커넥트">단일 모드 커넥트</a></li><li><a href="#분산-모드-커넥트">분산 모드 커넥트</a></li><li><a href="#커넥트-rest-api-사용법">커넥트 REST API 사용법</a></li></ul></li><li><a href="#커스텀-소스-커넥터-개발-예시">커스텀 소스 커넥터 개발 예시</a><ul><li><a href="#디펜던시-추가">디펜던시 추가</a></li><li><a href="#파일-소스-커넥터-설정-정의">파일 소스 커넥터 설정 정의</a></li><li><a href="#파일-소스-커넥터-개발">파일 소스 커넥터 개발</a></li><li><a href="#파일-소스-태스크-개발">파일 소스 태스크 개발</a></li><li><a href="#커넥트에-추가할-커넥터-jar-빌드">커넥트에 추가할 커넥터 jar 빌드</a></li></ul></li><li><a href="#커스텀-싱크-커넥터-개발-예시">커스텀 싱크 커넥터 개발 예시</a><ul><li><a href="#디펜던시-추가-1">디펜던시 추가</a></li><li><a href="#파일-싱크-커넥터-설정-정의">파일 싱크 커넥터 설정 정의</a></li><li><a href="#파일-싱크-커넥터-개발">파일 싱크 커넥터 개발</a></li><li><a href="#파일-싱크-태스크-개발">파일 싱크 태스크 개발</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="카프카-커넥트-개념-정리">카프카 커넥트 개념 정리</h2>
+
+<p>카프카 커넥트를 이용하면 외부 시스템과 카프카 토픽 간<br />
+반복적인 데이터 수집 및 전송 파이프라인을 자동화할 수 있습니다.<br />
+멀티 스레드로 실행되어 병렬 처리를 지원합니다.<br />
+데이터 수집량, 처리량, 오류율 등은 JMX를 통해 모니터링 할 수 있습니다.</p>
+
+<p>커넥트 내부 커넥터는 태스크들을 설정 및 관리하고, 태스크는 데이터 처리를 합니다.</p>
+
+<p>MySQL, MongoDB, S3, Elasticsearch 등 외부 시스템용 오픈소스 커넥터들이 많습니다.<br />
+Java 커넥트 라이브러리를 이용해 커스텀 커넥트 jar를 개발해야 할 수도 있습니다.<br />
+커넥터 플러그인 jar 파일을 플러그인 디렉토리에 추가하여 사용하면 됩니다.</p>
+
+<p><mark>커넥터 내부 기능</mark></p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>컨버터</td>
+      <td>바이트 배열 메시지를 외부 시스템 포맷으로 직렬화/역직렬화 시 사용</td>
+    </tr>
+    <tr>
+      <td>트랜스폼</td>
+      <td>메시지 단위 전처리/후처리 시 사용 (JSON 메시지 특정 키 삭제, 값 변경 등)</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="카프카-커넥트-운영">카프카 커넥트 운영</h2>
+
+<h3 id="단일-모드-커넥트">단일 모드 커넥트</h3>
+<p>커넥트를 단일 JVM 프로세스로 실행하는 방식입니다.<br />
+주로 개발 환경이나 중요도가 낮은 파이프라인 운영 시 사용합니다.</p>
+
+<p><mark>단일 모드 커넥트 설정</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-- 카프카 브로커 주소 목록 설정
+bootstrap.servers=localhost:9092
+
+-- 메시지 카/값 직렬화/역직렬화 컨버터 클래스 설정
+key.converter=org.apache.kafka.connect.json.JsonConverter
+value.converter=org.apache.kafka.connect.json.JsonConverter
+
+-- 메시지 키/값 스키마 정보 포함 여부 (스키마 정보 없이 메시지 처리)
+key.converter.schemas.enable=false
+value.converter.schemas.enable=false
+
+-- 오프셋 파일 저장 경로
+offset.storage.file.filename=/tmp/connect.offsets
+
+-- 오프셋 정보 디스크 기록 주기 (10초)
+offset.flush.interval.ms=10000
+
+-- 커넥터 플러그인 JAR 파일 경로
+plugin.path=/usr/local/share/kafka/plugins
+</code></pre></div></div>
+<p>단일 모드 커넥트 설정 파일 (connect-standalone.properties) 수정 예시입니다.</p>
+
+<p><mark>단일 모드 커넥터 설정</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-- 커넥터명 설정
+name=local-file-source
+
+-- 사용할 커넥터 클래스 (파일 읽는 Source 커넥터)
+connector.class=FileStreamSource
+
+-- 동시 실행할 태스크 수 설정 (1 = 단일 스레드)
+-- 싱크 커넥터 태스크 수는 토픽 파티션 수와 같게 설정하는 것이 좋음
+tasks.max=1
+
+-- 읽을 파일 경로
+file=/tmp/test.txt
+
+-- 커넥터가 파일 데이터를 전송할 카프카 토픽 이름
+topic=토픽명
+</code></pre></div></div>
+<p>단일 모드 커넥터 설정 파일 (connect-file-source.properties) 수정 예시입니다.</p>
+
+<p><mark>단일 모드 커넥트 실행 명령어</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties
+</code></pre></div></div>
+<p>단일 모드 커넥트 워커 실행 시 커넥트 설정파일, 커넥터 설정파일들을 파라미터로 넣으면 됩니다.</p>
+
+<h3 id="분산-모드-커넥트">분산 모드 커넥트</h3>
+<p>2대 이상의 서버에서 같은 그룹 ID의 여러 커넥트 프로세스가 하나의 클러스터로 동작하는 방식입니다.<br />
+데이터 양에 따라 커넥트 프로세스 무중단 스케일 아웃, 스케일 인이 가능합니다.<br />
+커넥터 내 스레드(태스크) 개수도 REST API로 조절 가능합니다.</p>
+
+<p><mark>분산 모드 커넥트 설정</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-- 카프카 브로커 주소 목록 설정
+bootstrap.servers=localhost:9092
+
+-- 메시지 카/값 직렬화/역직렬화 컨버터 클래스 설정
+key.converter=org.apache.kafka.connect.storage.StringConverter
+value.converter=org.apache.kafka.connect.storage.StringConverter
+
+-- 메시지 키/값 스키마 정보 포함 여부 (스키마 정보 없이 메시지 처리)
+key.converter.schemas.enable=false
+value.converter.schemas.enable=false
+
+-- 오프셋 정보 디스크 기록 주기 (10초)
+offset.flush.interval.ms=10000
+
+-- 커넥터 플러그인 JAR 파일 경로
+plugin.path=/usr/local/share/java/usr/local/share/kafka/plugins
+
+-- 커넥트 클러스터 그룹 ID
+group.id=connect-cluster
+
+-- 커넥트가 저장할 오프셋/정보/상태 내부 토픽명 (그룹 ID마다 별도 생성 필요)
+-- 브로커 토픽에 모든 상태를 저장하여 장애 복구 가능
+offset.storage.topic=connect-offsets
+offset.storage.replication.factor=3
+config.storage.topic=connect-config
+config.storage.replication.factor=3
+status.storage.topic=connect-status
+status.storage.replication.factor=3
+</code></pre></div></div>
+<p>분산 모드 커넥트 설정 파일 (connect-distributed.properties) 수정 예시입니다.</p>
+
+<p><mark>분산 모드 커넥트 실행 명령어</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bin/connect-distributed.sh config/connect-distributed.properties
+</code></pre></div></div>
+<p>분산 모드 커넥트 워커 실행 시 커넥트 설정파일을 파라미터로 넣으면 됩니다.<br />
+커넥터 인스턴스는 REST API 요청으로 생성 시 실행됩니다.</p>
+
+<h3 id="커넥트-rest-api-사용법">커넥트 REST API 사용법</h3>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>GET</td>
+      <td>/</td>
+      <td>커넥트 클러스터 정보 확인</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/connectors</td>
+      <td>현재 실행중 커넥터 목록 확인</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td>/connectors</td>
+      <td>새 커넥터 생성 및 실행</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/connectors/커넥터명</td>
+      <td>특정 커넥터 상세 정보 확인</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/connectors/커넥터명/config</td>
+      <td>커넥터 설정 확인</td>
+    </tr>
+    <tr>
+      <td>PUT</td>
+      <td>/connectors/커넥터명/config</td>
+      <td>커넥터 설정 변경</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/connectors/커넥터명/status</td>
+      <td>커넥터 상태 확인</td>
+    </tr>
+    <tr>
+      <td>DELETE</td>
+      <td>/connectors/커넥터명</td>
+      <td>커넥터 종료</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td>/connectors/커넥터명/restart</td>
+      <td>커넥터 재시작</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/connector-plugins</td>
+      <td>현재 사용할 수 있는 카프카 커넥터 플러그인 목록 조회</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><mark>싱크 커넥터 생성 요청 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -X POST http://localhost:8083/connectors
+-H 'Content-Type: application/json'
+-d '{
+  "name": "file-sink-test",
+  "config":
+  {
+    "topics":"test",
+    "connector.class":"org.apache.kafka.connect.file.FileStreamSinkConnector",
+    "tasks.max":1,
+    "file":"/파일경로/파일명.확장자"
+  }
+}'
+</code></pre></div></div>
+<p>싱크 커넥터 태스크 수를 파티션 수와 같게 설정하면 병렬 처리가 최대화되어 가장 빠릅니다.<br />
+데이터 처리가 느리면 태스크 수, 파티션 수를 늘려서 처리량 확장이 가능합니다.</p>
+
+<p><mark>커넥터 상태 확인</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://localhost:8083/connectors/커넥터명/status
+</code></pre></div></div>
+<p>아래와 같이 커넥터 실행 상태 및 주소, 태스크 실행 상태 및 주소를 확인할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "name":"file-sink-test",
+  "connector": {
+    "state":"RUNNING",
+    "worker_id":"127.0.0.1:8083"
+  },
+  "tasks": [
+    {
+      "id":0,
+      "state":"RUNNING",
+      "worker_id":"127.0.0.1:8083"
+    }
+  ],
+  "type":"sink"
+}
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="커스텀-소스-커넥터-개발-예시">커스텀 소스 커넥터 개발 예시</h2>
+
+<h3 id="디펜던시-추가">디펜던시 추가</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dependencies {
+  implementation 'org.apache.kafka:connect-api:2.5.0'
+}
+</code></pre></div></div>
+<p>소스 커넥터 개발에 필요한 라이브러리를 추가합니다.</p>
+
+<h3 id="파일-소스-커넥터-설정-정의">파일 소스 커넥터 설정 정의</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class SingleFileSourceConnectorConfig extends AbstractConfig {
+
+  // 읽을 파일 정보
+  public static final String DIR_FILE_NAME = "file";
+  private static final String DIR_FILE_NAME_DEFAULT_VALUE = "/tmp/kafka.txt";  // file 옵션 미지정 시 사용할 기본 파일 경로
+  private static final String DIR_FILE_NAME_DOC = "파일경로/파일명.확장자"; // 문서화용 파일 설명 문구
+
+  // 전송할 토픽 정보
+  public static final String TOPIC_NAME = "topic";
+  private static final String TOPIC_NAME_DEFAULT_VALUE = "test-topic"; // topic 옵션 미지정 시 사용할 기본 토픽명
+  private static final String TOPIC_NAME_DOC = "토픽명";
+
+  // 파일 소스 커넥터 설정 기본값 정의
+  public static final ConfigDef CONFIG = new ConfigDef()
+      .define(
+        DIR_FILE_NAME,
+        ConfigDef.Type.STRING,
+        DIR_FILE_NAME_DEFAULT_VALUE,
+        ConfigDef.Importance.HIGH,
+        DIR_FILE_NAME_DOC
+      )
+      .define(
+        TOPIC_NAME,
+        ConfigDef.Type.STRING,
+        TOPIC_NAME_DEFAULT_VALUE,
+        ConfigDef.Importance.HIGH,
+        TOPIC_NAME_DOC
+      );
+
+  // 파일 소스 커넥터 설정 참조
+  public SingleFileSourceConnectorConfig(Map&lt;String, String&gt; props) {
+    super(CONFIG, props);
+  }
+}
+</code></pre></div></div>
+<p>파일 소스 커넥터에서 사용할 모든 설정을 정의합니다.</p>
+
+<h3 id="파일-소스-커넥터-개발">파일 소스 커넥터 개발</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class SingleFileSourceConnector extends SourceConnector {
+  private Map&lt;String, String&gt; configProperties;
+
+  @Override
+  public String version() {
+    // 커넥터 버전 정의
+    return "1.0";
+  }
+
+  @Override
+  public void start(Map&lt;String, String&gt; props) {
+    this.configProperties = props;
+
+    try {
+      // 파일 소스 커넥터 설정 정의
+      new SingleFileSourceConnectorConfig(props);
+
+    } catch (ConfigException e) {
+      // 설정 누락 시 에러 발생
+      throw new ConnectException(e.getMessage(), e);
+    }
+  }
+
+  @Override
+  public Class&lt;? extends Task&gt; taskClass() {
+    // 파일 소스 태스크 클래스 리턴
+    return SingleFileSourceTask.class;
+  }
+
+  @Override
+  public List&lt;Map&lt;String, String&gt;&gt; taskConfigs(int maxTasks) {
+    // 태스크 설정 리스트에 파일 소스 커넥터 설정값 추가
+    // 파일 읽기 시에는 태스크 1개가 일반적이어서, singletonList 생성
+    return Collections.singletonList(new HashMap&lt;&gt;(configProperties));
+  }
+
+  @Override
+  public ConfigDef config() {
+    // 파일 소스 커넥터 설정 정의 반환
+    return SingleFileSourceConnectorConfig.CONFIG;
+  }
+
+  @Override
+  public void stop() {
+    // 커넥터 종료 시 리소스 정리
+  }
+}
+</code></pre></div></div>
+<p>소스 태스크 실행 전 커넥터 설정파일 초기화, 태스크 클래스 정의하는 소스 커넥터 예시입니다.</p>
+
+<h3 id="파일-소스-태스크-개발">파일 소스 태스크 개발</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class SingleFileSourceTask extends SourceTask {
+  private static final Logger logger = LoggerFactory.getLogger(SingleFileSourceTask.class);
+
+  private static final String FILENAME_FIELD = "파일명";
+  private static final String POSITION_FIELD = "포지션명";
+
+  private Map&lt;String, String&gt; fileNamePartition;
+  private Map&lt;String, Object&gt; offset;
+  private String topic;
+  private String file;
+  private long position = 0L;
+
+  @Override
+  public void start(Map&lt;String, String&gt; props) {
+    try {
+      // 파일 소스 커넥터 설정
+      SingleFileSourceConnectorConfig config = new SingleFileSourceConnectorConfig(props);
+      topic = config.getString(SingleFileSourceConnectorConfig.TOPIC_NAME); // 토픽명 가져오기
+      file = config.getString(SingleFileSourceConnectorConfig.DIR_FILE_NAME); // 파일명 가져오기
+
+      // 파티션 구분 기준 설정
+      fileNamePartition = Collections.singletonMap(FILENAME_FIELD, file);
+
+      // 소스 커넥터로 저장된 파일 내부 번호 기록용 오프셋 가져오기
+      offset = context.offsetStorageReader().offset(fileNamePartition);
+
+      if (offset != null) {
+        Object lastReadFileOffset = offset.get(POSITION_FIELD);
+
+        if (lastReadFileOffset != null) {
+          // 마지막으로 읽은 오프셋 번호 세팅
+          position = (Long) lastReadFileOffset;
+        }
+      } else {
+        // 저장된 오프셋이 없는 경우, 0 세팅
+        position = 0;
+      }
+    }
+  }
+
+  @Override
+  public List&lt;SourceRecord&gt; poll() { // 외부 시스템에서 새로운 데이터를 가져오기 위해 주기적으로 호출되는 메서드
+    List&lt;SourceRecord&gt; results = new ArrayList&lt;&gt;();
+
+    try {
+      // 1초마다 읽기
+      Thread.sleep(1000);
+
+      // 오프셋 라인 가져오기
+      List&lt;String&gt; lines = getLines(position);
+
+      // 읽을 라인이 있다면
+      if (!lines.isEmpty()) {
+        lines.forEach(line -&gt; {
+          // 오프셋 +1 라인 읽어서 레코드 생성 후 추가
+          Map&lt;String, Long&gt; sourceOffset = Collections.singletonMap(POSITION_FIELD, ++position);
+          SourceRecord sourceRecord = new SourceRecord(
+            fileNamePartition,
+            sourceOffset,
+            topic,
+            Schema.STRING_SCHEMA,
+            null,
+            Schema.STRING_SCHEMA,
+            line
+          );
+          results.add(sourceRecord);
+        });
+      }
+
+      // 커넥트 내부에서 토픽으로 send 될 List 반환
+      return results;
+
+    } catch (Exception e) {
+      logger.error(e.getMessage(), e);
+      throw new ConnectException(e.getMessage());
+    }
+  }
+
+  @Override
+  public void stop() {
+    // 태스크 종료 시 리소스 정리
+  }
+}
+</code></pre></div></div>
+<p>파일에서 데이터를 가져와서 카프카 토픽으로 전송하는 소스 태스크 개발 예시입니다.<br />
+커넥터당 1개의 태스크를 실행하는 것이 일반적이고, 퍼일 읽기는 병렬처리 하지 않습니다.</p>
+
+<h3 id="커넥트에-추가할-커넥터-jar-빌드">커넥트에 추가할 커넥터 jar 빌드</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jar {
+  from {
+    configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+  }
+}
+</code></pre></div></div>
+<p>런타임에 필요한 모든 클래스, 의존성을 포함해 빌드하는 우버 jar 스크립트 작성 후 빌드합니다.<br />
+빌드하여 jar 파일 생성 후 커넥트 플러그인 디렉토리에 추가하고 사용하면 됩니다.</p>
+
+<hr />
+
+<h2 id="커스텀-싱크-커넥터-개발-예시">커스텀 싱크 커넥터 개발 예시</h2>
+
+<h3 id="디펜던시-추가-1">디펜던시 추가</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dependencies {
+  implementation 'org.apache.kafka:connect-api:2.5.0'
+}
+</code></pre></div></div>
+<p>싱크 커넥터 개발에 필요한 라이브러리를 추가합니다.</p>
+
+<h3 id="파일-싱크-커넥터-설정-정의">파일 싱크 커넥터 설정 정의</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class SingleFileSinkConnectorConfig extends AbstractConfig {
+
+  public static final String DIR_FILE_NAME = "file";
+  private static final String DIR_FILE_NAME_DEFAULT_VALUE = "/tmp/kafka.txt"; // file 옵션 미지정 시 사용할 기본 파일 경로
+  private static final String DIR_FILE_NAME_DOC = "파일경로/파일명.확장자"; // 문서화용 파일 설명 문구
+
+  public static ConfigDef CONFIG = new ConfigDef()
+    .define(
+      DIR_FILE_NAME,
+      Type.STRING,
+      DIR_FILE_NAME_DEFAULT_VALUE,
+      Importance.HIGH,
+      DIR_FILE_NAME_DOC
+    );
+
+  public SingleFileSinkConnectorConfig(Map&lt;String, String&gt; props) {
+      super(CONFIG, props);
+  }
+}
+</code></pre></div></div>
+<p>파일 싱크 커넥터에서 사용할 모든 설정을 정의합니다.<br />
+토픽 정보는 싱크 커넥터 실행 시 파라미터로 받아야 합니다.</p>
+
+<h3 id="파일-싱크-커넥터-개발">파일 싱크 커넥터 개발</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class SingleFileSinkConnector extends SinkConnector {
+
+  private Map&lt;String, String&gt; configProperties;
+
+  @Override
+  public String version() {
+    return "1.0";
+  }
+
+  @Override
+  public void start(Map&lt;String, String&gt; props) {
+    this.configProperties = props;
+    try {
+      // 파일 싱크 커넥터 설정 정의
+      new SingleFileSinkConnectorConfig(props);
+    } catch (ConfigException e) {
+
+      // 설정 누락 시 에러 발생
+      throw new ConnectException(e.getMessage(), e);
+    }
+  }
+
+  @Override
+  public Class&lt;? extends Task&gt; taskClass() {
+    // 파일 싱크 태스크 클래스 리턴
+    return SingleFileSinkTask.class;
+  }
+
+  @Override
+  public List&lt;Map&lt;String, String&gt;&gt; taskConfigs(int maxTasks) {
+    List&lt;Map&lt;String, String&gt;&gt; taskConfigs = new ArrayList&lt;&gt;();
+    Map&lt;String, String&gt; taskProps = new HashMap&lt;&gt;();
+    taskProps.putAll(configProperties);
+
+    // 태스크 설정 리스트에 파일 싱크 커넥터 설정값 추가
+    for (int i = 0; i &lt; maxTasks; i++) {
+      taskConfigs.add(taskProps);
+    }
+
+    return taskConfigs;
+  }
+
+  @Override
+  public ConfigDef config() {
+    // 파일 싱크 커넥터 설정 정의 반환
+    return SingleFileSinkConnectorConfig.CONFIG;
+  }
+
+  @Override
+  public void stop() {
+    // 커넥터 종료 시 리소스 정리
+  }
+}
+</code></pre></div></div>
+<p>싱크 태스크 실행 전 커넥터 설정파일 초기화, 태스크 클래스 정의하는 싱크 커넥터 예시입니다.</p>
+
+<h3 id="파일-싱크-태스크-개발">파일 싱크 태스크 개발</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class SingleFileSinkTask extends SinkTask {
+  private SingleFileSinkConnectorConfig config;
+  private File file;
+  private FileWriter fileWriter;
+
+  @Override
+  public String version() {
+    return "1.0";
+  }
+
+  @Override
+  public void start(Map&lt;String, String&gt; props) {
+    try {
+      // 파일 싱크 커넥터 설정
+      config = new SingleFileSinkConnectorConfig(props);
+
+      // 파일 쓰기 객체 초기화
+      file = new File(config.getString(config.DIR_FILE_NAME));
+      fileWriter = new FileWriter(file, true);
+
+    } catch (Exception e) {
+      throw new ConnectException(e.getMessage(), e);
+    }
+  }
+
+  @Override
+  public void put(Collection&lt;SinkRecord&gt; records) { // 토픽에서 읽은 새로운 데이터를 외부 시스템에 전송하기 위해 호출되는 메서드
+    try {
+      // 토픽 레코드 데이터를 파일에 쓰기 (실시간)
+      for (SinkRecord record : records) {
+        fileWriter.write(record.value().toString() + "\n");
+      }
+    } catch (IOException e) {
+      throw new ConnectException(e.getMessage(), e);
+    }
+  }
+
+  @Override
+  public void flush(Map&lt;TopicPartition, OffsetAndMetadata&gt; offsets) { // 커밋 시점마다 호출되는 메서드
+    try {
+      // 버퍼에 전송 대기 중인 데이터 쓰기
+      fileWriter.flush();
+
+    } catch (IOException e) {
+      throw new ConnectException(e.getMessage(), e);
+    }
+  }
+
+  @Override
+  public void stop() {
+    try {
+      // 태스크 종료 시 리소스 정리
+      fileWriter.close();
+    } catch (IOException e) {
+      throw new ConnectException(e.getMessage(), e);
+    }
+  }
+}
+</code></pre></div></div>
+<p>카프카 토픽에서 데이터를 가져와서 파일에 쓰는 싱크 태스크 개발 예시입니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories#kafka" class="page__taxonomy-item" rel="tag">카프카</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-05-13">2025-05-13</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/web-dev/2025-05-21-1" class="pagination--pager" title="Git 블로그 카테고리 목록 페이징 기능 구현
+">❮</a>
+    
+    
+      <a href="/kafka/2025-05-12-1" class="pagination--pager" title="카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법
+">❯</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">최신 글</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-07-24-2" rel="permalink">Vue + SpringBoot 프로젝트 소켓 통신 구현 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-07-24T00:00:00+00:00">2025-07-24</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-07-24-1" rel="permalink">Vue + SpringBoot 프로젝트 외부 접근 방법 / CORS 설정 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-07-24T00:00:00+00:00">2025-07-24</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-07-14-1" rel="permalink">Javascript 기초 문법 정리
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-07-14T00:00:00+00:00">2025-07-14</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-07-11-1" rel="permalink">타입스크립트 고급 타입 정의 방법 / 인터페이스, 클래스, 제네릭 타입 등
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-07-11T00:00:00+00:00">2025-07-11</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>
