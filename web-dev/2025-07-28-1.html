@@ -475,7 +475,11 @@
             </nav>
           </aside>
         
-        <h2 id="부모창--자식-팝업-메시지-전송-방법">부모창 → 자식 팝업 메시지 전송 방법</h2>
+        <p>postMessage 통신 시, 별도의 CORS 설정은 필요하지 않습니다.</p>
+
+<hr />
+
+<h2 id="부모창--자식-팝업-메시지-전송-방법">부모창 → 자식 팝업 메시지 전송 방법</h2>
 
 <h3 id="부모창에서-postmessage-전송">부모창에서 postMessage 전송</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 자식 팝업 열기
@@ -486,8 +490,7 @@ setTimeout(() =&gt; {
     popup.postMessage({ message: "메시지 값" }, "http://자식팝업IP:포트");
 }, 500);
 </code></pre></div></div>
-<p>부모창에서 자식 팝업으로 postMessage 전송 방법입니다.<br />
-postMessage 통신 시, 별도의 CORS 설정은 필요하지 않습니다.</p>
+<p>부모창에서 자식 팝업으로 postMessage 전송 방법입니다.</p>
 
 <h3 id="자식-팝업에-메시지-수신-이벤트-리스너-작성">자식 팝업에 메시지 수신 이벤트 리스너 작성</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.addEventListener("message", (event) =&gt; {
@@ -513,8 +516,7 @@ opener.postMessage({message : '메시지 값'}, "http://부모창IP:포트");
 또는
 opener.postMessage({message : '메시지 값'}, "*"); // 모든 도메인 허용 : 테스트 시 사용
 </code></pre></div></div>
-<p>자식 팝업에서 부모창으로 postMessage 전송 방법입니다.<br />
-postMessage 통신 시, 별도의 CORS 설정은 필요하지 않습니다.</p>
+<p>자식 팝업에서 부모창으로 postMessage 전송 방법입니다.</p>
 
 <h3 id="부모창에-메시지-수신-이벤트-리스너-작성">부모창에 메시지 수신 이벤트 리스너 작성</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.addEventListener("message", (event) =&gt; {

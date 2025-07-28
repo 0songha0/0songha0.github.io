@@ -1392,7 +1392,7 @@ var store = [{
         "teaser": null
       },{
         "title": "postMessage 통신 방법 / 부모창, 자식 팝업 간 데이터 전달 방법",
-        "excerpt":"부모창 → 자식 팝업 메시지 전송 방법 부모창에서 postMessage 전송 // 자식 팝업 열기 const popup = window.open(\"http://자식팝업IP:포트/팝업페이지경로?파라미터=값\", \"_blank\"); // 자식 팝업에 postMessage 보내기 setTimeout(() =&gt; { popup.postMessage({ message: \"메시지 값\" }, \"http://자식팝업IP:포트\"); }, 500); 부모창에서 자식 팝업으로 postMessage 전송 방법입니다. postMessage 통신 시, 별도의 CORS 설정은 필요하지 않습니다. 자식...","categories": ["web-dev"],
+        "excerpt":"postMessage 통신 시, 별도의 CORS 설정은 필요하지 않습니다. 부모창 → 자식 팝업 메시지 전송 방법 부모창에서 postMessage 전송 // 자식 팝업 열기 const popup = window.open(\"http://자식팝업IP:포트/팝업페이지경로?파라미터=값\", \"_blank\"); // 자식 팝업에 postMessage 보내기 setTimeout(() =&gt; { popup.postMessage({ message: \"메시지 값\" }, \"http://자식팝업IP:포트\"); }, 500); 부모창에서 자식 팝업으로 postMessage 전송 방법입니다. 자식...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-07-28-1",
         "teaser": null
