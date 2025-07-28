@@ -1295,6 +1295,12 @@ var store = [{
         "url": "/web-dev/2025-06-16-1",
         "teaser": null
       },{
+        "title": "RESTful API 설계 방법 / HTTP Method 종류",
+        "excerpt":"RESTful API란? REST 아키텍처 스타일에 따라 설계된 API입니다. RESTful API 서버는 클라이언트 요청 상태를 저장하지 않습니다. REST란? 자원을 CRUD 형식으로 처리하는 HTTP 기반 아키텍처 스타일입니다. RESTful API 구성 요소 동작(행위) HTTP 메서드로 표현 자원(리소스) URI로 표현 데이터 JSON 또는 XML로 표현 동작(HTTP 메서드), 자원(URI)을 조합하여 RESTful 규칙을 따르는 API를 설계할...","categories": ["plan-design-db"],
+        "tags": [],
+        "url": "/plan-design-db/2025-06-17-1",
+        "teaser": null
+      },{
         "title": "Vue 환경변수 사용 방법 / 서버벌 env 분리 설정",
         "excerpt":"Vue 환경변수 설정 서버별 env 파일 분리 .env 모든 모드에서 공통으로 사용되는 env 파일입니다. 특정 모드 env 파일이 적용되면, 기본 env 파일 값을 덮어쓰며 병합됩니다. .env.local 로컬에서 사용되는 env 파일입니다. *.local 파일은 git에서 제외됩니다. .env.[mode] 실행 모드에 따라 적용되는 env 파일입니다. mode 예시 : development, staging, production 프로젝트 루트 경로에...","categories": ["web-dev"],
         "tags": [],
