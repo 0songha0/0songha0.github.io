@@ -627,12 +627,39 @@ for (int i = 1; i &lt; digitArr.length; i++) {
 <p>정렬된 배열에서 중간 원소를 기준으로 탐색 범위를 반씩 줄여나가며 찾는 알고리즘입니다.<br />
 시간복잡도는 O(logn) 입니다.</p>
 
-<p><mark>이분 탐색 예시</mark></p>
+<p><mark>이분 탐색 구현 방법</mark></p>
 <ol>
   <li>오름차순으로 정렬된 배열에서 정 중앙의 원소와 탐색할 데이터를 비교합니다.</li>
   <li>탐색할 데이터가 더 크면, 좌측의 원소들은 후보에서 제외합니다.</li>
   <li>우측의 원소 중에서 정 중앙의 원소를 찾고, 비교 및 탐색 범위 제외를 반복합니다.</li>
 </ol>
+
+<p><mark>Java 이분 탐색 코드 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+int[] digitArr = { 5, 3, 2, 8, 7, 6 };
+int target = 3;
+int targetNum = -1;
+
+Arrays.sort(digitArr);
+
+int lt = 0;
+int rt = digitArr.length-1;
+
+while (lt &lt;= rt) {
+  int mid = (lt + rt) / 2;
+
+  if (target == digitArr[mid]) {
+    targetNum = mid+1;
+    break;
+  } else if (target &lt; digitArr[mid]) {
+    rt = mid-1;
+  } else {
+    lt = mid+1;
+  }
+}
+</code></pre></div></div>
+<p>이분탐색은 반드시 정렬이 된 배열에서만 사용 가능합니다.</p>
 
 <hr />
 
