@@ -699,6 +699,8 @@ class 클래스명 implements 인터페이스명 {
 <p>함수, 클래스, 인터페이스 등에서 전달받은 매개변수 타입을 기반으로 추론하는 문법입니다.<br />
 데이터 타입을 직접 명시하지 않아도, 다양한 타입의 데이터 처리가 가능합니다.</p>
 
+<p>제네릭 사용 시, typeof 같은 타입 가드 없이도 타입이 추론되어 코드가 간결해질 수 있습니다.</p>
+
 <h3 id="제네릭-함수-정의">제네릭 함수 정의</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 제네릭 타입 변수 정의 후 매개변수 타입, 반환값 타입 명시
 function 함수명&lt;T&gt;(value: T): T {
@@ -780,6 +782,32 @@ let arr2 = map(["1", "2"], (it) =&gt; parseInt(it));
 // map 함수 반환값 : calback 반환값 타입의 배열 타입으로 추론
 </code></pre></div></div>
 <p>제네릭 함수 타입 정의 방법을 응용하여 map 함수를 정의한 코드입니다.</p>
+
+<p><mark>제네릭 함수 반환값 타입 정의</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 인터페이스 정의
+interface 인터페이스명 {
+  id: number;
+}
+
+// 제네릭 클래스 정의
+class 클래스명&lt;T&gt; {
+  constructor(private id: T) {}
+
+  getId(): T {
+    return this.id;
+  }
+}
+
+// 함수 반환값 타입 명시
+function 함수명(): 클래스명&lt;인터페이스명&gt; {
+  return new 클래스명({id: 123});
+}
+
+// 제네릭으로 추론된 객체 프로퍼티 접근 가능
+const 객체명 = 함수명();
+let num = 객체명.getId();
+</code></pre></div></div>
+<p>위와 같이, 함수 반환값을 제네릭 클래스로 정의하는 것이 가능합니다.</p>
 
 <h3 id="제네릭-인터페이스-정의">제네릭 인터페이스 정의</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 제네릭 인터페이스 선언
@@ -866,6 +894,34 @@ const 변수명 = new 클래스명(["1", "2", "3"]); // 타입 추론 : 클래�
 변수명.print();
 </code></pre></div></div>
 <p>다양한 데이터 타입 매개변수를 받을 수 있는 제네릭 클래스를 생성할 수 있습니다.</p>
+
+<p><mark>제네릭 클래스로 정의된 Promise 객체로 API 호출 시 성공 결과 타입 설정</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const promise = new Promise&lt;number&gt;((resolve, reject) =&gt; {
+  // 실제 API 호출 가정하여, 3초 후 결과 호출
+  setTimeout(() =&gt; {
+    // API 성공 시 콜백 함수 호출 (파라미터 : 결과값)
+    resolve(20);
+
+    // API 실패 시 콜백 함수 호출 (파라미터 : 실패 이유)
+    reject(new Error("API 호출 실패"));
+  }, 3000);
+});
+
+// resolve 함수 호출 결과값 받기
+promise
+  .then((response) =&gt; {
+    // resolve 함수 파라미터 출력
+    console.log(response);
+  })
+  .catch((err) =&gt; {
+    // reject 함수 파라미터 출력
+    if (err instanceof Error) {
+      console.error(err.message);
+    }
+  });
+</code></pre></div></div>
+<p>JavaScript 내장 클래스 promise 객체를 사용하여 비동기 요청 시,<br />
+제네릭 타입을 지정해서 resolve 함수 결과값 타입을 설정할 수 있습니다.</p>
 
         
       </section>
