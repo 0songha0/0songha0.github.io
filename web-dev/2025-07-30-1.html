@@ -52,19 +52,21 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>| 0songha0 &#124; Page 26</title>
+<!-- begin _includes/seo.html --><title>타입스크립트 타입 조작 방법 / 인덱스트 액세스 타입, 맵드 타입, 조건부 타입 등 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
   <meta name="author" content="0songha0">
   
+  <meta property="article:author" content="0songha0">
+  
 
 
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="송하영 개발 블로그">
-<meta property="og:url" content="https://0songha0.github.io/page/26/">
+<meta property="og:title" content="타입스크립트 타입 조작 방법 / 인덱스트 액세스 타입, 맵드 타입, 조건부 타입 등">
+<meta property="og:url" content="https://0songha0.github.io/web-dev/2025-07-30-1">
 
 
   <meta property="og:description" content="송하영 개발 블로그">
@@ -75,7 +77,11 @@
 
 
 
+  <meta property="article:published_time" content="2025-07-30T00:00:00+00:00">
 
+
+
+  <meta property="article:modified_time" content="2025-07-30T00:00:00+00:00">
 
 
 
@@ -84,13 +90,9 @@
   
 
 
-<link rel="canonical" href="https://0songha0.github.io/page/26/">
+<link rel="canonical" href="https://0songha0.github.io/web-dev/2025-07-30-1">
 
 
-  <link rel="prev" href="https://0songha0.github.io/page/25/">
-
-
-  <link rel="next" href="https://0songha0.github.io/page/27/">
 
 
 <script type="application/ld+json">
@@ -165,7 +167,7 @@
     <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
   </head>
 
-  <body class="layout--home">
+  <body class="layout--single">
     <nav class="skip-links">
   <h2 class="screen-reader-text">Skip links</h2>
   <ul>
@@ -430,76 +432,241 @@
 
 
 
-  
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="타입스크립트 타입 조작 방법 / 인덱스트 액세스 타입, 맵드 타입, 조건부 타입 등">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2025-07-30T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-07-30T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">타입스크립트 타입 조작 방법 / 인덱스트 액세스 타입, 맵드 타입, 조건부 타입 등
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-07-30T00:00:00+00:00">2025-07-30</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 타입스크립트 타입 조작 방법 / 인덱스트 액세스 타입, 맵드 타입, 조건부 타입 등</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
+              <ul class="toc__menu"><li><a href="#인덱스드-액세스-타입">인덱스드 액세스 타입</a><ul><li><a href="#객체에서-프로퍼티-타입-추출">객체에서 프로퍼티 타입 추출</a></li><li><a href="#배열에서-프로퍼티-타입-추출">배열에서 프로퍼티 타입 추출</a></li><li><a href="#튜플에서-프로퍼티-타입-추출">튜플에서 프로퍼티 타입 추출</a></li></ul></li><li><a href="#keyof-연산자">keyof 연산자</a></li><li><a href="#mapped-타입-맵드-타입">Mapped 타입 (맵드 타입)</a></li><li><a href="#템플릿-리터럴-타입">템플릿 리터럴 타입</a></li><li><a href="#조건부-타입">조건부 타입</a></li><li><a href="#유틸리티-타입">유틸리티 타입</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="인덱스드-액세스-타입">인덱스드 액세스 타입</h2>
+
+<p>객체, 배열, 튜플 타입에서 특정 프로퍼티 타입만 추출하는 방식입니다.</p>
+
+<h3 id="객체에서-프로퍼티-타입-추출">객체에서 프로퍼티 타입 추출</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 인터페이스 타입 정의 (객체 타입 정의 시 인터페이스 활용)
+interface 인터페이스명 {
+  title: string;
+  content: string;
+  author: {
+    id: number;
+    name: string;
+  };
+}
+
+// 인터페이스 타입을 충족하는 객체 변수 생성
+const 객체명: 인터페이스명 = {
+  title: "제목",
+  content: "본문",
+  author: {
+    id: 1,
+    name: "하영"
+  }
+}
+
+// 인덱스드 엑세스 타입으로 객체 매개변수 타입 정의
+// author: { id: number; name: string; } 과 동일한 타입 정의 효과
+function 함수명(author: 인터페이스명["author"]) { // 인터페이스명["author"]["id"] 형태로 중첩 사용도 가능
+  console.log(`${author.id}, ${author.name}`);
+}
+
+// 함수 호출 시, 객체 내 특정 프로퍼티 타입으로 추론
+함수명(객체명.author);
+</code></pre></div></div>
+<p>T[“프로퍼티Key(=인덱스)”] 형태로 특정 프로퍼티 타입만 추출할 수 있습니다.<br />
+프로퍼티 내 타입들이 변경되어도, 매개변수 타입 정의 코드 변경이 필요하지 않습니다.</p>
+
+<h3 id="배열에서-프로퍼티-타입-추출">배열에서 프로퍼티 타입 추출</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 타입 별칭 정의 (배열 타입 정의 시 타입 별칭 활용)
+type 타입별칭명 = {
+  title: string;
+  content: string;
+  author: {
+    id: number;
+    name: string;
+  };
+}[];
+
+// 배열 타입을 충족하는 배열 변수 생성
+// number, 0 등 어떤 숫자를 넣어도 배열 요소 타입 정상 추출
+const 객체명: 타입별칭명[number] = {
+  title: "제목",
+  content: "본문",
+  author: {
+    id: 1,
+    name: "하영"
+  }
+}
+
+// 인덱스드 엑세스 타입으로 배열 매개변수 타입 정의
+// author: { id: number; name: string; } 과 동일한 타입 정의 효과
+function 함수명(author: 타입별칭명[number]["author"]) {
+  console.log(`${author.id}, ${author.name}`);
+}
+
+// 함수 호출 시, 객체 내 특정 프로퍼티 타입으로 추론
+함수명(객체명.author);
+</code></pre></div></div>
+<p>배열 요소 타입을 추출하고, 그 안의 특정 프로퍼티 타입만 추출하는 인덱스트 액세스 타입 예시입니다.</p>
+
+<h3 id="튜플에서-프로퍼티-타입-추출">튜플에서 프로퍼티 타입 추출</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type 튜플타입명 = [number, string, boolean];
+
+// 튜플의 각 인덱스 요소 타입 추출
+type num = 튜플타입명[0];
+type str = 튜플타입명[1];
+type bool = 튜플타입명[2];
+
+// 전체 요소 유니온 타입 추출 (number | string | boolean)
+type union = 튜플타입명[number];
+</code></pre></div></div>
+<p>인덱스트 액세스 타입으로 튜플 타입의 각 요소 타입을 추출할 수 있습니다.</p>
+
+<hr />
+
+<h2 id="keyof-연산자">keyof 연산자</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 인터페이스 생성하여 객체 타입 정의
+interface 인터페이스명 {
+  name: string;
+  age: number;
+}
+
+const 객체명: 인터페이스명 {
+    
+}
+
+
+</code></pre></div></div>
+<p>특정 객체 타입에서 프로퍼티 키들을 스트링 리터럴 유니온 타입으로 추출하는 연산자입니다.</p>
+
+<hr />
+
+<h2 id="mapped-타입-맵드-타입">Mapped 타입 (맵드 타입)</h2>
+
+<p>기존 객체 타입을 기반으로 만든 새로운 객체 타입입니다.</p>
+
+<hr />
+
+<h2 id="템플릿-리터럴-타입">템플릿 리터럴 타입</h2>
+
+<p>스트링 리터럴 타입을 기반으로 정해진 패턴 문자열만 포함하는 타입입니다.</p>
+
+<hr />
+
+<h2 id="조건부-타입">조건부 타입</h2>
+
+<p>조건에 따라 타입을 다르게 지정할 수 있는 타입입니다.<br />
+extends, ?, : 등을 사용하여 삼항 연산자처럼 동작합니다.</p>
+
+<hr />
+
+<h2 id="유틸리티-타입">유틸리티 타입</h2>
+
+<p>타입스크립트에서 자주 사용하는 타입 조작 도구입니다.<br />
+대표적으로 Partial, Required, Readonly, Pick, Omit 등이 있습니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
 
   
-    
-    
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
+
 
   
 
-
-  <div class="archive home_archive">
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
     
-      <h3 class="archive__subtitle"></h3>
+      
+      
+      <a href="/categories#web-dev" class="page__taxonomy-item" rel="tag">Web 개발</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-07-30">2025-07-30</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">❮</a>
     
     
+      <a href="/web-dev/2025-07-28-1" class="pagination--pager" title="postMessage 통신 방법 / 부모창, 자식 팝업 간 데이터 전달 방법
+">❯</a>
+    
+  </nav>
 
-<h3 class="archive__subtitle">전체 글</h3>
 
+    </div>
 
+    
+  </article>
 
-
-<div class="entries-list">
   
-    
+  
+    <div class="page__related">
+      <h4 class="page__related-title">최신 글</h4>
+      <div class="grid__wrapper">
+        
+          
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
-        <a href="/it-tip/2023-02-25-2" rel="permalink">티스토리 블로그 구글 애드센스 사이트 추가 및 광고 신청 방법
+        <a href="/web-dev/2025-07-28-1" rel="permalink">postMessage 통신 방법 / 부모창, 자식 팝업 간 데이터 전달 방법
 </a>
       
     </h2>
@@ -510,7 +677,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2023-02-25T00:00:00+00:00">2023-02-25</time>
+        <time datetime="2025-07-28T00:00:00+00:00">2025-07-28</time>
       </span>
     
 
@@ -525,17 +692,17 @@
   </article>
 </div>
 
-  
-    
+        
+          
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
-        <a href="/it-tip/2023-02-25-1" rel="permalink">티스토리 블로그 네이버 검색 노출 등록 및 삭제 방법
+        <a href="/web-dev/2025-07-24-2" rel="permalink">Vue + SpringBoot 프로젝트 소켓 통신 구현 방법
 </a>
       
     </h2>
@@ -546,7 +713,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2023-02-25T00:00:00+00:00">2023-02-25</time>
+        <time datetime="2025-07-24T00:00:00+00:00">2025-07-24</time>
       </span>
     
 
@@ -561,17 +728,17 @@
   </article>
 </div>
 
-  
-    
+        
+          
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
-        <a href="/web-dev/2023-02-24-1" rel="permalink">SpringBoot application.properties 설정 종류
+        <a href="/web-dev/2025-07-24-1" rel="permalink">Vue + SpringBoot 프로젝트 외부 접근 방법 / CORS 설정 방법
 </a>
       
     </h2>
@@ -582,7 +749,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2023-02-24T00:00:00+00:00">2023-02-24</time>
+        <time datetime="2025-07-24T00:00:00+00:00">2025-07-24</time>
       </span>
     
 
@@ -597,17 +764,17 @@
   </article>
 </div>
 
-  
-    
+        
+          
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
-        <a href="/op/2023-02-24-1" rel="permalink">Java에서 리눅스 톰캣 파일 업로드 경로 및 접근 권한 변경
+        <a href="/web-dev/2025-07-14-1" rel="permalink">Javascript 기초 문법 정리
 </a>
       
     </h2>
@@ -618,7 +785,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2023-02-24T00:00:00+00:00">2023-02-24</time>
+        <time datetime="2025-07-14T00:00:00+00:00">2025-07-14</time>
       </span>
     
 
@@ -633,161 +800,13 @@
   </article>
 </div>
 
+        
+      </div>
+    </div>
   
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/it-tip/2023-02-24-1" rel="permalink">티스토리 블로그 구글서치콘솔 색인 생성 및 삭제 방법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2023-02-24T00:00:00+00:00">2023-02-24</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/elk/2023-02-23-1" rel="permalink">운영서버로 엘라스틱서치 인덱스 마이그레이션 방법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2023-02-23T00:00:00+00:00">2023-02-23</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
   
 </div>
 
-
-<nav class="pagination">
-  
-  <ul>
-    
-    
-      
-        <li><a href="/page/25/">❮</a></li>
-      
-    
-
-    
-    
-      <li><a href="/">1</a></li>
-    
-
-    
-    
-      
-      
-      <li><a href="#" class="disabled">&hellip;</a></li>
-    
-
-    
-    
-    
-
-    
-      
-        
-        
-        
-        <li><a href="/page/24/">24</a></li>
-      
-    
-      
-        
-        
-        
-        <li><a href="/page/25/">25</a></li>
-      
-    
-      
-        <li><a href="/page/26/" class="disabled current">26</a></li>
-      
-    
-      
-        
-        
-        
-        <li><a href="/page/27/">27</a></li>
-      
-    
-      
-        
-        
-        
-        <li><a href="/page/28/">28</a></li>
-      
-    
-
-    
-    
-      <li><a href="#" class="disabled">&hellip;</a></li>
-    
-
-    
-      <li><a href="/page/39/">39</a></li>
-    
-
-    
-    
-      <li><a href="/page/27/">❯</a></li>
-    
-  </ul>
-</nav>
-
-
-  </div>
-</div>
     </div>
 
     
@@ -843,6 +862,30 @@
 
 
 
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
 
 
 

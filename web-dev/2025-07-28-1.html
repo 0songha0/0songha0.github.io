@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 233</span>
+      <span class="nav__total">🌴 Total Posts: 234</span>
     </li> -->
     
     
@@ -487,21 +487,21 @@ const popup = window.open("http://자식팝업IP:포트/팝업페이지경로?�
 
 // 자식 팝업에 postMessage 보내기
 setTimeout(() =&gt; {
-    popup.postMessage({ message: "메시지 값" }, "http://자식팝업IP:포트");
+  popup.postMessage({ message: "메시지 값" }, "http://자식팝업IP:포트");
 }, 500);
 </code></pre></div></div>
 <p>부모창에서 자식 팝업으로 postMessage 전송 방법입니다.</p>
 
 <h3 id="자식-팝업에-메시지-수신-이벤트-리스너-작성">자식 팝업에 메시지 수신 이벤트 리스너 작성</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.addEventListener("message", (event) =&gt; {
-    // 부모창 origin 확인 필수
-    if (event.origin !== "http://부모창IP:포트") {
+  // 부모창 origin 확인 필수
+  if (event.origin !== "http://부모창IP:포트") {
     return;
-    }
+  }
 
-    if (event.data.message === '메시지 값') {
-        console.log("부모창에서 받은 메시지 : ", event.data.message);
-    }
+  if (event.data.message === '메시지 값') {
+    console.log("부모창에서 받은 메시지 : ", event.data.message);
+  }
 });
 </code></pre></div></div>
 <p>자식 팝업에 부모창 메시지 수신 이벤트 리스너를 작성해두면 postMessage를 받을 수 있습니다.</p>
@@ -520,14 +520,14 @@ opener.postMessage({message : '메시지 값'}, "*"); // 모든 도메인 허용
 
 <h3 id="부모창에-메시지-수신-이벤트-리스너-작성">부모창에 메시지 수신 이벤트 리스너 작성</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.addEventListener("message", (event) =&gt; {
-    // 자식 팝업 origin 확인 필수
-    if (event.origin !== "http://자식팝업IP:포트") {
+  // 자식 팝업 origin 확인 필수
+  if (event.origin !== "http://자식팝업IP:포트") {
     return;
-    }
+  }
 
-    if (event.data.message === '메시지 값') {
-        console.log("자식 팝업에서 받은 메시지 : ", event.data.message);
-    }
+  if (event.data.message === '메시지 값') {
+    console.log("자식 팝업에서 받은 메시지 : ", event.data.message);
+  }
 });
 </code></pre></div></div>
 <p>부모창에 자식 팝업 메시지 수신 이벤트 리스너를 작성해두면 postMessage를 받을 수 있습니다.</p>
@@ -568,7 +568,8 @@ opener.postMessage({message : '메시지 값'}, "*"); // 모든 도메인 허용
       
   <nav class="pagination">
     
-      <a href="#" class="pagination--pager disabled">❮</a>
+      <a href="/web-dev/2025-07-30-1" class="pagination--pager" title="타입스크립트 타입 조작 방법 / 인덱스트 액세스 타입, 맵드 타입, 조건부 타입 등
+">❮</a>
     
     
       <a href="/web-dev/2025-07-24-2" class="pagination--pager" title="Vue + SpringBoot 프로젝트 소켓 통신 구현 방법
@@ -587,6 +588,42 @@ opener.postMessage({message : '메시지 값'}, "*"); // 모든 도메인 허용
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-07-30-1" rel="permalink">타입스크립트 타입 조작 방법 / 인덱스트 액세스 타입, 맵드 타입, 조건부 타입 등
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-07-30T00:00:00+00:00">2025-07-30</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
         
           
 
@@ -681,42 +718,6 @@ opener.postMessage({message : '메시지 값'}, "*"); // 모든 도메인 허용
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-07-14T00:00:00+00:00">2025-07-14</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-07-11-1" rel="permalink">타입스크립트 고급 타입 정의 방법 / 인터페이스, 클래스, 제네릭 타입 등
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-07-11T00:00:00+00:00">2025-07-11</time>
       </span>
     
 

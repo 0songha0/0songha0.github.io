@@ -1396,4 +1396,10 @@ var store = [{
         "tags": [],
         "url": "/web-dev/2025-07-28-1",
         "teaser": null
+      },{
+        "title": "타입스크립트 타입 조작 방법 / 인덱스트 액세스 타입, 맵드 타입, 조건부 타입 등",
+        "excerpt":"인덱스드 액세스 타입 객체, 배열, 튜플 타입에서 특정 프로퍼티 타입만 추출하는 방식입니다. 객체에서 프로퍼티 타입 추출 // 인터페이스 타입 정의 (객체 타입 정의 시 인터페이스 활용) interface 인터페이스명 { title: string; content: string; author: { id: number; name: string; }; } // 인터페이스 타입을 충족하는 객체 변수 생성 const 객체명:...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-07-30-1",
+        "teaser": null
       }]
