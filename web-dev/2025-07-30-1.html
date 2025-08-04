@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 타입스크립트 타입 조작 방법 / 인덱스트 액세스 타입, 맵드 타입, 조건부 타입 등</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#인덱스드-액세스-타입">인덱스드 액세스 타입</a><ul><li><a href="#객체에서-프로퍼티-타입-추출">객체에서 프로퍼티 타입 추출</a></li><li><a href="#배열에서-프로퍼티-타입-추출">배열에서 프로퍼티 타입 추출</a></li><li><a href="#튜플에서-프로퍼티-타입-추출">튜플에서 프로퍼티 타입 추출</a></li></ul></li><li><a href="#keyof-연산자">keyof 연산자</a><ul><li><a href="#keyof-typeof-연산자-활용">keyof, typeof 연산자 활용</a></li></ul></li><li><a href="#mapped-타입-맵드-타입">Mapped 타입 (맵드 타입)</a><ul><li><a href="#mapped-타입-정의">Mapped 타입 정의</a></li></ul></li><li><a href="#템플릿-리터럴-타입">템플릿 리터럴 타입</a></li><li><a href="#조건부-타입">조건부 타입</a><ul><li><a href="#제네릭-조건부-타입-활용">제네릭, 조건부 타입 활용</a></li><li><a href="#분산-조건부-타입">분산 조건부 타입</a></li><li><a href="#infer-키워드">infer 키워드</a></li></ul></li><li><a href="#유틸리티-타입">유틸리티 타입</a></li></ul>
+              <ul class="toc__menu"><li><a href="#인덱스드-액세스-타입">인덱스드 액세스 타입</a><ul><li><a href="#객체에서-프로퍼티-타입-추출">객체에서 프로퍼티 타입 추출</a></li><li><a href="#배열에서-프로퍼티-타입-추출">배열에서 프로퍼티 타입 추출</a></li><li><a href="#튜플에서-프로퍼티-타입-추출">튜플에서 프로퍼티 타입 추출</a></li></ul></li><li><a href="#keyof-연산자">keyof 연산자</a><ul><li><a href="#keyof-typeof-연산자-활용">keyof, typeof 연산자 활용</a></li></ul></li><li><a href="#mapped-타입-맵드-타입">Mapped 타입 (맵드 타입)</a><ul><li><a href="#mapped-타입-정의">Mapped 타입 정의</a></li></ul></li><li><a href="#템플릿-리터럴-타입">템플릿 리터럴 타입</a></li><li><a href="#조건부-타입">조건부 타입</a><ul><li><a href="#제네릭-조건부-타입-활용">제네릭, 조건부 타입 활용</a></li><li><a href="#분산-조건부-타입">분산 조건부 타입</a></li><li><a href="#infer-키워드">infer 키워드</a></li></ul></li><li><a href="#유틸리티-타입">유틸리티 타입</a><ul><li><a href="#partial">Partial</a></li><li><a href="#required">Required</a></li><li><a href="#readonly">Readonly</a></li><li><a href="#pickt-k">Pick&lt;T, K&gt;</a></li><li><a href="#omitt-k">Omit&lt;T, K&gt;</a></li><li><a href="#recordk-v">Record&lt;K, V&gt;</a></li><li><a href="#excludet-u">Exclude&lt;T, U&gt;</a></li><li><a href="#extractt-u">Extract&lt;T, U&gt;</a></li><li><a href="#returntype">ReturnType</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -732,8 +732,193 @@ type 타입별칭명3 = 타입별칭명2&lt;타입별칭명1&gt;;
 
 <h2 id="유틸리티-타입">유틸리티 타입</h2>
 
-<p>타입스크립트에서 자주 사용되는 타입 조작 도구입니다.<br />
-대표적으로 Partial, Required, Readonly, Pick, Omit 등이 있습니다.</p>
+<p>기존 타입을 변형하거나 조합할 수 있는 타입스트립트 내장 타입 조작 도구입니다.<br />
+유틸리티 타입 수는 20개 이상이므로, 공식 문서를 참고하면 좋습니다.</p>
+
+<p>Partial, Required, Readonly, Pick, Omit, Record 타입은 맵드 타입 기반의 유틸리티 타입입니다.<br />
+Exclude, Extract, ReturnType 타입은 조건부 타입 기반의 유틸리티 타입입니다.</p>
+
+<h3 id="partial">Partial<T></T></h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface 인터페이스명 {
+  title: string;
+  content: string;
+  tags: string[];
+  thumbnailURL?: string;
+}
+
+// Partial 타입으로 신규 타입 생성
+const 객체명: Partial&lt;인터페이스명&gt; = {
+  title: "임시 게시글",
+  content: "작성중"
+}
+</code></pre></div></div>
+<p>모든 프로퍼티를 선택적으로 만드는 타입입니다.</p>
+
+<p><mark>Partial 타입 구현 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Partial&lt;T&gt; = {
+  [key in keyof T]?: T[key];
+}
+</code></pre></div></div>
+<p>제네릭으로 전달받은 객체 타입 속성들을 맵드 타입으로 순회하며 새로운 타입을 생성합니다.</p>
+
+<h3 id="required">Required<T></T></h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface 인터페이스명 {
+  title: string;
+  content: string;
+  tags: string[];
+  thumbnailURL?: string;
+}
+
+// Required 타입으로 신규 타입 생성
+const 객체명: Required&lt;인터페이스명&gt; = {
+  title: "임시 게시글",
+  content: "작성중"
+  // 모든 프로퍼티를 작성하지 않으면 타입 오류 발생
+}
+</code></pre></div></div>
+<p>모든 프로퍼티를 필수로 만드는 타입입니다.</p>
+
+<p><mark>Required 타입 구현 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Required&lt;T&gt; = {
+  [key in keyof T]-?: T[key];
+}
+</code></pre></div></div>
+<p>선택적 프로퍼티 키워드 (?) 를 제거하면, 필수 프로퍼티가 됩니다.</p>
+
+<h3 id="readonly">Readonly<T></T></h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface 인터페이스명 {
+  title: string;
+  content: string;
+  tags: string[];
+  thumbnailURL?: string;
+}
+
+// Readonly 타입으로 신규 타입 생성
+const 객체명: Readonly&lt;인터페이스명&gt; = {
+  title: "게시글",
+  content: "작성완료",
+  tags: ["카테고리명"]
+}
+</code></pre></div></div>
+<p>모든 프로퍼티를 읽기 전용으로 만들어 객체 수정을 방지하는 타입입니다.</p>
+
+<p><mark>Readonly 타입 구현 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Readonly&lt;T&gt; = {
+  readonly [key in keyof T]: T[key];
+}
+</code></pre></div></div>
+<p>객체 내 모든 속성 앞에 readonly를 붙여서 읽기 전용 속성으로 만들 수 있습니다.</p>
+
+<h3 id="pickt-k">Pick&lt;T, K&gt;</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface 인터페이스명 {
+  title: string;
+  content: string;
+  tags: string[];
+  thumbnailURL?: string;
+}
+
+// Pick 타입으로 신규 타입 생성
+const 객체명: Pick&lt;인터페이스명, "title" | "content"&gt; = {
+  title: "예전 글",
+  content: "작성완료"
+}
+</code></pre></div></div>
+<p>기존 타입 T에서 일부 프로퍼티 K만 선택하여 새로운 타입을 만듭니다.</p>
+
+<p><mark>Pick 타입 구현 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Pick&lt;T, K extends keyof T&gt; = {
+  [key in K]: T[key];
+}
+</code></pre></div></div>
+<p>맵드 타입으로 유니온 타입을 순회하며, 특정 속성들만 추출한 신규 타입을 만들 수 있습니다.<br />
+K extends keyof T로 정의했기 때문에 K는 반드시 T의 속성만 가져야 합니다.</p>
+
+<h3 id="omitt-k">Omit&lt;T, K&gt;</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface 인터페이스명 {
+  title: string;
+  content: string;
+  tags: string[];
+  thumbnailURL?: string;
+}
+
+// Omit 타입으로 신규 타입 생성
+const 객체명: Omit&lt;인터페이스명, "tags" | "thumbnailURL"&gt; = {
+  title: "예전 글",
+  content: "작성완료"
+}
+</code></pre></div></div>
+<p>기존 타입 T에서 일부 프로퍼티 K를 제거하여 새로운 타입을 만듭니다.</p>
+
+<p><mark>Omit 타입 구현 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Omit&lt;T, K extends keyof T&gt; = Pick&lt;T, Exclude&lt;keyof T, K&gt;&gt;;
+</code></pre></div></div>
+<p>Pick 타입, Exclude 타입을 응용하여 Omit 타입을 생성할 수 있습니다.</p>
+
+<h3 id="recordk-v">Record&lt;K, V&gt;</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type 타입별칭명 = Record&lt;"프로퍼티명1" | "프로퍼티명2" | "프로퍼티명3", {url: string; size: number}&gt;; 
+</code></pre></div></div>
+<p>키 K, 값 V로 구성된 객체 타입을 생성하는 유틸리티 타입입니다.<br />
+인덱스 시그니처와 비슷하지만 키 타입을 더 구체적으로 제한할 수 있습니다.<br />
+위 예시로 아래 타입과 동일한 타입이 생성됩니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type 타입별칭명 = {
+  프로퍼티명1: {
+    url: string;
+    size: number;
+  },
+  프로퍼티명2: {
+    url: string;
+    size: number;
+  },
+  프로퍼티명3: {
+    url: string;
+    size: number;
+  }
+}
+</code></pre></div></div>
+
+<p><mark>Record 타입 구현 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Record&lt;K extends keyof any, V&gt; = {
+  [key in K]: V;
+}
+</code></pre></div></div>
+<p>K는 객체 키로 사용할 수 있는 타입만 들어올 수 있도록 지정하였습니다.</p>
+
+<h3 id="excludet-u">Exclude&lt;T, U&gt;</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// string 타입으로 추론됨
+type 타입별칭명 = Exclude&lt;string | boolean, boolean&gt;
+</code></pre></div></div>
+<p>기존 타입 T에서 U에 해당하는 타입들을 제거한 유니온 타입을 반환합니다.</p>
+
+<p><mark>Exclude 타입 구현 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Exclude&lt;T, U&gt; = T extends U ? never : T;
+</code></pre></div></div>
+<p>조건부 타입 변수에 유니온 타입을 전달하면 분산되어, 유니온 각 멤버가 개별적으로 검사됩니다.</p>
+
+<h3 id="extractt-u">Extract&lt;T, U&gt;</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// boolean 타입으로 추론됨
+type 타입별칭명 = Extract&lt;string | boolean, boolean&gt;
+</code></pre></div></div>
+<p>기존 타입 T에서 U와 겹치는 타입만 추출한 유니온 타입을 반환합니다.</p>
+
+<p><mark>Extract 타입 구현 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Extract&lt;T, U&gt; = T extends U ? T : never;
+</code></pre></div></div>
+<p>never는 공집합이므로, 분산된 각 결과가 다시 유니온 타입으로 묶일 때 사라지게 됩니다.</p>
+
+<h3 id="returntype">ReturnType<T></T></h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function 함수명() {
+  return "문자열 반환";
+}
+
+// string 타입으로 추론됨
+type 타입별칭명 = ReturnType&lt;typeof 함수명&gt;;
+</code></pre></div></div>
+<p>함수 타입 T의 반환값 타입을 추출하는 유틸리티 타입입니다.</p>
+
+<p><mark>ReturnType 타입 구현 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type ReturnType&lt;T extends (...args: any) =&gt; any&gt; = T extends (...agrs: any) =&gt; infer R ? R : never;
+</code></pre></div></div>
+<p>제네릭으로 함수 타입만 들어올 수 있도록 제약을 걸고, infer R로 반환값 타입 추론이 가능하면 R 타입을 반환합니다.</p>
 
         
       </section>
