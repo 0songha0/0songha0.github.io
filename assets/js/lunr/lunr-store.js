@@ -1402,4 +1402,10 @@ var store = [{
         "tags": [],
         "url": "/web-dev/2025-07-30-1",
         "teaser": null
+      },{
+        "title": "타입스크립트 사용하는 리액트 프로젝트 구축 방법",
+        "excerpt":"리액트 프로젝트 구축 리액트 프로젝트 생성 명령어 npx create-react-app 프로젝트폴더명 Node.js 설치 후, npx 명령어로 리액트 프로젝트 폴더를 생성할 수 있습니다. App.test.js, logo.svg, reportWebVitals.js, setupTest.js 파일은 삭제해도 좋습니다. 로고 파일 삭제 시 App.js 수정 import './App.css'; function App() { return ( &lt;div className=\"App\"&gt;&lt;/div&gt; ); } export default App; 위와 같이,...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-08-05-1",
+        "teaser": null
       }]

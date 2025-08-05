@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Java API 호출 유틸 개발 / HttpURLConnection 객체 사용법 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>타입스크립트 사용하는 리액트 프로젝트 구축 방법 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,8 +65,8 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="Java API 호출 유틸 개발 / HttpURLConnection 객체 사용법">
-<meta property="og:url" content="https://0songha0.github.io/web-dev/2023-12-13-1">
+<meta property="og:title" content="타입스크립트 사용하는 리액트 프로젝트 구축 방법">
+<meta property="og:url" content="https://0songha0.github.io/web-dev/2025-08-05-1">
 
 
   <meta property="og:description" content="송하영 개발 블로그">
@@ -77,11 +77,11 @@
 
 
 
-  <meta property="article:published_time" content="2023-12-13T00:00:00+00:00">
+  <meta property="article:published_time" content="2025-08-05T00:00:00+00:00">
 
 
 
-  <meta property="article:modified_time" content="2023-12-13T00:00:00+00:00">
+  <meta property="article:modified_time" content="2025-08-05T00:00:00+00:00">
 
 
 
@@ -90,7 +90,7 @@
   
 
 
-<link rel="canonical" href="https://0songha0.github.io/web-dev/2023-12-13-1">
+<link rel="canonical" href="https://0songha0.github.io/web-dev/2025-08-05-1">
 
 
 
@@ -433,15 +433,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Java API 호출 유틸 개발 / HttpURLConnection 객체 사용법">
+    <meta itemprop="headline" content="타입스크립트 사용하는 리액트 프로젝트 구축 방법">
     <meta itemprop="description" content="">
-    <meta itemprop="datePublished" content="2023-12-13T00:00:00+00:00">
-    <meta itemprop="dateModified" content="2023-12-13T00:00:00+00:00">
+    <meta itemprop="datePublished" content="2025-08-05T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-08-05T00:00:00+00:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Java API 호출 유틸 개발 / HttpURLConnection 객체 사용법
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">타입스크립트 사용하는 리액트 프로젝트 구축 방법
 </h1>
           
 
@@ -450,7 +450,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2023-12-13T00:00:00+00:00">2023-12-13</time>
+        <time datetime="2025-08-05T00:00:00+00:00">2025-08-05</time>
       </span>
     
 
@@ -468,153 +468,100 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Java API 호출 유틸 개발 / HttpURLConnection 객체 사용법</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 타입스크립트 사용하는 리액트 프로젝트 구축 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#api-호출-유틸-개발">API 호출 유틸 개발</a><ul><li><a href="#urlconnectionutiljava">URLConnectionUtil.java</a></li><li><a href="#urlconnectionutil-호출-예시">URLConnectionUtil 호출 예시</a></li><li><a href="#결과-텍스트-예시">결과 텍스트 예시</a></li><li><a href="#java-json-파싱-예시">Java JSON 파싱 예시</a></li></ul></li><li><a href="#httpurlconnection-객체">HttpURLConnection 객체</a><ul><li><a href="#setrequestproperty-함수">setRequestProperty 함수</a></li></ul></li><li><a href="#urlconnection-오류-해결">URLConnection 오류 해결</a><ul><li><a href="#파라미터-인코딩-오류">파라미터 인코딩 오류</a></li><li><a href="#파라미터-디코딩-오류">파라미터 디코딩 오류</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#리액트-프로젝트-구축">리액트 프로젝트 구축</a><ul><li><a href="#리액트-프로젝트-생성-명령어">리액트 프로젝트 생성 명령어</a></li></ul></li><li><a href="#리액트-프로젝트-타입스크립트-설치">리액트 프로젝트 타입스크립트 설치</a><ul><li><a href="#타입스크립트-및-타입-선언-패키지-설치">타입스크립트 및 타입 선언 패키지 설치</a></li><li><a href="#타입스크립트-옵션-작성">타입스크립트 옵션 작성</a></li><li><a href="#기존-js-파일-확장자-변경">기존 js 파일 확장자 변경</a></li><li><a href="#타입스크립트-파일로-마이그레이션">타입스크립트 파일로 마이그레이션</a></li><li><a href="#tsx-파일-오류-해결">tsx 파일 오류 해결</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h2 id="api-호출-유틸-개발">API 호출 유틸 개발</h2>
+        <h2 id="리액트-프로젝트-구축">리액트 프로젝트 구축</h2>
 
-<p>통합 SSO 로그인 API, 타 팀 API 등 URL 연결이 많은 프로젝트라서 공통 유틸을 만들어보았습니다.</p>
+<h3 id="리액트-프로젝트-생성-명령어">리액트 프로젝트 생성 명령어</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx create-react-app 프로젝트폴더명
+</code></pre></div></div>
+<p>Node.js 설치 후, npx 명령어로 리액트 프로젝트 폴더를 생성할 수 있습니다.<br />
+App.test.js, logo.svg, reportWebVitals.js, setupTest.js 파일은 삭제해도 좋습니다.</p>
 
-<h3 id="urlconnectionutiljava">URLConnectionUtil.java</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+<p><mark>로고 파일 삭제 시 App.js 수정</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import './App.css';
 
-public class URLConnectionUtil {
-
-	// GET 방식으로 URL 요청 후 결과 String 반환
-	public String requestGetURL(String urlStr, String paramType) throws Exception {
-		URL url = new URL(urlStr);
-		
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		conn.setRequestMethod("GET");
-		conn.setRequestProperty("Content-Type", paramType);
-		conn.setDoOutput(true);
-	
-		return getInputStreamStr(conn.getInputStream());
-	}
-
-	// InputStream 읽어서 String 반환
-	public String getInputStreamStr(InputStream inputStream) throws Exception {
-		BufferedReader bufferedReader = null;
-		String resultStr = "";
-		
-		try {
-			bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-
-			String inputLine;
-			while ((inputLine = bufferedReader.readLine()) != null) {
-				resultStr = resultStr.concat(inputLine);
-			}
-
-		} finally {
-			if (bufferedReader != null) {
-				bufferedReader.close();
-			}
-		}
-		
-		return resultStr;
-	}
+function App() {
+  return (
+    &lt;div className="App"&gt;&lt;/div&gt;
+  );
 }
 
+export default App;
 </code></pre></div></div>
-
-<h3 id="urlconnectionutil-호출-예시">URLConnectionUtil 호출 예시</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String apiResultStr = urlConnectionUtil.requestGetURL("https://통합SSOURL:446/api/auth/Authorize?Token=" + token, "text/html");
-</code></pre></div></div>
-<p>GET 방식으로 URL 요청 후 결과 텍스트를 반환합니다.</p>
-
-<h3 id="결과-텍스트-예시">결과 텍스트 예시</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"Status":1000,"StatusCode":"AUTH_OK","Message":"인증정보가 확인되었습니다.","Result":{"Items":{"Token":"g%2fXUucTQHE5RrufUP4QuT2BY71Bad%2fgMofCh4WGKRhZyUcY%2fX4J7Cz5vu%2fqApkFzI%2fPxf5wlrgnpKH2YKR66oA%3d~~~","UserID":"유저명"}}}
-</code></pre></div></div>
-<p>API 서버로부터 JSON 형태의 결과값을 받았습니다.</p>
-
-<h3 id="java-json-파싱-예시">Java JSON 파싱 예시</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>JSONParser parser = new JSONParser();
-JSONObject jsonObj = (JSONObject) parser.parse(api1ResultStr);
-
-if (jsonObj.get("StatusCode") != null) {
-	String StatusCode = (String) jsonObj.get("StatusCode");
-	if ("AUTH_OK".equals(StatusCode)) {
-
-		JSONObject result = (JSONObject) jsonObj.get("Result");
-		JSONObject items = (JSONObject) result.get("Items");
-		String token = (String) items.get("Token");
-	}
-}
-</code></pre></div></div>
-<p>결과 텍스트 JSON에서 Result 안의 Items 안의 Token 값을 꺼내는 예시입니다.</p>
+<p>위와 같이, App div 내부 header 요소를 제거해야 합니다.</p>
 
 <hr />
 
-<h2 id="httpurlconnection-객체">HttpURLConnection 객체</h2>
+<h2 id="리액트-프로젝트-타입스크립트-설치">리액트 프로젝트 타입스크립트 설치</h2>
 
-<h3 id="setrequestproperty-함수">setRequestProperty 함수</h3>
-<p>요청 헤더에 키, 값을 추가하는 함수입니다.</p>
-
-<p><mark>Content-Type 파라미터</mark></p>
-<table>
-  <tbody>
-    <tr>
-      <td>application/json</td>
-      <td>JSON 형식으로 전송</td>
-    </tr>
-    <tr>
-      <td>text/html</td>
-      <td>TEXT 형식으로 전송</td>
-    </tr>
-  </tbody>
-</table>
-<p>요청 시 전달하는 파라미터 형식을 지정할 수 있습니다.</p>
-
-<p><mark>쿠키 파라미터</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conn.setRequestProperty("Cookie", "쿠키Key1=값; 쿠키Key2=값");
+<h3 id="타입스크립트-및-타입-선언-패키지-설치">타입스크립트 및 타입 선언 패키지 설치</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm i -D typescript @types/node @types/react @types/react-dom @types/jest
 </code></pre></div></div>
-<p>요청 쿠키 값을 세팅하여 보낼 수 있습니다.</p>
+<p>자바스크립트 기반 리액트 프로젝트에 타입스크립트 및 타입 관련 패키지들을 설치합니다.<br />
+node_modules 폴더에 @types 폴더가 생성되고, package.json 파일 devDependencies에 패키지들이 추가됩니다.<br />
+타입스크립트는 런타임에 실행되지 않으므로 –save-dev 또는 -D 옵션을 통해 개발용 의존성으로 추가합니다.</p>
 
-<hr />
-
-<h2 id="urlconnection-오류-해결">URLConnection 오류 해결</h2>
-
-<h3 id="파라미터-인코딩-오류">파라미터 인코딩 오류</h3>
-<p>GET 방식 URL 뒤에 붙이는 파라미터 값에 +가 들어가면 400 에러가 발생할 수 있습니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String tokenEnc = URLEncoder.encode(token, "UTF-8");
-String apiResultStr = urlConnectionUtil.requestGetURL("https://통합SSOURL:446/api/auth/Authorize?Token=" + tokenEnc, "text/html");
+<h3 id="타입스크립트-옵션-작성">타입스크립트 옵션 작성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "CommonJS",
+    "strict": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "jsx": "react-jsx"
+  },
+  "include": ["src"]
+}
 </code></pre></div></div>
-<p>위와 같이, URLEncoder를 사용하여 파라미터 값을 UTF-8로 인코딩하여 + 등의 특수문자를 치환해 보내면 됩니다.</p>
+<p>프로젝트 루트 폴더 안에 tsconfig.json 파일 생성 후 필요한 옵션들을 작성합니다.</p>
 
-<p><mark>400 에러 파라미터 모음</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WZfm8EgHEQjJn5m9xBLIDYzOgX1HIPe9oX40svhb+ACpjHM55Ae2j56tQyfZp61C
-WZfm8EgHEQjJn5m9xBLIDW07rylPTPK7qTls883VxnBD5VdONWykbik+6/gOmdR/
-WZfm8EgHEQjJn5m9xBLIDaQJmjnTxPgXwzf1uF/fLuqSYM9uW5y3cb7+BAqocZGW
-WZfm8EgHEQjJn5m9xBLIDX2iu/fLwX9ibQtZmvH2+Ew9BA4tuCH5SwRVQ+ilyAde
-WZfm8EgHEQjJn5m9xBLIDUfc5xn8eW0DJcA9xMcGNloe7Kl4BeC6FSC9HuL+WSTF
+<p><mark>타입스크립트 옵션 설정</mark><br />
+<a href="https://0songha0.github.io/web-dev/2025-06-30-1#%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%98%B5%EC%85%98-%EC%84%A4%EC%A0%95" target="_blank">https://0songha0.github.io/web-dev/2025-06-30-1#%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%98%B5%EC%85%98-%EC%84%A4%EC%A0%95</a></p>
+
+<h3 id="기존-js-파일-확장자-변경">기존 js 파일 확장자 변경</h3>
+<p>타입스크립트는 js 파일에서 DOM을 리턴하거나 렌더링하는 jsx 문법을 해석할 수 없습니다.<br />
+기존 js 파일들의 확장자를 jsx 또는 tsx로 변경하면 오류가 해결됩니다.</p>
+
+<p><mark>tsconfig.json 파일 오류 메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'/프로젝트경로/프로젝트명/src/App.js' 파일은 입력 파일을 덮어쓰므로 쓸 수 없습니다.
 </code></pre></div></div>
 
-<p><mark>성공 파라미터 모음</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WZfm8EgHEQjJn5m9xBLIDSx5YYBHXlJ77FRBdupWLmXOnD6ZgeMouQfx8dseogQJ
-WZfm8EgHEQjJn5m9xBLIDXSjB3aPMG4HH9i38Fr8ZkZKYwBIGCuHM6kKZnSyt/pu
-WZfm8EgHEQjJn5m9xBLIDaGYKDzGdH/ZzQhPS0onwCdfFhNKGxl2/LQ6pmF5QOi/
-WZfm8EgHEQjJn5m9xBLIDaj7QwOpcqfxOXG0k4RNCz9EquCGQoB0ntcUudJhFTlh
-WZfm8EgHEQjJn5m9xBLIDYmyYiniFKHKgwrFpkSoW3qISOpmQ7y9bHskFHgBWM00
-WZfm8EgHEQjJn5m9xBLIDbX5WnEu7QOo4Cs8WzUpmtbry0pws1oYEPl2NVQFizLz
+<h3 id="타입스크립트-파일로-마이그레이션">타입스크립트 파일로 마이그레이션</h3>
+<p>js, jsx 파일들을 tsx 파일로 변경해서 타입 검사를 수행하도록 해야 합니다.<br />
+tsx 파일로 변경되면 타입 검사로 인해 문법 오류가 발생하므로 하나씩 해결해나가야 합니다.</p>
+
+<h3 id="tsx-파일-오류-해결">tsx 파일 오류 해결</h3>
+<p><mark>import문 오류 메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>모듈 '"/프로젝트경로/프로젝트명/node_modules/@types/react-dom/client"'에는 기본 내보내기가 없습니다.
+</code></pre></div></div>
+<p>import 대상 js 파일에 default export 문이 없는 경우 발생하는 오류입니다.<br />
+기본 내보내기 값이 없는 모듈도 ES6 방식으로 불러오려면 “esModuleInterop”: true 컴파일러 옵션을 추가해야 합니다.</p>
+
+<p><mark>jsx 문법 오류 메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'--jsx' 플래그를 제공하지 않으면 JSX를 사용할 수 없습니다.
+</code></pre></div></div>
+<p>타입스크립트 컴파일러가 jsx 문법을 해석할 수 있도록, “jsx”: “react-jsx” 컴파일러 옵션을 추가해야 합니다.</p>
+
+<p><mark>index.tsx 오류 메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'HTMLElement | null' 형식의 인수는 'Element | DocumentFragment' 형식의 매개 변수에 할당될 수 없습니다.
+'null' 형식은 'Element | DocumentFragment' 형식에 할당할 수 없습니다.
+
+(method) Document.getElementById(elementId: string): HTMLElement | null
+</code></pre></div></div>
+<p>ReactDom.createRoot 함수는 null 타입 인수를 받지 않아 발생하는 에러입니다.<br />
+아래처럼, non null 단언 (!) 또는 단언 (as 타입명) 을 추가하여 해결할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const root = ReactDOM.createRoot(document.getElementById("root")!);
+또는
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 </code></pre></div></div>
 
-<p><mark>URL 디코딩 방법</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String token = URLDecoder.decode(tokenEnc, "UTF-8");
-</code></pre></div></div>
-
-<h3 id="파라미터-디코딩-오류">파라미터 디코딩 오류</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>javax.crypto.IllegalBlockSizeException: Input length must be multiple of 16 when decrypting with padded cipher
-</code></pre></div></div>
-<p>+가 들어있는 파라미터를 URLEncoder.decode 하는 경우 발생하는 에러입니다.<br />
-URL 인코딩 되어있는 문자열은 +가 “%2B”로 인코딩 되는데, API 호출 과정에서 자동 디코딩 되므로 다시 디코딩 하면 안 됩니다.</p>
 
         
       </section>
@@ -642,7 +589,7 @@ URL 인코딩 되어있는 문자열은 +가 “%2B”로 인코딩 되는데, A
 
 
         
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-12-13">2023-12-13</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-08-05">2025-08-05</time></p>
 
 
       </footer>
@@ -652,11 +599,10 @@ URL 인코딩 되어있는 문자열은 +가 “%2B”로 인코딩 되는데, A
       
   <nav class="pagination">
     
-      <a href="/web-dev/2023-12-15-1" class="pagination--pager" title="Java 특정 문자열 사이 추출 방법 / 정규표현식 사용법
-">❮</a>
+      <a href="#" class="pagination--pager disabled">❮</a>
     
     
-      <a href="/tool/2023-12-08-1" class="pagination--pager" title="윈도우 다크모드 설정 / 크롬 다크모드 설정 및 해제 방법
+      <a href="/web-dev/2025-07-30-1" class="pagination--pager" title="타입스크립트 타입 조작 방법 / 인덱스트 액세스 타입, 맵드 타입, 조건부 타입 등
 ">❯</a>
     
   </nav>
@@ -672,42 +618,6 @@ URL 인코딩 되어있는 문자열은 +가 “%2B”로 인코딩 되는데, A
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-08-05-1" rel="permalink">타입스크립트 사용하는 리액트 프로젝트 구축 방법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-08-05T00:00:00+00:00">2025-08-05</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
         
           
 
@@ -791,6 +701,42 @@ URL 인코딩 되어있는 문자열은 +가 “%2B”로 인코딩 되는데, A
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
         <a href="/web-dev/2025-07-24-2" rel="permalink">Vue + SpringBoot 프로젝트 소켓 통신 구현 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-07-24T00:00:00+00:00">2025-07-24</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-07-24-1" rel="permalink">Vue + SpringBoot 프로젝트 외부 접근 방법 / CORS 설정 방법
 </a>
       
     </h2>
