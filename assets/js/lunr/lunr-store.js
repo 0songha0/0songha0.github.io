@@ -1408,4 +1408,10 @@ var store = [{
         "tags": [],
         "url": "/web-dev/2025-08-05-1",
         "teaser": null
+      },{
+        "title": "Vue 프로젝트 QRCode 공통 컴포넌트 개발",
+        "excerpt":"Vue QRCode 컴포넌트 개발 방법 qrcode 라이브러리 추가 \"dependencies\": { \"qrcode\": \"^1.5.3\" } Javascript에서 qrcode를 쉽게 그려주는 라이브러리를 추가합니다. package.json 파일 수정 후 npm install 명령어 실행이 필요합니다. 환경변수 파일에 링크 추가 VITE_BOARD_FRONT_URL=http://10.10.1.86:5173 .env.서버구분 파일에 QRCode 베이스 URL을 작성합니다. QRCode 공통 컴포넌트 작성 &lt;template&gt; &lt;canvas ref=\"canvas\"&gt;&lt;/canvas&gt; &lt;/template&gt; &lt;script setup&gt; import...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-08-06-1",
+        "teaser": null
       }]
