@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 리액트에서 타입스크립트 코드 작성 방법 / 타입스크립트 + 리액트 사용법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#리액트-usestate-사용법">리액트 useState 사용법</a><ul><li><a href="#리액트-userstate로-상태-변수-정의">리액트 userState로 상태 변수 정의</a></li><li><a href="#상태-변수-수정">상태 변수 수정</a></li><li><a href="#배열-상태-변수-정의-및-수정">배열 상태 변수 정의 및 수정</a></li><li><a href="#상태-변수-값-변경-훅-정의">상태 변수 값 변경 훅 정의</a></li></ul></li><li><a href="#리액트-함수형-컴포넌트-분리-방법">리액트 함수형 컴포넌트 분리 방법</a><ul><li><a href="#루트-컴포넌트-apptsx">루트 컴포넌트 (App.tsx)</a></li><li><a href="#인풋-자식-컴포넌트">인풋 자식 컴포넌트</a></li><li><a href="#목록-자식-컴포넌트">목록 자식 컴포넌트</a></li></ul></li><li><a href="#공통-타입-정의-분리">공통 타입 정의 분리</a><ul><li><a href="#타입-정의-파일-분리">타입 정의 파일 분리</a></li><li><a href="#타입-정의-파일-사용-예시">타입 정의 파일 사용 예시</a></li></ul></li><li><a href="#리액트-context-api-사용법">리액트 Context API 사용법</a><ul><li><a href="#루트-컴포넌트-apptsx-1">루트 컴포넌트 (App.tsx)</a></li><li><a href="#인풋-자식-컴포넌트-1">인풋 자식 컴포넌트</a></li><li><a href="#목록-자식-컴포넌트-1">목록 자식 컴포넌트</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#리액트-usestate-사용법">리액트 useState 사용법</a><ul><li><a href="#리액트-userstate로-상태-변수-정의">리액트 userState로 상태 변수 정의</a></li><li><a href="#상태-변수-수정">상태 변수 수정</a></li><li><a href="#배열-상태-변수-정의-및-수정">배열 상태 변수 정의 및 수정</a></li><li><a href="#상태-변수-값-변경-훅-정의">상태 변수 값 변경 훅 정의</a></li></ul></li><li><a href="#리액트-함수형-컴포넌트-분리-방법">리액트 함수형 컴포넌트 분리 방법</a><ul><li><a href="#루트-컴포넌트-apptsx">루트 컴포넌트 (App.tsx)</a></li><li><a href="#인풋-자식-컴포넌트">인풋 자식 컴포넌트</a></li><li><a href="#목록-자식-컴포넌트">목록 자식 컴포넌트</a></li></ul></li><li><a href="#공통-타입-파일-분리">공통 타입 파일 분리</a><ul><li><a href="#공통-타입-정의-파일-작성">공통 타입 정의 파일 작성</a></li><li><a href="#공통-타입-정의-파일-사용-예시">공통 타입 정의 파일 사용 예시</a></li></ul></li><li><a href="#리액트-context-api-사용법">리액트 Context API 사용법</a><ul><li><a href="#루트-컴포넌트-apptsx-1">루트 컴포넌트 (App.tsx)</a></li><li><a href="#인풋-자식-컴포넌트-1">인풋 자식 컴포넌트</a></li><li><a href="#목록-자식-컴포넌트-1">목록 자식 컴포넌트</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -768,9 +768,9 @@ export default function 목록자식컴포넌트명(props: Props) {
 
 <hr />
 
-<h2 id="공통-타입-정의-분리">공통 타입 정의 분리</h2>
+<h2 id="공통-타입-파일-분리">공통 타입 파일 분리</h2>
 
-<h3 id="타입-정의-파일-분리">타입 정의 파일 분리</h3>
+<h3 id="공통-타입-정의-파일-작성">공통 타입 정의 파일 작성</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export interface Todo {
   id: number;
   content: string;
@@ -779,7 +779,7 @@ export default function 목록자식컴포넌트명(props: Props) {
 <p>src 폴더에 types 또는 interfaces 폴더를 만들고 .ts 파일을 생성합니다.<br />
 다양한 컴포넌트에서 사용하는 타입을 정의 후 export로 내보냅니다.</p>
 
-<h3 id="타입-정의-파일-사용-예시">타입 정의 파일 사용 예시</h3>
+<h3 id="공통-타입-정의-파일-사용-예시">공통 타입 정의 파일 사용 예시</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { Todo } from "../types/ts파일명";
 
 // Props 타입 정의 (타입 정의 상속)
