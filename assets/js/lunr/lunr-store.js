@@ -1404,7 +1404,7 @@ var store = [{
         "teaser": null
       },{
         "title": "타입스크립트 사용하는 리액트 프로젝트 구축 방법",
-        "excerpt":"리액트 프로젝트 구축 리액트 프로젝트 생성 명령어 npx create-react-app 프로젝트폴더명 Node.js 설치 후, npx 명령어로 리액트 프로젝트 폴더를 생성할 수 있습니다. App.test.js, logo.svg, reportWebVitals.js, setupTest.js 파일은 삭제해도 좋습니다. 로고 파일 삭제 시 App.js 수정 import './App.css'; function App() { return ( &lt;div className=\"App\"&gt;&lt;/div&gt; ); } export default App; 위와 같이,...","categories": ["web-dev"],
+        "excerpt":"리액트 프로젝트 구축 리액트 프로젝트 생성 명령어 npx create-react-app 프로젝트명 Node.js 설치 후, npx 명령어로 리액트 프로젝트 폴더를 생성할 수 있습니다. App.test.js, logo.svg, reportWebVitals.js, setupTest.js 파일은 삭제해도 좋습니다. 로고 파일 삭제 시 App.js 수정 import './App.css'; function App() { return ( &lt;div className=\"App\"&gt;&lt;/div&gt; ); } export default App; 위와 같이,...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-08-05-1",
         "teaser": null
@@ -1419,5 +1419,11 @@ var store = [{
         "excerpt":"리액트 useState 사용법 리액트 userState로 상태 변수 정의 import { useState } from \"react\"; // useState 함수로 상태 변수 정의 const [상태변수명, set상태변수명] = useState(\"\"); // string 타입으로 추론 (권장) 또는 const [상태변수명, set상태변수명] = useState&lt;string&gt;(); // string | undefined 유니온 타입으로 추론 제네릭 함수 useState는 전달받은 초기값 타입으로 변수...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-08-07-1",
+        "teaser": null
+      },{
+        "title": "타입스크립트 라이브러리 설치 및 사용법",
+        "excerpt":"타입스크립트 외부 라이브러리 설치 npm 패키지 검색 사이트 https://www.npmjs.com Javascript, Typescript 라이브러리들을 검색하여 install 명령어를 얻을 수 있는 공식 사이트입니다. TypeScript로 작성되지 않은 JavaScript 라이브러리는 타입 정보 패키지가 없으면 import 시 오류가 납니다. 라이브러리 우측 DT 마크 클릭 시 JavaScript의 라이브러리 타입 정보 패키지로 이동합니다. 타입 정보 패키지도 함께 설치하면,...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-08-07-2",
         "teaser": null
       }]

@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 237</span>
+      <span class="nav__total">🌴 Total Posts: 238</span>
     </li> -->
     
     
@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 타입스크립트 사용하는 리액트 프로젝트 구축 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#리액트-프로젝트-구축">리액트 프로젝트 구축</a><ul><li><a href="#리액트-프로젝트-생성-명령어">리액트 프로젝트 생성 명령어</a></li></ul></li><li><a href="#리액트-프로젝트-타입스크립트-설치">리액트 프로젝트 타입스크립트 설치</a><ul><li><a href="#타입스크립트-및-타입-선언-패키지-설치">타입스크립트 및 타입 선언 패키지 설치</a></li><li><a href="#타입스크립트-옵션-작성">타입스크립트 옵션 작성</a></li><li><a href="#기존-js-파일-확장자-변경">기존 js 파일 확장자 변경</a></li><li><a href="#타입스크립트-파일로-마이그레이션">타입스크립트 파일로 마이그레이션</a></li><li><a href="#tsx-파일-오류-해결">tsx 파일 오류 해결</a></li></ul></li><li><a href="#리액트-프로젝트-실행">리액트 프로젝트 실행</a><ul><li><a href="#리액트-실행-명령어">리액트 실행 명령어</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#리액트-프로젝트-구축">리액트 프로젝트 구축</a><ul><li><a href="#리액트-프로젝트-생성-명령어">리액트 프로젝트 생성 명령어</a></li></ul></li><li><a href="#리액트-프로젝트-타입스크립트-설치">리액트 프로젝트 타입스크립트 설치</a><ul><li><a href="#타입스크립트-및-타입-선언-패키지-설치">타입스크립트 및 타입 선언 패키지 설치</a></li><li><a href="#타입스크립트-옵션-작성">타입스크립트 옵션 작성</a></li><li><a href="#기존-js-파일-확장자-변경">기존 js 파일 확장자 변경</a></li><li><a href="#타입스크립트-파일로-마이그레이션">타입스크립트 파일로 마이그레이션</a></li><li><a href="#tsx-파일-오류-해결">tsx 파일 오류 해결</a></li></ul></li><li><a href="#리액트-타입스크립트-프로젝트-구축">리액트 타입스크립트 프로젝트 구축</a><ul><li><a href="#리액트-타입스크립트-일괄-설치-명령어">리액트 타입스크립트 일괄 설치 명령어</a></li></ul></li><li><a href="#리액트-프로젝트-실행">리액트 프로젝트 실행</a><ul><li><a href="#리액트-실행-명령어">리액트 실행 명령어</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -478,7 +478,7 @@
         <h2 id="리액트-프로젝트-구축">리액트 프로젝트 구축</h2>
 
 <h3 id="리액트-프로젝트-생성-명령어">리액트 프로젝트 생성 명령어</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx create-react-app 프로젝트폴더명
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx create-react-app 프로젝트명
 </code></pre></div></div>
 <p>Node.js 설치 후, npx 명령어로 리액트 프로젝트 폴더를 생성할 수 있습니다.<br />
 App.test.js, logo.svg, reportWebVitals.js, setupTest.js 파일은 삭제해도 좋습니다.</p>
@@ -564,6 +564,19 @@ const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 
 <hr />
 
+<h2 id="리액트-타입스크립트-프로젝트-구축">리액트 타입스크립트 프로젝트 구축</h2>
+
+<p>리액트 프로젝트 생성 시 템플릿 옵션으로 타입스크립트를 함께 설치하는 방법도 있습니다.</p>
+
+<h3 id="리액트-타입스크립트-일괄-설치-명령어">리액트 타입스크립트 일괄 설치 명령어</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx create-react-app 프로젝트명 --template typescript
+</code></pre></div></div>
+<p>타입스크립트 템플릿이 적용된 리액트 프로젝트 설치 명령어입니다.<br />
+App.js 등이 App.tsx 등으로 변환되고, 타입 선언 패키지들이 자동 설치됩니다.<br />
+타입스크립트 옵션들도 자동으로 설정되어 간편하게 시작할 수 있습니다.</p>
+
+<hr />
+
 <h2 id="리액트-프로젝트-실행">리액트 프로젝트 실행</h2>
 
 <h3 id="리액트-실행-명령어">리액트 실행 명령어</h3>
@@ -627,6 +640,42 @@ const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-08-07-2" rel="permalink">타입스크립트 라이브러리 설치 및 사용법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-08-07T00:00:00+00:00">2025-08-07</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
         
           
 
@@ -721,42 +770,6 @@ const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-07-30T00:00:00+00:00">2025-07-30</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-07-28-1" rel="permalink">postMessage 통신 방법 / 부모창, 자식 팝업 간 데이터 전달 방법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-07-28T00:00:00+00:00">2025-07-28</time>
       </span>
     
 

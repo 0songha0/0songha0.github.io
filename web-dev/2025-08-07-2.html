@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>디딤365 DidimNow 콘솔 사용법 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>타입스크립트 라이브러리 설치 및 사용법 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,8 +65,8 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="디딤365 DidimNow 콘솔 사용법">
-<meta property="og:url" content="https://0songha0.github.io/op/2025-01-16-1">
+<meta property="og:title" content="타입스크립트 라이브러리 설치 및 사용법">
+<meta property="og:url" content="https://0songha0.github.io/web-dev/2025-08-07-2">
 
 
   <meta property="og:description" content="송하영 개발 블로그">
@@ -77,11 +77,11 @@
 
 
 
-  <meta property="article:published_time" content="2025-01-16T00:00:00+00:00">
+  <meta property="article:published_time" content="2025-08-07T00:00:00+00:00">
 
 
 
-  <meta property="article:modified_time" content="2025-01-16T00:00:00+00:00">
+  <meta property="article:modified_time" content="2025-08-07T00:00:00+00:00">
 
 
 
@@ -90,7 +90,7 @@
   
 
 
-<link rel="canonical" href="https://0songha0.github.io/op/2025-01-16-1">
+<link rel="canonical" href="https://0songha0.github.io/web-dev/2025-08-07-2">
 
 
 
@@ -433,15 +433,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="디딤365 DidimNow 콘솔 사용법">
+    <meta itemprop="headline" content="타입스크립트 라이브러리 설치 및 사용법">
     <meta itemprop="description" content="">
-    <meta itemprop="datePublished" content="2025-01-16T00:00:00+00:00">
-    <meta itemprop="dateModified" content="2025-01-16T00:00:00+00:00">
+    <meta itemprop="datePublished" content="2025-08-07T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-08-07T00:00:00+00:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">디딤365 DidimNow 콘솔 사용법
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">타입스크립트 라이브러리 설치 및 사용법
 </h1>
           
 
@@ -450,7 +450,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-01-16T00:00:00+00:00">2025-01-16</time>
+        <time datetime="2025-08-07T00:00:00+00:00">2025-08-07</time>
       </span>
     
 
@@ -468,54 +468,36 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 디딤365 DidimNow 콘솔 사용법</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 타입스크립트 라이브러리 설치 및 사용법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#didimnow-사용법">DidimNow 사용법</a><ul><li><a href="#디딤-문의-방법">디딤 문의 방법</a></li></ul></li><li><a href="#didimnow-콘솔-사용법">DidimNow 콘솔 사용법</a><ul><li><a href="#didim-관리-서버-정보-확인-방법">Didim 관리 서버 정보 확인 방법</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#타입스크립트-외부-라이브러리-설치">타입스크립트 외부 라이브러리 설치</a><ul><li><a href="#npm-패키지-검색-사이트">npm 패키지 검색 사이트</a></li><li><a href="#라이브러리-설치-명령어">라이브러리 설치 명령어</a></li><li><a href="#라이브러리-사용법">라이브러리 사용법</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h2 id="didimnow-사용법">DidimNow 사용법</h2>
+        <h2 id="타입스크립트-외부-라이브러리-설치">타입스크립트 외부 라이브러리 설치</h2>
 
-<h3 id="디딤-문의-방법">디딤 문의 방법</h3>
-<p>DidimNow 로그인 &gt; 고객지원 &gt; AS 요청 &gt; 글쓰기<br />
-운영서버 장애 원인 확인 요청, WAS 서버 또는 DB 커넥션 풀 설정 확인 및 변경 요청, VM 서버 ACG 인바운드 방화벽 정책 하용 요청 등이 가능합니다.</p>
+<h3 id="npm-패키지-검색-사이트">npm 패키지 검색 사이트</h3>
+<p><a href="https://www.npmjs.com" target="_blank">https://www.npmjs.com</a><br />
+Javascript, Typescript 라이브러리들을 검색하여 install 명령어를 얻을 수 있는 공식 사이트입니다.</p>
 
-<p><mark>DB 커넥션 설정 값</mark></p>
-<table class="table_2_left">
-  <tbody>
-    <tr>
-      <td>maxTotal</td>
-      <td>WAS 서버 커넥션 풀 최대 연결 수 (변경 시 톰캣 재기동 필요)</td>
-    </tr>
-    <tr>
-      <td>max_connection</td>
-      <td>DB 커넥션 풀 최대 연결 수</td>
-    </tr>
-    <tr>
-      <td>Max_used_connections</td>
-      <td>DB 활성 커넥션 수 (현재 실시간 연결 수)</td>
-    </tr>
-  </tbody>
-</table>
+<p>TypeScript로 작성되지 않은 JavaScript 라이브러리는 타입 정보 패키지가 없으면 import 시 오류가 납니다.<br />
+라이브러리 우측 DT 마크 클릭 시 JavaScript의 라이브러리 타입 정보 패키지로 이동합니다.<br />
+타입 정보 패키지도 함께 설치하면, TypeScript에서 해당 라이브러리를 오류 없이 사용할 수 있습니다.</p>
 
-<p><mark>방화벽 허용 요청 시</mark><br />
-네이버 클라우드 서버에 접근하려면 출발지 공인 IP를 허용해야 합니다.<br />
-사설IP가 아니라, 공인IP로 허용해서 같은 망의 팀원들도 모두 접근 가능합니다.<br />
-서버 ACG 방화벽 허용 이후에도 SFTP 접근이 불가하면, 22 포트 사내 아웃바운드 방화벽을 허용해야 합니다.</p>
+<h3 id="라이브러리-설치-명령어">라이브러리 설치 명령어</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm i 패키지명
+</code></pre></div></div>
+<p>타입 정의가 내장된 라이브러리는 install 명령어로 설치 후 바로 사용할 수 있습니다.</p>
 
-<p><mark>사내 방화벽 허용 요청 시 참고사항</mark><br />
-현재 사내 방화벽에서 외부 통신에 대해 80, 8080, 443 포트가 가본적으로 열려있고 22 포트는 신청해서 열어야 합니다.<br />
-사용자망에서는 80, 443 등 기본 포트가 열려있어 접근이 가능하지만 서버 간 통신에서는 막혀있다고 합니다.<br />
-그래서 서버 간 통신에서는 80, 443 등도 따로 방화벽 허용 요청을 해야 연결 가능합니다.</p>
+<h3 id="라이브러리-사용법">라이브러리 사용법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import 모듈명 from "라이브러리명";
+</code></pre></div></div>
+<p>.tsx 타입스크립트 파일에서 라이브러리 import 후 사용하면 됩니다.</p>
 
-<hr />
-
-<h2 id="didimnow-콘솔-사용법">DidimNow 콘솔 사용법</h2>
-
-<h3 id="didim-관리-서버-정보-확인-방법">Didim 관리 서버 정보 확인 방법</h3>
-<p>DidimNow 로그인 &gt; 상단 콘솔 바로가기 버튼 &gt; 인프라 메뉴 &gt; 시스템 구성도 탭 &gt; 보기 설정 : 사용자정의(표) 선택 &gt; 문서 선택 : VM &gt; 서버 IP, Admin ID, PW 확인 가능<br />
-PW는 마스킹 되어 있어서, 우클릭 &gt; 암호복사 &gt; 문자 OTP 인증 시 확인이 가능합니다.</p>
+<p><mark>라이브러리 타입 정보 없는 경우 오류 메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>모듈 '라이브러리명'에 대한 선언 파일을 찾을 수 없습니다.
+</code></pre></div></div>
 
         
       </section>
@@ -536,14 +518,14 @@ PW는 마스킹 되어 있어서, 우클릭 &gt; 암호복사 &gt; 문자 OTP �
     
       
       
-      <a href="/categories#op" class="page__taxonomy-item" rel="tag">리눅스 / 운영</a>
+      <a href="/categories#web-dev" class="page__taxonomy-item" rel="tag">Web 개발</a>
     
     </span>
   </p>
 
 
         
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-01-16">2025-01-16</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-08-07">2025-08-07</time></p>
 
 
       </footer>
@@ -553,11 +535,10 @@ PW는 마스킹 되어 있어서, 우클릭 &gt; 암호복사 &gt; 문자 OTP �
       
   <nav class="pagination">
     
-      <a href="/op/2025-01-23-1" class="pagination--pager" title="시큐어코딩 점검툴 사용법 / 보안 취약점 보완 조치 방법
-">❮</a>
+      <a href="#" class="pagination--pager disabled">❮</a>
     
     
-      <a href="/web-dev/2025-01-08-1" class="pagination--pager" title="프로그래밍 명명 규칙 정리
+      <a href="/web-dev/2025-08-07-1" class="pagination--pager" title="리액트에서 타입스크립트 코드 작성 방법 / 타입스크립트 + 리액트 사용법
 ">❯</a>
     
   </nav>
@@ -573,42 +554,6 @@ PW는 마스킹 되어 있어서, 우클릭 &gt; 암호복사 &gt; 문자 OTP �
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-08-07-2" rel="permalink">타입스크립트 라이브러리 설치 및 사용법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-08-07T00:00:00+00:00">2025-08-07</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
         
           
 
@@ -703,6 +648,42 @@ PW는 마스킹 되어 있어서, 우클릭 &gt; 암호복사 &gt; 문자 OTP �
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-08-05T00:00:00+00:00">2025-08-05</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-07-30-1" rel="permalink">타입스크립트 타입 조작 방법 / 인덱스트 액세스 타입, 맵드 타입, 조건부 타입 등
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-07-30T00:00:00+00:00">2025-07-30</time>
       </span>
     
 
