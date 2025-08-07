@@ -1414,4 +1414,10 @@ var store = [{
         "tags": [],
         "url": "/web-dev/2025-08-06-1",
         "teaser": null
+      },{
+        "title": "리액트에서 타입스크립트 코드 작성 방법 / 타입스크립트 + 리액트 사용법",
+        "excerpt":"리액트 useState 사용법 리액트 userState로 상태 변수 정의 import { useState } from \"react\"; // useState 함수로 상태 변수 정의 const [상태변수명, set상태변수명] = useState(\"\"); // string 타입으로 추론 (권장) 또는 const [상태변수명, set상태변수명] = useState&lt;string&gt;(); // string | undefined 유니온 타입으로 추론 제네릭 함수 useState는 전달받은 초기값 타입으로 변수...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-08-07-1",
+        "teaser": null
       }]
