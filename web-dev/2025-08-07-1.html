@@ -490,6 +490,7 @@ const [상태변수명, set상태변수명] = useState&lt;string&gt;(); // strin
 
 <h3 id="상태-변수-수정">상태 변수 수정</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 인풋 값 변경 이벤트 핸들러
+// React에서 제공하는 이벤트 객체 타입 사용하여 타입 안전성 확보
 const onChangeInput = (e: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
   set상태변수명(e.target.value);
 };
@@ -718,6 +719,7 @@ export default function 인풋자식컴포넌트명(props: Props) {
   const [text, setText] = useState("");
 
   // 인풋 변경 시 상태 변경 함수
+  // React에서 제공하는 이벤트 객체 타입 사용하여 타입 안전성 확보
   const onChangeInput = (e: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
     setText(e.target.value);
   };
@@ -929,6 +931,7 @@ export default function 인풋자식컴포넌트명() {
   const [text, setText] = useState("");
 
   // 인풋 변경 시 상태 변경 함수
+  // React에서 제공하는 이벤트 객체 타입 사용하여 타입 안전성 확보
   const onChangeInput = (e: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
     setText(e.target.value);
   };
