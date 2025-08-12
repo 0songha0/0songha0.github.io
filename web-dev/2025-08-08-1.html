@@ -571,14 +571,6 @@ module.exports = (io) =&gt; {
   io.on("connection", (socket) =&gt; {
     console.log("방금 연결된 클라이언트 연결 ID : ", socket.id);
 
-    // 클라이언트에서 보낸 "message" 이벤트 수신
-    socket.on("message", (msg) =&gt; {
-      console.log("받은 메시지 : ", msg);
-
-      // 모든 클라이언트에게 "message "이벤트 전송 (Broadcast)
-      io.emit("message", msg);
-    });
-
     // 클라이언트에서 보낸 "join" 이벤트 수신
     socket.on("join", async (userName, callback) =&gt; {
       try {
@@ -590,6 +582,14 @@ module.exports = (io) =&gt; {
       } catch (error) {
         callback({ succese: false, error: error.message });
       }
+    });
+
+    // 클라이언트에서 보낸 "message" 이벤트 수신
+    socket.on("message", (msg) =&gt; {
+      console.log("받은 메시지 : ", msg);
+
+      // 모든 클라이언트에게 "message "이벤트 전송 (Broadcast)
+      io.emit("message", msg);
     });
 
     // 연결 해제 이벤트 수신
@@ -784,8 +784,8 @@ export default socket;
 <h3 id="소켓-클라이언트-메시지-전송">소켓 클라이언트 메시지 전송</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import socket from "/utils/socket";
 
-// 소켓 백엔드 서버 수동 연결
-// 소켓 인스턴스 옵션 autoConnect: false인 경우
+// 소켓 백엔드 서버 수동 연결 (소켓 인스턴스 옵션 autoConnect: false인 경우)
+// 소켓 서버 연결 시 "connection" 이벤트 발생
 socket.connect();
 
 // 소켓 서버에 이벤트 전송
