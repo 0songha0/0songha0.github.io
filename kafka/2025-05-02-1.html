@@ -588,8 +588,15 @@ kafka-topics.sh --create --bootstrap-server localhost:9092 --topic 토픽명 --p
 <p><mark>브로커 서버 여러대인 경우</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--bootstrap-server 10.10.2.7:9092,10.10.2.8:9092,10.10.2.9:9092
 </code></pre></div></div>
-<p>위와 같이, 브로커 서버들 주소를 쉼표로 구분하여 공백 없이 붙여 쓰면 됩니다.<br />
-스트링부트에서는 bootstrap-servers 프로퍼티로 설정하면 됩니다.</p>
+<p>위와 같이, 브로커 서버들 주소를 쉼표로 구분하여 공백 없이 붙여 쓰면 됩니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>spring:
+  kafka:
+    producer:
+      bootstrap-servers: 10.10.2.7:9092,10.10.2.8:9092,10.10.2.9:9092
+    consumer:
+      bootstrap-servers: 10.10.2.7:9092,10.10.2.8:9092,10.10.2.9:9092
+</code></pre></div></div>
+<p>스트링부트에서는 bootstrap-servers 프로퍼티로 설정하면 됩니다.</p>
 
 <h3 id="토픽-리스트-확인">토픽 리스트 확인</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kafka-topics.sh --bootstrap-server localhost:9092 --list
