@@ -1050,7 +1050,7 @@ var store = [{
         "teaser": null
       },{
         "title": "네이버클라우드 운영서버 VPN 접속 방법",
-        "excerpt":"NCP SSL VPN 접속 방법 네이버클라우드 운영서버는 VPN Agent 설치 및 연결 후 접속이 가능합니다. VPN Agent 설치 https://guide-gov.ncloud-docs.com/docs/sslvpn-download 위 링크에서 Windows용 SSL VPN Agent를 다운로드하고 설치합니다. VPN 추가 VPN 프로그램의 VPN 추가 팝업에서 아래와 같이 입력하고 추가합니다. 도메인 https://sslvpn-kr-vpc-01.gov-ncloud.com (수도권) 아이디 SSLVPN 사용자 Username 비밀번호 SSLVPN 사용자 Password VPN...","categories": ["op"],
+        "excerpt":"NCP SSL VPN 접속 방법 네이버클라우드 운영서버는 VPN Agent 설치 및 연결 후 접속이 가능합니다. VPN Agent 설치 NCP 공공존 VPN 설치 https://guide-gov.ncloud-docs.com/docs/sslvpn-download 위 링크에서 Windows용 SSL VPN Agent를 다운로드하고 설치합니다. 공공존 VPN 프로그램 이름은 NAVER Cloud SSL VPN입니다. NCP 민간존 VPN 설치 https://guide.ncloud-docs.com/docs/sslvpn-download 공공존 VPN 프로그램으로 민간존 클라우드 환경에...","categories": ["op"],
         "tags": [],
         "url": "/op/2024-05-28-1",
         "teaser": null
