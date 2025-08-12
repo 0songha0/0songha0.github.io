@@ -1,0 +1,1096 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>웹소켓 사용법 / WebSocket으로 실시간 소통 채팅앱 개발 방법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="웹소켓 사용법 / WebSocket으로 실시간 소통 채팅앱 개발 방법">
+<meta property="og:url" content="https://0songha0.github.io/web-dev/2025-08-08-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-08-08T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2025-08-08T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/web-dev/2025-08-08-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 239</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka"><span class="nav__sub-title">카프카</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/english"><span class="nav__sub-title">English</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="웹소켓 사용법 / WebSocket으로 실시간 소통 채팅앱 개발 방법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2025-08-08T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-08-08T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">웹소켓 사용법 / WebSocket으로 실시간 소통 채팅앱 개발 방법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-08-08T00:00:00+00:00">2025-08-08</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 웹소켓 사용법 / WebSocket으로 실시간 소통 채팅앱 개발 방법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
+              <ul class="toc__menu"><li><a href="#http-웹소켓-프로토콜-차이">HTTP, 웹소켓 프로토콜 차이</a><ul><li><a href="#http-프로토콜">HTTP 프로토콜</a></li><li><a href="#웹소켓-프로토콜">웹소켓 프로토콜</a></li></ul></li><li><a href="#nodejs-백엔드-웹소켓-서버-구축">Node.js 백엔드 웹소켓 서버 구축</a><ul><li><a href="#nodejs-프로젝트-초기화">Node.js 프로젝트 초기화</a></li><li><a href="#nodejs-프로젝트-모듈-설치">Node.js 프로젝트 모듈 설치</a></li><li><a href="#환경변수-파일-생성">환경변수 파일 생성</a></li><li><a href="#express-앱-인스턴스-생성">Express 앱 인스턴스 생성</a></li><li><a href="#웹소켓-이벤트-핸들러-작성">웹소켓 이벤트 핸들러 작성</a></li><li><a href="#http-서버-생성-및-웹소켓-서버-실행">HTTP 서버 생성 및 웹소켓 서버 실행</a></li><li><a href="#nodejs-서버-실행">Node.js 서버 실행</a></li></ul></li><li><a href="#nodejs-서버-mongodb-사용법">Node.js 서버 MongoDB 사용법</a><ul><li><a href="#컬렉션-스키마-및-모델-생성">컬렉션 스키마 및 모델 생성</a></li><li><a href="#mongodb-데이터베이스-연결">MongoDB 데이터베이스 연결</a></li><li><a href="#db-컨트롤러-함수-생성">DB 컨트롤러 함수 생성</a></li></ul></li><li><a href="#reactjs-웹소켓-클라이언트-구축">React.js 웹소켓 클라이언트 구축</a><ul><li><a href="#소켓-클라이언트-라이브러리-추가">소켓 클라이언트 라이브러리 추가</a></li><li><a href="#소켓-클라이언트-코드-작성">소켓 클라이언트 코드 작성</a></li><li><a href="#소켓-클라이언트-메시지-전송">소켓 클라이언트 메시지 전송</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="http-웹소켓-프로토콜-차이">HTTP, 웹소켓 프로토콜 차이</h2>
+
+<h3 id="http-프로토콜">HTTP 프로토콜</h3>
+<p>웹에서 클라이언트가 서버에 요청을 보내면 응답을 반환하는 요청-응답 기반의 단방향 통신 프로토콜입니다.<br />
+HTTP 통신은 서버 응답 후 연결이 끊기므로 연결에 지속성이 없습니다.</p>
+
+<h3 id="웹소켓-프로토콜">웹소켓 프로토콜</h3>
+<p>클라이언트와 서버가 초기 연결을 맺은 뒤, 양방향으로 실시간 데이터를 주고받을 수 있는 프로토콜입니다.<br />
+Socket.IO 라이브러리는 네임스페이스로 채널을 구분하여 클라이언트, 서버를 그룹핑 합니다.</p>
+
+<hr />
+
+<h2 id="nodejs-백엔드-웹소켓-서버-구축">Node.js 백엔드 웹소켓 서버 구축</h2>
+
+<p>Node.js 서버에서 HTTP 서버 실행 후, 웹소켓 서버를 실행해야 합니다.</p>
+
+<h3 id="nodejs-프로젝트-초기화">Node.js 프로젝트 초기화</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm init -y
+</code></pre></div></div>
+<p>백엔드 프로젝트 폴더 생성 후 터미널에서 해당 폴더에 접근하여 명령어를 실행합니다.</p>
+
+<h3 id="nodejs-프로젝트-모듈-설치">Node.js 프로젝트 모듈 설치</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm i express mongoose cors dotenv socket.io
+</code></pre></div></div>
+<p>Node.js 프로젝트에서 필요한 모듈들을 설치하는 명령어입니다.</p>
+
+<p><mark>Node.js 프레임워크 및 라이브러리 종류</mark></p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>express</td>
+      <td>서버 라우팅, 미들웨어 관리를 도와주는 Node.js 기반 웹 프레임워크</td>
+    </tr>
+    <tr>
+      <td>mongoose</td>
+      <td>Node.js와 MongoDB를 연결해서 CRUD 작업을 도와주는 라이브러리</td>
+    </tr>
+    <tr>
+      <td>cors</td>
+      <td>Javascript 클라이언트, 서버 통신 시 교차 출처 요청 CORS 정책을 설정하기 위한 미들웨어</td>
+    </tr>
+    <tr>
+      <td>dotenv</td>
+      <td>.env 파일에 작성한 환경변수를 Node.js 애플리케이션에서 사용할 수 있게 해주는 라이브러리</td>
+    </tr>
+    <tr>
+      <td>http</td>
+      <td>
+        HTTP 서버를 만들 때 사용하는 Node.js 내장 모듈<br />
+        생성된 HTTP 서버 인스턴스 위에서 express 앱, 웹소켓 서버가 함께 동작
+      </td>
+    </tr>
+    <tr>
+      <td>socket.io</td>
+      <td>Node.js 환경에서 웹소켓 기반 실시간 양방향 통신을 쉽게 구현할 수 있는 라이브러리</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="환경변수-파일-생성">환경변수 파일 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PORT=5000
+DB_URL=mongodb://DB서버IP:27017/DB명
+</code></pre></div></div>
+<p>.env 파일을 생성하여 Node 포트, 데이터베이스 주소 등을 작성합니다.<br />
+js 코드에서 dotenv 모듈로 환경변수 로드 후, process.env.환경병수명으로 사용할 수 있습니다.</p>
+
+<h3 id="express-앱-인스턴스-생성">Express 앱 인스턴스 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// express 모듈 불러오기
+const express = require("express");
+
+// 익스프레스 인스턴스 생성
+const app = express();
+
+// 라우팅
+
+// CORS 미들웨어 생성
+const cors = require("cors");
+
+// 익스프레스 인스턴스에 CORS 미들웨어 등록
+// 기본값 : 모든 도메인 요청 허용
+app.use(cors());
+
+module.exports = app;
+</code></pre></div></div>
+<p>app.js 파일을 만들고, Node.js 서버에서 실행할 Express 앱 인스턴스를 생성합니다.</p>
+
+<h3 id="웹소켓-이벤트-핸들러-작성">웹소켓 이벤트 핸들러 작성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const userController = require(../controllers/userController);
+
+// server.js에서 socket.io 서버 인스턴스 전달 받을 예정
+module.exports = (io) =&gt; {
+  // 웹소켓 연결 이벤트 수신
+  // 매개변수 socket : 연결된 클라이언트 정보
+  io.on("connection", (socket) =&gt; {
+    console.log("방금 연결된 클라이언트 연결 ID : ", socket.id);
+
+    // 클라이언트에서 보낸 "message" 이벤트 수신
+    socket.on("message", (msg) =&gt; {
+      console.log("받은 메시지 : ", msg);
+
+      // 모든 클라이언트에게 "message "이벤트 전송 (Broadcast)
+      io.emit("message", msg);
+    });
+
+    // 클라이언트에서 보낸 "join" 이벤트 수신
+    socket.on("join", async (userName, callback) =&gt; {
+      try {
+        // 소켓 입장 유저 정보 DB 저장 및 조회
+        const user = await userController.saveUser(userName, socket.id);
+
+        // 콜백함수 호출 및 데이터 전달
+        callback({ succese: true, user: user });
+      } catch (error) {
+        callback({ succese: false, error: error.message });
+      }
+    });
+
+    // 연결 해제 이벤트 수신
+    socket.on("disconnect", () =&gt; {
+      console.log("클라이언트 연결 종료 : ", socket.id);
+    });
+  });
+}
+</code></pre></div></div>
+<p>server.js에서 사용할 소켓 이벤트 핸들러 코드를 별도의 파일로 작성합니다.<br />
+/utils/socketHandler.js 파일로 생성하는 것이 권장됩니다.</p>
+
+<h3 id="http-서버-생성-및-웹소켓-서버-실행">HTTP 서버 생성 및 웹소켓 서버 실행</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const http = require("http");
+const app = require("./app");
+
+// 환경변수 로드
+require("dotenv").config();
+
+// HTTP 서버 인스턴스 생성
+const httpServer = http.createServer(app);
+
+// HTTP 서버에 socket.io 서버 인스턴스 실행
+const { Server } = require("socket.io");
+const io = new Server(httpServer, {
+  cors: {
+    origin: "*", // 또는 ["http://소켓연결허용클라이언트IP:3000", "https://소켓연결허용클라이언트도메인.com"],
+    methods: ["GET", "POST"]
+  }
+});
+
+// 웹소켓 이벤트 핸들러 모듈 실행
+require("./utils/socketHandler.js")(io);
+
+// HTTP 서버 실행 및 클라이언트 요청 대기
+httpServer.listen(process.env.PORT, () =&gt; {
+  console.log("Node.js HTTP 서버 실행 완료. 포트 : ", process.env.PORT);
+});
+</code></pre></div></div>
+<p>server.js 파일을 만들고, Node.js 서버 실행 시 HTTP 서버가 실행되도록 합니다.<br />
+HTTP 서버 위에서 Express 앱 인스턴스, Socket.io 웹소켓 서버가 동시에 동작하게 됩니다.</p>
+
+<h3 id="nodejs-서버-실행">Node.js 서버 실행</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node server.js
+</code></pre></div></div>
+<p>노드를 이용해서 Javascript 파일을 실행할 수 있습니다.<br />
+Ctrl + C로 Node.js 서버를 종료할 수 있습니다.</p>
+
+<p><mark>nodemon 모듈 설치 명령어</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm i --save-dev nodemon
+</code></pre></div></div>
+<p>node 대신 nodemon 모듈로 실행하면, 코드 변경 시 자동 재시작 되어서 편합니다.</p>
+
+<hr />
+
+<h2 id="nodejs-서버-mongodb-사용법">Node.js 서버 MongoDB 사용법</h2>
+
+<p>백엔드 프로젝트에서 유저 정보, 채팅 메시지 정보를 저장하는 데이터베이스입니다.<br />
+MongoDB에서는 테이블이 아니라 컬렉션을 사용합니다.</p>
+
+<h3 id="컬렉션-스키마-및-모델-생성">컬렉션 스키마 및 모델 생성</h3>
+<p>프로젝트 폴더에 models 폴더 생성 후 user.js, chat.js 파일을 생성합니다.</p>
+
+<p><mark>user.js</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const mongoose = require("mongoose");
+
+// 유저 정보 스키마 정의
+const userSchema = new mongoose.Schema({
+  userName: {
+    type: String,
+    required: [true, "에러메세지"], // 필수 입력값, 없으면 에러 출력
+    unique: true // 중복 불가
+  },
+  socketId: {
+    type: String
+  },
+  isOnline: {
+    type: Boolean,
+    default: false
+  }
+});
+
+// 모델 생성 및 내보내기
+module.exports = mongoose.model("User", userSchema);
+</code></pre></div></div>
+<p>유저 정보 스키마가 적용된 모델을 생성하여 내보내서, 다른 파일에서 사용할 수 있게 합니다.</p>
+
+<p><mark>chat.js</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const mongoose = require("mongoose");
+
+// 채팅 메시지 정보 스키마 정의
+const chatSchema = new mongoose.Schema(
+  {
+    chat: String, // 메시지 내용
+    user: { // 보낸 유저
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+      },
+      name: String
+    }
+  },
+  { timestamps: true }
+)
+
+// 모델 생성 및 내보내기
+module.exports = mongoose.model("Chat", chatSchema);
+</code></pre></div></div>
+<p>채팅 메시지 정보 스키마가 적용된 모델을 생성하여 내보내서, 다른 파일에서 사용할 수 있게 합니다.</p>
+
+<h3 id="mongodb-데이터베이스-연결">MongoDB 데이터베이스 연결</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const mongoose = require("mongoose");
+
+// 환경변수 로드
+require("dotenv").config();
+
+// MongoDB 연결 및 DB 옵션 설정
+mongoose.connect(process.env.DB_URL, {
+  useNewUrlParser: true, // MongoDB 연결 URL을 최신 방식으로 해석 
+  useUnifiedTopology: true // 연결 관리 방식을 최신 엔진으로 변경
+})
+.then(() =&gt; console.log("데이터베이스 연결 성공"))
+.catch(err =&gt; console.error("DB 연결 에러 : ", err));
+</code></pre></div></div>
+<p>Node.js 백엔드 서버 app.js 파일에 mongoose 모듈을 추가하고 몽고DB에 연결합니다.<br />
+DB 연결은 별도 db.js 파일이나 server.js에서 처리하는 경우도 많습니다.</p>
+
+<h3 id="db-컨트롤러-함수-생성">DB 컨트롤러 함수 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 유저 모델 import
+const User = require('../models/User');
+
+const userController = {}
+
+// 유저 정보 저장 함수
+userController.saveUser = async (userName, socketId) =&gt; {
+  // 이미 있는 유저인지 확인
+  let user = await User.findOne({ userName: userName });
+
+  // 신규 유저 정보 생성
+  if (!user) {
+    user = new User({
+      userName: userName,
+      socketId: sid,
+      isOnline: true
+    }
+  }
+  
+  // 기존 유저 정보 업데이트
+  user.socketId = socketId;
+  user.isOnline = true;
+
+  // 유저 정보 저장
+  await user.save();
+  return user;
+}
+
+module.exports = userController;
+</code></pre></div></div>
+<p>/controllers/userController.js 파일 생성 후 유저 테이블 조작 함수를 작성합니다.</p>
+
+<hr />
+
+<h2 id="reactjs-웹소켓-클라이언트-구축">React.js 웹소켓 클라이언트 구축</h2>
+
+<h3 id="소켓-클라이언트-라이브러리-추가">소켓 클라이언트 라이브러리 추가</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"socket.io-client": "^4.7.2",
+</code></pre></div></div>
+<p>package.json 파일 dependencies에 Socket.IO 클라이언트 라이브러리를 추가합니다.</p>
+
+<h3 id="소켓-클라이언트-코드-작성">소켓 클라이언트 코드 작성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import {io} from "socket.io-client";
+
+// 소켓 클라이언트 인스턴스 생성
+const socket = io("http://백엔드서버주소:포트", {
+    query: {classCode}, // 백엔드 서버 연결 시 쿼리 파라미터 함께 전송
+    autoConnect: false, // 기본값 : true (소켓 클라이언트 인스턴스 생성 시 백엔드 서버 자동 연결)
+    transports: ['websocket','polling'], // 연결 방식 우선순위 지정
+    withCredentials: true, // 크로스 도메인 요청 시 쿠키, 인증 헤더 등 포함
+    timeout: 5000, // 서버 연결 시도 후 5초 안에 응답이 없으면 실패 처리
+    reconnection: true, // 연결이 끊겼을 때, 자동 재연결 허용
+    reconnectionAttempts: 10, // 자동 재연결 시도 횟수 (10번)
+    reconnectionDelay: 2000, // 재연결 시도 간격 (2초)
+});
+
+// 소켓 클라이언트 인스턴스 내보내기
+export default socket;
+</code></pre></div></div>
+<p>src/utils/socket.js 파일 생성 후 Socket.IO 클라이언트 코드를 작성합니다.</p>
+
+<h3 id="소켓-클라이언트-메시지-전송">소켓 클라이언트 메시지 전송</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import socket from "/utils/socket";
+
+// 소켓 백엔드 서버 수동 연결
+// 소켓 인스턴스 옵션 autoConnect: false인 경우
+socket.connect();
+
+// 소켓 서버에 이벤트 전송
+socket.emit("이벤트명", 전송할데이터);
+또는
+socket.emit("이벤트명", 전송할데이터, (res) =&gt; {
+  // 서버에서 acknowledgement로 응답한 경우 실행되는 콜백함수 작성
+  console.log("콜백 데이터 : ", res);
+
+  if (res?.succese) {
+    // 서버 작업 성공 시 처리
+  }
+});
+</code></pre></div></div>
+<p>소켓을 사용하려는 컴포넌트에서 소켓 생성 유틸 import 후, 백엔드 서버에 연결합니다.<br />
+소켓 클라이언트 인스턴스는 브라우저 탭마다 하나씩 생성될 수 있습니다.<br />
+브라우저 탭을 종료하면 TCP 연결이 끊기면서 소켓 백엔드 서버가 “disconnect” 이벤트를 감지합니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories#web-dev" class="page__taxonomy-item" rel="tag">Web 개발</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-08-08">2025-08-08</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">❮</a>
+    
+    
+      <a href="/web-dev/2025-08-07-2" class="pagination--pager" title="타입스크립트 라이브러리 설치 및 사용법
+">❯</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">최신 글</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-08-07-2" rel="permalink">타입스크립트 라이브러리 설치 및 사용법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-08-07T00:00:00+00:00">2025-08-07</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-08-07-1" rel="permalink">리액트에서 타입스크립트 코드 작성 방법 / 타입스크립트 + 리액트 사용법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-08-07T00:00:00+00:00">2025-08-07</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-08-06-1" rel="permalink">Vue 프로젝트 QRCode 공통 컴포넌트 개발
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-08-06T00:00:00+00:00">2025-08-06</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-08-05-1" rel="permalink">타입스크립트 사용하는 리액트 프로젝트 구축 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-08-05T00:00:00+00:00">2025-08-05</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>
