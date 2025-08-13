@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 웹소켓 사용법 / WebSocket으로 실시간 소통 채팅앱 개발 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#http-웹소켓-프로토콜-차이">HTTP, 웹소켓 프로토콜 차이</a><ul><li><a href="#http-프로토콜">HTTP 프로토콜</a></li><li><a href="#웹소켓-프로토콜">웹소켓 프로토콜</a></li></ul></li><li><a href="#nodejs-백엔드-웹소켓-서버-구축">Node.js 백엔드 웹소켓 서버 구축</a><ul><li><a href="#nodejs-프로젝트-초기화">Node.js 프로젝트 초기화</a></li><li><a href="#nodejs-프로젝트-모듈-설치">Node.js 프로젝트 모듈 설치</a></li><li><a href="#환경변수-파일-생성">환경변수 파일 생성</a></li><li><a href="#express-앱-인스턴스-생성">Express 앱 인스턴스 생성</a></li><li><a href="#웹소켓-이벤트-핸들러-작성">웹소켓 이벤트 핸들러 작성</a></li><li><a href="#http-서버-생성-및-웹소켓-서버-실행">HTTP 서버 생성 및 웹소켓 서버 실행</a></li><li><a href="#nodejs-서버-실행">Node.js 서버 실행</a></li></ul></li><li><a href="#nodejs-서버-mongodb-사용법">Node.js 서버 MongoDB 사용법</a><ul><li><a href="#컬렉션-스키마-및-모델-생성">컬렉션 스키마 및 모델 생성</a></li><li><a href="#mongodb-데이터베이스-연결">MongoDB 데이터베이스 연결</a></li><li><a href="#db-컨트롤러-함수-생성">DB 컨트롤러 함수 생성</a></li></ul></li><li><a href="#reactjs-웹소켓-클라이언트-개발">React.js 웹소켓 클라이언트 개발</a><ul><li><a href="#소켓-클라이언트-라이브러리-추가">소켓 클라이언트 라이브러리 추가</a></li><li><a href="#소켓-클라이언트-코드-작성">소켓 클라이언트 코드 작성</a></li><li><a href="#소켓-클라이언트-메시지-전송">소켓 클라이언트 메시지 전송</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#http-웹소켓-프로토콜-차이">HTTP, 웹소켓 프로토콜 차이</a><ul><li><a href="#http-프로토콜">HTTP 프로토콜</a></li><li><a href="#웹소켓-프로토콜">웹소켓 프로토콜</a></li></ul></li><li><a href="#nodejs-백엔드-웹소켓-서버-구축">Node.js 백엔드 웹소켓 서버 구축</a><ul><li><a href="#nodejs-프로젝트-초기화">Node.js 프로젝트 초기화</a></li><li><a href="#nodejs-프로젝트-모듈-설치">Node.js 프로젝트 모듈 설치</a></li><li><a href="#환경변수-파일-생성">환경변수 파일 생성</a></li><li><a href="#express-앱-인스턴스-생성">Express 앱 인스턴스 생성</a></li><li><a href="#웹소켓-이벤트-핸들러-작성">웹소켓 이벤트 핸들러 작성</a></li><li><a href="#http-서버-생성-및-웹소켓-서버-실행">HTTP 서버 생성 및 웹소켓 서버 실행</a></li><li><a href="#nodejs-서버-실행">Node.js 서버 실행</a></li></ul></li><li><a href="#nodejs-서버-mongodb-사용법">Node.js 서버 MongoDB 사용법</a><ul><li><a href="#컬렉션-스키마-및-모델-생성">컬렉션 스키마 및 모델 생성</a></li><li><a href="#mongodb-데이터베이스-연결">MongoDB 데이터베이스 연결</a></li><li><a href="#db-컨트롤러-함수-생성">DB 컨트롤러 함수 생성</a></li></ul></li><li><a href="#reactjs-웹소켓-클라이언트-개발">React.js 웹소켓 클라이언트 개발</a><ul><li><a href="#소켓-클라이언트-라이브러리-추가">소켓 클라이언트 라이브러리 추가</a></li><li><a href="#소켓-클라이언트-연결">소켓 클라이언트 연결</a></li><li><a href="#소켓-클라이언트-통신-예시">소켓 클라이언트 통신 예시</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -562,37 +562,55 @@ module.exports = app;
 <p>app.js 파일을 만들고, Node.js 서버에서 실행할 Express 앱 인스턴스를 생성합니다.</p>
 
 <h3 id="웹소켓-이벤트-핸들러-작성">웹소켓 이벤트 핸들러 작성</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const userController = require(../controllers/userController);
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// DB 컨트롤러 import
+const userController = require("../controllers/userController");
+const chatController = require("../controllers/chatController");
 
 // server.js에서 socket.io 서버 인스턴스 전달 받을 예정
 module.exports = (io) =&gt; {
-  // 웹소켓 연결 이벤트 수신
+  // 웹소켓 연결 이벤트 수신 리스너
   // 매개변수 socket : 연결된 클라이언트 정보
   io.on("connection", (socket) =&gt; {
     console.log("방금 연결된 클라이언트 연결 ID : ", socket.id);
 
-    // 클라이언트에서 보낸 "join" 이벤트 수신
+    // 클라이언트에서 보낸 "join" 이벤트 수신 리스너
     socket.on("join", async (userName, callback) =&gt; {
       try {
         // 소켓 입장 유저 정보 DB 저장 및 조회
         const user = await userController.saveUser(userName, socket.id);
 
+        // 시스템 메시지 생성
+        const welcomeChat = {
+          chat: "${user.name} 님이 채팅방에 들어왔습니다.",
+          user: { id: null, name: "system" };
+        };
+
+        // 소켓에 접속한 모든 클라이언트에게 "message" 이벤트 전송 (Broadcast)
+        io.emit("message", welcomeChat);
+
         // 콜백함수 호출 및 데이터 전달
         callback({ succese: true, user: user });
+
       } catch (error) {
         callback({ succese: false, error: error.message });
       }
     });
 
-    // 클라이언트에서 보낸 "message" 이벤트 수신
-    socket.on("message", (msg) =&gt; {
+    // 클라이언트에서 보낸 "sendMessage" 이벤트 수신 리스너
+    socket.on("sendMessage", async (msg) =&gt; {
       console.log("받은 메시지 : ", msg);
 
-      // 모든 클라이언트에게 "message "이벤트 전송 (Broadcast)
-      io.emit("message", msg);
+      // 메시지 보낸 유저 정보 조회
+      const user = await userController.getUser(socket.id);
+
+      // 소켓 메시지 DB 저장
+      const chat = await chatController.savechat(msg, user);
+
+      // 소켓에 접속한 모든 클라이언트에게 "message" 이벤트 전송 (Broadcast)
+      io.emit("message", chat);
     });
 
-    // 연결 해제 이벤트 수신
+    // 연결 해제 이벤트 수신 리스너
     socket.on("disconnect", () =&gt; {
       console.log("클라이언트 연결 종료 : ", socket.id);
     });
@@ -687,9 +705,9 @@ const chatSchema = new mongoose.Schema(
     user: { // 보낸 유저
       id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User" // User 테이블 참조
       },
-      name: String
+      userName: String
     }
   },
   { timestamps: true }
@@ -718,6 +736,7 @@ mongoose.connect(process.env.DB_URL, {
 DB 연결은 별도 db.js 파일이나 server.js에서 처리하는 경우도 많습니다.</p>
 
 <h3 id="db-컨트롤러-함수-생성">DB 컨트롤러 함수 생성</h3>
+<p><mark>유저 컨트롤러 개발</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 유저 모델 import
 const User = require('../models/User');
 
@@ -732,7 +751,7 @@ userController.saveUser = async (userName, socketId) =&gt; {
   if (!user) {
     user = new User({
       userName: userName,
-      socketId: sid,
+      socketId: socketId,
       isOnline: true
     }
   }
@@ -741,14 +760,48 @@ userController.saveUser = async (userName, socketId) =&gt; {
   user.socketId = socketId;
   user.isOnline = true;
 
-  // 유저 정보 저장
+  // 유저 정보 DB 저장
   await user.save();
+
+  return user;
+}
+
+// 소켓ID로 유저 정보 조회 함수
+userController.getUser = async (socketId) =&gt; {
+  const user = await User.findOne({ socketId: socketId });
+
+  if (!user) throw new Error("DB에서 유저 정보를 찾을 수 없습니다.");
+
   return user;
 }
 
 module.exports = userController;
 </code></pre></div></div>
 <p>/controllers/userController.js 파일 생성 후 유저 테이블 조작 함수를 작성합니다.</p>
+
+<p><mark>채팅 컨트롤러 개발</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 채팅 모델 import
+const Chat = require('../models/Chat');
+
+const chatController = {}
+
+// 채팅 메시지 저장 함수
+chatController.saveChat = async (msg, user) =&gt; {
+  const chat = new Chat({
+    chat: msg,
+    user: {
+      id: user._id, // mongoDB에서 부여해주는 데이터 키값
+      userName: user.userName
+    }
+  });
+
+  // 체팅 메시지 DB 저장
+  await chat.save();
+
+  return chat;
+}
+</code></pre></div></div>
+<p>/controllers/chatController.js 파일 생성 후 유저 테이블 조작 함수를 작성합니다.</p>
 
 <hr />
 
@@ -761,11 +814,11 @@ module.exports = userController;
 </code></pre></div></div>
 <p>package.json 파일 dependencies에 Socket.IO 클라이언트 라이브러리를 추가합니다.</p>
 
-<h3 id="소켓-클라이언트-코드-작성">소켓 클라이언트 코드 작성</h3>
+<h3 id="소켓-클라이언트-연결">소켓 클라이언트 연결</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import {io} from "socket.io-client";
 
 // 소켓 클라이언트 인스턴스 생성
-const socket = io("http://백엔드서버주소:포트", {
+const socket = io("http://백엔드서버주소:포트/소켓방고유값(Namespace)", {
     query: {classCode}, // 백엔드 서버 연결 시 쿼리 파라미터 함께 전송
     autoConnect: false, // 기본값 : true (소켓 클라이언트 인스턴스 생성 시 백엔드 서버 자동 연결)
     transports: ['websocket','polling'], // 연결 방식 우선순위 지정
@@ -781,24 +834,75 @@ export default socket;
 </code></pre></div></div>
 <p>src/utils/socket.js 파일 생성 후 Socket.IO 클라이언트 코드를 작성합니다.</p>
 
-<h3 id="소켓-클라이언트-메시지-전송">소켓 클라이언트 메시지 전송</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import socket from "/utils/socket";
+<h3 id="소켓-클라이언트-통신-예시">소켓 클라이언트 통신 예시</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import socket from "./utils/socket";
 
-// 소켓 백엔드 서버 수동 연결 (소켓 인스턴스 옵션 autoConnect: false인 경우)
-// 소켓 서버 연결 시 "connection" 이벤트 발생
-socket.connect();
+function App() {
 
-// 소켓 서버에 이벤트 전송
-socket.emit("이벤트명", 전송할데이터);
-또는
-socket.emit("이벤트명", 전송할데이터, (res) =&gt; {
-  // 서버에서 acknowledgement로 응답한 경우 실행되는 콜백함수 작성
-  console.log("콜백 데이터 : ", res);
+  // 리액트 상태 선언
+  const [user, setUser] = useState(null);
+  const [message, setMessage] = useState("");
+  const [messageList, setMessageList] = useState([]);
 
-  if (res?.succese) {
-    // 서버 작업 성공 시 처리
+  useEffect(() =&gt; {
+
+    // 소켓 백엔드 서버 수동 연결 (소켓 인스턴스 옵션 autoConnect: false인 경우)
+    // 소켓 서버 연결 시 "connection" 이벤트 발생
+    socket.connect();
+
+    // 소켓 서버에서 보낸 "message" 이벤트 수신 리스너 등록
+    socket.on("message", (msg) =&gt; {
+
+      // 받은 메시지 객체 리스트 추가
+      setMessageList((prevState) =&gt; prevState.concat(msg));
+    });
+
+    // 유저 입장
+    userJoin();
+
+    // 컴포넌트 unmount 시
+    return () =&gt; {
+      // 소켓에 등록한 이벤트 리스너 제거
+      socket.off("message");
+
+      // 소켓 연결 해제
+      socket.disconnect();
+    };
+
+  }, []);
+
+  // 유저 입장 시 호출되는 함수
+  const userJoin = () =&gt; {
+    const userName = prompt("이름을 입력하세요.");
+
+    socket.emit("join", userName, (res) =&gt; {
+      // 서버에서 acknowledgement로 응답한 경우 실행되는 콜백함수
+      console.log("콜백 데이터 : ", res);
+
+      // 서버 작업 성공 시 처리
+      if (res?.succese) {
+        // 유저 상태 저장
+        setUser(res.user);
+      }
+    });
   }
-});
+
+  // 메시지 전송 버튼 클릭 시 함수
+  const sendMessage = () =&gt; {
+
+    // 소켓 서버에 "sendMessage" 이벤트 전송
+    socket.emit("sendMessage", message);
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;div className="App"&gt;
+        &lt;채팅리스트컴포넌트 messageList={messageList} user={user} /&gt;
+        &lt;채팅입력컴포넌트 message={message} setMessage={setMessage} sendMessage={sendMessage} /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  )
+}
 </code></pre></div></div>
 <p>소켓을 사용하려는 컴포넌트에서 소켓 생성 유틸 import 후, 백엔드 서버에 연결합니다.<br />
 소켓 클라이언트 인스턴스는 브라우저 탭마다 하나씩 생성될 수 있습니다.<br />
