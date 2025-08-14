@@ -818,6 +818,7 @@ chatController.saveChat = async (msg, user) =&gt; {
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import {io} from "socket.io-client";
 
 // 소켓 클라이언트 인스턴스 생성
+// 기본 Namespace "/"가 아닌 경우, 소켓 서버에 Namespace가 있어야만 입장 가능
 const socket = io("http://백엔드서버주소:포트/소켓방고유값(Namespace)", {
     query: {classCode}, // 백엔드 서버 연결 시 쿼리 파라미터 함께 전송
     autoConnect: false, // 기본값 : true (소켓 클라이언트 인스턴스 생성 시 백엔드 서버 자동 연결)
