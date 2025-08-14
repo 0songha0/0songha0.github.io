@@ -1181,10 +1181,10 @@ var store = [{
         "url": "/tool/2025-04-20-1",
         "teaser": null
       },{
-        "title": "IntelliJ SpringBoot + Vue 프로젝트, 소켓 + 카프카 프로젝트 세팅 방법",
-        "excerpt":"AIDT 실시간 퀴즈 프로젝트를 인수인계 받아 세팅하는 과정을 정리하였습니다. IntelliJ SpringBoot + Vue 프로젝트 세팅 Java 17 설치 및 설정 https://0songha0.github.io/tool/2024-05-29-1 위 글을 참고하여 JAVA 설치 및 환경변수 설정을 완료하면 됩니다. 현재 프로젝트를 잠시 열어서 Java 버전 확인하고 맞게 설치하는 것이 좋습니다. IDE가 아닌 터미널에서 SpringBoot Gradle/Maven 빌드 또는 Kafka...","categories": ["web-dev"],
+        "title": "IntelliJ Vue + SpringBoot 프로젝트, 소켓 + 카프카 프로젝트 세팅 방법",
+        "excerpt":"AIDT 실시간 퀴즈 프로젝트를 인수인계 받아 세팅하는 과정을 정리하였습니다. IntelliJ SpringBoot + Vue 프로젝트 세팅 Java 17 설치 및 설정 https://0songha0.github.io/tool/2024-05-29-1 위 글을 참고하여 JAVA 설치 및 환경변수 설정을 완료하면 됩니다. 현재 프로젝트를 잠시 열어서 Java 버전 확인하고 맞게 설치하는 것이 좋습니다. IDE가 아닌 터미널에서 SpringBoot Gradle/Maven 빌드 또는 Kafka...","categories": ["kafka"],
         "tags": [],
-        "url": "/web-dev/2025-04-21-1",
+        "url": "/kafka/2025-04-21-1",
         "teaser": null
       },{
         "title": "카프카 (apache kafka) 기초 개념 / 카프카 관련 용어 정리",
@@ -1431,5 +1431,11 @@ var store = [{
         "excerpt":"HTTP, 웹소켓 프로토콜 차이 HTTP 프로토콜 웹에서 클라이언트가 서버에 요청을 보내면 응답을 반환하는 요청-응답 기반의 단방향 통신 프로토콜입니다. HTTP 통신은 서버 응답 후 연결이 끊기므로 연결에 지속성이 없습니다. 웹소켓 프로토콜 클라이언트와 서버가 초기 연결을 맺은 뒤, 양방향으로 실시간 데이터를 주고받을 수 있는 프로토콜입니다. Socket.IO 라이브러리는 네임스페이스로 채널을 구분하여 클라이언트, 서버를...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-08-08-1",
+        "teaser": null
+      },{
+        "title": "실시간 퀴즈 팝업 Vue 프로젝트, 소켓 + 카프카 프로젝트 분석",
+        "excerpt":"프로젝트 구조 분석 프로젝트 구성 Vue 프로젝트 (프론트엔드) : 실시간 퀴즈 팝업 화면 및 소켓 클라이언트 역할로 소켓 서버와 실시간 통신 SpringBoot 프로젝트 (백엔드) : 유저 정보 검증, 소켓 서버로 입장 요청 전달, DB 저장, S3 파일 저장 등 백엔드 처리 SpringBoot 소켓+카프카 프로젝트 (백엔드) : 소켓 서버 역할, 네임스페이스...","categories": ["kafka"],
+        "tags": [],
+        "url": "/kafka/2025-08-13-1",
         "teaser": null
       }]
