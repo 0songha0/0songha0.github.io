@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 240</span>
+      <span class="nav__total">🌴 Total Posts: 239</span>
     </li> -->
     
     
@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 실시간 퀴즈 팝업 Vue 프로젝트, 소켓 + 카프카 프로젝트 분석</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#프로젝트-구조-분석">프로젝트 구조 분석</a><ul><li><a href="#프로젝트-구성">프로젝트 구성</a></li><li><a href="#프로젝트-역할-요약">프로젝트 역할 요약</a></li></ul></li><li><a href="#vue-프로젝트-프론트엔드-분석">Vue 프로젝트 (프론트엔드) 분석</a><ul><li><a href="#유저-입장-화면-vue-로직">유저 입장 화면 Vue 로직</a></li><li><a href="#유저-입장-컴포저블-함수-로직">유저 입장 컴포저블 함수 로직</a></li><li><a href="#유저-소통-화면-vue-로직">유저 소통 화면 Vue 로직</a></li><li><a href="#소켓-스토어-함수-로직">소켓 스토어 함수 로직</a></li><li><a href="#소켓-이벤트-전송-로직">소켓 이벤트 전송 로직</a></li></ul></li><li><a href="#springboot-프로젝트-백엔드-분석">SpringBoot 프로젝트 (백엔드) 분석</a><ul><li><a href="#유저-객체-유효성-검사-백엔드-api">유저 객체 유효성 검사 백엔드 API</a></li><li><a href="#소켓-namespace-생성-요청-백엔드-api">소켓 Namespace 생성 요청 백엔드 API</a></li></ul></li><li><a href="#springboot-소켓카프카-프로젝트-백엔드-분석">SpringBoot 소켓+카프카 프로젝트 (백엔드) 분석</a><ul><li><a href="#소켓-서버-실행">소켓 서버 실행</a></li><li><a href="#소켓-서버-namespace-생성-백엔드-api">소켓 서버 Namespace 생성 백엔드 API</a></li><li><a href="#카프카-리스너-등록">카프카 리스너 등록</a></li><li><a href="#유저-소켓-입장-백엔드-api">유저 소켓 입장 백엔드 API</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#프로젝트-구조-분석">프로젝트 구조 분석</a><ul><li><a href="#프로젝트-구성">프로젝트 구성</a></li><li><a href="#프로젝트-역할-요약">프로젝트 역할 요약</a></li></ul></li><li><a href="#vue-프로젝트-분석-프론트엔드">Vue 프로젝트 분석 (프론트엔드)</a><ul><li><a href="#소켓-서버-url-환경변수-설정">소켓 서버 URL 환경변수 설정</a></li><li><a href="#유저-입장-화면-vue-로직">유저 입장 화면 Vue 로직</a></li><li><a href="#유저-입장-컴포저블-함수-로직">유저 입장 컴포저블 함수 로직</a></li><li><a href="#유저-소통-화면-vue-로직">유저 소통 화면 Vue 로직</a></li><li><a href="#소켓-스토어-함수-로직">소켓 스토어 함수 로직</a></li><li><a href="#소켓-이벤트-전송-로직">소켓 이벤트 전송 로직</a></li></ul></li><li><a href="#springboot-프로젝트-분석-백엔드">SpringBoot 프로젝트 분석 (백엔드)</a><ul><li><a href="#application-서버구분yml-설정">application-서버구분.yml 설정</a></li><li><a href="#유저-객체-유효성-검사-백엔드-api">유저 객체 유효성 검사 백엔드 API</a></li><li><a href="#소켓-namespace-생성-요청-백엔드-api">소켓 Namespace 생성 요청 백엔드 API</a></li></ul></li><li><a href="#springboot-소켓카프카-프로젝트-분석-백엔드">SpringBoot 소켓+카프카 프로젝트 분석 (백엔드)</a><ul><li><a href="#웹소켓-라이브러리">웹소켓 라이브러리</a></li><li><a href="#vue-url-소켓-서버-url-설정">Vue URL, 소켓 서버 URL 설정</a></li><li><a href="#netty-웹소켓-서버-생성">netty 웹소켓 서버 생성</a></li><li><a href="#소켓-자동-실행-및-종료-처리">소켓 자동 실행 및 종료 처리</a></li><li><a href="#소켓-서버-namespace-생성-백엔드-api">소켓 서버 Namespace 생성 백엔드 API</a></li><li><a href="#카프카-리스너-등록">카프카 리스너 등록</a></li><li><a href="#유저-소켓-입장-백엔드-api">유저 소켓 입장 백엔드 API</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -491,7 +491,13 @@ classCode를 네임스페이스로 구분하여 해당 룸으로 입장한 유�
 
 <hr />
 
-<h2 id="vue-프로젝트-프론트엔드-분석">Vue 프로젝트 (프론트엔드) 분석</h2>
+<h2 id="vue-프로젝트-분석-프론트엔드">Vue 프로젝트 분석 (프론트엔드)</h2>
+
+<h3 id="소켓-서버-url-환경변수-설정">소켓 서버 URL 환경변수 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>VITE_SOCKET_URL=http://10.10.1.87:8084
+</code></pre></div></div>
+<p>.env.서버구분 파일에 SpringBoot 소켓 서버 URL을 작성합니다.<br />
+백엔드 서버 application-서버구분.yml 파일에 socket io 정보로 작성된 포트와 동일해야 통신이 가능합니다.</p>
 
 <h3 id="유저-입장-화면-vue-로직">유저 입장 화면 Vue 로직</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
@@ -679,7 +685,7 @@ export const useSocket = defineStore("socket", () =&gt; {
 
     // 소켓이 연결되지 않은 경우
     if (!socket[getCode].connected) {
-      // 소켓 연결
+      // 소켓 수동 연결
       socket[getCode].connect();
 
       // 소켓 연결 이벤트 리스너 등록
@@ -783,7 +789,16 @@ const mediaSendMessage = (socketType, data) =&gt; {
 
 <hr />
 
-<h2 id="springboot-프로젝트-백엔드-분석">SpringBoot 프로젝트 (백엔드) 분석</h2>
+<h2 id="springboot-프로젝트-분석-백엔드">SpringBoot 프로젝트 분석 (백엔드)</h2>
+
+<p>Vue 프로젝트의 백엔드 프로젝트인 SpringBoot 프로젝트에서 소켓 프로젝트에 HTTP 요청할 수 있습니다.</p>
+
+<h3 id="application-서버구분yml-설정">application-서버구분.yml 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>customSocket:
+  server: "http://10.10.1.87:8088"
+</code></pre></div></div>
+<p>위와 같이, 소켓 포트가 아닌 소켓 프로젝트 톰캣 포트가 작성되어 있습니다.<br />
+웹소켓 통신이 아니라 HTTP 통신을 하기 위함입니다.</p>
 
 <h3 id="유저-객체-유효성-검사-백엔드-api">유저 객체 유효성 검사 백엔드 API</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@RestController
@@ -849,7 +864,8 @@ public class ClassroomController {
   }
 }
 </code></pre></div></div>
-<p>소켓 서버로 Namespace 생성 요청을 보내기 위한 컨트롤러입니다.</p>
+<p>소켓 서버로 Namespace 생성 요청을 보내기 위한 컨트롤러입니다.<br />
+웹소켓 서버에 HTTP 요청을 보내는 서비스를 호출합니다.</p>
 
 <p><mark>서비스 코드</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Service
@@ -905,14 +921,123 @@ public class ClassroomService {
   }
 }
 </code></pre></div></div>
-<p>소켓 서버 API를 호출하여 유저를 입장시키기 위한 게이트웨이 역할을 하는 서비스입니다.</p>
+<p>소켓 서버 Namespace 생성 API를 호출하여, 유저를 입장시키기 위한 전처리 및 게이트웨이 역할을 하는 서비스입니다.</p>
 
 <hr />
 
-<h2 id="springboot-소켓카프카-프로젝트-백엔드-분석">SpringBoot 소켓+카프카 프로젝트 (백엔드) 분석</h2>
+<h2 id="springboot-소켓카프카-프로젝트-분석-백엔드">SpringBoot 소켓+카프카 프로젝트 분석 (백엔드)</h2>
 
-<h3 id="소켓-서버-실행">소켓 서버 실행</h3>
-<p>작성예정</p>
+<h3 id="웹소켓-라이브러리">웹소켓 라이브러리</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dependencies {
+  implementation 'com.corundumstudio.socketio:netty-socketio:2.0.12'
+}
+</code></pre></div></div>
+<p>build.gradle 파일에 netty 소켓 IO 라이브러리가 추가되어 있습니다.</p>
+
+<h3 id="vue-url-소켓-서버-url-설정">Vue URL, 소켓 서버 URL 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 톰캣 서버 포트 설정 (HTTP 통신용)
+server:
+  port: 8088
+  error:
+    whitelabel:
+      enabled: false
+    include-exception: false
+    include-stacktrace: never
+    include-message: never
+    path: "/custom-error"
+
+// 통신을 주고받을 Vue URL 설정
+vue-port: "http://10.10.1.87:8082"
+
+// netty 소켓 서버 포트 설정 (웹소켓 통신용)
+socket:
+  io:
+    server: 0.0.0.0 // 모든 IP에서 오는 요청 수신 대기
+    port: 8084 // 다른 서비스와 같은 포트 사용 시 충돌 에러 발생
+
+// 스프링 프로젝트명, 카프카 브로커 서버 목록 설정
+spring:
+  application:
+    name: 프로젝트명
+  kafka:
+    bootstrap-servers: 10.10.2.7:9092,10.10.2.8:9092,10.10.2.9:9092
+</code></pre></div></div>
+<p>application-서버구분.yml 파일에 소켓 서버 포트, 통신을 주고받을 Vue URL, 소켓 포트, 카프카 브로커 서버 목록이 작성되어 있습니다.</p>
+
+<h3 id="netty-웹소켓-서버-생성">netty 웹소켓 서버 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package kr.co.프로젝트명.socket.config;
+
+import com.corundumstudio.socketio.SocketIOServer;
+import com.corundumstudio.socketio.Transport;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class SocketIOConfig {
+
+  @Value("${socket.io.server}")
+  private String server;
+  @Value("${socket.io.port}")
+  private int port;
+  @Value("${vue-port}")
+  private String vuePort;
+
+  @Bean
+  public SocketIOServer socketIOServer() {
+    com.corundumstudio.socketio.Configuration config = new com.corundumstudio.socketio.Configuration();
+    config.setHostname(server);
+    config.setPort(port);
+    config.setMaxFramePayloadLength(1024 * 1024);  // 1MB로 설정 예시
+    config.setEnableCors(true);
+    config.setAllowCustomRequests(true);
+    config.setOrigin("*"); // CORS 설정 : 운영 환경에서는 운영 도메인 지정 필요
+    config.setTransports(Transport.WEBSOCKET, Transport.POLLING);
+    SocketIOServer server = new SocketIOServer(config);
+    return server;
+  }
+}
+</code></pre></div></div>
+<p>SocketIOConfig를 Bean으로 등록하여, 애플리케이션 실행 시 톰캣 서버와 별도로 실행되는 Netty 웹소켓 서버가 생성됩니다.</p>
+
+<h3 id="소켓-자동-실행-및-종료-처리">소켓 자동 실행 및 종료 처리</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package kr.co.프로젝트명.socket.lifeCycle;
+
+import com.corundumstudio.socketio.SocketIOServer;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+@Component
+@Slf4j
+@RequiredArgsConstructor
+public class SocketIOServerLifeCycle {
+
+  private final SocketIOServer server;
+
+  private boolean isServerRunning = false;
+
+  @PostConstruct
+  public void start(){
+    if (!isServerRunning) {
+      server.start();
+      isServerRunning = true;
+      log.info("소켓 서버 시작 {}", server.getConfiguration().toString());
+      return;
+    }
+    log.info("이미 시작중 {}", server.getConfiguration().toString());
+  }
+
+  @PreDestroy
+  public void stop(){
+    server.stop();
+    log.info("소켓 서버 DIE");
+  }
+}
+</code></pre></div></div>
+<p>@PostConstruct, @PreDestroy 어노테이션을 이용하여 스프링부트 시작 및 종료 시 소켓이 자동 시작 및 종료되도록 설정합니다.</p>
 
 <h3 id="소켓-서버-namespace-생성-백엔드-api">소켓 서버 Namespace 생성 백엔드 API</h3>
 <p><mark>컨트롤러 코드</mark></p>
@@ -1048,7 +1173,7 @@ public class NameSpaceService {
   }
 
   /**
-   * Namespace 리스너 등록 함수
+   * 소켓 Namespace 이벤트 리스너 등록 함수
    */
   public void setupNamespaceListeners(SocketIONamespace namespace){
       // 소켓 연결 이벤트 리스너 등록

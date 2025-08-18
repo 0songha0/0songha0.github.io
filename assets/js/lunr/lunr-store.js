@@ -1385,12 +1385,6 @@ var store = [{
         "url": "/web-dev/2025-07-24-1",
         "teaser": null
       },{
-        "title": "Vue + SpringBoot 프로젝트 소켓 통신 구현 방법",
-        "excerpt":"SpringBoot 프로젝트 소켓 서버 구현 웹소켓 라이브러리 추가 dependencies { implementation 'com.corundumstudio.socketio:netty-socketio:2.0.12' } build.gradle 파일에 netty 소켓 IO 라이브러리를 추가합니다. Vue URL, 소켓 서버 URL 설정 // 톰캣 서버 포트 설정 (HTTP 통신용) server: port: 8088 error: whitelabel: enabled: false include-exception: false include-stacktrace: never include-message: never path: \"/custom-error\" // 통신을...","categories": ["web-dev"],
-        "tags": [],
-        "url": "/web-dev/2025-07-24-2",
-        "teaser": null
-      },{
         "title": "postMessage 통신 방법 / 부모창, 자식 팝업 간 데이터 전달 방법",
         "excerpt":"postMessage 통신 시, 별도의 CORS 설정은 필요하지 않습니다. 부모창 → 자식 팝업 메시지 전송 방법 부모창에서 postMessage 전송 // 자식 팝업 열기 const popup = window.open(\"http://자식팝업IP:포트/팝업페이지경로?파라미터=값\", \"_blank\"); // 자식 팝업에 postMessage 보내기 setTimeout(() =&gt; { popup.postMessage({ message: \"메시지 값\" }, \"http://자식팝업IP:포트\"); }, 500); 부모창에서 자식 팝업으로 postMessage 전송 방법입니다. 자식...","categories": ["web-dev"],
         "tags": [],
