@@ -1,9 +1,9 @@
 ---
-title: "파이썬 / Java"
+title: "Python / Java"
 layout: category
 permalink: /python-java
 author_profile: true
-taxonomy: 파이썬 / Java
+taxonomy: Python / Java
 sidebar:
   nav: "categories"
 pagination:

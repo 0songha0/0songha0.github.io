@@ -33,14 +33,14 @@ categories:
     url: /op
   - title: "윈도우 / Tool"
     url: /tool
-  - title: "파이썬 / Java"
+  - title: "Python / Java"
     url: /python-java
   - title: "네트워크 / 보안"
     url: /network
   - title: "엘라스틱서치"
     url: /elk
-  - title: "카프카"
-    url: /kafka
+  - title: "Kafka / Socket"
+    url: /kafka-socket
   - title: "IT Tip"
     url: /it-tip
   - title: "English"
