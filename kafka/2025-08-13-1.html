@@ -1473,13 +1473,14 @@ public class MediaSocketService {
     for (SocketIOClient client : broadcastOperations.getClients()){
       if (!client.getSessionId().toString().equals(media.getSessionId())){
 
+        // 소켓 Namespace 내 Room에 속한 소켓 클라이언트들에게 이벤트 전송
         client.sendEvent(media.getEventName(), media);
       }
     }
   }
 }
 </code></pre></div></div>
-<p>카프카 프로듀서 클래스 함수를 호출하는 서비스 코드입니다.</p>
+<p>카프카 프로듀서 클래스 함수를 호출하거나, 컨슈머 클래스 함수에서 호출하는 서비스 코드입니다.</p>
 
 <p><mark>카프카 프로듀서 코드</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Service
@@ -1597,7 +1598,10 @@ public class MessageConsumer {
   public void consumeMediaMsg(ConsumerRecord&lt;String, Media&gt; record) {
     try {
       String roomId = record.key();
+
+      // 소켓 클라이언트들에게 이벤트 전송하는 함수 호출
       mediaSocketService.tcrSend(roomId, record.value());
+
       log.info("Media 메시지: {}", record.value());
 
     } catch (Exception e) {
