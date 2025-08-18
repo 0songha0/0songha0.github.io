@@ -1428,7 +1428,7 @@ var store = [{
         "teaser": null
       },{
         "title": "실시간 퀴즈 팝업 Vue 프로젝트, 소켓 + 카프카 프로젝트 분석",
-        "excerpt":"프로젝트 구조 분석 프로젝트 구성 Vue 프로젝트 실시간 퀴즈 팝업 화면 및 소켓 클라이언트 역할로 소켓 서버와 실시간 통신 SpringBoot 프로젝트 유저 정보 검증, 소켓 서버로 입장 요청 전달, DB 저장, S3 파일 저장 등 백엔드 처리 SpringBoot 소켓+카프카 프로젝트 소켓 서버 역할, 네임스페이스 단위 실시간 소통 처리, 카프카 프로듀서/컨슈머...","categories": ["kafka-socket"],
+        "excerpt":"프로젝트 구조 분석 프로젝트 구성 Vue 프로젝트 실시간 퀴즈 팝업 화면 및 소켓 클라이언트 역할로 소켓 서버와 실시간 통신 SpringBoot 프로젝트 유저 정보 검증, 소켓 서버로 입장 요청 전달, DB 저장, S3 파일 저장 등 백엔드 처리 SpringBoot 소켓 + 카프카 프로젝트 소켓 서버 역할, 네임스페이스 단위 실시간 소통 처리,...","categories": ["kafka-socket"],
         "tags": [],
         "url": "/kafka-socket/2025-08-13-1",
         "teaser": null
