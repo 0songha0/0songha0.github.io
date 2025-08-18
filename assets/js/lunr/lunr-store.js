@@ -1182,33 +1182,33 @@ var store = [{
         "teaser": null
       },{
         "title": "IntelliJ Vue + SpringBoot 프로젝트, 소켓 + 카프카 프로젝트 세팅 방법",
-        "excerpt":"AIDT 실시간 퀴즈 프로젝트를 인수인계 받아 세팅하는 과정을 정리하였습니다. IntelliJ SpringBoot + Vue 프로젝트 세팅 Java 17 설치 및 설정 https://0songha0.github.io/tool/2024-05-29-1 위 글을 참고하여 JAVA 설치 및 환경변수 설정을 완료하면 됩니다. 현재 프로젝트를 잠시 열어서 Java 버전 확인하고 맞게 설치하는 것이 좋습니다. IDE가 아닌 터미널에서 SpringBoot Gradle/Maven 빌드 또는 Kafka...","categories": ["kafka"],
+        "excerpt":"AIDT 실시간 퀴즈 프로젝트를 인수인계 받아 세팅하는 과정을 정리하였습니다. IntelliJ SpringBoot + Vue 프로젝트 세팅 Java 17 설치 및 설정 https://0songha0.github.io/tool/2024-05-29-1 위 글을 참고하여 JAVA 설치 및 환경변수 설정을 완료하면 됩니다. 현재 프로젝트를 잠시 열어서 Java 버전 확인하고 맞게 설치하는 것이 좋습니다. IDE가 아닌 터미널에서 SpringBoot Gradle/Maven 빌드 또는 Kafka...","categories": ["kafka-socket"],
         "tags": [],
-        "url": "/kafka/2025-04-21-1",
+        "url": "/kafka-socket/2025-04-21-1",
         "teaser": null
       },{
         "title": "카프카 (apache kafka) 기초 개념 / 카프카 관련 용어 정리",
-        "excerpt":"카프카 프로젝트 분석을 위해서 학습한 내용을 정리한 글입니다. 카프카 개념 카프카란? 카프카는 중앙 메시지 허브처럼 동작하는 분산 이벤트 스트리밍 플랫폼입니다. 실시간 데이터 파이프라인, 스트리밍 애플리케이션 구축에 적합합니다. 여러 애플리케이션이 카프카를 통해 메시지 발행(Publish) 하고, 구독(Subscribe) 할 수 있습니다. 링크드인에 데이터를 생성하는 소스 애플리케이션과 데이터를 적재하는 타겟 애플리케이션이 늘어나면서 아키텍처가 복잡해짐에...","categories": ["kafka"],
+        "excerpt":"카프카 프로젝트 분석을 위해서 학습한 내용을 정리한 글입니다. 카프카 개념 카프카란? 카프카는 중앙 메시지 허브처럼 동작하는 분산 이벤트 스트리밍 플랫폼입니다. 실시간 데이터 파이프라인, 스트리밍 애플리케이션 구축에 적합합니다. 여러 애플리케이션이 카프카를 통해 메시지 발행(Publish) 하고, 구독(Subscribe) 할 수 있습니다. 링크드인에 데이터를 생성하는 소스 애플리케이션과 데이터를 적재하는 타겟 애플리케이션이 늘어나면서 아키텍처가 복잡해짐에...","categories": ["kafka-socket"],
         "tags": [],
-        "url": "/kafka/2025-04-25-1",
+        "url": "/kafka-socket/2025-04-25-1",
         "teaser": null
       },{
         "title": "로컬 리눅스 아파치 카프카 설치 및 실행 방법",
-        "excerpt":"로컬 테스트를 위한 아파치 카프카 2.5 설치 방법입니다. 윈도우에서는 .sh 파일을 직접 실행할 수 없어서 리눅스 가상 환경이 필요합니다. IntelliJ에서 도커로 카프카 이미지 설정 후 실행하는게 더 간편합니다. 리눅스 아파치 카프카 설치 및 실행 카프카 바이너리 파일 다운 https://kafka.apache.org/downloads 위 링크에서 Binary downloads: kafka_2.12-2.5.0.tgz 파일 다운로드 후 압축을 해제하여 설치합니다....","categories": ["kafka"],
+        "excerpt":"로컬 테스트를 위한 아파치 카프카 2.5 설치 방법입니다. 윈도우에서는 .sh 파일을 직접 실행할 수 없어서 리눅스 가상 환경이 필요합니다. IntelliJ에서 도커로 카프카 이미지 설정 후 실행하는게 더 간편합니다. 리눅스 아파치 카프카 설치 및 실행 카프카 바이너리 파일 다운 https://kafka.apache.org/downloads 위 링크에서 Binary downloads: kafka_2.12-2.5.0.tgz 파일 다운로드 후 압축을 해제하여 설치합니다....","categories": ["kakafka-socketfka"],
         "tags": [],
-        "url": "/kafka/2025-04-29-1",
+        "url": "/kafka-socket/2025-04-29-1",
         "teaser": null
       },{
         "title": "아파치 카프카 설정 방법 / 브로커, 토픽, 프로듀서, 컨슈머, 스트림즈 옵션 정리",
-        "excerpt":"카프카 브로커 설정 카프카폴더/config/server.properties 파일에 브로커 실행 시 사용되는 설정들을 정의합니다. 브로커 ID 설정 broker.id=0 같은 클러스터 내에서 현재 실행할 브로커 고유 ID를 설정합니다. 브로커 리스너 설정 -- 브로커가 요청을 수신할 주소 설정 (내부 바인딩) listeners=PLAINTEXT://localhost:9092 -- 클라이언트가 접속할 브로커 주소 설정 (외부 연결용) advertised.listeners=PLAINTEXT://localhost:9092 클라이언트는 advertised.listeners에 설정된 브로커 주소:포트를...","categories": ["kafka"],
+        "excerpt":"카프카 브로커 설정 카프카폴더/config/server.properties 파일에 브로커 실행 시 사용되는 설정들을 정의합니다. 브로커 ID 설정 broker.id=0 같은 클러스터 내에서 현재 실행할 브로커 고유 ID를 설정합니다. 브로커 리스너 설정 -- 브로커가 요청을 수신할 주소 설정 (내부 바인딩) listeners=PLAINTEXT://localhost:9092 -- 클라이언트가 접속할 브로커 주소 설정 (외부 연결용) advertised.listeners=PLAINTEXT://localhost:9092 클라이언트는 advertised.listeners에 설정된 브로커 주소:포트를...","categories": ["kafka-socket"],
         "tags": [],
-        "url": "/kafka/2025-04-29-2",
+        "url": "/kafka-socket/2025-04-29-2",
         "teaser": null
       },{
         "title": "카프카 구축 시 참고사항 / 설치형 카프카, SaaS형 카프카 차이 및 장단점",
-        "excerpt":"카프카 구축 시 참고사항 클라우드 서비스 모델 종류 https://0songha0.github.io/op/2025-04-30-1 온프레미스, IaaS, PaaS, SaaS 개념을 정리한 글입니다. 운영 카프카 권장 하드웨어 사양 RAM 32GB (브로커 프로세스용 힙 메모리 6GB, 나머지는 데이터 입출력을 위한 OS 페이지 캐시 영역으로 활용) CPU 24 core (SSL 암호화 및 압축 기능 사용 시 더 높은 사양...","categories": ["kafka"],
+        "excerpt":"카프카 구축 시 참고사항 클라우드 서비스 모델 종류 https://0songha0.github.io/op/2025-04-30-1 온프레미스, IaaS, PaaS, SaaS 개념을 정리한 글입니다. 운영 카프카 권장 하드웨어 사양 RAM 32GB (브로커 프로세스용 힙 메모리 6GB, 나머지는 데이터 입출력을 위한 OS 페이지 캐시 영역으로 활용) CPU 24 core (SSL 암호화 및 압축 기능 사용 시 더 높은 사양...","categories": ["kafka-socket"],
         "tags": [],
-        "url": "/kafka/2025-04-30-1",
+        "url": "/kafka-socket/2025-04-30-1",
         "teaser": null
       },{
         "title": "클라우드 서비스 모델 종류 / 온프레미스, IaaS, PaaS, SaaS 개념 정리",
@@ -1218,27 +1218,27 @@ var store = [{
         "teaser": null
       },{
         "title": "카프카 쉘 스크립트 CLI 종류 및 사용법",
-        "excerpt":"카프카 CLI 종류 Kafka CLI 도구는 카프카 설치 시 bin 폴더에 포함된 쉘 스크립트 (.sh 또는 .bat) 실행 파일입니다. 카프카 클러스터 운영 및 관리 기능들을 CLI (Command Line Interface) 형태로 제공합니다. kafka-server-start.sh 카프카 브로커 실행 kafka-server-stop.sh 카프카 브로커 종료 zookeeper-server-start.sh 주키퍼 서버 실행 zookeeper-server-stop.sh 주키퍼 서버 종료 kafka-topics.sh 토픽 생성,...","categories": ["kafka"],
+        "excerpt":"카프카 CLI 종류 Kafka CLI 도구는 카프카 설치 시 bin 폴더에 포함된 쉘 스크립트 (.sh 또는 .bat) 실행 파일입니다. 카프카 클러스터 운영 및 관리 기능들을 CLI (Command Line Interface) 형태로 제공합니다. kafka-server-start.sh 카프카 브로커 실행 kafka-server-stop.sh 카프카 브로커 종료 zookeeper-server-start.sh 주키퍼 서버 실행 zookeeper-server-stop.sh 주키퍼 서버 종료 kafka-topics.sh 토픽 생성,...","categories": ["kafka-socket"],
         "tags": [],
-        "url": "/kafka/2025-05-02-1",
+        "url": "/kafka-socket/2025-05-02-1",
         "teaser": null
       },{
         "title": "Java 카프카 프로듀서, 컨슈머 애플리케이션 개발 방법",
-        "excerpt":"Java 프로젝트 생성 (공통) 카프카 프로듀서, 컨슈머 애플리케이션은 Java 프로젝트로 개발할 수 있습니다. Javascript, go, Python 등으로도 가능하지만, 공식 지원되는 라이브러리 언어는 Java입니다. IntelliJ Java 프로젝트 생성 방법 File &gt; New &gt; Project… &gt; 아래와 같이 입력 후 Create Name 프로젝트명 입력 Language Java 1.8 이상 선택 Build system Gradle...","categories": ["kafka"],
+        "excerpt":"Java 프로젝트 생성 (공통) 카프카 프로듀서, 컨슈머 애플리케이션은 Java 프로젝트로 개발할 수 있습니다. Javascript, go, Python 등으로도 가능하지만, 공식 지원되는 라이브러리 언어는 Java입니다. IntelliJ Java 프로젝트 생성 방법 File &gt; New &gt; Project… &gt; 아래와 같이 입력 후 Create Name 프로젝트명 입력 Language Java 1.8 이상 선택 Build system Gradle...","categories": ["kafka-socket"],
         "tags": [],
-        "url": "/kafka/2025-05-07-1",
+        "url": "/kafka-socket/2025-05-07-1",
         "teaser": null
       },{
         "title": "카프카 스트림즈 개념 정리 / Java 카프카 스트림즈 애플리케이션 개발 방법",
-        "excerpt":"카프카 스트림즈 개념 정리 카프카 스트림즈를 이용하면 토픽 스트림 데이터 처리 후, 토픽 또는 외부 시스템에 저장할 수 있습니다. 처리할 토픽 파티션이 3개면 스트림즈 애플리케이션 내부에 3개의 태스크가 자동으로 할당됩니다. 파티션 수만큼 생성된 태스크들이 병렬로 데이터를 처리하므로 성능이 좋습니다. 같은 application.id로 스트림즈 애플리케이션들을 실행하면, 프로세스-스레드가 분리되어 일부 프로세스에 장애가 발생해도...","categories": ["kafka"],
+        "excerpt":"카프카 스트림즈 개념 정리 카프카 스트림즈를 이용하면 토픽 스트림 데이터 처리 후, 토픽 또는 외부 시스템에 저장할 수 있습니다. 처리할 토픽 파티션이 3개면 스트림즈 애플리케이션 내부에 3개의 태스크가 자동으로 할당됩니다. 파티션 수만큼 생성된 태스크들이 병렬로 데이터를 처리하므로 성능이 좋습니다. 같은 application.id로 스트림즈 애플리케이션들을 실행하면, 프로세스-스레드가 분리되어 일부 프로세스에 장애가 발생해도...","categories": ["kafka-socket"],
         "tags": [],
-        "url": "/kafka/2025-05-12-1",
+        "url": "/kafka-socket/2025-05-12-1",
         "teaser": null
       },{
         "title": "카프카 커넥트 개념 정리 / Java 카프카 커넥트 개발 방법",
-        "excerpt":"카프카 커넥트 개념 정리 카프카 커넥트를 이용하면 외부 시스템과 카프카 토픽 간 반복적인 데이터 수집 및 전송 파이프라인을 자동화할 수 있습니다. 멀티 스레드로 실행되어 병렬 처리를 지원합니다. 데이터 수집량, 처리량, 오류율 등은 JMX를 통해 모니터링 할 수 있습니다. 커넥트 내부 커넥터는 태스크들을 설정 및 관리하고, 태스크는 데이터 처리를 합니다. MySQL,...","categories": ["kafka"],
+        "excerpt":"카프카 커넥트 개념 정리 카프카 커넥트를 이용하면 외부 시스템과 카프카 토픽 간 반복적인 데이터 수집 및 전송 파이프라인을 자동화할 수 있습니다. 멀티 스레드로 실행되어 병렬 처리를 지원합니다. 데이터 수집량, 처리량, 오류율 등은 JMX를 통해 모니터링 할 수 있습니다. 커넥트 내부 커넥터는 태스크들을 설정 및 관리하고, 태스크는 데이터 처리를 합니다. MySQL,...","categories": ["kafka-socket"],
         "tags": [],
-        "url": "/kafka/2025-05-13-1",
+        "url": "/kafka-socket/2025-05-13-1",
         "teaser": null
       },{
         "title": "Git 블로그 카테고리 목록 페이징 기능 구현",
@@ -1422,14 +1422,14 @@ var store = [{
         "teaser": null
       },{
         "title": "웹소켓 사용법 / WebSocket으로 실시간 소통 채팅앱 개발 방법",
-        "excerpt":"HTTP, 웹소켓 프로토콜 차이 HTTP 프로토콜 웹에서 클라이언트가 서버에 요청을 보내면 응답을 반환하는 요청-응답 기반의 단방향 통신 프로토콜입니다. HTTP 통신은 서버 응답 후 연결이 끊기므로 연결에 지속성이 없습니다. 웹소켓 프로토콜 클라이언트와 서버가 초기 연결을 맺은 뒤, 양방향으로 실시간 데이터를 주고받을 수 있는 프로토콜입니다. Socket.IO 라이브러리는 네임스페이스로 채널을 구분하여 클라이언트, 서버를...","categories": ["web-dev"],
+        "excerpt":"HTTP, 웹소켓 프로토콜 차이 HTTP 프로토콜 웹에서 클라이언트가 서버에 요청을 보내면 응답을 반환하는 요청-응답 기반의 단방향 통신 프로토콜입니다. HTTP 통신은 서버 응답 후 연결이 끊기므로 연결에 지속성이 없습니다. 웹소켓 프로토콜 클라이언트와 서버가 초기 연결을 맺은 뒤, 양방향으로 실시간 데이터를 주고받을 수 있는 프로토콜입니다. Socket.IO 라이브러리는 네임스페이스로 채널을 구분하여 클라이언트, 서버를...","categories": ["kafka-socket"],
         "tags": [],
-        "url": "/web-dev/2025-08-08-1",
+        "url": "/kafka-socket/2025-08-08-1",
         "teaser": null
       },{
         "title": "실시간 퀴즈 팝업 Vue 프로젝트, 소켓 + 카프카 프로젝트 분석",
-        "excerpt":"프로젝트 구조 분석 프로젝트 구성 Vue 프로젝트 실시간 퀴즈 팝업 화면 및 소켓 클라이언트 역할로 소켓 서버와 실시간 통신 SpringBoot 프로젝트 유저 정보 검증, 소켓 서버로 입장 요청 전달, DB 저장, S3 파일 저장 등 백엔드 처리 SpringBoot 소켓+카프카 프로젝트 소켓 서버 역할, 네임스페이스 단위 실시간 소통 처리, 카프카 프로듀서/컨슈머...","categories": ["kafka"],
+        "excerpt":"프로젝트 구조 분석 프로젝트 구성 Vue 프로젝트 실시간 퀴즈 팝업 화면 및 소켓 클라이언트 역할로 소켓 서버와 실시간 통신 SpringBoot 프로젝트 유저 정보 검증, 소켓 서버로 입장 요청 전달, DB 저장, S3 파일 저장 등 백엔드 처리 SpringBoot 소켓+카프카 프로젝트 소켓 서버 역할, 네임스페이스 단위 실시간 소통 처리, 카프카 프로듀서/컨슈머...","categories": ["kafka-socket"],
         "tags": [],
-        "url": "/kafka/2025-08-13-1",
+        "url": "/kafka-socket/2025-08-13-1",
         "teaser": null
       }]

@@ -66,7 +66,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
 <meta property="og:title" content="실시간 퀴즈 팝업 Vue 프로젝트, 소켓 + 카프카 프로젝트 분석">
-<meta property="og:url" content="https://0songha0.github.io/kafka/2025-08-13-1">
+<meta property="og:url" content="https://0songha0.github.io/kafka-socket/2025-08-13-1">
 
 
   <meta property="og:description" content="송하영 개발 블로그">
@@ -90,7 +90,7 @@
   
 
 
-<link rel="canonical" href="https://0songha0.github.io/kafka/2025-08-13-1">
+<link rel="canonical" href="https://0songha0.github.io/kafka-socket/2025-08-13-1">
 
 
 
@@ -377,7 +377,7 @@
     
       <li>
         
-              <a href="/python-java"><span class="nav__sub-title">파이썬 / Java</span></a>
+              <a href="/python-java"><span class="nav__sub-title">Python / Java</span></a>
         
 
         
@@ -401,7 +401,7 @@
     
       <li>
         
-              <a href="/kafka"><span class="nav__sub-title">카프카</span></a>
+              <a href="/kafka-socket"><span class="nav__sub-title">Kafka / Socket</span></a>
         
 
         
@@ -1529,6 +1529,48 @@ public class MessageProducer {
 @Slf4j
 public class MessageConsumer {
 
+  private final WbSocketService wbSocketService;
+  private final RoomManager roomManager;
+  private final RoomService roomService;
+  private final KafkaListenerEndpointRegistry kafkaListenerEndpointRegistry;
+  private final PickerSocketService pickerSocketService;
+  private final MediaSocketService mediaSocketService;
+  private final SocketEventService socketEventService;
+  private final WidgetSocketService widgetSocketService;
+  private final NameSpaceService nameSpaceService;
+  private final SocketIOController socketIOController;
+  private final SocketIOServer socketIOServer;
+  private final ConsumerConfig consumerConfig;
+
+  /**
+   * 카프카 컨슈머 클래스 생성자
+   */
+  public MessageConsumer(WbSocketService wbSocketService,
+                        RoomManager roomManager,
+                        RoomService roomService,
+                        KafkaListenerEndpointRegistry kafkaListenerEndpointRegistry,
+                        PickerSocketService pickerSocketService,
+                        MediaSocketService mediaSocketService,
+                        SocketEventService socketEventService,
+                        WidgetSocketService widgetSocketService,
+                        NameSpaceService nameSpaceService,
+                        SocketIOController socketIOController,
+                        SocketIOServer socketIOServer,
+                        ConsumerConfig consumerConfig) {
+    this.wbSocketService = wbSocketService;
+    this.roomManager = roomManager;
+    this.roomService = roomService;
+    this.kafkaListenerEndpointRegistry = kafkaListenerEndpointRegistry;
+    this.pickerSocketService = pickerSocketService;
+    this.mediaSocketService = mediaSocketService;
+    this.socketEventService = socketEventService;
+    this.widgetSocketService = widgetSocketService;
+    this.nameSpaceService = nameSpaceService;
+    this.socketIOController = socketIOController;
+    this.socketIOServer = socketIOServer;
+    this.consumerConfig = consumerConfig;
+  }
+
   /**
    * "user-topic" 컨슈머
    */
@@ -1631,7 +1673,7 @@ public class MessageConsumer {
     
       
       
-      <a href="/categories#kafka" class="page__taxonomy-item" rel="tag">카프카</a>
+      <a href="/categories#kafka-socket" class="page__taxonomy-item" rel="tag">Kafka / Socket</a>
     
     </span>
   </p>
@@ -1651,7 +1693,7 @@ public class MessageConsumer {
       <a href="#" class="pagination--pager disabled">❮</a>
     
     
-      <a href="/web-dev/2025-08-08-1" class="pagination--pager" title="웹소켓 사용법 / WebSocket으로 실시간 소통 채팅앱 개발 방법
+      <a href="/kafka-socket/2025-08-08-1" class="pagination--pager" title="웹소켓 사용법 / WebSocket으로 실시간 소통 채팅앱 개발 방법
 ">❯</a>
     
   </nav>
@@ -1677,7 +1719,7 @@ public class MessageConsumer {
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
-        <a href="/web-dev/2025-08-08-1" rel="permalink">웹소켓 사용법 / WebSocket으로 실시간 소통 채팅앱 개발 방법
+        <a href="/kafka-socket/2025-08-08-1" rel="permalink">웹소켓 사용법 / WebSocket으로 실시간 소통 채팅앱 개발 방법
 </a>
       
     </h2>
