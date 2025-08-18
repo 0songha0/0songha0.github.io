@@ -940,11 +940,12 @@ public class ClassroomService {
 
 <h3 id="웹소켓-카프카-라이브러리">웹소켓, 카프카 라이브러리</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dependencies {
+  implementation 'org.springframework.boot:spring-boot-starter-websocket'
   implementation 'com.corundumstudio.socketio:netty-socketio:2.0.12'
   implementation 'org.springframework.kafka:spring-kafka'
 }
 </code></pre></div></div>
-<p>build.gradle 파일에 netty 소켓 IO 라이브러리, 카프카 라이브러리가 추가되어 있습니다.</p>
+<p>build.gradle 파일에 netty 소켓 IO 라이브러리, 카프카 라이브러리 등이 추가되어 있습니다.</p>
 
 <h3 id="vue-url-소켓-서버-포트-카프카-서버-url-설정">Vue URL, 소켓 서버 포트, 카프카 서버 URL 설정</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 톰캣 서버 포트 설정 (HTTP 통신용)
@@ -1524,7 +1525,7 @@ public class MessageProducer {
 <p>카프카 프로듀서 클래스에서 KafkaTemplate을 통해 프로듀서를 자동 생성합니다.<br />
 각 토픽에 roomId가 메시지 키, 메시지 객체가 메시지 값인 레코드를 비동기 전송합니다.</p>
 
-<p><mark>카프카 프로듀서 옵션 클래스</mark></p>
+<p><mark>카프카 프로듀서 생성 클래스</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Configuration
 public class ProducerConfig {
 
@@ -1571,7 +1572,29 @@ public class ProducerConfig {
   }
 }
 </code></pre></div></div>
-<p>카프카 프로듀서들을 설정하는 클래스를 정의할 수 있습니다.</p>
+<p>카프카 프로듀서들을 생성하는 클래스를 정의할 수 있습니다.</p>
+
+<p><mark>카프카 프로듀서 설정 유틸 클래스</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class CommonJSONSerializer {
+
+  static Map&lt;String,Object&gt; customProducer(String bootstrapServers){
+
+    Map&lt;String,Object&gt; props = new HashMap&lt;&gt;();
+
+    props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+    props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+    props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+    props.put(ProducerConfig.ACKS_CONFIG, "all");
+    props.put(ProducerConfig.RETRIES_CONFIG, 10);
+    props.put(ProducerConfig.BATCH_SIZE_CONFIG, 16384);
+    props.put(ProducerConfig.LINGER_MS_CONFIG, 1);
+    props.put(ProducerConfig.BUFFER_MEMORY_CONFIG, 33554432);
+
+    return props;
+  }
+}
+</code></pre></div></div>
+<p>카프카 프로듀서 옵션을 설정하는 유틸 클래스를 정의합니다.</p>
 
 <h3 id="카프카-컨슈머-관련-로직">카프카 컨슈머 관련 로직</h3>
 <p><mark>카프카 컨슈머 코드</mark></p>
@@ -1704,7 +1727,7 @@ public class MessageConsumer {
 </code></pre></div></div>
 <p>@KafkaListener으로 인해, 컨슈머 클래스 선언만으로도 Spring kafka가 토픽에서 메시지를 읽어옵니다.</p>
 
-<p><mark>카프카 컨슈머 옵션 클래스</mark></p>
+<p><mark>카프카 컨슈머 생성 클래스</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Configuration
 @Slf4j
 @RequiredArgsConstructor
@@ -1780,7 +1803,30 @@ public class ConsumerConfig {
     }
 }
 </code></pre></div></div>
-<p>카프카 컨슈머들을 설정하는 클래스를 정의할 수 있습니다.</p>
+<p>카프카 컨슈머들을 생성하는 클래스를 정의할 수 있습니다.</p>
+
+<p><mark>카프카 컨슈머 설정 유틸 클래스</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class CommonJSONDeserializer {
+
+  static Map&lt;String, Object&gt; customConsumer(String bootStrapServer, String dynamicGroupId) {
+
+    Map&lt;String, Object&gt; props = new HashMap&lt;&gt;();
+
+    props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServer);
+    props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+
+    props.put(ConsumerConfig.GROUP_ID_CONFIG, dynamicGroupId);
+    props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
+    props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
+    props.put(ErrorHandlingDeserializer.KEY_DESERIALIZER_CLASS, StringDeserializer.class);
+    props.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JsonDeserializer.class);
+    props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
+
+    return props;
+  }
+}
+</code></pre></div></div>
+<p>카프카 컨슈머 옵션을 설정하는 유틸 클래스를 정의합니다.</p>
 
         
       </section>
