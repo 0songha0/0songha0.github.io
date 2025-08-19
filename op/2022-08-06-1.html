@@ -490,7 +490,7 @@ After=network.target
 [Service]
 User=ncloud # 애플리케이션 실행 유저명
 WorkingDirectory=/home/app/프로젝트명
-ExecStart=/usr/bin/java경로 -Dspring.profiles.active=프로파일명 -jar /home/app/프로젝트명/프로젝트명.jar
+ExecStart=/usr/bin/java실행파일경로 -Dspring.profiles.active=프로파일명 -jar /home/app/프로젝트명/프로젝트명.jar
 SuccessExitStatus=143
 Restart=always # 실패 시 항상 재시작
 

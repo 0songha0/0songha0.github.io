@@ -470,12 +470,12 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 리눅스 Java 설치 및 스프링부트 프로젝트 내장 톰캣 실행 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#리눅스-java-설치">리눅스 Java 설치</a><ul><li><a href="#리눅스-jdk-압축-파일-다운">리눅스 JDK 압축 파일 다운</a></li><li><a href="#jdk-설치-압축-파일-해제">JDK 설치 (압축 파일 해제)</a></li><li><a href="#java-실행파일-심볼릭-링크-생성">Java 실행파일 심볼릭 링크 생성</a></li><li><a href="#java-환경변수-설정">Java 환경변수 설정</a></li></ul></li><li><a href="#내장-톰캣-서버-실행-방법">내장 톰캣 서버 실행 방법</a><ul><li><a href="#deploysh-스크립트-파일-작성-방법">deploy.sh 스크립트 파일 작성 방법</a></li><li><a href="#systemd-서비스-파일-작성-방법">systemd 서비스 파일 작성 방법</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#리눅스-java-설치">리눅스 Java 설치</a><ul><li><a href="#리눅스-jdk-압축-파일-다운">리눅스 JDK 압축 파일 다운</a></li><li><a href="#jdk-설치-압축-파일-해제">JDK 설치 (압축 파일 해제)</a></li><li><a href="#java-실행파일-심볼릭-링크-생성">Java 실행파일 심볼릭 링크 생성</a></li><li><a href="#java-환경변수-설정">Java 환경변수 설정</a></li></ul></li><li><a href="#스프링부트-jar-빌드">스프링부트 jar 빌드</a><ul><li><a href="#intellij-스프링부트-jar-빌드-방법">IntelliJ 스프링부트 jar 빌드 방법</a></li></ul></li><li><a href="#내장-톰캣-서버-실행-방법">내장 톰캣 서버 실행 방법</a><ul><li><a href="#deploysh-스크립트-파일-작성-방법">deploy.sh 스크립트 파일 작성 방법</a></li><li><a href="#systemd-서비스-파일-작성-방법">systemd 서비스 파일 작성 방법</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <p>스프링부트 프로젝트는 내장 톰캣이 있으므로, 톰캣을 따로 설치하지 않아도 java 명령어로 실행할 수 있습니다.</p>
+        <p>스프링부트 프로젝트는 내장 톰캣이 있으므로, 톰캣을 따로 설치하지 않고 java로 실행할 수 있습니다.</p>
 
 <hr />
 
@@ -521,6 +521,14 @@ export PATH=$JAVA_HOME/bin:$PATH
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo $JAVA_HOME
 </code></pre></div></div>
 <p>등록된 Java 환경변수 값 (/opt/java/jdk-17.0.15) 을 확인할 수 있습니다.</p>
+
+<hr />
+
+<h2 id="스프링부트-jar-빌드">스프링부트 jar 빌드</h2>
+
+<h3 id="intellij-스프링부트-jar-빌드-방법">IntelliJ 스프링부트 jar 빌드 방법</h3>
+<p><a href="https://0songha0.github.io/op/2023-03-07-1#intellij-gradle-war-%EB%B9%8C%EB%93%9C-%EB%B0%A9%EB%B2%95" target="_blank">https://0songha0.github.io/op/2023-03-07-1#intellij-gradle-war-%EB%B9%8C%EB%93%9C-%EB%B0%A9%EB%B2%95</a><br />
+Gradle로 스프링부트 프로젝트 jar 빌드 후 파일질라로 서버에 올려둡니다.</p>
 
 <hr />
 
