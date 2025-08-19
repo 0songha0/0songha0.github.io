@@ -1432,4 +1432,10 @@ var store = [{
         "tags": [],
         "url": "/kafka-socket/2025-08-13-1",
         "teaser": null
+      },{
+        "title": "리눅스 Java 설치 및 스프링부트 프로젝트 내장 톰캣 실행 방법",
+        "excerpt":"스프링부트 프로젝트는 내장 톰캣이 있으므로, 톰캣을 따로 설치하지 않아도 java 명령어로 실행할 수 있습니다. 리눅스 Java 설치 리눅스 JDK 압축 파일 다운 https://www.oracle.com/java/technologies/downloads/archive 오라클 로그인 후, 위 경로 우측에서 프로젝트 JDK 버전을 선택합니다. jdk-17.0.15_linux-x64_bin.tar.gz 같은 압축 파일로 받으면 설치가 간편합니다. rpm, deb 같은 패키지 설치 방식을 이용하는 것도 가능합니다. JDK...","categories": ["op"],
+        "tags": [],
+        "url": "/op/2025-08-19-1",
+        "teaser": null
       }]
