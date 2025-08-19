@@ -162,7 +162,7 @@ var store = [{
         "teaser": null
       },{
         "title": "리눅스 서비스 관리 방법 / systemctl 명령어 정리",
-        "excerpt":"서비스 사용 방법 서비스 상태 확인 systemctl status 서비스명 서비스 시작 systemctl start 서비스명 서비스 정지 systemctl stop 서비스명 서비스 재시작 systemctl restart 서비스명 서비스 자동시작 설정 자동 시작 여부 확인 systemctl is-enabled 서비스명 자동 시작 설정 systemctl enable 서비스명 enable 해두면 재부팅 시마다 수동으로 시작하지 않아도 됩니다. 자동 시작...","categories": ["op"],
+        "excerpt":"서비스 파일 작성 방법 서비스 파일 생성 sudo vi /etc/systemd/system/서비스명.service 위와 같은 명령어로 서비스 파일을 생성할 수 있습니다. 스프링부트 프로젝트 실행 서비스 파일 예시 [Unit] Description=프로젝트명 Application After=network.target [Service] User=ncloud # 애플리케이션 실행 유저명 WorkingDirectory=/home/app/프로젝트명 ExecStart=/usr/bin/java경로 -Dspring.profiles.active=프로파일명 -jar /home/app/프로젝트명/프로젝트명.jar SuccessExitStatus=143 Restart=always # 실패 시 항상 재시작 [Install] WantedBy=multi-user.target Java로 스프링부트...","categories": ["op"],
         "tags": [],
         "url": "/op/2022-08-06-1",
         "teaser": null
