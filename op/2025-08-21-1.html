@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Javascript 기초 문법 정리 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>리눅스 Nginx 서버 구축 및 Vue 프로젝트 빌드 방법 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,8 +65,8 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="Javascript 기초 문법 정리">
-<meta property="og:url" content="https://0songha0.github.io/web-dev/2025-07-14-1">
+<meta property="og:title" content="리눅스 Nginx 서버 구축 및 Vue 프로젝트 빌드 방법">
+<meta property="og:url" content="https://0songha0.github.io/op/2025-08-21-1">
 
 
   <meta property="og:description" content="송하영 개발 블로그">
@@ -77,11 +77,11 @@
 
 
 
-  <meta property="article:published_time" content="2025-07-14T00:00:00+00:00">
+  <meta property="article:published_time" content="2025-08-21T00:00:00+00:00">
 
 
 
-  <meta property="article:modified_time" content="2025-07-14T00:00:00+00:00">
+  <meta property="article:modified_time" content="2025-08-21T00:00:00+00:00">
 
 
 
@@ -90,7 +90,7 @@
   
 
 
-<link rel="canonical" href="https://0songha0.github.io/web-dev/2025-07-14-1">
+<link rel="canonical" href="https://0songha0.github.io/op/2025-08-21-1">
 
 
 
@@ -433,15 +433,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Javascript 기초 문법 정리">
+    <meta itemprop="headline" content="리눅스 Nginx 서버 구축 및 Vue 프로젝트 빌드 방법">
     <meta itemprop="description" content="">
-    <meta itemprop="datePublished" content="2025-07-14T00:00:00+00:00">
-    <meta itemprop="dateModified" content="2025-07-14T00:00:00+00:00">
+    <meta itemprop="datePublished" content="2025-08-21T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-08-21T00:00:00+00:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Javascript 기초 문법 정리
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">리눅스 Nginx 서버 구축 및 Vue 프로젝트 빌드 방법
 </h1>
           
 
@@ -450,7 +450,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-07-14T00:00:00+00:00">2025-07-14</time>
+        <time datetime="2025-08-21T00:00:00+00:00">2025-08-21</time>
       </span>
     
 
@@ -468,231 +468,140 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Javascript 기초 문법 정리</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 리눅스 Nginx 서버 구축 및 Vue 프로젝트 빌드 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#javascript-기초-문법">javascript 기초 문법</a><ul><li><a href="#자료형-확인">자료형 확인</a></li><li><a href="#변수-값-비교">변수 값 비교</a></li></ul></li><li><a href="#javascript-반복문">javascript 반복문</a><ul><li><a href="#for-반복문">for 반복문</a></li><li><a href="#forin-반복문">for…in 반복문</a></li><li><a href="#forof-반복문">for…of 반복문</a></li></ul></li><li><a href="#javascript-날짜-계산">javascript 날짜 계산</a><ul><li><a href="#년-월의-마지막-일자-계산">년, 월의 마지막 일자 계산</a></li></ul></li><li><a href="#javascript-구조분해-할당">Javascript 구조분해 할당</a><ul><li><a href="#구조분해-할당-시-별칭-설정">구조분해 할당 시 별칭 설정</a></li><li><a href="#vue-상태-값에-구조분해-할당">Vue 상태 값에 구조분해 할당</a></li><li><a href="#구조분해-할당-시-기본값-설정">구조분해 할당 시 기본값 설정</a></li></ul></li><li><a href="#javascript-전개-구문">Javascript 전개 구문</a><ul><li><a href="#객체-및-배열-복사">객체 및 배열 복사</a></li></ul></li><li><a href="#javascript-페이지-열기">Javascript 페이지 열기</a><ul><li><a href="#새-탭으로-열기">새 탭으로 열기</a></li><li><a href="#새-창-팝업으로-열기">새 창 팝업으로 열기</a></li></ul></li><li><a href="#javascript-클래스">Javascript 클래스</a><ul><li><a href="#javascript-클래스-생성">Javascript 클래스 생성</a></li><li><a href="#javascript-클래스-상속-방법">Javascript 클래스 상속 방법</a></li><li><a href="#javascript-객체-생성">Javascript 객체 생성</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#우분투-nginx-서버-설치-방법">우분투 Nginx 서버 설치 방법</a><ul><li><a href="#nginx-저장소-필수-패키지-설치">Nginx 저장소 필수 패키지 설치</a></li><li><a href="#nginx-공식-서명-키-등록">Nginx 공식 서명 키 등록</a></li><li><a href="#gpg-서명-키-검증">GPG 서명 키 검증</a></li><li><a href="#nginx-공식-저장소-추가">Nginx 공식 저장소 추가</a></li><li><a href="#pinning-설정">Pinning 설정</a></li><li><a href="#nginx-설치">NginX 설치</a></li></ul></li><li><a href="#nginx-서버-실행-및-종료">Nginx 서버 실행 및 종료</a><ul><li><a href="#nginx-서버-실행">Nginx 서버 실행</a></li><li><a href="#nginx-서버-종료">Nginx 서버 종료</a></li><li><a href="#nginx-서버-자동시작-설정">Nginx 서버 자동시작 설정</a></li></ul></li><li><a href="#nginx-서버-설정">Nginx 서버 설정</a><ul><li><a href="#웹-루트-폴더-변경">웹 루트 폴더 변경</a></li></ul></li><li><a href="#vue-프로젝트-배포-방법">Vue 프로젝트 배포 방법</a><ul><li><a href="#vue-프로젝트-빌드-명령어">Vue 프로젝트 빌드 명령어</a></li><li><a href="#dist-폴더-압축-후-서버-업로드">dist 폴더 압축 후 서버 업로드</a></li><li><a href="#dist-폴더-압축-해제">dist 폴더 압축 해제</a></li><li><a href="#심볼릭-링크-생성-및-교체">심볼릭 링크 생성 및 교체</a></li><li><a href="#nginx-설정-재적용-및-워커-재로드">Nginx 설정 재적용 및 워커 재로드</a></li><li><a href="#기존-배포-폴더-삭제">기존 배포 폴더 삭제</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h2 id="javascript-기초-문법">javascript 기초 문법</h2>
-
-<h3 id="자료형-확인">자료형 확인</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>typeof 변수명또는값
-또는
-typeof(변수명또는값)
-</code></pre></div></div>
-<p>Javascript 객체 또는 값의 자료형을 확인할 수 있는 단항 연산자입니다.</p>
-
-<h3 id="변수-값-비교">변수 값 비교</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 변수 값 자동 형변환 후 비교
-// 타입이 달라도 값이 같으면 true
-if (변수명1 == 변수명2)
-
-// 변수 값 자동 형변환 없이 비교
-// 타입, 값이 모두 같아야 true
-if (변수명1 === 변수명2)
-</code></pre></div></div>
-<p>Javascript ==, === 연산자는 프리미티브 타입 비교 시에만 사용하는 것이 좋습니다.<br />
-배열 및 객체 타입 비교 시에는 값이 아니라 참조 주소를 비교하므로, 값이 같아도 다른 객체를 비교하면 false가 됩니다.</p>
+        <p><mark>리눅스 Nginx 설치 시 참고</mark><br />
+<a href="https://nginx.org/en/linux_packages.html" tatget="_blank">https://nginx.org/en/linux_packages.html</a><br />
+Nginx 공식 홈페이지에서 리눅스 OS 종류별로 설치 방법을 자세히 알려주고 있습니다.</p>
 
 <hr />
 
-<h2 id="javascript-반복문">javascript 반복문</h2>
+<h2 id="우분투-nginx-서버-설치-방법">우분투 Nginx 서버 설치 방법</h2>
 
-<h3 id="for-반복문">for 반복문</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for (let i = 0; i &lt; list.length; i++) {
-    const obj = list[i];
-}
+<h3 id="nginx-저장소-필수-패키지-설치">Nginx 저장소 필수 패키지 설치</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt install curl gnupg2 ca-certificates lsb-release ubuntu-keyring
 </code></pre></div></div>
-<p>인덱스 값을 사용하여 배열의 요소 값을 얻을 수 있습니다.</p>
+<p>nginx 저장소 추가 시 필요한 필수 패키지들을 다운로드하여 준비합니다.</p>
 
-<h3 id="forin-반복문">for…in 반복문</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const obj = { a: 1, b: 2, c: 3 };
-
-for (let key in obj) {
-  console.log(key); // "a", "b", "c"
-  console.log(obj[key]); // 1, 2, 3
-}
+<h3 id="nginx-공식-서명-키-등록">Nginx 공식 서명 키 등록</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor \
+    | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg &gt;/dev/null
 </code></pre></div></div>
-<p>순서가 보장되지 않으며, 키 문자열로 반복하여 객체의 속성을 열거할 때 주로 사용합니다.</p>
+<p>Nginx 패키지가 공식 저장소 nginx.org에서 서명한 것인지 검증하기 위해 GPG 서명 키를 다운로드해서 저장합니다.</p>
 
-<h3 id="forof-반복문">for…of 반복문</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const arr = [1, 2, 3];
-
-for (let value of arr) {
-  console.log(value); // 1, 2, 3
-}
+<h3 id="gpg-서명-키-검증">GPG 서명 키 검증</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gpg --dry-run --quiet --no-keyring --import --import-options import-show /usr/share/keyrings/nginx-archive-keyring.gpg
 </code></pre></div></div>
-<p>순서가 보장되며, 반복 가능한 객체의 값을 직접 처리할 때 사용합니다.<br />
-for 반복문이나 forEach 메서드와 달리, 인덱스 값을 얻을 수 없다는 단점이 있습니다.</p>
+<p>방금 받은 서명 키가 정상 키인지 확인합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62
+</code></pre></div></div>
+<p>위와 같은 출력이 포함되면 정상입니다.</p>
+
+<h3 id="nginx-공식-저장소-추가">Nginx 공식 저장소 추가</h3>
+<p><mark>Stable 버전 추가 명령어</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \
+http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" \
+    | sudo tee /etc/apt/sources.list.d/nginx.list
+</code></pre></div></div>
+<p>최신이 아닐 수 있지만, 안정적인 버전 Nginx 저장소를 추가합니다.</p>
+
+<p><mark>Mainline 버전 추가 명령어</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \
+http://nginx.org/packages/mainline/ubuntu `lsb_release -cs` nginx" \
+    | sudo tee /etc/apt/sources.list.d/nginx.list
+</code></pre></div></div>
+<p>실험적일 수 있지만, 최신 버전 Nginx 저장소를 추가합니다.</p>
+
+<h3 id="pinning-설정">Pinning 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" \
+    | sudo tee /etc/apt/preferences.d/99nginx
+</code></pre></div></div>
+<p>Ubuntu 기본 저장소에 있는 Nginx가 아니라, nginx.org 저장소에서 받은 패키지를 우선 적용하도록 설정합니다.</p>
+
+<h3 id="nginx-설치">NginX 설치</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt update
+sudo apt install nginx
+</code></pre></div></div>
+<p>apt update 명령어로 추가된 저장소 목록을 최신화 후, Nginx를 설치합니다.</p>
 
 <hr />
 
-<h2 id="javascript-날짜-계산">javascript 날짜 계산</h2>
+<h2 id="nginx-서버-실행-및-종료">Nginx 서버 실행 및 종료</h2>
 
-<h3 id="년-월의-마지막-일자-계산">년, 월의 마지막 일자 계산</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function getLastDay(year, month) {
-  // 다음 달의 이전 날로 설정 (month는 0부터 시작)
-  let date = new Date(year, month, 0);
-
-  // 마지막 일자 반환
-  return date.getDate();
-}
+<h3 id="nginx-서버-실행">Nginx 서버 실행</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl start nginx
 </code></pre></div></div>
-<p>2024~2025년 달력 기준으로 테스트 완료하였습니다.</p>
+
+<h3 id="nginx-서버-종료">Nginx 서버 종료</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl stop nginx
+</code></pre></div></div>
+
+<h3 id="nginx-서버-자동시작-설정">Nginx 서버 자동시작 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl enable nginx
+</code></pre></div></div>
+
+<p><mark>Nginx 서버 자동시작 여부 확인</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl is-enabled nginx
+</code></pre></div></div>
+<p>enable라고 나오면 리눅스 서버 재기동 시 Nginx 서버도 자동시작됩니다.</p>
 
 <hr />
 
-<h2 id="javascript-구조분해-할당">Javascript 구조분해 할당</h2>
+<h2 id="nginx-서버-설정">Nginx 서버 설정</h2>
 
-<h3 id="구조분해-할당-시-별칭-설정">구조분해 할당 시 별칭 설정</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const { data: posts } = 함수명();
-</code></pre></div></div>
-<p>함수에서 return 한 data 속성 값을 새 변수 posts에 할당합니다.<br />
-data 변수는 사용할 수 없고, posts 변수가 정의되는 것입니다.</p>
-
-<h3 id="vue-상태-값에-구조분해-할당">Vue 상태 값에 구조분해 할당</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const loading = ref(false);
-const error = ref(null);
-
-({ error: error.value, loading: loading.value } = 함수명(파라미터));
-</code></pre></div></div>
-<p>Vue 반응형 변수 값으로 구조분해 할당하는 예시입니다.<br />
-하지만 위와 같은 방식은 반응형 상태를 유지할 수 없어 권장되지 않습니다.<br />
-아래처럼 명시적으로 대입하는 방식이 반응성을 유지해서 권장됩니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const loading = ref(false);
-const error = ref(null);
-
-const result = 함수명(파라미터);
-loading.value = result.loading;
-error.value = result.error;
-</code></pre></div></div>
-
-<h3 id="구조분해-할당-시-기본값-설정">구조분해 할당 시 기본값 설정</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export const 함수명 = (data = {}) =&gt; {
-  // 항수 로직
-}
-</code></pre></div></div>
-<p>위와 같이, 함수 모듈에서 파라미터를 받을 때 값이 없으면 기본값을 할당할 수 있습니다.</p>
+<h3 id="웹-루트-폴더-변경">웹 루트 폴더 변경</h3>
+<p>Nginx 기본 웹 루트 폴더 /var/www/html는 다른 폴더로 변경이 가능합니다.<br />
+Nginx 설정 파일에서 ‘root /var/www/프로젝트명_current’으로 수정하면 됩니다.</p>
 
 <hr />
 
-<h2 id="javascript-전개-구문">Javascript 전개 구문</h2>
+<h2 id="vue-프로젝트-배포-방법">Vue 프로젝트 배포 방법</h2>
 
-<h3 id="객체-및-배열-복사">객체 및 배열 복사</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const obj = { a: 1, b: 2 };
-
-const newObj = {
-  ...obj,
-  b: 9,
-  c: 3
-};
+<h3 id="vue-프로젝트-빌드-명령어">Vue 프로젝트 빌드 명령어</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm run build --mode 프로파일명
 </code></pre></div></div>
-<p>javascript 전개구문으로 객체 및 배열 속성들을 펼쳐 복사하거나 병합할 수 있습니다.<br />
-객체 속성 키가 같은 경우, 뒤에 추가된 속성 값으로 덮어쓰기 됩니다.</p>
+<p>프로젝트 빌드 시 .vue 파일들이 정적 HTML, JS, CSS 파일로 변환되어 dist 폴더에 생성됩니다.<br />
+mode 옵션은 빌드 시 사용할 환경변수 .env 파일을 지정하는 용도입니다.<br />
+mode를 지정하지 않으면 production 모드로 자동 설정됩니다.</p>
 
-<hr />
+<h3 id="dist-폴더-압축-후-서버-업로드">dist 폴더 압축 후 서버 업로드</h3>
+<p>로컬에서 dist 폴더 압축 후 파일질라로 리눅스 서버에 올립니다.</p>
 
-<h2 id="javascript-페이지-열기">Javascript 페이지 열기</h2>
-
-<h3 id="새-탭으로-열기">새 탭으로 열기</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;a onclick="openNewTabPage()"&gt;버튼명&lt;/a&gt;
-
-&lt;script&gt;
-function openNewTabPage() {
-  window.open('http://URL', '_blank');
-}
-&lt;/script&gt;
+<h3 id="dist-폴더-압축-해제">dist 폴더 압축 해제</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>unzip /업로드경로/dist.zip -d /var/www/프로젝트명_v버전명
 </code></pre></div></div>
-<p>target 속성 _blank 값으로 새 탭에서 페이지를 열 수 있습니다.<br />
-아래와 같이, HTML만으로도 새 탭 열기가 가능합니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;a href="http://URL" target="_blank"&gt;버튼명&lt;/a&gt;
+<p>위 명령어로 압축을 해제하여 신규 배포 폴더를 생성합니다.<br />
+-d 옵션으로 지정한 폴더가 없으면 자동 생성됩니다.</p>
+
+<h3 id="심볼릭-링크-생성-및-교체">심볼릭 링크 생성 및 교체</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ln -sfn /var/www/프로젝트명_v버전명 /var/www/프로젝트명_current
 </code></pre></div></div>
+<p>웹 루트 폴더로 접근하면 실제 파일이 있는 폴더로 연결되는 심볼릭 링크를 생성합니다.<br />
+fn 옵션으로 인해 같은 이름의 심볼릭링크가 있으면 덮어쓰기 됩니다.</p>
 
-<h3 id="새-창-팝업으로-열기">새 창 팝업으로 열기</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;a class="btn btn-primary fs-5" @click="openPopup('http://URL')"&gt;선생님 로그인&lt;/a&gt;
-
-&lt;script&gt;
-function openPopup(url, popupName) {
-  // 현재 사용자 화면 크기로 팝업 창 최대 크기 계산 
-  const width = window.screen.availWidth;
-  const height = window.screen.availHeight;
-
-  // 팝업 크기 및 위치 설정
-  const features = `width=${width},height=${height},top=0,left=0,scrollbars=yes,resizable=yes`;
-
-  // 팝업 창 열기
-  window.open(url, popupName, features);
-}
-&lt;/script&gt;
+<h3 id="nginx-설정-재적용-및-워커-재로드">Nginx 설정 재적용 및 워커 재로드</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo nginx -s reload
 </code></pre></div></div>
-<p>현재 사용자 브라우저 크기로 계산해서 전체화면 팝업을 띄우는 예시입니다.<br />
-window.open 2번째 파라미터는 팝업창 고유 이름으로, 같은 이름 팝업이 뜨면 기존 팝업에 덮어씌워집니다.</p>
+<p>Nginx는 웹 루트로 설정된 심볼릭 링크 경로를 계속 참조하므로, Nginx 재시작 없이도 신규 소스가 반영됩니다.<br />
+그러나, Nginx 워커가 이미 열고 있는 파일도 최신 파일로 반영하려면 reload 하는 것이 좋습니다.<br />
+Nginx 마스터 프로세스가 설정 파일을 다시 읽고, 새로운 워커 프로세스가 띄워집니다.<br />
+기존 워커가 기존 연결을 모두 처리한 뒤 종료되므로 사용자 접속 끊김이 거의 없는 방식입니다.</p>
 
-<hr />
-
-<h2 id="javascript-클래스">Javascript 클래스</h2>
-
-<h3 id="javascript-클래스-생성">Javascript 클래스 생성</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class 클래스명 {
-  필드명1;
-  필드명2;
-  필드명3;
-
-  // 생성자
-  constructor(필드명1, 필드명2, 필드명3) {
-    this.필드명1 = 필드명1;
-    this.필드명2 = 필드명2;
-    this.필드명3 = 필드명3;
-  }
-
-  메서드명(파라미터명1) {
-    console.log(`현재 객체 필드1 값 : ${this.필드명1}`);
-  }
-}
+<h3 id="기존-배포-폴더-삭제">기존 배포 폴더 삭제</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /var/www
+rm -rf 프로젝트명_v기존버전명
 </code></pre></div></div>
-<p>Javascript class 문법을 이용하여 클래스를 정의할 수 있습니다.</p>
+<p>신규 배포 후 안정화 기간이 지나도 문제가 없는 경우, 기존 배포 폴더는 삭제하는 것이 권장됩니다.</p>
 
-<h3 id="javascript-클래스-상속-방법">Javascript 클래스 상속 방법</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class 부모클래스명 {
-  필드명1;
-  필드명2;
-  필드명3;
-
-  // 생성자
-  constructor(필드명1, 필드명2, 필드명3) {
-    this.필드명1 = 필드명1;
-    this.필드명2 = 필드명2;
-    this.필드명3 = 필드명3;
-  }
-
-  메서드명(파라미터명1) {
-    console.log(`현재 객체 필드1 값 : ${this.필드명1}`);
-  }
-}
-
-class 자식클래스명 extends 부모클래스명 {
-  필드명4;
-
-  constructor(필드명1, 필드명2, 필드명3, 필드명4) {
-    super(필드명1, 필드명2, 필드명3); // 부모 클래스 생성자 호출
-    this.필드명4 = 필드명4;
-  }
-}
-</code></pre></div></div>
-<p>부모 클래스 필드 및 메서드를 모두 상속받는 자식 클래스를 정의할 수 있습니다.</p>
-
-<h3 id="javascript-객체-생성">Javascript 객체 생성</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let 객체명 = new 클래스명(필드1값, 필드2값, 필드3값);
-
-// 클래스 내 메서드 호출 가능
-객체명.메서드명(파라미터1값);
-
-// 객체 정보 확인
-console.log(객체명);
-</code></pre></div></div>
-<p>정의한 클래스 생성자를 이용하여 객체 인스턴스를 생성할 수 있습니다.</p>
+<p>로컬에서 dist 폴더 빌드, 이때 프로파일 설정 (ex. npm run build – –mode production) -&gt;
+dist 폴더 zip압축하여 서버에 올림-&gt; 
+dist 폴더 unzip -&gt;
+nginx 재시작</p>
 
         
       </section>
@@ -713,14 +622,14 @@ console.log(객체명);
     
       
       
-      <a href="/categories#web-dev" class="page__taxonomy-item" rel="tag">Web 개발</a>
+      <a href="/categories#op" class="page__taxonomy-item" rel="tag">리눅스 / 운영</a>
     
     </span>
   </p>
 
 
         
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-07-14">2025-07-14</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-08-21">2025-08-21</time></p>
 
 
       </footer>
@@ -730,11 +639,11 @@ console.log(객체명);
       
   <nav class="pagination">
     
-      <a href="/web-dev/2025-07-24-1" class="pagination--pager" title="Vue + SpringBoot 프로젝트 외부 접근 방법 / CORS 설정 방법
+      <a href="/op/2025-08-22-1" class="pagination--pager" title="리눅스 deb, apt 사용법 / ubuntu 등 Debian 계열 패키지 매니저
 ">❮</a>
     
     
-      <a href="/web-dev/2025-07-11-1" class="pagination--pager" title="타입스크립트 고급 타입 정의 방법 / 인터페이스, 클래스, 제네릭 타입 등
+      <a href="/op/2025-08-19-1" class="pagination--pager" title="리눅스 Java 설치 및 스프링부트 프로젝트 내장 톰캣 실행 방법
 ">❯</a>
     
   </nav>
@@ -772,42 +681,6 @@ console.log(객체명);
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-08-22T00:00:00+00:00">2025-08-22</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/op/2025-08-21-1" rel="permalink">리눅스 Nginx 서버 구축 및 Vue 프로젝트 빌드 방법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-08-21T00:00:00+00:00">2025-08-21</time>
       </span>
     
 
@@ -880,6 +753,42 @@ console.log(객체명);
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-08-13T00:00:00+00:00">2025-08-13</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/kafka-socket/2025-08-08-1" rel="permalink">웹소켓 사용법 / WebSocket으로 실시간 소통 채팅앱 개발 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-08-08T00:00:00+00:00">2025-08-08</time>
       </span>
     
 
