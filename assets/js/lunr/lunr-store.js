@@ -384,7 +384,7 @@ var store = [{
         "teaser": null
       },{
         "title": "리눅스 rpm, yum 사용법 / CentOS 등 Redhat 계열 패키지 매니저",
-        "excerpt":"rpm 사용법 패키지 파일 설치 rpm -i 패키지파일명.rpm yum 사용법 yum 명령어는 인터넷이 가능한 환경에서만 사용 가능합니다. 설치 또는 업데이트 설치 yum -y install 패키지명 -y 옵션은 모든 질문에 y를 자동 입력하며 설치해 줍니다. 설치된 패키지 삭제 yum remove 패키지명 설치된 모든 패키지 목록 yum list all 기존 설치한 패키지...","categories": ["op"],
+        "excerpt":"rpm 명령어 사용법 패키지 파일 설치 rpm -i 패키지파일명.rpm yum 명령어 사용법 일반적으로 yum 명령어는 인터넷 연결이 가능한 환경에서만 사용 가능합니다. private subnet에 위치한 ncloud 서버는 인터넷이 되지 않아도, 클라우드에서 제공하는 사설 저장소를 바라보도록 설정되어 있기 때문에 yum 사용이 가능합니다. 설치 또는 업데이트 설치 yum -y install 패키지명 -y 옵션은...","categories": ["op"],
         "tags": [],
         "url": "/op/2023-02-02-1",
         "teaser": null
@@ -1440,13 +1440,13 @@ var store = [{
         "teaser": null
       },{
         "title": "리눅스 Nginx 서버 구축 및 Vue 프로젝트 빌드 방법",
-        "excerpt":"리눅스 Nginx 설치 시 참고 https://nginx.org/en/linux_packages.html Nginx 공식 홈페이지에서 리눅스 OS 종류별로 설치 방법을 자세히 알려주고 있습니다. 우분투 Nginx 서버 설치 방법 Nginx 저장소 필수 패키지 설치 sudo apt install curl gnupg2 ca-certificates lsb-release ubuntu-keyring nginx 저장소 추가 시 필요한 필수 패키지들을 다운로드하여 준비합니다. Nginx 공식 서명 키 등록 curl...","categories": ["op"],
+        "excerpt":"리눅스 Nginx 설치 시 참고 https://nginx.org/en/linux_packages.html Nginx 공식 홈페이지에서 리눅스 OS 종류별로 설치 방법을 자세히 알려주고 있습니다. 우분투 Nginx 서버 설치 방법 Nginx 저장소 필수 패키지 설치 sudo apt install curl gnupg ca-certificates lsb-release ubuntu-keyring nginx 저장소 추가 시 필요한 필수 패키지들을 다운로드하여 준비합니다. Nginx 공식 서명 키 등록 curl...","categories": ["op"],
         "tags": [],
         "url": "/op/2025-08-21-1",
         "teaser": null
       },{
         "title": "리눅스 deb, apt 사용법 / ubuntu 등 Debian 계열 패키지 매니저",
-        "excerpt":"deb 사용법 패키지 파일 설치 sudo dpkg -i 패키지파일명.deb dpkg로 패키지 설치 시 의존성 문제 해결 sudo apt-get install -f 위 명령어를 통해 부족한 의존성을 설치하여 문제를 해결할 수 있습니다. apt 사용법 패키지 파일 설치 sudo apt install ./패키지파일명.deb apt를 사용하면, deb 패키지 설치 후 의존성 문제 해결도 한번에 처리해줘서...","categories": ["op"],
+        "excerpt":"deb 명령어 사용법 패키지 파일 설치 sudo dpkg -i 패키지파일명.deb dpkg로 패키지 설치 시 의존성 문제 해결 sudo apt-get install -f 위 명령어를 통해 부족한 의존성을 설치하여 문제를 해결할 수 있습니다. apt 명령어 사용법 일반적으로 apt 명령어는 인터넷 연결이 가능한 환경에서만 사용 가능합니다. private subnet에 위치한 ncloud 서버는 인터넷이 되지...","categories": ["op"],
         "tags": [],
         "url": "/op/2025-08-22-1",
         "teaser": null

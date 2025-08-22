@@ -470,12 +470,12 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 리눅스 deb, apt 사용법 / ubuntu 등 Debian 계열 패키지 매니저</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#deb-사용법">deb 사용법</a><ul><li><a href="#패키지-파일-설치">패키지 파일 설치</a></li></ul></li><li><a href="#apt-사용법">apt 사용법</a><ul><li><a href="#패키지-파일-설치-1">패키지 파일 설치</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#deb-명령어-사용법">deb 명령어 사용법</a><ul><li><a href="#패키지-파일-설치">패키지 파일 설치</a></li></ul></li><li><a href="#apt-명령어-사용법">apt 명령어 사용법</a><ul><li><a href="#패키지-파일-설치-1">패키지 파일 설치</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h2 id="deb-사용법">deb 사용법</h2>
+        <h2 id="deb-명령어-사용법">deb 명령어 사용법</h2>
 
 <h3 id="패키지-파일-설치">패키지 파일 설치</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo dpkg -i 패키지파일명.deb
@@ -488,7 +488,12 @@
 
 <hr />
 
-<h2 id="apt-사용법">apt 사용법</h2>
+<h2 id="apt-명령어-사용법">apt 명령어 사용법</h2>
+
+<p>일반적으로 apt 명령어는 인터넷 연결이 가능한 환경에서만 사용 가능합니다.</p>
+
+<p>private subnet에 위치한 ncloud 서버는 인터넷이 되지 않아도,<br />
+클라우드에서 제공하는 사설 저장소를 바라보도록 설정되어 있기 때문에 apt 사용이 가능합니다.</p>
 
 <h3 id="패키지-파일-설치-1">패키지 파일 설치</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt install ./패키지파일명.deb
