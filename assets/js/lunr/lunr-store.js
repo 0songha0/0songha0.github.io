@@ -1438,4 +1438,10 @@ var store = [{
         "tags": [],
         "url": "/op/2025-08-19-1",
         "teaser": null
+      },{
+        "title": "리눅스 deb, apt 사용법 / ubuntu 등 Debian 계열 패키지 매니저",
+        "excerpt":"deb 사용법 패키지 파일 설치 sudo dpkg -i 패키지파일명.deb dpkg로 패키지 설치 시 의존성 문제 해결 sudo apt-get install -f 위 명령어를 통해 부족한 의존성을 설치하여 문제를 해결할 수 있습니다. apt 사용법 패키지 파일 설치 sudo apt install ./패키지파일명.deb apt를 사용하면, deb 패키지 설치 후 의존성 문제 해결도 한번에 처리해줘서...","categories": ["op"],
+        "tags": [],
+        "url": "/op/2025-08-22-1",
+        "teaser": null
       }]
