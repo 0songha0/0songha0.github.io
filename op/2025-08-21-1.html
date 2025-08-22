@@ -492,15 +492,16 @@ Nginx 공식 홈페이지에서 리눅스 OS 종류별로 설치 방법을 자�
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor \
     | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg &gt;/dev/null
 </code></pre></div></div>
-<p>Nginx 패키지가 공식 저장소 nginx.org에서 서명한 것인지 검증하기 위해 GPG 서명 키를 다운로드해서 저장합니다.</p>
+<p>Nginx 패키지가 공식 저장소 nginx.org에서 서명한 것인지 검증하기 위해 GPG 서명 키를 다운로드해서 저장합니다.<br />
+GPG 키를 등록하지 않으면, apt가 보안상 믿을 수 없다고 설치를 거부하게 됩니다.</p>
 
 <h3 id="gpg-서명-키-검증">GPG 서명 키 검증</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gpg --dry-run --quiet --no-keyring --import --import-options import-show /usr/share/keyrings/nginx-archive-keyring.gpg
 </code></pre></div></div>
-<p>방금 받은 서명 키가 정상 키인지 확인합니다.</p>
+<p>방금 받은 서명 키가 nginx.org에서 제공한 키인지 확인합니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62
 </code></pre></div></div>
-<p>위와 같은 출력이 포함되면 정상입니다.</p>
+<p>위와 같은 출력이 포함되면 정상 키입니다.</p>
 
 <h3 id="nginx-공식-저장소-추가">Nginx 공식 저장소 추가</h3>
 <p><mark>Stable 버전 추가 명령어</mark></p>
@@ -508,20 +509,20 @@ Nginx 공식 홈페이지에서 리눅스 OS 종류별로 설치 방법을 자�
 http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" \
     | sudo tee /etc/apt/sources.list.d/nginx.list
 </code></pre></div></div>
-<p>최신이 아닐 수 있지만, 안정적인 버전 Nginx 저장소를 추가합니다.</p>
+<p>최신이 아닐 수 있지만, 안정적인 버전의 Nginx 저장소를 추가합니다.</p>
 
 <p><mark>Mainline 버전 추가 명령어</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \
 http://nginx.org/packages/mainline/ubuntu `lsb_release -cs` nginx" \
     | sudo tee /etc/apt/sources.list.d/nginx.list
 </code></pre></div></div>
-<p>실험적일 수 있지만, 최신 버전 Nginx 저장소를 추가합니다.</p>
+<p>실험적일 수 있지만, 최신 버전의 Nginx 저장소를 추가합니다.</p>
 
 <h3 id="pinning-설정">Pinning 설정</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" \
     | sudo tee /etc/apt/preferences.d/99nginx
 </code></pre></div></div>
-<p>Ubuntu 기본 저장소에 있는 Nginx가 아니라, nginx.org 저장소에서 받은 패키지를 우선 적용하도록 설정합니다.</p>
+<p>Ubuntu 기본 저장소에 있는 Nginx가 아니라, nginx.org 저장소에서 받은 패키지를 우선 설치하도록 설정합니다.</p>
 
 <h3 id="nginx-설치">NginX 설치</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt update
