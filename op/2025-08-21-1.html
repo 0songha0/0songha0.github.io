@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 리눅스 Nginx 서버 구축 및 Vue 프로젝트 빌드 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#우분투-nginx-서버-설치-방법">우분투 Nginx 서버 설치 방법</a><ul><li><a href="#nginx-저장소-필수-패키지-설치">Nginx 저장소 필수 패키지 설치</a></li><li><a href="#nginx-공식-서명-키-등록">Nginx 공식 서명 키 등록</a></li><li><a href="#gpg-서명-키-검증">GPG 서명 키 검증</a></li><li><a href="#nginx-공식-저장소-추가">Nginx 공식 저장소 추가</a></li><li><a href="#pinning-설정">Pinning 설정</a></li><li><a href="#nginx-설치">NginX 설치</a></li></ul></li><li><a href="#nginx-서버-실행-및-종료">Nginx 서버 실행 및 종료</a><ul><li><a href="#nginx-서버-실행">Nginx 서버 실행</a></li><li><a href="#nginx-서버-종료">Nginx 서버 종료</a></li><li><a href="#nginx-서버-자동시작-설정">Nginx 서버 자동시작 설정</a></li></ul></li><li><a href="#nginx-서버-설정">Nginx 서버 설정</a><ul><li><a href="#웹-루트-폴더-변경">웹 루트 폴더 변경</a></li></ul></li><li><a href="#vue-프로젝트-배포-방법">Vue 프로젝트 배포 방법</a><ul><li><a href="#vue-프로젝트-빌드-명령어">Vue 프로젝트 빌드 명령어</a></li><li><a href="#dist-폴더-압축-후-서버-업로드">dist 폴더 압축 후 서버 업로드</a></li><li><a href="#dist-폴더-압축-해제">dist 폴더 압축 해제</a></li><li><a href="#심볼릭-링크-생성-및-교체">심볼릭 링크 생성 및 교체</a></li><li><a href="#nginx-설정-재적용-및-워커-재로드">Nginx 설정 재적용 및 워커 재로드</a></li><li><a href="#기존-배포-폴더-삭제">기존 배포 폴더 삭제</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#우분투-nginx-서버-설치-방법-인터넷o">우분투 Nginx 서버 설치 방법 (인터넷O)</a><ul><li><a href="#nginx-저장소-필수-패키지-설치">Nginx 저장소 필수 패키지 설치</a></li><li><a href="#nginx-공식-서명-키-등록">Nginx 공식 서명 키 등록</a></li><li><a href="#gpg-서명-키-검증">GPG 서명 키 검증</a></li><li><a href="#nginx-공식-저장소-추가">Nginx 공식 저장소 추가</a></li><li><a href="#pinning-설정">Pinning 설정</a></li><li><a href="#nginx-설치">NginX 설치</a></li></ul></li><li><a href="#우분투-nginx-서버-설치-방법-인터넷x">우분투 Nginx 서버 설치 방법 (인터넷X)</a><ul><li><a href="#nginx-설치-패키지-파일-다운로드">Nginx 설치 패키지 파일 다운로드</a></li><li><a href="#nginx-설치-1">Nginx 설치</a></li><li><a href="#nginx-설치-확인">Nginx 설치 확인</a></li></ul></li><li><a href="#nginx-서버-실행-및-종료">Nginx 서버 실행 및 종료</a><ul><li><a href="#nginx-서버-실행">Nginx 서버 실행</a></li><li><a href="#nginx-서버-종료">Nginx 서버 종료</a></li><li><a href="#nginx-서버-자동시작-설정">Nginx 서버 자동시작 설정</a></li></ul></li><li><a href="#nginx-서버-설정">Nginx 서버 설정</a><ul><li><a href="#nginx-설정파일-종류">Nginx 설정파일 종류</a></li><li><a href="#웹-루트-폴더-변경">웹 루트 폴더 변경</a></li></ul></li><li><a href="#vue-프로젝트-배포-방법">Vue 프로젝트 배포 방법</a><ul><li><a href="#vue-프로젝트-빌드-명령어">Vue 프로젝트 빌드 명령어</a></li><li><a href="#dist-폴더-압축-후-서버-업로드">dist 폴더 압축 후 서버 업로드</a></li><li><a href="#dist-폴더-압축-해제">dist 폴더 압축 해제</a></li><li><a href="#심볼릭-링크-생성-및-교체">심볼릭 링크 생성 및 교체</a></li><li><a href="#nginx-설정-재적용-및-워커-재로드">Nginx 설정 재적용 및 워커 재로드</a></li><li><a href="#기존-배포-폴더-삭제">기존 배포 폴더 삭제</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -481,7 +481,9 @@ Nginx 공식 홈페이지에서 리눅스 OS 종류별로 설치 방법을 자�
 
 <hr />
 
-<h2 id="우분투-nginx-서버-설치-방법">우분투 Nginx 서버 설치 방법</h2>
+<h2 id="우분투-nginx-서버-설치-방법-인터넷o">우분투 Nginx 서버 설치 방법 (인터넷O)</h2>
+
+<p>인터넷이 가능한 서버에서만 가능한 방법입니다.</p>
 
 <h3 id="nginx-저장소-필수-패키지-설치">Nginx 저장소 필수 패키지 설치</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt install curl gnupg ca-certificates lsb-release ubuntu-keyring
@@ -532,11 +534,46 @@ sudo apt install nginx
 
 <hr />
 
+<h2 id="우분투-nginx-서버-설치-방법-인터넷x">우분투 Nginx 서버 설치 방법 (인터넷X)</h2>
+
+<p>인터넷 연결이 불가한 운영서버에서 Nginx를 설치하는 방법입니다.</p>
+
+<h3 id="nginx-설치-패키지-파일-다운로드">Nginx 설치 패키지 파일 다운로드</h3>
+<p><a href="https://nginx.org/packages/ubuntu/pool/nginx/n/nginx" target="_blank">https://nginx.org/packages/ubuntu/pool/nginx/n/nginx</a><br />
+위 링크에서 리눅스 OS 버전 및 CPU 종류에 맞는 Nginx 설치 패키지 파일을 다운로드 합니다.<br />
+nginx-dbg 파일은 개발 및 디버깅용이므로, nginx_1.28.0-1~noble_amd64.deb 같은 파일을 받아야 합니다.</p>
+
+<h3 id="nginx-설치-1">Nginx 설치</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /deb파일위치
+sudo apt install ./nginx_1.28.0-1~noble_amd64.deb
+</code></pre></div></div>
+<p>윈도우에서 다운받은 Nginx 설치 패키지 deb 파일을 파일질라로 서버에 올리고 설치합니다.<br />
+dpkg -i 명령어와 달리, apt i 명령어는 .deb 파일 의존성도 자동으로 설치됩니다.</p>
+
+<p><mark>파일 접근 권한 관련 에러 메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>N: Download is performed unsandboxed as root as file '/home/ncloud/insatall/nginx_1.28.0-1~noble_amd64.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
+</code></pre></div></div>
+<p>위와 같은 에러가 발생해도 Nginx 설치 및 동작에는 영향이 없으므로 무시해도 됩니다.</p>
+
+<h3 id="nginx-설치-확인">Nginx 설치 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nginx -v
+또는
+sudo systemctl status nginx
+</code></pre></div></div>
+<p>nginx 설치가 정상적으로 되었는지 확인할 수 있습니다.</p>
+
+<hr />
+
 <h2 id="nginx-서버-실행-및-종료">Nginx 서버 실행 및 종료</h2>
 
 <h3 id="nginx-서버-실행">Nginx 서버 실행</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl start nginx
 </code></pre></div></div>
+
+<p><mark>Nginx 실행파일 위치 확인</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>which nginx
+</code></pre></div></div>
+<p>일반적으로 /usr/sbin/nginx 폴더에 nginx 실행파일이 저장됩니다.</p>
 
 <h3 id="nginx-서버-종료">Nginx 서버 종료</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl stop nginx
@@ -554,6 +591,35 @@ sudo apt install nginx
 <hr />
 
 <h2 id="nginx-서버-설정">Nginx 서버 설정</h2>
+
+<h3 id="nginx-설정파일-종류">Nginx 설정파일 종류</h3>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>/etc/nginx/nginx.conf</td>
+      <td>Nginx 메인 설정 파일</td>
+    </tr>
+    <tr>
+      <td>/etc/nginx/conf.d/*.conf</td>
+      <td>
+        공통 설정 또는 개별 사이트 설정 파일<br />
+        Ubuntu 보다는 CentOS 계열에서 주로 사용합니다.
+      </td>
+    </tr>
+    <tr>
+      <td>/etc/nginx/sites-available/도메인명</td>
+      <td>사이트별 가상호스트 설정 파일 (원본)</td>
+    </tr>
+    <tr>
+      <td>/etc/nginx/sites-enabled/도메인명</td>
+      <td>
+        활성화된 사이트 설정 파일 (심볼릭 링크)<br />
+        Nginx가 실제로 참조하는 파일입니다.
+        </td>
+    </tr>
+  </tbody>
+</table>
+<p>Ubuntu 계열 Nginx 디렉토리 구조입니다.</p>
 
 <h3 id="웹-루트-폴더-변경">웹 루트 폴더 변경</h3>
 <p>Nginx 기본 웹 루트 폴더 /var/www/html는 다른 폴더로 변경이 가능합니다.<br />
