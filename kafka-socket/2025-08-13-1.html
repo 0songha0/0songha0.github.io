@@ -977,7 +977,8 @@ spring:
   kafka:
     bootstrap-servers: 10.10.2.7:9092,10.10.2.8:9092,10.10.2.9:9092
 </code></pre></div></div>
-<p>application-서버구분.yml 파일에 소켓 서버 포트, 통신을 주고받을 Vue URL, 소켓 포트, 카프카 브로커 서버 목록이 작성되어 있습니다.</p>
+<p>application-서버구분.yml 파일에 소켓 서버 포트, 통신을 주고받을 Vue URL, 소켓 포트, 카프카 브로커 서버 목록이 작성되어 있습니다.<br />
+소켓 서버가 NCP 서버인 경우, 카프카 서버에 접근할 수 있는 ACG (접근 제어 그룹) 허용 시 연결이 가능합니다.</p>
 
 <h3 id="netty-웹소켓-서버-생성">netty 웹소켓 서버 생성</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package kr.co.프로젝트명.socket.config;
