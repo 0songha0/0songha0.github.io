@@ -529,9 +529,10 @@ Administrator. It usually boils down to these three things:
 <p><mark>비밀번호 입력 요구 해제 설정</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo visudo
 </code></pre></div></div>
-<p>sudo 구성파일에 아래와 같이 추가하고 저장하면, 해당 유저에서 sudo su - 시 비밀번호를 입력하지 않아도 됩니다.</p>
+<p>sudo 구성파일에 아래와 같이 추가하고 저장하면, 해당 유저에서 모든 sudo 명령어 시 비밀번호를 입력하지 않아도 됩니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>유저명 ALL=(ALL) NOPASSWD: ALL
 </code></pre></div></div>
+<p>NOPASSWD: /bin/su -라고 작성하면, sudo su - 명령어 시에만 비밀번호를 묻지 않게 됩니다.</p>
 
 <h3 id="crontab-실행-목록-확인">crontab 실행 목록 확인</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crontab -l
