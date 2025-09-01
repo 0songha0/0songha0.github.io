@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 리눅스 Java 설치 및 스프링부트 프로젝트 내장 톰캣 실행 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#리눅스-java-설치">리눅스 Java 설치</a><ul><li><a href="#리눅스-jdk-압축-파일-다운">리눅스 JDK 압축 파일 다운</a></li><li><a href="#jdk-설치-압축-파일-해제">JDK 설치 (압축 파일 해제)</a></li><li><a href="#java-실행파일-심볼릭-링크-생성">Java 실행파일 심볼릭 링크 생성</a></li><li><a href="#java-환경변수-설정">Java 환경변수 설정</a></li></ul></li><li><a href="#스프링부트-jar-빌드-방법">스프링부트 jar 빌드 방법</a><ul><li><a href="#intellij-스프링부트-jar-빌드">IntelliJ 스프링부트 jar 빌드</a></li></ul></li><li><a href="#스프링부트-내장-톰캣-서버-실행-방법">스프링부트 내장 톰캣 서버 실행 방법</a><ul><li><a href="#deploysh-스크립트-파일-작성-방식">deploy.sh 스크립트 파일 작성 방식</a></li><li><a href="#systemd-서비스-파일-작성-방식">systemd 서비스 파일 작성 방식</a></li></ul></li><li><a href="#스프링부트-프로젝트-배포-방법">스프링부트 프로젝트 배포 방법</a><ul><li><a href="#deploysh-스크립트-파일-실행-방식">deploy.sh 스크립트 파일 실행 방식</a></li><li><a href="#systemd-서비스-파일-실행-방식">systemd 서비스 파일 실행 방식</a></li></ul></li><li><a href="#스프링부트-내장-톰캣-로그-관리">스프링부트 내장 톰캣 로그 관리</a><ul><li><a href="#톰캣-로그-저장-위치-설정">톰캣 로그 저장 위치 설정</a></li><li><a href="#logback-springxml-파일-예시">logback-spring.xml 파일 예시</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#리눅스-java-설치">리눅스 Java 설치</a><ul><li><a href="#리눅스-jdk-압축-파일-다운">리눅스 JDK 압축 파일 다운</a></li><li><a href="#jdk-설치-압축-파일-해제">JDK 설치 (압축 파일 해제)</a></li><li><a href="#java-실행파일-심볼릭-링크-생성">Java 실행파일 심볼릭 링크 생성</a></li><li><a href="#java-환경변수-설정">Java 환경변수 설정</a></li></ul></li><li><a href="#스프링부트-jar-빌드-방법">스프링부트 jar 빌드 방법</a><ul><li><a href="#intellij-스프링부트-jar-빌드">IntelliJ 스프링부트 jar 빌드</a></li></ul></li><li><a href="#스프링부트-내장-톰캣-서버-실행-방법">스프링부트 내장 톰캣 서버 실행 방법</a><ul><li><a href="#deploysh-스크립트-파일-작성-방식">deploy.sh 스크립트 파일 작성 방식</a></li><li><a href="#systemd-서비스-파일-작성-방식">systemd 서비스 파일 작성 방식</a></li></ul></li><li><a href="#스프링부트-프로젝트-배포-방법">스프링부트 프로젝트 배포 방법</a><ul><li><a href="#deploysh-스크립트-파일-실행-방식">deploy.sh 스크립트 파일 실행 방식</a></li><li><a href="#systemd-서비스-파일-실행-방식">systemd 서비스 파일 실행 방식</a></li></ul></li><li><a href="#스프링부트-내장-톰캣-로그-관리">스프링부트 내장 톰캣 로그 관리</a><ul><li><a href="#톰캣-로그-저장-위치-설정">톰캣 로그 저장 위치 설정</a></li><li><a href="#logback-springxml-파일-예시">logback-spring.xml 파일 예시</a></li></ul></li><li><a href="#스프링부트-정보-확인">스프링부트 정보 확인</a><ul><li><a href="#스프링부트-pid-확인-방법">스프링부트 PID 확인 방법</a></li><li><a href="#스프링부트-포트-확인-방법">스프링부트 포트 확인 방법</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -616,11 +616,6 @@ echo "배포 완료"
 </code></pre></div></div>
 <p>작성한 deploy.sh 스크립트를 실행하여 내장 톰캣을 실행할 수 있습니다.</p>
 
-<p><mark>java 프로세스 확인 방법</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ps -ef | grep java
-</code></pre></div></div>
-<p>실행 중 java 프로세스 목록에서 jar 파일 실행 명령어 좌측에 406806 같은 PID가 확인됩니다.</p>
-
 <h3 id="systemd-서비스-파일-작성-방식">systemd 서비스 파일 작성 방식</h3>
 <p><a href="https://0songha0.github.io/op/2022-08-06-1" target=":blank">https://0songha0.github.io/op/2022-08-06-1</a><br />
 위 글을 참고하여 서비스 파일을 작성 및 등록하고, systemctl 명령어로 실행하면 됩니다.<br />
@@ -631,7 +626,8 @@ echo "배포 완료"
 <h2 id="스프링부트-프로젝트-배포-방법">스프링부트 프로젝트 배포 방법</h2>
 
 <h3 id="deploysh-스크립트-파일-실행-방식">deploy.sh 스크립트 파일 실행 방식</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp ./프로젝트명-신규GradleVersion명.jar /opt/프로젝트명/프로젝트명-기존GradleVersion명.jar
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /jar업로드폴더
+cp ./프로젝트명-신규GradleVersion명.jar /opt/프로젝트명
 ./deploy.sh
 </code></pre></div></div>
 <p>신규 버전의 jar 파일 업로드 후 deploy.sh 파일을 재실행 합니다.<br />
@@ -644,8 +640,9 @@ echo "배포 완료"
 젠킨스 파이프라인에서 배포 완료 후 실행하는 것도 좋습니다.</p>
 
 <h3 id="systemd-서비스-파일-실행-방식">systemd 서비스 파일 실행 방식</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl stop 서비스명.service
-cp ./프로젝트명-GradleVersion명.jar /opt/프로젝트명/프로젝트명-GradleVersion명.jar
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /jar업로드폴더
+systemctl stop 서비스명.service
+cp ./프로젝트명-GradleVersion명.jar /opt/프로젝트명
 systemctl start 서비스명.service
 </code></pre></div></div>
 <p>기존 서비스 프로세스를 종료하고, jar 파일 교체 후 다시 실행하면 됩니다.</p>
@@ -809,6 +806,20 @@ systemctl start 서비스명.service
 &lt;/configuration&gt;
 </code></pre></div></div>
 <p>rollingPolicy fileNamePattern 설정으로 오래된 로그 파일은 프로젝트명.YYYY-MM-DD.순번.gz 파일로 압축되어 저장됩니다.</p>
+
+<hr />
+
+<h2 id="스프링부트-정보-확인">스프링부트 정보 확인</h2>
+
+<h3 id="스프링부트-pid-확인-방법">스프링부트 PID 확인 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ps -ef | grep java
+</code></pre></div></div>
+<p>실행 중 java 프로세스 목록에서 jar 파일 실행 명령어 좌측에 406806 같은 PID가 확인됩니다.</p>
+
+<h3 id="스프링부트-포트-확인-방법">스프링부트 포트 확인 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ss -ltnp | grep java
+</code></pre></div></div>
+<p>application.yml 파일 server port와 동일하게 실행되었는지 확인할 수 있습니다.</p>
 
         
       </section>
