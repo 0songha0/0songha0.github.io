@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> AWS EC2 서버 생성 방법 / EC2 인스턴스 유형 / AWS 보안그룹 설정</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#aws-ec2-서버-생성-방법">AWS EC2 서버 생성 방법</a></li><li><a href="#아마존-ec2-인스턴스-유형">아마존 EC2 인스턴스 유형</a><ul><li><a href="#범용-인스턴스-t3-종류">범용 인스턴스 T3 종류</a></li></ul></li><li><a href="#aws-보안그룹-설정">AWS 보안그룹 설정</a><ul><li><a href="#인바운드-규칙-설정">인바운드 규칙 설정</a></li><li><a href="#아웃바운드-규칙-설정">아웃바운드 규칙 설정</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#aws-ec2-서버-생성-방법">AWS EC2 서버 생성 방법</a></li><li><a href="#아마존-ec2-인스턴스-유형">아마존 EC2 인스턴스 유형</a><ul><li><a href="#범용-인스턴스-t-시리즈-종류">범용 인스턴스 T 시리즈 종류</a></li><li><a href="#컴퓨팅-최적화-인스턴스-c-시리즈-종류">컴퓨팅 최적화 인스턴스 C 시리즈 종류</a></li></ul></li><li><a href="#aws-보안그룹-설정">AWS 보안그룹 설정</a><ul><li><a href="#인바운드-규칙-설정">인바운드 규칙 설정</a></li><li><a href="#아웃바운드-규칙-설정">아웃바운드 규칙 설정</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -540,7 +540,7 @@ EC2 &gt; 네트워크 및 보안 &gt; 키 페어 &gt; 키 페어 생성</p>
 
 <h2 id="아마존-ec2-인스턴스-유형">아마존 EC2 인스턴스 유형</h2>
 
-<h3 id="범용-인스턴스-t3-종류">범용 인스턴스 T3 종류</h3>
+<h3 id="범용-인스턴스-t-시리즈-종류">범용 인스턴스 T 시리즈 종류</h3>
 <table>
   <thead>
     <tr>
@@ -610,6 +610,40 @@ EC2 &gt; 네트워크 및 보안 &gt; 키 페어 &gt; 키 페어 생성</p>
     </tr>
   </tbody>
 </table>
+
+<h3 id="컴퓨팅-최적화-인스턴스-c-시리즈-종류">컴퓨팅 최적화 인스턴스 C 시리즈 종류</h3>
+<table>
+  <thead>
+    <tr>
+      <th>인스턴스</th>
+      <th>CPU 개수</th>
+      <th>메모리 (GiB)</th>
+      <th>메모</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>c5.large / c6g.large</td>
+      <td>2</td>
+      <td>4</td>
+      <td>소규모 클래스 (10~20명) LiveKit 서버 사양으로 적합합니다.</td>
+    </tr>
+    <tr>
+      <td>c5.xlarge / c6g.xlarge</td>
+      <td>4</td>
+      <td>8</td>
+      <td>중규모 클래스 (30~50명) LiveKit 서버 사양으로 적합합니다.</td>
+    </tr>
+    <tr>
+      <td>c5.2xlarge / c6g.2xlarge 이상</td>
+      <td>8</td>
+      <td>16</td>
+      <td>대규모 클래스 (50명 이상), 고화질 영상 LiveKit 서버 사양으로 적합합니다.</td>
+    </tr>
+  </tbody>
+</table>
+<p>네트워크가 느리고 UDP 트래픽이 차단되는 학교에서 WebRTC 사용 시 발생하는 문제점을 개선할 수 있도록 LiveKit 서버를 사용하면 좋습니다.<br />
+LiveKit 서버는 시그널링 서버 + SFU + TURN 서버 기능을 포함하여 안정적인 오디오, 비디오 전송이 가능합니다.</p>
 
 <hr />
 
