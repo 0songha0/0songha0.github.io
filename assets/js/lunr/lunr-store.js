@@ -1456,4 +1456,10 @@ var store = [{
         "tags": [],
         "url": "/op/2025-09-04-1",
         "teaser": null
+      },{
+        "title": "Spring Filter, Intercepter 공통점 및 차이점",
+        "excerpt":"스프링 필터, 인터셉터 공통점 전역 처리에 주로 사용됩니다. 컨트롤러 호출 전 요청을 가로채서 전처리를 할 수 있습니다. 컨트롤러 실행 후 응답에 후처리도 할 수 있습니다. 필터, 인터셉터는 여러 개 등록 시 순서 제어가 가능합니다. 스프링 필터, 인터셉터 차이점 Spring Filter 소속 : 톰캣 등 Servlet Container 실행 시점 : DispatcherServlet...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-09-12-1",
+        "teaser": null
       }]
