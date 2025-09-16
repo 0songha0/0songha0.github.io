@@ -657,7 +657,18 @@ some 함수는 첫 번째로 조건을 만족하는 요소를 찾는 즉시 순�
 <h3 id="텍스트-클립보드-복사-기능">텍스트 클립보드 복사 기능</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const copyToClipboard = async (text) =&gt; {
   try {
-    await navigator.clipboard.writeText(text);
+    if (navigator.clipboard &amp;&amp; navigator.clipboard.writeText) {
+      // https 또는 localhost에서 클립보드 복사 (최신, 표준 방법)
+      await navigator.clipboard.writeText(text || "");
+    } else {
+      // 보안 컨텍스트 환경이 아닌 경우 클립보드 복사 (Deprecated, 권장X)
+      const textarea = document.createElement("textarea");
+      textarea.value = text || "";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy"); // 선택된 텍스트를 클립보드에 복사
+      document.body.removeChild(textarea);
+    }
     alert("클립보드에 복사되었습니다.");
   } catch (err) {
     console.error("클립보드 복사 실패:", err);
