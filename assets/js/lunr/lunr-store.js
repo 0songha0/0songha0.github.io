@@ -1462,4 +1462,10 @@ var store = [{
         "tags": [],
         "url": "/web-dev/2025-09-12-1",
         "teaser": null
+      },{
+        "title": "자주 쓰는 Vue 문법 / 유용한 기능 Vue 사용법",
+        "excerpt":"Vue 화면 조작 ul li 목록 출력 방법 &lt;template&gt; &lt;ul class=\"classSelectUl\"&gt; &lt;li v-for=\"(item, index) in list\" :key=\"index\" :class=\"{ active: activeIndex === index}\" @click=\"setActiveIndex(index)\" &gt;&lt;/li&gt; &lt;/ul&gt; &lt;/template&gt; &lt;script&gt; import { ref, onMounted } from \"vue\"; import { useapi명 } from \"@/common/utils/api명.js\"; const { getList } = useapi명(); const list = ref([]);...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-09-16-1",
+        "teaser": null
       }]
