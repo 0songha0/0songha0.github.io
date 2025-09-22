@@ -1470,7 +1470,7 @@ var store = [{
         "teaser": null
       },{
         "title": "객체지향 설계 원칙 (SOLID 원칙) 및 디자인 패턴 정리",
-        "excerpt":"현재 작성중인 글입니다. 객체지향 설계 원칙 (SOLID 원칙) 단일 책임 원칙 (SRP) 클래스는 하나의 책임만 가져야 합니다. 각 클래스는 여러 함수를 가질 수 있지만, 하나의 역할을 수행해야 합니다. 단일 책임 원칙 위반 예시 한 클래스에 DB 저장, 이메일 전송, 로그 출력 등 여러 역할의 함수가 작성된 경우 각 기능 변경...","categories": ["plan-design-db"],
+        "excerpt":"객체지향 설계 원칙 (SOLID 원칙) 단일 책임 원칙 (SRP) 클래스는 하나의 책임만 가져야 합니다. 각 클래스는 여러 함수를 가질 수 있지만, 한가지 역할을 수행해야 합니다. 단일 책임 원칙 위반 예시 public class UserService { public void saveUser(User user) { // 데이터베이스에 유저 정보 저장 로직 } public void sendWelcomeEmail(User) user...","categories": ["plan-design-db"],
         "tags": [],
         "url": "/plan-design-db/2025-09-17-1",
         "teaser": null
