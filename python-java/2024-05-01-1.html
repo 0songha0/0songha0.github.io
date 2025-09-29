@@ -1022,6 +1022,11 @@ queue.isEmpty();
 
 // 큐 전체 삭제
 queue.clear();
+
+// 큐 순회
+for (객체명 객체변수명 : queue) {
+  
+}
 </code></pre></div></div>
 
 <h3 id="덱-arraydeque-">덱 (ArrayDeque) ★</h3>
@@ -1103,6 +1108,62 @@ while(!pq.isEmpty()) {
 // 우선순위 큐 전체 출력 (우선순위 큐는 꺼내면서 정렬하므로, 삽입 후 pq는 정렬된 상태가 아닙니다.)
 System.out.println(pq);
 </code></pre></div></div>
+
+<p><mark>큐 자료구조로 우선순위 큐 구현 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class 객체명 {
+  int id;
+  int priority;
+
+  public 객체명(int id, int priority) {
+    this.id = id;
+    this.priority = priority;
+  }
+}
+
+class Main {
+  public int solution(int n, int m, int[] arr) {
+    Queue&lt;객체명&gt; queue = new ArrayDeque&lt;&gt;();
+    int answer = 0;
+
+    for (int i = 0; i &lt; n; i++) {
+      // 객체 추가 (기존 순번, 우선순위 값)
+      queue.offer(new 객체명(i, arr[i]));
+    }
+
+    // 큐 순회
+    while (!queue.isEmpty()) {
+      객체명 current객체명 = queue.poll();
+      
+      // 더 높은 우선순위가 있는지 여부
+      boolean hasHigher = false;
+
+      // 현재 꺼낸 객체 우선순위가
+      // 큐 전체 객체 우선순위보다 높지 않으면 다시 넣기
+      for (객체명 객체변수명 : queue) {
+        if (객체변수명.priority &gt; current객체명.priority) {
+          queue.offer(current객체명);
+          hasHigher = true;
+          break;
+        }
+      }
+
+      // 현재 꺼낸 객체 우선순위가 가장 높은 경우
+      if (!hasHigher) {
+        answer++;
+
+        // arr m번째 객체가 우선순위에 의해 꺼내진 순서 반환
+        if (current객체명.id == m) {
+          return answer;
+        }
+      }
+    }
+
+    return -1;
+  }
+}
+</code></pre></div></div>
+<p>PriorityQueue 객체를 이용하면 더 편하게 우선순위 큐를 구현할 수 있지만,<br />
+기존 Qeuue 객체로도 우선순위 큐를 구현할 수 있습니다.</p>
 
 <h3 id="키-값-자료구조-map">키-값 자료구조 (Map)</h3>
 
