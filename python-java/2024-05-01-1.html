@@ -1137,8 +1137,8 @@ class Main {
       // 더 높은 우선순위가 있는지 여부
       boolean hasHigher = false;
 
-      // 현재 꺼낸 객체 우선순위가
-      // 큐 전체 객체 우선순위보다 높지 않으면 다시 넣기
+      // 큐에서 꺼낸 현재 객체보다
+      // 우선순위가 높은 객체가 있으면 다시 넣기
       for (객체명 객체변수명 : queue) {
         if (객체변수명.priority &gt; current객체명.priority) {
           queue.offer(current객체명);
