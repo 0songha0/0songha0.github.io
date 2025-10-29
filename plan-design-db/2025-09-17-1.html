@@ -2360,9 +2360,218 @@ TextBox: Username
 <h3 id="데코레이터-패턴">데코레이터 패턴</h3>
 
 <p><mark>데코레이터 패턴 예시 1</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Component interface
+interface Coffee {
+  String getDescription();
+  double getCost();
+}
+
+// ConcreteComponent class
+class SimpleCoffee implements Coffee {
+  @Override
+  public String getDescription() {
+    return "Simple coffee";
+  }
+
+  @Override
+  public double getCost() {
+    return 5.0;
+  }
+}
+
+// Decorator class
+class CoffeeDecorator implements Coffee {
+  protected Coffee decoratedCoffee;
+
+  public CoffeeDecorator(Coffee coffee) {
+    this.decoratedCoffee = coffee;
+  }
+
+  @Override
+  public String getDescription() {
+    return decoratedCoffee.getDescription();
+  }
+
+  @Override
+  public double getCost() {
+    return decoratedCoffee.getCost();
+  }
+}
+
+// Concrete Decorators
+class MilkDecorator extends CoffeeDecorator {
+  public MilkDecorator(Coffee coffee) {
+    super(coffee);
+  }
+
+  @Override
+  public String getDescription() {
+    return super.getDescription() + ", Milk";
+  }
+
+  @Override
+  public double getCost() {
+    return super.getCost() + 1.5;
+  }
+}
+
+class SugarDecorator extends CoffeeDecorator {
+  public SugarDecorator(Coffee coffee) {
+    super(coffee);
+  }
+
+  @Override
+  public String getDescription() {
+    return super.getDescription() + ", Sugar";
+  }
+
+  @Override
+  public double getCost() {
+    return super.getCost() + 0.5;
+  }
+}
+
+// Client code
+public class Main {
+  public static void main(String[] args) {
+  
+    Coffee simpleCoffee = new SimpleCoffee();
+    System.out.println(
+      simpleCoffee.getDescription() + " $" + simpleCoffee.getCost()
+    );
+    
+    Coffee milkCoffee = new MilkDecorator(
+      new SimpleCoffee());
+    System.out.println(
+      milkCoffee.getDescription() + " $" + milkCoffee.getCost()
+    );
+
+    Coffee milkAndSugarCoffee = new SugarDecorator(
+      new MilkDecorator(
+        new SimpleCoffee()
+      )
+    );
+    
+    System.out.println(
+      milkAndSugarCoffee.getDescription()
+      + " $" + milkAndSugarCoffee.getCost()
+    );
+  }
+}
+</code></pre></div></div>
 <p>위 코드의 실행 결과는 아래와 같습니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Simple coffee $5.0
+Simple coffee, Milk $6.5
+Simple coffee, Milk, Sugar $7.0
+</code></pre></div></div>
+
+<p><mark>데코레이터 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Base Component
+interface Text {
+  String getContent();
+}
+
+// Concrete Component
+class PlainText implements Text {
+  private String content;
+
+  public PlainText(String content) {
+    this.content = content;
+  }
+
+  @Override
+  public String getContent() {
+    return content;
+  }
+}
+
+// Base Decorator
+abstract class TextDecorator implements Text {
+  protected Text decoratedText;
+
+  public TextDecorator(Text text) {
+    this.decoratedText = text;
+  }
+
+  @Override
+  public String getContent() {
+    return decoratedText.getContent();
+  }
+}
+
+// Concrete Decorators
+class BoldDecorator extends TextDecorator {
+  public BoldDecorator(Text text) {
+    super(text);
+  }
+
+  @Override
+  public String getContent() {
+    return "&lt;b&gt;" + super.getContent() + "&lt;/b&gt;";
+  }
+}
+
+class ItalicDecorator extends TextDecorator {
+  public ItalicDecorator(Text text) {
+    super(text);
+  }
+
+  @Override
+  public String getContent() {
+    return "&lt;i&gt;" + super.getContent() + "&lt;/i&gt;";
+  }
+}
+
+class UnderlineDecorator extends TextDecorator {
+  public UnderlineDecorator(Text text) {
+    super(text);
+  }
+
+  @Override
+  public String getContent() {
+    return "&lt;u&gt;" + super.getContent() + "&lt;/u&gt;";
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+    // Create a plain text
+    Text text = new PlainText("Hello, Decorator Pattern!");
+    System.out.println("Plain text: " + text.getContent());
+
+    text = new BoldDecorator(text);
+    System.out.println("Bold text: " + text.getContent());
+
+    text = new ItalicDecorator(text);
+    System.out.println(
+      "Bold and italic text: " + text.getContent());
+
+    text = new UnderlineDecorator(text);
+    System.out.println(
+      "Bold, italic, and underlined text: "
+        + text.getContent()
+    );
+
+    Text anotherText = new UnderlineDecorator(
+      new ItalicDecorator(
+        new PlainText("Another example")
+      )
+    );
+    System.out.println(
+      "Underlined and italic text: "
+        + anotherText.getContent()
+    );
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Plain text: Hello, Decorator Pattern!
+Bold text: &lt;b&gt;Hello, Decorator Pattern!&lt;/b&gt;
+Bold and italic text: &lt;i&gt;&lt;b&gt;Hello, Decorator Pattern!&lt;/b&gt;&lt;/i&gt;
+Bold, italic, and underlined text:
+ &lt;u&gt;&lt;i&gt;&lt;b&gt;Hello, Decorator Pattern!&lt;/b&gt;&lt;/i&gt;&lt;/u&gt;
+Underlined and italic text: &lt;u&gt;&lt;i&gt;Another example&lt;/i&gt;&lt;/u&gt;
+</code></pre></div></div>
 
 <h3 id="파사드-패턴">파사드 패턴</h3>
 <p>여러 개의 복잡한 서브시스템 클래스들을 하나의 파사드 클래스로 묶습니다.<br />
@@ -2545,16 +2754,315 @@ File delete success: true
 <h3 id="플라이웨이트-패턴">플라이웨이트 패턴</h3>
 
 <p><mark>플라이웨이트 패턴 예시 1</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Flyweight class
+class Book {
+  private final String title; // intrinsic state (shared)
+
+  public Book(String title) {
+    this.title = title;
+  }
+
+  public void read() {
+    System.out.println("Reading the book titled: " + title);
+  }
+}
+
+import java.util.HashMap;
+import java.util.Map;
+
+// FlyweightFactory class
+class Bookshelf {
+  private static final Map&lt;String, Book&gt; bookshelf = new HashMap&lt;&gt;();
+
+  public static Book getBook(String title) {
+    Book book = bookshelf.get(title);
+
+    if (book == null) {
+      book = new Book(title);
+      bookshelf.put(title, book);
+      System.out.println(
+          "Adding a new book to the bookshelf: " + title);
+    } else {
+      System.out.println(
+          "Reusing existing book from the bookshelf: " + title);
+    }
+    return book;
+  }
+}
+
+// Client code
+public class Main {
+  public static void main(String[] args) {
+    Book book1 = Bookshelf.getBook("Effective Java");
+    book1.read();
+
+    Book book2 = Bookshelf.getBook("Effective Java");
+    book2.read();
+
+    Book book3 = Bookshelf.getBook("Clean Code");
+    book3.read();
+
+    // Check if book1 and book2 are the same object
+    System.out.println(
+      book1 == book2 ? "Same book for 'Effective Java'."
+      : "Different books for 'Effective Java'."
+    );
+  }
+}
+</code></pre></div></div>
 <p>위 코드의 실행 결과는 아래와 같습니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Adding a new book to the bookshelf: Effective Java
+Reading the book titled: Effective Java
+Reusing existing book from the bookshelf: Effective Java
+Reading the book titled: Effective Java
+Adding a new book to the bookshelf: Clean Code
+Reading the book titled: Clean Code
+Same book for 'Effective Java'.
+</code></pre></div></div>
+
+<p><mark>플라이웨이트 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Flyweight interface
+interface Font {
+    void apply(String text);
+}
+
+// ConcreteFlyweight class
+class ConcreteFont implements Font {
+  private String font;
+  private int size;
+  private String color;
+
+  public ConcreteFont(String font, int size, String color) {
+    this.font = font;
+    this.size = size;
+    this.color = color;
+  }
+
+  @Override
+  public void apply(String text) {
+    System.out.println(
+      "Text: '" + text + "' with Font: "
+      + font + ", Size: " + size + ", Color: " + color);
+  }
+}
+
+import java.util.HashMap;
+import java.util.Map;
+
+// Flyweight Factory class
+class FontFactory {
+  private static final HashMap&lt;String, Font&gt; fontMap = new HashMap&lt;&gt;();
+
+  public static Font getFont(String font, int size, String color) {
+    String key = font + size + color;
+    Font fontObject = fontMap.get(key);
+
+    if (fontObject == null) {
+      fontObject = new ConcreteFont(font, size, color);
+      fontMap.put(key, fontObject);
+      System.out.println("Creating font: " + key);
+    } else {
+      System.out.println("Reusing font: " + key);
+    }
+    return fontObject;
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+    Font font1 = FontFactory.getFont("Arial", 12, "Black");
+    font1.apply("Hello, World!");
+
+    Font font2 = FontFactory.getFont("Arial", 12, "Black");
+    font2.apply("Flyweight Pattern");
+
+    Font font3 = FontFactory.getFont("Times New Roman", 14, "Blue");
+    font3.apply("Design Patterns");
+
+    Font font4 = FontFactory.getFont("Arial", 12, "Black");
+    font4.apply("Another Text");
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Creating font: Arial12Black
+Text: 'Hello, World!' with Font: Arial, Size: 12, Color: Black
+Reusing font: Arial12Black
+Text: 'Flyweight Pattern' with Font: Arial, Size: 12, Color: Black
+Creating font: Times New Roman14Blue
+Text: 'Design Patterns' with Font: Times New Roman, Size: 14, Color: Blue
+Reusing font: Arial12Black
+Text: 'Another Text' with Font: Arial, Size: 12, Color: Black
+</code></pre></div></div>
 
 <h3 id="프록시-패턴">프록시 패턴</h3>
 
 <p><mark>프록시 패턴 예시 1</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Subject interface
+interface Image {
+  void display();
+  String getFileName();
+}
+
+// RealSubject class
+class RealImage implements Image {
+  private String fileName;
+
+  public RealImage(String fileName) {
+    this.fileName = fileName;
+    loadFromDisk();
+  }
+
+  private void loadFromDisk() {
+    System.out.println("Loading " + fileName);
+  }
+
+  @Override
+  public void display() {
+    System.out.println("Displaying " + fileName);
+  }
+
+  @Override
+  public String getFileName() {
+    return fileName;
+  }
+}
+
+// Proxy class
+class ProxyImage implements Image {
+  private RealImage realImage;
+  private String fileName;
+
+  public ProxyImage(String fileName) {
+    this.fileName = fileName;
+  }
+
+  @Override
+  public void display() {
+    if (realImage == null) {
+      realImage = new RealImage(fileName);
+    }
+    realImage.display();
+  }
+
+  @Override
+  public String getFileName() {
+    return fileName;
+  }
+
+  public String getFileExtension() {
+    int lastIndex = fileName.lastIndexOf('.');
+    if (lastIndex == -1) {
+      return "";
+    }
+    return fileName.substring(lastIndex + 1);
+  }
+}
+
+// Client code
+public class Main {
+  public static void main(String[] args) {
+    ProxyImage image = new ProxyImage("test_image.jpg");
+
+    System.out.println("File name: " + image.getFileName());
+    System.out.println("File extension: " + image.getFileExtension());
+
+    image.display();
+    image.display();
+  }
+}
+</code></pre></div></div>
 <p>위 코드의 실행 결과는 아래와 같습니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>File name: test_image.jpg
+File extension: jpg
+Loading test_image.jpg
+Displaying test_image.jpg
+Displaying test_image.jpg
+</code></pre></div></div>
+
+<p><mark>프록시 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Subject interface
+interface BankAccount {
+  void withdraw(double amount);
+  void deposit(double amount);
+}
+
+// Real Subject class
+class RealBankAccount implements BankAccount {
+  private double balance;
+  
+  public RealBankAccount(double initialBalance) {
+    this.balance = initialBalance;
+  }
+
+  @Override
+  public void withdraw(double amount) {
+  if (balance &gt;= amount) {
+      balance -= amount;
+      System.out.println(amount + " withdrawn. Current balance: " + balance);
+    } else {
+      System.out.println("Insufficient balance.");
+    }
+  }
+
+  @Override
+  public void deposit(double amount) {
+    balance += amount;
+    System.out.println(amount + " deposited. Current balance: " + balance);
+  }
+}
+
+// Proxy class
+class BankAccountProxy implements BankAccount {
+  private RealBankAccount realBankAccount;
+  private String userRole;
+  
+  public BankAccountProxy(String userRole, double initialBalance) {
+    this.userRole = userRole;
+    this.realBankAccount = new RealBankAccount(initialBalance);
+  }
+
+  // Check if the user has Admin access
+  private boolean hasAccess() {
+    return "Admin".equalsIgnoreCase(userRole);
+  }
+
+  @Override
+  public void withdraw(double amount) {
+    if (hasAccess()) {
+      realBankAccount.withdraw(amount);
+    } else {
+      System.out.println("Access denied. Only Admin can withdraw.");
+    }
+  }
+
+  @Override
+  public void deposit(double amount) {
+    realBankAccount.deposit(amount);
+  }
+}
+
+// Client code
+public class Main {
+  public static void main(String[] args) {
+    // User with Admin access
+    BankAccount adminAccount = new BankAccountProxy("Admin", 1000);
+    adminAccount.deposit(500);   // Deposit allowed
+    adminAccount.withdraw(300);  // Withdraw allowed
+
+    // User without Admin access
+    BankAccount userAccount = new BankAccountProxy("User", 1000);
+    userAccount.deposit(500);    // Deposit allowed
+    userAccount.withdraw(300);   // Withdraw denied
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>500.0 deposited. Current balance: 1500.0
+300.0 withdrawn. Current balance: 1200.0
+500.0 deposited. Current balance: 1500.0
+Access denied. Only Admin can withdraw.
+</code></pre></div></div>
 
 <hr />
 
@@ -2563,23 +3071,666 @@ File delete success: true
 <h3 id="책임-연쇄-패턴">책임 연쇄 패턴</h3>
 
 <p><mark>책임 연쇄 패턴 예시 1</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>abstract class Handler {
+    protected Handler next;
+
+    public void setNext(Handler next) {
+        this.next = next;
+    }
+
+    public void handle(int number) {
+        process(number);
+        if (next != null) next.handle(number);
+    }
+
+    protected abstract void process(int number);
+}
+
+class PositiveHandler extends Handler {
+    @Override
+    protected void process(int number) {
+        if (number &gt; 0) {
+            System.out.println(number + " is a positive number");
+        }
+    }
+}
+
+class EvenHandler extends Handler {
+    @Override
+    protected void process(int number) {
+        if (number % 2 == 0) {
+            System.out.println(number + " is an even number");
+        }
+    }
+}
+
+class DivisibleBy3Handler extends Handler {
+    @Override
+    protected void process(int number) {
+        if (number % 3 == 0) {
+            System.out.println(number + " is divible by 3");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Handler positive = new PositiveHandler();
+        Handler even = new EvenHandler();
+        Handler divisibleBy3 = new DivisibleBy3Handler();
+
+        positive.setNext(even);
+        even.setNext(divisibleBy3);
+
+        positive.handle(-2);
+        positive.handle(4);
+        positive.handle(6);
+    }
+}
+</code></pre></div></div>
 <p>위 코드의 실행 결과는 아래와 같습니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-2 is an even number
+
+4 is a positive number
+4 is an even number
+
+6 is a positive number
+6 is an even number
+6 is divible by 3
+</code></pre></div></div>
+
+<p><mark>책임 연쇄 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enum LogLevel {
+  INFO, DEBUG, WARN
+}
+
+abstract class Logger {
+  protected LogLevel level;
+  protected Logger nextLogger;
+
+  public void setNextLogger(Logger nextLogger) {
+    this.nextLogger = nextLogger;
+  }
+
+  public void logMessage(LogLevel level, String message) {
+    if (this.level.ordinal() &lt;= level.ordinal()) {
+      write(message);
+    }
+    if (nextLogger != null) {
+      nextLogger.logMessage(level, message);
+    }
+  }
+
+  protected abstract void write(String message);
+}
+
+class ConsoleLogger extends Logger {
+  public ConsoleLogger(LogLevel level) {
+    this.level = level;
+  }
+
+  @Override
+  protected void write(String message) {
+    System.out.println("Console::Logger: " + message);
+  }
+}
+
+class FileLogger extends Logger {
+  public FileLogger(LogLevel level) {
+    this.level = level;
+  }
+
+  @Override
+  protected void write(String message) {
+    System.out.println("File::Logger: " + message);
+  }
+}
+
+class NetworkLogger extends Logger {
+  public NetworkLogger(LogLevel level) {
+    this.level = level;
+  }
+
+  @Override
+  protected void write(String message) {
+    System.out.println("Network::Logger: " + message);
+  }
+}
+
+public class Main {
+  private static Logger getChainOfLoggers() {
+    Logger networkLogger = new NetworkLogger(LogLevel.WARN);
+    Logger fileLogger = new FileLogger(LogLevel.DEBUG);
+    Logger consoleLogger = new ConsoleLogger(LogLevel.INFO);
+
+    networkLogger.setNextLogger(fileLogger);
+    fileLogger.setNextLogger(consoleLogger);
+
+    return networkLogger;
+  }
+
+  public static void main(String[] args) {
+    Logger loggerChain = getChainOfLoggers();
+
+    loggerChain.logMessage(LogLevel.INFO, 
+        "This is an information.");
+    
+    loggerChain.logMessage(LogLevel.DEBUG,
+        "This is a debug level information.");
+    
+    loggerChain.logMessage(LogLevel.WARN,
+        "This is a warning information.");
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Console::Logger: This is an information.
+
+File::Logger: This is a debug level information.
+Console::Logger: This is a debug level information.
+
+Network::Logger: This is a warning information.
+File::Logger: This is a warning information.
+Console::Logger: This is a warning information.
+</code></pre></div></div>
 
 <h3 id="커맨드-패턴">커맨드 패턴</h3>
 
 <p><mark>커맨드 패턴 예시 1</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Receiver Class
+public class Light {
+  public void turnOn() {
+    System.out.println("Light is ON");
+  }
+
+  public void turnOff() {
+    System.out.println("Light is OFF");
+  }
+}
+
+// Command Interface
+public interface Command {
+  void execute();
+}
+
+// Concrete Commands
+public class LightOnCommand implements Command {
+  private Light light;
+
+  public LightOnCommand(Light light) {
+    this.light = light;
+  }
+
+  @Override
+  public void execute() {
+    light.turnOn();
+  }
+}
+
+public class LightOffCommand implements Command {
+  private Light light;
+
+  public LightOffCommand(Light light) {
+    this.light = light;
+  }
+
+  @Override
+  public void execute() {
+    light.turnOff();
+  }
+}
+
+// Invoker Class
+public class RemoteControl {
+  private Command command;
+
+  public void setCommand(Command command) {
+    this.command = command;
+  }
+
+  public void pressButton() {
+    command.execute();
+  }
+}
+
+public class Client {
+  public static void main(String[] args) {
+    Light livingRoomLight = new Light();
+    
+    Command lightOn = new LightOnCommand(livingRoomLight);
+    
+    Command lightOff = new LightOffCommand(livingRoomLight);
+    
+    RemoteControl remote = new RemoteControl();
+    
+    remote.setCommand(lightOn);
+    remote.pressButton(); // "Light is ON"
+    
+    remote.setCommand(lightOff);
+    remote.pressButton(); // "Light is OFF"
+  }
+}
+
+// Receiver
+public class TextEditor {
+  private StringBuilder content;
+
+  public TextEditor() {
+    this.content = new StringBuilder();
+  }
+
+  public void insertText(String text, int position) {
+    content.insert(position, text);
+  }
+
+  public void deleteText(int position, int length) {
+    content.delete(position, position + length);
+  }
+
+  public String getTextSubstring(int start, int end) {
+    return content.substring(start, end);
+  }
+
+  public String getContent() {
+    return content.toString();
+  }
+}
+
+// Command interface
+public interface Command {
+  void execute();
+  void undo();
+}
+
+// Concrete commands
+public class InsertTextCommand implements Command {
+  private TextEditor editor;
+  private String text;
+  private int position;
+  
+  public InsertTextCommand(
+    TextEditor editor, String text, int position) 
+  {
+    this.editor = editor;
+    this.text = text;
+    this.position = position;
+  }
+
+  @Override
+  public void execute() {
+    editor.insertText(text, position);
+  }
+  @Override
+  public void undo() {
+    editor.deleteText(position, text.length());
+  }
+}
+
+public class DeleteTextCommand implements Command {
+  private TextEditor editor;
+  private String deletedText;
+  private int position;
+
+  public DeleteTextCommand(
+    TextEditor editor, int position, int length) 
+  {
+    this.editor = editor;
+    this.position = position;
+    this.deletedText = editor.getTextSubstring(
+        position, position + length);
+  }
+
+  @Override
+  public void execute() {
+    editor.deleteText(position, deletedText.length());
+  }
+  @Override
+  public void undo() {
+    editor.insertText(deletedText, position);
+  }
+}
+
+import java.util.Stack;
+
+// Invoker
+public class TextEditorInvoker {
+  private Stack&lt;Command&gt; undoStack = new Stack&lt;&gt;();
+  private Stack&lt;Command&gt; redoStack = new Stack&lt;&gt;();
+
+  public void executeCommand(Command command) {
+    command.execute();
+    undoStack.push(command);
+    redoStack.clear();
+  }
+
+  public void undo() {
+    if (!undoStack.isEmpty()) {
+      Command command = undoStack.pop();
+      command.undo();
+      redoStack.push(command);
+    }
+  }
+
+  public void redo() {
+    if (!redoStack.isEmpty()) {
+      Command command = redoStack.pop();
+      command.execute();
+      undoStack.push(command);
+    }
+  }
+}
+
+// Client code
+public class Main {
+  public static void main(String[] args) {
+    TextEditor editor = new TextEditor();
+    TextEditorInvoker invoker = new TextEditorInvoker();
+
+    Command insertHello
+      = new InsertTextCommand(editor, "Hello, ", 0);
+    invoker.executeCommand(insertHello);
+
+    Command insertWorld
+      = new InsertTextCommand(editor, "World!", 7);
+    invoker.executeCommand(insertWorld);
+
+    System.out.println(
+        "Current text: " + editor.getContent());
+
+    invoker.undo();
+    System.out.println(
+        "After undo: " + editor.getContent());
+
+    invoker.redo();
+    System.out.println(
+        "After redo: " + editor.getContent());
+
+    Command deleteCommand
+      = new DeleteTextCommand(editor, 0, 7);
+    invoker.executeCommand(deleteCommand);
+    System.out.println(
+        "After delete: " + editor.getContent());
+
+    invoker.undo();
+    System.out.println(
+        "Final text: " + editor.getContent());
+  }
+}
+</code></pre></div></div>
 <p>위 코드의 실행 결과는 아래와 같습니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Current text: Hello, World!
+After undo: Hello, 
+After redo: Hello, World!
+After delete: World!
+Final text: Hello, World!
+</code></pre></div></div>
 
 <h3 id="인터프리터-패턴">인터프리터 패턴</h3>
 
 <p><mark>인터프리터 패턴 예시 1</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public interface Expression {
+  int interpret();
+}
+
+public class Number implements Expression {
+  private int number;
+
+  public Number(int number) {
+    this.number = number;
+  }
+
+  @Override
+  public int interpret() {
+    return this.number;
+  }
+}
+
+public class Add implements Expression {
+  private Expression leftExpression;
+  private Expression rightExpression;
+
+  public Add(
+    Expression leftExpression,
+    Expression rightExpression
+  ) {
+    this.leftExpression = leftExpression;
+    this.rightExpression = rightExpression;
+  }
+
+  @Override
+  public int interpret() {
+      return leftExpression.interpret() + rightExpression.interpret();
+  }
+}
+
+public class Subtract implements Expression {
+  private Expression leftExpression;
+  private Expression rightExpression;
+
+  public Subtract(
+    Expression leftExpression,
+    Expression rightExpression
+  ) {
+    this.leftExpression = leftExpression;
+    this.rightExpression = rightExpression;
+  }
+
+  @Override
+  public int interpret() {
+    return leftExpression.interpret() - rightExpression.interpret();
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+  
+    Expression five = new Number(5);
+    Expression two = new Number(2);
+    Expression three = new Number(3);
+
+    Expression addExpression = new Add(five, two);
+    
+    Expression subtractExpression = new Subtract(addExpression, three);
+
+    System.out.println(
+      "(5 + 2) - 3 = "
+        + subtractExpression.interpret());
+  }
+}
+</code></pre></div></div>
 <p>위 코드의 실행 결과는 아래와 같습니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(5 + 2) - 3 = 4
+</code></pre></div></div>
+
+<p><mark>인터프리터 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
+
+// Context
+class Context {
+  private Map&lt;String, List&lt;Map&lt;String, String&gt;&gt;&gt; tables;
+
+  public Context() {
+    this.tables = new HashMap&lt;&gt;();
+
+    // Initialize sample data
+    List&lt;Map&lt;String, String&gt;&gt; users = new ArrayList&lt;&gt;();
+
+    users.add(new HashMap&lt;String, String&gt;() );
+
+    users.add(new HashMap&lt;String, String&gt;() );
+
+    tables.put("users", users);
+  }
+
+  public List&lt;Map&lt;String, String&gt;&gt; getTable(String name) {
+    return tables.get(name);
+  }
+
+  public void setTable(
+    String name, List&lt;Map&lt;String, String&gt;&gt; table
+  ) {
+    tables.put(name, table);
+  }
+}
+
+import java.util.*;
+
+// Abstract Expression
+interface Expression {
+  List&lt;Map&lt;String, String&gt;&gt; interpret(Context context);
+}
+
+// WHERE clause expression
+class WhereExpression implements Expression {
+  private String column;
+  private String operator;
+  private String value;
+  private String tableName;
+
+  public WhereExpression(
+    String tableName, String column,
+    String operator, String value
+  ) {
+    this.tableName = tableName;
+    this.column = column;
+    this.operator = operator;
+    this.value = value;
+  }
+
+  @Override
+  public List&lt;Map&lt;String, String&gt;&gt; interpret(Context context) {
+    List&lt;Map&lt;String, String&gt;&gt; result = new ArrayList&lt;&gt;();
+    List&lt;Map&lt;String, String&gt;&gt; table = context.getTable(tableName);
+    for (Map&lt;String, String&gt; row : table) {
+      if (evaluate(row.get(column), operator, value)) {
+        result.add(row);
+      }
+    }
+    return result;
+  }
+
+  private boolean evaluate(
+    String columnValue, String operator, String value
+  ) {
+    switch (operator) {
+      case "=":
+        return columnValue.equals(value);
+      case "&gt;":
+        return Integer.parseInt(columnValue)
+          &gt; Integer.parseInt(value);
+      case "&lt;":
+        return Integer.parseInt(columnValue)
+          &lt; Integer.parseInt(value);
+      default:
+        return false;
+    }
+  }
+}
+
+import java.util.*;
+
+// SELECT statement expression
+class SelectExpression implements Expression {
+  private String tableName;
+  private List&lt;String&gt; columns;
+  private Expression whereClause;
+
+  public SelectExpression(
+    String tableName, List&lt;String&gt; columns,
+    Expression whereClause
+  ) {
+    this.tableName = tableName;
+    this.columns = columns;
+    this.whereClause = whereClause;
+  }
+
+  @Override
+  public List&lt;Map&lt;String, String&gt;&gt; interpret(Context context) {
+    List&lt;Map&lt;String, String&gt;&gt; table
+      = context.getTable(tableName);
+    List&lt;Map&lt;String, String&gt;&gt; result = new ArrayList&lt;&gt;();
+
+    for (Map&lt;String, String&gt; row : table) {
+      Context rowContext = new Context();
+      rowContext.setTable(
+        tableName, Collections.singletonList(row));
+
+      if (whereClause == null || !whereClause.interpret(rowContext).isEmpty()) {
+        Map&lt;String, String&gt; newRow = new HashMap&lt;&gt;();
+        
+        for (String column : columns) {
+          if (column.equals("*")) {
+            newRow.putAll(row);
+          } else {
+            newRow.put(column, row.get(column));
+          }
+        }
+        result.add(newRow);
+      }
+    }
+
+    return result;
+  }
+}
+
+// SQL Parser
+class SQLParser {
+  public static Expression parse(String query) {
+    String[] parts = query.split("\\s+");
+    if (!parts[0].equalsIgnoreCase("SELECT")) {
+      throw new RuntimeException(
+        "Only SELECT statements are supported");
+    }
+
+    List&lt;String&gt; columns = Arrays.asList(parts[1].split(","));
+    String tableName = parts[3];
+
+    Expression whereClause = null;
+    if (parts.length &gt; 4 
+      &amp;&amp; parts[4].equalsIgnoreCase("WHERE")) {
+      whereClause = new WhereExpression(
+        tableName, parts[5], parts[6], parts[7]);
+    }
+
+    return new SelectExpression(tableName, columns, whereClause);
+  }
+}
+
+// Client code
+public class Main {
+  public static void main(String[] args) {
+    Context context = new Context();
+
+    // Test query 1: Select all columns from users
+    String query1 = "SELECT * FROM users";
+    Expression expr1 = SQLParser.parse(query1);
+    List&lt;Map&lt;String, String&gt;&gt; result1 = expr1.interpret(context);
+    
+    System.out.println("Result of query: " + query1);
+    for (Map&lt;String, String&gt; row : result1) {
+      System.out.println(row);
+    }
+
+    // Test query 2: Select name and age of users older than 27
+    String query2 = "SELECT name,age FROM users WHERE age &gt; 27";
+    Expression expr2 = SQLParser.parse(query2);
+    List&lt;Map&lt;String, String&gt;&gt; result2 = expr2.interpret(context);
+    
+    System.out.println("\nResult of query: " + query2);
+    for (Map&lt;String, String&gt; row : result2) {
+      System.out.println(row);
+    }
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Result of query: SELECT * FROM users
+{name=John, id=1, age=30}
+{name=Jane, id=2, age=25}
+
+Result of query: SELECT name,age FROM users WHERE age &gt; 27
+{name=John, age=30}
+</code></pre></div></div>
 
 <h3 id="이터레이터-패턴-반복자-패턴">이터레이터 패턴 (반복자 패턴)</h3>
 
@@ -2591,9 +3742,170 @@ File delete success: true
 <h3 id="미디에이터-패턴-중재자-패턴">미디에이터 패턴 (중재자 패턴)</h3>
 
 <p><mark>미디에이터 패턴 예시 1</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Mediator interface
+public interface ChatMediator {
+  void sendMessage(String message, User user);
+  void addUser(User user);
+}
+
+import java.util.List;
+import java.util.ArrayList;
+
+// Concrete implementation of the Mediator interface
+public class ChatMediatorImpl implements ChatMediator {
+  private List&lt;User&gt; users;
+
+  public ChatMediatorImpl() {
+    this.users = new ArrayList&lt;&gt;();
+  }
+
+  @Override
+  public void addUser(User user) {
+    this.users.add(user);
+  }
+
+  @Override
+  public void sendMessage(String message, User user) {
+    for (User u : this.users) {
+      if (u != user) {
+        u.receive(message);
+      }
+    }
+  }
+}
+
+// Abstract User class
+public abstract class User {
+  protected ChatMediator mediator;
+  protected String name;
+
+  public User(ChatMediator mediator, String name) {
+    this.mediator = mediator;
+    this.name = name;
+  }
+
+  public abstract void send(String message);
+  public abstract void receive(String message);
+}
+
+// Concrete implementation of the User class
+public class UserImpl extends User {
+
+  public UserImpl(ChatMediator mediator, String name) {
+    super(mediator, name);
+  }
+
+  @Override
+  public void send(String message) {
+    System.out.println(
+      this.name + ": Sending Message = " + message);
+    mediator.sendMessage(message, this);
+  }
+
+  @Override
+  public void receive(String message) {
+    System.out.println(
+      kthis.name + ": Received Message = " + message);
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+    ChatMediator mediator = new ChatMediatorImpl();
+
+    User user1 = new UserImpl(mediator, "John");
+    User user2 = new UserImpl(mediator, "Jane");
+    User user3 = new UserImpl(mediator, "Bob");
+    User user4 = new UserImpl(mediator, "Alice");
+
+    mediator.addUser(user1);
+    mediator.addUser(user2);
+    mediator.addUser(user3);
+    mediator.addUser(user4);
+
+    user1.send("Hi All");
+  }
+}
+</code></pre></div></div>
 <p>위 코드의 실행 결과는 아래와 같습니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>John: Sending Message = Hi All
+Jane: Received Message = Hi All
+Bob: Received Message = Hi All
+Alice: Received Message = Hi All
+</code></pre></div></div>
+<p><mark>미디에이터 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface AirportMediator {
+  boolean isRunwayAvailable();
+  void setRunwayAvailability(boolean status);
+}
+
+class AirportControlTower implements AirportMediator {
+  private boolean isRunwayAvailable = true;
+
+  public boolean isRunwayAvailable() {
+    return isRunwayAvailable;
+  }
+
+  public void setRunwayAvailability(boolean status) {
+    isRunwayAvailable = status;
+  }
+}
+
+class Flight {
+  private AirportMediator mediator;
+  private String flightNumber;
+
+  public Flight(AirportMediator mediator, String flightNumber) {
+    this.mediator = mediator;
+    this.flightNumber = flightNumber;
+  }
+
+  public void land() {
+    if (mediator.isRunwayAvailable()) {
+      System.out.println(
+        "Flight " + flightNumber + " is landing.");
+      mediator.setRunwayAvailability(false);
+    } else {
+      System.out.println(
+        "Flight " + flightNumber + " is waiting to land.");
+    }
+  }
+}
+
+class Runway {
+  private AirportMediator mediator;
+
+  public Runway(AirportMediator mediator) {
+    this.mediator = mediator;
+  }
+
+  public void clear() {
+    System.out.println("Runway is clear.");
+    mediator.setRunwayAvailability(true);
+  }
+}
+
+public class AirportSystem {
+  public static void main(String[] args) {
+    AirportMediator controlTower = new AirportControlTower();
+
+    Flight flight1 = new Flight(controlTower, "KE123");
+    Flight flight2 = new Flight(controlTower, "OZ456");
+    Runway runway = new Runway(controlTower);
+
+    flight1.land();
+    flight2.land();
+    runway.clear();
+    flight2.land();
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Flight KE123 is landing.
+Flight OZ456 is waiting to land.
+Runway is clear.
+Flight OZ456 is landing.
+</code></pre></div></div>
 
 <h3 id="메멘토-패턴">메멘토 패턴</h3>
 
