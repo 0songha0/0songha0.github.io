@@ -576,6 +576,7 @@ public class Penguin extends Bird {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     Bird bird = new Bird();
@@ -662,6 +663,7 @@ public class Robot implements Worker {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     Worker employee = new Employee();
@@ -860,6 +862,7 @@ public class Label {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     Button button = new Button("Submit");
@@ -924,7 +927,7 @@ abstract class VehicleFactory {
   }
 }
 
-// Client code
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     VehicleFactory carFactory = new CarFactory();
@@ -981,6 +984,7 @@ public abstract class ProductFactory {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     ProductFactory factory = new ConcreteProductFactory();
@@ -1086,7 +1090,7 @@ class BankTransferPaymentFactory extends PaymentFactory {
   }
 }
 
-// Client code
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     FinancialInfo userInfo = new FinancialInfo(
@@ -1200,6 +1204,7 @@ class Application {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     // Create Windows GUI
@@ -1335,7 +1340,7 @@ class DatabaseClient {
   }
 }
 
-// Usage
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     DatabaseClient mysqlClient = new DatabaseClient(new MySQLFactory());
@@ -1410,6 +1415,7 @@ class Pizza {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     Pizza myPizza = new Pizza.PizzaBuilder()
@@ -1496,6 +1502,7 @@ public class HttpRequest {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
   
@@ -1566,6 +1573,7 @@ class Person implements Prototype {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     Person original = new Person("John", 30, "123 Main St");
@@ -1643,7 +1651,7 @@ class DocumentTemplateManager {
   }
 }
 
-// Usage example
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     DocumentTemplateManager.addTemplate(
@@ -1802,6 +1810,7 @@ class VGAAdapter implements DisplayAdapter {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     USB usb = new USB();
@@ -1943,7 +1952,7 @@ class AdvancedRemote extends Remote {
   }
 }
 
-// Client
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     Device tv = new TV();
@@ -2028,7 +2037,7 @@ class EncryptedMessage extends Message {
   }
 }
 
-// Client
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     MessageSender emailSender = new EmailSender();
@@ -2129,7 +2138,7 @@ class Directory implements FileSystemComponent {
   }
 }
 
-// Client
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     File file1 = new File("Document.txt", 100);
@@ -2286,6 +2295,7 @@ class Window implements UIComponent {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     Button submitButton = new Button("Submit");
@@ -2395,7 +2405,7 @@ class SugarDecorator extends CoffeeDecorator {
   }
 }
 
-// Client code
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
   
@@ -2485,6 +2495,7 @@ class UnderlineDecorator extends TextDecorator {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     // Create a plain text
@@ -2523,13 +2534,14 @@ Underlined and italic text: &lt;u&gt;&lt;i&gt;Another example&lt;/i&gt;&lt;/u&gt
 서브시스템 변경이 생기면 파사드 클래스 내부만 수정하면 되어서, 클라이언트 코드 변경이 최소화됩니다.</p>
 
 <p><mark>파사드 패턴 예시 1 : 스마트홈 아침 루틴</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 서브시스템 클래스들
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 서브시스템 클래스 1 : 온도 조절기
 public class Thermostat {
   public void setTemperature(int temperature) {
     System.out.println("집 온도 : " + temperature + "로 설정");
   }
 }
 
+// 서브시스템 클래스 2 : 전등
 public class Lights {
   public void on() {
     System.out.println("전등 켜기");
@@ -2540,6 +2552,7 @@ public class Lights {
   }
 }
 
+// 서브시스템 클래스 3 : 커피머신
 public class CoffeeMaker {
   public void brewCoffee() {
     System.out.println("커피 내리기");
@@ -2558,15 +2571,17 @@ public class SmartHomeFacade {
     this.coffeeMaker = coffeeMaker;
   }
 
+  // 기상 후 루틴 함수
   public void wakeUp() {
-    System.out.println("기상 후 루틴");
+    // 각 서브시스템 함수 호출
     thermostat.setTemperature(22);
     lights.on();
     coffeeMaker.brewCoffee();
   }
 
+  // 외출 시 루틴 함수
   public void leaveHome() {
-    System.out.println("외출 시 루틴");
+    // 각 서브시스템 함수 호출
     thermostat.setTemperature(18);
     lights.off();
   }
@@ -2575,10 +2590,12 @@ public class SmartHomeFacade {
 // 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
+    // 서브시스템 객체들 생성
     Thermostat thermostat = new Thermostat();
     Lights lights = new Lights();
     CoffeeMaker coffeeMaker = new CoffeeMaker();
-
+  
+    // 파사드 클래스 생성자로 서브시스템 객체들 전달
     SmartHomeFacade smartHome = new SmartHomeFacade(thermostat, lights, coffeeMaker);
 
     smartHome.wakeUp();
@@ -2587,35 +2604,35 @@ public class Main {
 }
 </code></pre></div></div>
 <p>위 코드의 실행 결과는 아래와 같습니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>기상 후 루틴
-집 온도 : 22로 설정
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>집 온도 : 22로 설정
 전등 켜기
 커피 내리기
 
-외출 시 루틴
 집 온도 : 18로 설정
 전등 끄기
 </code></pre></div></div>
 
 <p><mark>파사드 패턴 예시 2 : 파일 시스템 작업</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 서브시스템 클래스들
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 서브시스템 클래스 1 : 파일 읽기
 class FileReader {
   public String readFile(String filePath) throws IOException {
-    // 파일 읽기
+    // 파일 읽기 기능
     return new String(Files.readAllBytes(Paths.get(filePath)));
   }
 }
 
+// 서브시스템 클래스 2 : 파일 쓰기
 class FileWriter {
-  // 파일 쓰기
   public void writeFile(String filePath, String content) throws IOException {
+    // 파일 쓰기 기능
     Files.write(Paths.get(filePath), content.getBytes());
   }
 }
 
+// 서브시스템 클래스 3 : 파일 삭제
 class FileDeleter {
-  // 파일 삭제
   public void deleteFile(String filePath) throws IOException {
+    // 파일 삭제 기능
     Files.delete(Paths.get(filePath));
   }
 }
@@ -2626,15 +2643,17 @@ class FileSystemFacade {
   private FileWriter fileWriter;
   private FileDeleter fileDeleter;
 
-  // 생성자에서 서브시스템들 객체 생성
+  // 생성자에서 서브시스템 객체들 생성
   public FileSystemFacade() {
     this.fileReader = new FileReader();
     this.fileWriter = new FileWriter();
     this.fileDeleter = new FileDeleter();
   }
 
+  // 파일 읽기 함수
   public String readFile(String filePath) {
     try {
+      // 파일 읽기 서브시스템 함수 호출
       return fileReader.readFile(filePath);
     } catch (IOException e) {
       System.err.println("Error reading file: " + e.getMessage());
@@ -2642,8 +2661,10 @@ class FileSystemFacade {
     }
   }
 
+  // 파일 쓰기 함수
   public boolean writeFile(String filePath, String content) {
     try {
+      // 파일 쓰기 서브시스템 함수 호출
       fileWriter.writeFile(filePath, content);
       return true;
     } catch (IOException e) {
@@ -2652,8 +2673,10 @@ class FileSystemFacade {
     }
   }
 
+  // 파일 삭제 함수
   public boolean deleteFile(String filePath) {
     try {
+      // 파일 삭제 서브시스템 함수 호출
       fileDeleter.deleteFile(filePath);
       return true;
     } catch (IOException e) {
@@ -2666,6 +2689,7 @@ class FileSystemFacade {
 // 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
+    // 파사드 클래스 객체 생성
     FileSystemFacade fs = new FileSystemFacade();
 
     // 파일 쓰기 함수 호출
@@ -2722,7 +2746,7 @@ class Bookshelf {
   }
 }
 
-// Client code
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     Book book1 = Bookshelf.getBook("Effective Java");
@@ -2792,6 +2816,7 @@ class FontFactory {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     Font font1 = FontFactory.getFont("Arial", 12, "Black");
@@ -2883,7 +2908,7 @@ class ProxyImage implements Image {
   }
 }
 
-// Client code
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     ProxyImage image = new ProxyImage("test_image.jpg");
@@ -2966,7 +2991,7 @@ class BankAccountProxy implements BankAccount {
   }
 }
 
-// Client code
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     // User with Admin access
@@ -3037,6 +3062,7 @@ class DivisibleBy3Handler extends Handler {
     }
 }
 
+// 클라이언트 (호출부)
 public class Main {
     public static void main(String[] args) {
         Handler positive = new PositiveHandler();
@@ -3121,6 +3147,7 @@ class NetworkLogger extends Logger {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   private static Logger getChainOfLoggers() {
     Logger networkLogger = new NetworkLogger(LogLevel.WARN);
@@ -3342,18 +3369,16 @@ public class TextEditorInvoker {
   }
 }
 
-// Client code
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     TextEditor editor = new TextEditor();
     TextEditorInvoker invoker = new TextEditorInvoker();
 
-    Command insertHello
-      = new InsertTextCommand(editor, "Hello, ", 0);
+    Command insertHello = new InsertTextCommand(editor, "Hello, ", 0);
     invoker.executeCommand(insertHello);
 
-    Command insertWorld
-      = new InsertTextCommand(editor, "World!", 7);
+    Command insertWorld = new InsertTextCommand(editor, "World!", 7);
     invoker.executeCommand(insertWorld);
 
     System.out.println("Current text: " + editor.getContent());
@@ -3364,8 +3389,7 @@ public class Main {
     invoker.redo();
     System.out.println("After redo: " + editor.getContent());
 
-    Command deleteCommand
-      = new DeleteTextCommand(editor, 0, 7);
+    Command deleteCommand = new DeleteTextCommand(editor, 0, 7);
     invoker.executeCommand(deleteCommand);
     System.out.println("After delete: " + editor.getContent());
 
@@ -3438,6 +3462,7 @@ public class Subtract implements Expression {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
   
@@ -3601,7 +3626,7 @@ class SQLParser {
   }
 }
 
-// Client code
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     Context context = new Context();
@@ -3705,7 +3730,7 @@ class MyListIterator implements MyIterator {
   }
 }
 
-// Client
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     MyList list = new MyList(3);
@@ -3849,7 +3874,7 @@ class FileSystem {
   }
 }
 
-// Main class
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     Directory root = new Directory("root");
@@ -3964,6 +3989,7 @@ public class UserImpl extends User {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     ChatMediator mediator = new ChatMediatorImpl();
@@ -4117,7 +4143,7 @@ class GameCaretaker {
   }
 }
 
-// Client
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     Game game = new Game();
@@ -4226,6 +4252,7 @@ class Editor {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     Editor editor = new Editor();
@@ -4304,6 +4331,7 @@ class NewsChannel implements Observer {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     NewsAgency agency = new NewsAgency();
@@ -4397,7 +4425,7 @@ class ForecastDisplay implements WeatherObserver {
   }
 }
 
-// Main class
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     WeatherData weatherData = new WeatherData();
@@ -4498,6 +4526,7 @@ class NewsSubscriber implements Subscriber {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     Broker broker = new Broker();
@@ -4589,6 +4618,7 @@ class EmailDeliveryService {
   public void shutdown() { executor.shutdown(); }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     EmailDeliveryService emailService = new EmailDeliveryService();
@@ -4686,6 +4716,7 @@ public class Door {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     Door door = new Door();
@@ -4768,6 +4799,7 @@ public class VideoPlayer {
   void stop(VideoPlayer player);
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     VideoPlayer player = new VideoPlayer();
@@ -4830,13 +4862,21 @@ public class Main {
 </code></pre></div></div>
 
 <h3 id="전략-패턴">전략 패턴</h3>
-<p>전략들을 필요에 따라 갈아끼울 수 있도록 하는 패턴입니다.</p>
+<p>특정 인터페이스를 구현하는 여러 전략 클래스들을 두고, 런타임 시 필요에 따라 갈아끼우는 패턴입니다.</p>
 
-<p><mark>전략 패턴 예시 1</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface PaymentStrategy {
+<p>중간 다리인 Context 클래스는 실제 기능 로직을 구현하지 않고 인터페이스에만 의존합니다.<br />
+상위 모듈이 하위 모듈의 구현이 아니라 추상화에 의존해야 하는 DIP(의존 역전 원칙)을 충족하게 됩니다.</p>
+
+<p>코드 변경 시 전략 구현체만 수정 및 추가하면 되어서, SOLID 원칙의 개방-폐쇄 원칙도 준수하는 코드입니다.</p>
+
+<p><mark>전략 패턴 예시 1 : 결제 방식</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 결제 전략 인터페이스
+interface PaymentStrategy {
+  // 결제 전략 함수 정의
   void pay(int amount);
 }
 
+// 결제 전략 클래스 1 : 신용카드
 class CreditCardPayment implements PaymentStrategy {
   private String name;
   private String cardNumber;
@@ -4846,12 +4886,14 @@ class CreditCardPayment implements PaymentStrategy {
     this.cardNumber = cardNumber;
   }
 
+  // 결제 전략 함수 구현
   @Override
   public void pay(int amount) {
     System.out.println(amount + " paid with credit card");
   }
 }
 
+// 결제 전략 클래스 2 : 페이팔
 class PayPalPayment implements PaymentStrategy {
   private String email;
 
@@ -4859,51 +4901,56 @@ class PayPalPayment implements PaymentStrategy {
     this.email = email;
   }
 
+  // 결제 전략 함수 구현
   @Override
   public void pay(int amount) {
     System.out.println(amount + " paid using PayPal");
   }
 }
 
-// Context class
+// 중간 Context 클래스 : 쇼핑 카트
 class ShoppingCart {
+  // 결제 전략 인터페이스 필드
   private PaymentStrategy paymentStrategy;
 
+  // 결제 전략 인터페이스 변경 함수 (파라미터로 인터페이스를 구현한 클래스가 올 수 있음)
   public void setPaymentStrategy(PaymentStrategy paymentStrategy) {
     this.paymentStrategy = paymentStrategy;
   }
 
+  // 쇼핑 카트 나갈 때 실행되는 함수
   public void checkout(int amount) {
+    // 결제 전략에 따른 계산 기능 수행
     paymentStrategy.pay(amount);
   }
 }
 
-// Client code
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
+    // 쇼핑 카트 클래스 생성
     ShoppingCart cart = new ShoppingCart();
 
-    cart.setPaymentStrategy(
-      new CreditCardPayment(
-        "John Doe",
-        "1234567890123456"
-      )
-    );
-    cart.checkout(100);
-    //100 paid with credit card
+    // 결제 전략 클래스 세팅
+    cart.setPaymentStrategy(new CreditCardPayment("John Doe", "1234567890123456"));
 
-    cart.setPaymentStrategy(
-      new PayPalPayment(
-        "johndoe@example.com"
-      )
-    );
+    // 신용카드로 100원 결제
+    cart.checkout(100);
+
+    // 결제 전략 클래스 변경
+    cart.setPaymentStrategy(new PayPalPayment("johndoe@example.com"));
+
+    // 페이팔로 200원 결제
     cart.checkout(200);
-    // 200 paid using PayPal
   }
 }
 </code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100 paid with credit card
+200 paid using PayPal
+</code></pre></div></div>
 
-<p><mark>전략 패턴 예시 2</mark></p>
+<p><mark>전략 패턴 예시 2 : 압축 알고리즘</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface CompressionStrategy {
   String compress(String data);
 }
@@ -4950,7 +4997,7 @@ class Compressor {
   }
 }
 
-// Client code
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     Compressor compressor = new Compressor();
@@ -5011,6 +5058,7 @@ class Coffee extends Beverage {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     Beverage tea = new Tea();
@@ -5144,6 +5192,7 @@ class JSONDataProcessor extends DataProcessor {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     DataProcessor csvProcessor = new CSVDataProcessor();
@@ -5248,6 +5297,7 @@ class PerimeterVisitor implements Visitor {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     Shape circle = new Circle(5);
@@ -5380,6 +5430,7 @@ class FileSearchVisitor implements Visitor {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     // Create files
@@ -5456,6 +5507,7 @@ class RangeSpecification implements Specification {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     Specification evenSpec = new EvenSpecification();
@@ -5574,6 +5626,7 @@ public class ProductFilter {
   }
 }
 
+// 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
     List&lt;Product&gt; products = Arrays.asList(
