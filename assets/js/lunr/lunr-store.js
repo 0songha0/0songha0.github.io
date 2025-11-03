@@ -1475,8 +1475,8 @@ var store = [{
         "url": "/plan-design-db/2025-09-17-1",
         "teaser": null
       },{
-        "title": "Java 객체지향 설계 시 사용하는 디자인 패턴 정리",
-        "excerpt":"생성 패턴 싱글톤 패턴 (Singleton 패턴) 싱글톤 패턴 예시 1 public class Theme { private static Theme instance; private String themeColor; private Theme() { this.themeColor = \"light\"; // Default theme } public static Theme getInstance() { if (instance == null) { instance = new Theme(); } return instance; } public...","categories": ["plan-design-db"],
+        "title": "Java 객체지향 설계 시 사용하는 디자인 패턴 예시",
+        "excerpt":"생성 패턴 싱글톤 패턴 (Singleton) 싱글톤 패턴 예시 1 public class Theme { private static Theme instance; private String themeColor; private Theme() { this.themeColor = \"light\"; // Default theme } public static Theme getInstance() { if (instance == null) { instance = new Theme(); } return instance; } public String...","categories": ["plan-design-db"],
         "tags": [],
         "url": "/plan-design-db/2025-11-03-1",
         "teaser": null
