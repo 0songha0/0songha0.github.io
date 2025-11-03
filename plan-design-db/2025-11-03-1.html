@@ -1,0 +1,5671 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Java 객체지향 설계 시 사용하는 디자인 패턴 정리 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="Java 객체지향 설계 시 사용하는 디자인 패턴 정리">
+<meta property="og:url" content="https://0songha0.github.io/plan-design-db/2025-11-03-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-11-03T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2025-11-03T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/plan-design-db/2025-11-03-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 247</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">Python / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka-socket"><span class="nav__sub-title">Kafka / Socket</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/english"><span class="nav__sub-title">English</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Java 객체지향 설계 시 사용하는 디자인 패턴 정리">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2025-11-03T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-11-03T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Java 객체지향 설계 시 사용하는 디자인 패턴 정리
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-11-03T00:00:00+00:00">2025-11-03</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Java 객체지향 설계 시 사용하는 디자인 패턴 정리</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
+              <ul class="toc__menu"><li><a href="#생성-패턴">생성 패턴</a><ul><li><a href="#싱글톤-패턴-singleton-패턴">싱글톤 패턴 (Singleton 패턴)</a></li><li><a href="#팩토리-메서드-패턴-factory-method-패턴">팩토리 메서드 패턴 (Factory Method 패턴)</a></li><li><a href="#추상-팩토리-패턴-abstract-factory-패턴">추상 팩토리 패턴 (Abstract Factory 패턴)</a></li><li><a href="#빌더-패턴-builder-패턴">빌더 패턴 (Builder 패턴)</a></li><li><a href="#프로토타입-패턴-prototype-패턴">프로토타입 패턴 (Prototype 패턴)</a></li></ul></li><li><a href="#구조-패턴">구조 패턴</a><ul><li><a href="#어댑터-패턴-adapter-패턴">어댑터 패턴 (Adapter 패턴)</a></li><li><a href="#브리지-패턴-bridge-패턴">브리지 패턴 (Bridge 패턴)</a></li><li><a href="#복합체-패턴-composite-패턴">복합체 패턴 (Composite 패턴)</a></li><li><a href="#데코레이터-패턴-decorator-패턴">데코레이터 패턴 (Decorator 패턴)</a></li><li><a href="#파사드-패턴-facade-패턴">파사드 패턴 (Facade 패턴)</a></li><li><a href="#플라이웨이트-패턴-flyweight-패턴">플라이웨이트 패턴 (Flyweight 패턴)</a></li><li><a href="#프록시-패턴-proxy-패턴">프록시 패턴 (Proxy 패턴)</a></li></ul></li><li><a href="#행위-패턴">행위 패턴</a><ul><li><a href="#책임-연쇄-패턴-chain-of-responsibility-패턴">책임 연쇄 패턴 (Chain of Responsibility 패턴)</a></li><li><a href="#커맨드-패턴-command-패턴">커맨드 패턴 (Command 패턴)</a></li><li><a href="#인터프리터-패턴-interpreter-패턴">인터프리터 패턴 (Interpreter 패턴)</a></li><li><a href="#반복자-패턴-iterator-패턴">반복자 패턴 (Iterator 패턴)</a></li><li><a href="#중재자-패턴-mediator-패턴">중재자 패턴 (Mediator 패턴)</a></li><li><a href="#메멘토-패턴-memento-패턴">메멘토 패턴 (Memento 패턴)</a></li><li><a href="#관찰자-패턴-opserver-패턴">관찰자 패턴 (Opserver 패턴)</a></li><li><a href="#발행-구독-패턴-publisher-subscriber-패턴">발행-구독 패턴 (Publisher-Subscriber 패턴)</a></li><li><a href="#상태-패턴-state-패턴">상태 패턴 (State 패턴)</a></li><li><a href="#전략-패턴-strategy-패턴">전략 패턴 (Strategy 패턴)</a></li><li><a href="#템플릿-메서드-패턴-template-method">템플릿 메서드 패턴 (Template Method)</a></li><li><a href="#방문자-패턴-visitor-패턴">방문자 패턴 (Visitor 패턴)</a></li></ul></li><li><a href="#도메인-주도-설계-ddd">도메인 주도 설계 (DDD)</a><ul><li><a href="#명세-패턴-specification-패턴">명세 패턴 (Specification 패턴)</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="생성-패턴">생성 패턴</h2>
+
+<h3 id="싱글톤-패턴-singleton-패턴">싱글톤 패턴 (Singleton 패턴)</h3>
+
+<p><mark>싱글톤 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Theme {
+  private static Theme instance;
+  private String themeColor;
+
+  private Theme() {
+    this.themeColor = "light"; // Default theme
+  }
+
+  public static Theme getInstance() {
+    if (instance == null) {
+      instance = new Theme();
+    }
+    return instance;
+  }
+
+  public String getThemeColor() {
+    return themeColor;
+  }
+  public void setThemeColor(String themeColor) {
+    this.themeColor = themeColor;
+  }
+}
+
+public class Button {
+  private String label;
+
+  public Button(String label) {
+    this.label = label;
+  }
+
+  public void display() {
+    String themeColor = Theme.getInstance().getThemeColor();
+    System.out.println("Button [" + label + "] displayed in " + themeColor + " theme.");
+  }
+}
+
+public class TextField {
+  private String text;
+
+  public TextField(String text) {
+    this.text = text;
+  }
+
+  public void display() {
+    String themeColor = Theme.getInstance().getThemeColor();
+    System.out.println("TextField [" + text + "] displayed in " + themeColor + " theme.");
+  }
+}
+
+public class Label {
+  private String text;
+
+  public Label(String text) {
+    this.text = text;
+  }
+
+  public void display() {
+    String themeColor = Theme.getInstance().getThemeColor();
+    System.out.println("Label [" + text + "] displayed in " + themeColor + " theme.");
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    Button button = new Button("Submit");
+    TextField textField = new TextField("Enter your name");
+    Label label = new Label("Username");
+
+    button.display();
+    textField.display();
+    label.display();
+
+    Theme.getInstance().setThemeColor("dark");
+
+    button.display();
+    textField.display();
+    label.display();
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Button [Submit] displayed in light theme.
+TextField [Enter your name] displayed in light theme.
+Label [Username] displayed in light theme.
+
+Button [Submit] displayed in dark theme.
+TextField [Enter your name] displayed in dark theme.
+Label [Username] displayed in dark theme.
+</code></pre></div></div>
+
+<h3 id="팩토리-메서드-패턴-factory-method-패턴">팩토리 메서드 패턴 (Factory Method 패턴)</h3>
+
+<p><mark>팩토리 메서드 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Product interface
+interface Vehicle {
+  void drive();
+}
+
+// Concrete products
+class Car implements Vehicle {
+  @Override
+  public void drive() {
+    System.out.println("Driving a car");
+  }
+}
+
+class Motorcycle implements Vehicle {
+  @Override
+  public void drive() {
+    System.out.println("Riding a motorcycle");
+  }
+}
+
+// Creator abstract class
+abstract class VehicleFactory {
+  // Factory method
+  abstract Vehicle createVehicle();
+  
+  // Operations using the factory method
+  public void deliverVehicle() {
+    Vehicle vehicle = createVehicle();
+    System.out.println("Delivering the vehicle:");
+    vehicle.drive();
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    VehicleFactory carFactory = new CarFactory();
+    carFactory.deliverVehicle();
+    
+    VehicleFactory motorcycleFactory = new MotorcycleFactory();
+    motorcycleFactory.deliverVehicle();
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Delivering the vehicle:
+Driving a car
+Delivering the vehicle:
+Riding a motorcycle
+</code></pre></div></div>
+
+<p><mark>팩토리 메서드 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Product interface
+public interface Product {
+  void create();
+}
+
+public class Electronics implements Product {
+  @Override
+  public void create() {
+    System.out.println("Electronics product created.");
+  }
+}
+
+public class Clothing implements Product {
+  @Override
+  public void create() {
+    System.out.println("Clothing product created.");
+  }
+}
+
+public class Book implements Product {
+  @Override
+  public void create() {
+    System.out.println("Book product created.");
+  }
+}
+
+// ProductFactory class
+public abstract class ProductFactory {
+  // Factory Method
+  public abstract Product createProduct(String type);
+
+  public Product orderProduct(String type) {
+    Product product = createProduct(type);
+    product.create();
+    return product;
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    ProductFactory factory = new ConcreteProductFactory();
+
+    // Create an electronics product
+    Product electronics = factory.orderProduct("electronics");
+
+    // Create a clothing product
+    Product clothing = factory.orderProduct("clothing");
+
+    // Create a book product
+    Product book = factory.orderProduct("book");
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Electronics product created.
+Clothing product created.
+Book product created.
+</code></pre></div></div>
+
+<p><mark>팩토리 메서드 패턴 예시 3</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Payment interface
+interface Payment {
+  void processPayment(double amount);
+}
+
+class CreditCardPayment implements Payment {
+  private String creditCardNumber;
+  public CreditCardPayment(String creditCardNumber) {
+    this.creditCardNumber = creditCardNumber;
+  }
+  
+  @Override
+  public void processPayment(double amount) {
+    System.out.println("Credit card: $" + amount);
+  }
+}
+
+class PayPalPayment implements Payment {
+  private String payPalEmail;
+  public PayPalPayment(String payPalEmail) {
+    this.payPalEmail = payPalEmail;
+  }
+  
+  @Override
+  public void processPayment(double amount) {
+    System.out.println("PayPal: $" + amount);
+  }
+}
+
+class BankTransferPayment implements Payment {
+  private String bankAccountNumber;
+  public BankTransferPayment(String bankAccountNumber) {
+    this.bankAccountNumber = bankAccountNumber;
+  }
+
+  @Override
+  public void processPayment(double amount) {
+    System.out.println("Bank transfer: $" + amount);
+  }
+}
+
+class FinancialInfo {
+  String creditCardNumber;
+  String payPalEmail;
+  String bankAccountNumber;
+
+  public FinancialInfo(
+    String creditCardNumber, 
+    String payPalEmail, 
+    String bankAccountNumber
+  ) {
+    this.creditCardNumber = creditCardNumber;
+    this.payPalEmail = payPalEmail;
+    this.bankAccountNumber = bankAccountNumber;
+  }
+}
+
+// Abstract factory class
+abstract class PaymentFactory {
+  abstract Payment createPayment(FinancialInfo info);
+}
+
+class CreditCardPaymentFactory extends PaymentFactory {
+  @Override
+  Payment createPayment(FinancialInfo info) {
+    return new CreditCardPayment(info.creditCardNumber);
+  }
+}
+
+class PayPalPaymentFactory extends PaymentFactory {
+  @Override
+  Payment createPayment(FinancialInfo info) {
+    return new PayPalPayment(info.payPalEmail);
+  }
+}
+
+class BankTransferPaymentFactory extends PaymentFactory {
+  @Override
+  Payment createPayment(FinancialInfo info) {
+    return new BankTransferPayment(info.bankAccountNumber);
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    FinancialInfo userInfo = new FinancialInfo(
+      "1234-5678-9012-3456", "user@example.com", "987654321"
+    );
+
+    PaymentFactory factory = new CreditCardPaymentFactory();
+    Payment payment = factory.createPayment(userInfo);
+    payment.processPayment(100.0);
+
+    factory = new PayPalPaymentFactory();
+    payment = factory.createPayment(userInfo);
+    payment.processPayment(200.0);
+
+    factory = new BankTransferPaymentFactory();
+    payment = factory.createPayment(userInfo);
+    payment.processPayment(300.0);
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Credit card: $100.0
+PayPal: $200.0
+Bank transfer: $300.0
+</code></pre></div></div>
+
+<h3 id="추상-팩토리-패턴-abstract-factory-패턴">추상 팩토리 패턴 (Abstract Factory 패턴)</h3>
+
+<p><mark>추상 팩토리 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Abstract product interfaces
+interface Button {
+  void paint();
+}
+
+interface Checkbox {
+  void paint();
+}
+
+class WindowsButton implements Button {
+  @Override
+  public void paint() {
+    System.out.println("Rendering a button in Windows style");
+  }
+}
+
+class WindowsCheckbox implements Checkbox {
+  @Override
+  public void paint() {
+    System.out.println("Rendering a checkbox in Windows style");
+  }
+}
+
+class MacOSButton implements Button {
+  @Override
+  public void paint() {
+    System.out.println("Rendering a button in MacOS style");
+  }
+}
+
+class MacOSCheckbox implements Checkbox {
+  @Override
+  public void paint() {
+    System.out.println("Rendering a checkbox in MacOS style");
+  }
+}
+
+// Abstract factory interface
+interface GUIFactory {
+  Button createButton();
+  Checkbox createCheckbox();
+}
+
+// Concrete factories
+class WindowsFactory implements GUIFactory {
+  @Override
+  public Button createButton() {
+    return new WindowsButton();
+  }
+
+  @Override
+  public Checkbox createCheckbox() {
+    return new WindowsCheckbox();
+  }
+}
+
+class MacOSFactory implements GUIFactory {
+  @Override
+  public Button createButton() {
+    return new MacOSButton();
+  }
+
+  @Override
+  public Checkbox createCheckbox() {
+    return new MacOSCheckbox();
+  }
+}
+
+// Client code
+class Application {
+  private Button button;
+  private Checkbox checkbox;
+
+  public Application(GUIFactory factory) {
+    button = factory.createButton();
+    checkbox = factory.createCheckbox();
+  }
+
+  public void paint() {
+    button.paint();
+    checkbox.paint();
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    // Create Windows GUI
+    GUIFactory windowsFactory = new WindowsFactory();
+    Application windowsApp = new Application(windowsFactory);
+    windowsApp.paint();
+
+    System.out.println();
+
+    // Create MacOS GUI
+    GUIFactory macFactory = new MacOSFactory();
+    Application macApp = new Application(macFactory);
+    macApp.paint();
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Rendering a button in Windows style
+Rendering a checkbox in Windows style
+
+Rendering a button in MacOS style
+Rendering a checkbox in MacOS style
+</code></pre></div></div>
+
+<p><mark>추상 팩토리 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Abstract products
+interface Connection {
+  void open();
+  void close();
+}
+
+interface Command {
+  void execute(String query);
+}
+
+interface ResultSet {
+  void getResults();
+}
+
+// Abstract factory
+interface DatabaseFactory {
+  Connection createConnection();
+  Command createCommand();
+  ResultSet createResultSet();
+}
+
+// Concrete products for MySQL
+class MySQLConnection implements Connection {
+  public void open() {
+    System.out.println("Opening MySQL connection");
+  }
+  public void close() {
+    System.out.println("Closing MySQL connection");
+  }
+}
+
+class MySQLCommand implements Command {
+  public void execute(String query) {
+    System.out.println("Executing MySQL query: " + query);
+  }
+}
+
+class MySQLResultSet implements ResultSet {
+  public void getResults() {
+    System.out.println("Getting results from MySQL database");
+  }
+}
+
+// Concrete products for PostgreSQL
+class PostgreSQLConnection implements Connection {
+  public void open() {
+    System.out.println("Opening PostgreSQL connection");
+  }
+  public void close() {
+    System.out.println("Closing PostgreSQL connection");
+  }
+}
+
+class PostgreSQLCommand implements Command {
+  public void execute(String query) {
+    System.out.println("Executing PostgreSQL query: " + query);
+  }
+}
+
+class PostgreSQLResultSet implements ResultSet {
+  public void getResults() {
+    System.out.println("Getting results from PostgreSQL database");
+  }
+}
+
+// Concrete factories
+class MySQLFactory implements DatabaseFactory {
+  public Connection createConnection() {
+    return new MySQLConnection();
+  }
+  public Command createCommand() {
+    return new MySQLCommand();
+  }
+  public ResultSet createResultSet() {
+    return new MySQLResultSet();
+  }
+}
+
+class PostgreSQLFactory implements DatabaseFactory {
+  public Connection createConnection() {
+    return new PostgreSQLConnection();
+  }
+  public Command createCommand() {
+    return new PostgreSQLCommand();
+  }
+  public ResultSet createResultSet() {
+    return new PostgreSQLResultSet();
+  }
+}
+
+// Client code
+class DatabaseClient {
+  private Connection connection;
+  private Command command;
+  private ResultSet resultSet;
+
+  public DatabaseClient(DatabaseFactory factory) {
+    connection = factory.createConnection();
+    command = factory.createCommand();
+    resultSet = factory.createResultSet();
+  }
+
+  public void performDatabaseOperations() {
+    connection.open();
+    command.execute("SELECT * FROM users");
+    resultSet.getResults();
+    connection.close();
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    DatabaseClient mysqlClient = new DatabaseClient(new MySQLFactory());
+    mysqlClient.performDatabaseOperations();
+
+    System.out.println("\nSwitching to PostgreSQL...\n");
+
+    DatabaseClient postgresClient = new DatabaseClient(new PostgreSQLFactory());
+    postgresClient.performDatabaseOperations();
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Opening MySQL connection
+Executing MySQL query: SELECT * FROM users
+Getting results from MySQL database
+Closing MySQL connection
+
+Switching to PostgreSQL...
+
+Opening PostgreSQL connection
+Executing PostgreSQL query: SELECT * FROM users
+Getting results from PostgreSQL database
+Closing PostgreSQL connection
+</code></pre></div></div>
+
+<h3 id="빌더-패턴-builder-패턴">빌더 패턴 (Builder 패턴)</h3>
+
+<p><mark>빌더 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Product class
+class Pizza {
+  private String dough;
+  private String sauce;
+  private String topping;
+
+  // Private constructor to enforce the use of Builder
+  private Pizza(PizzaBuilder builder) {
+    this.dough = builder.dough;
+    this.sauce = builder.sauce;
+    this.topping = builder.topping;
+  }
+
+  @Override
+  public String toString() {
+    return "Pizza with " + dough + " dough, "
+      + sauce + " sauce, and " + topping + " topping.";
+  }
+
+  public static class PizzaBuilder {
+    private String dough;
+    private String sauce;
+    private String topping;
+
+    public PizzaBuilder dough(String dough) {
+      this.dough = dough;
+      return this;
+    }
+
+    public PizzaBuilder sauce(String sauce) {
+      this.sauce = sauce;
+      return this;
+    }
+    
+    public PizzaBuilder topping(String topping) {
+      this.topping = topping;
+      return this;
+    }
+
+    public Pizza build() {
+      return new Pizza(this);
+    }
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    Pizza myPizza = new Pizza.PizzaBuilder()
+          .dough("Thin Crust")
+          .sauce("Tomato")
+          .topping("Cheese")
+          .build();
+
+    System.out.println(myPizza);
+
+    String orderType = "Veggie";
+
+    Pizza.PizzaBuilder pizzaBuilder = new Pizza.PizzaBuilder().dough("Regular");
+
+    pizzaBuilder.sauce("Pesto");
+
+    if (orderType.equals("Veggie")) {
+      pizzaBuilder.topping("Vegetables");
+    } else {
+      pizzaBuilder.topping("Pepperoni");
+    }
+
+    Pizza customPizza = pizzaBuilder.build();
+    System.out.println(customPizza);
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pizza with Thin Crust dough, Tomato sauce, and Cheese topping.
+Pizza with Regular dough, Pesto sauce, and Vegetables topping.
+</code></pre></div></div>
+
+<p><mark>빌더 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Product class
+public class HttpRequest {
+  private String method;
+  private String url;
+  private Map&lt;String, String&gt; headers;
+  private Map&lt;String, String&gt; parameters;
+  private String body;
+  
+  // private constructor
+  private HttpRequest(Builder builder) {
+    this.method = builder.method;
+    this.url = builder.url;
+    this.headers = builder.headers;
+    this.parameters = builder.parameters;
+    this.body = builder.body;
+  }
+  
+  @Override
+  public String toString() {
+    return "HttpRequest [method=" + method + ", url=" + url + 
+          ", headers=" + headers + ", parameters=" + parameters + 
+          ", body=" + body + "]";
+  }
+
+  public static class Builder {
+    private String method;
+    private String url;
+    private Map&lt;String, String&gt; headers = new HashMap&lt;&gt;();
+    private Map&lt;String, String&gt; parameters = new HashMap&lt;&gt;();
+    private String body;
+
+    public Builder(String method, String url) {
+      this.method = method;
+      this.url = url;
+    }
+
+    public Builder addHeader(String key, String value) {
+      this.headers.put(key, value);
+      return this; }
+
+    public Builder addParameter(String key, String value) {
+      this.parameters.put(key, value);
+      return this; }
+
+    public Builder setBody(String body) {
+      this.body = body;
+      return this; }
+
+    public HttpRequest build() {
+      return new HttpRequest(this); }
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+  
+    HttpRequest getRequest = new HttpRequest.Builder(
+      "GET", "https://example.com/api")
+      .addHeader("Authorization", "Bearer token")
+      .addParameter("query", "builder-pattern")
+      .build();
+
+    HttpRequest postRequest = new HttpRequest.Builder(
+      "POST", "https://example.com/api")
+      .addHeader("Authorization", "Bearer token")
+      .setBody("{ \"name\": \"John\", \"age\": 30 }")
+      .build();
+      
+    System.out.println(getRequest);
+    System.out.println(postRequest);
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HttpRequest [method=GET, url=https://example.com/api,
+ headers={Authorization=Bearer token}, parameters={query=builder-pattern},
+ body=null]
+ 
+HttpRequest [method=POST, url=https://example.com/api,
+ headers={Authorization=Bearer token}, parameters={},
+ body={ "name": "John", "age": 30 }]
+</code></pre></div></div>
+
+<h3 id="프로토타입-패턴-prototype-패턴">프로토타입 패턴 (Prototype 패턴)</h3>
+
+<p><mark>프로토타입 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface Prototype {
+    Prototype clone();
+}
+
+class Person implements Prototype {
+  private String name;
+  private int age;
+  private String address;
+
+  public Person(
+    String name, int age, String address
+  ) {
+    this.name = name;
+    this.age = age;
+    this.address = address;
+  }
+
+  public Person(Person other) {
+    this.name = other.name;
+    this.age = other.age;
+    this.address = other.address;
+  }
+
+  @Override
+  public Person clone() {
+    return new Person(this);
+  }
+
+  public void setAddress(String newAddress) {
+    this.address = newAddress;
+  }
+
+  public void displayInfo() {
+    System.out.println("Name: " + name + ", Age: " + age+ ", Address: " + address);
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    Person original = new Person("John", 30, "123 Main St");
+    original.displayInfo();
+
+    Person cloned = original.clone();
+    cloned.setAddress("456 Clone St");
+
+    System.out.println("\nAfter cloning and modifying the clone:");
+    original.displayInfo();
+    cloned.displayInfo();
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Name: John, Age: 30, Address: 123 Main St
+
+After cloning and modifying the clone:
+Name: John, Age: 30, Address: 123 Main St
+Name: John, Age: 30, Address: 456 Clone St
+</code></pre></div></div>
+
+<p><mark>프로토타입 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Simple Prototype interface
+interface Prototype {
+  Prototype clone();
+}
+
+// Document interface extending Prototype
+interface Document extends Prototype {
+  void setContent(String content);
+  String getContent();
+}
+
+// Concrete document class
+class TextDocument implements Document {
+  private String content;
+
+  public TextDocument(String content) {
+    this.content = content;
+  }
+
+  @Override
+  public Document clone() {
+    return new TextDocument(this.content);
+  }
+
+  @Override
+  public void setContent(String content) {
+    this.content = content;
+  }
+
+  @Override
+  public String getContent() {
+    return content;
+  }
+}
+
+// Template manager
+class DocumentTemplateManager {
+  private static final Map&lt;String, Document&gt; templates
+    = new HashMap&lt;&gt;();
+
+  public static void addTemplate(String name, Document doc) {
+    templates.put(name, doc);
+  }
+
+  public static Document createDocument(String templateName) {
+    Document template = templates.get(templateName);
+    if (template == null) {
+      throw new IllegalArgumentException(
+        "Template not found: " + templateName);
+    }
+    return (Document) template.clone();
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    DocumentTemplateManager.addTemplate(
+      "welcome",
+      new TextDocument("Welcome, {name}!"));
+    DocumentTemplateManager.addTemplate(
+      "meeting",
+      new TextDocument(
+          "Meeting scheduled on {date} at {time}"));
+
+    Document welcomeDoc = DocumentTemplateManager
+      .createDocument("welcome");
+    welcomeDoc.setContent(
+      welcomeDoc
+      .getContent()
+      .replace("{name}", "John Doe"));
+    
+    System.out.println("Welcome document: " + welcomeDoc.getContent());
+
+    Document meetingDoc = DocumentTemplateManager
+      .createDocument("meeting");
+    meetingDoc.setContent(meetingDoc.getContent()
+          .replace("{date}", "2024-10-01")
+          .replace("{time}", "14:00"));
+            
+    System.out.println("Meeting document: " + meetingDoc.getContent());
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Welcome document: Welcome, John Doe!
+Meeting document: Meeting scheduled on 2024-10-01 at 14:00
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="구조-패턴">구조 패턴</h2>
+
+<h3 id="어댑터-패턴-adapter-패턴">어댑터 패턴 (Adapter 패턴)</h3>
+
+<p><mark>어댑터 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Target interface
+interface ModernMessageSender {
+  void sendMessage(String message, String recipient);
+}
+
+// Adaptee interface
+interface OldMessageSender {
+  int send(String[] messageData);
+}
+
+// Concrete Adaptee
+class OldMessageSystem implements OldMessageSender {
+  @Override
+  public int send(String[] messageData) {
+    System.out.println("OldMessageSystem: Sending message: " + messageData[0] + " to " + messageData[1]);
+    return 1; // Success code
+  }
+}
+
+// Adapter
+class MessageAdapter implements ModernMessageSender {
+  private OldMessageSender oldSystem;
+
+  public MessageAdapter(OldMessageSender oldSystem) {
+    this.oldSystem = oldSystem;
+  }
+
+  @Override
+  public void sendMessage(String message, String recipient) {
+    String[] messageData = {message, recipient};
+    int result = oldSystem.send(messageData);
+    if (result != 1) {
+      System.out.println("Failed to send message");
+    }
+  }
+}
+
+// Client
+class Main {
+  public static void main(String[] args) {
+    OldMessageSender oldSystem = new OldMessageSystem();
+    ModernMessageSender adapter = new MessageAdapter(oldSystem);
+
+    adapter.sendMessage("Hello, World!", "john@example.com");
+  }
+}
+
+// The target interface
+interface DisplayAdapter {
+  void display();
+}
+
+// Adaptees
+class USB {
+  void connectWithUsbCable(String data) {
+    System.out.println("Displaying via USB with data: " + data);
+  }
+}
+
+class HDMI {
+  void connectWithHdmiCable(int resolution) {
+    System.out.println(
+    "Displaying via HDMI with resolution: " + resolution + "p"
+    );
+  }
+}
+
+class VGA {
+  void connectWithVgaCable(boolean highQuality) {
+    System.out.println(
+    "Displaying via VGA with high quality: " + highQuality
+    );
+  }
+}
+
+class USBAdapter implements DisplayAdapter {
+  private USB usb;
+  private String data;
+  public USBAdapter(USB usb, String data) {
+    this.usb = usb;
+    this.data = data;
+  }
+
+  @Override
+  public void display() {
+    usb.connectWithUsbCable(data);
+  }
+}
+
+class HDMIAdapter implements DisplayAdapter {
+  private HDMI hdmi;
+  private int resolution;
+  public HDMIAdapter(HDMI hdmi, int resolution) {
+    this.hdmi = hdmi;
+    this.resolution = resolution;
+  }
+
+  @Override
+  public void display() {
+    hdmi.connectWithHdmiCable(resolution);
+  }
+}
+
+class VGAAdapter implements DisplayAdapter {
+  private VGA vga;
+  private boolean highQuality;
+  public VGAAdapter(VGA vga, boolean highQuality) {
+    this.vga = vga;
+    this.highQuality = highQuality;
+  }
+
+  @Override
+  public void display() {
+    vga.connectWithVgaCable(highQuality);
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    USB usb = new USB();
+    HDMI hdmi = new HDMI();
+    VGA vga = new VGA();
+
+    List&lt;DisplayAdapter&gt; adapters = new ArrayList&lt;&gt;();
+    adapters.add(new USBAdapter(usb, "Video Data"));
+    adapters.add(new HDMIAdapter(hdmi, 1080));
+    adapters.add(new VGAAdapter(vga, true));
+
+    for (DisplayAdapter adapter : adapters) {
+      adapter.display();
+    }
+  }
+}
+</code></pre></div></div>
+
+<h3 id="브리지-패턴-bridge-패턴">브리지 패턴 (Bridge 패턴)</h3>
+
+<p><mark>브리지 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Implementor
+interface Device {
+  void turnOn();
+  void turnOff();
+  void setVolume(int volume);
+  boolean isEnabled();
+}
+
+// Concrete Implementors
+class TV implements Device {
+  private boolean on = false;
+  private int volume = 30;
+
+  @Override
+  public void turnOn() {
+    on = true;
+    System.out.println("TV is now ON.");
+  }
+
+  @Override
+  public void turnOff() {
+    on = false;
+    System.out.println("TV is now OFF.");
+  }
+
+  @Override
+  public void setVolume(int volume) {
+    this.volume = volume;
+    System.out.println("TV volume set to " + volume);
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return on;
+  }
+}
+
+class Radio implements Device {
+  private boolean on = false;
+  private int volume = 30;
+
+  @Override
+  public void turnOn() {
+    on = true;
+    System.out.println("Radio is now ON.");
+  }
+
+  @Override
+  public void turnOff() {
+    on = false;
+    System.out.println("Radio is now OFF.");
+  }
+
+  @Override
+  public void setVolume(int volume) {
+    this.volume = volume;
+    System.out.println("Radio volume set to " + volume);
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return on;
+  }
+}
+
+// Abstraction
+abstract class Remote {
+  protected Device device;
+
+  protected Remote(Device device) {
+    this.device = device;
+  }
+
+  public abstract void power();
+
+  public void volumeUp() {
+    device.setVolume(device.isEnabled() ? 1 : 0);
+  }
+
+  public void volumeDown() {
+    device.setVolume(device.isEnabled() ? -1 : 0);
+  }
+}
+
+// Refined Abstractions
+class BasicRemote extends Remote {
+  public BasicRemote(Device device) {
+    super(device);
+  }
+
+  @Override
+  public void power() {
+    if (device.isEnabled()) {
+      device.turnOff();
+    } else {
+      device.turnOn();
+    }
+  }
+}
+
+class AdvancedRemote extends Remote {
+  public AdvancedRemote(Device device) {
+    super(device);
+  }
+
+  @Override
+  public void power() {
+    if (device.isEnabled()) {
+      device.turnOff();
+    } else {
+      device.turnOn();
+    }
+  }
+
+  public void mute() {
+    device.setVolume(0);
+    System.out.println("Device is muted.");
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    Device tv = new TV();
+    Remote basicRemote = new BasicRemote(tv);
+    basicRemote.power();
+    basicRemote.volumeUp();
+    
+    System.out.println();
+
+    Device radio = new Radio();
+    AdvancedRemote advancedRemote = new AdvancedRemote(radio);
+    advancedRemote.power();
+    advancedRemote.mute();
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TV is now ON.
+TV volume set to 1
+
+Radio is now ON.
+Radio volume set to 0
+Device is muted.
+</code></pre></div></div>
+
+<p><mark>브리지 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Implementor
+interface MessageSender {
+  void sendMessage(String message);
+}
+
+// Concrete Implementors
+class EmailSender implements MessageSender {
+  @Override
+  public void sendMessage(String message) {
+    System.out.println("Sending email with message: " + message);
+  }
+}
+
+class SMSSender implements MessageSender {
+  @Override
+  public void sendMessage(String message) {
+    System.out.println("Sending SMS with message: " + message);
+  }
+}
+
+// Abstraction
+abstract class Message {
+  protected MessageSender messageSender;
+
+  protected Message(MessageSender messageSender) {
+    this.messageSender = messageSender;
+  }
+
+  public abstract void send(String message);
+}
+
+// Refined Abstractions
+class TextMessage extends Message {
+  public TextMessage(MessageSender messageSender) {
+    super(messageSender);
+  }
+  @Override
+  public void send(String message) {
+    messageSender.sendMessage("Text Message: " + message);
+  }
+}
+
+class EncryptedMessage extends Message {
+  public EncryptedMessage(MessageSender messageSender) {
+    super(messageSender);
+  }
+  @Override
+  public void send(String message) {
+    String encryptedMessage = encrypt(message);
+    messageSender.sendMessage(
+      "Encrypted Message: " + encryptedMessage);
+  }
+
+  private String encrypt(String message) {
+    return new StringBuilder(message).reverse().toString();
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    MessageSender emailSender = new EmailSender();
+    MessageSender smsSender = new SMSSender();
+
+    Message textMessage = new TextMessage(emailSender);
+    textMessage.send("Hello World!");
+
+    Message encryptedMessage = new EncryptedMessage(smsSender);
+    encryptedMessage.send("Hello World!");
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sending email with message: Text Message: Hello World!
+
+Sending SMS with message: Encrypted Message: !dlroW olleH
+</code></pre></div></div>
+
+<h3 id="복합체-패턴-composite-패턴">복합체 패턴 (Composite 패턴)</h3>
+
+<p><mark>복합체 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Component
+interface FileSystemComponent {
+  void printName();
+  int getSize();
+  String getName();
+}
+
+// Leaf
+class File implements FileSystemComponent {
+  private String name;
+  private int size;
+
+  public File(String name, int size) {
+    this.name = name;
+    this.size = size;
+  }
+
+  @Override
+  public void printName() {
+    System.out.println("File: " + name);
+  }
+
+  @Override
+  public int getSize() {
+    return size;
+  }
+
+  @Override
+  public String getName() {
+    return name;
+  }
+}
+
+// Composite
+class Directory implements FileSystemComponent {
+  private String name;
+  private List&lt;FileSystemComponent&gt; components
+    = new ArrayList&lt;&gt;();
+
+  public Directory(String name) {
+    this.name = name;
+  }
+
+  public void add(FileSystemComponent component) {
+    components.add(component);
+  }
+
+  public void remove(FileSystemComponent component) {
+    components.remove(component);
+  }
+
+  public void remove(String name) {
+    components.removeIf(component -&gt; component.getName().equals(name));
+  }
+
+  @Override
+  public void printName() {
+    System.out.println("Directory: " + name);
+    for (FileSystemComponent component : components) {
+      component.printName();
+    }
+  }
+
+  @Override
+  public int getSize() {
+    int totalSize = 0;
+    for (FileSystemComponent component : components) {
+      totalSize += component.getSize();
+    }
+    return totalSize;
+  }
+
+  @Override
+  public String getName() {
+    return name;
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    File file1 = new File("Document.txt", 100);
+    File file2 = new File("Image.jpg", 200);
+
+    Directory subDir = new Directory("SubFolder");
+    subDir.add(new File("SubFile.txt", 50));
+
+    Directory rootDir = new Directory("RootFolder");
+    rootDir.add(file1);
+    rootDir.add(file2);
+    rootDir.add(subDir);
+
+    System.out.println("Initial structure:");
+    rootDir.printName();
+    System.out.println("Total size: " + rootDir.getSize() + " KB");
+
+    System.out.println("\nRemoving Image.jpg:");
+    rootDir.remove("Image.jpg");
+    rootDir.printName();
+    System.out.println("Total " + rootDir.getSize() + " KB");
+
+    System.out.println("\nRemoving SubFolder:");
+    rootDir.remove(subDir);
+    rootDir.printName();
+    System.out.println("Total size: " + rootDir.getSize() + " KB");
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Initial structure:
+Directory: RootFolder
+File: Document.txt
+File: Image.jpg
+Directory: SubFolder
+File: SubFile.txt
+Total size: 350 KB
+
+Removing Image.jpg:
+Directory: RootFolder
+File: Document.txt
+Directory: SubFolder
+File: SubFile.txt
+Total size: 150 KB
+
+Removing SubFolder:
+Directory: RootFolder
+File: Document.txt
+Total size: 100 KB
+</code></pre></div></div>
+
+<p><mark>복합체 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface UIComponent {
+  void render();
+  void add(UIComponent component);
+  void remove(UIComponent component);
+}
+
+// Leaves
+class Button implements UIComponent {
+  private String label;
+
+  public Button(String label) {
+    this.label = label;
+  }
+
+  @Override
+  public void render() {
+    System.out.println("Button: " + label);
+  }
+
+  @Override
+  public void add(UIComponent component) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public void remove(UIComponent component) {
+    throw new UnsupportedOperationException();
+  }
+}
+
+class TextBox implements UIComponent {
+  private String text;
+
+  public TextBox(String text) {
+    this.text = text;
+  }
+
+  @Override
+  public void render() {
+    System.out.println("TextBox: " + text);
+  }
+
+  @Override
+  public void add(UIComponent component) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public void remove(UIComponent component) {
+    throw new UnsupportedOperationException();
+  }
+}
+
+// Composites
+class Panel implements UIComponent {
+  private String name;
+  private List&lt;UIComponent&gt; components = new ArrayList&lt;&gt;();
+
+  public Panel(String name) {
+    this.name = name;
+  }
+
+  @Override
+  public void render() {
+    System.out.println("Panel: " + name);
+    components.forEach(UIComponent::render);
+  }
+
+  @Override
+  public void add(UIComponent component) {
+    components.add(component);
+  }
+
+  @Override
+  public void remove(UIComponent component) {
+    components.remove(component);
+  }
+}
+
+class Window implements UIComponent {
+  private String title;
+  private List&lt;UIComponent&gt; components = new ArrayList&lt;&gt;();
+
+  public Window(String title) {
+    this.title = title;
+  }
+
+  @Override
+  public void render() {
+    System.out.println("Window: " + title);
+    components.forEach(UIComponent::render);
+  }
+
+  @Override
+  public void add(UIComponent component) {
+    components.add(component);
+  }
+
+  @Override
+  public void remove(UIComponent component) {
+    components.remove(component);
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    Button submitButton = new Button("Submit");
+    Button cancelButton = new Button("Cancel");
+    TextBox usernameField = new TextBox("Username");
+
+    Panel formPanel = new Panel("Form");
+    formPanel.add(submitButton);
+    formPanel.add(cancelButton);
+    formPanel.add(usernameField);
+
+    Window mainWindow = new Window("Main");
+    mainWindow.add(formPanel);
+    mainWindow.render();
+
+    System.out.println();
+
+    formPanel.remove(cancelButton);
+    mainWindow.render();
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Window: Main
+Panel: Form
+Button: Submit
+Button: Cancel
+TextBox: Username
+
+Window: Main
+Panel: Form
+Button: Submit
+TextBox: Username
+</code></pre></div></div>
+
+<h3 id="데코레이터-패턴-decorator-패턴">데코레이터 패턴 (Decorator 패턴)</h3>
+
+<p><mark>데코레이터 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Component interface
+interface Coffee {
+  String getDescription();
+  double getCost();
+}
+
+// ConcreteComponent class
+class SimpleCoffee implements Coffee {
+  @Override
+  public String getDescription() {
+    return "Simple coffee";
+  }
+
+  @Override
+  public double getCost() {
+    return 5.0;
+  }
+}
+
+// Decorator class
+class CoffeeDecorator implements Coffee {
+  protected Coffee decoratedCoffee;
+
+  public CoffeeDecorator(Coffee coffee) {
+    this.decoratedCoffee = coffee;
+  }
+
+  @Override
+  public String getDescription() {
+    return decoratedCoffee.getDescription();
+  }
+
+  @Override
+  public double getCost() {
+    return decoratedCoffee.getCost();
+  }
+}
+
+// Concrete Decorators
+class MilkDecorator extends CoffeeDecorator {
+  public MilkDecorator(Coffee coffee) {
+    super(coffee);
+  }
+
+  @Override
+  public String getDescription() {
+    return super.getDescription() + ", Milk";
+  }
+
+  @Override
+  public double getCost() {
+    return super.getCost() + 1.5;
+  }
+}
+
+class SugarDecorator extends CoffeeDecorator {
+  public SugarDecorator(Coffee coffee) {
+    super(coffee);
+  }
+
+  @Override
+  public String getDescription() {
+    return super.getDescription() + ", Sugar";
+  }
+
+  @Override
+  public double getCost() {
+    return super.getCost() + 0.5;
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+  
+    Coffee simpleCoffee = new SimpleCoffee();
+    System.out.println(simpleCoffee.getDescription() + " $" + simpleCoffee.getCost());
+    
+    Coffee milkCoffee = new MilkDecorator(new SimpleCoffee());
+    System.out.println(milkCoffee.getDescription() + " $" + milkCoffee.getCost());
+
+    Coffee milkAndSugarCoffee = new SugarDecorator(new MilkDecorator(new SimpleCoffee()));
+    
+    System.out.println(milkAndSugarCoffee.getDescription() + " $" + milkAndSugarCoffee.getCost());
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Simple coffee $5.0
+Simple coffee, Milk $6.5
+Simple coffee, Milk, Sugar $7.0
+</code></pre></div></div>
+
+<p><mark>데코레이터 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Base Component
+interface Text {
+  String getContent();
+}
+
+// Concrete Component
+class PlainText implements Text {
+  private String content;
+
+  public PlainText(String content) {
+    this.content = content;
+  }
+
+  @Override
+  public String getContent() {
+    return content;
+  }
+}
+
+// Base Decorator
+abstract class TextDecorator implements Text {
+  protected Text decoratedText;
+
+  public TextDecorator(Text text) {
+    this.decoratedText = text;
+  }
+
+  @Override
+  public String getContent() {
+    return decoratedText.getContent();
+  }
+}
+
+// Concrete Decorators
+class BoldDecorator extends TextDecorator {
+  public BoldDecorator(Text text) {
+    super(text);
+  }
+
+  @Override
+  public String getContent() {
+    return "&lt;b&gt;" + super.getContent() + "&lt;/b&gt;";
+  }
+}
+
+class ItalicDecorator extends TextDecorator {
+  public ItalicDecorator(Text text) {
+    super(text);
+  }
+
+  @Override
+  public String getContent() {
+    return "&lt;i&gt;" + super.getContent() + "&lt;/i&gt;";
+  }
+}
+
+class UnderlineDecorator extends TextDecorator {
+  public UnderlineDecorator(Text text) {
+    super(text);
+  }
+
+  @Override
+  public String getContent() {
+    return "&lt;u&gt;" + super.getContent() + "&lt;/u&gt;";
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    // Create a plain text
+    Text text = new PlainText("Hello, Decorator Pattern!");
+    System.out.println("Plain text: " + text.getContent());
+
+    text = new BoldDecorator(text);
+    System.out.println("Bold text: " + text.getContent());
+
+    text = new ItalicDecorator(text);
+    System.out.println("Bold and italic text: " + text.getContent());
+
+    text = new UnderlineDecorator(text);
+    System.out.println("Bold, italic, and underlined text: " + text.getContent());
+
+    Text anotherText = new UnderlineDecorator(new ItalicDecorator(new PlainText("Another example")));
+    System.out.println("Underlined and italic text: " + anotherText.getContent());
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Plain text: Hello, Decorator Pattern!
+Bold text: &lt;b&gt;Hello, Decorator Pattern!&lt;/b&gt;
+Bold and italic text: &lt;i&gt;&lt;b&gt;Hello, Decorator Pattern!&lt;/b&gt;&lt;/i&gt;
+Bold, italic, and underlined text:
+ &lt;u&gt;&lt;i&gt;&lt;b&gt;Hello, Decorator Pattern!&lt;/b&gt;&lt;/i&gt;&lt;/u&gt;
+Underlined and italic text: &lt;u&gt;&lt;i&gt;Another example&lt;/i&gt;&lt;/u&gt;
+</code></pre></div></div>
+
+<h3 id="파사드-패턴-facade-패턴">파사드 패턴 (Facade 패턴)</h3>
+<p>여러 개의 복잡한 서브시스템 클래스들을 하나의 파사드 클래스로 묶습니다.<br />
+클라이언트가 서브시스템을 직접 호출하지 않고, 파사드 클래스만 호출하여 기능들을 쉽게 이용할 수 있는 패턴입니다.</p>
+
+<p>파사드 클래스는 내부 구조의 복잡성을 은폐하고, 단순한 인터페이스를 제공합니다.<br />
+클라이언트는 파사드 클래스에만 의존하므로 결합도가 낮아집니다.<br />
+서브시스템 변경이 생기면 파사드 클래스 내부만 수정하면 되어서, 클라이언트 코드 변경이 최소화됩니다.</p>
+
+<p><mark>파사드 패턴 예시 1 : 스마트홈 아침 루틴</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 서브시스템 클래스 1 : 온도 조절기
+public class Thermostat {
+  public void setTemperature(int temperature) {
+    System.out.println("집 온도 : " + temperature + "로 설정");
+  }
+}
+
+// 서브시스템 클래스 2 : 전등
+public class Lights {
+  public void on() {
+    System.out.println("전등 켜기");
+  }
+
+  public void off() {
+    System.out.println("전등 끄기");
+  }
+}
+
+// 서브시스템 클래스 3 : 커피머신
+public class CoffeeMaker {
+  public void brewCoffee() {
+    System.out.println("커피 내리기");
+  }
+}
+
+// 파사드 클래스
+public class SmartHomeFacade {
+  private Thermostat thermostat;
+  private Lights lights;
+  private CoffeeMaker coffeeMaker;
+
+  public SmartHomeFacade(Thermostat thermostat, Lights lights, CoffeeMaker coffeeMaker) {
+    this.thermostat = thermostat;
+    this.lights = lights;
+    this.coffeeMaker = coffeeMaker;
+  }
+
+  // 기상 후 루틴 함수
+  public void wakeUp() {
+    // 각 서브시스템 함수 호출
+    thermostat.setTemperature(22);
+    lights.on();
+    coffeeMaker.brewCoffee();
+  }
+
+  // 외출 시 루틴 함수
+  public void leaveHome() {
+    // 각 서브시스템 함수 호출
+    thermostat.setTemperature(18);
+    lights.off();
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    // 서브시스템 객체들 생성
+    Thermostat thermostat = new Thermostat();
+    Lights lights = new Lights();
+    CoffeeMaker coffeeMaker = new CoffeeMaker();
+  
+    // 파사드 클래스 생성자로 서브시스템 객체들 전달
+    SmartHomeFacade smartHome = new SmartHomeFacade(thermostat, lights, coffeeMaker);
+
+    smartHome.wakeUp();
+    smartHome.leaveHome();
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>집 온도 : 22로 설정
+전등 켜기
+커피 내리기
+
+집 온도 : 18로 설정
+전등 끄기
+</code></pre></div></div>
+
+<p><mark>파사드 패턴 예시 2 : 파일 시스템 작업</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 서브시스템 클래스 1 : 파일 읽기
+class FileReader {
+  public String readFile(String filePath) throws IOException {
+    // 파일 읽기 기능
+    return new String(Files.readAllBytes(Paths.get(filePath)));
+  }
+}
+
+// 서브시스템 클래스 2 : 파일 쓰기
+class FileWriter {
+  public void writeFile(String filePath, String content) throws IOException {
+    // 파일 쓰기 기능
+    Files.write(Paths.get(filePath), content.getBytes());
+  }
+}
+
+// 서브시스템 클래스 3 : 파일 삭제
+class FileDeleter {
+  public void deleteFile(String filePath) throws IOException {
+    // 파일 삭제 기능
+    Files.delete(Paths.get(filePath));
+  }
+}
+
+// 파사드 클래스
+class FileSystemFacade {
+  private FileReader fileReader;
+  private FileWriter fileWriter;
+  private FileDeleter fileDeleter;
+
+  // 생성자에서 서브시스템 객체들 생성
+  public FileSystemFacade() {
+    this.fileReader = new FileReader();
+    this.fileWriter = new FileWriter();
+    this.fileDeleter = new FileDeleter();
+  }
+
+  // 파일 읽기 함수
+  public String readFile(String filePath) {
+    try {
+      // 파일 읽기 서브시스템 함수 호출
+      return fileReader.readFile(filePath);
+    } catch (IOException e) {
+      System.err.println("Error reading file: " + e.getMessage());
+      return null;
+    }
+  }
+
+  // 파일 쓰기 함수
+  public boolean writeFile(String filePath, String content) {
+    try {
+      // 파일 쓰기 서브시스템 함수 호출
+      fileWriter.writeFile(filePath, content);
+      return true;
+    } catch (IOException e) {
+      System.err.println("Error writing file: " + e.getMessage());
+      return false;
+    }
+  }
+
+  // 파일 삭제 함수
+  public boolean deleteFile(String filePath) {
+    try {
+      // 파일 삭제 서브시스템 함수 호출
+      fileDeleter.deleteFile(filePath);
+      return true;
+    } catch (IOException e) {
+      System.err.println("Error deleting file: " + e.getMessage());
+      return false;
+    }
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    // 파사드 클래스 객체 생성
+    FileSystemFacade fs = new FileSystemFacade();
+
+    // 파일 쓰기 함수 호출
+    boolean writeSuccess = fs.writeFile("test.txt", "Hello, Facade Pattern!");
+    System.out.println("File write success: " + writeSuccess);
+
+    // 파일 읽기 함수 호출
+    String content = fs.readFile("test.txt");
+    System.out.println("File content: " + content);
+
+    // 파일 삭제 함수 호출
+    boolean deleteSuccess = fs.deleteFile("test.txt");
+    System.out.println("File delete success: " + deleteSuccess);
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>File write success: true
+File content: Hello, Facade Pattern!
+File delete success: true
+</code></pre></div></div>
+
+<h3 id="플라이웨이트-패턴-flyweight-패턴">플라이웨이트 패턴 (Flyweight 패턴)</h3>
+
+<p><mark>플라이웨이트 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Flyweight class
+class Book {
+  private final String title; // intrinsic state (shared)
+
+  public Book(String title) {
+    this.title = title;
+  }
+
+  public void read() {
+    System.out.println("Reading the book titled: " + title);
+  }
+}
+
+// FlyweightFactory class
+class Bookshelf {
+  private static final Map&lt;String, Book&gt; bookshelf = new HashMap&lt;&gt;();
+
+  public static Book getBook(String title) {
+    Book book = bookshelf.get(title);
+
+    if (book == null) {
+      book = new Book(title);
+      bookshelf.put(title, book);
+      System.out.println("Adding a new book to the bookshelf: " + title);
+    } else {
+      System.out.println("Reusing existing book from the bookshelf: " + title);
+    }
+    return book;
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    Book book1 = Bookshelf.getBook("Effective Java");
+    book1.read();
+
+    Book book2 = Bookshelf.getBook("Effective Java");
+    book2.read();
+
+    Book book3 = Bookshelf.getBook("Clean Code");
+    book3.read();
+
+    // Check if book1 and book2 are the same object
+    System.out.println(book1 == book2 ? "Same book for 'Effective Java'." : "Different books for 'Effective Java'.");
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Adding a new book to the bookshelf: Effective Java
+Reading the book titled: Effective Java
+Reusing existing book from the bookshelf: Effective Java
+Reading the book titled: Effective Java
+Adding a new book to the bookshelf: Clean Code
+Reading the book titled: Clean Code
+Same book for 'Effective Java'.
+</code></pre></div></div>
+
+<p><mark>플라이웨이트 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Flyweight interface
+interface Font {
+    void apply(String text);
+}
+
+// ConcreteFlyweight class
+class ConcreteFont implements Font {
+  private String font;
+  private int size;
+  private String color;
+
+  public ConcreteFont(String font, int size, String color) {
+    this.font = font;
+    this.size = size;
+    this.color = color;
+  }
+
+  @Override
+  public void apply(String text) {
+    System.out.println("Text: '" + text + "' with Font: " + font + ", Size: " + size + ", Color: " + color);
+  }
+}
+
+// Flyweight Factory class
+class FontFactory {
+  private static final HashMap&lt;String, Font&gt; fontMap = new HashMap&lt;&gt;();
+
+  public static Font getFont(String font, int size, String color) {
+    String key = font + size + color;
+    Font fontObject = fontMap.get(key);
+
+    if (fontObject == null) {
+      fontObject = new ConcreteFont(font, size, color);
+      fontMap.put(key, fontObject);
+      System.out.println("Creating font: " + key);
+    } else {
+      System.out.println("Reusing font: " + key);
+    }
+    return fontObject;
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    Font font1 = FontFactory.getFont("Arial", 12, "Black");
+    font1.apply("Hello, World!");
+
+    Font font2 = FontFactory.getFont("Arial", 12, "Black");
+    font2.apply("Flyweight Pattern");
+
+    Font font3 = FontFactory.getFont("Times New Roman", 14, "Blue");
+    font3.apply("Design Patterns");
+
+    Font font4 = FontFactory.getFont("Arial", 12, "Black");
+    font4.apply("Another Text");
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Creating font: Arial12Black
+Text: 'Hello, World!' with Font: Arial, Size: 12, Color: Black
+Reusing font: Arial12Black
+Text: 'Flyweight Pattern' with Font: Arial, Size: 12, Color: Black
+Creating font: Times New Roman14Blue
+Text: 'Design Patterns' with Font: Times New Roman, Size: 14, Color: Blue
+Reusing font: Arial12Black
+Text: 'Another Text' with Font: Arial, Size: 12, Color: Black
+</code></pre></div></div>
+
+<h3 id="프록시-패턴-proxy-패턴">프록시 패턴 (Proxy 패턴)</h3>
+
+<p><mark>프록시 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Subject interface
+interface Image {
+  void display();
+  String getFileName();
+}
+
+// RealSubject class
+class RealImage implements Image {
+  private String fileName;
+
+  public RealImage(String fileName) {
+    this.fileName = fileName;
+    loadFromDisk();
+  }
+
+  private void loadFromDisk() {
+    System.out.println("Loading " + fileName);
+  }
+
+  @Override
+  public void display() {
+    System.out.println("Displaying " + fileName);
+  }
+
+  @Override
+  public String getFileName() {
+    return fileName;
+  }
+}
+
+// Proxy class
+class ProxyImage implements Image {
+  private RealImage realImage;
+  private String fileName;
+
+  public ProxyImage(String fileName) {
+    this.fileName = fileName;
+  }
+
+  @Override
+  public void display() {
+    if (realImage == null) {
+      realImage = new RealImage(fileName);
+    }
+    realImage.display();
+  }
+
+  @Override
+  public String getFileName() {
+    return fileName;
+  }
+
+  public String getFileExtension() {
+    int lastIndex = fileName.lastIndexOf('.');
+    if (lastIndex == -1) {
+      return "";
+    }
+    return fileName.substring(lastIndex + 1);
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    ProxyImage image = new ProxyImage("test_image.jpg");
+
+    System.out.println("File name: " + image.getFileName());
+    System.out.println("File extension: " + image.getFileExtension());
+
+    image.display();
+    image.display();
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>File name: test_image.jpg
+File extension: jpg
+Loading test_image.jpg
+Displaying test_image.jpg
+Displaying test_image.jpg
+</code></pre></div></div>
+
+<p><mark>프록시 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Subject interface
+interface BankAccount {
+  void withdraw(double amount);
+  void deposit(double amount);
+}
+
+// Real Subject class
+class RealBankAccount implements BankAccount {
+  private double balance;
+  
+  public RealBankAccount(double initialBalance) {
+    this.balance = initialBalance;
+  }
+
+  @Override
+  public void withdraw(double amount) {
+  if (balance &gt;= amount) {
+      balance -= amount;
+      System.out.println(amount + " withdrawn. Current balance: " + balance);
+    } else {
+      System.out.println("Insufficient balance.");
+    }
+  }
+
+  @Override
+  public void deposit(double amount) {
+    balance += amount;
+    System.out.println(amount + " deposited. Current balance: " + balance);
+  }
+}
+
+// Proxy class
+class BankAccountProxy implements BankAccount {
+  private RealBankAccount realBankAccount;
+  private String userRole;
+  
+  public BankAccountProxy(String userRole, double initialBalance) {
+    this.userRole = userRole;
+    this.realBankAccount = new RealBankAccount(initialBalance);
+  }
+
+  // Check if the user has Admin access
+  private boolean hasAccess() {
+    return "Admin".equalsIgnoreCase(userRole);
+  }
+
+  @Override
+  public void withdraw(double amount) {
+    if (hasAccess()) {
+      realBankAccount.withdraw(amount);
+    } else {
+      System.out.println("Access denied. Only Admin can withdraw.");
+    }
+  }
+
+  @Override
+  public void deposit(double amount) {
+    realBankAccount.deposit(amount);
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    // User with Admin access
+    BankAccount adminAccount = new BankAccountProxy("Admin", 1000);
+    adminAccount.deposit(500);   // Deposit allowed
+    adminAccount.withdraw(300);  // Withdraw allowed
+
+    // User without Admin access
+    BankAccount userAccount = new BankAccountProxy("User", 1000);
+    userAccount.deposit(500);    // Deposit allowed
+    userAccount.withdraw(300);   // Withdraw denied
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>500.0 deposited. Current balance: 1500.0
+300.0 withdrawn. Current balance: 1200.0
+500.0 deposited. Current balance: 1500.0
+Access denied. Only Admin can withdraw.
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="행위-패턴">행위 패턴</h2>
+
+<h3 id="책임-연쇄-패턴-chain-of-responsibility-패턴">책임 연쇄 패턴 (Chain of Responsibility 패턴)</h3>
+
+<p><mark>책임 연쇄 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>abstract class Handler {
+    protected Handler next;
+
+    public void setNext(Handler next) {
+        this.next = next;
+    }
+
+    public void handle(int number) {
+        process(number);
+        if (next != null) next.handle(number);
+    }
+
+    protected abstract void process(int number);
+}
+
+class PositiveHandler extends Handler {
+    @Override
+    protected void process(int number) {
+        if (number &gt; 0) {
+            System.out.println(number + " is a positive number");
+        }
+    }
+}
+
+class EvenHandler extends Handler {
+    @Override
+    protected void process(int number) {
+        if (number % 2 == 0) {
+            System.out.println(number + " is an even number");
+        }
+    }
+}
+
+class DivisibleBy3Handler extends Handler {
+    @Override
+    protected void process(int number) {
+        if (number % 3 == 0) {
+            System.out.println(number + " is divible by 3");
+        }
+    }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+    public static void main(String[] args) {
+        Handler positive = new PositiveHandler();
+        Handler even = new EvenHandler();
+        Handler divisibleBy3 = new DivisibleBy3Handler();
+
+        positive.setNext(even);
+        even.setNext(divisibleBy3);
+
+        positive.handle(-2);
+        positive.handle(4);
+        positive.handle(6);
+    }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-2 is an even number
+
+4 is a positive number
+4 is an even number
+
+6 is a positive number
+6 is an even number
+6 is divible by 3
+</code></pre></div></div>
+
+<p><mark>책임 연쇄 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enum LogLevel {
+  INFO, DEBUG, WARN
+}
+
+abstract class Logger {
+  protected LogLevel level;
+  protected Logger nextLogger;
+
+  public void setNextLogger(Logger nextLogger) {
+    this.nextLogger = nextLogger;
+  }
+
+  public void logMessage(LogLevel level, String message) {
+    if (this.level.ordinal() &lt;= level.ordinal()) {
+      write(message);
+    }
+    if (nextLogger != null) {
+      nextLogger.logMessage(level, message);
+    }
+  }
+
+  protected abstract void write(String message);
+}
+
+class ConsoleLogger extends Logger {
+  public ConsoleLogger(LogLevel level) {
+    this.level = level;
+  }
+
+  @Override
+  protected void write(String message) {
+    System.out.println("Console::Logger: " + message);
+  }
+}
+
+class FileLogger extends Logger {
+  public FileLogger(LogLevel level) {
+    this.level = level;
+  }
+
+  @Override
+  protected void write(String message) {
+    System.out.println("File::Logger: " + message);
+  }
+}
+
+class NetworkLogger extends Logger {
+  public NetworkLogger(LogLevel level) {
+    this.level = level;
+  }
+
+  @Override
+  protected void write(String message) {
+    System.out.println("Network::Logger: " + message);
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  private static Logger getChainOfLoggers() {
+    Logger networkLogger = new NetworkLogger(LogLevel.WARN);
+    Logger fileLogger = new FileLogger(LogLevel.DEBUG);
+    Logger consoleLogger = new ConsoleLogger(LogLevel.INFO);
+
+    networkLogger.setNextLogger(fileLogger);
+    fileLogger.setNextLogger(consoleLogger);
+
+    return networkLogger;
+  }
+
+  public static void main(String[] args) {
+    Logger loggerChain = getChainOfLoggers();
+
+    loggerChain.logMessage(LogLevel.INFO, 
+        "This is an information.");
+    
+    loggerChain.logMessage(LogLevel.DEBUG,
+        "This is a debug level information.");
+    
+    loggerChain.logMessage(LogLevel.WARN,
+        "This is a warning information.");
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Console::Logger: This is an information.
+
+File::Logger: This is a debug level information.
+Console::Logger: This is a debug level information.
+
+Network::Logger: This is a warning information.
+File::Logger: This is a warning information.
+Console::Logger: This is a warning information.
+</code></pre></div></div>
+
+<h3 id="커맨드-패턴-command-패턴">커맨드 패턴 (Command 패턴)</h3>
+
+<p><mark>커맨드 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Receiver Class
+public class Light {
+  public void turnOn() {
+    System.out.println("Light is ON");
+  }
+
+  public void turnOff() {
+    System.out.println("Light is OFF");
+  }
+}
+
+// Command Interface
+public interface Command {
+  void execute();
+}
+
+// Concrete Commands
+public class LightOnCommand implements Command {
+  private Light light;
+
+  public LightOnCommand(Light light) {
+    this.light = light;
+  }
+
+  @Override
+  public void execute() {
+    light.turnOn();
+  }
+}
+
+public class LightOffCommand implements Command {
+  private Light light;
+
+  public LightOffCommand(Light light) {
+    this.light = light;
+  }
+
+  @Override
+  public void execute() {
+    light.turnOff();
+  }
+}
+
+// Invoker Class
+public class RemoteControl {
+  private Command command;
+
+  public void setCommand(Command command) {
+    this.command = command;
+  }
+
+  public void pressButton() {
+    command.execute();
+  }
+}
+
+public class Client {
+  public static void main(String[] args) {
+    Light livingRoomLight = new Light();
+    
+    Command lightOn = new LightOnCommand(livingRoomLight);
+    
+    Command lightOff = new LightOffCommand(livingRoomLight);
+    
+    RemoteControl remote = new RemoteControl();
+    
+    remote.setCommand(lightOn);
+    remote.pressButton(); // "Light is ON"
+    
+    remote.setCommand(lightOff);
+    remote.pressButton(); // "Light is OFF"
+  }
+}
+
+// Receiver
+public class TextEditor {
+  private StringBuilder content;
+
+  public TextEditor() {
+    this.content = new StringBuilder();
+  }
+
+  public void insertText(String text, int position) {
+    content.insert(position, text);
+  }
+
+  public void deleteText(int position, int length) {
+    content.delete(position, position + length);
+  }
+
+  public String getTextSubstring(int start, int end) {
+    return content.substring(start, end);
+  }
+
+  public String getContent() {
+    return content.toString();
+  }
+}
+
+// Command interface
+public interface Command {
+  void execute();
+  void undo();
+}
+
+// Concrete commands
+public class InsertTextCommand implements Command {
+  private TextEditor editor;
+  private String text;
+  private int position;
+  
+  public InsertTextCommand(
+    TextEditor editor, String text, int position) 
+  {
+    this.editor = editor;
+    this.text = text;
+    this.position = position;
+  }
+
+  @Override
+  public void execute() {
+    editor.insertText(text, position);
+  }
+  @Override
+  public void undo() {
+    editor.deleteText(position, text.length());
+  }
+}
+
+public class DeleteTextCommand implements Command {
+  private TextEditor editor;
+  private String deletedText;
+  private int position;
+
+  public DeleteTextCommand(
+    TextEditor editor, int position, int length) 
+  {
+    this.editor = editor;
+    this.position = position;
+    this.deletedText = editor.getTextSubstring(
+        position, position + length);
+  }
+
+  @Override
+  public void execute() {
+    editor.deleteText(position, deletedText.length());
+  }
+  @Override
+  public void undo() {
+    editor.insertText(deletedText, position);
+  }
+}
+
+// Invoker
+public class TextEditorInvoker {
+  private Stack&lt;Command&gt; undoStack = new Stack&lt;&gt;();
+  private Stack&lt;Command&gt; redoStack = new Stack&lt;&gt;();
+
+  public void executeCommand(Command command) {
+    command.execute();
+    undoStack.push(command);
+    redoStack.clear();
+  }
+
+  public void undo() {
+    if (!undoStack.isEmpty()) {
+      Command command = undoStack.pop();
+      command.undo();
+      redoStack.push(command);
+    }
+  }
+
+  public void redo() {
+    if (!redoStack.isEmpty()) {
+      Command command = redoStack.pop();
+      command.execute();
+      undoStack.push(command);
+    }
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    TextEditor editor = new TextEditor();
+    TextEditorInvoker invoker = new TextEditorInvoker();
+
+    Command insertHello = new InsertTextCommand(editor, "Hello, ", 0);
+    invoker.executeCommand(insertHello);
+
+    Command insertWorld = new InsertTextCommand(editor, "World!", 7);
+    invoker.executeCommand(insertWorld);
+
+    System.out.println("Current text: " + editor.getContent());
+
+    invoker.undo();
+    System.out.println("After undo: " + editor.getContent());
+
+    invoker.redo();
+    System.out.println("After redo: " + editor.getContent());
+
+    Command deleteCommand = new DeleteTextCommand(editor, 0, 7);
+    invoker.executeCommand(deleteCommand);
+    System.out.println("After delete: " + editor.getContent());
+
+    invoker.undo();
+    System.out.println("Final text: " + editor.getContent());
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Current text: Hello, World!
+After undo: Hello, 
+After redo: Hello, World!
+After delete: World!
+Final text: Hello, World!
+</code></pre></div></div>
+
+<h3 id="인터프리터-패턴-interpreter-패턴">인터프리터 패턴 (Interpreter 패턴)</h3>
+
+<p><mark>인터프리터 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public interface Expression {
+  int interpret();
+}
+
+public class Number implements Expression {
+  private int number;
+
+  public Number(int number) {
+    this.number = number;
+  }
+
+  @Override
+  public int interpret() {
+    return this.number;
+  }
+}
+
+public class Add implements Expression {
+  private Expression leftExpression;
+  private Expression rightExpression;
+
+  public Add(
+    Expression leftExpression,
+    Expression rightExpression
+  ) {
+    this.leftExpression = leftExpression;
+    this.rightExpression = rightExpression;
+  }
+
+  @Override
+  public int interpret() {
+      return leftExpression.interpret() + rightExpression.interpret();
+  }
+}
+
+public class Subtract implements Expression {
+  private Expression leftExpression;
+  private Expression rightExpression;
+
+  public Subtract(
+    Expression leftExpression,
+    Expression rightExpression
+  ) {
+    this.leftExpression = leftExpression;
+    this.rightExpression = rightExpression;
+  }
+
+  @Override
+  public int interpret() {
+    return leftExpression.interpret() - rightExpression.interpret();
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+  
+    Expression five = new Number(5);
+    Expression two = new Number(2);
+    Expression three = new Number(3);
+
+    Expression addExpression = new Add(five, two);
+    
+    Expression subtractExpression = new Subtract(addExpression, three);
+
+    System.out.println("(5 + 2) - 3 = " + subtractExpression.interpret());
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(5 + 2) - 3 = 4
+</code></pre></div></div>
+
+<p><mark>인터프리터 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Context
+class Context {
+  private Map&lt;String, List&lt;Map&lt;String, String&gt;&gt;&gt; tables;
+
+  public Context() {
+    this.tables = new HashMap&lt;&gt;();
+
+    // Initialize sample data
+    List&lt;Map&lt;String, String&gt;&gt; users = new ArrayList&lt;&gt;();
+
+    users.add(new HashMap&lt;String, String&gt;() );
+
+    users.add(new HashMap&lt;String, String&gt;() );
+
+    tables.put("users", users);
+  }
+
+  public List&lt;Map&lt;String, String&gt;&gt; getTable(String name) {
+    return tables.get(name);
+  }
+
+  public void setTable(
+    String name, List&lt;Map&lt;String, String&gt;&gt; table
+  ) {
+    tables.put(name, table);
+  }
+}
+
+// Abstract Expression
+interface Expression {
+  List&lt;Map&lt;String, String&gt;&gt; interpret(Context context);
+}
+
+// WHERE clause expression
+class WhereExpression implements Expression {
+  private String column;
+  private String operator;
+  private String value;
+  private String tableName;
+
+  public WhereExpression(
+    String tableName, String column,
+    String operator, String value
+  ) {
+    this.tableName = tableName;
+    this.column = column;
+    this.operator = operator;
+    this.value = value;
+  }
+
+  @Override
+  public List&lt;Map&lt;String, String&gt;&gt; interpret(Context context) {
+    List&lt;Map&lt;String, String&gt;&gt; result = new ArrayList&lt;&gt;();
+    List&lt;Map&lt;String, String&gt;&gt; table = context.getTable(tableName);
+    for (Map&lt;String, String&gt; row : table) {
+      if (evaluate(row.get(column), operator, value)) {
+        result.add(row);
+      }
+    }
+    return result;
+  }
+
+  private boolean evaluate(
+    String columnValue, String operator, String value
+  ) {
+    switch (operator) {
+      case "=":
+        return columnValue.equals(value);
+      case "&gt;":
+        return Integer.parseInt(columnValue)
+          &gt; Integer.parseInt(value);
+      case "&lt;":
+        return Integer.parseInt(columnValue)
+          &lt; Integer.parseInt(value);
+      default:
+        return false;
+    }
+  }
+}
+
+// SELECT statement expression
+class SelectExpression implements Expression {
+  private String tableName;
+  private List&lt;String&gt; columns;
+  private Expression whereClause;
+
+  public SelectExpression(String tableName, List&lt;String&gt; columns, Expression whereClause) {
+    this.tableName = tableName;
+    this.columns = columns;
+    this.whereClause = whereClause;
+  }
+
+  @Override
+  public List&lt;Map&lt;String, String&gt;&gt; interpret(Context context) {
+    List&lt;Map&lt;String, String&gt;&gt; table = context.getTable(tableName);
+    List&lt;Map&lt;String, String&gt;&gt; result = new ArrayList&lt;&gt;();
+
+    for (Map&lt;String, String&gt; row : table) {
+      Context rowContext = new Context();
+      rowContext.setTable(
+        tableName, Collections.singletonList(row));
+
+      if (whereClause == null || !whereClause.interpret(rowContext).isEmpty()) {
+        Map&lt;String, String&gt; newRow = new HashMap&lt;&gt;();
+        
+        for (String column : columns) {
+          if (column.equals("*")) {
+            newRow.putAll(row);
+          } else {
+            newRow.put(column, row.get(column));
+          }
+        }
+        result.add(newRow);
+      }
+    }
+
+    return result;
+  }
+}
+
+// SQL Parser
+class SQLParser {
+  public static Expression parse(String query) {
+    String[] parts = query.split("\\s+");
+    if (!parts[0].equalsIgnoreCase("SELECT")) {
+      throw new RuntimeException(
+        "Only SELECT statements are supported");
+    }
+
+    List&lt;String&gt; columns = Arrays.asList(parts[1].split(","));
+    String tableName = parts[3];
+
+    Expression whereClause = null;
+    if (parts.length &gt; 4 
+      &amp;&amp; parts[4].equalsIgnoreCase("WHERE")) {
+      whereClause = new WhereExpression(
+        tableName, parts[5], parts[6], parts[7]);
+    }
+
+    return new SelectExpression(tableName, columns, whereClause);
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    Context context = new Context();
+
+    // Test query 1: Select all columns from users
+    String query1 = "SELECT * FROM users";
+    Expression expr1 = SQLParser.parse(query1);
+    List&lt;Map&lt;String, String&gt;&gt; result1 = expr1.interpret(context);
+    
+    System.out.println("Result of query: " + query1);
+    for (Map&lt;String, String&gt; row : result1) {
+      System.out.println(row);
+    }
+
+    // Test query 2: Select name and age of users older than 27
+    String query2 = "SELECT name,age FROM users WHERE age &gt; 27";
+    Expression expr2 = SQLParser.parse(query2);
+    List&lt;Map&lt;String, String&gt;&gt; result2 = expr2.interpret(context);
+    
+    System.out.println("\nResult of query: " + query2);
+    for (Map&lt;String, String&gt; row : result2) {
+      System.out.println(row);
+    }
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Result of query: SELECT * FROM users
+{name=John, id=1, age=30}
+{name=Jane, id=2, age=25}
+
+Result of query: SELECT name,age FROM users WHERE age &gt; 27
+{name=John, age=30}
+</code></pre></div></div>
+
+<h3 id="반복자-패턴-iterator-패턴">반복자 패턴 (Iterator 패턴)</h3>
+
+<p><mark>반복자 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Iterator Interface
+interface MyIterator {
+  boolean hasNext();
+  Object next();
+}
+
+// Aggregate Interface
+interface Collection {
+  MyIterator createIterator();
+}
+
+// Concrete Aggregate
+class MyList implements Collection {
+  private Object[] items;
+  private int last = 0;
+
+  public MyList(int size) {
+    items = new Object[size];
+  }
+
+  public void add(Object item) {
+    if (last &lt; items.length) {
+      items[last] = item;
+      last++;
+    }
+  }
+
+  public Object get(int index) {
+    return items[index];
+  }
+
+  public int size() {
+    return last;
+  }
+
+  @Override
+  public MyIterator createIterator() {
+    return new MyListIterator(this);
+  }
+}
+
+// ConcreteIterator
+class MyListIterator implements MyIterator {
+  private MyList list;
+  private int index;
+
+  public MyListIterator(MyList list) {
+    this.list = list;
+    this.index = 0;
+  }
+
+  @Override
+  public boolean hasNext() {
+    return index &lt; list.size();
+  }
+
+  @Override
+  public Object next() {
+    if (this.hasNext()) {
+      return list.get(index++);
+    }
+    return null;
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    MyList list = new MyList(3);
+    list.add("A");
+    list.add("B");
+    list.add("C");
+
+    MyIterator iterator = list.createIterator();
+    while (iterator.hasNext()) {
+      System.out.println(iterator.next());
+    }
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A
+B
+C
+</code></pre></div></div>
+
+<p><mark>반복자 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// FileSystemItem interface
+interface FileSystemItem {
+  String getName();
+}
+
+// File class
+class File implements FileSystemItem {
+  private String name;
+
+  public File(String name) {
+    this.name = name;
+  }
+
+  @Override
+  public String getName() {
+    return name;
+  }
+}
+
+// Directory class
+class Directory implements FileSystemItem {
+  private String name;
+  private List&lt;FileSystemItem&gt; contents = new ArrayList&lt;&gt;();
+
+  public Directory(String name) {
+    this.name = name;
+  }
+
+  public void add(FileSystemItem item) {
+    contents.add(item);
+  }
+
+  public List&lt;FileSystemItem&gt; getContents() {
+    return contents;
+  }
+
+  @Override
+  public String getName() {
+    return name;
+  }
+}
+
+// FileSystemIterator interface
+interface FileSystemIterator {
+  boolean hasNext();
+  FileSystemItem next();
+}
+
+// DepthFirstIterator class
+class DepthFirstIterator implements FileSystemIterator {
+  private Stack&lt;FileSystemItem&gt; stack = new Stack&lt;&gt;();
+
+  public DepthFirstIterator(Directory root) {
+    stack.push(root);
+  }
+
+  @Override
+  public boolean hasNext() {
+    return !stack.isEmpty();
+  }
+
+  @Override
+  public FileSystemItem next() {
+    if (!hasNext()) {
+      throw new NoSuchElementException();
+    }
+
+    FileSystemItem current = stack.pop();
+    if (current instanceof Directory) {
+      List&lt;FileSystemItem&gt; contents = ((Directory) current).getContents();
+      for (int i = contents.size() - 1; i &gt;= 0; i--) {
+        stack.push(contents.get(i));
+      }
+    }
+    return current;
+  }
+}
+
+// BreadthFirstIterator class
+class BreadthFirstIterator implements FileSystemIterator {
+  private Queue&lt;FileSystemItem&gt; queue = new LinkedList&lt;&gt;();
+
+  public BreadthFirstIterator(Directory root) {
+    queue.offer(root);
+  }
+
+  @Override
+  public boolean hasNext() {
+    return !queue.isEmpty();
+  }
+
+  @Override
+  public FileSystemItem next() {
+    if (!hasNext()) {
+      throw new NoSuchElementException();
+    }
+
+    FileSystemItem current = queue.poll();
+    if (current instanceof Directory) {
+      queue.addAll(((Directory) current).getContents());
+    }
+    return current;
+  }
+}
+
+// FileSystem class
+class FileSystem {
+  private Directory root;
+
+  public FileSystem(Directory root) {
+    this.root = root;
+  }
+
+  public FileSystemIterator depthFirstIterator() {
+    return new DepthFirstIterator(root);
+  }
+
+  public FileSystemIterator breadthFirstIterator() {
+    return new BreadthFirstIterator(root);
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    Directory root = new Directory("root");
+    Directory home = new Directory("home");
+    Directory user = new Directory("user");
+    File file1 = new File("file1.txt");
+    File file2 = new File("file2.txt");
+    File file3 = new File("file3.txt");
+
+    root.add(home);
+    home.add(user);
+    user.add(file1);
+    user.add(file2);
+    home.add(file3);
+
+    FileSystem fileSystem = new FileSystem(root);
+
+    System.out.println("Depth-First Traversal:");
+    FileSystemIterator depthIterator = fileSystem.depthFirstIterator();
+    while (depthIterator.hasNext()) {
+      System.out.println(depthIterator.next().getName());
+    }
+
+    System.out.println("\nBreadth-First Traversal:");
+    FileSystemIterator breadthIterator = fileSystem.breadthFirstIterator();
+    while (breadthIterator.hasNext()) {
+      System.out.println(breadthIterator.next().getName());
+    }
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Depth-First Traversal:
+root
+home
+user
+file1.txt
+file2.txt
+file3.txt
+
+Breadth-First Traversal:
+root
+home
+user
+file3.txt
+file1.txt
+file2.txt
+</code></pre></div></div>
+
+<h3 id="중재자-패턴-mediator-패턴">중재자 패턴 (Mediator 패턴)</h3>
+
+<p><mark>중재자 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Mediator interface
+public interface ChatMediator {
+  void sendMessage(String message, User user);
+  void addUser(User user);
+}
+
+// Concrete implementation of the Mediator interface
+public class ChatMediatorImpl implements ChatMediator {
+  private List&lt;User&gt; users;
+
+  public ChatMediatorImpl() {
+    this.users = new ArrayList&lt;&gt;();
+  }
+
+  @Override
+  public void addUser(User user) {
+    this.users.add(user);
+  }
+
+  @Override
+  public void sendMessage(String message, User user) {
+    for (User u : this.users) {
+      if (u != user) {
+        u.receive(message);
+      }
+    }
+  }
+}
+
+// Abstract User class
+public abstract class User {
+  protected ChatMediator mediator;
+  protected String name;
+
+  public User(ChatMediator mediator, String name) {
+    this.mediator = mediator;
+    this.name = name;
+  }
+
+  public abstract void send(String message);
+  public abstract void receive(String message);
+}
+
+// Concrete implementation of the User class
+public class UserImpl extends User {
+
+  public UserImpl(ChatMediator mediator, String name) {
+    super(mediator, name);
+  }
+
+  @Override
+  public void send(String message) {
+    System.out.println(this.name + ": Sending Message = " + message);
+    mediator.sendMessage(message, this);
+  }
+
+  @Override
+  public void receive(String message) {
+    System.out.println(kthis.name + ": Received Message = " + message);
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    ChatMediator mediator = new ChatMediatorImpl();
+
+    User user1 = new UserImpl(mediator, "John");
+    User user2 = new UserImpl(mediator, "Jane");
+    User user3 = new UserImpl(mediator, "Bob");
+    User user4 = new UserImpl(mediator, "Alice");
+
+    mediator.addUser(user1);
+    mediator.addUser(user2);
+    mediator.addUser(user3);
+    mediator.addUser(user4);
+
+    user1.send("Hi All");
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>John: Sending Message = Hi All
+Jane: Received Message = Hi All
+Bob: Received Message = Hi All
+Alice: Received Message = Hi All
+</code></pre></div></div>
+<p><mark>중재자 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface AirportMediator {
+  boolean isRunwayAvailable();
+  void setRunwayAvailability(boolean status);
+}
+
+class AirportControlTower implements AirportMediator {
+  private boolean isRunwayAvailable = true;
+
+  public boolean isRunwayAvailable() {
+    return isRunwayAvailable;
+  }
+
+  public void setRunwayAvailability(boolean status) {
+    isRunwayAvailable = status;
+  }
+}
+
+class Flight {
+  private AirportMediator mediator;
+  private String flightNumber;
+
+  public Flight(AirportMediator mediator, String flightNumber) {
+    this.mediator = mediator;
+    this.flightNumber = flightNumber;
+  }
+
+  public void land() {
+    if (mediator.isRunwayAvailable()) {
+      System.out.println("Flight " + flightNumber + " is landing.");
+      mediator.setRunwayAvailability(false);
+    } else {
+      System.out.println("Flight " + flightNumber + " is waiting to land.");
+    }
+  }
+}
+
+class Runway {
+  private AirportMediator mediator;
+
+  public Runway(AirportMediator mediator) {
+    this.mediator = mediator;
+  }
+
+  public void clear() {
+    System.out.println("Runway is clear.");
+    mediator.setRunwayAvailability(true);
+  }
+}
+
+public class AirportSystem {
+  public static void main(String[] args) {
+    AirportMediator controlTower = new AirportControlTower();
+
+    Flight flight1 = new Flight(controlTower, "KE123");
+    Flight flight2 = new Flight(controlTower, "OZ456");
+    Runway runway = new Runway(controlTower);
+
+    flight1.land();
+    flight2.land();
+    runway.clear();
+    flight2.land();
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Flight KE123 is landing.
+Flight OZ456 is waiting to land.
+Runway is clear.
+Flight OZ456 is landing.
+</code></pre></div></div>
+
+<h3 id="메멘토-패턴-memento-패턴">메멘토 패턴 (Memento 패턴)</h3>
+
+<p><mark>메멘토 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Memento
+class GameMemento {
+  private String level;
+  private int score;
+
+  public GameMemento(String level, int score) {
+    this.level = level;
+    this.score = score;
+  }
+
+  public String getLevel() {
+    return level;
+  }
+
+  public int getScore() {
+    return score;
+  }
+}
+
+// Originator
+class Game {
+  private String level;
+  private int score;
+
+  public void set(String level, int score) {
+    this.level = level;
+    this.score = score;
+    System.out.println("Game state set to - Level: " + level + ", Score: " + score);
+  }
+
+  public GameMemento save() {
+    return new GameMemento(level, score);
+  }
+
+  public void restore(GameMemento memento) {
+    this.level = memento.getLevel();
+    this.score = memento.getScore();
+    System.out.println("Game state restored to - Level: " + level + ", Score: " + score);
+  }
+}
+
+// Caretaker
+class GameCaretaker {
+  private List&lt;GameMemento&gt; mementoList = new ArrayList&lt;&gt;();
+
+  public void add(GameMemento state) {
+    mementoList.add(state);
+  }
+
+  public GameMemento get(int index) {
+    return mementoList.get(index);
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    Game game = new Game();
+    GameCaretaker caretaker = new GameCaretaker();
+
+    game.set("Level 1", 100);
+    caretaker.add(game.save());
+
+    game.set("Level 2", 200);
+    caretaker.add(game.save());
+
+    game.set("Level 3", 300);
+
+    game.restore(caretaker.get(1));
+    game.restore(caretaker.get(0));
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Game state set to - Level: Level 1, Score: 100
+Game state set to - Level: Level 2, Score: 200
+Game state set to - Level: Level 3, Score: 300
+Game state restored to - Level: Level 2, Score: 200
+Game state restored to - Level: Level 1, Score: 100
+</code></pre></div></div>
+
+<p><mark>메멘토 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Memento
+class DocumentMemento {
+  private final String content;
+
+  public DocumentMemento(String content) {
+    this.content = content;
+  }
+
+  public String getContent() {
+    return content;
+  }
+}
+
+// Originator
+class Document {
+  private StringBuilder content;
+
+  public Document() {
+    this.content = new StringBuilder();
+  }
+
+  public void write(String text) {
+    content.append(text);
+  }
+
+  public String getContent() {
+    return content.toString();
+  }
+
+  public DocumentMemento save() {
+    return new DocumentMemento(content.toString());
+  }
+
+  public void restore(DocumentMemento memento) {
+    this.content = new StringBuilder(memento.getContent());
+  }
+}
+
+// Caretaker
+class DocumentHistory {
+  private final Stack&lt;DocumentMemento&gt; history = new Stack&lt;&gt;();
+
+  public void push(DocumentMemento memento) {
+    history.push(memento);
+  }
+
+  public DocumentMemento pop() {
+    if (!history.isEmpty()) {
+      return history.pop();
+    }
+    return null;
+  }
+}
+
+// Client
+class Editor {
+  private final Document document;
+  private final DocumentHistory history;
+
+  public Editor() {
+    this.document = new Document();
+    this.history = new DocumentHistory();
+  }
+
+  public void write(String text) {
+    history.push(document.save());
+    document.write(text);
+  }
+
+  public void undo() {
+    DocumentMemento memento = history.pop();
+    if (memento != null) {
+      document.restore(memento);
+    }
+  }
+
+  public String getContent() {
+    return document.getContent();
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    Editor editor = new Editor();
+
+    editor.write("Hello, ");
+    editor.write("this is Memento pattern. ");
+    System.out.println(editor.getContent());
+
+    editor.undo();
+    System.out.println(editor.getContent());
+
+    editor.write("This is an example implemented in Java.");
+    System.out.println(editor.getContent());
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello, this is Memento pattern. 
+Hello, 
+Hello, This is an example implemented in Java.
+</code></pre></div></div>
+
+<h3 id="관찰자-패턴-opserver-패턴">관찰자 패턴 (Opserver 패턴)</h3>
+
+<p><mark>관찰자 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Subject (Publisher) interface
+interface Subject {
+  void registerObserver(Observer observer);
+  void removeObserver(Observer observer);
+  void notifyObservers();
+}
+
+// Observer interface
+interface Observer {
+  void update(String news);
+}
+
+// Concrete Subject
+class NewsAgency implements Subject {
+  private List&lt;Observer&gt; observers = new ArrayList&lt;&gt;();
+  private String news;
+
+  @Override
+  public void registerObserver(Observer observer) {
+    observers.add(observer);
+  }
+  @Override
+  public void removeObserver(Observer observer) {
+    observers.remove(observer);
+  }
+
+  @Override
+  public void notifyObservers() {
+    for (Observer observer : observers) {
+      observer.update(news);
+    }
+  }
+
+  public void setNews(String news) {
+    this.news = news;
+    notifyObservers();
+  }
+}
+
+// Concrete Observer
+class NewsChannel implements Observer {
+  private String name;
+
+  public NewsChannel(String name) {
+    this.name = name;
+  }
+
+  @Override
+  public void update(String news) {
+    System.out.println(name + " received news: " + news);
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    NewsAgency agency = new NewsAgency();
+
+    NewsChannel channel1 = new NewsChannel("Channel 1");
+    NewsChannel channel2 = new NewsChannel("Channel 2");
+
+    agency.registerObserver(channel1);
+    agency.registerObserver(channel2);
+
+    agency.setNews("Breaking news: Observer Pattern in action!");
+
+    agency.removeObserver(channel2);
+
+    agency.setNews("Another update: Channel 2 unsubscribed.");
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Channel 1 received news: Breaking news: Observer Pattern in action!
+Channel 2 received news: Breaking news: Observer Pattern in action!
+Channel 1 received news: Another update: Channel 2 unsubscribed.
+</code></pre></div></div>
+
+<p><mark>관찰자 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Subject interface
+interface WeatherStation {
+  void registerObserver(WeatherObserver o);
+  void removeObserver(WeatherObserver o);
+  void notifyObservers();
+}
+
+// Observer interface
+interface WeatherObserver {
+  void update(float temp, float humidity, float pressure);
+}
+
+// Concrete Subject
+class WeatherData implements WeatherStation {
+  private List&lt;WeatherObserver&gt; observers = new ArrayList&lt;&gt;();
+  private float temperature, humidity, pressure;
+
+  public void setMeasurements(
+    float temperature, float humidity, float pressure
+  ) {
+    this.temperature = temperature;
+    this.humidity = humidity;
+    this.pressure = pressure;
+    notifyObservers();
+  }
+
+  @Override
+  public void registerObserver(WeatherObserver o) {
+    observers.add(o);
+  }
+  
+  @Override
+  public void removeObserver(WeatherObserver o) {
+    observers.remove(o);
+  }
+
+  @Override
+  public void notifyObservers() {
+    for (WeatherObserver observer : observers) {
+      observer.update(temperature, humidity, pressure);
+    }
+  }
+}
+
+// Concrete Observer 1
+class CurrentConditionsDisplay implements WeatherObserver {
+  @Override
+  public void update(float temp, float humidity, float pressure) {
+    System.out.println("Current: " + temp + "F, " + humidity + "% humidity");
+  }
+}
+
+// Concrete Observer 2
+class StatisticsDisplay implements WeatherObserver {
+  @Override
+  public void update(float temp, float humidity, float pressure) {
+    System.out.println("Avg/Max/Min temp: " + temp + "/" + (temp + 2) + "/" + (temp - 2));
+  }
+}
+
+// Concrete Observer 3
+class ForecastDisplay implements WeatherObserver {
+  @Override
+  public void update(float temp, float humidity, float pressure) {
+    System.out.println("Forecast: " + (pressure &lt; 29.92 ? "Rain" : "Sunny"));
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    WeatherData weatherData = new WeatherData();
+
+    CurrentConditionsDisplay currentDisplay = new CurrentConditionsDisplay();
+    StatisticsDisplay statisticsDisplay = new StatisticsDisplay();
+    ForecastDisplay forecastDisplay = new ForecastDisplay();
+
+    weatherData.registerObserver(currentDisplay);
+    weatherData.registerObserver(statisticsDisplay);
+    weatherData.registerObserver(forecastDisplay);
+
+    weatherData.setMeasurements(80, 65, 30.4f);
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Current: 80.0F, 65.0% humidity
+Avg/Max/Min temp: 80.0/82.0/78.0
+Forecast: Sunny
+</code></pre></div></div>
+
+<h3 id="발행-구독-패턴-publisher-subscriber-패턴">발행-구독 패턴 (Publisher-Subscriber 패턴)</h3>
+
+<p><mark>발행-구독 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Message {
+  private String content;
+  private String topic;
+
+  public Message(String content, String topic) {
+    this.content = content;
+    this.topic = topic;
+  }
+
+  public String getContent() {
+    return content;
+  }
+
+  public String getTopic() {
+    return topic;
+  }
+}
+
+// Publisher interface
+interface Publisher {
+  void publish(Message message);
+}
+
+// Subscriber interface
+interface Subscriber {
+  void update(Message message);
+}
+
+class Broker {
+  private Map&lt;String, List&lt;Subscriber&gt;&gt; subscribers = new HashMap&lt;&gt;();
+
+  public void subscribe(String topic, Subscriber subscriber) {
+    subscribers.computeIfAbsent(topic, k -&gt; new ArrayList&lt;&gt;()).add(subscriber);
+  }
+
+  public void publish(Message message) {
+    List&lt;Subscriber&gt; topicSubscribers = subscribers.get(message.getTopic());
+    
+    if (topicSubscribers != null) {
+      for (Subscriber subscriber : topicSubscribers) {
+        subscriber.update(message);
+      }
+    }
+  }
+}
+
+// Concrete Publisher
+class NewsPublisher implements Publisher {
+  private Broker broker;
+
+  public NewsPublisher(Broker broker) {
+    this.broker = broker;
+  }
+
+  @Override
+  public void publish(Message message) {
+    System.out.println("Publishing: " + message.getContent() + " on topic: " + message.getTopic());
+    broker.publish(message);
+  }
+}
+
+// Concrete Subscriber
+class NewsSubscriber implements Subscriber {
+  private String name;
+
+  public NewsSubscriber(String name) {
+    this.name = name;
+  }
+
+  @Override
+  public void update(Message message) {
+    System.out.println(name + " received: " + message.getContent() + " on topic: " + message.getTopic());
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    Broker broker = new Broker();
+
+    NewsPublisher publisher = new NewsPublisher(broker);
+
+    NewsSubscriber subscriber1 = new NewsSubscriber("Subscriber 1");
+    NewsSubscriber subscriber2 = new NewsSubscriber("Subscriber 2");
+
+    broker.subscribe("sports", subscriber1);
+    broker.subscribe("weather", subscriber2);
+    broker.subscribe("sports", subscriber2);
+
+    publisher.publish(new Message("Liverpool won the match", "sports"));
+    publisher.publish(new Message("It's sunny today", "weather"));
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Publishing: Liverpool won the match on topic: sports
+Subscriber 1 received: Liverpool won the match on topic: sports
+Subscriber 2 received: Liverpool won the match on topic: sports
+Publishing: It's sunny today on topic: weather
+Subscriber 2 received: It's sunny today on topic: weather
+</code></pre></div></div>
+
+<p><mark>발행-구독 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Publisher
+class MarketingDepartment {
+  private EmailDeliveryService emailService;
+  private String eventType;
+
+  public MarketingDepartment(
+    EmailDeliveryService emailService,
+    String eventType
+  ) {
+    this.emailService = emailService;
+    this.eventType = eventType;
+  }
+
+  public void launchCampaign(String message) {
+    System.out.println("Launching campaign: " + message);
+    emailService.sendEmails(eventType, message);
+  }
+}
+
+// Subscriber Interface
+interface Customer {
+  void receiveEmail(String message);
+}
+
+// Concrete Subscriber
+class IndividualCustomer implements Customer {
+  private String name;
+
+  public IndividualCustomer(String name) {
+    this.name = name;
+  }
+
+  @Override
+  public void receiveEmail(String message) {
+    System.out.println(name + " is receiving email async: " + message);
+    try {
+      Thread.sleep(5000);  // Simulating email reading time
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+    }
+    System.out.println(name + " finished reading email: " + message);
+  }
+}
+
+// Broker (Asynchronous)
+class EmailDeliveryService {
+  private Map&lt;String, List&lt;Customer&gt;&gt; customerGroups = new HashMap&lt;&gt;();
+  private ExecutorService executor = Executors.newCachedThreadPool();
+
+  public void subscribe(String eventType, Customer customer) {
+    customerGroups.computeIfAbsent(eventType, k -&gt; new ArrayList&lt;&gt;()).add(customer);
+  }
+
+  public void sendEmails(String eventType, String message) {
+    List&lt;Customer&gt; customers = customerGroups.get(eventType);
+    if (customers != null) {
+      for (Customer customer : customers) {
+        executor.submit(() -&gt; customer.receiveEmail(message));
+      }
+    }
+  }
+  public void shutdown() { executor.shutdown(); }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    EmailDeliveryService emailService = new EmailDeliveryService();
+
+    MarketingDepartment marketing = new MarketingDepartment(emailService, "ProductLaunch");
+
+    Customer customer1 = new IndividualCustomer("Customer 1");
+    Customer customer2 = new IndividualCustomer("Customer 2");
+
+    emailService.subscribe("ProductLaunch", customer1);
+    emailService.subscribe("ProductLaunch", customer2);
+
+    marketing.launchCampaign("New Product");
+
+    Customer customer3 = new IndividualCustomer("Customer 3");
+    emailService.subscribe("ProductLaunch", customer3);
+
+    marketing.launchCampaign("Update");
+
+    try {
+        Thread.sleep(10000);
+    } catch (InterruptedException e) {
+        Thread.currentThread().interrupt();
+    }
+
+    emailService.shutdown();
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Launching campaign: New Product
+Launching campaign: Update
+Customer 2 is receiving email async: New Product
+Customer 3 is receiving email async: Update
+Customer 2 is receiving email async: Update
+Customer 1 is receiving email async: New Product
+Customer 1 is receiving email async: Update
+Customer 3 finished reading email: Update
+Customer 1 finished reading email: Update
+Customer 2 finished reading email: Update
+Customer 2 finished reading email: New Product
+Customer 1 finished reading email: New Product
+</code></pre></div></div>
+
+<h3 id="상태-패턴-state-패턴">상태 패턴 (State 패턴)</h3>
+
+<p><mark>상태 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public interface State {
+  void open(Door door);
+  void close(Door door);
+}
+
+public class ClosedState implements State {
+  @Override
+  public void open(Door door) {
+    System.out.println("Door is now Open.");
+    door.setState(new OpenState());
+  }
+
+  @Override
+  public void close(Door door) {
+    System.out.println("Door is already Closed.");
+  }
+}
+
+public class OpenState implements State {
+  @Override
+  public void open(Door door) {
+    System.out.println("Door is already Open.");
+  }
+
+  @Override
+  public void close(Door door) {
+    System.out.println("Door is now Closed.");
+    door.setState(new ClosedState());
+  }
+}
+
+public class Door {
+  private State state;
+  public Door() {
+    this.state = new ClosedState();
+  }
+
+  public void setState(State state) {
+    this.state = state;
+  }
+
+  public void open() {
+    state.open(this);
+  }
+
+  public void close() {
+    state.close(this);
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    Door door = new Door();
+    
+    door.open();  // "Door is now Open."
+    door.open();  // "Door is already Open."
+    door.close(); // "Door is now Closed."
+    door.close(); // "Door is already Closed."
+  }
+}
+</code></pre></div></div>
+
+<p><mark>상태 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public interface State {
+  void play(VideoPlayer player);
+  void stop(VideoPlayer player);
+}
+
+public class StoppedState implements State {
+  @Override
+  public void play(VideoPlayer player) {
+    System.out.println("Starting the video.");
+    player.setState(new PlayingState());
+  }
+
+  @Override
+  public void stop(VideoPlayer player) {
+    System.out.println("Video is already stopped.");
+  }
+}
+
+public class PlayingState implements State {
+  @Override
+  public void play(VideoPlayer player) {
+    System.out.println("Video is already playing.");
+  }
+
+  @Override
+  public void stop(VideoPlayer player) {
+    System.out.println("Pausing the video.");
+    player.setState(new PausedState());
+  }
+}
+
+public class PausedState implements State {
+  @Override
+  public void play(VideoPlayer player) {
+    System.out.println("Resuming the video.");
+    player.setState(new PlayingState());
+  }
+
+  @Override
+  public void stop(VideoPlayer player) {
+    System.out.println("Stopping the video.");
+    player.setState(new StoppedState());
+  }
+}
+
+public class VideoPlayer {
+  private State state;
+
+  public VideoPlayer() {
+    // Set initial state Stopped
+    this.state = new StoppedState();
+  }
+
+  public void setState(State state) {
+    this.state = state;
+  }
+
+  public void play() {
+    state.play(this);
+  }
+
+  public void stop() {
+    state.stop(this);
+  }
+}public interface State {
+  void play(VideoPlayer player);
+  void stop(VideoPlayer player);
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    VideoPlayer player = new VideoPlayer();
+    
+    player.play();   // "Starting the video."
+    player.play();   // "Video is already playing."
+    player.stop();   // "Pausing the video."
+    player.play();   // "Resuming the video."
+    player.stop();   // "Pausing the video."
+    player.stop();   // "Stopping the video."
+    player.stop();   // "Video is already stopped."
+  }
+}
+</code></pre></div></div>
+
+<p><mark>상태 패턴이 적용되지 않은, 조건문 방식 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class VideoPlayer {
+  private String state;
+
+  public VideoPlayer() {
+    this.state = "Stopped";
+  }
+
+  public void play() {
+    if (state.equals("Stopped")) {
+      System.out.println("Starting the video.");
+      state = "Playing";
+    } else if (state.equals("Playing")) {
+      System.out.println("Video is already playing.");
+    } else if (state.equals("Paused")) {
+      System.out.println("Resuming the video.");
+      state = "Playing";
+    }
+  }
+
+  public void stop() {
+    if (state.equals("Playing")) {
+      System.out.println("Pausing the video.");
+      state = "Paused";
+    } else if (state.equals("Paused")) {
+      System.out.println("Stopping the video.");
+      state = "Stopped";
+    } else if (state.equals("Stopped")) {
+      System.out.println("Video is already stopped.");
+    }
+  }
+
+  public static void main(String[] args) {
+    VideoPlayer player = new VideoPlayer();
+    
+    player.play();   // "Starting the video."
+    player.play();   // "Video is already playing."
+    player.stop();   // "Pausing the video."
+    player.play();   // "Resuming the video."
+    player.stop();   // "Pausing the video."
+    player.stop();   // "Stopping the video."
+    player.stop();   // "Video is already stopped."
+  }
+}
+</code></pre></div></div>
+
+<h3 id="전략-패턴-strategy-패턴">전략 패턴 (Strategy 패턴)</h3>
+<p>특정 인터페이스를 구현하는 여러 전략 클래스들을 두고, 런타임 시 필요에 따라 갈아끼우는 패턴입니다.</p>
+
+<p>중간 다리인 Context 클래스는 실제 기능 로직을 구현하지 않고 인터페이스에만 의존합니다.<br />
+상위 모듈이 하위 모듈의 구현이 아니라 추상화에 의존해야 하는 DIP(의존 역전 원칙)을 충족하게 됩니다.</p>
+
+<p>코드 변경 시 전략 구현체만 수정 및 추가하면 되어서, SOLID 원칙의 개방-폐쇄 원칙도 준수하는 코드입니다.</p>
+
+<p><mark>전략 패턴 예시 1 : 결제 방식</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 결제 전략 인터페이스
+interface PaymentStrategy {
+  // 결제 전략 함수 정의
+  void pay(int amount);
+}
+
+// 결제 전략 클래스 1 : 신용카드
+class CreditCardPayment implements PaymentStrategy {
+  private String name;
+  private String cardNumber;
+
+  public CreditCardPayment(String name, String cardNumber) {
+    this.name = name;
+    this.cardNumber = cardNumber;
+  }
+
+  // 결제 전략 함수 구현
+  @Override
+  public void pay(int amount) {
+    System.out.println(amount + " paid with credit card");
+  }
+}
+
+// 결제 전략 클래스 2 : 페이팔
+class PayPalPayment implements PaymentStrategy {
+  private String email;
+
+  public PayPalPayment(String email) {
+    this.email = email;
+  }
+
+  // 결제 전략 함수 구현
+  @Override
+  public void pay(int amount) {
+    System.out.println(amount + " paid using PayPal");
+  }
+}
+
+// 중간 Context 클래스 : 쇼핑 카트
+class ShoppingCart {
+  // 결제 전략 인터페이스 필드
+  private PaymentStrategy paymentStrategy;
+
+  // 결제 전략 인터페이스 변경 함수 (파라미터로 인터페이스를 구현한 클래스가 올 수 있음)
+  public void setPaymentStrategy(PaymentStrategy paymentStrategy) {
+    this.paymentStrategy = paymentStrategy;
+  }
+
+  // 쇼핑 카트 나갈 때 실행되는 함수
+  public void checkout(int amount) {
+    // 결제 전략에 따른 계산 기능 수행
+    paymentStrategy.pay(amount);
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    // Context 클래스 생성
+    ShoppingCart cart = new ShoppingCart();
+
+    // 결제 전략 클래스 교체
+    cart.setPaymentStrategy(new CreditCardPayment("John Doe", "1234567890123456"));
+
+    // 신용카드로 100원 결제
+    cart.checkout(100);
+
+    // 결제 전략 클래스 교체
+    cart.setPaymentStrategy(new PayPalPayment("johndoe@example.com"));
+
+    // 페이팔로 200원 결제
+    cart.checkout(200);
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100 paid with credit card
+200 paid using PayPal
+</code></pre></div></div>
+
+<p><mark>전략 패턴 예시 2 : 문자열 인코딩 알고리즘</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 문자열 인코딩 전략 인터페이스
+interface EncodingStrategy {
+  // 인코딩 전략 함수 정의
+  String encode(String data);
+}
+
+// 인코딩 전략 클래스 1 : 반복되는 문자 횟수 인코딩
+class RunLengthEncoding implements EncodingStrategy {
+
+  // 인코딩 전략 함수 구현
+  @Override
+  public String encode(String data) {
+    StringBuilder encoded = new StringBuilder();
+    int count = 1;
+    for (int i = 1; i &lt;= data.length(); i++) {
+      if (i &lt; data.length() &amp;&amp; data.charAt(i) == data.charAt(i - 1)) {
+        count++;
+      } else {
+        encoded.append(data.charAt(i - 1));
+        encoded.append(count);
+        count = 1;
+      }
+    }
+    return encoded.toString();
+  }
+}
+
+// 인코딩 전략 클래스 2 : 단순 치환 인코딩
+class SimpleReplacementEncoding implements EncodingStrategy {
+
+  // 인코딩 전략 함수 구현
+  @Override
+  public String encode(String data) {
+    return data.replace("a", "1")
+               .replace("e", "2")
+               .replace("i", "3")
+               .replace("o", "4")
+               .replace("u", "5");
+  }
+}
+
+// 중간 Context 클래스
+class Encoder {
+  private EncodingStrategy strategy;
+
+  // 인코딩 전략 교체 함수
+  public void setEncodingStrategy(EncodingStrategy strategy) {
+    this.strategy = strategy;
+  }
+
+  public String encode(String data) {
+    // 전략에 따른 인코딩 기능 수행
+    return strategy.encode(data);
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    // Context 클래스 생성
+    Encoder encoder = new Encoder();
+
+    String data = "aabcccccaaa";
+
+    // 인코딩 전략 교체
+    encoder.setEncodingStrategy(new RunLengthEncoding());
+
+    // 문자열 인코딩 : 반복되는 문자 횟수 인코딩
+    System.out.println("Run-Length Encoding : " + encoder.encode(data));
+
+    // 인코딩 전략 교체
+    encoder.setEncodingStrategy(new SimpleReplacementEncoding());
+
+    // 문자열 인코딩 : 단순 치환 인코딩
+    System.out.println("Simple Replacement Encoding : " + encoder.encode(data));
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Run-Length Encoding : a2b1c5a3
+
+Simple Replacement Encoding : 11bccccc111
+</code></pre></div></div>
+
+<h3 id="템플릿-메서드-패턴-template-method">템플릿 메서드 패턴 (Template Method)</h3>
+
+<p>정해진 단계로 실행되어야 하는 일들을 구현할 때 사용되는 패턴입니다.</p>
+
+<p>상위 클래스가 알고리즘 전체 순서 및 템플릿을 정의하고,<br />
+각 하위 클래스에서 알고리즘 세부 단계를 구체적으로 구현하도록 합니다.</p>
+
+<p><mark>템플릿 메서드 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>abstract class Beverage {
+  // 템플릿 함수
+  final void prepareRecipe() {
+    boilWater();
+    brew();
+    pourInCup();
+    addCondiments();
+  }
+
+  void boilWater() {
+    System.out.println("Boiling water");
+  }
+
+  void pourInCup() {
+    System.out.println("Pouring into cup");
+  }
+
+  abstract void brew();
+  abstract void addCondiments();
+}
+
+class Tea extends Beverage {
+  void brew() {
+    System.out.println("Steeping the tea");
+  }
+
+  void addCondiments() {
+    System.out.println("Adding lemon");
+  }
+}
+
+class Coffee extends Beverage {
+  void brew() {
+    System.out.println("Dripping coffee through filter");
+  }
+
+  void addCondiments() {
+    System.out.println("Adding sugar and milk");
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    Beverage tea = new Tea();
+    Beverage coffee = new Coffee();
+
+    System.out.println("\nMaking tea...");
+    tea.prepareRecipe();
+
+    System.out.println("\nMaking coffee...");
+    coffee.prepareRecipe();
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Making tea...
+Boiling water
+Steeping the tea
+Pouring into cup
+Adding lemon
+
+Making coffee...
+Boiling water
+Dripping coffee through filter
+Pouring into cup
+Adding sugar and milk
+</code></pre></div></div>
+
+<p><mark>템플릿 메서드 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>abstract class DataProcessor {
+  public final void process(String data) {
+    loadData(data);
+    if (isValidData(data)) {
+      processData(data);
+      saveData(data);
+    } else {
+      System.out.println("Data is invalid, processing aborted.");
+    }
+  }
+
+  protected abstract void loadData(String data);
+  protected abstract boolean isValidData(String data);
+  protected abstract void processData(String data);
+  protected abstract void saveData(String data);
+}
+
+class CSVDataProcessor extends DataProcessor {
+  @Override
+  protected void loadData(String data) {
+    System.out.println("Loading data from CSV file: " + data);
+  }
+
+  @Override
+  protected boolean isValidData(String data) {
+    return data != null &amp;&amp; data.contains("CSV");
+  }
+
+  @Override
+  protected void processData(String data) {
+    System.out.println("Processing CSV data");
+  }
+
+  @Override
+  protected void saveData(String data) {
+    System.out.println("Saving CSV data to database");
+  }
+}
+
+class JSONDataProcessor extends DataProcessor {
+  @Override
+  protected void loadData(String data) {
+    System.out.println("Loading data from JSON file: " + data);
+  }
+
+  @Override
+  protected boolean isValidData(String data) {
+    return data != null;
+  }
+
+  @Override
+  protected void processData(String data) {
+    System.out.println("Processing JSON data");
+  }
+
+  @Override
+  protected void saveData(String data) {
+    System.out.println("Saving JSON data to database");
+  }
+}
+
+class CSVDataProcessor extends DataProcessor {
+  @Override
+  protected void loadData(String data) {
+    System.out.println("Loading data from CSV file: " + data);
+  }
+
+  @Override
+  protected boolean isValidData(String data) {
+    return data != null &amp;&amp; data.contains("CSV");
+  }
+
+  @Override
+  protected void processData(String data) {
+    System.out.println("Processing CSV data");
+  }
+
+  @Override
+  protected void saveData(String data) {
+    System.out.println("Saving CSV data to database");
+  }
+}
+
+class JSONDataProcessor extends DataProcessor {
+  @Override
+  protected void loadData(String data) {
+    System.out.println("Loading data from JSON file: " + data);
+  }
+
+  @Override
+  protected boolean isValidData(String data) {
+    return data != null &amp;&amp; data.contains("JSON");
+  }
+
+  @Override
+  protected void processData(String data) {
+    System.out.println("Processing JSON data");
+  }
+
+  @Override
+  protected void saveData(String data) {
+    System.out.println("Saving JSON data to database");
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    DataProcessor csvProcessor = new CSVDataProcessor();
+    csvProcessor.process("CSV data");
+
+    System.out.println();
+
+    DataProcessor jsonProcessor = new JSONDataProcessor();
+    jsonProcessor.process("XML data");
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Loading data from CSV file: CSV data
+Processing CSV data
+Saving CSV data to database
+
+Loading data from JSON file: XML data
+Data is invalid, processing aborted.
+</code></pre></div></div>
+
+<h3 id="방문자-패턴-visitor-패턴">방문자 패턴 (Visitor 패턴)</h3>
+
+<p><mark>방문자 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Element interface
+interface Shape {
+  void accept(Visitor visitor);
+}
+
+// Concrete elements
+class Circle implements Shape {
+  double radius;
+
+  Circle(double radius) {
+    this.radius = radius;
+  }
+
+  public double getRadius() {
+    return radius;
+  }
+
+  @Override
+  public void accept(Visitor visitor) {
+    visitor.visit(this);
+  }
+}
+
+class Rectangle implements Shape {
+  double width, height;
+
+  Rectangle(double width, double height) {
+    this.width = width;
+    this.height = height;
+  }
+
+  public double getWidth() {
+    return width;
+  }
+
+  public double getHeight() {
+    return height;
+  }
+
+  @Override
+  public void accept(Visitor visitor) {
+    visitor.visit(this);
+  }
+}
+
+// Visitor interface
+interface Visitor {
+  void visit(Circle circle);
+  void visit(Rectangle rectangle);
+}
+
+// Concrete Visitor
+class AreaVisitor implements Visitor {
+  @Override
+  public void visit(Circle circle) {
+    double area = Math.PI * circle.getRadius() * circle.getRadius();
+    System.out.println("Circle Area: " + area);
+  }
+
+  @Override
+  public void visit(Rectangle rectangle) {
+    double area = rectangle.getWidth() * rectangle.getHeight();
+    System.out.println("Rectangle Area: " + area);
+  }
+}
+
+class PerimeterVisitor implements Visitor {
+  @Override
+  public void visit(Circle circle) {
+    double perimeter = 2 * Math.PI * circle.getRadius();
+    System.out.println("Circle Perimeter: " + perimeter);
+  }
+
+  @Override
+  public void visit(Rectangle rectangle) {
+    double perimeter = 2 * (rectangle.getWidth() + rectangle.getHeight());
+    System.out.println("Rectangle Perimeter: " + perimeter);
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    Shape circle = new Circle(5);
+    Shape rectangle = new Rectangle(4, 6);
+
+    Visitor areaVisitor = new AreaVisitor();
+    Visitor perimeterVisitor = new PerimeterVisitor();
+
+    System.out.println("Calculating Area:");
+    circle.accept(areaVisitor);
+    rectangle.accept(areaVisitor);
+
+    System.out.println("\nCalculating Perimeter:");
+    circle.accept(perimeterVisitor);
+    rectangle.accept(perimeterVisitor);
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Calculating Area:
+Circle Area: 78.53981633974483
+Rectangle Area: 24.0
+
+Calculating Perimeter:
+Circle Perimeter: 31.41592653589793
+Rectangle Perimeter: 20.0
+</code></pre></div></div>
+
+<p><mark>방문자 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// FileSystemElement interface
+interface FileSystemElement {
+  void accept(Visitor visitor);
+}
+
+// File class
+class File implements FileSystemElement {
+  private String name;
+  private long size;
+
+  public File(String name, long size) {
+    this.name = name;
+    this.size = size;
+  }
+
+  public String getName() { return name; }
+  public long getSize() { return size; }
+
+  @Override
+  public void accept(Visitor visitor) {
+    visitor.visit(this);
+  }
+}
+
+// Directory class
+class Directory implements FileSystemElement {
+  private String name;
+  private List&lt;FileSystemElement&gt; elements;
+
+  public Directory(String name) {
+    this.name = name;
+    this.elements = new ArrayList&lt;&gt;();
+  }
+
+  public String getName() { return name; }
+
+  public void addElement(FileSystemElement element) {
+    elements.add(element);
+  }
+  public List&lt;FileSystemElement&gt; getElements() {
+    return elements;
+  }
+
+  @Override
+  public void accept(Visitor visitor) {
+    visitor.visit(this);
+  }
+}
+
+// Visitor interface
+interface Visitor {
+  void visit(File file);
+  void visit(Directory directory);
+}
+
+// Concrete visitors
+class SizeCalculatorVisitor implements Visitor {
+  private long totalSize = 0;
+
+  @Override
+  public void visit(File file) {
+    totalSize += file.getSize();
+  }
+
+  @Override
+  public void visit(Directory directory) {
+    for (FileSystemElement element : directory.getElements()) {
+      element.accept(this);
+    }
+  }
+
+  public long getTotalSize() {
+    return totalSize;
+  }
+}
+
+class FileSearchVisitor implements Visitor {
+  private String searchFileName;
+  private File foundFile;
+
+  public FileSearchVisitor(String searchFileName) {
+    this.searchFileName = searchFileName;
+  }
+
+  @Override
+  public void visit(File file) {
+    if (file.getName().equals(searchFileName)) {
+      foundFile = file;
+    }
+  }
+
+  @Override
+  public void visit(Directory directory) {
+    for (FileSystemElement element : directory.getElements()) {
+      element.accept(this);
+    }
+  }
+
+  public File getFoundFile() {
+    return foundFile;
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    // Create files
+    File file1 = new File("file1.txt", 100);
+    File file2 = new File("file2.txt", 200);
+    File file3 = new File("file3.txt", 300);
+
+    // Create directories and add files to them
+    Directory dir1 = new Directory("Folder1");
+    dir1.addElement(file1);
+    dir1.addElement(file2);
+
+    Directory dir2 = new Directory("Folder2");
+    dir2.addElement(file3);
+
+    Directory rootDir = new Directory("Root");
+    rootDir.addElement(dir1);
+    rootDir.addElement(dir2);
+
+    SizeCalculatorVisitor sizeVisitor = new SizeCalculatorVisitor();
+    rootDir.accept(sizeVisitor);
+    System.out.println("Total size of file system: " + sizeVisitor.getTotalSize() + " bytes");
+
+    FileSearchVisitor searchVisitor = new FileSearchVisitor("file3.txt");
+    rootDir.accept(searchVisitor);
+    File foundFile = searchVisitor.getFoundFile();
+    if (foundFile != null) {
+      System.out.println("File found: " + foundFile.getName() + ", Size: " + foundFile.getSize() + " bytes");
+    } else {
+      System.out.println("File not found.");
+    }
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Total size of file system: 600 bytes
+File found: file3.txt, Size: 300 bytes
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="도메인-주도-설계-ddd">도메인 주도 설계 (DDD)</h2>
+
+<h3 id="명세-패턴-specification-패턴">명세 패턴 (Specification 패턴)</h3>
+
+<p><mark>명세 패턴 예시 1</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public interface Specification {
+  boolean isSatisfiedBy(int number);
+
+  default Specification and(Specification other) {
+    return number -&gt; this.isSatisfiedBy(number) &amp;&amp; other.isSatisfiedBy(number);
+  }
+}
+
+class EvenSpecification implements Specification {
+  @Override
+  public boolean isSatisfiedBy(int number) {
+    return number % 2 == 0;
+  }
+}
+
+class RangeSpecification implements Specification {
+  private int min;
+  private int max;
+
+  public RangeSpecification(int min, int max) {
+    this.min = min;
+    this.max = max;
+  }
+
+  @Override
+  public boolean isSatisfiedBy(int number) {
+    return number &gt;= min &amp;&amp; number &lt;= max;
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    Specification evenSpec = new EvenSpecification();
+    Specification rangeSpec = new RangeSpecification(10, 20);
+
+    Specification evenAndInRangeSpec = evenSpec.and(rangeSpec);
+
+    int number = 24;
+
+    System.out.println("Even: " + evenSpec.isSatisfiedBy(number));
+        
+    System.out.println("In range 10-20: " + rangeSpec.isSatisfiedBy(number));
+        
+    System.out.println("Even and in range 10-20: " + evenAndInRangeSpec.isSatisfiedBy(number));
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Even: true
+In range 10-20: false
+Even and in range 10-20: false
+</code></pre></div></div>
+
+<p><mark>명세 패턴 예시 2</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Product {
+  private String name;
+  private String category;
+  private int price;
+  private int stock;
+
+  public Product(String name, String category, int price, int stock) {
+    this.name = name;
+    this.category = category;
+    this.price = price;
+    this.stock = stock;
+  }
+
+  public String getName() { return name; }
+  public String getCategory() { return category; }
+  public double getPrice() { return price; }
+  public int getStock() { return stock; }
+}
+
+public class PriceSpec implements Specification {
+  private int maxPrice;
+
+  public PriceSpec(int maxPrice) {
+    this.maxPrice = maxPrice;
+  }
+
+  @Override
+  public boolean isSatisfiedBy(Product item) {
+    return item.getPrice() &lt;= maxPrice;
+  }
+}
+
+public class InStockSpec implements Specification {
+  @Override
+  public boolean isSatisfiedBy(Product item) {
+    return item.getStock() &gt; 0;
+  }
+}
+
+public class AndSpec implements Specification {
+  private Specification spec1;
+  private Specification spec2;
+
+  public AndSpec(Specification spec1, Specification spec2) {
+    this.spec1 = spec1; this.spec2 = spec2;
+  }
+
+  @Override
+  public boolean isSatisfiedBy(Product item) {
+    return spec1.isSatisfiedBy(item) &amp;&amp; spec2.isSatisfiedBy(item);
+  }
+}
+
+public class OrSpec implements Specification {
+  private Specification spec1;
+  private Specification spec2;
+
+  public OrSpec(Specification spec1, Specification spec2) {
+    this.spec1 = spec1; this.spec2 = spec2;
+  }
+
+  @Override
+  public boolean isSatisfiedBy(Product item) {
+    return spec1.isSatisfiedBy(item) || spec2.isSatisfiedBy(item);
+  }
+}
+
+public class NotSpec implements Specification {
+  private Specification spec;
+
+  public NotSpec(Specification spec) {
+    this.spec = spec;
+  }
+
+  @Override
+  public boolean isSatisfiedBy(Product item) {
+    return !spec.isSatisfiedBy(item);
+  }
+}
+
+public class ProductFilter {
+  public static List&lt;Product&gt; filter(List&lt;Product&gt; items, Specification spec) {
+    return items.stream()
+                .filter(spec::isSatisfiedBy)
+                .collect(Collectors.toList());
+  }
+
+  public static void printProducts(List&lt;Product&gt; products) {
+    products.forEach(
+      p -&gt; System.out.println(p.getName() + " - " + p.getCategory() + " - $" + p.getPrice() + " - Stock: " + p.getStock())
+    );
+  }
+}
+
+// 클라이언트 (호출부)
+public class Main {
+  public static void main(String[] args) {
+    List&lt;Product&gt; products = Arrays.asList(
+      new Product("Laptop", "Electronics", 1200, 5),
+      new Product("Smartphone", "Electronics", 800, 0),
+      new Product("Headphones", "Electronics", 200, 10),
+      new Product("Book", "Literature", 20, 50)
+    );
+
+    Specification electronicsSpec = new CategorySpec("Electronics");
+    Specification inStockSpec = new InStockSpec();
+    Specification expensiveSpec = new PriceSpec(500);
+
+    Specification electronicInStock = new AndSpec(electronicsSpec, inStockSpec);
+    Specification electronicOrInStock = new OrSpec(electronicsSpec, inStockSpec);
+    Specification notExpensive = new NotSpec(expensiveSpec);
+
+    System.out.println("Electronics in stock:");
+    ProductFilter.printProducts(ProductFilter.filter(products, electronicInStock));
+
+    System.out.println("\nElectronics or items in stock:");
+    ProductFilter.printProducts(ProductFilter.filter(products, electronicOrInStock));
+
+    System.out.println("\nNot expensive items:");
+    ProductFilter.printProducts(ProductFilter.filter(products, notExpensive));
+  }
+}
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Electronics in stock:
+Laptop - Electronics - $1200.0 - Stock: 5
+Headphones - Electronics - $200.0 - Stock: 10
+
+Electronics or items in stock:
+Laptop - Electronics - $1200.0 - Stock: 5
+Smartphone - Electronics - $800.0 - Stock: 0
+Headphones - Electronics - $200.0 - Stock: 10
+Book - Literature - $20.0 - Stock: 50
+
+Not expensive items:
+Laptop - Electronics - $1200.0 - Stock: 5
+Smartphone - Electronics - $800.0 - Stock: 0
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories#plan-design-db" class="page__taxonomy-item" rel="tag">기획 / 설계 / DB</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-11-03">2025-11-03</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">❮</a>
+    
+    
+      <a href="/plan-design-db/2025-09-17-1" class="pagination--pager" title="Java 객체지향 설계 방법 정리 (SOLID 원칙, 디자인패턴)
+">❯</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">최신 글</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/plan-design-db/2025-09-17-1" rel="permalink">Java 객체지향 설계 방법 정리 (SOLID 원칙, 디자인패턴)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-09-17T00:00:00+00:00">2025-09-17</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-09-16-1" rel="permalink">자주 쓰는 Vue 문법 / 유용한 기능 Vue 사용법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-09-16T00:00:00+00:00">2025-09-16</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-09-12-1" rel="permalink">Spring Filter, Intercepter 공통점 및 차이점
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-09-12T00:00:00+00:00">2025-09-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/op/2025-09-04-1" rel="permalink">WebRTC 시스템 구축 시 서버 아키텍처
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-09-04T00:00:00+00:00">2025-09-04</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2025 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

@@ -1469,9 +1469,15 @@ var store = [{
         "url": "/web-dev/2025-09-16-1",
         "teaser": null
       },{
-        "title": "객체지향 설계 원칙 (SOLID 원칙) 및 디자인 패턴 정리",
+        "title": "Java 객체지향 설계 방법 정리 (SOLID 원칙, 디자인패턴)",
         "excerpt":"객체지향 설계 원칙 (SOLID 원칙) 단일 책임 원칙 (SRP) 클래스는 하나의 책임만 가져야 합니다. 각 클래스는 여러 함수를 가질 수 있지만, 한가지 역할을 수행해야 합니다. 단일 책임 원칙 위반 예시 public class UserService { public void saveUser(User user) { // 데이터베이스에 유저 정보 저장 로직 } public void sendWelcomeEmail(User) user...","categories": ["plan-design-db"],
         "tags": [],
         "url": "/plan-design-db/2025-09-17-1",
+        "teaser": null
+      },{
+        "title": "Java 객체지향 설계 시 사용하는 디자인 패턴 정리",
+        "excerpt":"생성 패턴 싱글톤 패턴 (Singleton 패턴) 싱글톤 패턴 예시 1 public class Theme { private static Theme instance; private String themeColor; private Theme() { this.themeColor = \"light\"; // Default theme } public static Theme getInstance() { if (instance == null) { instance = new Theme(); } return instance; } public...","categories": ["plan-design-db"],
+        "tags": [],
+        "url": "/plan-design-db/2025-11-03-1",
         "teaser": null
       }]
