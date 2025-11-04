@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 247</span>
+      <span class="nav__total">🌴 Total Posts: 248</span>
     </li> -->
     
     
@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 자주 쓰는 MariaDB 쿼리 정리 / MySQL 사용법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#mysql-ddl-쿼리">MySQL DDL 쿼리</a></li><li><a href="#mysql-dql-쿼리">MySQL DQL 쿼리</a></li><li><a href="#mysql-dml-쿼리">MySQL DML 쿼리</a><ul><li><a href="#데이터-insert문">데이터 INSERT문</a></li><li><a href="#update-문">UPDATE 문</a></li><li><a href="#join으로-조회된-행-delete">JOIN으로 조회된 행 DELETE</a></li></ul></li><li><a href="#mysql-설정">MySQL 설정</a><ul><li><a href="#mysql-타임아웃-설정-방법">MySQL 타임아웃 설정 방법</a></li></ul></li><li><a href="#mysql-db-정보-확인">MySQL DB 정보 확인</a><ul><li><a href="#db-목록-조회">DB 목록 조회</a></li><li><a href="#mysql-쓰레드-조회-쿼리">MySQL 쓰레드 조회 쿼리</a></li></ul></li><li><a href="#mysql-인덱스-관련-쿼리">MySQL 인덱스 관련 쿼리</a><ul><li><a href="#테이블-인덱스-조회-쿼리">테이블 인덱스 조회 쿼리</a></li><li><a href="#인덱스-생성-쿼리">인덱스 생성 쿼리</a></li><li><a href="#인덱스-삭제-쿼리">인덱스 삭제 쿼리</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#mysql-ddl-쿼리">MySQL DDL 쿼리</a></li><li><a href="#mysql-dql-쿼리">MySQL DQL 쿼리</a></li><li><a href="#mysql-dml-쿼리">MySQL DML 쿼리</a><ul><li><a href="#데이터-insert문">데이터 INSERT문</a></li><li><a href="#update-문">UPDATE 문</a></li><li><a href="#join으로-조회된-행-delete">JOIN으로 조회된 행 DELETE</a></li></ul></li><li><a href="#mysql-설정">MySQL 설정</a><ul><li><a href="#mysql-타임아웃-설정-방법">MySQL 타임아웃 설정 방법</a></li></ul></li><li><a href="#mysql-db-정보-확인">MySQL DB 정보 확인</a><ul><li><a href="#db-버전-확인">DB 버전 확인</a></li><li><a href="#db-목록-조회">DB 목록 조회</a></li><li><a href="#mysql-쓰레드-조회-쿼리">MySQL 쓰레드 조회 쿼리</a></li></ul></li><li><a href="#mysql-인덱스-관련-쿼리">MySQL 인덱스 관련 쿼리</a><ul><li><a href="#테이블-인덱스-조회-쿼리">테이블 인덱스 조회 쿼리</a></li><li><a href="#인덱스-생성-쿼리">인덱스 생성 쿼리</a></li><li><a href="#인덱스-삭제-쿼리">인덱스 삭제 쿼리</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -551,6 +551,10 @@ JDBC 타임아웃 설정이 더 일반적이나, 둘 다 설정하는 것이 안
 <hr />
 
 <h2 id="mysql-db-정보-확인">MySQL DB 정보 확인</h2>
+
+<h3 id="db-버전-확인">DB 버전 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT VERSION();
+</code></pre></div></div>
 
 <h3 id="db-목록-조회">DB 목록 조회</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>show databases
@@ -684,6 +688,42 @@ JDBC 타임아웃 설정이 더 일반적이나, 둘 다 설정하는 것이 안
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
+        <a href="/plan-design-db/2025-11-04-1" rel="permalink">Spring + JSP 프로젝트 패키지 폴더 구조 설계
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-11-04T00:00:00+00:00">2025-11-04</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
         <a href="/plan-design-db/2025-11-03-1" rel="permalink">Java 객체지향 설계 시 사용하는 디자인 패턴 예시
 </a>
       
@@ -768,42 +808,6 @@ JDBC 타임아웃 설정이 더 일반적이나, 둘 다 설정하는 것이 안
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-09-16T00:00:00+00:00">2025-09-16</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-09-12-1" rel="permalink">Spring Filter, Intercepter 공통점 및 차이점
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-09-12T00:00:00+00:00">2025-09-12</time>
       </span>
     
 

@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>프로그래밍 명명 규칙 정리 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>Spring + JSP 프로젝트 패키지 폴더 구조 설계 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,8 +65,8 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="프로그래밍 명명 규칙 정리">
-<meta property="og:url" content="https://0songha0.github.io/web-dev/2025-01-08-1">
+<meta property="og:title" content="Spring + JSP 프로젝트 패키지 폴더 구조 설계">
+<meta property="og:url" content="https://0songha0.github.io/plan-design-db/2025-11-04-1">
 
 
   <meta property="og:description" content="송하영 개발 블로그">
@@ -77,11 +77,11 @@
 
 
 
-  <meta property="article:published_time" content="2025-01-08T00:00:00+00:00">
+  <meta property="article:published_time" content="2025-11-04T00:00:00+00:00">
 
 
 
-  <meta property="article:modified_time" content="2025-01-08T00:00:00+00:00">
+  <meta property="article:modified_time" content="2025-11-04T00:00:00+00:00">
 
 
 
@@ -90,7 +90,7 @@
   
 
 
-<link rel="canonical" href="https://0songha0.github.io/web-dev/2025-01-08-1">
+<link rel="canonical" href="https://0songha0.github.io/plan-design-db/2025-11-04-1">
 
 
 
@@ -433,15 +433,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="프로그래밍 명명 규칙 정리">
+    <meta itemprop="headline" content="Spring + JSP 프로젝트 패키지 폴더 구조 설계">
     <meta itemprop="description" content="">
-    <meta itemprop="datePublished" content="2025-01-08T00:00:00+00:00">
-    <meta itemprop="dateModified" content="2025-01-08T00:00:00+00:00">
+    <meta itemprop="datePublished" content="2025-11-04T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2025-11-04T00:00:00+00:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">프로그래밍 명명 규칙 정리
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Spring + JSP 프로젝트 패키지 폴더 구조 설계
 </h1>
           
 
@@ -450,7 +450,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-01-08T00:00:00+00:00">2025-01-08</time>
+        <time datetime="2025-11-04T00:00:00+00:00">2025-11-04</time>
       </span>
     
 
@@ -468,58 +468,140 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 프로그래밍 명명 규칙 정리</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Spring + JSP 프로젝트 패키지 폴더 구조 설계</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#파스칼-표기법-pascal-case">파스칼 표기법 (Pascal Case)</a></li><li><a href="#낙타-표기법-camel-case">낙타 표기법 (Camel Case)</a></li><li><a href="#뱀-표기법-snake-case">뱀 표기법 (Snake Case)</a></li><li><a href="#케밥-표기법-kebab-case">케밥 표기법 (Kebab Case)</a></li><li><a href="#헝가리안-표기법-hungarian-notation">헝가리안 표기법 (Hungarian Notation)</a></li></ul>
+              <ul class="toc__menu"><li><a href="#spring-프로젝트-패키지-설계">Spring 프로젝트 패키지 설계</a><ul><li><a href="#java-폴더-구조">Java 폴더 구조</a></li><li><a href="#jsp-기반-프론트-구조">JSP 기반 프론트 구조</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <p>일반적인 프로그래밍 명명 규칙을 정리하였습니다.<br />
-프로젝트에 따라 다른 규칙이 적용될 수 있고, 일관성이 가장 중요합니다.</p>
+        <h2 id="spring-프로젝트-패키지-설계">Spring 프로젝트 패키지 설계</h2>
 
-<hr />
+<h3 id="java-폴더-구조">Java 폴더 구조</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src.main.java.com.도메인명
+ ├── global 또는 common // 공통
+ │   ├── config // 전역 설정
+ │   │   ├── AppConfig.java
+ │   │   ├── WebConfig.java // 인터셉터 등록
+ │   │   ├── DataSourceConfig.java
+ │   │   └── SecurityConfig.java
+ │   │   └── interceptor
+ │   │       ├── AuthInterceptor.java
+ │   │       └── LoggingInterceptor.java
+ │   │
+ │   ├── exception // 에러 처리
+ │   │   ├── GlobalExceptionHandler.java
+ │   │   ├── CustomException.java
+ │   │   └── ErrorResponse.java
+ │   │
+ │   └── util // 유틸
+ │       ├── DateUtils.java
+ │       └── StringUtils.java
+ │
+ ├── user // 비즈니스 도메인 폴더 1
+ │   ├── domain
+ │   │   └── User.java
+ │   │
+ │   ├── dto
+ │   │   ├── UserRequestDto.java
+ │   │   └── UserResponseDto.java
+ │   │
+ │   ├── mapper
+ │   │   └── UserMapper.java
+ │   │
+ │   ├── repository // mapper 사용 시 DAO 미사용
+ │   │   └── UserDao.java
+ │   │
+ │   ├── service
+ │   │   ├── UserService.java
+ │   │   └── impl
+ │   │       └── UserServiceImpl.java
+ │   │
+ │   └── controller
+ │       └── UserController.java
+ │
+ └── post // 비즈니스 도메인 폴더 2
+     ├── domain
+     │   └── Post.java
+     │
+     ├── dto
+     │   ├── PostRequestDto.java
+     │   └── PostResponseDto.java
+     │
+     ├── mapper
+     │   └── PostMapper.java
+     │
+     ├── repository // mapper 사용 시 DAO 미사용
+     │   └── PostDao.java
+     │
+     ├── service
+     │   ├── PostService.java
+     │   └── impl
+     │       └── PostServiceImpl.java
+     │
+     └── controller
+         └── PostController.java
+</code></pre></div></div>
+<p>스프링 MVC 구조를 도메인 단위로 분리하여 DDD (Domain-Driven Design) 원칙을 반영한 설계입니다.<br />
+파일이 많아지면 각 폴더 내부에서 역할/기능 단위로 세분화하는 것도 좋습니다.</p>
 
-<h2 id="파스칼-표기법-pascal-case">파스칼 표기법 (Pascal Case)</h2>
+<p><mark>데이터 객체 설계 종류<mark></mark></mark></p>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>Entity 또는 VO (Value Object)</td>
+      <td>
+        DB 테이블과 매핑되는 비즈니스 도메인 핵심 객체<br />
+        비즈니스 로직 포함 가능<br />
+        JPA 환경에서는 Entity 사용<br />
+        JDBC, MyBaties 환경에서는 VO 사용
+      </td>
+    </tr>
+    <tr>
+      <td>DTO (Data Transfer Object)</td>
+      <td>
+        Controller ↔ Service 간 데이터 전달용 객체<br />
+        주로 Request DTO, Response DTO 분리<br />
+        Entity 또는 VO 데이터 직접 노출을 막기 위해 사용
+      </td>
+    </tr>
+    <tr>
+      <td>Mapper</td>
+      <td>DTO ↔ Entity 또는 VO 변환 담당 객체</td>
+    </tr>
+    <tr>
+      <td>DAO (Data Access Object)</td>
+      <td>
+        JDBC, MyBaties에서 사용되는 데이터베이스 접근 전용 객체<br />
+        스프링에서는 @Repository로 구현<br />
+        JPA 환경에서는 Repository가 DAO 역할 대체 가능<br />
+        MyBatis 환경에서는 Mapper 인터페이스가 DAO 역할 대체 가능<br />
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-<p>Java, TypeScript, C# 등에서 클래스명이나 타입명을 파스칼 케이스로 작성합니다.</p>
-
-<p><code class="language-plaintext highlighter-rouge">예시)</code> PascalCase</p>
-
-<hr />
-
-<h2 id="낙타-표기법-camel-case">낙타 표기법 (Camel Case)</h2>
-
-<p>Java, Javascript 등에서 변수명이나 함수명을 카멜 케이스로 작성합니다.<br />
-HTML에서 id도 카멜 케이스로 작성하여 Javascript와 일관성을 유지하면 좋습니다.</p>
-
-<p><code class="language-plaintext highlighter-rouge">예시)</code> camelCase</p>
-
-<hr />
-
-<h2 id="뱀-표기법-snake-case">뱀 표기법 (Snake Case)</h2>
-
-<p>데이터베이스에서 대소문자를 구분하지 않으므로, DB 테이블명이나 컬럼명을 소문자 스네이크 케이스로 작성합니다.</p>
-
-<p><code class="language-plaintext highlighter-rouge">예시)</code> snake_case</p>
-
-<hr />
-
-<h2 id="케밥-표기법-kebab-case">케밥 표기법 (Kebab Case)</h2>
-
-<p>HTML, CSS에서 class 이름은 하이픈을 사용하는 것이 W3C 표준으로 권장됩니다.<br />
-Javascript 파일명도 케밥 케이스가 가장 권장됩니다.</p>
-
-<p><code class="language-plaintext highlighter-rouge">예시)</code> kebab-case</p>
-
-<hr />
-
-<h2 id="헝가리안-표기법-hungarian-notation">헝가리안 표기법 (Hungarian Notation)</h2>
-
-<p>변수명 앞에 변수의 타입이나 용도를 나타내는 접두사를 붙이는 방법입니다.<br />
-가독성이 낮고 불필요해져서 최근에는 사용되지 않는 추세입니다.</p>
-
-<p><code class="language-plaintext highlighter-rouge">예시)</code> strUserName</p>
+<h3 id="jsp-기반-프론트-구조">JSP 기반 프론트 구조</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src.main.webapp
+└── WEB-INF
+    ├── views // JSP 페이지 폴더
+    │    ├── common // 공통 JSP (header, footer, layout 등)
+    │    ├── user // 비즈니스 도메인 폴더 1
+    │    │    ├── list.jsp
+    │    │    ├── detail.jsp
+    │    │    └── form.jsp
+    │    └── post // 비즈니스 도메인 폴더 2
+    │         ├── list.jsp
+    │         ├── detail.jsp
+    │         └── write.jsp
+    │
+    ├── layouts // 템플릿 레이아웃 (Tiles, Sitemesh, include 기반)
+    ├── jspf // JSP fragment (공통 include용)
+    ├── error // 에러 페이지 (404.jsp, 500.jsp)
+    └── web.xml // 디스패처 설정
+</code></pre></div></div>
+<p>JSP 파일은 보안상 외부에서 접근할 수 없는 WEB-INF 폴더에 위치해야 합니다.<br />
+views 폴더는 도메인별로 분리하고, 사용자/메뉴별 하위 폴더를 생성하는 것도 좋습니다.</p>
 
         
       </section>
@@ -540,14 +622,14 @@ Javascript 파일명도 케밥 케이스가 가장 권장됩니다.</p>
     
       
       
-      <a href="/categories#web-dev" class="page__taxonomy-item" rel="tag">Web 개발</a>
+      <a href="/categories#plan-design-db" class="page__taxonomy-item" rel="tag">기획 / 설계 / DB</a>
     
     </span>
   </p>
 
 
         
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-01-08">2025-01-08</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-11-04">2025-11-04</time></p>
 
 
       </footer>
@@ -557,11 +639,10 @@ Javascript 파일명도 케밥 케이스가 가장 권장됩니다.</p>
       
   <nav class="pagination">
     
-      <a href="/op/2025-01-16-1" class="pagination--pager" title="디딤365 DidimNow 콘솔 사용법
-">❮</a>
+      <a href="#" class="pagination--pager disabled">❮</a>
     
     
-      <a href="/plan-design-db/2025-01-08-2" class="pagination--pager" title="MySQL DQL 쿼리 정리 / 테이블 데이터 조회 쿼리 문법
+      <a href="/plan-design-db/2025-11-03-1" class="pagination--pager" title="Java 객체지향 설계 시 사용하는 디자인 패턴 예시
 ">❯</a>
     
   </nav>
@@ -577,42 +658,6 @@ Javascript 파일명도 케밥 케이스가 가장 권장됩니다.</p>
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/plan-design-db/2025-11-04-1" rel="permalink">Spring + JSP 프로젝트 패키지 폴더 구조 설계
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-11-04T00:00:00+00:00">2025-11-04</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
         
           
 
@@ -707,6 +752,42 @@ Javascript 파일명도 케밥 케이스가 가장 권장됩니다.</p>
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-09-16T00:00:00+00:00">2025-09-16</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-09-12-1" rel="permalink">Spring Filter, Intercepter 공통점 및 차이점
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-09-12T00:00:00+00:00">2025-09-12</time>
       </span>
     
 

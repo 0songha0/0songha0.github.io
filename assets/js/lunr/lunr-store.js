@@ -1480,4 +1480,10 @@ var store = [{
         "tags": [],
         "url": "/plan-design-db/2025-11-03-1",
         "teaser": null
+      },{
+        "title": "Spring + JSP 프로젝트 패키지 폴더 구조 설계",
+        "excerpt":"Spring 프로젝트 패키지 설계 Java 폴더 구조 src.main.java.com.도메인명 ├── global 또는 common // 공통 │ ├── config // 전역 설정 │ │ ├── AppConfig.java │ │ ├── WebConfig.java // 인터셉터 등록 │ │ ├── DataSourceConfig.java │ │ └── SecurityConfig.java │ │ └── interceptor │ │ ├── AuthInterceptor.java │ │ └──...","categories": ["plan-design-db"],
+        "tags": [],
+        "url": "/plan-design-db/2025-11-04-1",
+        "teaser": null
       }]
