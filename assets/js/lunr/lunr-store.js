@@ -1476,7 +1476,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Java 객체지향 설계 시 사용하는 디자인 패턴 예시",
-        "excerpt":"생성 패턴 싱글톤 패턴 (Singleton) 싱글톤 패턴 예시 1 public class Theme { private static Theme instance; private String themeColor; private Theme() { this.themeColor = \"light\"; // Default theme } public static Theme getInstance() { if (instance == null) { instance = new Theme(); } return instance; } public String...","categories": ["plan-design-db"],
+        "excerpt":"생성 패턴 싱글톤 패턴 (Singleton) 프로그램에서 특정 클래스의 인스턴스가 단 하나만 존재해야 하는 경우 사용되는 패턴입니다. 싱글톤 패턴으로 생성된 클래스는 getInstance 함수를 통해 인스턴스를 하나만 생성하고, 프로그램 전체에서 동일한 인스턴스를 공유하여 일관된 전역 상태를 유지합니다. 싱글톤 패턴 예시 1 // 싱글톤 패턴으로 설계된 테마 클래스 public class Theme { //...","categories": ["plan-design-db"],
         "tags": [],
         "url": "/plan-design-db/2025-11-03-1",
         "teaser": null
