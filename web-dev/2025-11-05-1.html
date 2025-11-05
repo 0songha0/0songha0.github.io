@@ -481,15 +481,15 @@
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>build-deploy
 The process '/opt/hostedtoolcache/Ruby/3.1.7/x64/bin/bundle' failed with exit code 5
 </code></pre></div></div>
-<p>위와 같은 메세지가 나오는 경우, 빌드에 사용되는 Bundler와 루비 버전이 호환되지 않아 실패했을 수 있습니다.<br />
-아래와 같이, Git 블로그 .github/workflows/jekyll.yml 파일에서 루비 버전을 수정 후 빌드하면 됩니다.</p>
+<p>위와 같은 메세지가 나오는 경우, 빌드에 사용되는 Bundler와 루비 버전이 호환되지 않아 실패했을 수 있습니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- name: Setup Ruby
   uses: ruby/setup-ruby@v1
   with:
     ruby-version: '3.2'
     bundler-cache: true
 </code></pre></div></div>
-<p>기존 3.1 버전에서 3.2로 수정 시 정상 빌드되는 것을 확인하였습니다.</p>
+<p>위와 같이, Git 블로그 .github/workflows/jekyll.yml 파일에서 루비 버전을 수정 후 빌드하면 됩니다.<br />
+기존 3.1 버전에서 3.2로 수정 시 정상 빌드되는 것을 확인하였습니다.</p>
 
         
       </section>
