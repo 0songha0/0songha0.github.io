@@ -479,68 +479,68 @@
 
 <h3 id="java-폴더-구조">Java 폴더 구조</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src.main.java.com.도메인명
- ├── global 또는 common // 공통
- │   ├── config // 전역 설정
- │   │   ├── AppConfig.java
- │   │   ├── WebConfig.java // 인터셉터 등록
- │   │   ├── DataSourceConfig.java
- │   │   └── SecurityConfig.java
- │   │   └── interceptor
- │   │       ├── AuthInterceptor.java
- │   │       └── LoggingInterceptor.java
+ ├─ global 또는 common // 공통
+ │   ├─ config // 전역 설정
+ │   │   ├─ AppConfig.java
+ │   │   ├─ WebConfig.java // 인터셉터 등록
+ │   │   ├─ DataSourceConfig.java
+ │   │   └─ SecurityConfig.java
+ │   │   └─ interceptor
+ │   │      ├─ AuthInterceptor.java
+ │   │      └─ LoggingInterceptor.java
  │   │
- │   ├── exception // 에러 처리
- │   │   ├── GlobalExceptionHandler.java
- │   │   ├── CustomException.java
- │   │   └── ErrorResponse.java
+ │   ├─ exception // 에러 처리
+ │   │   ├─ GlobalExceptionHandler.java
+ │   │   ├─ CustomException.java
+ │   │   └─ ErrorResponse.java
  │   │
- │   └── util // 유틸
- │       ├── DateUtils.java
- │       └── StringUtils.java
+ │   └─ util // 유틸
+ │         ├─ DateUtils.java
+ │         └─ StringUtils.java
  │
- ├── user // 비즈니스 도메인 폴더 1
- │   ├── domain
- │   │   └── User.java
+ ├─ user // 비즈니스 도메인 폴더 1
+ │   ├─ domain
+ │   │   └─ User.java
  │   │
- │   ├── dto
- │   │   ├── UserRequestDto.java
- │   │   └── UserResponseDto.java
+ │   ├─ dto
+ │   │   ├─ UserRequestDto.java
+ │   │   └─ UserResponseDto.java
  │   │
- │   ├── mapper
- │   │   └── UserMapper.java
+ │   ├─ mapper
+ │   │   └─ UserMapper.java
  │   │
- │   ├── repository // mapper 사용 시 DAO 미사용
- │   │   └── UserDao.java
+ │   ├─ repository // mapper 사용 시 DAO 미사용
+ │   │   └─ UserDao.java
  │   │
- │   ├── service
- │   │   ├── UserService.java
- │   │   └── impl
- │   │       └── UserServiceImpl.java
+ │   ├─ service
+ │   │   ├─ UserService.java
+ │   │   └─ impl
+ │   │      └─ UserServiceImpl.java
  │   │
- │   └── controller
- │       └── UserController.java
+ │   └─ controller
+ │       └─ UserController.java
  │
- └── post // 비즈니스 도메인 폴더 2
-     ├── domain
-     │   └── Post.java
+ └─ post // 비즈니스 도메인 폴더 2
+     ├─ domain
+     │   └─ Post.java
      │
-     ├── dto
-     │   ├── PostRequestDto.java
-     │   └── PostResponseDto.java
+     ├─ dto
+     │   ├─ PostRequestDto.java
+     │   └─ PostResponseDto.java
      │
-     ├── mapper
-     │   └── PostMapper.java
+     ├─ mapper
+     │   └─ PostMapper.java
      │
-     ├── repository // mapper 사용 시 DAO 미사용
-     │   └── PostDao.java
+     ├─ repository // mapper 사용 시 DAO 미사용
+     │   └─ PostDao.java
      │
-     ├── service
-     │   ├── PostService.java
-     │   └── impl
-     │       └── PostServiceImpl.java
+     ├─ service
+     │   ├─ PostService.java
+     │   └─ impl
+     │      └─ PostServiceImpl.java
      │
-     └── controller
-         └── PostController.java
+     └─ controller
+         └─ PostController.java
 </code></pre></div></div>
 <p>스프링 MVC 구조를 도메인 단위로 분리하여 DDD (Domain-Driven Design) 원칙을 반영한 설계입니다.<br />
 파일이 많아지면 각 폴더 내부에서 역할/기능 단위로 세분화하는 것도 좋습니다.</p>
@@ -583,22 +583,22 @@
 
 <h3 id="jsp-기반-프론트-구조">JSP 기반 프론트 구조</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src.main.webapp
-└── WEB-INF
-    ├── views // JSP 페이지 폴더
-    │    ├── common // 공통 JSP (header, footer, layout 등)
-    │    ├── user // 비즈니스 도메인 폴더 1
-    │    │    ├── list.jsp
-    │    │    ├── detail.jsp
-    │    │    └── form.jsp
-    │    └── post // 비즈니스 도메인 폴더 2
-    │         ├── list.jsp
-    │         ├── detail.jsp
-    │         └── write.jsp
-    │
-    ├── layouts // 템플릿 레이아웃 (Tiles, Sitemesh, include 기반)
-    ├── jspf // JSP fragment (공통 include용)
-    ├── error // 에러 페이지 (404.jsp, 500.jsp)
-    └── web.xml // 디스패처 설정
+└─ WEB-INF
+  ├─ views // JSP 페이지 폴더
+  │  ├─ common // 공통 JSP (header, footer, layout 등)
+  │  ├─ user // 비즈니스 도메인 폴더 1
+  │  │  ├─ list.jsp
+  │  │  ├─ detail.jsp
+  │  │  └─ form.jsp
+  │  └─ post // 비즈니스 도메인 폴더 2
+  │  	    ├─ list.jsp
+  │  	    ├─ detail.jsp
+  │  	    └─ write.jsp
+  │  
+  ├─ layouts // 템플릿 레이아웃 (Tiles, Sitemesh, include 기반)
+  ├─ jspf // JSP fragment (공통 include용)
+  ├─ error // 에러 페이지 (404.jsp, 500.jsp)
+  └─ web.xml // 디스패처 설정
 </code></pre></div></div>
 <p>JSP 파일은 보안상 외부에서 접근할 수 없는 WEB-INF 폴더에 위치해야 합니다.<br />
 views 폴더는 도메인별로 분리하고, 사용자/메뉴별 하위 폴더를 생성하는 것도 좋습니다.</p>
