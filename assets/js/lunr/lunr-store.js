@@ -1486,4 +1486,10 @@ var store = [{
         "tags": [],
         "url": "/plan-design-db/2025-11-04-1",
         "teaser": null
+      },{
+        "title": "Git 블로그 에러 원인 및 해결 방법",
+        "excerpt":"Git 블로그 빌드 실패 Bundler, RubyGems 버전 불일치 에러 build-deploy The process '/opt/hostedtoolcache/Ruby/3.1.7/x64/bin/bundle' failed with exit code 5 위와 같은 메세지가 나오는 경우, 빌드에 사용되는 Bundler와 루비 버전이 호환되지 않아 실패했을 수 있습니다. 아래와 같이, Git 블로그 .github/workflows/jekyll.yml 파일에서 루비 버전을 수정 후 빌드하면 됩니다. - name: Setup Ruby uses:...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-11-05-1",
+        "teaser": null
       }]
