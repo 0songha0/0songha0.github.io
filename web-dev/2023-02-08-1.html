@@ -547,7 +547,8 @@ public ModelAndView 컨트롤러명(@ModelAttribute("VO클래스명") VO클래�
 }
 </code></pre></div></div>
 <p>받은 파라미터 또는 form input name과 같은 이름의 VO 클래스 변수에 모두 자동 바인딩 됩니다.<br />
-@ModelAttribute를 사용하면, 모델에 데이터가 자동으로 추가되어 뷰에서 해당 이름으로 접근할 수 있습니다.</p>
+@ModelAttribute를 사용하면, 모델에 데이터가 자동으로 추가되어 뷰에서 해당 이름으로 접근할 수 있습니다.<br />
+컨트롤러 내에서 mav.addObject(“VO클래스명”, 변수명); 을 직접 써주지 않아도 됩니다.</p>
 
 <hr />
 
