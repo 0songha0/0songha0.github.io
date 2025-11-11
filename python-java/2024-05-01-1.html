@@ -1419,19 +1419,19 @@ int max = set.last();
 오름차순 시에는 Integer.compare(this.x, order.y); 를 리턴하면 됩니다.</p>
 
 <h3 id="정렬-기준-커스텀-클래스-활용-방법">정렬 기준 커스텀 클래스 활용 방법</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// ArrayList 정렬
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// ArrayList 정렬 방법
 ArrayList&lt;클래스명&gt; list = new ArrayList&lt;&gt;();
 list.add(new 클래스명(1, 5));
 list.add(new 클래스명(2, 3));
 Collections.sort(list); // list 내부 클래스의 compareTo 함수 기준 정렬
 
-// 객체 배열 정렬
+// 객체 배열 정렬 방법
 클래스명[] 클래스Arr = new 클래스명[개수];
 클래스Arr[0] = new 클래스명(1, 5);
 클래스Arr[1] = new 클래스명(2, 3);
 Arrays.sort(클래스Arr); // 배열 내부 클래스의 compareTo 함수 기준 정렬
 
-// 우선순위 큐 정렬
+// 우선순위 큐 정렬 방법
 PriorityQueue&lt;클래스명&gt; pq = new PriorityQueue&lt;&gt;();
 pq.offer(new 클래스명(1, 5));
 pq.offer(new 클래스명(2, 3));
