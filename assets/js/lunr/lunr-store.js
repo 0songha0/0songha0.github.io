@@ -1492,4 +1492,10 @@ var store = [{
         "tags": [],
         "url": "/web-dev/2025-11-05-1",
         "teaser": null
+      },{
+        "title": "자주 쓰는 Mybatis 설정 정리",
+        "excerpt":"mybatis-config.xml 설정 Type Aliases 설정 &lt;configuration&gt; &lt;typeAlias alias=\"ClassCondition\" type=\"com.chunjae.lrn.dto.ClassCondition\"/&gt; &lt;typeAlias alias=\"ClassVO\" type=\"com.chunjae.lrn.domain.ClassVO\"/&gt; &lt;/configuration&gt; mybatis 쿼리에 parameterType, resultType으로 사용되는 클래스들 별칭을 등록해둘 수 있습니다. 컬럼명 자동 매핑 설정 &lt;configuration&gt; &lt;settings&gt; &lt;setting name=\"mapUnderscoreToCamelCase\" value=\"true\"/&gt; &lt;/settings&gt; &lt;/configuration&gt; Mybatis가 스네이크 케이스 DB 컬럼을 카멜케이스 VO 필드로 자동 매핑해주는 설정입니다. SELECT 쿼리 예시 &lt;select id=\"selectClass\"...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-11-12-1",
+        "teaser": null
       }]
