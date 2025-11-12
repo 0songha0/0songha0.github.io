@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 코딩테스트 필수 Java 문법 및 자료구조 정리</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#java-자료구조">Java 자료구조</a><ul><li><a href="#숫자형">숫자형</a></li><li><a href="#문자형">문자형</a></li><li><a href="#문자열">문자열</a></li><li><a href="#배열-array">배열 (Array)</a></li><li><a href="#리스트-arraylist">리스트 (ArrayList)</a></li><li><a href="#연결리스트-linkedlist">연결리스트 (LinkedList)</a></li><li><a href="#스택-stack">스택 (Stack)</a></li><li><a href="#큐-queue">큐 (Queue)</a></li><li><a href="#덱-arraydeque-">덱 (ArrayDeque) ★</a></li><li><a href="#힙-heap">힙 (Heap)</a></li><li><a href="#우선순위-큐-priorityqueue">우선순위 큐 (PriorityQueue)</a></li><li><a href="#키-값-자료구조-map">키-값 자료구조 (Map)</a></li><li><a href="#집합-set">집합 (Set)</a></li><li><a href="#트리-tree">트리 (Tree)</a></li><li><a href="#그래프-graph">그래프 (Graph)</a></li></ul></li><li><a href="#java-객체-정렬-기준-커스텀-방법">Java 객체 정렬 기준 커스텀 방법</a><ul><li><a href="#클래스-정의-시-정렬-조건-설정">클래스 정의 시 정렬 조건 설정</a></li><li><a href="#정렬-기준-커스텀-클래스-활용-방법">정렬 기준 커스텀 클래스 활용 방법</a></li></ul></li><li><a href="#java-코드-실행시간-계산-방법">Java 코드 실행시간 계산 방법</a></li></ul>
+              <ul class="toc__menu"><li><a href="#java-자료구조">Java 자료구조</a><ul><li><a href="#숫자형">숫자형</a></li><li><a href="#문자형">문자형</a></li><li><a href="#문자열">문자열</a></li><li><a href="#배열-array">배열 (Array)</a></li><li><a href="#리스트-arraylist">리스트 (ArrayList)</a></li><li><a href="#연결리스트-linkedlist">연결리스트 (LinkedList)</a></li><li><a href="#스택-stack">스택 (Stack)</a></li><li><a href="#큐-queue">큐 (Queue)</a></li><li><a href="#덱-arraydeque-">덱 (ArrayDeque) ★</a></li><li><a href="#힙-heap">힙 (Heap)</a></li><li><a href="#우선순위-큐-priorityqueue">우선순위 큐 (PriorityQueue)</a></li><li><a href="#키-값-자료구조-map">키-값 자료구조 (Map)</a></li><li><a href="#집합-set">집합 (Set)</a></li><li><a href="#트리-tree">트리 (Tree)</a></li><li><a href="#그래프-graph">그래프 (Graph)</a></li></ul></li><li><a href="#java-객체-정렬-기준-커스텀-방법">Java 객체 정렬 기준 커스텀 방법</a><ul><li><a href="#정렬-기준-커스텀-클래스-정의">정렬 기준 커스텀 클래스 정의</a></li><li><a href="#정렬-기준-커스텀-클래스-정렬-방법">정렬 기준 커스텀 클래스 정렬 방법</a></li></ul></li><li><a href="#java-코드-실행시간-계산-방법">Java 코드 실행시간 계산 방법</a></li></ul>
 
             </nav>
           </aside>
@@ -891,49 +891,6 @@ public class Solution {
   }
 }
 </code></pre></div></div>
-
-<p><mark>ArrayList 정렬 커스텀</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
-
-class Point implements Comparable&lt;Point&gt; {
-  int x, y;
-
-  Point(int x, int y) {
-    this.x = x;
-    this.y = y;
-  }
-
-  @Override
-  public int compareTo(Point nextPoint) {
-    // 앞, 뒤 Point 비교 시
-    if (this.x == nextPoint.x) {
-      // x 값이 같으면 y 값 오름차순 정렬
-      return this.y - nextPoint.y;
-    } else {
-      // x 값이 다르면 x 값 내림차순 정렬
-      return nextPoint.x - this.x;
-    }
-  }
-}
-
-class Main {
-  public static void main(String[] args) {
-    ArrayList&lt;Point&gt; pointList = new ArrayList&lt;&gt;();
-
-    // 정렬되지 않은 x, y 좌표 추가
-    pointList.add(new Point(2, 7));
-    pointList.add(new Point(1, 3));
-    pointList.add(new Point(1, 2));
-    pointList.add(new Point(2, 5));
-    pointList.add(new Point(3, 6));
-
-    // Point 클래스 compareTo 함수 이용하여 정렬
-    Collections.sort(pointList);
-  }
-}
-</code></pre></div></div>
-<p>Comparable 인터페이스를 구현한 클래스로 정렬 기준 함수를 재정의 할 수 있습니다.<br />
-compareTo 함수 오버라이딩 시 리턴값이 음수면 this가 앞에 위치하게 됩니다.</p>
 
 <h3 id="연결리스트-linkedlist">연결리스트 (LinkedList)</h3>
 <p>원소가 데이터-포인터로 구성되어 있고, 포인터는 다음 원소 메모리 위치를 가리킵니다.<br />
@@ -1393,7 +1350,7 @@ int max = set.last();
 
 <h2 id="java-객체-정렬-기준-커스텀-방법">Java 객체 정렬 기준 커스텀 방법</h2>
 
-<h3 id="클래스-정의-시-정렬-조건-설정">클래스 정의 시 정렬 조건 설정</h3>
+<h3 id="정렬-기준-커스텀-클래스-정의">정렬 기준 커스텀 클래스 정의</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class 클래스명 implements Comparable&lt;클래스명&gt; {
   int x;
   int y;
@@ -1405,39 +1362,40 @@ int max = set.last();
 
   @Override
   public int compareTo(클래스명 order) {
-    if (this.x == order.x) {
-      // x 값이 같으면, y 기준 내림차순 (부 정렬 조건)
-      return Integer.compare(order.y, this.y);
-    } else {
+    if (this.x != order.x) {
       // x 값이 같지 않으면, x 기준 내림차순 (주 정렬 조건)
       return Integer.compare(order.x, this.x);
+    } else {
+      // x 값이 같으면, y 기준 내림차순 (부 정렬 조건)
+      return Integer.compare(order.y, this.y);
     }
   }
 }
 </code></pre></div></div>
-<p>Integer.compare 사용 시, 계산 결과가 int 범위를 초과하는 경우 overflow 에러를 방지할 수 있습니다.<br />
-오름차순 시에는 Integer.compare(this.x, order.y); 를 리턴하면 됩니다.</p>
+<p>클래스 정의 시 Comparable 인터페이스를 구현하고, compareTo 함수를 재정의하여 정렬 조건을 설정합니다.<br />
+Integer.compare 사용 시, 계산 결과가 int 범위를 초과하는 overflow 에러를 방지할 수 있습니다.<br />
+오름차순 시에는 Integer.compare(this.x, order.y); 처럼 음수를 리턴하면 됩니다.</p>
 
-<h3 id="정렬-기준-커스텀-클래스-활용-방법">정렬 기준 커스텀 클래스 활용 방법</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// ArrayList 정렬 방법
-ArrayList&lt;클래스명&gt; list = new ArrayList&lt;&gt;();
-list.add(new 클래스명(1, 5));
-list.add(new 클래스명(2, 3));
-Collections.sort(list); // list 내부 클래스의 compareTo 함수 기준 정렬
+<h3 id="정렬-기준-커스텀-클래스-정렬-방법">정렬 기준 커스텀 클래스 정렬 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// ArrayList 정렬
+ArrayList&lt;클래스명&gt; 클래스list = new ArrayList&lt;&gt;();
+클래스list.add(new 클래스명(1, 5));
+클래스list.add(new 클래스명(2, 3));
+Collections.sort(클래스list); // list 내부 클래스의 compareTo 함수 기준 정렬
 
-// 객체 배열 정렬 방법
+// 객체 배열 정렬
 클래스명[] 클래스Arr = new 클래스명[개수];
 클래스Arr[0] = new 클래스명(1, 5);
 클래스Arr[1] = new 클래스명(2, 3);
 Arrays.sort(클래스Arr); // 배열 내부 클래스의 compareTo 함수 기준 정렬
 
-// 우선순위 큐 정렬 방법
+// 우선순위 큐 정렬
 PriorityQueue&lt;클래스명&gt; pq = new PriorityQueue&lt;&gt;();
 pq.offer(new 클래스명(1, 5));
 pq.offer(new 클래스명(2, 3));
 pq.poll(); // 우선순위 큐 내부 클래스의 compareTo 함수 기준으로 정렬된 이진 힙에서 가장 최상위 객체 반환
 </code></pre></div></div>
-<p>Comparable 인터페이스를 상속받고, compareTo 함수를 재정의 한 클래스를 활용하여 정렬하는 방법들입니다.</p>
+<p>좌표를 저장하는 Point 객체, 간선을 저장하는 Edge 객체 등을 생성하여 정렬할 때 활용하면 좋습니다.</p>
 
 <hr />
 
