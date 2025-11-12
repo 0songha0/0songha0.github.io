@@ -1376,32 +1376,43 @@ int max = set.last();
 Integer.compare 사용 시, 계산 결과가 int 범위를 초과하는 overflow 에러를 방지할 수 있습니다.<br />
 오름차순 시에는 Integer.compare(this.x, order.y); 처럼 음수를 리턴하면 됩니다.</p>
 
-<h3 id="정렬-기준-커스텀-클래스-정렬-방법">정렬 기준 커스텀 클래스 정렬 방법</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// ArrayList 정렬
-ArrayList&lt;클래스명&gt; 클래스list = new ArrayList&lt;&gt;();
-클래스list.add(new 클래스명(1, 5));
-클래스list.add(new 클래스명(2, 3));
-Collections.sort(클래스list); // list 내부 클래스의 compareTo 함수 기준 정렬
-
-// 객체 배열 정렬
-클래스명[] 클래스Arr = new 클래스명[개수];
-클래스Arr[0] = new 클래스명(1, 5);
-클래스Arr[1] = new 클래스명(2, 3);
-Arrays.sort(클래스Arr); // 배열 내부 클래스의 compareTo 함수 기준 정렬
-
-// 우선순위 큐 정렬
-PriorityQueue&lt;클래스명&gt; pq = new PriorityQueue&lt;&gt;();
-pq.offer(new 클래스명(1, 5));
-pq.offer(new 클래스명(2, 3));
-pq.poll(); // 우선순위 큐 내부 클래스의 compareTo 함수 기준으로 정렬된 이진 힙에서 가장 최상위 객체 반환
-</code></pre></div></div>
-
 <p><mark>정렬 기준 커스텀하기 좋은 클래스 종류</mark></p>
 <ul>
   <li>좌표를 저장하는 Point 클래스 : 좌표를 특정 기준으로 정렬할 때 사용</li>
   <li>간선 가중치를 저장하는 Edge 클래스 : 크루스칼 알고리즘에서 최소 스패닝 트리를 만들 때 사용</li>
   <li>출발점에서 현재까지의 최소 거리를 저장하는 Node 클래스 : 다익스트라 알고리즘 등에서 사용</li>
 </ul>
+
+<h3 id="정렬-기준-커스텀-클래스-정렬-방법">정렬 기준 커스텀 클래스 정렬 방법</h3>
+<p><mark>ArrayList 정렬</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// ArrayList 생성 및 원소 추가
+ArrayList&lt;클래스명&gt; 클래스list = new ArrayList&lt;&gt;();
+클래스list.add(new 클래스명(1, 5));
+클래스list.add(new 클래스명(2, 3));
+
+// list 내부 클래스의 compareTo 함수 기준 정렬
+Collections.sort(클래스list);
+</code></pre></div></div>
+
+<p><mark>객체 배열 정렬</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 객체 배열 생성 및 원소 추가
+클래스명[] 클래스Arr = new 클래스명[개수];
+클래스Arr[0] = new 클래스명(1, 5);
+클래스Arr[1] = new 클래스명(2, 3);
+
+// 배열 내부 클래스의 compareTo 함수 기준 정렬
+Arrays.sort(클래스Arr);
+</code></pre></div></div>
+
+<p><mark>우선순위 큐 정렬</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 우선순위 큐 생성 및 원소 추가
+PriorityQueue&lt;클래스명&gt; pq = new PriorityQueue&lt;&gt;();
+pq.offer(new 클래스명(1, 5));
+pq.offer(new 클래스명(2, 3));
+
+// 우선순위 큐 내부 클래스의 compareTo 함수 기준으로 정렬된 이진 힙에서 가장 최상위 객체 반환
+pq.poll();
+</code></pre></div></div>
 
 <hr />
 
