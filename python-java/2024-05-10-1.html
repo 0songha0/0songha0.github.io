@@ -495,26 +495,26 @@
 </ol>
 
 <p><mark>선택 정렬 Java 코드 예시</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int[] digitArr = { 5, 3, 2, 8, 7, 6 };
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int[] digits = { 5, 3, 2, 8, 7, 6 };
 
 // 배열 왼쪽부터 선형 탐색
-for (int i = 0; i &lt; digitArr.length-1; i++) {
+for (int i = 0; i &lt; digits.length-1; i++) {
 
   // 현재 위치를 최소값으로 가정
   int minValIdx = i;
   
   // 이후 요소들 중 최소값 선택
-  for (int j = i+1; j &lt; digitArr.length; j++) {
+  for (int j = i+1; j &lt; digits.length; j++) {
 
-    if (digitArr[j] &lt; digitArr[minValIdx]) {
+    if (digits[j] &lt; digits[minValIdx]) {
       minValIdx = j;
     }
   }
 
   // 현재 위치, 최소값 위치 교환
-  int tmp = digitArr[i];
-  digitArr[i] = digitArr[minValIdx];
-  digitArr[minValIdx] = tmp;
+  int tmp = digits[i];
+  digits[i] = digits[minValIdx];
+  digits[minValIdx] = tmp;
 }
 </code></pre></div></div>
 <p>Java에서 선택 정렬을 오름차순으로 구현한 예시입니다.</p>
@@ -531,14 +531,14 @@ for (int i = 0; i &lt; digitArr.length-1; i++) {
 </ol>
 
 <p><mark>버블 정렬 Java 코드 예시</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int[] digitArr = { 5, 3, 2, 8, 7, 6 };
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int[] digits = { 5, 3, 2, 8, 7, 6 };
 
-for (int i = 0; i &lt; digitArr.length-1; i++) {
-  for (int j = 0; j &lt; digitArr.length-1-i; j++) {
-    if (digitArr[j] &gt; digitArr[j+1]) {
-      int tmp = digitArr[j];
-      digitArr[j] = digitArr[j+1];
-      digitArr[j+1] = tmp;
+for (int i = 0; i &lt; digits.length-1; i++) {
+  for (int j = 0; j &lt; digits.length-1-i; j++) {
+    if (digits[j] &gt; digits[j+1]) {
+      int tmp = digits[j];
+      digits[j] = digits[j+1];
+      digits[j+1] = tmp;
     }
   }
 }
@@ -559,22 +559,22 @@ for (int i = 0; i &lt; digitArr.length-1; i++) {
 </ol>
 
 <p><mark>삽입 정렬 Java 코드 예시</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int[] digitArr = { 5, 3, 2, 8, 7, 6 };
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int[] digits = { 5, 3, 2, 8, 7, 6 };
 
-for (int i = 1; i &lt; digitArr.length; i++) {
+for (int i = 1; i &lt; digits.length; i++) {
 
-  int iVal = digitArr[i];
+  int iVal = digits[i];
   int j;
 
   for (j = i-1; j &gt;= 0; j--) {
-    if (digitArr[j] &gt; iVal) {
-      digitArr[j+1] = digitArr[j];
+    if (digits[j] &gt; iVal) {
+      digits[j+1] = digits[j];
     } else {
       break;
     }
   }
 
-  digitArr[j+1] = iVal;
+  digits[j+1] = iVal;
 }
 </code></pre></div></div>
 <p>Java에서 삽입 정렬을 오름차순으로 구현한 예시입니다.</p>
@@ -637,22 +637,22 @@ for (int i = 1; i &lt; digitArr.length; i++) {
 <p><mark>이분 탐색 Java 코드 예시</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.*;
 
-int[] digitArr = { 5, 3, 2, 8, 7, 6 };
+int[] digits = { 5, 3, 2, 8, 7, 6 };
 int target = 3;
 int targetNum = -1;
 
-Arrays.sort(digitArr);
+Arrays.sort(digits);
 
 int lt = 0;
-int rt = digitArr.length-1;
+int rt = digits.length-1;
 
 while (lt &lt;= rt) {
   int mid = (lt + rt) / 2;
 
-  if (target == digitArr[mid]) {
+  if (target == digits[mid]) {
     targetNum = mid+1;
     break;
-  } else if (target &lt; digitArr[mid]) {
+  } else if (target &lt; digits[mid]) {
     rt = mid-1;
   } else {
     lt = mid+1;
@@ -754,21 +754,19 @@ Union-Find 알고리즘으로 사이클 여부를 판별하여 사이클이 생�
 크루스칼 알고리즘, 무방향 그래프 사이클 존재여부 판별, 네트워크 수 계산, 원소 그룹 판별 문제 등에서 사용됩니다.</p>
 
 <p><mark>Union-Find 알고리즘 Java 코드 예시</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int[] rootArr = new int[원소수];
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int[] parent = new int[원소수];
 
 // 각 원소가 속한 집합의 루트 원소 초기화
 for (int i = 0; i &lt; 원소수; i++) {
-  rootArr[i] = i;
+  parent[i] = i;
 }
 
 // 원소가 속한 집합의 루트 원소 반환 함수
 public int find(int v) { // v는 vertex (정점)
-  if (rootArr[v] == v) {
-    return v;
-  } else {
-    // 재귀적으로 루트 탐색하고 돌아오며, 최신 루트 원소로 값 업데이트
-    return rootArr[v] = find(rootArr[v]);
-  }
+  if (parent[v] == v) return v;
+
+  // 재귀적으로 루트 탐색하고 돌아오며, 최신 루트 원소로 값 업데이트
+  return parent[v] = find(parent[v]);
 }
 
 // 두 원소 집합을 연결하여 하나의 집합으로 합치는 함수
@@ -780,7 +778,7 @@ public void union(int v1, int v2) {
   // 원소1, 원소 2가 서로 다른 집합이면,
   if (fv1 != fv2) {
     // 원소1의 루트 원소 값을 원소2의 루트 원소로 변경하여 같은 집합으로 합치기
-    rootArr[fv1] = fv2;
+    parent[fv1] = fv2;
   }
 }
 
