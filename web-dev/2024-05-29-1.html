@@ -496,7 +496,7 @@ IntelliJ workspace에 프로젝트 폴더, 톰캣 폴더만 복사해서 옮겨�
 <h2 id="이클립스-프로젝트-톰캣-설정">이클립스 프로젝트 톰캣 설정</h2>
 
 <h3 id="톰캣-추가">톰캣 추가</h3>
-<p>우측 상단 Add Configurations &gt; 좌측 상단 + 버튼 &gt; Tomcat Server : Local 선택 &gt; Application server : Configuration 클릭 &gt; 좌측 상단 + &gt; Tomcat Home : 프로젝트 톰캣 폴더 선택 (예시 : apache-tomcat-9.0.82) &gt; OK &gt; Name : 톰캣명 버전 입력 &gt; Store as project file 체크 (팀원에게 동일한 톰캣 설정 공유 가능. 팀원마다 톰캣 설치 경로가 다른 경우 체크X) &gt; HTTP Port : 프로젝트 URL 포트 입력 &gt; Before launch : Build ‘프로젝트명:war exploded’ artifact (톰캣에 war 배포) 후 Build (최신 코드 컴파일) 순서로 배치 &gt; Apply &gt; OK</p>
+<p>우측 상단 Add Configurations &gt; 좌측 상단 + 버튼 &gt; Tomcat Server : Local 선택 &gt; Application server : Configuration 클릭 &gt; 좌측 상단 + &gt; Tomcat Home : 프로젝트 톰캣 폴더 선택 (예시 : apache-tomcat-9.0.82) &gt; OK &gt; Name : 톰캣명 버전 입력 &gt; Store as project file 체크 (팀원에게 동일한 톰캣 설정 공유 가능. 팀원마다 톰캣 설치 경로가 다른 경우 체크X) &gt; HTTP Port : 프로젝트 URL 포트 입력 &gt; Before launch : Build (최신 코드 컴파일) 후 Build ‘프로젝트명:war exploded’ artifact (톰캣에 war 배포) 순서로 배치 &gt; Apply &gt; OK</p>
 
 <p><mark>톰캣에 프로젝트 추가</mark><br />
 우측 상단 Edit Configurations &gt; 추가한 Tomcat 선택 &gt; Deployment 탭 &gt; + 버튼 &gt; Artifacts… &gt; 프로젝트명:war exploded 선택 &gt; OK &gt; 하단 Application context: / 로 수정 &gt; Apply &gt; OK<br />
