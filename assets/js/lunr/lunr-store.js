@@ -1062,7 +1062,7 @@ var store = [{
         "teaser": null
       },{
         "title": "IntelliJ에서 이클립스 Maven 프로젝트 사용 방법",
-        "excerpt":"이클립스 프로젝트 Import 프로젝트 복사 기존 이클립스 프로젝트에 영향이 가지 않게, 이클립스 프로젝트를 통째로 복사하고 이름을 변경합니다. IntelliJ workspace에 프로젝트 폴더, 톰캣 폴더만 복사해서 옮겨도 좋습니다. IntelliJ에서 이클립스 프로젝트 열기 좌측 상단 File &gt; New &gt; Project from Existing Sources… &gt; 복사한 이클립스 폴더의 workscase에서 프로젝트 폴더 선택 &gt; OK...","categories": ["web-dev"],
+        "excerpt":"IntelliJ에 이클립스 프로젝트 Import 프로젝트 복사 기존 이클립스 프로젝트에 영향이 가지 않게, 이클립스 프로젝트를 통째로 복사하고 이름을 변경합니다. IntelliJ workspace에 프로젝트 폴더, 톰캣 폴더만 복사해서 옮겨도 좋습니다. IntelliJ에서 이클립스 프로젝트 열기 좌측 상단 File &gt; New &gt; Project from Existing Sources… &gt; 복사한 이클립스 폴더의 workscase에서 프로젝트 폴더 선택 &gt;...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2024-05-29-1",
         "teaser": null
