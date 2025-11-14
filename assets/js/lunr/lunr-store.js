@@ -1194,7 +1194,7 @@ var store = [{
         "teaser": null
       },{
         "title": "로컬 리눅스 아파치 카프카 설치 및 실행 방법",
-        "excerpt":"로컬 테스트를 위한 아파치 카프카 2.5 설치 방법입니다. 윈도우에서는 .sh 파일을 직접 실행할 수 없어서 리눅스 가상 환경이 필요합니다. IntelliJ에서 도커로 카프카 이미지 설정 후 실행하는게 더 간편합니다. 리눅스 아파치 카프카 설치 및 실행 카프카 바이너리 파일 다운 https://kafka.apache.org/downloads 위 링크에서 Binary downloads: kafka_2.12-2.5.0.tgz 파일 다운로드 후 압축을 해제하여 설치합니다....","categories": ["kakafka-socketfka"],
+        "excerpt":"로컬 테스트를 위한 아파치 카프카 2.5 설치 방법입니다. 윈도우에서는 .sh 파일을 직접 실행할 수 없어서 리눅스 가상 환경이 필요합니다. IntelliJ에서 도커로 카프카 이미지 설정 후 실행하는게 더 간편합니다. 리눅스 아파치 카프카 설치 및 실행 카프카 바이너리 파일 다운 https://kafka.apache.org/downloads 위 링크에서 Binary downloads: kafka_2.12-2.5.0.tgz 파일 다운로드 후 압축을 해제하여 설치합니다....","categories": ["kafka-socket"],
         "tags": [],
         "url": "/kafka-socket/2025-04-29-1",
         "teaser": null
