@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> IntelliJ에서 이클립스 Maven 프로젝트 사용 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#이클립스-프로젝트-import">이클립스 프로젝트 Import</a><ul><li><a href="#프로젝트-복사">프로젝트 복사</a></li><li><a href="#intellij에서-이클립스-프로젝트-열기">IntelliJ에서 이클립스 프로젝트 열기</a></li><li><a href="#load-maven-project-">Load Maven Project ★</a></li></ul></li><li><a href="#이클립스-프로젝트-톰캣-설정">이클립스 프로젝트 톰캣 설정</a><ul><li><a href="#톰캣-추가">톰캣 추가</a></li><li><a href="#톰캣-xml-설정">톰캣 XML 설정</a></li></ul></li><li><a href="#intellij-톰캣-실행">IntelliJ 톰캣 실행</a><ul><li><a href="#톰캣-실행-방법">톰캣 실행 방법</a></li><li><a href="#브랜치-이동-후-톰캣-실행-에러-해결">브랜치 이동 후 톰캣 실행 에러 해결</a></li></ul></li><li><a href="#intellij-관련-파일-git-제외-방법">IntelliJ 관련 파일 Git 제외 방법</a><ul><li><a href="#gitignore-파일-수정">.gitignore 파일 수정</a></li><li><a href="#이미-push-된-git-파일-캐시-제거">이미 push 된 Git 파일 캐시 제거</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#이클립스-프로젝트-import">이클립스 프로젝트 Import</a><ul><li><a href="#프로젝트-복사">프로젝트 복사</a></li><li><a href="#intellij에서-이클립스-프로젝트-열기">IntelliJ에서 이클립스 프로젝트 열기</a></li></ul></li><li><a href="#이클립스-프로젝트-톰캣-설정">이클립스 프로젝트 톰캣 설정</a><ul><li><a href="#톰캣-추가">톰캣 추가</a></li><li><a href="#톰캣-db-연결-설정">톰캣 DB 연결 설정</a></li></ul></li><li><a href="#intellij-톰캣-실행">IntelliJ 톰캣 실행</a><ul><li><a href="#톰캣-실행-방법">톰캣 실행 방법</a></li><li><a href="#톰캣-실행-시-지난-빌드-프로파일이-남아있는-경우">톰캣 실행 시 지난 빌드 프로파일이 남아있는 경우</a></li><li><a href="#브랜치-이동-후-톰캣-실행-에러-해결">브랜치 이동 후 톰캣 실행 에러 해결</a></li></ul></li><li><a href="#intellij-관련-파일-git-제외-방법">IntelliJ 관련 파일 Git 제외 방법</a><ul><li><a href="#gitignore-파일-수정">.gitignore 파일 수정</a></li><li><a href="#이미-push-된-git-파일-캐시-제거">이미 push 된 Git 파일 캐시 제거</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -481,31 +481,29 @@
 <p>기존 이클립스 프로젝트에 영향이 가지 않게, 이클립스 프로젝트를 통째로 복사하고 이름을 변경합니다.</p>
 
 <h3 id="intellij에서-이클립스-프로젝트-열기">IntelliJ에서 이클립스 프로젝트 열기</h3>
-<p>좌측 상단 File &gt; New &gt; Project from Existing Sources… &gt; 복사한 이클립스 폴더의 workscase에서 프로젝트 폴더 선택 &gt; OK &gt; import project from external model : Eclipse 선택 &gt; Next &gt; Next &gt; Git 프로젝트 폴더 선택 &gt; Next &gt; Next &gt; 좌측 상단 + &gt; Add JDK &gt; 이클립스 Java Build Path에서 확인한 Java 버전에 맞는 JDK를 오라클 홈페이지에서 다운받아 설치 &gt; JDK 경로 선택 (예시 : C:\Program Files\Java\jdk-1.8) &gt; OK &gt; JDK 버전 선택 &gt; Create &gt; Import from Eclipse 경고창 OK &gt; New Window</p>
-
-<h3 id="load-maven-project-">Load Maven Project ★</h3>
-<p>우측 하단 Maven build scripts found 팝업에서 Load Maven Project 버튼 클릭<br />
+<p>좌측 상단 File &gt; New &gt; Project from Existing Sources… &gt; 복사한 이클립스 폴더의 workscase에서 프로젝트 폴더 선택 &gt; OK &gt; import project from external model : Eclipse 선택 &gt; Next &gt; Next &gt; Git 프로젝트 폴더 선택 &gt; Next &gt; Next &gt; 좌측 상단 + &gt; Add JDK &gt; 이클립스 Java Build Path에서 확인한 Java 버전에 맞는 JDK를 오라클 홈페이지에서 다운받아 설치 &gt; JDK 경로 선택 (예시 : C:\Program Files\Java\jdk-1.8) &gt; OK &gt; JDK 버전 선택 &gt; Create &gt; Import from Eclipse 경고창 OK &gt; New Window &gt;<br />
+우측 하단 Maven build scripts found 팝업에서 Load Maven Project 버튼 클릭 ★<br />
 이 버튼을 누르지 않으면 모든 설정을 직접 수동으로 해야 합니다..</p>
 
 <p>IntelliJ 최신 버전에서는 이클립스 프로젝트 Import 후 모듈명이 common으로 잡힐 수 있으나, 그대로 사용하는 것이 좋습니다.</p>
 
 <p><mark>프로젝트 정상 로드 확인</mark><br />
-좌측 상단 File &gt; Project Structure… &gt; Modules &gt; 프로젝트명 &gt; Web &gt; Deployment Descriptors 하단 Web Module Deployment Descriptor 경로가 프로젝트경로\src\main\webapp\WEB-INF\web.xml 이면 정상입니다.</p>
+좌측 상단 File &gt; Project Structure… &gt; Modules &gt; 프로젝트명 폴더 &gt; Web &gt; Deployment Descriptors : Web Module Deployment Descriptor 경로가 프로젝트경로\src\main\webapp\WEB-INF\web.xml 이면 정상입니다.</p>
 
 <hr />
 
 <h2 id="이클립스-프로젝트-톰캣-설정">이클립스 프로젝트 톰캣 설정</h2>
 
 <h3 id="톰캣-추가">톰캣 추가</h3>
-<p>우측 상단 Add Configurations &gt; 좌측 상단 + 버튼 &gt; Tomcat Server : Local 선택 &gt; Application server : Configuration 클릭 &gt; 좌측 상단 + &gt; Tomcat Home : 프로젝트 톰캣 폴더 선택 (예시 : apache-tomcat-9.0.82) &gt; OK &gt; Name : 톰캣명-버전 입력 &gt; Store as project file 체크 &gt; HTTP Port : 프로젝트 URL 포트 입력 &gt; Before launch : + 버튼에서 Run Maven Goal 선택 후 Command line : clean 입력 &gt; OK &gt; Maven clean-Build artifact-Build 순서로 배치 &gt; Apply &gt; OK<br />
-Maven clean 후 톰캣 실행하도록 설정해서, 이전 Maven install 및 package 빌드 영향을 받지 않습니다.</p>
+<p>우측 상단 Add Configurations &gt; 좌측 상단 + 버튼 &gt; Tomcat Server : Local 선택 &gt; Application server : Configuration 클릭 &gt; 좌측 상단 + &gt; Tomcat Home : 프로젝트 톰캣 폴더 선택 (예시 : apache-tomcat-9.0.82) &gt; OK &gt; Name : 톰캣명 버전 입력 &gt; Store as project file 체크 (팀원에게 동일한 톰캣 설정 공유 가능. 팀원마다 톰캣 설치 경로가 다른 경우 체크X) &gt; HTTP Port : 프로젝트 URL 포트 입력 &gt; Before launch : Build ‘프로젝트명:war exploded’ artifact (톰캣에 war 배포) 후 Build (최신 코드 컴파일) 순서로 배치 &gt; Apply &gt; OK</p>
 
 <p><mark>톰캣에 프로젝트 추가</mark><br />
-우측 상단 Edit Configurations &gt; 추가한 Tomcat 선택 &gt; Deployment 탭 &gt; + 버튼 &gt; Artifacts… &gt; 프로젝트명:war exploded 선택 &gt; OK &gt; 하단 Application context: / 으로 수정 &gt; Apply &gt; OK</p>
+우측 상단 Edit Configurations &gt; 추가한 Tomcat 선택 &gt; Deployment 탭 &gt; + 버튼 &gt; Artifacts… &gt; 프로젝트명:war exploded 선택 &gt; OK &gt; 하단 Application context: / 로 수정 &gt; Apply &gt; OK<br />
+프로젝트 추가 후 Before launch 순서가 정상인지 확인하는 것이 좋습니다.</p>
 
-<h3 id="톰캣-xml-설정">톰캣 XML 설정</h3>
+<h3 id="톰캣-db-연결-설정">톰캣 DB 연결 설정</h3>
 <p>프로젝트 톰캣 폴더\conf 아래 server.xml, context.xml에 기존 이클립스 톰캣 설정을 복사하고 저장합니다.<br />
-DB 관련하여 server.xml에 Resource, context.xml에 ResourceLink 설정이 되어있어야 합니다.</p>
+DB 관련하여 server.xml은 Resource 설정, context.xml은 ResourceLink 설정이 되어있어야 합니다.</p>
 
 <hr />
 
@@ -517,7 +515,27 @@ DB 관련하여 server.xml에 Resource, context.xml에 ResourceLink 설정이 �
 <p><mark>Lombok 어노테이션 프로세싱 활성화</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lombok requires enabled annotation processing
 </code></pre></div></div>
-<p>톰캣 실행 시 우측 하단에 위와 같은 에러가 나오면, Enable annotation processing 버튼을 클릭하면 됩니다.</p>
+<p>톰캣 실행 시 우측 하단에 위와 같은 에러가 나오면, Enable annotation processing 버튼을 클릭하면 됩니다.  IntelliJ에서 Lombok이 정상 동작하려면 Annotation Procecssing 기능을 활성화해야 합니다.</p>
+
+<h3 id="톰캣-실행-시-지난-빌드-프로파일이-남아있는-경우">톰캣 실행 시 지난 빌드 프로파일이 남아있는 경우</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;build&gt;
+  &lt;resources&gt;
+    &lt;resource&gt;
+      &lt;directory&gt;src/main/resources-${env}&lt;/directory&gt;
+    &lt;/resource&gt;
+    &lt;resource&gt;
+      &lt;directory&gt;src/main/resources&lt;/directory&gt;
+    &lt;/resource&gt;
+  &lt;/resources&gt;
+  &lt;!-- 생략 --&gt;
+&lt;/build&gt;
+</code></pre></div></div>
+<p>pom.xml에 빌드 시 프로파일을 ${env}와 같은 maven 환경변수 값으로 지정하는 프로젝트에서<br />
+서버 구분에 맞는 프로젝트 War 빌드 후 로컬 톰캣 실행 시 프로파일이 꼬이는 경우,<br />
+톰캣 실행 전 Maven Build를 먼저 실행해서 resources-프로파일명 폴더를 target/classes로 복사해야 합니다.</p>
+
+<p><mark>톰캣 실행 전 Maven Build 실행 방법</mark><br />
+우측 상단 Edit Configurations &gt; 추가된 Tomcat 선택 &gt; Server 탭 &gt; Before launch &gt; + &gt; Run Maven Goal &gt; Command line : clean package -Denv=프로파일명 또는 package -Denv=프로파일명 입력 &gt; OK &gt; Run Maven Goal ‘common component: clean package -Denv=프로파일명’이 Build artifact 전에 위치하도록 수정 &gt; Apply &gt; OK</p>
 
 <h3 id="브랜치-이동-후-톰캣-실행-에러-해결">브랜치 이동 후 톰캣 실행 에러 해결</h3>
 <p>우측 Maven View &gt; 상단 Reload All Maven Projects 클릭 (메이븐 업데이트) &gt; 톰캣 재실행<br />
