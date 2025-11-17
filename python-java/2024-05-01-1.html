@@ -764,7 +764,7 @@ public class Solution {
     Arrays.sort(배열, (객체명 o1, 객체명 o2) -&gt; Integer.compare(o1.int변수명, o2.int변수명));
     // o1 &gt; o2면 1을 반환하여 서로의 위치를 변경합니다.
     
-    // 배열 깊은 복사
+    // 배열 깊은 복사 ★
     int[] clone = arr.clone();
 
     // 배열 자르기 (i번째부터 j번째까지)
@@ -843,6 +843,7 @@ public class Solution {
     list.add(값);
 
     // 인덱스 위치에 원소 삽입 : O(n)
+    // 이후 원소들이 뒤로 한 칸씩 밀려서 시간복잡도가 높아집니다.
     list.add(2, 값);
 
     // 인덱스 위치 값 수정
@@ -933,6 +934,9 @@ stack.push(1);
 
 // 스택에서 마지막 데이터를 제거하지 않고 반환
 stack.peek();
+
+// 스택에서 인덱스 요소를 제거하지 않고 값만 확인
+stack.get(인덱스);
 
 // 스택이 비어있는지 확인 (스택이 비어있을 때 pop 하면 EmptyStackException 발생)
 if (stack.isEmpty()) {
