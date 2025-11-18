@@ -834,7 +834,7 @@ public int solution(int n, int[] stables) {
   int lt = 1; // 가능한 말 사이 최소 거리
   int rt = stables[ stables.length -1 ]; // 가능한 말 사이 최대 거리
 
-  // 결정 알고리즘 코드
+  // 결정 알고리즘 코드 (이분탐색 활용)
   while (lt &lt;= rt) {
     int mid = (lt + rt) / 2;
 
