@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 자주 쓰는 Spring 정리 / Java 문법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#자주-쓰는-spring">자주 쓰는 Spring</a><ul><li><a href="#spring-db-연결-방법">Spring DB 연결 방법</a></li><li><a href="#spring-annotation-정리">Spring annotation 정리</a></li><li><a href="#요청-도메인-주소-반환-함수">요청 도메인 주소 반환 함수</a></li><li><a href="#modelandview-사용법">ModelAndView 사용법</a></li></ul></li><li><a href="#java-문법">Java 문법</a><ul><li><a href="#문자열로-변환">문자열로 변환</a></li><li><a href="#추상메서드-및-디폴트메서드-차이">추상메서드 및 디폴트메서드 차이</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#자주-쓰는-spring">자주 쓰는 Spring</a><ul><li><a href="#spring-db-연결-방법">Spring DB 연결 방법</a></li><li><a href="#spring-annotation-정리">Spring annotation 정리</a></li><li><a href="#요청-도메인-주소-반환-함수">요청 도메인 주소 반환 함수</a></li><li><a href="#modelandview-사용법">ModelAndView 사용법</a></li></ul></li><li><a href="#java-문법">Java 문법</a><ul><li><a href="#문자열로-변환">문자열로 변환</a></li><li><a href="#추상메서드-및-디폴트메서드-차이">추상메서드 및 디폴트메서드 차이</a></li><li><a href="#스트림-stream">스트림 (stream)</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -546,6 +546,26 @@ valueOf는 변수가 null이어도 Exception이 발생하지 않아 안전합니
 인터페이스에서 구현부가 없는 메서드는 자동으로 추상 메서드로 취급됩니다.</p>
 
 <p>인터페이스에서 구현부를 가지는 디폴트 메서드는 default 키워드로 정의합니다.</p>
+
+<h3 id="스트림-stream">스트림 (stream)</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 기본형 배열 최대값 구하기
+Arrays.stream(배열명).max().getAsInt();
+// 스트림에서 제공하는 리덕션 함수들은 OptionalInt 타입으로 리턴하므로, int로 변환하는 함수 사용 필요
+
+// 기본형 배열 최소값 구하기
+Arrays.stream(배열명).min().getAsInt();
+
+// 기본형 배열 합계 구하기
+Arrays.stream(배열명).sum();
+// sum 합수는 기본형 int 리턴
+
+// 조건에 따라 걸러내고, 각 요소를 다른 값으로 변환
+List&lt;Integer&gt; result = 리스트명.stream() // 리스트를 스트림으로 변환
+                              .filter(n -&gt; n % 2 == 0) // 짝수 요소만 남긴 신규 스트림 생성
+                              .map(n -&gt; n * n)         // 스트림 내 요소 값을 제곱
+                              .toList(); // 스트림을 리스트로 변환
+</code></pre></div></div>
+<p>스트림은 오토박싱 및 내부처리 오버헤드로 인해 for문보다 약간 느릴 수 있습니다.</p>
 
         
       </section>
