@@ -806,13 +806,12 @@ find(원소1), Find(원소2) 결과 비교 시 서로 같으면 같은 집합에
 최대값, 최소값 등 조건을 만족하는 최적의 답을 효율적으로 찾아내는 문제에서 사용됩니다.</p>
 
 <p><mark>마구간 정하기 문제 풀이 예시</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 입력받은 거리를 기준으로 마구간에 배치할 수 있는 말의 수 반환 함수
-public int count(int stables, int distance) {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public int count(int stables, int distance) {
   // 1번째 마구간에 1마리 배치
   int cnt = 1;
   int endPoint = stables[0];
 
-  // 거리를 유지하며 다음 마구간에 말 배치 및 카운트
+  // 입력받은 거리를 유지하며 다음 마구간에 말 배치 및 카운트
   for (int i = 1; i &lt; stables.length; i++) {
     if (stables[i] - endPoint &gt;= distance) {
       cnt++;
@@ -820,6 +819,7 @@ public int count(int stables, int distance) {
     }
   }
 
+  // 마구간에 배치할 수 있는 말의 수 반환
   return cnt;
 }
 
