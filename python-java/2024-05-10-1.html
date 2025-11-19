@@ -966,9 +966,21 @@ public int solution(int n, int[] stables) {
   int[] dx = {-1, 0, 1, 0};
   int[] dy = {0, 1, 0, -1};
 
+  // 로봇의 초기 이동 방향 : 3시
+  int direction = 1;
+
   int x = 0;
   int y = 0;
-  int direction = 1; // 초기 이동 방향 : 3시
+
+  // 로봇(2)의 초기 위치
+  for (int i = 0; i &lt; board.length; i++) {
+    for (int j = 0; j &lt; board[i].length; j++) {
+      if (board[i][j] == 2) {
+        x = i;
+        y = j;
+      }
+    }
+  }
 
   int seconds = 0;
 
