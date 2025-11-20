@@ -691,7 +691,7 @@ N 제한이 30~50 이상이면, DFS 재귀로 풀었을 때 1분 이상 소요�
 </code></pre></div></div>
 <p>1부터 N까지 출력하는 DFS 함수 예시입니다.</p>
 
-<p><mark>재귀로 트리 탐색 DFS 구현 예시</mark></p>
+<p><mark>재귀 및 스택으로 트리 탐색 DFS 구현 예시</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 트리 구성용 노드 클래스
 class Node {
   int data;
@@ -706,7 +706,7 @@ class Node {
 }
 
 public class Main {
-  // 트리 탐색 DFS 함수
+  // 재귀로 트리 탐색 DFS 함수
   public void DFS(Node root) {
     // DFS 함수 종료 조건
     if (root == null) return;
@@ -726,6 +726,31 @@ public class Main {
     // 후위순회 : 왼쪽 노드 &gt; 오른쪽 노드 &gt; root 노드 방문
     // System.out.println("후위순회 root 노드 방문처리 : " + root.data);
   }
+
+  // 스택으로 트리 탐색 DFS 함수
+  public void DFS_Stack(Node root) {
+    // 시작 노드가 비어있으면 종료
+    if (root == null) return;
+
+    // 시작 노드 push
+    Stack&lt;Node&gt; stack = new Stack&lt;&gt;();
+    stack.push(root);
+
+    // 스택이 비어있지 않을 때까지 반복
+    while (!stack.isEmpty()) {
+        // 스택에 최근 추가한 노드 꺼내기
+        Node curNode = stack.pop();
+
+        // 전위순회 : root 노드 &gt; 왼쪽 노드 &gt; 오른쪽 노드 방문
+        System.out.println("전위순회 root 노드 방문처리 : " + curNode.data);
+        // 스택으로 구현 시, 후위순회는 스택 2개로 구현해야 해서 어렵습니다.
+
+        // 현재 노드와 인접한 노드 중 아직 방문하지 않은 노드들 추가
+        // 스택은 선입후출이므로, 방문할 순서의 역순으로 push
+        if (curNode.rt != null) stack.push(curNode.rt);
+        if (curNode.lt != null) stack.push(curNode.lt);
+    }
+  }
   
   public static void main(String args[]) {
     // 트리 생성
@@ -736,13 +761,18 @@ public class Main {
     root.lt.rt = new Node(5);
     root.rt.lt = new Node(6);
     root.rt.rt = new Node(7);
-
-    // 트리 탐색 DFS 힘수 호출
+    
     Main main = new Main();
+
+    // 재귀로 트리 탐색 DFS 힘수 호출
     main.DFS(root);
+
+    // 스택으로 트리 탐색 DFS 함수 호출
+    main.DFS_Stack(root);
   }
 }
 </code></pre></div></div>
+<p>트리는 사이클이 존재하지 않아 방문여부 체크를 생략해도 무한루프가 생기지 않습니다.</p>
 
 <p><mark>재귀로 부분집합 생성 DFS 구현 예시</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public static void main(String args[]) {
@@ -773,7 +803,7 @@ public void DFS(int i, int[] arr, boolean[] ch, List&lt;Integer&gt; subset) {
   DFS(i + 1, arr, ch, subset);
 }
 </code></pre></div></div>
-<p>현재 예시에서는 체크 배열이 필요하지 않지만, 활용하기 좋아서 참고로 작성합니다.</p>
+<p>현재 예시에서는 체크 배열이 필요하지 않지만, 다른 문제에 활용하기 좋아서 참고로 작성합니다.</p>
 
 <p><mark>재귀로 합이 같은 부분집합 탐색 DFS 구현 예시</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public void DFS(int L, int sum, int[] arr) {
@@ -812,15 +842,6 @@ public void DFS(int i, int[] arr, boolean[] ch, List&lt;Integer&gt; subset) {
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 </code></pre></div></div>
 <p>조합은 원소를 중복 없이, 순서 상관 없이 선택하는 경우의 수입니다.</p>
-
-<p><mark>스택으로 DFS 구현 요약</mark></p>
-<ol>
-  <li>스택에 시작 노드를 push</li>
-  <li>스택이 비어있지 않을 때까지 반복 시작</li>
-  <li>스택에 최근 push 한 노드를 pop하고 방문 여부 확인 후 방문 처리</li>
-  <li>현재 노드와 인접한 노드 중 아직 방문하지 않은 노드들을 스택에 push<br />
-(스택은 선입후출이므로, 방문할 순서의 역순으로 노드를 push 합니다.)</li>
-</ol>
 
 <h3 id="bfs-너비-우선-탐색-">BFS (너비 우선 탐색) ★</h3>
 <p>트리 및 그래프의 시작 노드부터 차수가 가장 가까운 노드들을 우선 탐색하는 알고리즘입니다.<br />
