@@ -673,6 +673,24 @@ while (lt &lt;= rt) {
 N 제한이 30~50 이상이면, DFS 재귀로 풀었을 때 1분 이상 소요되어 시간초과 될 수 있습니다.<br />
 이러한 경우는 DP 냅색알고리즘 등 다른 알고리즘을 사용해서 풀어야 합니다.</p>
 
+<p><mark>재귀로 DFS 구현 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public void DFS(int n) {
+  if (n == 0) return;
+
+  // N이 3인 경우, 3 &gt; 2 &gt; 1 출력
+  // 출력 후 다음 스택 프레임이 생성되므로 N부터 출력됨
+  // System.out.println("내림차순 출력 : " + n);
+
+  // 재귀 함수 호출
+  DFS(n-1);
+
+  // N이 3인 경우, 1 &gt; 2 &gt; 3 출력
+  // 재귀가 끝까지 내려간 후, 마지막 스택 프레임부터 스택에서 빠져나오면서 출력됨
+  System.out.println("오름차순 출력 : " + n);
+}
+</code></pre></div></div>
+<p>1부터 N까지 출력하는 DFS 함수 예시입니다.</p>
+
 <p><mark>재귀로 트리 탐색 DFS 구현 예시</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 트리 구성용 노드 클래스
 class Node {
@@ -690,6 +708,7 @@ class Node {
 public class Main {
   // 트리 탐색 DFS 함수
   public void DFS(Node root) {
+    // DFS 함수 종료 조건
     if (root == null) return;
 
     // 전위순회 : root 노드 &gt; 왼쪽 노드 &gt; 오른쪽 노드 방문
@@ -1003,7 +1022,7 @@ public int solution(int n, int[] stables) {
 }
 </code></pre></div></div>
 <p>N마리의 말을 마구간에 배치할 때, 가장 가까운 두 말의 거리 최대값을 구하는 문제 풀이입니다.<br />
-결정알고리즘은 while문이 끝날 때 answer에 들어있는 숫자가 가장 유효한 값이 됩니다.</p>
+결정알고리즘은 while문이 끝날 때 answer에 들어있는 숫자가 가장 유효한 값입니다.</p>
 
 <hr />
 
