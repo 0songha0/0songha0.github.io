@@ -718,8 +718,7 @@ long l = Long.parseLong(sb.toString());
 <p>멀티스레드 환경에서는 Thread-Safe 한 StringBuffer를 사용해야 합니다.</p>
 
 <h3 id="배열-array">배열 (Array)</h3>
-<p>생성한 배열 크기를 변경할 수 없으므로, 저장할 데이터의 개수를 알 수 있을 때 사용합니다.<br />
-보통 1차원 배열은 1,000만개, 2차원 배열은 3,000 * 3,000 크기를 넘으면 배열 할당이 실패될 수 있습니다.</p>
+<p>메모리에 연속적으로 저장되는 배열은 크기 변경이 불가하므로, 저장할 데이터 수가 고정된 경우 사용합니다.</p>
 
 <p><mark>1차원 배열 사용법</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
@@ -852,13 +851,14 @@ public class Solution {
     list.add(값);
 
     // 인덱스 위치에 원소 삽입 : O(n)
-    // 이후 원소들이 뒤로 한 칸씩 밀려서 시간복잡도가 높아집니다.
+    // 뒤 원소들이 한 칸씩 이동되어서 시간복잡도가 높아집니다.
     list.add(2, 값);
 
     // 인덱스 위치 값 수정
     list.set(2, 값);
 
     // 리스트의 0번째 원소 출력 : O(1)
+    // 조회 시 인덱스로 바로 접근해서 빠릅니다.
     System.out.println(list.get(0));
 
     // 리스트 마지막 원소 삭제 : O(1)
@@ -905,16 +905,15 @@ public class Solution {
 <h3 id="연결리스트-linkedlist">연결리스트 (LinkedList)</h3>
 <p>원소가 데이터-포인터로 구성되어 있고, 포인터는 다음 원소 메모리 위치를 가리킵니다.<br />
 데이터가 메모리 상 흩어져 저장되어, 앞 원소부터 순회해야 원하는 데이터에 접근할 수 있습니다.<br />
-중간 원소 추가는 앞/뒤 원소 포인터를 변경하면 되어서 간단하지만, 해당 위치까지 순회해서 O(n) 입니다.</p>
+원소 추가/삭제는 앞/뒤 원소 포인터를 변경하면 되어서 빠르지만, 해당 위치까지 순회해서 O(n) 입니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 연결리스트 객체 생성
 LinkedList&lt;String&gt; list = new LinkedList&lt;&gt;();
 
 // 연결리스트 마지막에 원소 추가 : O(1)
-// LinkedList는 마지막 노드를 가리키는 포인터가 있어서 빠릅니다.
+// 마지막 노드를 가리키는 포인터가 있어서 빠르게 추가할 수 있습니다.
 list.add("값");
 
 // 연결리스트 중간 원소 추가 : O(n)
-// 인덱스 위치까지 순회 필요해서 느립니다.
 list.add(인덱스, "값");
 
 // 연결리스트 중간 원소 삭제 : O(n)
@@ -924,11 +923,13 @@ list.remove("값");
 list.indexOf("값");
 
 // 연결리스트 3번째 원소 원소 탐색 : O(n)
+// 앞 원소부터 순차적으로 타고 들어가서 느립니다.
 list.get(2);
 
 // 연결리스트 전체 삭제
 list.clear();
 </code></pre></div></div>
+<p>연결리스트는 노드 데이터 외에도 이전/다음 노드 포인터를 저장하므로 배열보다 추가 메모리가 필요합니다.</p>
 
 <h3 id="스택-stack">스택 (Stack)</h3>
 <p>먼저 입력한 데이터를 나중에 꺼내는 선입후출(FILO) 자료구조입니다.<br />
