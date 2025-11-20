@@ -908,8 +908,8 @@ ch 배열을 사용해서, 현재까지 이미 선택한 원소는 선택하지 
   // 조합 배열 생성
   int[] combi = new int[m];
 
-  // 조합 DFS 함수 호출
-  DFS(0);
+  // 조합 DFS 함수 호출 (1부터 N개까지)
+  DFS(0, 1);
 }
 
 public void DFS(int L, int start) {
