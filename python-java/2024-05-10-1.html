@@ -1042,7 +1042,7 @@ class Main {
         continue;
       }
 
-      // 현재 노드와 인접한 다음 노드들 순회
+      // 현재 노드에서 갈 수 있는 다음 노드들 순회
       for(Node nextNode : graph.get(curNode.vertex)) {
         
         // 다음 노드 최단거리보다 현재 노드 가중치 + 다음 노드 가중치가 작으면
@@ -1050,7 +1050,7 @@ class Main {
           // 다음 노드 최단거리 갱신
           dist[nextNode.vertex] = curNode.cost + nextNode.cost;
 
-          // 다음 노드 추가
+          // 다음 노드 후보 추가
           pq.offer(new Node(nextNode.vertex, curNode.cost + nextNode.cost));
         }
       }
