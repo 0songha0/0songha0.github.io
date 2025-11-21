@@ -1013,12 +1013,9 @@ class Main {
     int[] dist = new int[n+1];
     Arrays.fill(dist, Integer.MAX_VALUE);
 
-    // 노드 방문 여부 체크 배열 생성
-    boolean[] visited = new boolean[n+1];
-
     // 출발 노드부터 각 노드까지의 최단거리 탐색
     Main main = new Main();
-    main.solution(graph, dist, visited);
+    main.solution(graph, dist);
 
     // 출발 노드부터 각 노드까지의 최단거리 출력
     for (int i = 1; i &lt;= n; i++) {
@@ -1031,7 +1028,7 @@ class Main {
   }
 
   // 다익스트라 알고리즘으로 출발 노드부터 모든 노드까지의 최단거리 탐색 함수
-  public void solution(List&lt;List&lt;Node&gt;&gt; graph, int[] dist, boolean[] visited) {
+  public void solution(List&lt;List&lt;Node&gt;&gt; graph, int[] dist) {
     PriorityQueue&lt;Node&gt; pq = new PriorityQueue&lt;&gt;();
 
     // 출발 노드 및 최단거리 추가
@@ -1041,14 +1038,13 @@ class Main {
     // 우선순위 큐가 비어있지 않을 때까지 반복
     while(!pq.isEmpty()) {
       // 우선순위 큐에서 가장 가중치가 작은 노드 꺼내기
-      // Node 클래스 내 compareTo 메소드 기준으로 정렬되어 꺼내짐
+      // Node 클래스 내 compareTo 메소드 기준으로 정렬되어 꺼내집니다.
       Node curNode = pq.poll();
 
-      // 현재 노드를 이미 방문했다면 넘어가기
-      if (visited[curNode.vertex]) continue;
-      
-      // 현재 노드 방문 처리 (현재 노드 중복 처리 방지)
-      visited[curNode.vertex] = true;
+      // 현재 노드 최단거리보다 현재 노드 가중치가 크면 넘어가기
+      if(dist[curNode.vertex] &lt; curNode.cost) {
+        continue;
+      }
 
       // 현재 노드에서 갈 수 있는 다음 노드들 순회
       for(Node nextNode : graph.get(curNode.vertex)) {
