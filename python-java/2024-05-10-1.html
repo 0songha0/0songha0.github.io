@@ -988,7 +988,7 @@ class Main {
     // 그래프 인접 리스트 생성
     List&lt;List&lt;Node&gt;&gt; graph = new ArrayList&lt;&gt;();
 
-    // 인접 리스트에 노드 수만큼 간선 리스트 추가
+    // 그래프에 노드 수만큼 리스트 추가
     for (int i = 0; i &lt;= n; i++) {
       graph.add(new ArrayList&lt;&gt;());
     }
@@ -999,23 +999,23 @@ class Main {
       int nextVertex = sc.nextInt();
       int cost = sc.nextInt();
 
-      // 현재 노드 간선 리스트에 다음 노드로 가는 간선 객체 추가
+      // 현재 노드 리스트에 다음 노드 객체 추가
       graph.get(curVertex).add(new Node(nextVertex, cost));
 
       // 무방향 그래프인 경우 추가
       // graph.get(nextVertex).add(new Node(curVertex, cost));
     }
 
-    // 각 노드까지의 최단거리 배열 생성
+    // 각 노드까지의 최단거리 배열 생성 (최단거리 초기값 무한으로 설정)
     int[] dist = new int[n+1];
-    Arrays.fill(dist, Integer.MAX_VALUE); // 최단거리 초기값 무한으로 설정
+    Arrays.fill(dist, Integer.MAX_VALUE);
 
     Main main = new Main();
 
     // 출발 노드부터 각 노드까지의 최단거리 탐색
     main.solution(graph, dist);
 
-    // 출발 노드부터 각 노드까지의 최소 가중치 출력
+    // 출발 노드부터 각 노드까지의 최단거리 출력
     for (int i = 1; i &lt;= n; i++) {
       if (dist[i] != Integer.MAX_VALUE) {
         System.out.println(i + "번 노드까지의 최단거리 : " + dist[i]);
@@ -1027,7 +1027,7 @@ class Main {
   public void solution(List&lt;List&lt;Node&gt;&gt; graph, int[] dist) {
     PriorityQueue&lt;Node&gt; pq = new PriorityQueue&lt;&gt;();
 
-    // 출발 노드 간선 및 최단거리 추가
+    // 출발 노드 및 최단거리 추가
     pq.offer(new Node(1, 0));
     dist[1] = 0;
 
@@ -1037,20 +1037,20 @@ class Main {
       // Node 클래스 내 compareTo 메소드 기준으로 정렬되어 꺼내짐
       Node curNode = pq.poll();
 
-      // 현재 노드 최소 가중치보다 현재 노드 가중치가 크면 넘어가기
+      // 현재 노드 최단거리보다 현재 노드 가중치가 크면 넘어가기
       if(dist[curNode.vertex] &lt; curNode.cost) {
         continue;
       }
 
-      // 현재 노드와 인접한 노드들 순회
+      // 현재 노드와 인접한 다음 노드들 순회
       for(Node nextNode : graph.get(curNode.vertex)) {
         
-        // 다음 노드 최소 가중치보다 현재 노드 가중치 + 다음 노드 가중치가 작으면
+        // 다음 노드 최단거리보다 현재 노드 가중치 + 다음 노드 가중치가 작으면
         if(dist[nextNode.vertex] &gt; curNode.cost + nextNode.cost) {
-          // 다음 노드 최소 가중치 갱신
+          // 다음 노드 최단거리 갱신
           dist[nextNode.vertex] = curNode.cost + nextNode.cost;
 
-          // 다음 노드 후보 추가
+          // 다음 최단거리 후보 노드 추가
           pq.offer(new Node(nextNode.vertex, curNode.cost + nextNode.cost));
         }
       }
@@ -1059,8 +1059,8 @@ class Main {
 }
 </code></pre></div></div>
 <p>가중치 그래프에서 출발 노드부터 모든 노드까지의 최단거리를 구합니다.<br />
-for문을 이용하면 방문하지 않은 각 노드마다 최단거리 노드를 순차 탐색해서 O(n²)이지만,<br />
-우선순위 큐를 이용하면 다음 최단거리 노드 후보를 바로 꺼낼 수 있어 효율적입니다.</p>
+그래프 인접 행렬 + for문을 이용하면 방문하지 않은 각 노드마다 최단거리 노드를 순차 탐색하면 O(n²)이지만,<br />
+그래프 인접 리스트 + 우선순위 큐를 이용하면 다음 최단거리 후보 노드를 바로 꺼낼 수 있어 효율적입니다.</p>
 
 <h3 id="벨만-포드">벨만-포드</h3>
 <p>음의 가중치가 있는 그래프에서도 올바른 최단 경로를 구할 수 있는 알고리즘입니다.<br />
