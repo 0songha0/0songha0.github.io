@@ -960,20 +960,20 @@ BFS는 현재 레벨의 모든 노드를 큐에 저장하므로 너비가 넓으
 음의 가중치가 있는 그래프에서는 올바르게 동작하지 않습니다.</p>
 
 <p><mark>우선순위 큐로 다익스트라 구현 예시</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 도착 노드, 가중치 겂을 저장할 수 있는 간선 객체 생성
-class Edge implements Comparable&lt;Edge&gt; {
-  int nextVertex;
-  int weight;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 노드 번호, 현재 노드까지의 가중치 저장 클래스 생성
+class Node implements Comparable&lt;Node&gt; {
+  int vertex;
+  int cost;
 
-  public Edge(int nextVertex, int weight) {
-    this.nextVertex = nextVertex;
-    this.weight = weight;
+  public Node(int vertex, int cost) {
+    this.vertex = vertex;
+    this.cost = cost;
   }
 
   @Override
-  public int compareTo(Edge order) {
+  public int compareTo(Node order) {
     // 가중치 오름차순 정렬
-    return Integer.compare(this.weight, order.weight);
+    return Integer.compare(this.cost, order.cost);
   }
 }
 
@@ -986,10 +986,10 @@ class Main {
     int m = sc.nextInt();
 
     // 그래프 인접 리스트 생성
-    List&lt;List&lt;Edge&gt;&gt; graph = new ArrayList&lt;&gt;();
+    List&lt;List&lt;Node&gt;&gt; graph = new ArrayList&lt;&gt;();
 
     // 인접 리스트에 노드 수만큼 간선 리스트 추가
-    for (int i = 0; i &lt; n; i++) {
+    for (int i = 0; i &lt;= n; i++) {
       graph.add(new ArrayList&lt;&gt;());
     }
 
@@ -997,23 +997,23 @@ class Main {
     for (int i = 0; i &lt; m; i++) {
       int curVertex = sc.nextInt();
       int nextVertex = sc.nextInt();
-      int weight = sc.nextInt();
+      int cost = sc.nextInt();
 
       // 현재 노드 간선 리스트에 다음 노드로 가는 간선 객체 추가
-      graph.get(curVertex).add(new Edge(nextVertex, weight));
+      graph.get(curVertex).add(new Node(nextVertex, cost));
 
       // 무방향 그래프인 경우 추가
-      // graph.get(nextVertex).add(new Edge(curVertex, weight));
+      // graph.get(nextVertex).add(new Node(curVertex, cost));
     }
 
     // 각 노드까지의 최단거리 배열 생성
-  ` int[] dist = new int[n+1];
+    int[] dist = new int[n+1];
     Arrays.fill(dist, Integer.MAX_VALUE); // 최단거리 초기값 무한으로 설정
 
     Main main = new Main();
 
     // 출발 노드부터 각 노드까지의 최단거리 탐색
-    main.solution(n, m, graph, dist);
+    main.solution(graph, dist);
 
     // 출발 노드부터 각 노드까지의 최소 가중치 출력
     for (int i = 1; i &lt;= n; i++) {
@@ -1024,38 +1024,34 @@ class Main {
   }
 
   // 다익스트라 알고리즘으로 출발 노드부터 모든 노드까지의 최단거리 탐색 함수
-  public void solution(int n, int m, List&lt;List&lt;Edge&gt;&gt; graph, int[] dist) {
-    PriorityQueue&lt;Edge&gt; pq = new PriorityQueue&lt;&gt;();
+  public void solution(List&lt;List&lt;Node&gt;&gt; graph, int[] dist) {
+    PriorityQueue&lt;Node&gt; pq = new PriorityQueue&lt;&gt;();
 
     // 출발 노드 간선 및 최단거리 추가
-    pq.offer(new Edge(1, 0));
+    pq.offer(new Node(1, 0));
     dist[1] = 0;
 
     // 우선순위 큐가 비어있지 않을 때까지 반복
     while(!pq.isEmpty()) {
-      // 우선순위 큐에서 가장 가중치가 작은 간선 꺼내기
-      // Edge 객체 내 compareTo 메소드 기준으로 정렬되어 꺼내짐
-      Edge curEdge = pq.poll();
+      // 우선순위 큐에서 가장 가중치가 작은 노드 꺼내기
+      // Node 클래스 내 compareTo 메소드 기준으로 정렬되어 꺼내짐
+      Node curNode = pq.poll();
 
-      // 다음 노드를 현재 노드로 간주
-      int curVertex = curEdge.nextVertex;
-      int curWeight = curEdge.weight;
-
-      // 현재 노드 최단거리보다 현재까지의 간선 가중치가 크면 넘어가기
-      if(dist[curVertex] &lt; curWeight) {
+      // 현재 노드 최소 가중치보다 현재 노드 가중치가 크면 넘어가기
+      if(dist[curNode.vertex] &lt; curNode.cost) {
         continue;
       }
 
-      // 현재 노드와 인접한 다음 간선들 순회
-      for(Edge nextEdge : graph.get(curVertex)) {
+      // 현재 노드와 인접한 노드들 순회
+      for(Node nextNode : graph.get(curNode.vertex)) {
         
-        // 다음 노드 최단거리보다 현재까지의 간선 가중치 + 다음 간선 가중치가 작으면
-        if(dist[nextEdge.nextVertex] &gt; curWeight + nextEdge.weight) {
-          // 다음 노드 최단거리 갱신
-          dist[nextEdge.nextVertex] = curWeight + nextEdge.weight;
+        // 다음 노드 최소 가중치보다 현재 노드 가중치 + 다음 노드 가중치가 작으면
+        if(dist[nextNode.vertex] &gt; curNode.cost + nextNode.cost) {
+          // 다음 노드 최소 가중치 갱신
+          dist[nextNode.vertex] = curNode.cost + nextNode.cost;
 
-          // 다음 노드 최소 가중치 간선 추가
-          pq.offer(new Edge(nextEdge.nextVertex, curWeight + nextEdge.weight));
+          // 다음 노드 후보 추가
+          pq.offer(new Node(nextNode.vertex, curNode.cost + nextNode.cost));
         }
       }
     }
