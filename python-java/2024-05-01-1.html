@@ -1352,6 +1352,30 @@ int max = set.last();
 인공지능의 의사 결정 트리, 자동 완성 기능, 데이터베이스(B-트리, B+트리) 등에 사용합니다.<br />
 이진 트리는 모든 노드의 최대 차수(자식 노드 수)가 2인 트리입니다.</p>
 
+<p><mark>기본 트리 구현</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 원소 클래스 정의
+class Node {
+  int vertex;
+  Node lt;
+  Node rt;
+
+  public Node(int vertex) {
+    this.vertex = vertex;
+    lt = null;
+    rt = null;
+  }
+}
+
+// 루트 노드 생성 후 하위 노드들 추가
+Node root = new Node(0);
+root.lt = new Node(1);
+root.rt = new Node(2);
+root.lt.lt = new Node(3);
+root.lt.rt = new Node(4);
+root.rt.lt = new Node(5);
+root.rt.rt = new Node(6);
+</code></pre></div></div>
+
 <p><mark>이진 탐색 트리 (이진 검색 트리)</mark><br />
 왼쪽 가지의 모든 자식이 부모보다 작고, 오른쪽 가지의 모든 자식이 부모보다 큰 트리입니다.<br />
 왼쪽 가지의 끝에 최소 노드가 있고, 오른쪽 가지의 끝에 최대 노드가 있습니다.<br />
@@ -1361,6 +1385,60 @@ int max = set.last();
 <h3 id="그래프-graph">그래프 (Graph)</h3>
 <p>노드와 방향/무방향 간선으로 이루어진 비선형 자료구조입니다.<br />
 그래프 간선에는 가중치가 있을 수도 있습니다.</p>
+
+<p><mark>인접 행렬 그래프 구현</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 인접 행렬 그래프 생성
+int[][] graph = new int[][];
+
+// 간선 연결 정보 입력
+for (int i = 0; i &lt; 간선수; i++) {
+  int curVertex = sc.nextInt();
+  int nextVertex = sc.nextInt();
+  int cost = sc.nextInt();
+
+  // 행 노드에서 열 노드로 갈 수 있음 체크
+  graph[curVertex][nextVertex] = cost; // 가중치 그래프가 아니면 1 저장
+
+  // 무방향 그래프 (양방향 그래프) 인 경우 추가
+  graph[nextVertex][curVertex] = cost;
+}
+</code></pre></div></div>
+<p>그래프를 인접 행렬 (2차원 배열) 형태로 저장하면 노드가 많고 간선이 적을수록 메모리가 낭비됩니다.<br />
+간선이 적으면 인접 리스트 형태로 현재 노드에서 갈 수 있는 노드만 저장하는 것이 좋습니다.</p>
+
+<p><mark>인접 리스트 그래프 구현</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 노드 클래스 정의
+class Node {
+  int vertex;
+  int cost;
+
+  public Node(int vertex, int cost) {
+    this.vertex = vertex;
+    this.cost = cost;
+  }
+}
+
+// 인접 리스트 그래프 생성
+List&lt;List&lt;Node&gt;&gt; graph = new ArrayList&lt;&gt;();
+
+// 노드 리스트 추가
+for (int i = 0; i &lt; 노드수; i++) {
+  graph.add(new ArrayList&lt;&gt;());
+}
+
+// 간선 연결 정보 입력
+for (int i = 0; i &lt; 간선수; i++) {
+  int curVertex = sc.nextInt();
+  int nextVertex = sc.nextInt();
+  int cost = sc.nextInt();
+
+  // 현재 노드에서 갈 수 있는 다음 노드 추가
+  graph.get(curVertex).add(new Node(nextVertex, cost));
+
+  // 무방향 그래프 (양방향 그래프) 인 경우 추가
+  graph.get(nextVertex).add(new Node(curVertex, cost));
+}
+</code></pre></div></div>
 
 <hr />
 
