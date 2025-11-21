@@ -959,19 +959,6 @@ BFS는 현재 레벨의 모든 노드를 큐에 저장하므로 너비가 넓으
 <p>양의 가중치만 있는 방향/무방향 그래프에서 최단 경로를 우선순위 큐로 구하는 알고리즘입니다.<br />
 음의 가중치가 있는 그래프에서는 올바르게 동작하지 않습니다.</p>
 
-<p><mark>다익스트라 구현 요약</mark></p>
-<ol>
-  <li>시작 노드의 최단거리를 0, 모든 노드의 최단거리를 무한으로 설정</li>
-  <li>시작 노드를 (거리 0, 노드) 형태로 우선순위 큐에 추가</li>
-  <li>(목표 지점에 도착하거나) 우선순위 큐가 비어있지 않을 때까지 반복 시작</li>
-  <li>우선순위 큐에서 가장 거리가 짧은 노드를 poll</li>
-  <li>if 현재 노드의 최단거리보다 꺼낸 노드의 최단거리가 크면 continue</li>
-  <li>꺼낸 노드를 현재 노드로 간주</li>
-  <li>현재 노드와 인접한 노드들 순회</li>
-  <li>현재 노드의 최단거리 + 간선 가중치가 인접 노드의 최단거리보다 작으면</li>
-  <li>인접 노드의 최단거리 갱신 후 (갱신된 거리, 노드) 형태로 우선순위 큐에 추가</li>
-</ol>
-
 <p><mark>우선순위 큐로 다익스트라 구현 예시</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 도착 노드, 가중치 겂을 저장할 수 있는 간선 객체 생성
 class Edge implements Comparable&lt;Edge&gt; {
@@ -1021,57 +1008,61 @@ class Main {
 
     // 각 노드까지의 최단거리 배열 생성
   ` int[] dist = new int[n+1];
-    Arrays.fill(dist, Integer.MAX_VALUE);
+    Arrays.fill(dist, Integer.MAX_VALUE); // 최단거리 초기값 무한으로 설정
 
     Main main = new Main();
 
-    // 출발 노드부터 목표 노드까지 최단거리 탐색
+    // 출발 노드부터 각 노드까지의 최단거리 탐색
     main.solution(n, m, graph, dist);
 
-    // 각 노드까지의 최소 가중치 출력
+    // 출발 노드부터 각 노드까지의 최소 가중치 출력
     for (int i = 1; i &lt;= n; i++) {
       if (dist[i] != Integer.MAX_VALUE) {
-        System.out.println(i + "번 노드 최단거리 : " + dist[i]);
+        System.out.println(i + "번 노드까지의 최단거리 : " + dist[i]);
       }
     }
   }
 
-  // 다익스트라 알고리즘으로 출발 노드부터 목표 노드까지 최단거리 탐색 함수
+  // 다익스트라 알고리즘으로 출발 노드부터 모든 노드까지의 최단거리 탐색 함수
   public void solution(int n, int m, List&lt;List&lt;Edge&gt;&gt; graph, int[] dist) {
     PriorityQueue&lt;Edge&gt; pq = new PriorityQueue&lt;&gt;();
 
-    // 출발 노드 간선 및 최소 가중치 추가
+    // 출발 노드 간선 및 가중치 추가
     pq.offer(new Edge(1, 0));
     dist[1] = 0;
 
-    // 큐가 비어있지 않을 때까지 반복
+    // 우선순위 큐가 비어있지 않을 때까지 반복
     while(!pq.isEmpty()) {
-      // 현재까지 남은 간선 중, 가장 가중치가 작은 간선 꺼내기
-      // Edge 객체 내 compareTo 메소드 기준으로 정렬되어 꺼내집니다.
+      // 우선순위 큐에서 가장 가중치가 작은 간선 꺼내기
+      // Edge 객체 내 compareTo 메소드 기준으로 정렬되어 꺼내짐
       Edge curEdge = pq.poll();
 
-      // 현재 간선의 다음 노드로 가는 최소 가중치보다 현재까지의 간선 가중치가 크면 넘어가기
-      if(dist[curEdge.nextVertex] &lt; curEdge.weight) {
+      // 다음 노드를 현재 노드로 간주
+      int curVertex = curEdge.nextVertex;
+      int curWeight = curEdge.weight;
+
+      // 현재 노드 최단거리보다 현재까지의 간선 가중치가 크면 넘어가기
+      if(dist[curVertex] &lt; curWeight) {
         continue;
       }
 
-      // 현재 간선의 다음 노드에 연결된 다음 간선들 우선순위 큐에 추가
-      for(Edge nextEdge : graph.get(curEdge.nextVertex)) {
+      // 현재 노드와 인접한 다음 간선들 순회
+      for(Edge nextEdge : graph.get(curVertex)) {
         
-        // 다음 간선의 다음 노드로 가는 최소 가중치보다 현재까지의 간선 가중치 + 다음 간선 가중치가 작으면
-        if(dist[nextEdge.nextVertex] &gt; curEdge.weight + nextEdge.weight) {
-          // 다음 노드로 가는 최소 가중치 갱신
-          dist[nextEdge.nextVertex] = curEdge.weight + nextEdge.weight;
+        // 다음 노드 최단거리보다 현재까지의 간선 가중치 + 다음 간선 가중치가 작으면
+        if(dist[nextEdge.nextVertex] &gt; curWeight + nextEdge.weight) {
+          // 다음 노드 최단거리 갱신
+          dist[nextEdge.nextVertex] = curWeight + nextEdge.weight;
 
-          // 다음 노드로 가는 최소 가중치 간선 추가
-          pq.offer(new Edge(nextEdge.nextVertex, curEdge.weight + nextEdge.weight));
+          // 다음 노드 최소 가중치 간선 추가
+          pq.offer(new Edge(nextEdge.nextVertex, curWeight + nextEdge.weight));
         }
       }
     }
   }
 }
 </code></pre></div></div>
-<p>가중치 그래프에서 출발 노드부터 목표 노드까지 가는 최단거리를 찾습니다.<br />
+<p>가중치 그래프에서 출발 노드부터 모든 노드까지의 최단거리를 구합니다.<br />
 for문을 이용하면 방문하지 않은 각 노드마다 최단거리 노드를 순차 탐색해서 O(n²)이지만,<br />
 우선순위 큐를 이용하면 다음 최단거리 노드 후보를 바로 꺼낼 수 있어 효율적입니다.</p>
 
