@@ -1319,16 +1319,16 @@ var store = [{
         "url": "/web-dev/2025-06-20-1",
         "teaser": null
       },{
-        "title": "영단어 기본 구조 정리 / 접두사, 어근, 접미사 요약",
-        "excerpt":"영단어 기본 구조 접두사 단어 앞에 붙어 방향, 부정, 강조 등 의미 추가 어근 단어의 핵심 의미를 담는 부분 접미사 단어 뒤에 붙어 품사를 바꾸거나, 의미 변형 접두사 요약 최중요 접두사 pro 앞에 (forth) pre 미리 (already) 전에 (before) re 뒤로 (back) 다시 (again) in¹ (im) 안에 (in) ex (es,...","categories": ["english"],
+        "title": "1",
+        "excerpt":" ","categories": [],
         "tags": [],
-        "url": "/english/2025-06-22-1",
+        "url": "/1/",
         "teaser": null
       },{
-        "title": "영단어 최중요 어근 공부",
-        "excerpt":"cap¹ (cip, ceive, cept) cap 잡다(hold) 생각을 취하다(take) capable 할 수 있는, 유능한 (cap : 잡다) (able : 할 수 있는) capability 능력, 역량 capacity 용량, 수용력, 능력 capture 포획하다, 사로잡다 생포, 포획, 억류 captive 사로잡힌, 억류된 포로, 인질 captivity 감금, 억류 captivate (~의 마음을) 사로잡다 anticipate 예측하다, 예상하다 (anti...","categories": ["english"],
+        "title": "1",
+        "excerpt":" ","categories": [],
         "tags": [],
-        "url": "/english/2025-06-23-1",
+        "url": "/1/",
         "teaser": null
       },{
         "title": "Vue 플러그인 사용법 / 전역 컴포넌트, 리소스, 커스텀 디렉티브 등록 방법",
