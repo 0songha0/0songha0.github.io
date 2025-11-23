@@ -1153,9 +1153,14 @@ class Main {
 검색이 많은 서비스, 캐싱, 데이터베이스 인덱싱 등에 사용합니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 해시맵 객체 생성 (HashTable 클래스는 잘 사용되지 않습니다.)
 HashMap&lt;String, Integer&gt; map = new HashMap&lt;&gt;();
+HashMap&lt;String, HashSet&lt;String&gt;&gt; setMap = new HashMap&lt;&gt;();
 
 // 해시맵 값 삽입 및 수정 : O(1) (같은 키를 넣으면, 기존에 저장된 값이 수정됩니다.)
 map.put("키", 값);
+
+// 해시맵에 키가 없으면 키 생성 후 초기값 저장
+setMap.putIfAbsent("키", new HashSet&lt;&gt;());
+// 이후 setMap.get("키").add("값"); 형태로 HashSet에 값 추가 가능
 
 // 다른 맵 키-값 전체 복사
 map.putAll(다른맵객체);
