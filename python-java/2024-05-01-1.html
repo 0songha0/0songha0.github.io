@@ -1279,20 +1279,20 @@ set1.removeAll(set2);
 
 // 배열 순회
 for (int i : arr) {
-  // 값이 해시셋에 있는지 확인 : O(1)
+  // HashSet에 값이 있는지 확인 : O(1)
   // List contains는 O(n)이므로, HashSet으로 변환하여 값을 찾으면 훨씬 효율적입니다.
   if (set.contains(i)) {
     return true;
   }
 
-  // 해시셋에 현재 값 저장 : O(1)
+  // HashSet에 현재 값 저장 : O(1)
   set.add(i);
 }
 
-// 해시셋 데이터 개수 확인
+// HashSet 데이터 개수 확인
 set.size();
 
-// 해시셋 데이터 삭제 : O(1)
+// HashSet 데이터 삭제 : O(1)
 set.remove(값);
 </code></pre></div></div>
 <p>배열에서 두 수의 합이 특정한 값이 되는지 O(1)으로 확인할 수 있습니다.</p>
@@ -1339,19 +1339,21 @@ for (int v : set) {
     result[i++] = v;
 }
 
-// 트리셋이 비어있는지 확인
+// TreeSet이 비어있는지 확인
 set.isEmpty();
 
-if (set.contains(i)) { // TreeSet은 자가균형 이진탐색트리로 이루어져 있으므로, O(logn) 입니다.
-
+// TreeSet에 값이 있는지 확인 : O(logn)
+if (set.contains(i)) {
+  // TreeSet은 자가균형 이진탐색트리로 이루어져 있으므로,
+  // 검색 시 트리 높이 (logn) 만큼 비교 연산을 수행하게 됩니다.
 }
 
 // TreeSet은 특정 인덱스에 해당하는 원소에 접근할 수 없습니다.
 
-// 트리셋 데이터 삭제 : O(logn)
+// TreeSet 데이터 삭제 : O(logn)
 set.remove(값);
 
-// 오름차순 트리셋의 경우, 최소값/최대값 조회
+// 오름차순 TreeSet의 경우, 최소값/최대값 조회
 int min = set.first();
 int max = set.last();
 </code></pre></div></div>
