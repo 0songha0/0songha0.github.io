@@ -489,6 +489,10 @@
         &lt;source&gt;1.8&lt;/source&gt;
         &lt;target&gt;1.8&lt;/target&gt;
         &lt;encoding&gt;UTF-8&lt;/encoding&gt;
+
+        &lt;!-- 항상 전체 컴파일 설정 : DTO, VO 필드 변경 시 MapStruct impl 갱신 --&gt;
+        &lt;useIncrementalCompilation&gt;false&lt;/useIncrementalCompilation&gt;
+
         &lt;annotationProcessorPaths&gt;
           &lt;!-- Lombok annotationProcessor --&gt;
           &lt;path&gt;
