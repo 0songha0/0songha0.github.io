@@ -1504,4 +1504,10 @@ var store = [{
         "tags": [],
         "url": "/web-dev/2025-11-25-1",
         "teaser": null
+      },{
+        "title": "VO ↔ DTO 변환 라이브러리 MapStruct 사용법",
+        "excerpt":"MapStruct 라이브러리 추가 방법 pom.xml 수정 &lt;dependencies&gt; &lt;!-- MapStruct 라이브러리 의존성 추가 --&gt; &lt;dependency&gt; &lt;groupId&gt;org.mapstruct&lt;/groupId&gt; &lt;artifactId&gt;mapstruct&lt;/artifactId&gt; &lt;version&gt;1.4.2.Final&lt;/version&gt; &lt;/dependency&gt; &lt;/dependencies&gt; &lt;build&gt; &lt;!-- 생략 --&gt; &lt;plugins&gt; &lt;plugin&gt; &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt; &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt; &lt;version&gt;3.10.1&lt;/version&gt; &lt;configuration&gt; &lt;source&gt;1.8&lt;/source&gt; &lt;target&gt;1.8&lt;/target&gt; &lt;encoding&gt;UTF-8&lt;/encoding&gt; &lt;annotationProcessorPaths&gt; &lt;!-- Lombok annotationProcessor --&gt; &lt;path&gt; &lt;groupId&gt;org.projectlombok&lt;/groupId&gt; &lt;artifactId&gt;lombok&lt;/artifactId&gt; &lt;version&gt;1.18.30&lt;/version&gt; &lt;/path&gt; &lt;!-- MapStruct annotationProcessor 추가 --&gt; &lt;path&gt; &lt;groupId&gt;org.mapstruct&lt;/groupId&gt; &lt;artifactId&gt;mapstruct-processor&lt;/artifactId&gt;...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2025-11-25-2",
+        "teaser": null
       }]
