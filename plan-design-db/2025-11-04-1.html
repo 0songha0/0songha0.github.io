@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 250</span>
+      <span class="nav__total">🌴 Total Posts: 251</span>
     </li> -->
     
     
@@ -492,15 +492,19 @@
  │
  └─ user // 비즈니스 도메인 폴더 1
      ├─ domain
-     │   └─ User.java // VO (DB 테이블 1:1 매핑)
+     │   └─ User.java // DB 테이블 1:1 매핑 VO 객체
+     │   └─ UserResultSet.java // 내부 처리용 DB 조회 결과 객체 (페이징/집계 등)
      │
      ├─ dto
      │   ├─ UserRequestDto.java // 생성/수정 요청용 DTO
-     │   └─ UserResponseDto.java // 조회 시 응답용 DTO
+     │   └─ UserResponseDto.java // 클라이언트 반환용 DTO
      │   └─ UserCondition.java // 조회 시 검색조건 전달용 DTO
      │
-     ├─ mapper
-     │   └─ UserMapper.java
+     ├─ mapper 
+     │   └─ UserMapper.java // Mybatis Mapper (DB 전용)
+     │   └─ dto
+     │      └─ UserResponseMapper.java // MapStruct Mapper (응답 VO → DTO 변환용)
+     │      └─ UserRequestMapper.java // MapStruct Mapper (요청 DTO → VO 변환용)
      │
      ├─ repository // mapper 사용 시 DAO 미사용
      │   └─ UserDao.java
@@ -648,6 +652,42 @@ views 폴더는 도메인별로 분리하고, 사용자/메뉴별 하위 폴더�
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
+        <a href="/web-dev/2025-11-25-1" rel="permalink">Spring Maven 프로젝트 lombok 라이브러리 추가 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-11-25T00:00:00+00:00">2025-11-25</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
         <a href="/web-dev/2025-11-12-1" rel="permalink">자주 쓰는 Mybatis 설정 정리
 </a>
       
@@ -732,42 +772,6 @@ views 폴더는 도메인별로 분리하고, 사용자/메뉴별 하위 폴더�
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-11-03T00:00:00+00:00">2025-11-03</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/plan-design-db/2025-09-17-1" rel="permalink">Java 객체지향 설계 방법 정리 (SOLID 원칙, 디자인패턴)
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-09-17T00:00:00+00:00">2025-09-17</time>
       </span>
     
 

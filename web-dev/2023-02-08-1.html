@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 250</span>
+      <span class="nav__total">🌴 Total Posts: 251</span>
     </li> -->
     
     
@@ -462,7 +462,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Spring 어노테이션 정리</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#클래스-레벨-어노테이션">클래스 레벨 어노테이션</a><ul><li><a href="#restcontroller">@RestController</a></li><li><a href="#component">@Component</a></li></ul></li><li><a href="#컨트롤러-매핑-어노테이션">컨트롤러 매핑 어노테이션</a><ul><li><a href="#requestmapping">@RequestMapping</a></li><li><a href="#postmapping">@PostMapping</a></li><li><a href="#getmapping">@GetMapping</a></li></ul></li><li><a href="#파라미터-어노테이션">파라미터 어노테이션</a><ul><li><a href="#requestbody">@RequestBody</a></li><li><a href="#requestparam">@RequestParam</a></li><li><a href="#modelattribute">@ModelAttribute</a></li></ul></li><li><a href="#리턴-어노테이션">리턴 어노테이션</a><ul><li><a href="#responsebody">@ResponseBody</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#클래스-레벨-어노테이션">클래스 레벨 어노테이션</a><ul><li><a href="#restcontroller">@RestController</a></li><li><a href="#component">@Component</a></li></ul></li><li><a href="#컨트롤러-매핑-어노테이션">컨트롤러 매핑 어노테이션</a><ul><li><a href="#requestmapping">@RequestMapping</a></li><li><a href="#postmapping">@PostMapping</a></li><li><a href="#getmapping">@GetMapping</a></li></ul></li><li><a href="#파라미터-어노테이션">파라미터 어노테이션</a><ul><li><a href="#requestbody">@RequestBody</a></li><li><a href="#requestparam">@RequestParam</a></li><li><a href="#modelattribute">@ModelAttribute</a></li></ul></li><li><a href="#리턴-어노테이션">리턴 어노테이션</a><ul><li><a href="#responsebody">@ResponseBody</a></li></ul></li><li><a href="#lombok-어노테이션">Lombok 어노테이션</a><ul><li><a href="#data-getter--setter">@Data (@Getter + @Setter)</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -562,6 +562,34 @@ public ModelAndView selectList(HttpServletRequest req, HttpServletResponse res, 
 <p>return하는 java 객체를 json 형태로 변환하여 jsonView로 전달합니다.<br />
 return 값이 jsp 페이지명 String이 아닌 경우, @ResponseBody를 쓰지 않으면 URL 404 에러가 발생합니다.</p>
 
+<hr />
+
+<h2 id="lombok-어노테이션">Lombok 어노테이션</h2>
+
+<h3 id="data-getter--setter">@Data (@Getter + @Setter)</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import com.intermorph.cmmn.base.BaseVO;
+import lombok.Data;
+
+@Data
+public class VO명 extends BaseVO {
+	private String 필드명1;
+	private String 필드명2;
+}
+</code></pre></div></div>
+<p>위와 같이, VO 또는 DTO 클래스 위에 @Data 어노테이션을 달아주면 getter, setter를 자동 생성해줍니다.<br />
+BaseVO에는 삭제여부, 등록일시, 등록자ID, 수정일시, 수정자ID 등이 필드로 구성됩니다.</p>
+
+<p><mark>Lombok 어노테이션 미사용 시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public String get필드명() {
+  return 필드명;
+}
+
+public void set필드명(String 필드명) {
+  this.필드명 = 필드명;
+}
+</code></pre></div></div>
+<p>위와 같이 필드마다 getter, setter 함수를 직접 생성해줘야 해서 번거롭고, 코드가 깔끔하지 않습니다.</p>
+
         
       </section>
 
@@ -618,6 +646,42 @@ return 값이 jsp 페이지명 String이 아닌 경우, @ResponseBody를 쓰지 
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2025-11-25-1" rel="permalink">Spring Maven 프로젝트 lombok 라이브러리 추가 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2025-11-25T00:00:00+00:00">2025-11-25</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
         
           
 
@@ -712,42 +776,6 @@ return 값이 jsp 페이지명 String이 아닌 경우, @ResponseBody를 쓰지 
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2025-11-04T00:00:00+00:00">2025-11-04</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/plan-design-db/2025-11-03-1" rel="permalink">Java 객체지향 설계 시 사용하는 디자인 패턴 예시
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-11-03T00:00:00+00:00">2025-11-03</time>
       </span>
     
 
