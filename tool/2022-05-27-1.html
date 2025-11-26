@@ -482,7 +482,11 @@
 <p>File &gt; Settings… &gt; File Encodings &gt; Properties Files: UTF-8으로 변경 후 Transparent native-to-ascii conversion 체크</p>
 
 <h3 id="jsp-소스-변경-시-톰캣-재시작-없이-적용되게-설정">jsp 소스 변경 시 톰캣 재시작 없이 적용되게 설정</h3>
-<p>우측 상단 Edit Configurations &gt; Server &gt; On ‘Update’ adcion &amp; On frame deactivation : Update classes and resources로 변경</p>
+<p>우측 상단 Edit Configurations &gt; Tomcat Server &gt; Server 탭 &gt; On frame deactivation : Update classes and resources<br />
+IntelliJ 창을 벗어날 때마다 Java 클래스, JSP 등 리소스를 톰캣에 재배포합니다.</p>
+
+<p>On ‘Update’ adcion는 IntelliJ에서 직접 Update 버튼을 눌렀을 때 반영하는 설정이며,<br />
+톰캣을 재시작하는 기본값 Restart server는 효율적이지 않아 Update classes and resources가 권장됩니다.</p>
 
 <h3 id="intellij-heap-memory-size-변경">IntelliJ heap memory size 변경</h3>
 <p>상단 Help &gt; Edit Custom VM Options… &gt; -Xmx4096m 설정 후 IntelliJ 재시작</p>
