@@ -1510,4 +1510,10 @@ var store = [{
         "tags": [],
         "url": "/web-dev/2025-11-25-2",
         "teaser": null
+      },{
+        "title": "윈도우 Claude AI 설치 및 Claude CLI 사용 방법",
+        "excerpt":"윈도우 CLI claude 설치 방법 node 설치 확인 node -v npm -v Window에서 Claude AI를 사용하기 위해서는 node가 설치되어야 합니다. claude 설치 명령어 npm install -g @anthropic-ai/claude-code node가 설치되어 있으면 위 명령어로 claude 패키지를 설치할 수 있습니다. claude 실행 명령어 cd 프로젝트경로 claude claude 화면이 나오면 엔터를 두 번 입력하여...","categories": ["tool"],
+        "tags": [],
+        "url": "/tool/2025-11-27-1",
+        "teaser": null
       }]
