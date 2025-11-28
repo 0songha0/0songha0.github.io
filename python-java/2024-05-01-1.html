@@ -462,7 +462,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 코딩테스트 필수 Java 문법 및 자료구조 정리</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#java-자료구조">Java 자료구조</a><ul><li><a href="#숫자형">숫자형</a></li><li><a href="#문자형">문자형</a></li><li><a href="#문자열">문자열</a></li><li><a href="#배열-array">배열 (Array)</a></li><li><a href="#리스트-arraylist">리스트 (ArrayList)</a></li><li><a href="#연결리스트-linkedlist">연결리스트 (LinkedList)</a></li><li><a href="#스택-stack">스택 (Stack)</a></li><li><a href="#큐-queue">큐 (Queue)</a></li><li><a href="#덱-arraydeque-">덱 (ArrayDeque) ★</a></li><li><a href="#힙-heap">힙 (Heap)</a></li><li><a href="#우선순위-큐-priorityqueue">우선순위 큐 (PriorityQueue)</a></li><li><a href="#키-값-자료구조-map">키-값 자료구조 (Map)</a></li><li><a href="#집합-set">집합 (Set)</a></li><li><a href="#트리-tree">트리 (Tree)</a></li><li><a href="#그래프-graph">그래프 (Graph)</a></li></ul></li><li><a href="#java-객체-정렬-기준-커스텀-방법">Java 객체 정렬 기준 커스텀 방법</a><ul><li><a href="#정렬-기준-커스텀-클래스-정의">정렬 기준 커스텀 클래스 정의</a></li><li><a href="#정렬-기준-커스텀-클래스-정렬-방법">정렬 기준 커스텀 클래스 정렬 방법</a></li></ul></li><li><a href="#java-코드-실행시간-계산-방법">Java 코드 실행시간 계산 방법</a></li></ul>
+              <ul class="toc__menu"><li><a href="#java-자료구조">Java 자료구조</a><ul><li><a href="#숫자형">숫자형</a></li><li><a href="#문자형">문자형</a></li><li><a href="#문자열">문자열</a></li><li><a href="#배열-array">배열 (Array)</a></li><li><a href="#리스트-arraylist">리스트 (ArrayList)</a></li><li><a href="#연결리스트-linkedlist">연결리스트 (LinkedList)</a></li><li><a href="#스택-stack">스택 (Stack)</a></li><li><a href="#큐-queue">큐 (Queue)</a></li><li><a href="#덱-arraydeque-">덱 (ArrayDeque) ★</a></li><li><a href="#힙-heap">힙 (Heap)</a></li><li><a href="#우선순위-큐-priorityqueue">우선순위 큐 (PriorityQueue)</a></li><li><a href="#키-값-자료구조-map">키-값 자료구조 (Map)</a></li><li><a href="#집합-set">집합 (Set)</a></li><li><a href="#트리-tree">트리 (Tree)</a></li><li><a href="#그래프-graph">그래프 (Graph)</a></li></ul></li><li><a href="#java-객체-정렬-기준-커스텀-방법">Java 객체 정렬 기준 커스텀 방법</a><ul><li><a href="#정렬-기준-커스텀-클래스-정의">정렬 기준 커스텀 클래스 정의</a></li><li><a href="#정렬-기준-커스텀-클래스-정렬-방법">정렬 기준 커스텀 클래스 정렬 방법</a></li></ul></li><li><a href="#java-코드-실행시간-계산-방법">Java 코드 실행시간 계산 방법</a></li><li><a href="#java-읽기-기본-코드">Java 읽기 기본 코드</a><ul><li><a href="#scanner">Scanner</a></li><li><a href="#bufferedreader">BufferedReader</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -1537,6 +1537,35 @@ long end = System.currentTimeMillis();
 System.out.println(((end - start) / 1000.0) + "초");
 </code></pre></div></div>
 <p>컴퓨터가 초당 연산할 수 있는 최대 횟수는 1억입니다.</p>
+
+<hr />
+
+<h2 id="java-읽기-기본-코드">Java 읽기 기본 코드</h2>
+
+<h3 id="scanner">Scanner</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Main {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+
+    String word = sc.next();
+    Integer num = sc.nextInt();
+    String line = sc.nextLine();
+  }
+}
+</code></pre></div></div>
+<p>Scanner는 간단한 데이터 입력을 받을 때 사용하면 좋습니다.</p>
+
+<h3 id="bufferedreader">BufferedReader</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.io.*;
+
+public class Main {
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    System.out.println(br.readLine());
+  }
+}
+</code></pre></div></div>
+<p>BufferedReader는 Scanner보다 많은 입력을 빠르게 읽을 수 있어 알고리즘 문제에서 자주 사용됩니다.</p>
 
         
       </section>
