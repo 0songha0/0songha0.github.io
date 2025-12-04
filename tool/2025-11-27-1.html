@@ -462,12 +462,16 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 윈도우 Claude AI 설치 및 Claude CLI 사용 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#윈도우-cli-claude-설치-방법">윈도우 CLI claude 설치 방법</a><ul><li><a href="#node-설치-확인">node 설치 확인</a></li><li><a href="#claude-설치-명령어">claude 설치 명령어</a></li><li><a href="#claude-실행-명령어">claude 실행 명령어</a></li><li><a href="#claude-code-초기화">claude code 초기화</a></li></ul></li><li><a href="#윈도우-claude-cli-사용법">윈도우 Claude CLI 사용법</a><ul><li><a href="#한국어-답변-설정">한국어 답변 설정</a></li><li><a href="#프로젝트-파일-지정">프로젝트 파일 지정</a></li><li><a href="#가이드-파일-요청">가이드 파일 요청</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#윈도우-cli-claude-설치-방법">윈도우 CLI claude 설치 방법</a><ul><li><a href="#윈도우-powershell-실행">윈도우 PowerShell 실행</a></li><li><a href="#node-설치-확인">node 설치 확인</a></li><li><a href="#claude-설치-명령어">claude 설치 명령어</a></li><li><a href="#claude-실행-명령어">claude 실행 명령어</a></li><li><a href="#claude-code-초기화">claude code 초기화</a></li></ul></li><li><a href="#윈도우-claude-cli-사용법">윈도우 Claude CLI 사용법</a><ul><li><a href="#한국어-답변-설정">한국어 답변 설정</a></li><li><a href="#프로젝트-파일-지정">프로젝트 파일 지정</a></li><li><a href="#가이드-파일-요청">가이드 파일 요청</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
         <h2 id="윈도우-cli-claude-설치-방법">윈도우 CLI claude 설치 방법</h2>
+
+<h3 id="윈도우-powershell-실행">윈도우 PowerShell 실행</h3>
+<p>윈도우 검색 &gt; PowerShell 입력 &gt; Windows PowerShell 실행<br />
+cmd에서는 질문할 때 여러 줄 불여넣기가 되지 않아 PowerShell로 하는 것이 좋습니다.</p>
 
 <h3 id="node-설치-확인">node 설치 확인</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node -v
@@ -488,6 +492,19 @@ claude
 Claude 이메일 계정 입력 후 인증 코드로 인증하고 승인합니다.<br />
 다시 cli로 이동하고 엔터를 두 번 입력하여 현재 폴더를 workspace로 사용합니다.</p>
 
+<p><mark>PowerShell에서 claude 실행 시 오류 해결</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>claude : 이 시스템에서 스크립트를 실행할 수 없으므로 D:\nodejs\claude.ps1 파일을 로드할 수 없습니다. 자세한 내용은 abou
+t_Execution_Policies(https://go.microsoft.com/fwlink/?LinkID=135170)를 참조하십시오.
+위치 줄:1 문자:1
++ claude
++ ~~~~~~
+    + CategoryInfo          : 보안 오류: (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+</code></pre></div></div>
+<p>위와 같은 오류가 나오면, 아래 명령어로 현재 사용자가 ps1 스크립트를 실행할 수 있도록 허용합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+</code></pre></div></div>
+
 <h3 id="claude-code-초기화">claude code 초기화</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/init
 </code></pre></div></div>
@@ -506,7 +523,7 @@ Claude code가 프로젝트를 분석해서 만드는 CLAUDE.md 파일이 생기
 claude는 항상 CLAUDE.md 파일을 참고하기 때문에 내용 추가를 요청하였습니다.</p>
 
 <p><mark>CLAUDE.md 파일에 추가하면 좋은 내용</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CLAUDE.md 파일에 하드코딩을 지양하고 항상 효율적인 클린한 코드로 개발하라는 내용을 추가해줘
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CLAUDE.md 파일에 하드코딩을 지양하고, 항상 효율적인 클린한 코드로 개발하고, 불필요한 코드는 제거하라는 내용을 추가해줘
 </code></pre></div></div>
 <p>문자열 상수 등을 코드에 직접 작성하지 않고, 설정 파일로 분리합니다.<br />
 신규 로직을 작성하기 전에 기존 유틸, 공동 함수 등을 먼저 확인하고 재사용합니다.<br />
