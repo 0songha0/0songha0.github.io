@@ -462,7 +462,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 시큐어코딩 점검툴 사용법 / 보안 취약점 보완 조치 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#시큐어코딩-진단-방법">시큐어코딩 진단 방법</a><ul><li><a href="#code-ray-xg-pro-사용법">CODE-RAY XG PRO 사용법</a></li></ul></li><li><a href="#개선-불가-코드-제외-처리">개선 불가 코드 제외 처리</a><ul><li><a href="#폴더-제외-방법">폴더 제외 방법</a></li><li><a href="#파일-제외-방법">파일 제외 방법</a></li></ul></li><li><a href="#보안-취약점-보완-방법">보안 취약점 보완 방법</a><ul><li><a href="#http-응답-분할">HTTP 응답 분할</a></li><li><a href="#중요정보-평문전송-http">중요정보 평문전송 (HTTP)</a></li><li><a href="#취약한-암호화-알고리즘-사용">취약한 암호화 알고리즘 사용</a></li><li><a href="#private-배열에-public-데이터-할당">Private 배열에 Public 데이터 할당</a></li><li><a href="#public-메소드로부터-반환된-private-배열">Public 메소드로부터 반환된 Private 배열</a></li><li><a href="#오류메시지를-통한-정보노출">오류메시지를 통한 정보노출</a></li><li><a href="#오류-상황-대응-부재">오류 상황 대응 부재</a></li><li><a href="#주석문-안에-포함된-시스템-주요정보-jsp의-html-주석">주석문 안에 포함된 시스템 주요정보 (JSP의 HTML 주석)</a></li></ul></li><li><a href="#보안-취약점-보완-시-문제-해결">보안 취약점 보완 시 문제 해결</a><ul><li><a href="#bombyte-order-mark-문제">BOM(Byte Order Mark) 문제</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#시큐어코딩-진단-방법">시큐어코딩 진단 방법</a><ul><li><a href="#code-ray-xg-pro-사용법">CODE-RAY XG PRO 사용법</a></li></ul></li><li><a href="#개선-불가-코드-제외-처리">개선 불가 코드 제외 처리</a><ul><li><a href="#폴더-제외-방법">폴더 제외 방법</a></li><li><a href="#파일-제외-방법">파일 제외 방법</a></li></ul></li><li><a href="#보안-취약점-보완-방법">보안 취약점 보완 방법</a><ul><li><a href="#http-응답-분할">HTTP 응답 분할</a></li><li><a href="#중요정보-평문전송-http">중요정보 평문전송 (HTTP)</a></li><li><a href="#취약한-암호화-알고리즘-사용">취약한 암호화 알고리즘 사용</a></li><li><a href="#private-배열에-public-데이터-할당">Private 배열에 Public 데이터 할당</a></li><li><a href="#public-메소드로부터-반환된-private-배열">Public 메소드로부터 반환된 Private 배열</a></li><li><a href="#오류메시지를-통한-정보노출">오류메시지를 통한 정보노출</a></li><li><a href="#오류-상황-대응-부재">오류 상황 대응 부재</a></li><li><a href="#주석문-안에-포함된-시스템-주요정보-jsp의-html-주석">주석문 안에 포함된 시스템 주요정보 (JSP의 HTML 주석)</a></li><li><a href="#중요정보-평문저장">중요정보 평문저장</a></li></ul></li><li><a href="#보안-취약점-보완-시-문제-해결">보안 취약점 보완 시 문제 해결</a><ul><li><a href="#bombyte-order-mark-문제">BOM(Byte Order Mark) 문제</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -535,6 +535,10 @@
 <p>시큐어코딩 점검 결과에서 낮음 등급은 제외하고 높음, 보통 등급만 보완합니다.<br />
 보안약점 설명 및 수정 방법을 참고하고, 구글링 해서 수정 후 계속 프로그램을 돌려보면서 확인합니다.<br />
 개발서버용 브랜치에서 먼저 수정 후 운영서버용 브랜치에 반영해야 합니다.</p>
+
+<p><mark>CODE-RAY 취약점 보완 팁</mark><br />
+취약점 상세 화면 우측의 연관 라인 최하위 코드 선택 후 IDE에서 검색하고 수정하는 것이 좋습니다.<br />
+한 파일에서 여러 취약점이 나온 경우, CODE-RAY 툴 내에서 수정 저장하면 반영이 안됩니다.</p>
 
 <h3 id="http-응답-분할">HTTP 응답 분할</h3>
 <p>JAVA 컨트롤러에서 HTTP 요청에 들어있는 파라미터를 HTTP 응답 헤더에 포함하여 다시 전달할 때,<br />
@@ -653,16 +657,6 @@ public void set배열명(String[] 배열명) {
 </code></pre></div></div>
 <p>아래와 같이, 새로운 배열을 생성하고 값을 복사하면 보안이 강화됩니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public void set배열명(String[] 배열명) {
-  if (배열명 != null) {
-    this.배열명 = new String[배열명.length];
-    System.arraycopy(배열명, 0, this.배열명, 0, 배열명.length);
-  } else {
-    this.배열명 = null;
-  }
-}
-</code></pre></div></div>
-<p>System.arraycopy 함수를 사용하면 for문보다 빠르고 효율적으로 배열을 복사할 수 있습니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public void set배열명(String[] 배열명) {
   this.배열명 = (배열명 == null) ? null : Arrays.copyOf(배열명, 배열명.length);
 }
 </code></pre></div></div>
@@ -676,7 +670,7 @@ public void set리스트명(List&lt;VO명&gt; List명) {
   this.리스트명 = 리스트명;
 }
 </code></pre></div></div>
-<p>아래와 같이, 새로운 리스트 객체를 생성하고 값을 복사하면 보안이 강화됩니다.</p>
+<p>아래와 같이, 새로운 리스트 객체를 생성하고 값을 깊은 복사하면 데이터 변경 시 원본에 영향을 주지 않아 안전합니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public void set리스트명(List&lt;VO명&gt; 리스트명) {
   this.리스트명 = (리스트명 == null) ? null : new ArrayList&lt;&gt;(리스트명);
 }
@@ -720,13 +714,7 @@ Private 변수 객체의 복제본을 만들어서 반환해야 외부 수정을
 
 <p><mark>private 배열 반환 개선</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public String[] get배열명() {
-  if (this.배열명 == null) {
-    return null;
-  } else {
-    String[] tempData = Arrays.copyOf(배열명, 배열명.length);
-
-    return tempData;
-  }
+  return (배열명 == null) ? null : Arrays.copyOf(배열명, 배열명.length);
 }
 </code></pre></div></div>
 <p>새로운 변수에 담아서 리턴해야 보안 취약점으로 탐지되지 않습니다.</p>
@@ -797,6 +785,12 @@ HTML 코드
 <p>아래처럼, JSP에서는 HTML 주석 대신 Java 주석을 사용하면 개발자 도구에서 보이지 않습니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;% /* Java 주석 */ %&gt;
 </code></pre></div></div>
+
+<h3 id="중요정보-평문저장">중요정보 평문저장</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>System.out.println("classProfSearch ehCache Put : " + cacheKey);
+</code></pre></div></div>
+<p>위와 같이, 중요한 정보를 출력하는 코드도 제거 대상입니다.</p>
+
 <hr />
 
 <h2 id="보안-취약점-보완-시-문제-해결">보안 취약점 보완 시 문제 해결</h2>
