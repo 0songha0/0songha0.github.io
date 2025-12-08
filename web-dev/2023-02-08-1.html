@@ -462,23 +462,54 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Spring 어노테이션 정리</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#클래스-레벨-어노테이션">클래스 레벨 어노테이션</a><ul><li><a href="#restcontroller">@RestController</a></li><li><a href="#component">@Component</a></li></ul></li><li><a href="#컨트롤러-매핑-어노테이션">컨트롤러 매핑 어노테이션</a><ul><li><a href="#requestmapping">@RequestMapping</a></li><li><a href="#postmapping">@PostMapping</a></li><li><a href="#getmapping">@GetMapping</a></li></ul></li><li><a href="#파라미터-어노테이션">파라미터 어노테이션</a><ul><li><a href="#requestbody">@RequestBody</a></li><li><a href="#requestparam">@RequestParam</a></li><li><a href="#modelattribute">@ModelAttribute</a></li></ul></li><li><a href="#리턴-어노테이션">리턴 어노테이션</a><ul><li><a href="#responsebody">@ResponseBody</a></li></ul></li><li><a href="#lombok-어노테이션">Lombok 어노테이션</a><ul><li><a href="#data-getter--setter">@Data (@Getter + @Setter)</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#트랜잭션-관리-어노테이션">트랜잭션 관리 어노테이션</a><ul><li><a href="#transactional">@Transactional</a></li></ul></li><li><a href="#클래스-레벨-어노테이션">클래스 레벨 어노테이션</a><ul><li><a href="#component">@Component</a></li><li><a href="#controller">@Controller</a></li><li><a href="#restcontroller">@RestController</a></li><li><a href="#service">@Service</a></li><li><a href="#repository">@Repository</a></li></ul></li><li><a href="#메서드-레벨-어노테이션">메서드 레벨 어노테이션</a><ul><li><a href="#requestmapping">@RequestMapping</a></li><li><a href="#postmapping">@PostMapping</a></li><li><a href="#getmapping">@GetMapping</a></li></ul></li><li><a href="#파라미터-어노테이션">파라미터 어노테이션</a><ul><li><a href="#requestbody">@RequestBody</a></li><li><a href="#requestparam">@RequestParam</a></li><li><a href="#modelattribute">@ModelAttribute</a></li></ul></li><li><a href="#리턴-어노테이션">리턴 어노테이션</a><ul><li><a href="#responsebody">@ResponseBody</a></li></ul></li><li><a href="#lombok-어노테이션">Lombok 어노테이션</a><ul><li><a href="#data-getter--setter">@Data (@Getter + @Setter)</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h2 id="클래스-레벨-어노테이션">클래스 레벨 어노테이션</h2>
+        <h2 id="트랜잭션-관리-어노테이션">트랜잭션 관리 어노테이션</h2>
 
-<h3 id="restcontroller">@RestController</h3>
-<p>HTTP 응답 본문을 직렬화하여 반환하므로, RESTful API를 제공하는 컨트롤러 클래스에 지정하면 좋습니다.<br />
-일반 @Controller와 달리 내부적으로 모든 method에 @ResponseBody가 붙게 됩니다.</p>
+<h3 id="transactional">@Transactional</h3>
+<p>@Transactional을 사용하지 않으면, Mapper 호출 시마다 auto-commit 될 수 있습니다.</p>
 
-<h3 id="component">@Component</h3>
-<p>Bean을 따로 등록하지 않아도 클래스 자체를 스프링 Bean으로 자동 등록합니다.</p>
+<p>@Transactional이 붙은 클래스는 모든 public 메서드에 @Transactional이 자동 적용됩니다.</p>
+
+<p>@Transactional이 적용된 메서드가 호출되면 프록시 기반 AOP가 가로채서 트랜잭션 경계를 설정하고,<br />
+스프링 애플리케이션 컨텍스트에 설정된 트랜잭션 매니저가 실제 트랜잭션의 시작, 커밋, 롤백을 관리합니다.</p>
+
+<p><mark>@Transactional 사용 시 주의사항</mark><br />
+같은 클래스 내부에서 @Transactional이 적용된 다른 메서드를 호출하면 트랜잭션이 적용되지 않습니다.<br />
+스프링 AOP는 외부 호출 시에만 적용되고, 내부 호출 시에는 적용되지 않기 때문입니다.</p>
 
 <hr />
 
-<h2 id="컨트롤러-매핑-어노테이션">컨트롤러 매핑 어노테이션</h2>
+<h2 id="클래스-레벨-어노테이션">클래스 레벨 어노테이션</h2>
+
+<h3 id="component">@Component</h3>
+<p>@Component를 클래스에 붙이면, XML 등에 직접 등록하지 않아도 스프링 컨테이너가 Bean으로 등록합니다.<br />
+Bean으로 등록된 클래스는 애플리케이션이 실행될 때 객체가 자동 생성되어 바로 사용 가능합니다.</p>
+
+<p>@Controller, @Service, @Repository는 @Component의 특수화된 형태입니다.</p>
+
+<h3 id="controller">@Controller</h3>
+<p>MVC 패턴에서 컨트롤러 클래스를 나타냅니다.<br />
+주로 JSP, Thymeleaf 등 View를 반환할 때 사용합니다.</p>
+
+<h3 id="restcontroller">@RestController</h3>
+<p>RESTful API를 제공하는 컨트롤러 클래스에 지정하면 좋습니다.<br />
+@RestController를 사용하면 내부적으로 모든 메서드에 @ResponseBody가 적용되어<br />
+뷰 리졸버를 거치지 않고 HTTP 응답 본문에 JSON, XML 등 데이터를 직렬화하여 반환하게 됩니다.</p>
+
+<h3 id="service">@Service</h3>
+<p>비즈니스 로직을 처리하는 서비스 계층 클래스에 사용합니다.</p>
+
+<h3 id="repository">@Repository</h3>
+<p>DAO 역할을 수행하는 데이터 접근 계층 클래스에 사용합니다.<br />
+스프링이 DB 관련 예외를 DataAccessException로 변환해줍니다.</p>
+
+<hr />
+
+<h2 id="메서드-레벨-어노테이션">메서드 레벨 어노테이션</h2>
 
 <h3 id="requestmapping">@RequestMapping</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@RequestMapping(value="/", method = RequestMethod.GET)

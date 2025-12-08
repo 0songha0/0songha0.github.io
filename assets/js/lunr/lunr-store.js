@@ -402,7 +402,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Spring 어노테이션 정리",
-        "excerpt":"클래스 레벨 어노테이션 @RestController HTTP 응답 본문을 직렬화하여 반환하므로, RESTful API를 제공하는 컨트롤러 클래스에 지정하면 좋습니다. 일반 @Controller와 달리 내부적으로 모든 method에 @ResponseBody가 붙게 됩니다. @Component Bean을 따로 등록하지 않아도 클래스 자체를 스프링 Bean으로 자동 등록합니다. 컨트롤러 매핑 어노테이션 @RequestMapping @RequestMapping(value=\"/\", method = RequestMethod.GET) @RequestMapping(value=\"/\", method = RequestMethod.POST) @RequestMapping(value=\"/\", method...","categories": ["web-dev"],
+        "excerpt":"트랜잭션 관리 어노테이션 @Transactional @Transactional을 사용하지 않으면, Mapper 호출 시마다 auto-commit 될 수 있습니다. @Transactional이 붙은 클래스는 모든 public 메서드에 @Transactional이 자동 적용됩니다. @Transactional이 적용된 메서드가 호출되면 프록시 기반 AOP가 가로채서 트랜잭션 경계를 설정하고, 스프링 애플리케이션 컨텍스트에 설정된 트랜잭션 매니저가 실제 트랜잭션의 시작, 커밋, 롤백을 관리합니다. @Transactional 사용 시 주의사항...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-02-08-1",
         "teaser": null
