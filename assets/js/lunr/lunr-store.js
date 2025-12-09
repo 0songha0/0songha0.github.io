@@ -402,7 +402,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Spring 어노테이션 정리",
-        "excerpt":"트랜잭션 관리 어노테이션 @Transactional @Transactional을 사용하지 않으면, Mapper 호출 시마다 auto-commit 될 수 있습니다. @Transactional이 붙은 클래스는 모든 public 메서드에 @Transactional이 자동 적용됩니다. @Transactional이 적용된 메서드가 호출되면 프록시 기반 AOP가 가로채서 트랜잭션 경계를 설정하고, 스프링 애플리케이션 컨텍스트에 설정된 트랜잭션 매니저가 실제 트랜잭션의 시작, 커밋, 롤백을 관리합니다. @Transactional 사용 시 주의사항...","categories": ["web-dev"],
+        "excerpt":"트랜잭션 관리 어노테이션 @Transactional 스프링에서 @Transactional을 사용하지 않으면, 스프링이 트랜잭션 경계를 관리하지 않습니다. DB 연결 설정에 따라 MyBatis Mapper 호출 시마다 auto-commit 될 수 있습니다. 여러 쿼리를 하나의 트랜잭션으로 묶으려면 @Transactional을 사용해야 합니다. @Transactional이 붙은 클래스는 모든 public 메서드에 @Transactional이 자동 적용됩니다. 스프링 트랜잭션 동작 원리 @Transactional이 적용된 메서드가 호출되면...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2023-02-08-1",
         "teaser": null
@@ -1026,7 +1026,7 @@ var store = [{
         "teaser": null
       },{
         "title": "CS 면접, 코딩테스트 알고리즘 종류 및 Java 코드 정리",
-        "excerpt":"알고리즘 도감 앱을 함께 보면, 각 알고리즘 동작을 그림으로 쉽게 이해하고 복습하기 좋습니다. 정렬 알고리즘 정의된 순서대로 데이터를 나열하는 방법입니다. 선택 정렬 배열의 왼쪽 끝에서부터 차례로, 선택된 최소값과 위치를 교환하며 정렬하는 알고리즘입니다. 정렬되지 않은 데이터가 많을수록 성능이 떨어지며, 시간복잡도가 O(n²) 입니다. 선택 정렬 코드 예시 int[] digits = { 5,...","categories": ["python-java"],
+        "excerpt":"알고리즘 도감 앱을 함께 보면, 각 알고리즘 동작을 그림으로 쉽게 이해하고 복습하기 좋습니다. 정렬 알고리즘 정의된 순서대로 데이터를 정렬하는 방법입니다. 버블 정렬 배열의 한쪽 끝에서부터, 서로 인접한 두 원소를 비교하고 위치를 교환하며 정렬하는 알고리즘입니다. 반대쪽 끝의 정렬된 원소들을 제외하고, 모두 정렬될 때까지 반복합니다. 코드가 단순하지만, 시간복잡도가 O(n²)으로 매우 느립니다. 버블...","categories": ["python-java"],
         "tags": [],
         "url": "/python-java/2024-05-10-1",
         "teaser": null
@@ -1458,7 +1458,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Spring Filter, Intercepter 공통점 및 차이점",
-        "excerpt":"스프링 필터, 인터셉터 공통점 전역 처리에 주로 사용됩니다. 컨트롤러 호출 전 요청을 가로채서 전처리를 할 수 있습니다. 컨트롤러 실행 후 응답에 후처리도 할 수 있습니다. 필터, 인터셉터는 여러 개 등록 시 순서 제어가 가능합니다. 스프링 필터, 인터셉터 차이점 Spring Filter 소속 : 톰캣 등 Servlet Container 실행 시점 : DispatcherServlet...","categories": ["web-dev"],
+        "excerpt":"스프링 필터, 인터셉터 공통점 필터, 인터셉터는 전역 처리에 주로 사용되고, 여러 개 등록 시 순서 제어가 가능합니다. 컨트롤러 호출 전 요청을 가로채서 전처리를 할 수 있습니다. 컨트롤러 실행 후 응답에 후처리도 할 수 있습니다. 스프링 필터, 인터셉터 차이점 Spring Filter 소속 : 톰캣 등 Servlet Container 실행 시점 : DispatcherServlet...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2025-09-12-1",
         "teaser": null

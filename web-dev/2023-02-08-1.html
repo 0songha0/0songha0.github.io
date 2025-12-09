@@ -470,11 +470,14 @@
         <h2 id="트랜잭션-관리-어노테이션">트랜잭션 관리 어노테이션</h2>
 
 <h3 id="transactional">@Transactional</h3>
-<p>@Transactional을 사용하지 않으면, Mapper 호출 시마다 auto-commit 될 수 있습니다.</p>
+<p>스프링에서 @Transactional을 사용하지 않으면, 스프링이 트랜잭션 경계를 관리하지 않습니다.<br />
+DB 연결 설정에 따라 MyBatis Mapper 호출 시마다 auto-commit 될 수 있습니다.<br />
+여러 쿼리를 하나의 트랜잭션으로 묶으려면 @Transactional을 사용해야 합니다.</p>
 
 <p>@Transactional이 붙은 클래스는 모든 public 메서드에 @Transactional이 자동 적용됩니다.</p>
 
-<p>@Transactional이 적용된 메서드가 호출되면 프록시 기반 AOP가 가로채서 트랜잭션 경계를 설정하고,<br />
+<p><mark>스프링 트랜잭션 동작 원리</mark><br />
+@Transactional이 적용된 메서드가 호출되면 프록시 기반 AOP가 가로채서 트랜잭션 경계를 설정하고,<br />
 스프링 애플리케이션 컨텍스트에 설정된 트랜잭션 매니저가 실제 트랜잭션의 시작, 커밋, 롤백을 관리합니다.</p>
 
 <p><mark>@Transactional 사용 시 주의사항</mark><br />
