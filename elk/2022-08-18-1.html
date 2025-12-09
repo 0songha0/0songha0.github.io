@@ -826,20 +826,22 @@ score(점수)가 높을수록 유사도 높은 document입니다.</p>
     <tr>
       <td>score = boost * idf * tf</td>
     </tr>
-&lt;/table&gt;
+  </tbody>
+</table>
 
-<mark>2. boost</mark>  
-관련성이 높은 필드나 키워드에 더하는 가중치이며, fields 속성의 필드명 뒤에 ^2 등 붙여서 가중치 부여 가능합니다.
+<p><mark>2. boost</mark><br />
+관련성이 높은 필드나 키워드에 더하는 가중치이며, fields 속성의 필드명 뒤에 ^2 등 붙여서 가중치 부여 가능합니다.</p>
 
-<mark>3. IDF</mark>  
-인덱스의 전체 document 내 용어 등장 빈도 (역문서 빈도) 이며, 낮을수록 연관성이 높습니다.
+<p><mark>3. IDF</mark><br />
+인덱스의 전체 document 내 용어 등장 빈도 (역문서 빈도) 이며, 낮을수록 연관성이 높습니다.</p>
 
 <table class="table_one">
   <tbody>
     <tr>
       <td>IDF = freq / (freq + k1 * (1 - b + b * dl / avgdl))</td>
     </tr>
-&lt;/table&gt;
+  </tbody>
+</table>
 <table class="table_2_left">
   <tbody>
     <tr>
@@ -861,15 +863,16 @@ score(점수)가 높을수록 유사도 높은 document입니다.</p>
   </tbody>
 </table>
 
-<mark>4. TF</mark>  
-해당 document 내 용어 등장 빈도 (용어빈도) 이며, 높을수록 연관성이 높습니다.
+<p><mark>4. TF</mark><br />
+해당 document 내 용어 등장 빈도 (용어빈도) 이며, 높을수록 연관성이 높습니다.</p>
 
 <table class="table_one">
   <tbody>
     <tr>
       <td>TF = log(1 + (N - n + 0.5) / (n + 0.5))</td>
     </tr>
-&lt;/table&gt;
+  </tbody>
+</table>
 <table class="table_2_left">
   <tbody>
     <tr>
@@ -882,7 +885,6 @@ score(점수)가 높을수록 유사도 높은 document입니다.</p>
     </tr>
   </tbody>
 </table>
-</tbody></table></tbody></table></tbody></table>
 
         
       </section>
