@@ -528,7 +528,7 @@ DB 관련하여 server.xml은 Resource 설정, context.xml은 ResourceLink 설�
 톰캣 실행 전 Maven Build를 먼저 실행해서 resources-프로파일명 폴더를 target/classes로 복사해야 합니다.</p>
 
 <p><mark>톰캣 실행 전 Maven Build 실행 방법</mark><br />
-우측 상단 Edit Configurations &gt; 추가된 Tomcat 선택 &gt; Server 탭 &gt; Before launch &gt; + &gt; Run Maven Goal &gt; Command line : clean package -Denv=프로파일명 또는 package -Denv=프로파일명 입력 &gt; OK &gt; Run Maven Goal ‘common component: clean package -Denv=프로파일명’이 Build artifact 전에 위치하도록 수정 &gt; Apply &gt; OK<br />
+우측 상단 Edit Configurations &gt; 추가된 Tomcat 선택 &gt; Server 탭 &gt; Before launch &gt; + &gt; Run Maven Goal &gt; Command line : clean package -Denv=프로파일명 또는 package -Denv=프로파일명 입력 &gt; OK &gt; 추가한 Maven Goal이 Build 전에 위치하도록 수정 &gt; Apply &gt; OK<br />
 Maven Build 시간이 많이 소요되므로, 지난 war 빌드 결과가 남아있는 경우에만 재빌드하는 것도 좋습니다.</p>
 
 <h3 id="브랜치-이동-후-톰캣-실행-에러-해결">브랜치 이동 후 톰캣 실행 에러 해결</h3>
