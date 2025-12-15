@@ -462,7 +462,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 네이버 클라우드 서버 콘솔 (NCP Console) 사용법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#ncp-콘솔-사용법">NCP 콘솔 사용법</a><ul><li><a href="#ncp-서버-정보-확인">NCP 서버 정보 확인</a></li><li><a href="#alb-로드밸런서-정보-확인">ALB 로드밸런서 정보 확인</a></li><li><a href="#alb-로드밸런서-target-확인">ALB 로드밸런서 Target 확인</a></li><li><a href="#ncp-서버-방화벽-acg-설정">NCP 서버 방화벽 ACG 설정</a></li><li><a href="#ncp-서버-이벤트-확인">NCP 서버 이벤트 확인</a></li></ul></li><li><a href="#ncp-트러블-슈팅">NCP 트러블 슈팅</a><ul><li><a href="#서버-요청-중-슬로우-쿼리-확인-방법">서버 요청 중 슬로우 쿼리 확인 방법</a></li><li><a href="#db-서버-과부화-학인-방법">DB 서버 과부화 학인 방법</a></li><li><a href="#db-장애-시점-모니터링-방법">DB 장애 시점 모니터링 방법</a></li></ul></li><li><a href="#ncp-톰캣-로그-관리">NCP 톰캣 로그 관리</a><ul><li><a href="#ncp-톰캣-로그-백업-방법">NCP 톰캣 로그 백업 방법</a></li></ul></li><li><a href="#ncp-db-백업-및-복원">NCP DB 백업 및 복원</a><ul><li><a href="#ncp-db-백업-방법">NCP DB 백업 방법</a></li><li><a href="#ncp-db-백업-설정-확인">NCP DB 백업 설정 확인</a></li><li><a href="#ncp-db-복원-방법">NCP DB 복원 방법</a></li><li><a href="#ncp-db-장애-시-복구-절차">NCP DB 장애 시 복구 절차</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#ncp-콘솔-사용법">NCP 콘솔 사용법</a><ul><li><a href="#ncp-서버-정보-확인">NCP 서버 정보 확인</a></li><li><a href="#alb-로드밸런서-정보-확인">ALB 로드밸런서 정보 확인</a></li><li><a href="#alb-로드밸런서-target-확인">ALB 로드밸런서 Target 확인</a></li><li><a href="#ncp-서버-방화벽-acg-설정">NCP 서버 방화벽 ACG 설정</a></li><li><a href="#ncp-서버-이벤트-확인">NCP 서버 이벤트 확인</a></li><li><a href="#ncp-sourcecommit-git-생성">NCP SourceCommit Git 생성</a></li><li><a href="#ncp-sourcecommit-git-계정-생성">NCP SourceCommit Git 계정 생성</a></li></ul></li><li><a href="#ncp-트러블-슈팅">NCP 트러블 슈팅</a><ul><li><a href="#서버-요청-중-슬로우-쿼리-확인-방법">서버 요청 중 슬로우 쿼리 확인 방법</a></li><li><a href="#db-서버-과부화-학인-방법">DB 서버 과부화 학인 방법</a></li><li><a href="#db-장애-시점-모니터링-방법">DB 장애 시점 모니터링 방법</a></li></ul></li><li><a href="#ncp-톰캣-로그-관리">NCP 톰캣 로그 관리</a><ul><li><a href="#ncp-톰캣-로그-백업-방법">NCP 톰캣 로그 백업 방법</a></li></ul></li><li><a href="#ncp-db-백업-및-복원">NCP DB 백업 및 복원</a><ul><li><a href="#ncp-db-백업-방법">NCP DB 백업 방법</a></li><li><a href="#ncp-db-백업-설정-확인">NCP DB 백업 설정 확인</a></li><li><a href="#ncp-db-복원-방법">NCP DB 복원 방법</a></li><li><a href="#ncp-db-장애-시-복구-절차">NCP DB 장애 시 복구 절차</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -497,6 +497,13 @@ ACG 인바운드 설정 시 로드밸런서 도메인은 허용할 필요 없고
 <p>NCP Console 좌측 Server 메뉴 &gt; Event 메뉴<br />
 각 서버 인스턴스에 자동 정지 및 시작 이벤트가 수행된 시각을 알 수 있습니다.<br />
 수행예정 시각과 별개로, 수행완료 시각이 실제 완료 시간입니다.</p>
+
+<h3 id="ncp-sourcecommit-git-생성">NCP SourceCommit Git 생성</h3>
+<p>NCP Concole 좌측 Services 메뉴 &gt; Commit 검색 &gt; SourceCommit 선택 &gt; 리포지토리 생성 버튼 &gt; 리포지토리 이름 : 프로젝트명 작성, 리포지토리 설명 : 프로젝트 설명 작성, 초기화 설정 Add a READEME 체크 해제, Add a .gitignore: None 선택 &gt; 다음 &gt; 다음 &gt; 생성</p>
+
+<h3 id="ncp-sourcecommit-git-계정-생성">NCP SourceCommit Git 계정 생성</h3>
+<p>NCP Concole 좌측 Services 메뉴 &gt; Commit 검색 &gt; SourceCommit 선택 &gt; GIT 계정/GIT SSH 설정 버튼 &gt; User name : 로그인 되어있는 서브 계정 이름으로 고정됨, Password : 신규 입력 &gt; 적용<br />
+서브계정 1개당 Git 계정 1개만 생성할 수 있습니다.</p>
 
 <hr />
 

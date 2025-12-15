@@ -462,7 +462,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 윈도우 cmd에서 Git 사용법 / Git 명령어 정리 / Git 에러 해결</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#윈도우-cmd에서-git-사용법">윈도우 cmd에서 Git 사용법</a><ul><li><a href="#윈도우-git-설치-방법">윈도우 Git 설치 방법</a></li><li><a href="#git-원격-브랜치-소스-가져오기">Git 원격 브랜치 소스 가져오기</a></li><li><a href="#git-계정-인증">Git 계정 인증</a></li><li><a href="#git-유저명-이메일-관리">Git 유저명, 이메일 관리</a></li><li><a href="#로컬-소스로-덮어쓰기-push">로컬 소스로 덮어쓰기 push</a></li><li><a href="#현재-경로에-연결된-git-주소-확인">현재 경로에 연결된 Git 주소 확인</a></li><li><a href="#원격-저장소-소스-내려받기">원격 저장소 소스 내려받기</a></li><li><a href="#작업한-로컬-소스-올리기">작업한 로컬 소스 올리기</a></li><li><a href="#git-커밋-내역-확인">Git 커밋 내역 확인</a></li><li><a href="#마지막-커밋-삭제">마지막 커밋 삭제</a></li><li><a href="#브랜치-이동">브랜치 이동</a></li><li><a href="#브랜치-강제-이동">브랜치 강제 이동</a></li><li><a href="#git-브랜치-확인">Git 브랜치 확인</a></li><li><a href="#브랜치-삭제">브랜치 삭제</a></li><li><a href="#브랜치-병합">브랜치 병합</a></li><li><a href="#git-커밋-메시지-검색">Git 커밋 메시지 검색</a></li><li><a href="#git-stash-전체-삭제">Git Stash 전체 삭제</a></li></ul></li><li><a href="#git-변경사항-폴더-이동-방법">Git 변경사항 폴더 이동 방법</a><ul><li><a href="#git-patch-파일-생성">Git patch 파일 생성</a></li><li><a href="#공백-관련-경고-미표시-설정">공백 관련 경고 미표시 설정</a></li><li><a href="#git-patch-파일-적용">Git patch 파일 적용</a></li></ul></li><li><a href="#git-에러-해결">Git 에러 해결</a><ul><li><a href="#push-시-에러-해결">push 시 에러 해결</a></li></ul></li><li><a href="#commit-제외-폴더-및-파일-설정">Commit 제외 폴더 및 파일 설정</a></li></ul>
+              <ul class="toc__menu"><li><a href="#윈도우-cmd에서-git-사용법">윈도우 cmd에서 Git 사용법</a><ul><li><a href="#윈도우-git-설치-방법">윈도우 Git 설치 방법</a></li><li><a href="#git-원격-브랜치-소스-가져오기">Git 원격 브랜치 소스 가져오기</a></li><li><a href="#git-계정-인증">Git 계정 인증</a></li><li><a href="#git-유저명-이메일-관리">Git 유저명, 이메일 관리</a></li><li><a href="#로컬-소스로-덮어쓰기-push">로컬 소스로 덮어쓰기 push</a></li><li><a href="#현재-경로에-연결된-git-주소-확인">현재 경로에 연결된 Git 주소 확인</a></li><li><a href="#원격-저장소-소스-내려받기">원격 저장소 소스 내려받기</a></li><li><a href="#작업한-로컬-소스-올리기">작업한 로컬 소스 올리기</a></li><li><a href="#git-커밋-내역-확인">Git 커밋 내역 확인</a></li><li><a href="#마지막-커밋-삭제">마지막 커밋 삭제</a></li><li><a href="#브랜치-이동">브랜치 이동</a></li><li><a href="#브랜치-강제-이동">브랜치 강제 이동</a></li><li><a href="#git-브랜치-확인">Git 브랜치 확인</a></li><li><a href="#브랜치-삭제">브랜치 삭제</a></li><li><a href="#브랜치-병합">브랜치 병합</a></li><li><a href="#git-커밋-메시지-검색">Git 커밋 메시지 검색</a></li><li><a href="#git-stash-전체-삭제">Git Stash 전체 삭제</a></li></ul></li><li><a href="#git-변경사항-폴더-이동-방법">Git 변경사항 폴더 이동 방법</a><ul><li><a href="#git-patch-파일-생성">Git patch 파일 생성</a></li><li><a href="#공백-관련-경고-미표시-설정">공백 관련 경고 미표시 설정</a></li><li><a href="#git-patch-파일-적용">Git patch 파일 적용</a></li><li><a href="#git-이관-방법">Git 이관 방법</a></li></ul></li><li><a href="#git-에러-해결">Git 에러 해결</a><ul><li><a href="#push-시-에러-해결">push 시 에러 해결</a></li></ul></li><li><a href="#commit-제외-폴더-및-파일-설정">Commit 제외 폴더 및 파일 설정</a></li></ul>
 
             </nav>
           </aside>
@@ -680,6 +680,27 @@ git apply changes.patch
 </code></pre></div></div>
 <p>신규 프로젝트 폴더 안에 changes.patch 파일을 옮기고, apply 하여 적용합니다.<br />
 이미 사용한 patch 파일은 삭제하는 것이 좋습니다.</p>
+
+<h3 id="git-이관-방법">Git 이관 방법</h3>
+<p>AWS CodeCommit Git을 복제하여 NCP SourceCommit Git에 push 하였습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkgit gitMigration
+cd gitMigration
+</code></pre></div></div>
+<p>Git 마이그레이션 전용 임시 폴더를 생성합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone --mirror https://git-codecommit.ap-northeast-2.amazonaws.com/v1/repos/리포지토리명
+cd 리포지토리명.git
+</code></pre></div></div>
+<p>기존 AWS CodeCommit Git의 모든 브랜치, 태그, refs 등을 완전 복제합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote add ncp https://devtools.gov-ncloud.com/1234/리포지포리명.git
+git push --mirror ncp
+</code></pre></div></div>
+<p>복제된 Git 폴더에 NCP SourceCommit Git 리포지토리를 ncp라는 별칭의 새 원격 저장소로 추가합니다.<br />
+추가된 NCP Git 원격 저장소에 기존 프로젝트 코드 및 히스토리를 복제하여 Push 합니다.<br />
+push 시 나오는 Git Credential Manager 팝업에 신규 NCP Git 사용자명 및 암호 입력이 필요합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd workspace
+git clone https://devtools.gov-ncloud.com/1234/리포지포리명.git
+</code></pre></div></div>
+<p>기존 작업 폴더에 이관한 NCP Git 프로젝트 코드를 내려받습니다.</p>
 
 <hr />
 
