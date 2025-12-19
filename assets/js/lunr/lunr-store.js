@@ -95,6 +95,12 @@ var store = [{
         "url": "/it-tip/2022-06-22-1",
         "teaser": null
       },{
+        "title": "크롬 F12 개발자도구 성능 관련 탭 사용법",
+        "excerpt":"Network 탭 사용법 네트워크 탭에서 웹 페이지 리소스가 예상대로 다운로드, 업로드 되는지 확인할 수 있습니다. 리소스 목록의 최상위 리소스는 일반적으로 HTML 문서이고 네트워크 활동이 시간순으로 기록됩니다. 리소스명, 응답코드 상태, 리소스 유형, 요청을 발생시킨 코드, 자원의 크기 및 시간을 확인할 수 있습니다. 폭포 열 활성화 방법 리소스 목록 우클릭 &gt; Waterfall...","categories": ["it-tip"],
+        "tags": [],
+        "url": "/it-tip/2022-06-22-2",
+        "teaser": null
+      },{
         "title": "Java 로깅 라이브러리 종류 / lombok 및 slf4j를 이용한 log4j2 사용 방법",
         "excerpt":"System.out.println 대신 Logger 사용 이유 System.out.println은 IO 자원을 사용하기 때문에 리소스를 많이 사용하여 성능 저하가 올 수 있습니다. 그래서 System.out.println는 운영 반영 시 직접 전부 삭제하고 올려야 하기 때문에, 로그 레벨에 따라 출력 여부를 설정할 수 있고 로깅 성능이 좋은 Logger를 사용하여 개발하는 것이 좋습니다. Java 로깅 라이브러리 종류 log4j...","categories": ["web-dev"],
         "tags": [],

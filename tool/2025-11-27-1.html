@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 253</span>
+      <span class="nav__total">🌴 Total Posts: 254</span>
     </li> -->
     
     
@@ -523,12 +523,14 @@ Claude code가 프로젝트를 분석해서 만드는 CLAUDE.md 파일이 생기
 claude는 항상 CLAUDE.md 파일을 참고하기 때문에 내용 추가를 요청하였습니다.</p>
 
 <p><mark>CLAUDE.md 파일에 추가하면 좋은 내용</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CLAUDE.md 파일에 아래 내용을 중복 없이 추가해줘
-- 항상 하드코딩 지양
-- 효율적인 클린한 코드로 개발
-- 불필요한 코드는 제거
-- Controller는 요청/응답 처리, Service 호출만 담당
-- 모든 비즈니스 로직은 Service 계층에 작성
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CLAUDE.md 파일에 아래 코딩 규칙을 중복 없이 추가해줘
+- 하드코딩을 지양하고, 재사용 가능하도록 공통화 및 설정화를 우선한다.
+- 중복을 제거하고, 성능과 유지보수를 고려한 효율적인 코드로 개발한다.
+- 최신 문법을 사용하며, 공식 문서에서 권장하는 코드 스타일을 준수한다.
+- 가독성을 최우선으로 하여 불필요한 코드와 복잡도를 제거한다.
+- Controller는 요청/응답 처리와 Service 호출만 담당한다.
+- 모든 비즈니스 로직은 Service 계층에 작성한다.
+- 서브쿼리 사용을 지양하고, 가능하면 JOIN 기반으로 쿼리를 작성한다.
 </code></pre></div></div>
 <p>문자열 상수 등을 코드에 직접 작성하지 않고, 설정 파일로 분리합니다.<br />
 신규 로직을 작성하기 전에 기존 유틸, 공동 함수 등을 먼저 확인하고 재사용합니다.<br />
