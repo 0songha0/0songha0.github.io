@@ -533,7 +533,7 @@ Bean으로 등록된 클래스는 애플리케이션이 실행될 때 객체가 
 
 <p><mark>URL로 ID 파라미터 받는 방법</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@GetMapping("/update/{id}")
-public String getUpdatePage(@PathVariable Integer id, @RequestParam Map&lt;String,Object&gt; params) throws Exception {
+public String getUpdatePage(@PathVariable("id") Integer id, @RequestParam Map&lt;String,Object&gt; params) throws Exception {
 
     log.info("아이디 : " + id);
 
