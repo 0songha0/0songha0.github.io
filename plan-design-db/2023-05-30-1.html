@@ -604,7 +604,7 @@ JDBC 타임아웃 설정이 더 일반적이나, 둘 다 설정하는 것이 안
 </table>
 
 <h3 id="인덱스-생성-쿼리">인덱스 생성 쿼리</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE INDEX 인덱스명 ON 테이블명 (컬럼명);
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE INDEX 인덱스명 ON 테이블명 (컬럼명1, 컬럼명2);
 -- 인덱스명 예시 : idx_테이블명_컬럼명1_컬럼명2 또는 idx_테이블명_순번
 </code></pre></div></div>
 <p>테이블 잠금이 발생할 수 있으므로, 운영 중 인덱스 생성은 지양해야 합니다.<br />
