@@ -924,9 +924,17 @@ public class Solution {
 
     // 리스트 오름차순 정렬 : O(nlogn)
     Collections.sort(list);
+    또는
+    list.sort(Comparator.naturalOrder());
+    또는
+    list.sort((a, b) -&gt; Integer.compare(a, b));
 
     // 리스트 내림차순 정렬 : O(nlogn)
     Collections.sort(list, Collections.reverseOrder());
+    또는
+    list.sort(Comparator.reverseOrder());
+    또는
+    list.sort((a, b) -&gt; Integer.compare(b, a));
 
     // 리스트의 인덱스 1부터 5 앞까지의 요소를 정렬
     Collections.sort(list.subList(1, 5));
@@ -1556,6 +1564,8 @@ ArrayList&lt;클래스명&gt; 클래스list = new ArrayList&lt;&gt;();
 
 // list 내부 클래스의 compareTo 함수 기준 정렬
 Collections.sort(클래스list);
+또는
+클래스list.sort(null); // Comparator 매개변수를 전달하지 않고, 기본 정렬 사용
 </code></pre></div></div>
 
 <p><mark>객체 배열 정렬</mark></p>
