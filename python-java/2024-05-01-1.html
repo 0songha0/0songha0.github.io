@@ -802,8 +802,14 @@ public class Solution {
     Arrays.sort(배열, (객체명 o1, 객체명 o2) -&gt; Integer.compare(o1.int변수명, o2.int변수명));
     // o1 &gt; o2면 1을 반환하여 서로의 위치를 변경합니다.
     
-    // 배열 깊은 복사 ★
-    int[] clone = arr.clone();
+    // 배열 복사 ★
+    int[] arr2 = arr.clone();
+    또는
+    arr2 = Arrays.copyOf(arr, arr.length); // 길이 변경 가능
+
+    // 배열 부분 복사
+    int[] arr2 = new int[arr.length+1];
+    System.arraycopy(arr, 0, arr2, 1, arr.length); // 인덱스 0번째를 1번째로 복사
 
     // 배열 자르기 (i번째부터 j번째까지)
     int[] slice = Arrays.copyOfRange(arr, i-1, j);
