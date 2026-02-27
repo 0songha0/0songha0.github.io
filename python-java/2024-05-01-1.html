@@ -942,6 +942,13 @@ public class Solution {
     또는
     list.sort((a, b) -&gt; Integer.compare(b, a));
 
+    // int 배열 리스트 정렬기준 커스텀
+    ArrayList&lt;int[]&gt; list = new ArrayList&lt;&gt;();
+    list.add(new int[]{ 1, 2 });
+    list.add(new int[]{ 5, 3 });
+    list.sort((a, b) -&gt; a[0] != b[0] ? Integer.compare(a[0], b[0]) : Integer.compare(b[1], a[1]));
+    // 첫번째 요소 기준으로 오름차순 후 두번째 요소 기준으로 내림차순
+
     // 리스트의 인덱스 1부터 5 앞까지의 요소를 정렬
     Collections.sort(list.subList(1, 5));
   }
