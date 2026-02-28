@@ -776,18 +776,21 @@ public class Solution {
     // 배열 오름차순 정렬 : O(nlogn)
     Arrays.sort(arr);
 
+    // 내림차순 정렬 방법 1
     // 기본형 int 배열은 Array.sort 시 2번째 인자로 Comparator를 받을 수 없어서 내림차순 정렬 불가
-    // 프리미티브 타입 int[]를 객체 타입 Integer[]로 변환 후
+    // 오름차순 정렬된 프리미티브 타입 int[]를 객체 타입 Integer[]로 변환 후
     Integer[] Integer_arr = new Integer[arr.length];
     for (int i = 0; i &lt; arr.length; i++) {
       Integer_arr[i] = arr[i];
     }
-    // 내림차순 정렬
     Arrays.sort(Integer_arr, Collections.reverseOrder());
-    또는
+
+    // 내림차순 정렬 방법 2
+    // 객체 타입만 정렬 가능한 Collections.reverseOrder() 대신 람다 활용
     Arrays.sort(Integer_arr, (a, b) -&gt; Integer.compare(b, a));
 
-    // 가장 효율적인 내림차순 정렬 방법 (오름차순 정렬된 배열에서 앞/뒤 인덱스 교환)
+    // 내림차순 정렬 방법 3 (가장 효율적)
+    // 오름차순 정렬된 배열에서 투 포인터로 앞/뒤 인덱스 교환
     for (int i = 0; i &lt; arr.length / 2; i++) {
         int tmp = arr[i];
         arr[i] = arr[arr.length - 1 - i];
