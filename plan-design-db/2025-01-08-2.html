@@ -536,6 +536,12 @@ FROM
 	테이블명
 </code></pre></div></div>
 
+<p><mark>컬럼 내 JSON 값 변경</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UPDATE 테이블명
+SET FILE_STNG = JSON_SET(컬럼명, '$.JSON키', '값')
+WHERE 검색조건
+</code></pre></div></div>
+
 <h3 id="여러-컬럼-데이터-병합">여러 컬럼 데이터 병합</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT
 	CONCAT(컬럼명1, 컬럼명2)
@@ -610,6 +616,7 @@ FROM
 FROM 사용자로그테이블명
 WHERE 사용자ID컬럼명 = '사용자ID';
 </code></pre></div></div>
+<p>위 쿼리는 정렬을 하지 않아서, 인덱스가 없는 테이블이면 ORDER BY + LIMIT 1 을 사용한 쿼리보다 훨씬 빠릅니다.</p>
 
         
       </section>
