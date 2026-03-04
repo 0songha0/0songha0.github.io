@@ -1522,4 +1522,10 @@ var store = [{
         "tags": [],
         "url": "/tool/2025-11-27-1",
         "teaser": null
+      },{
+        "title": "이미지 모달 팝업 및 일주일 간 보지 않기 기능 개발",
+        "excerpt":"이미지 모달 팝업 개발 모달 팝업 HTML &lt;div class=\"dim\" id=\"mainModalDim\"&gt;&lt;/div&gt; &lt;div id=\"mainModalPop\"&gt; &lt;div id=\"mainModalInner\" role=\"document\"&gt; &lt;div id=\"mainModalContent\"&gt; &lt;div id=\"mainModalImgWrap\"&gt; &lt;div id=\"mainModalTopBar\"&gt; &lt;label id=\"mainModalWeekLabel\" for=\"mainModalWeekChk\"&gt; &lt;input type=\"checkbox\" id=\"mainModalWeekChk\"&gt; &lt;span id=\"mainModalChkIcon\"&gt;&lt;svg width=\"12\" height=\"10\" viewBox=\"0 0 12 10\"&gt;&lt;polyline points=\"1.5,5 4.5,8 10.5,1.5\" fill=\"none\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/&gt;&lt;/svg&gt;&lt;/span&gt; 일주일 간 보지 않기 &lt;/label&gt; &lt;button type=\"button\"...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2026-03-04-1",
+        "teaser": null
       }]
