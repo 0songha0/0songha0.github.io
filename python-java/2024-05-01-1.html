@@ -800,10 +800,14 @@ public class Solution {
     // 배열의 인덱스 1부터 4까지의 요소를 정렬
     Arrays.sort(arr, 1, 5);
 
-    // 람다식은 한 번만 실행할 목적으로 코드를 간결하게 표현하는 익명 함수입니다.
-    // 배열에 저장된 객체의 int 변수 값을 람다 함수로 받아서 비교 후 오름차순 정렬합니다.
+    // 2차원 배열 정렬
+    Arrays.sort(arrs, (a, b) -&gt; Integer.compare(a[0], b[0]));
+    // 2차원 배열 내 0번째 요소 기준으로 오름차순 정렬
+
+    // 객체 배열 정렬
     Arrays.sort(배열, (객체명 o1, 객체명 o2) -&gt; Integer.compare(o1.int변수명, o2.int변수명));
-    // o1 &gt; o2면 1을 반환하여 서로의 위치를 변경합니다.
+    // 배열에 저장된 객체의 int 변수 값을 람다 함수로 받아서 비교 후 오름차순 정렬합니다.
+    // o1.int변수명 &gt; o2.int변수명이면, 양수를 반환하여 o1이 o2보다 뒤에 오도록 정렬됩니다.
     
     // 배열 복사 ★
     int[] arr2 = arr.clone();
@@ -978,6 +982,9 @@ list.add("값");
 // 연결리스트 중간 원소 추가 : O(n)
 list.add(인덱스, "값");
 
+// 연결리스트 오름차순 정렬 : O(nlogn)
+Collections.sort(list);
+
 // 연결리스트 중간 원소 삭제 : O(n)
 list.remove("값");
 
@@ -987,6 +994,14 @@ list.indexOf("값");
 // 연결리스트 3번째 원소 원소 탐색 : O(n)
 // 앞 원소부터 순차적으로 타고 들어가서 느립니다.
 list.get(2);
+
+// 연결리스트 0번째 자료 제거 후 반환
+list.pollFirst();
+
+// 연결리스트가 비어있지 않으면, 0번째 요소 값 확인 및 비교
+if (!list.isEmpty() &amp;&amp; "비교값".equals(list.peek())) {
+  
+}
 
 // 연결리스트 전체 삭제
 list.clear();
