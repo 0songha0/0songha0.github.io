@@ -528,7 +528,7 @@
 
     // '일주일 간 보지 않기' 체크박스 토글 이벤트
     $('#mainModalWeekChk').on('change', function(){
-      var $icon = $('#mainModalChkIcon');
+      const $icon = $('#mainModalChkIcon');
       if ($(this).is(':checked')) {
         $icon.css('background', '#fff').find('svg').css('opacity', '1');
       } else {
@@ -540,7 +540,7 @@
     $('#mainModalClose').on('click', function(){
       // '일주일 간 보지 않기' 체크 시 7일 뒤 만료되는 쿠키 저장
       if ($('#mainModalWeekChk').is(':checked')) {
-        var expires = new Date();
+        const expires = new Date();
         expires.setDate(expires.getDate() + 7);
         document.cookie = 'mainModalHideWeek=Y; path=/; expires=' + expires.toUTCString();
       }
