@@ -462,7 +462,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 리눅스 톰캣 설치 및 설정 방법 / 톰캣 실행 에러 해결</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#리눅스-톰캣-설치-방법">리눅스 톰캣 설치 방법</a><ul><li><a href="#톰캣-jdk-설치-파일-준비">톰캣, JDK 설치 파일 준비</a></li><li><a href="#톰캣-설치-방법">톰캣 설치 방법</a></li><li><a href="#jdk-설치-방법">JDK 설치 방법</a></li></ul></li><li><a href="#톰캣-초기-설정-방법">톰캣 초기 설정 방법</a><ul><li><a href="#리눅스-환경변수-설정">리눅스 환경변수 설정</a></li><li><a href="#catalinaout-톰캣-로그-날짜별-생성-설정">catalina.out 톰캣 로그 날짜별 생성 설정</a></li><li><a href="#30일-이상-톰캣-로그-파일-삭제-설정">30일 이상 톰캣 로그 파일 삭제 설정</a></li><li><a href="#톰캣-context-설정">톰캣 Context 설정</a></li><li><a href="#톰캣-db-연결-설정">톰캣 DB 연결 설정</a></li><li><a href="#톰캣-폴더-소유자-변경">톰캣 폴더 소유자 변경</a></li></ul></li><li><a href="#기타-톰캣-설정">기타 톰캣 설정</a><ul><li><a href="#톰캣-로그-레벨-변경">톰캣 로그 레벨 변경</a></li><li><a href="#log4j2-로그-경로-설정">log4j2 로그 경로 설정</a></li><li><a href="#톰캣-최대-파라미터-수-변경">톰캣 최대 파라미터 수 변경</a></li></ul></li><li><a href="#톰캣-실행-및-종료">톰캣 실행 및 종료</a><ul><li><a href="#톰캣-실행">톰캣 실행</a></li><li><a href="#톰캣-실행-확인">톰캣 실행 확인</a></li><li><a href="#톰캣-종료">톰캣 종료</a></li></ul></li><li><a href="#톰캣-접속-테스트">톰캣 접속 테스트</a></li><li><a href="#톰캣-에러-해결">톰캣 에러 해결</a></li><li><a href="#톰캣-버전-확인">톰캣 버전 확인</a><ul><li><a href="#톰캣-버전-확인-스크립트-실행">톰캣 버전 확인 스크립트 실행</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#리눅스-톰캣-설치-방법">리눅스 톰캣 설치 방법</a><ul><li><a href="#톰캣-jdk-설치-파일-준비">톰캣, JDK 설치 파일 준비</a></li><li><a href="#톰캣-설치-방법">톰캣 설치 방법</a></li><li><a href="#jdk-설치-방법">JDK 설치 방법</a></li></ul></li><li><a href="#톰캣-초기-설정-방법">톰캣 초기 설정 방법</a><ul><li><a href="#리눅스-환경변수-설정">리눅스 환경변수 설정</a></li><li><a href="#catalinaout-톰캣-로그-날짜별-생성-설정">catalina.out 톰캣 로그 날짜별 생성 설정</a></li><li><a href="#30일-이상-톰캣-로그-파일-삭제-설정">30일 이상 톰캣 로그 파일 삭제 설정</a></li><li><a href="#톰캣-context-설정">톰캣 Context 설정</a></li><li><a href="#톰캣-db-연결-설정">톰캣 DB 연결 설정</a></li><li><a href="#톰캣-폴더-소유자-변경">톰캣 폴더 소유자 변경</a></li></ul></li><li><a href="#기타-톰캣-설정">기타 톰캣 설정</a><ul><li><a href="#톰캣-로그-레벨-변경">톰캣 로그 레벨 변경</a></li><li><a href="#log4j2-로그-경로-설정">log4j2 로그 경로 설정</a></li><li><a href="#톰캣-최대-파라미터-수-변경">톰캣 최대 파라미터 수 변경</a></li><li><a href="#톰캣-세션-타임아웃-시간-설정">톰캣 세션 타임아웃 시간 설정</a></li></ul></li><li><a href="#톰캣-실행-및-종료">톰캣 실행 및 종료</a><ul><li><a href="#톰캣-실행">톰캣 실행</a></li><li><a href="#톰캣-실행-확인">톰캣 실행 확인</a></li><li><a href="#톰캣-종료">톰캣 종료</a></li></ul></li><li><a href="#톰캣-접속-테스트">톰캣 접속 테스트</a></li><li><a href="#톰캣-에러-해결">톰캣 에러 해결</a></li><li><a href="#톰캣-버전-확인">톰캣 버전 확인</a><ul><li><a href="#톰캣-버전-확인-스크립트-실행">톰캣 버전 확인 스크립트 실행</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -847,6 +847,21 @@ FATAL &gt; ERROR &gt; WARN &gt; INFO &gt; DEBUG &gt; TRACE</mark></mark></p>
 
 <p>connectionTimeout 설정은 톰캣 요청 타임아웃 시간으로, 기본값은 20초(20,000ms) 입니다.<br />
 톰캣 요청이 끊어져도 DB 쿼리는 계속 수행되므로 JDBC 타임아웃 시간도 30초 정도로 설정하는 것이 좋습니다.</p>
+
+<h3 id="톰캣-세션-타임아웃-시간-설정">톰캣 세션 타임아웃 시간 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;session-config&gt;
+    &lt;session-timeout&gt;30&lt;/session-timeout&gt;
+&lt;/session-config&gt;
+</code></pre></div></div>
+<p>web.xml에서 session=timeout 옵션을 찾아 기본 시간 30분에서 원하는 시간으로 변경합니다.<br />
+세션 시간이 너무 길면 보안에 좋지 않아 주의가 필요합니다.</p>
+
+<p><mark>Java 코드로 세션 시간 확인 방법</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>httpSession.getMaxInactiveInterval()
+// 1800 = 30분 / 3600 = 60분
+</code></pre></div></div>
+<p>톰캣 conf 폴더 내 web.xml, 프로젝트 WEB-INF 폴더 내 web.xml 둘 다 session-timeout 설정이 있다면,<br />
+프로젝트 내부에 있는 web.xml의 session-timeout 시간이 우선 적용됩니다.</p>
 
 <hr />
 
