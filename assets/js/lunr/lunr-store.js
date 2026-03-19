@@ -1530,7 +1530,7 @@ var store = [{
         "teaser": null
       },{
         "title": "윈도우 Codex 앱 설치 및 Codex AI 사용 방법",
-        "excerpt":"Codex AI란? chatGPT를 제공하는 OpenAI에서 만든 코딩 어시스턴트입니다. Codex AI 유료 사용 후기 작업을 단계적으로 나눠서 처리하여 Claude Code 보다 체감 작업 속도가 느렸습니다. 정렬 순서를 SQL이 아니라 Java 서비스에서 변경해서 비효율적으로 느껴졌고, 컨트롤러에서 범용적으로 사용중인 객체의 import 문을 제거하여 오류가 발생하기도 하였습니다. 윈도우 Codex 설치 방법 종류 IntelliJ 최신버전에서...","categories": ["tool"],
+        "excerpt":"Codex AI란? chatGPT를 제공하는 OpenAI에서 만든 코딩 어시스턴트입니다. Codex AI 유료 사용 후기 작업을 단계적으로 나눠서 처리하여 Claude Code 보다 체감 작업 속도가 느렸습니다. 정렬 순서를 SQL이 아니라 Java 서비스에서 변경해 비효율적으로 느껴졌고, 복잡한 정렬 기준을 모두 반영하지 않아서 결과 순서가 뒤죽박죽으로 나왔습니다. 컨트롤러에서 범용적으로 사용 중인 객체의 import 문을...","categories": ["tool"],
         "tags": [],
         "url": "/tool/2026-03-19-1",
         "teaser": null
