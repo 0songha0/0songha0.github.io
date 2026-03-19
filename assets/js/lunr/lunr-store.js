@@ -1528,4 +1528,10 @@ var store = [{
         "tags": [],
         "url": "/web-dev/2026-03-04-1",
         "teaser": null
+      },{
+        "title": "윈도우 Codex 앱 설치 및 Codex AI 사용 방법",
+        "excerpt":"Codex AI란? chatGPT를 제공하는 OpenAI에서 만든 코딩 어시스턴트입니다. 작업을 단계적으로 나눠서 처리하여 Claude Code 보다 작업 속도가 느리게 느껴졌습니다. 윈도우 Codex 설치 방법 종류 IntelliJ 최신버전에서 플러그인으로 설치 exe 파일으로 Codex 앱 설치 cmd 창에서 npm 설치 후 cli 명령어로 설치 윈도우 Codex 앱 설치 방법 윈도우 Codex 앱 다운로드...","categories": ["tool"],
+        "tags": [],
+        "url": "/tool/2026-03-19-1",
+        "teaser": null
       }]
