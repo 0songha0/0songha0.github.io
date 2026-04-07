@@ -720,7 +720,7 @@ var store = [{
         "teaser": null
       },{
         "title": "SourceTree 설치 / GUI 툴 소스트리에서 Git 사용법",
-        "excerpt":"SourceTree 설치 https://www.sourcetreeapp.com 소스트리 설치 시 Bitbucket 선택 창에서 건너뛰기를 누르고, Mercurial 체크를 해제해야 합니다. Git에 Push 할 사용자명, 이메일주소 입력 후 SSH 키 선택 창에서 아니오를 선택합니다. 소스트리 사용법 프로젝트에 Git 저장소 생성 방법 상단 + 탭 &gt; Create &gt; 목적지 경로: 탐색하여 프로젝트 폴더 선택 &gt; 저장소명 입력...","categories": ["tool"],
+        "excerpt":"SourceTree 설치 https://www.sourcetreeapp.com 소스트리 설치 시 Bitbucket 선택 창에서 건너뛰기를 누르고, Mercurial 체크를 해제해야 합니다. Git에 Push 할 사용자명, 이메일주소 입력 후 SSH 키 선택 창에서 아니오를 선택합니다. 소스트리 사용법 Git 원격 리포지터리 내려받기 상단 + 탭 &gt; Clone &gt; 소스경로/URL : Git 저장소 URL 입력 &gt; 목적지 경로 :...","categories": ["tool"],
         "tags": [],
         "url": "/tool/2023-10-31-1",
         "teaser": null
