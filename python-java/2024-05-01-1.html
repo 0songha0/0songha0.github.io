@@ -1528,7 +1528,7 @@ for (int i = 0; i &lt; 간선수; i++) {
 <p>그래프를 인접 행렬 (2차원 배열) 형태로 저장하면 노드가 많고 간선이 적을수록 메모리가 낭비됩니다.<br />
 간선이 적으면 인접 리스트 형태로 현재 노드에서 갈 수 있는 노드만 저장하는 것이 좋습니다.</p>
 
-<p><mark>인접 리스트 그래프 구현</mark></p>
+<p><mark>인접 리스트 그래프 구현 (Node)</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 노드 클래스 정의
 class Node {
   int vertex;
@@ -1561,6 +1561,35 @@ for (int i = 0; i &lt; 간선수; i++) {
   graph.get(nextVertex).add(new Node(curVertex, cost));
 }
 </code></pre></div></div>
+
+<p><mark>인접 리스트 그래프 구현 (int[])</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>List&lt;List&lt;int[]&gt;&gt; graph = new ArrayList&lt;&gt;();
+
+// i번째 List 꺼내서 int 배열 원소 추가
+list.get(인덱스).add(new int[]{ nextVertex, cost });
+
+// i번째에서 갈 수 있는 다음 정점들 순회
+for (int[] next : graph.get(u)) {
+  int v = next[0];
+  int cost = next[1];
+}
+</code></pre></div></div>
+
+<p><mark>인접 리스트 그래프 구현 (Map-Set)</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Map&lt;Integer, Set&lt;Integer&gt;&gt; graph = new HashMap&lt;&gt;();
+
+// Map에 키가 없으면 키 생성 후 Set 저장
+graph.putIfAbsent("키", new HashSet&lt;&gt;());
+
+// Map에서 키에 해당하는 Set 꺼내서 원소 추가
+graph.get("키").add("값");
+
+// 현재 키에 해당하는 Set 원소 순회
+for (int line : graph.get("키")) {
+  
+}
+</code></pre></div></div>
+<p>가중치가 없는 버스 및 지하철 호선 문제에서 사용할 수 있습니다.</p>
 
 <hr />
 
