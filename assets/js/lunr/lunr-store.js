@@ -1534,4 +1534,10 @@ var store = [{
         "tags": [],
         "url": "/tool/2026-03-19-1",
         "teaser": null
+      },{
+        "title": "Springboot swagger 사용법 / 백엔드 API 문서 자동 생성 및 설정",
+        "excerpt":"스프링부트 스웨거 사용법 Gradle 의존성 추가 implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0' 스웨거 사용을 위해서 build.gradle 파일에 Springdoc OpenAPI 라이브러리 의존성을 추가합니다. Swagger UI 접속 http://localhost:8080/swagger-ui/index.html 또는 http://localhost:8080/swagger-ui.html 서버를 실행하면 Springdoc OpenAPI가 API 명세를 자동 생성하고, Swagger UI가 시각화하여 API 문서를 제공합니다. API 실행 테스트 API URL 클릭 &gt; 펼쳐진 Parameters 우측 Try it...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2026-04-10-1",
+        "teaser": null
       }]
