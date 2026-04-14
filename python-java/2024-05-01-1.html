@@ -577,12 +577,20 @@ Character.toLowerCase(c);
 // 문자가 숫자인지 판별
 Character.isDigit('문자');
 
-// 문자형 배열을 문자열로 변환
+// 프리미티브 타입 배열 char[]를 문자열로 변환
 char[] chars = {'H', 'e', 'l', 'l', 'o'};
 String str = String.valueOf(chars);
+// 객체 타입 배열 Character[]는 String.valueOf로 문자열 변환이 안되므로,
+// char[] 등으로 변환 후 처리 필요
+
+// 알파벳 인덱스 (순번) 확인
+int i = '알파벳소문자' - 'a';
 
 // 알파벳 더하기
 char c = 'A' + 1; // 결과 : B (char 형에 int를 더하면 char로 자동 형변환)
+
+// 유니코드 코드값을 문자로 변환
+(char) 숫자
 </code></pre></div></div>
 
 <h3 id="문자열">문자열</h3>
@@ -596,12 +604,11 @@ System.out.println(System.identityHashCode(str)); // 객체 해시코드 : 18082
 str += "문자열2";
 System.out.println(System.identityHashCode(str)); // 객체 해시코드 : 589431969 (다른 객체가 됨)
 
-// 문자열 모두 삭제
-str = str.replace("1", ""); // 문자열에서 "1" 전체 삭제
+// 앞에서부터 처음 일치한 문자열 하나만 변경
+str = str.replaceFirst("문자열1", "문자열2");
 
-// 앞에서부터 처음 발견한 문자열 하나만 삭제
-str = str.replaceFirst("문자열", "");
-
+// 일치하는 문자열 전체 변경
+str = str.replace("문자열1", "문자열2");
 // replace 함수 : 정규표현식 사용 불가
 // replaceAll 함수 : 정규표현식 사용 가능
 
@@ -617,14 +624,17 @@ str = str.replaceAll("[a-zA-Z가-힣0-9]", "");
 // 정규표현식으로 영어 외 모두 제거
 str = str.replaceAll("[^a-zA-Z]", "");
 
-// 정규표현식으로 l~z에 해당하지 않는 문자 모두 변경
-str = str.replaceAll("[^l-z]", "l");
+// 정규표현식으로 l~z에 해당하지 않는 문자 모두 제거
+str = str.replaceAll("[^l-z]", "");
 
 // 문자열을 n번 반복한 문자열 생성
 str = str.repeat(n);
 
-// 0번째부터 5번째 앞까지 문자열 추출
-str.substring(0, 5);
+// 0번째 인덱스부터 5번째 앞까지 문자열 추출
+str = str.substring(0, 5);
+
+// 7번째 인덱스부터 끝까지 문자열 추출
+str = str.substring(7);
 
 // 앞에서부터 탐색하여, 문자가 저장된 인덱스 반환 (없으면 -1 반환)
 str.indexOf(문자);
@@ -691,6 +701,9 @@ for (char c : chars) {
 }
 System.out.println(sb.toString());
 
+// 저장된 문자열 크기 확인
+sb.length();
+
 // 특정 문자가 있는 인덱스 반환
 sb.toString().indexOf("문자");
 
@@ -755,9 +768,9 @@ public class Solution {
     // 1차원 배열 모든 원소 값 채우기
     Arrays.fill(arr, 값);
 
-    // 2차원 배열 모든 원소 값 채우기
+    // 2차원 배열 모든 원소 값을 최대값으로 채우기
     for (int i = 0; i &lt; arrs.length; i++) {
-      Arrays.fill(arrs[i], 값);
+      Arrays.fill(arrs[i], Integer.MAX_VALUE);
     }
 
     // 0번째 원소 값을 1으로 변경 : O(1)
@@ -781,7 +794,7 @@ public class Solution {
 
     // 내림차순 정렬 방법 1
     // 기본형 int 배열은 Array.sort 시 2번째 인자로 Comparator를 받을 수 없어서 내림차순 정렬 불가
-    // 오름차순 정렬된 프리미티브 타입 int[]를 객체 타입 Integer[]로 변환 후
+    // 오름차순 정렬된 프리미티브 타입 배열 int[]를 객체 타입 배열 Integer[]로 변환 후 내림차순
     Integer[] Integer_arr = new Integer[arr.length];
     for (int i = 0; i &lt; arr.length; i++) {
       Integer_arr[i] = arr[i];
@@ -1158,7 +1171,8 @@ PriorityQueue&lt;Node&gt; pq = new PriorityQueue&lt;&gt;((o1, o2) -&gt; Integer.
 // 컬렉션 객체의 모든 데이터를 오름차순 정렬하여 담은 우선순위 큐 객체 생성
 PriorityQueue&lt;String&gt; pq = new PriorityQueue&lt;&gt;(list);
 
-// 컬렉션 객체의 모든 데이터를 우선순위 큐 객체에 삽입 : O(n)
+// 컬렉션 객체의 모든 데이터를 우선순위 큐 객체에 삽입 : O(nlogn)
+// (n개 삽입 * logn 재정렬)
 pq.addAll(list);
 
 // int 배열의 모든 데이터를 우선순위 큐 객체에 삽입 : O(nlogn)
@@ -1427,7 +1441,7 @@ for (char c : set) {
 // Set 인터페이스는 인덱스 기반 접근을 지원하지 않습니다.
 List&lt;Integer&gt; list = new ArrayList&lt;&gt;(set);
 list.get(i);
-// 위와 같이, 리스트로 변환하면 인덱스로 접근이 가능합니다.
+// 위와 같이, set을 리스트로 변환하면 인덱스로 접근이 가능합니다.
 </code></pre></div></div>
 
 <p><mark>TreeSet</mark><br />
