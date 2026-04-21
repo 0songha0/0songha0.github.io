@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 257</span>
+      <span class="nav__total">🌴 Total Posts: 258</span>
     </li> -->
     
     
@@ -462,7 +462,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 윈도우 Claude AI 설치 및 Claude CLI 사용 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#윈도우-cli-claude-설치-방법">윈도우 CLI claude 설치 방법</a><ul><li><a href="#윈도우-powershell-실행">윈도우 PowerShell 실행</a></li><li><a href="#node-설치-확인">node 설치 확인</a></li><li><a href="#claude-설치-명령어">claude 설치 명령어</a></li><li><a href="#claude-실행-명령어">claude 실행 명령어</a></li><li><a href="#claude-code-초기화">claude code 초기화</a></li></ul></li><li><a href="#윈도우-claude-cli-사용법">윈도우 Claude CLI 사용법</a><ul><li><a href="#한국어-답변-설정">한국어 답변 설정</a></li><li><a href="#프로젝트-파일-지정">프로젝트 파일 지정</a></li><li><a href="#가이드-파일-요청">가이드 파일 요청</a></li><li><a href="#화면-개발-요청">화면 개발 요청</a></li><li><a href="#퍼블-반영-요청">퍼블 반영 요청</a></li><li><a href="#대화-내역-초기화-요청">대화 내역 초기화 요청</a></li></ul></li><li><a href="#claude-에러-대응">Claude 에러 대응</a><ul><li><a href="#사용량-한도-초과-메시지">사용량 한도 초과 메시지</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#윈도우-cli-claude-설치-방법">윈도우 CLI claude 설치 방법</a><ul><li><a href="#윈도우-powershell-실행">윈도우 PowerShell 실행</a></li><li><a href="#node-설치-확인">node 설치 확인</a></li><li><a href="#claude-설치-명령어">claude 설치 명령어</a></li><li><a href="#claude-실행-명령어">claude 실행 명령어</a></li><li><a href="#claude-code-초기화">claude code 초기화</a></li></ul></li><li><a href="#윈도우-claude-cli-사용법">윈도우 Claude CLI 사용법</a><ul><li><a href="#한국어-답변-설정">한국어 답변 설정</a></li><li><a href="#프로젝트-파일-지정">프로젝트 파일 지정</a></li><li><a href="#가이드-파일-요청">가이드 파일 요청</a></li><li><a href="#화면-개발-요청">화면 개발 요청</a></li><li><a href="#퍼블-반영-요청">퍼블 반영 요청</a></li><li><a href="#대화-내역-초기화-요청">대화 내역 초기화 요청</a></li></ul></li><li><a href="#claude-db-연결-방법">Claude DB 연결 방법</a><ul><li><a href="#mcp-서버-및-db-연결정보-등록">MCP 서버 및 DB 연결정보 등록</a></li><li><a href="#mcp-서버-목록-확인">MCP 서버 목록 확인</a></li><li><a href="#기본-서버-삭제-방법">기본 서버 삭제 방법</a></li></ul></li><li><a href="#claude-에러-대응">Claude 에러 대응</a><ul><li><a href="#사용량-한도-초과-메시지">사용량 한도 초과 메시지</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -575,6 +575,33 @@ claude는 항상 CLAUDE.md 파일을 참고하기 때문에 내용 추가를 요
 
 <hr />
 
+<h2 id="claude-db-연결-방법">Claude DB 연결 방법</h2>
+
+<h3 id="mcp-서버-및-db-연결정보-등록">MCP 서버 및 DB 연결정보 등록</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MSYS_NO_PATHCONV=1 claude mcp add 프로젝트명-dev-mysql --transport stdio --scope user \
+      -e MYSQL_HOST=10.10.101.DB서버주소 \
+      -e MYSQL_PORT=3306 \
+      -e MYSQL_USER=유저명 \
+      -e MYSQL_PASSWORD='비밀번호' \
+      -e MYSQL_DATABASE=DB명 \
+      -- cmd /c npx -y @naganpm/mysql-mcp-server
+</code></pre></div></div>
+<p>로컬에서 프로젝트명-dev-mysql 이름의 MySQL MCP 서버를 실행하고 Claude CLI에 등록합니다.</p>
+
+<h3 id="mcp-서버-목록-확인">MCP 서버 목록 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/exit
+claude
+/mcp
+</code></pre></div></div>
+<p>클로드 Cli 재시작 후 등록된 MCP 서버 목록 및 연결 상태를 확인할 수 있습니다.</p>
+
+<h3 id="기본-서버-삭제-방법">기본 서버 삭제 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>claude mcp remove 프로젝트명-dev-mysql
+</code></pre></div></div>
+<p>MCP 서버를 잘못 등록했을 경우, 위 명령어로 제거 가능합니다.</p>
+
+<hr />
+
 <h2 id="claude-에러-대응">Claude 에러 대응</h2>
 
 <h3 id="사용량-한도-초과-메시지">사용량 한도 초과 메시지</h3>
@@ -639,6 +666,42 @@ Claude는 사용량이 초과되면 미리 정해진 리셋 시각에 사용 한
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/tool/2026-04-21-1" rel="permalink">윈도우 Claude Desktop 설치 및 DB 연결 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-04-21T00:00:00+00:00">2026-04-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
         
           
 
@@ -733,42 +796,6 @@ Claude는 사용량이 초과되면 미리 정해진 리셋 시각에 사용 한
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2026-03-04T00:00:00+00:00">2026-03-04</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-11-25-2" rel="permalink">VO ↔ DTO 변환 라이브러리 MapStruct 사용법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-11-25T00:00:00+00:00">2025-11-25</time>
       </span>
     
 

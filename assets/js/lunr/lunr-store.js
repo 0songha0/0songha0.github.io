@@ -1540,4 +1540,10 @@ var store = [{
         "tags": [],
         "url": "/web-dev/2026-04-10-1",
         "teaser": null
+      },{
+        "title": "윈도우 Claude Desktop 설치 및 DB 연결 방법",
+        "excerpt":"윈도우 Claude Desktop 설치 윈도우 Claude Desktop 다운로드 https://claude.com/download 위 링크에서 클로드 데스크톱 앱을 설치할 수 있습니다. Claude DB 연결 방법 Claude Desktop 설정 파일 수정 파일 &gt; 설정 &gt; 개발자 &gt; 로컬 MCP 서버 구성 편집 &gt; claude_desktop_config.json 파일 열기 { \"preferences\": { \"coworkWebSearchEnabled\": true, \"coworkScheduledTasksEnabled\": false, \"ccdScheduledTasksEnabled\": false...","categories": ["tool"],
+        "tags": [],
+        "url": "/tool/2026-04-21-1",
+        "teaser": null
       }]
