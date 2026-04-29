@@ -1562,13 +1562,15 @@ public class Main {
   }
 }
 </code></pre></div></div>
-<p>같은 역할이지만 서로 다른 파라미터를 받는 클래스들을 어댑터 타겟 인터페이스로 묶어줄 수 있습니다.<br />
+<p>같은 역할이지만 서로 다른 파라미터를 받는 클래스들을 어댑터 타겟 인터페이스로 연결합니다.<br />
 어댑터 클래스만 구현해서 변경하면, 서로 다른 구현을 하나의 인터페이스로 일관되게 사용할 수 있습니다.</p>
 
 <h3 id="브리지-패턴-bridge">브리지 패턴 (Bridge)</h3>
+<p>추상화, 구현을 분리하고 구성(has-a) 관계로 연결하여 각각을 독립적으로 확장할 수 있는 패턴입니다.<br />
+상속 대신 객체 내부에 구현을 참조하고 위임하는 구조가 특징입니다.</p>
 
 <p><mark>브리지 패턴 예시 1</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Implementor
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 구현용 인터페이스
 interface Device {
   void turnOn();
   void turnOff();
@@ -1576,7 +1578,7 @@ interface Device {
   boolean isEnabled();
 }
 
-// Concrete Implementors
+// 구현 클래스 : TV
 class TV implements Device {
   private boolean on = false;
   private int volume = 30;
@@ -1605,6 +1607,7 @@ class TV implements Device {
   }
 }
 
+// 구현 클래스 : 라디오
 class Radio implements Device {
   private boolean on = false;
   private int volume = 30;
@@ -1633,26 +1636,30 @@ class Radio implements Device {
   }
 }
 
-// Abstraction
+// 추상 클래스
 abstract class Remote {
   protected Device device;
 
+  // 생성자에서 구현용 인터페이스에 의존 ★
   protected Remote(Device device) {
     this.device = device;
   }
 
+  // 추상 메서드
   public abstract void power();
 
+  // 구상 메서드에서 인터페이스 함수 호출
   public void volumeUp() {
     device.setVolume(device.isEnabled() ? 1 : 0);
   }
 
+  // 구상 메서드에서 인터페이스 함수 호출
   public void volumeDown() {
     device.setVolume(device.isEnabled() ? -1 : 0);
   }
 }
 
-// Refined Abstractions
+// 추상화 클래스 1 : 기본 리모컨
 class BasicRemote extends Remote {
   public BasicRemote(Device device) {
     super(device);
@@ -1668,6 +1675,7 @@ class BasicRemote extends Remote {
   }
 }
 
+// 추상화 클래스 2 : 고급 리모컨
 class AdvancedRemote extends Remote {
   public AdvancedRemote(Device device) {
     super(device);
@@ -1682,6 +1690,7 @@ class AdvancedRemote extends Remote {
     }
   }
 
+  // 음소거 기능 추가 구현
   public void mute() {
     device.setVolume(0);
     System.out.println("Device is muted.");
@@ -1715,12 +1724,12 @@ Device is muted.
 </code></pre></div></div>
 
 <p><mark>브리지 패턴 예시 2</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Implementor
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 구현용 인터페이스
 interface MessageSender {
   void sendMessage(String message);
 }
 
-// Concrete Implementors
+// 구현 클래스 1 : EmailSender
 class EmailSender implements MessageSender {
   @Override
   public void sendMessage(String message) {
@@ -1728,6 +1737,7 @@ class EmailSender implements MessageSender {
   }
 }
 
+// 구현 클래스 2 : SMSSender
 class SMSSender implements MessageSender {
   @Override
   public void sendMessage(String message) {
@@ -1735,10 +1745,11 @@ class SMSSender implements MessageSender {
   }
 }
 
-// Abstraction
+// 추상 클래스
 abstract class Message {
   protected MessageSender messageSender;
 
+  // 생성자에서 구현용 인터페이스에 의존 ★
   protected Message(MessageSender messageSender) {
     this.messageSender = messageSender;
   }
@@ -1746,21 +1757,24 @@ abstract class Message {
   public abstract void send(String message);
 }
 
-// Refined Abstractions
+// 추상화 클래스 1 : 텍스트 메시지
 class TextMessage extends Message {
   public TextMessage(MessageSender messageSender) {
     super(messageSender);
   }
+
   @Override
   public void send(String message) {
     messageSender.sendMessage("Text Message: " + message);
   }
 }
 
+// 추상화 클래스 2 : 암호화된 메시지
 class EncryptedMessage extends Message {
   public EncryptedMessage(MessageSender messageSender) {
     super(messageSender);
   }
+
   @Override
   public void send(String message) {
     String encryptedMessage = encrypt(message);
@@ -1768,6 +1782,7 @@ class EncryptedMessage extends Message {
       "Encrypted Message: " + encryptedMessage);
   }
 
+  // 암호화 기능 추가 구현
   private String encrypt(String message) {
     return new StringBuilder(message).reverse().toString();
   }
@@ -4478,12 +4493,18 @@ public class Main {
   public static void main(String[] args) {
     Door door = new Door();
     
-    door.open();  // "Door is now Open."
-    door.open();  // "Door is already Open."
-    door.close(); // "Door is now Closed."
-    door.close(); // "Door is already Closed."
+    door.open();
+    door.open();
+    door.close();
+    door.close();
   }
 }
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Door is now Open.
+Door is already Open.
+Door is now Closed.
+Door is already Closed.
 </code></pre></div></div>
 
 <p><mark>상태 패턴 예시 2</mark></p>
@@ -4572,15 +4593,24 @@ public class Main {
   public static void main(String[] args) {
     VideoPlayer player = new VideoPlayer();
     
-    player.play();   // "Starting the video."
-    player.play();   // "Video is already playing."
-    player.stop();   // "Pausing the video."
-    player.play();   // "Resuming the video."
-    player.stop();   // "Pausing the video."
-    player.stop();   // "Stopping the video."
-    player.stop();   // "Video is already stopped."
+    player.play();
+    player.play();
+    player.stop();
+    player.play();
+    player.stop();
+    player.stop();
+    player.stop();
   }
 }
+</code></pre></div></div>
+<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Starting the video.
+Video is already playing.
+Pausing the video.
+Resuming the video.
+Pausing the video.
+Stopping the video.
+Video is already stopped.
 </code></pre></div></div>
 
 <p><mark>상태 패턴이 적용되지 않은, 조건문 방식 예시</mark></p>
