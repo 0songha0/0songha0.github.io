@@ -1552,4 +1552,10 @@ var store = [{
         "tags": [],
         "url": "/web-dev/2026-04-23-1",
         "teaser": null
+      },{
+        "title": "내부망에서 리눅스 MySQL 설치 및 설정 방법",
+        "excerpt":"인터넷 연결이 안되어서 yum 명령어를 사용할 수 없는 리눅스 서버에서 RPM 패키지 설치 파일로 MySQL DB 설치하는 방법입니다. Generic 바이너리 파일 설치와 달리, RPM 파일로 설치하면 서비스 등록이 자동으로 됩니다. 폴더 소유자 변경, 심볼릭 링크 생성, MySQL 환경변수 추가, 설정 파일 생성도 수동으로 안 해도 됩니다. 리눅스 MySQL 설치 MySQL...","categories": ["op"],
+        "tags": [],
+        "url": "/op/2026-05-12-1",
+        "teaser": null
       }]

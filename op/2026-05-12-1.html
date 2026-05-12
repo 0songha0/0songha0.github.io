@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Spring 에러 핸들러 처리 / 톰캣에 에러 로그 안 찍히는 경우 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>내부망에서 리눅스 MySQL 설치 및 설정 방법 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,8 +65,8 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="Spring 에러 핸들러 처리 / 톰캣에 에러 로그 안 찍히는 경우">
-<meta property="og:url" content="https://0songha0.github.io/web-dev/2024-03-05-1">
+<meta property="og:title" content="내부망에서 리눅스 MySQL 설치 및 설정 방법">
+<meta property="og:url" content="https://0songha0.github.io/op/2026-05-12-1">
 
 
   <meta property="og:description" content="송하영 개발 블로그">
@@ -77,11 +77,11 @@
 
 
 
-  <meta property="article:published_time" content="2024-03-05T00:00:00+00:00">
+  <meta property="article:published_time" content="2026-05-12T00:00:00+00:00">
 
 
 
-  <meta property="article:modified_time" content="2024-03-05T00:00:00+00:00">
+  <meta property="article:modified_time" content="2026-05-12T00:00:00+00:00">
 
 
 
@@ -90,7 +90,7 @@
   
 
 
-<link rel="canonical" href="https://0songha0.github.io/web-dev/2024-03-05-1">
+<link rel="canonical" href="https://0songha0.github.io/op/2026-05-12-1">
 
 
 
@@ -425,15 +425,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Spring 에러 핸들러 처리 / 톰캣에 에러 로그 안 찍히는 경우">
+    <meta itemprop="headline" content="내부망에서 리눅스 MySQL 설치 및 설정 방법">
     <meta itemprop="description" content="">
-    <meta itemprop="datePublished" content="2024-03-05T00:00:00+00:00">
-    <meta itemprop="dateModified" content="2024-03-05T00:00:00+00:00">
+    <meta itemprop="datePublished" content="2026-05-12T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2026-05-12T00:00:00+00:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Spring 에러 핸들러 처리 / 톰캣에 에러 로그 안 찍히는 경우
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">내부망에서 리눅스 MySQL 설치 및 설정 방법
 </h1>
           
 
@@ -442,7 +442,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2024-03-05T00:00:00+00:00">2024-03-05</time>
+        <time datetime="2026-05-12T00:00:00+00:00">2026-05-12</time>
       </span>
     
 
@@ -460,32 +460,163 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Spring 에러 핸들러 처리 / 톰캣에 에러 로그 안 찍히는 경우</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 내부망에서 리눅스 MySQL 설치 및 설정 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#globalexceptionhandler-생성">GlobalExceptionHandler 생성</a></li></ul>
+              <ul class="toc__menu"><li><a href="#리눅스-mysql-설치">리눅스 MySQL 설치</a><ul><li><a href="#mysql-설치파일-다운">MySQL 설치파일 다운</a></li><li><a href="#파일질라로-파일-업로드">파일질라로 파일 업로드</a></li><li><a href="#mysql-설치파일-압축-해제">MySQL 설치파일 압축 해제</a></li><li><a href="#기존-mysql-db-설치-확인">기존 MySQL DB 설치 확인</a></li><li><a href="#rpm-파일로-mysql-설치">RPM 파일로 MySQL 설치</a></li><li><a href="#mysql-정상-설치-확인">MySQL 정상 설치 확인</a></li><li><a href="#mysql-버전-확인">MySQL 버전 확인</a></li><li><a href="#mysql-서비스-실행">MySQL 서비스 실행</a></li></ul></li><li><a href="#리눅스-mysql-접속">리눅스 MySQL 접속</a><ul><li><a href="#root-계정-임시비밀번호-확인">root 계정 임시비밀번호 확인</a></li><li><a href="#mysql-터미널-접속">MySQL 터미널 접속</a></li><li><a href="#mysql-root-계정-비밀번호-변경">MySQL root 계정 비밀번호 변경</a></li><li><a href="#mysql-유저-계정-및-비밀번호-인증-방식-확인">MySQL 유저 계정 및 비밀번호 인증 방식 확인</a></li><li><a href="#mysql-버전-확인-1">MySQL 버전 확인</a></li><li><a href="#mysql-터미널-나가기">MySQL 터미널 나가기</a></li></ul></li><li><a href="#리눅스-mysql-경로-확인">리눅스 MySQL 경로 확인</a><ul><li><a href="#mysql-실행-파일-위치-확인">MySQL 실행 파일 위치 확인</a></li><li><a href="#기타-mysql-관련-파일-경로">기타 MySQL 관련 파일 경로</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <p>resources 폴더의 log4j2.xml에서 Logger level을 DEBUG로 설정하였고,<br />
-컨트롤러에서 throws Exception 해주었는데도 톰캣에 에러 로그가 안 찍히는 경우,<br />
-@ExceptionHandler 어노테이션을 사용한 에러 핸들러를 생성하면 모든 에러가 톰캣에 출력됩니다.</p>
+        <p>인터넷 연결이 안되어서 yum 명령어를 사용할 수 없는 리눅스 서버에서<br />
+RPM 패키지 설치 파일로 MySQL DB 설치하는 방법입니다.</p>
 
-<h2 id="globalexceptionhandler-생성">GlobalExceptionHandler 생성</h2>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+<p>Generic 바이너리 파일 설치와 달리, RPM 파일로 설치하면 서비스 등록이 자동으로 됩니다.<br />
+폴더 소유자 변경, 심볼릭 링크 생성, MySQL 환경변수 추가, 설정 파일 생성도 수동으로 안 해도 됩니다.</p>
 
-@ControllerAdvice
-public class GlobalExceptionHandler {
+<hr />
 
-    @ExceptionHandler(Exception.class)
-    public void handleException(Exception e) {
-        // 톰캣에 에러 출력
-        e.printStackTrace();
-    }
-}
+<h2 id="리눅스-mysql-설치">리눅스 MySQL 설치</h2>
+
+<h3 id="mysql-설치파일-다운">MySQL 설치파일 다운</h3>
+<p><a href="https://downloads.mysql.com/archives/community" target="_blank">https://downloads.mysql.com/archives/community</a><br />
+Product Version: MySQL 버전 선택 &gt; Operating System: 서버 OS 선택 (Red Hat 기반이면 Red Hat Enterprise Linux / Oracle Linux 선택) &gt; OS Version: 서버 OS 버전 선택 (Linux version 4.18.0-553.5.1.el8_10.x86_64, Red Hat 8.5.0-22인 경우 Red Hat Enterprise Linux 8 / Oracle Linux 8 (x86, 64-bit) 선택) &gt; RPM Bundle Download</p>
+
+<h3 id="파일질라로-파일-업로드">파일질라로 파일 업로드</h3>
+<p>리눅스 서버의 유저 Home에 MySQL 설치파일을 업로드 합니다.</p>
+
+<h3 id="mysql-설치파일-압축-해제">MySQL 설치파일 압축 해제</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir mysql-8.0.32-rpms
+tar -xvf mysql-8.0.32-1.el8.x86_64.rpm-bundle.tar -C mysql-8.0.32-rpms
 </code></pre></div></div>
-<p>Exception.class에 해당하는 모든 예외를 출력합니다.</p>
+<p>-C 옵션은 현재 폴더가 아니라 지정한 폴더에 압축을 풀 때 사용됩니다.</p>
+
+<h3 id="기존-mysql-db-설치-확인">기존 MySQL DB 설치 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rpm -qa | grep -Ei 'mysql|mariadb'
+</code></pre></div></div>
+<p>충돌을 방지하기 위해, MariaDB 또는 MySQL 관련 패키지가 이미 설치되어 있는지 확인합니다.</p>
+
+<h3 id="rpm-파일로-mysql-설치">RPM 파일로 MySQL 설치</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo dnf install -y \
+  mysql-community-common-8.0.32-1.el8.x86_64.rpm \
+  mysql-community-client-plugins-8.0.32-1.el8.x86_64.rpm \
+  mysql-community-libs-8.0.32-1.el8.x86_64.rpm \
+  mysql-community-client-8.0.32-1.el8.x86_64.rpm \
+  mysql-community-icu-data-files-8.0.32-1.el8.x86_64.rpm \
+  mysql-community-server-8.0.32-1.el8.x86_64.rpm \
+  --disablerepo="*" --nogpgcheck
+</code></pre></div></div>
+<p>dnf 패키지 관리자를 통해, MySQL 서버 운영에 필요한 기본 패키지들만 설치합니다.<br />
+충돌이 나므로 devel (개발용), test (테스트용) 패키지들은 제외하였습니다.</p>
+
+<p><mark>정상 설치 완료 메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>설치되었습니다:
+  mysql-community-client-8.0.32-1.el8.x86_64              mysql-community-client-plugins-8.0.32-1.el8.x86_64
+  mysql-community-common-8.0.32-1.el8.x86_64              mysql-community-icu-data-files-8.0.32-1.el8.x86_64
+  mysql-community-libs-8.0.32-1.el8.x86_64                mysql-community-server-8.0.32-1.el8.x86_64
+</code></pre></div></div>
+
+<h3 id="mysql-정상-설치-확인">MySQL 정상 설치 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rpm -qa | grep mysql-community
+</code></pre></div></div>
+<p>아래와 같이, 설치된 패키지들을 확인할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql-community-icu-data-files-8.0.32-1.el8.x86_64
+mysql-community-common-8.0.32-1.el8.x86_64
+mysql-community-server-8.0.32-1.el8.x86_64
+mysql-community-libs-8.0.32-1.el8.x86_64
+mysql-community-client-8.0.32-1.el8.x86_64
+mysql-community-client-plugins-8.0.32-1.el8.x86_64
+</code></pre></div></div>
+
+<h3 id="mysql-버전-확인">MySQL 버전 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql --version
+</code></pre></div></div>
+<p>아래와 같이, 설치된 MySQL 버전을 확인할 수 있습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql  Ver 8.0.32 for Linux on x86_64 (MySQL Community Server - GPL)
+</code></pre></div></div>
+
+<h3 id="mysql-서비스-실행">MySQL 서비스 실행</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl enable mysqld
+systemctl start mysqld
+systemctl status mysqld
+</code></pre></div></div>
+<p>enable 명령어를 통해 서버 재시작 시 DB가 자동시작 되도록 설정 후 start 합니다.</p>
+
+<hr />
+
+<h2 id="리눅스-mysql-접속">리눅스 MySQL 접속</h2>
+
+<h3 id="root-계정-임시비밀번호-확인">root 계정 임시비밀번호 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep 'temporary password' /var/log/mysqld.log
+</code></pre></div></div>
+<p>아래와 같이, 우측 끝에 임시 비밀번호가 나옵니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A temporary password is generated for root@localhost: 임시비밀번호
+</code></pre></div></div>
+
+<h3 id="mysql-터미널-접속">MySQL 터미널 접속</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql -u root -p
+</code></pre></div></div>
+<p>Enter password: 메시지가 나오면 임시비밀번호를 입력하여 MySQL 터미널에 접속합니다.</p>
+
+<h3 id="mysql-root-계정-비밀번호-변경">MySQL root 계정 비밀번호 변경</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALTER USER 'root'@'localhost' IDENTIFIED BY '신규비밀번호';
+</code></pre></div></div>
+
+<p><mark>비밀번호 정책 미충족 에러메시지</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERROR 1819 (HY000): Your password does not satisfy the current policy requirements
+</code></pre></div></div>
+<p>대문자, 소문자, 특수문자, 숫자를 포함하고 최소 길이 조건을 충족해야 합니다.</p>
+
+<h3 id="mysql-유저-계정-및-비밀번호-인증-방식-확인">MySQL 유저 계정 및 비밀번호 인증 방식 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT user, host, plugin
+FROM mysql.user;
+</code></pre></div></div>
+
+<h3 id="mysql-버전-확인-1">MySQL 버전 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT VERSION();
+</code></pre></div></div>
+<p>원하는 버전으로 정상 설치되었는지 확인합니다.</p>
+
+<h3 id="mysql-터미널-나가기">MySQL 터미널 나가기</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exit
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="리눅스-mysql-경로-확인">리눅스 MySQL 경로 확인</h2>
+
+<h3 id="mysql-실행-파일-위치-확인">MySQL 실행 파일 위치 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>which mysql
+which mysqld
+</code></pre></div></div>
+<p>RPM으로 MySQL 설치 시, 기본적으로 MySQL 실행 파일 위치는 아래와 같습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/bin/mysql
+/usr/sbin/mysqld
+</code></pre></div></div>
+
+<h3 id="기타-mysql-관련-파일-경로">기타 MySQL 관련 파일 경로</h3>
+<table class="table_2_left">
+  <tbody>
+    <tr>
+      <td>MySQL 설정 파일</td>
+      <td>
+        /etc/my.cnf<br />
+        /etc/my.cnf.d/
+      </td>
+    </tr>
+    <tr>
+      <td>MySQL 데이터 디렉터리</td>
+      <td>/var/lib/mysql</td>
+    </tr>
+    <tr>
+      <td>MySQL 로그 파일</td>
+      <td>/var/log/mysqld.log</td>
+    </tr>
+    <tr>
+      <td>MySQL 서비스 파일</td>
+      <td>/usr/lib/systemd/system/mysqld.service</td>
+    </tr>
+  </tbody>
+</table>
 
         
       </section>
@@ -506,14 +637,14 @@ public class GlobalExceptionHandler {
     
       
       
-      <a href="/categories#web-dev" class="page__taxonomy-item" rel="tag">Web 개발</a>
+      <a href="/categories#op" class="page__taxonomy-item" rel="tag">리눅스 / 운영</a>
     
     </span>
   </p>
 
 
         
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2024-03-05">2024-03-05</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2026-05-12">2026-05-12</time></p>
 
 
       </footer>
@@ -523,11 +654,10 @@ public class GlobalExceptionHandler {
       
   <nav class="pagination">
     
-      <a href="/op/2024-03-07-1" class="pagination--pager" title="리눅스 폴더 및 파일 압축 관련 명령어
-">❮</a>
+      <a href="#" class="pagination--pager disabled">❮</a>
     
     
-      <a href="/python-java/2024-03-01-1" class="pagination--pager" title="코딩테스트 언어 선택 / Python → Java 변경 이유 / 코딩테스트 팁
+      <a href="/web-dev/2026-04-23-1" class="pagination--pager" title="JWT 토큰 인증 개념 및 회원 플랫폼 프로젝트 분석
 ">❯</a>
     
   </nav>
@@ -543,42 +673,6 @@ public class GlobalExceptionHandler {
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/op/2026-05-12-1" rel="permalink">내부망에서 리눅스 MySQL 설치 및 설정 방법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2026-05-12T00:00:00+00:00">2026-05-12</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
         
           
 
@@ -673,6 +767,42 @@ public class GlobalExceptionHandler {
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2026-04-10T00:00:00+00:00">2026-04-10</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/tool/2026-03-19-1" rel="permalink">윈도우 Codex 앱 설치 및 Codex AI 사용 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-03-19T00:00:00+00:00">2026-03-19</time>
       </span>
     
 
