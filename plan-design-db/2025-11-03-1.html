@@ -607,7 +607,7 @@ Label [Username] displayed in dark theme.
 </code></pre></div></div>
 
 <h3 id="팩토리-메서드-패턴-factory-method">팩토리 메서드 패턴 (Factory Method)</h3>
-<p>객체 생성을 팩토리에 위임하여 확장 가능한 프로그램을 설계할 수 있는 패턴입니다.</p>
+<p>단일 제품 객체 생성을 팩토리에 위임하여, 확장 가능한 프로그램을 설계할 수 있는 패턴입니다.</p>
 
 <p>클라이언트에서 구체 제품 클래스가 아닌 추상 Creator 타입에 의존하면,<br />
 제품 클래스가 추가되어도 클라이언트 공통 로직 수정 없이 확장할 수 있습니다.</p>
@@ -939,17 +939,23 @@ Bank transfer: $300.0
 </code></pre></div></div>
 
 <h3 id="추상-팩토리-패턴-abstract-factory">추상 팩토리 패턴 (Abstract Factory)</h3>
+<p>하나의 제품군에 속한 제품 객체들을 하나의 팩토리에서 일괄 생성하여,<br />
+일관된 방식으로 제품 그룹을 쉽게 교체할 수 있는 패턴입니다.</p>
+
+<p>구체 클래스에 의존하지 않으므로 유연성과 확장성을 높일 수 있습니다.</p>
 
 <p><mark>추상 팩토리 패턴 예시 1</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Abstract product interfaces
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 추상 제품 인터페이스 1 : 버튼
 interface Button {
   void paint();
 }
 
+// 추상 제품 인터페이스 2 : 체크박스
 interface Checkbox {
   void paint();
 }
 
+// 구체 제품 클래스 1-1 : 윈도우 스타일 버튼
 class WindowsButton implements Button {
   @Override
   public void paint() {
@@ -957,6 +963,7 @@ class WindowsButton implements Button {
   }
 }
 
+// 구체 제품 클래스 1-2 : 윈도우 스타일 체크박스
 class WindowsCheckbox implements Checkbox {
   @Override
   public void paint() {
@@ -964,6 +971,7 @@ class WindowsCheckbox implements Checkbox {
   }
 }
 
+// 구체 제품 클래스 2-1 : 맥 스타일 버튼
 class MacOSButton implements Button {
   @Override
   public void paint() {
@@ -971,6 +979,7 @@ class MacOSButton implements Button {
   }
 }
 
+// 구체 제품 클래스 2-2 : 맥 스타일 체크박스
 class MacOSCheckbox implements Checkbox {
   @Override
   public void paint() {
@@ -978,42 +987,48 @@ class MacOSCheckbox implements Checkbox {
   }
 }
 
-// Abstract factory interface
+// 추상 팩토리 인터페이스
 interface GUIFactory {
   Button createButton();
   Checkbox createCheckbox();
 }
 
-// Concrete factories
+// 구체 팩토리 클래스 1 : 윈도우 스타일 제품들을 생성하는 팩토리
 class WindowsFactory implements GUIFactory {
   @Override
   public Button createButton() {
+    // 구체 제품 클래스 1-1 생성 및 반환
     return new WindowsButton();
   }
 
   @Override
   public Checkbox createCheckbox() {
+    // 구체 제품 클래스 1-2 생성 및 반환
     return new WindowsCheckbox();
   }
 }
 
+// 구체 팩토리 클래스 2 : 맥 스타일 제품들을 생성하는 팩토리
 class MacOSFactory implements GUIFactory {
   @Override
   public Button createButton() {
+    // 구체 제품 클래스 2-1 생성 및 반환
     return new MacOSButton();
   }
 
   @Override
   public Checkbox createCheckbox() {
+    // 구체 제품 클래스 2-2 생성 및 반환
     return new MacOSCheckbox();
   }
 }
 
-// Client code
+// 애플리케이션 코드
 class Application {
   private Button button;
   private Checkbox checkbox;
 
+  // 생성자 : 전달받은 팩토리의 메서드를 사용해서 관련 제품들 생성
   public Application(GUIFactory factory) {
     button = factory.createButton();
     checkbox = factory.createCheckbox();
@@ -1028,21 +1043,26 @@ class Application {
 // 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
-    // Create Windows GUI
+    // 윈도우 스타일 팩토리 객체 생성
     GUIFactory windowsFactory = new WindowsFactory();
+    // 애플리케이션 객체 생성 시,
+    // 윈도우 스타일 팩토리를 사용해서 윈도우 스타일 제품들 생성
     Application windowsApp = new Application(windowsFactory);
     windowsApp.paint();
 
     System.out.println();
 
-    // Create MacOS GUI
+    // 맥 스타일 팩토리 객체 생성
     GUIFactory macFactory = new MacOSFactory();
+    // 애플리케이션 객체 생성 시,
+    // 맥 스타일 팩토리를 사용해서 맥 스타일 제품들 생성
     Application macApp = new Application(macFactory);
     macApp.paint();
   }
 }
 </code></pre></div></div>
-<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<p>추상 팩토리 인터페이스를 구현한 구체 팩토리 클래스가 구체 제품 클래스들을 생성합니다.<br />
+위 코드의 실행 결과는 아래와 같습니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Rendering a button in Windows style
 Rendering a checkbox in Windows style
 
@@ -1051,108 +1071,129 @@ Rendering a checkbox in MacOS style
 </code></pre></div></div>
 
 <p><mark>추상 팩토리 패턴 예시 2</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Abstract products
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 추상 제품 인터페이스 1 : 데이터베이스 연결
 interface Connection {
   void open();
   void close();
 }
 
+// 추상 제품 인터페이스 2 : SQL 명령 실행
 interface Command {
   void execute(String query);
 }
 
+// 추상 제품 인터페이스 3 : 조회 결과
 interface ResultSet {
   void getResults();
 }
 
-// Abstract factory
-interface DatabaseFactory {
-  Connection createConnection();
-  Command createCommand();
-  ResultSet createResultSet();
-}
-
-// Concrete products for MySQL
+// 구체 제품 클래스 1-1 : MySQL 연결
 class MySQLConnection implements Connection {
   public void open() {
     System.out.println("Opening MySQL connection");
   }
+
   public void close() {
     System.out.println("Closing MySQL connection");
   }
 }
 
+// 구체 제품 클래스 1-2 : MySQL 명령
 class MySQLCommand implements Command {
   public void execute(String query) {
     System.out.println("Executing MySQL query: " + query);
   }
 }
 
+// 구체 제품 클래스 1-3 : MySQL 조회 결과
 class MySQLResultSet implements ResultSet {
   public void getResults() {
     System.out.println("Getting results from MySQL database");
   }
 }
 
-// Concrete products for PostgreSQL
+// 구체 제품 클래스 2-1 : PostgreSQL 연결
 class PostgreSQLConnection implements Connection {
   public void open() {
     System.out.println("Opening PostgreSQL connection");
   }
+
   public void close() {
     System.out.println("Closing PostgreSQL connection");
   }
 }
 
+// 구체 제품 클래스 2-2 : PostgreSQL 명령
 class PostgreSQLCommand implements Command {
   public void execute(String query) {
     System.out.println("Executing PostgreSQL query: " + query);
   }
 }
 
+// 구체 제품 클래스 2-3 : PostgreSQL 조회 결과
 class PostgreSQLResultSet implements ResultSet {
   public void getResults() {
     System.out.println("Getting results from PostgreSQL database");
   }
 }
 
-// Concrete factories
+// 추상 팩토리 인터페이스
+interface DatabaseFactory {
+  Connection createConnection();
+  Command createCommand();
+  ResultSet createResultSet();
+}
+
+// 구체 팩토리 클래스 1 : MySQL 관련 제품들을 생성하는 팩토리
 class MySQLFactory implements DatabaseFactory {
   public Connection createConnection() {
+    // 구체 제품 클래스 1-1 생성 및 반환
     return new MySQLConnection();
   }
+
   public Command createCommand() {
+    // 구체 제품 클래스 1-2 생성 및 반환
     return new MySQLCommand();
   }
+
   public ResultSet createResultSet() {
+    // 구체 제품 클래스 1-3 생성 및 반환
     return new MySQLResultSet();
   }
 }
 
+// 구체 팩토리 클래스 2 : PostgreSQL 관련 제품들을 생성하는 팩토리
 class PostgreSQLFactory implements DatabaseFactory {
   public Connection createConnection() {
+    // 구체 제품 클래스 2-1 생성 및 반환
     return new PostgreSQLConnection();
   }
+
   public Command createCommand() {
+    // 구체 제품 클래스 2-2 생성 및 반환
     return new PostgreSQLCommand();
   }
+
   public ResultSet createResultSet() {
+    // 구체 제품 클래스 2-3 생성 및 반환
     return new PostgreSQLResultSet();
   }
 }
 
-// Client code
+// 데이터베이스를 사용하는 클라이언트 코드
 class DatabaseClient {
   private Connection connection;
   private Command command;
   private ResultSet resultSet;
 
+  // 생성자 : 전달받은 팩토리의 메서드를 사용해서 관련 DB 제품들 생성
   public DatabaseClient(DatabaseFactory factory) {
     connection = factory.createConnection();
     command = factory.createCommand();
     resultSet = factory.createResultSet();
   }
 
+  // DB 작업 수행 함수
   public void performDatabaseOperations() {
     connection.open();
     command.execute("SELECT * FROM users");
@@ -1164,12 +1205,16 @@ class DatabaseClient {
 // 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
+    // MySQL 팩토리를 사용해서 MySQL 관련 제품들 생성
     DatabaseClient mysqlClient = new DatabaseClient(new MySQLFactory());
+    // MySQL DB 작업 수행
     mysqlClient.performDatabaseOperations();
 
     System.out.println("\nSwitching to PostgreSQL...\n");
 
+    // PostgreSQL 팩토리를 사용해서 PostgreSQL 관련 제품들 생성
     DatabaseClient postgresClient = new DatabaseClient(new PostgreSQLFactory());
+    // PostgreSQL DB 작업 수행
     postgresClient.performDatabaseOperations();
   }
 }
