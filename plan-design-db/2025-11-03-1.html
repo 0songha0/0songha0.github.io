@@ -3899,30 +3899,38 @@ file2.txt
 </code></pre></div></div>
 
 <h3 id="중재자-패턴-mediator">중재자 패턴 (Mediator)</h3>
+<p>여러 객체들이 서로 직접 참조하지 않고, 중재자 객체를 통해 간접적으로 소통하는 패턴입니다.</p>
+
+<p>객체 간 직접적인 의존성을 줄여 결합도를 낮추고 유지보수성을 향상시킬 수 있습니다.</p>
 
 <p><mark>중재자 패턴 예시 1</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Mediator interface
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 중재자 인터페이스
 public interface ChatMediator {
   void sendMessage(String message, User user);
   void addUser(User user);
 }
 
-// Concrete implementation of the Mediator interface
+// 중재자 인터페이스를 구현한 구체 중재자 클래스
 public class ChatMediatorImpl implements ChatMediator {
+  // 유저 리스트 필드
   private List&lt;User&gt; users;
 
   public ChatMediatorImpl() {
     this.users = new ArrayList&lt;&gt;();
   }
 
+  // 중재자에 유저 등록 함수
   @Override
   public void addUser(User user) {
     this.users.add(user);
   }
 
+  // 메시지 발송 함수
   @Override
   public void sendMessage(String message, User user) {
+    // 각 유저들의 메시지 수신 함수 호출
     for (User u : this.users) {
+      // 메시지 발송한 본인 제외
       if (u != user) {
         u.receive(message);
       }
@@ -3930,11 +3938,13 @@ public class ChatMediatorImpl implements ChatMediator {
   }
 }
 
-// Abstract User class
+// 유저 추상 클래스
 public abstract class User {
+  // 중재자 인터페이스 필드
   protected ChatMediator mediator;
   protected String name;
 
+  // 생성자 : 중재자, 유저명 등록
   public User(ChatMediator mediator, String name) {
     this.mediator = mediator;
     this.name = name;
@@ -3944,116 +3954,161 @@ public abstract class User {
   public abstract void receive(String message);
 }
 
-// Concrete implementation of the User class
+// 유저 추상 클래스를 구현한 구체 유저 클래스
 public class UserImpl extends User {
+  // 중재자 인터페이스, 유저명 필드 상속 받음
 
   public UserImpl(ChatMediator mediator, String name) {
     super(mediator, name);
   }
 
+  // 메시지 발송 함수
   @Override
   public void send(String message) {
     System.out.println(this.name + ": Sending Message = " + message);
+    // 중재자를 통해 메시지 발송
     mediator.sendMessage(message, this);
   }
 
+  // 메시지 수신 함수
   @Override
   public void receive(String message) {
-    System.out.println(kthis.name + ": Received Message = " + message);
+    System.out.println(this.name + ": Received Message = " + message);
   }
 }
 
 // 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
+    // 중재자 객체 생성
     ChatMediator mediator = new ChatMediatorImpl();
 
+    // 같은 중재자를 사용하는 유저 객체들 생성
     User user1 = new UserImpl(mediator, "John");
     User user2 = new UserImpl(mediator, "Jane");
     User user3 = new UserImpl(mediator, "Bob");
     User user4 = new UserImpl(mediator, "Alice");
 
+    // 중재자에 유저 등록 (채팅방 입장)
     mediator.addUser(user1);
     mediator.addUser(user2);
     mediator.addUser(user3);
     mediator.addUser(user4);
 
+    // 유저1이 메시지 전송 시,
+    // 중재자가 각 유저들에게 메시지 전달
     user1.send("Hi All");
   }
 }
 </code></pre></div></div>
-<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<p>중재자 클래스를 통해 유저 간 소통이 간접적으로 이루어지는 중재자 패턴 예시입니다.<br />
+위 코드의 실행 결과는 아래와 같습니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>John: Sending Message = Hi All
 Jane: Received Message = Hi All
 Bob: Received Message = Hi All
 Alice: Received Message = Hi All
 </code></pre></div></div>
+
 <p><mark>중재자 패턴 예시 2</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface AirportMediator {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 중재자 인터페이스
+interface AirportMediator {
   boolean isRunwayAvailable();
   void setRunwayAvailability(boolean status);
 }
 
+// 중재자 인터페이스를 구현한 구체 중재자 클래스 : 관제탑
 class AirportControlTower implements AirportMediator {
+  // 활주로 사용 가능 여부 필드
   private boolean isRunwayAvailable = true;
 
+  // 활주로 사용 가능 여부 반환
   public boolean isRunwayAvailable() {
     return isRunwayAvailable;
   }
 
+  // 활주로 사용 가능 여부 변경
   public void setRunwayAvailability(boolean status) {
     isRunwayAvailable = status;
   }
 }
 
+// 동료 클래스 1 : 비행기
 class Flight {
   private AirportMediator mediator;
   private String flightNumber;
 
+  // 생성자 : 중재자 및 비행기 번호 설정
   public Flight(AirportMediator mediator, String flightNumber) {
     this.mediator = mediator;
     this.flightNumber = flightNumber;
   }
 
+  // 착륙 요청 함수
   public void land() {
+    // 중재자를 통해, 활주로 사용 가능 여부 확인
     if (mediator.isRunwayAvailable()) {
+      // 활주로가 사용 가능하면,
+      // 착륙중 메시지 출력
       System.out.println("Flight " + flightNumber + " is landing.");
+
+      // 중재자를 통해, 활주로를 사용 불가 상태로 변경
       mediator.setRunwayAvailability(false);
+
     } else {
+      // 착륙 대기중 메시지 출력
       System.out.println("Flight " + flightNumber + " is waiting to land.");
     }
   }
 }
 
+// 동료 클래스 2 : 활주로
 class Runway {
   private AirportMediator mediator;
 
+  // 생성자 : 중재자 설정
   public Runway(AirportMediator mediator) {
     this.mediator = mediator;
   }
 
+  // 활주로 비우기 함수
   public void clear() {
     System.out.println("Runway is clear.");
+
+    // 중재자를 통해, 활주로를 다시 사용 가능 상태로 변경
     mediator.setRunwayAvailability(true);
   }
 }
 
+// 클라이언트 (호출부)
 public class AirportSystem {
   public static void main(String[] args) {
+    // 중재자 객체 생성 (관제탑 생성)
     AirportMediator controlTower = new AirportControlTower();
 
+    // 같은 관제탑을 공유하는 비행기 및 활주로 객체 생성
     Flight flight1 = new Flight(controlTower, "KE123");
     Flight flight2 = new Flight(controlTower, "OZ456");
     Runway runway = new Runway(controlTower);
 
+    // 비행기 1 착륙
+    // 중재자를 통해, 활주로를 사용 불가 상태로 변경
     flight1.land();
+
+    // 비행기 2 착륙 시도
+    // 활주로가 사용 중이므로 착륙 대기
     flight2.land();
+
+    // 중재자를 통해, 활주로를 사용 가능 상태로 변경
     runway.clear();
+
+    // 비행기 2 착륙
     flight2.land();
   }
 }
 </code></pre></div></div>
-<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<p>활주로 사용 여부를 중재자를 통해 관리하는 중재자 패턴 예시입니다.<br />
+이처럼 여러 객체들 사이의 상호작용을 제어할 수도 있습니다.<br />
+위 코드의 실행 결과는 아래와 같습니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Flight KE123 is landing.
 Flight OZ456 is waiting to land.
 Runway is clear.
