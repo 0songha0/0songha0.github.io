@@ -462,7 +462,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 내부망에서 리눅스 MySQL 설치 및 설정 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#리눅스-mysql-설치">리눅스 MySQL 설치</a><ul><li><a href="#mysql-설치파일-다운">MySQL 설치파일 다운</a></li><li><a href="#파일질라로-파일-업로드">파일질라로 파일 업로드</a></li><li><a href="#mysql-설치파일-압축-해제">MySQL 설치파일 압축 해제</a></li><li><a href="#기존-mysql-db-설치-확인">기존 MySQL DB 설치 확인</a></li><li><a href="#rpm-파일로-mysql-설치">RPM 파일로 MySQL 설치</a></li><li><a href="#mysql-정상-설치-확인">MySQL 정상 설치 확인</a></li><li><a href="#mysql-버전-확인">MySQL 버전 확인</a></li><li><a href="#mysql-서비스-실행">MySQL 서비스 실행</a></li></ul></li><li><a href="#리눅스-mysql-접속">리눅스 MySQL 접속</a><ul><li><a href="#root-계정-임시비밀번호-확인">root 계정 임시비밀번호 확인</a></li><li><a href="#mysql-터미널-접속">MySQL 터미널 접속</a></li><li><a href="#mysql-root-계정-비밀번호-변경">MySQL root 계정 비밀번호 변경</a></li><li><a href="#mysql-유저-계정-및-비밀번호-인증-방식-확인">MySQL 유저 계정 및 비밀번호 인증 방식 확인</a></li><li><a href="#mysql-버전-확인-1">MySQL 버전 확인</a></li><li><a href="#mysql-터미널-나가기">MySQL 터미널 나가기</a></li></ul></li><li><a href="#리눅스-mysql-경로-확인">리눅스 MySQL 경로 확인</a><ul><li><a href="#mysql-실행-파일-위치-확인">MySQL 실행 파일 위치 확인</a></li><li><a href="#기타-mysql-관련-파일-경로">기타 MySQL 관련 파일 경로</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#리눅스-mysql-설치">리눅스 MySQL 설치</a><ul><li><a href="#mysql-설치파일-다운">MySQL 설치파일 다운</a></li><li><a href="#파일질라로-파일-업로드">파일질라로 파일 업로드</a></li><li><a href="#mysql-설치파일-압축-해제">MySQL 설치파일 압축 해제</a></li><li><a href="#기존-mysql-db-설치-확인">기존 MySQL DB 설치 확인</a></li><li><a href="#rpm-파일로-mysql-설치">RPM 파일로 MySQL 설치</a></li><li><a href="#mysql-정상-설치-확인">MySQL 정상 설치 확인</a></li><li><a href="#mysql-버전-확인">MySQL 버전 확인</a></li><li><a href="#mysql-서비스-실행">MySQL 서비스 실행</a></li></ul></li><li><a href="#리눅스-mysql-접속">리눅스 MySQL 접속</a><ul><li><a href="#root-계정-임시비밀번호-확인">root 계정 임시비밀번호 확인</a></li><li><a href="#mysql-터미널-접속">MySQL 터미널 접속</a></li><li><a href="#mysql-root-계정-비밀번호-변경">MySQL root 계정 비밀번호 변경</a></li><li><a href="#mysql-유저-계정-및-비밀번호-인증-방식-확인">MySQL 유저 계정 및 비밀번호 인증 방식 확인</a></li><li><a href="#mysql-계정-추가">MySQL 계정 추가</a></li><li><a href="#mysql-버전-확인-1">MySQL 버전 확인</a></li><li><a href="#mysql-터미널-나가기">MySQL 터미널 나가기</a></li></ul></li><li><a href="#리눅스-mysql-경로-확인">리눅스 MySQL 경로 확인</a><ul><li><a href="#mysql-실행-파일-위치-확인">MySQL 실행 파일 위치 확인</a></li><li><a href="#기타-mysql-관련-파일-경로">기타 MySQL 관련 파일 경로</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -570,6 +570,13 @@ systemctl status mysqld
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT user, host, plugin
 FROM mysql.user;
 </code></pre></div></div>
+
+<h3 id="mysql-계정-추가">MySQL 계정 추가</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE USER '유저명'@'%' IDENTIFIED WITH mysql_native_password BY '신규비밀번호';
+
+GRANT ALL PRIVILEGES ON DB명.* TO '유저명'@'%';
+</code></pre></div></div>
+<p>% 부분에 DB 접근하려는 호스트 IP를 입력하면 해당 IP에서만 접근 가능한 유저가 생성됩니다.</p>
 
 <h3 id="mysql-버전-확인-1">MySQL 버전 확인</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT VERSION();
