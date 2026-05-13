@@ -462,7 +462,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> MySQL DDL 쿼리 정리 / 테이블 생성 및 수정 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#mysql-ddl-쿼리">MySQL DDL 쿼리</a><ul><li><a href="#테이블-생성">테이블 생성</a></li><li><a href="#테이블-collation-변경">테이블 Collation 변경</a></li><li><a href="#테이블-복제">테이블 복제</a></li><li><a href="#테이블-삭제">테이블 삭제</a></li><li><a href="#테이블-컬럼-추가">테이블 컬럼 추가</a></li><li><a href="#테이블-컬럼-삭제">테이블 컬럼 삭제</a></li><li><a href="#테이블-기본키-추가-pk-추가">테이블 기본키 추가 (PK 추가)</a></li><li><a href="#테이블-기본키-삭제-pk-삭제">테이블 기본키 삭제 (PK 삭제)</a></li><li><a href="#테이블-외래키-추가-fk-추가">테이블 외래키 추가 (FK 추가)</a></li><li><a href="#테이블-외래키-삭제-fk-삭제">테이블 외래키 삭제 (FK 삭제)</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#mysql-ddl-쿼리">MySQL DDL 쿼리</a><ul><li><a href="#테이블-생성">테이블 생성</a></li><li><a href="#테이블-collation-변경">테이블 Collation 변경</a></li><li><a href="#테이블-복제">테이블 복제</a></li><li><a href="#테이블-삭제">테이블 삭제</a></li><li><a href="#대용량-테이블-데이터-전체-삭제">대용량 테이블 데이터 전체 삭제</a></li><li><a href="#테이블-컬럼-추가">테이블 컬럼 추가</a></li><li><a href="#테이블-컬럼-삭제">테이블 컬럼 삭제</a></li><li><a href="#테이블-기본키-추가-pk-추가">테이블 기본키 추가 (PK 추가)</a></li><li><a href="#테이블-기본키-삭제-pk-삭제">테이블 기본키 삭제 (PK 삭제)</a></li><li><a href="#테이블-외래키-추가-fk-추가">테이블 외래키 추가 (FK 추가)</a></li><li><a href="#테이블-외래키-삭제-fk-삭제">테이블 외래키 삭제 (FK 삭제)</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -525,6 +525,11 @@ ADD INDEX idx_신규테이블명_02 (`컬럼명1`);
 <h3 id="테이블-삭제">테이블 삭제</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DROP TABLE 테이블명;
 </code></pre></div></div>
+
+<h3 id="대용량-테이블-데이터-전체-삭제">대용량 테이블 데이터 전체 삭제</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TRUNCATE TABLE 테이블명;
+</code></pre></div></div>
+<p>DELETE FROM 테이블명보다 훨씬 빠르고, 행 단위 삭제 로그 처리 부담이 적은 쿼리입니다.</p>
 
 <h3 id="테이블-컬럼-추가">테이블 컬럼 추가</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALTER TABLE 테이블명 ADD COLUMN 컬럼명 데이터타입(사이즈) COMMENT '컬럼 설명';
