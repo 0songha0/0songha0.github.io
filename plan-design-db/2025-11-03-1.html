@@ -482,6 +482,9 @@
 <p>싱글톤 패턴으로 생성된 클래스는 getInstance 함수를 통해 인스턴스를 하나만 생성하고,<br />
 프로그램 전체에서 동일한 인스턴스를 공유하여 일관된 전역 상태를 유지합니다.</p>
 
+<p>싱글턴 패턴은 주로 생성자를 private으로 만들고,<br />
+static 메소드에서 유일한 인스턴스를 생성 및 반환하는 방식으로 구현됩니다.</p>
+
 <p><mark>싱글톤 패턴 예시 1</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 싱글톤 패턴으로 설계된 테마 클래스
 public class Theme {
@@ -5352,14 +5355,20 @@ Data is invalid, processing aborted.
 
 <h3 id="방문자-패턴-visitor">방문자 패턴 (Visitor)</h3>
 
+<p>객체 구조는 안정적이지만 객체에 수행할 기능이 자주 추가/변경되는 상황에서 유용하게 사용되는 패턴입니다.</p>
+
+<p>기존 클래스에 방문자 객체의 visit() 함수를 호출하는 accept() 함수를 미리 추가해두면,<br />
+기존 클래스를 변경하지 않고 방문자 클래스를 통해 새로운 기능을 추가할 수 있습니다.</p>
+
 <p><mark>방문자 패턴 예시 1</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Element interface
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 모양 인터페이스
 interface Shape {
   void accept(Visitor visitor);
 }
 
-// Concrete elements
+// 모양 인터페이스를 적용한 원 클래스
 class Circle implements Shape {
+  // 반지름 필드
   double radius;
 
   Circle(double radius) {
@@ -5370,13 +5379,17 @@ class Circle implements Shape {
     return radius;
   }
 
+  // 방문자 수용 함수 ★
   @Override
   public void accept(Visitor visitor) {
+    // 현재 클래스를 인자로 방문자 함수 호출
     visitor.visit(this);
   }
 }
 
+// 모양 인터페이스를 적용한 직사각형 클래스
 class Rectangle implements Shape {
+  // 가로, 세로 필드
   double width, height;
 
   Rectangle(double width, double height) {
@@ -5392,26 +5405,33 @@ class Rectangle implements Shape {
     return height;
   }
 
+  // 방문자 수용 함수 ★
   @Override
   public void accept(Visitor visitor) {
+    // 현재 클래스를 인자로 방문자 함수 호출
     visitor.visit(this);
   }
 }
 
-// Visitor interface
+// 방문자 인터페이스
 interface Visitor {
+  // 원 클래스 방문 함수
   void visit(Circle circle);
+
+  // 직사각형 클래스 방문 함수
   void visit(Rectangle rectangle);
 }
 
-// Concrete Visitor
+// 방문자 인터페이스를 적용한 면적 구하기 클래스
 class AreaVisitor implements Visitor {
+  // 원 클래스 방문 함수 구현
   @Override
   public void visit(Circle circle) {
     double area = Math.PI * circle.getRadius() * circle.getRadius();
     System.out.println("Circle Area: " + area);
   }
 
+  // 직사각형 클래스 방문 함수 구현
   @Override
   public void visit(Rectangle rectangle) {
     double area = rectangle.getWidth() * rectangle.getHeight();
@@ -5419,13 +5439,16 @@ class AreaVisitor implements Visitor {
   }
 }
 
+// 방문자 인터페이스를 적용한 둘레 구하기 클래스
 class PerimeterVisitor implements Visitor {
+  // 원 클래스 방문 함수 구현
   @Override
   public void visit(Circle circle) {
     double perimeter = 2 * Math.PI * circle.getRadius();
     System.out.println("Circle Perimeter: " + perimeter);
   }
 
+  // 직사각형 클래스 방문 함수 구현
   @Override
   public void visit(Rectangle rectangle) {
     double perimeter = 2 * (rectangle.getWidth() + rectangle.getHeight());
@@ -5436,16 +5459,26 @@ class PerimeterVisitor implements Visitor {
 // 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
+    // 반지름 5 원 인스턴스 생성
     Shape circle = new Circle(5);
+
+    // 가로 4, 세로 6 직사각형 인스턴스 생성
     Shape rectangle = new Rectangle(4, 6);
 
+    // 면적 구하기 방문자 생성
     Visitor areaVisitor = new AreaVisitor();
+
+    // 둘레 구하기 방문자 생성
     Visitor perimeterVisitor = new PerimeterVisitor();
 
+    // 각 도형의 방문자 수용 함수를 호출하며,
+    // 면적 구하기 방문자 전달
     System.out.println("Calculating Area:");
     circle.accept(areaVisitor);
     rectangle.accept(areaVisitor);
 
+    // 각 도형의 방문자 수용 함수를 호출하며,
+    // 둘레 구하기 방문자 전달
     System.out.println("\nCalculating Perimeter:");
     circle.accept(perimeterVisitor);
     rectangle.accept(perimeterVisitor);
@@ -5463,14 +5496,16 @@ Rectangle Perimeter: 20.0
 </code></pre></div></div>
 
 <p><mark>방문자 패턴 예시 2</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// FileSystemElement interface
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 파일시스템 인터페이스
 interface FileSystemElement {
   void accept(Visitor visitor);
 }
 
-// File class
+// 파일시스템 인터페이스를 적용한 파일 클래스
 class File implements FileSystemElement {
   private String name;
+
+  // 파일 크기 필드
   private long size;
 
   public File(String name, long size) {
@@ -5479,17 +5514,22 @@ class File implements FileSystemElement {
   }
 
   public String getName() { return name; }
+
   public long getSize() { return size; }
 
+  // 방문자 수용 함수 ★
   @Override
   public void accept(Visitor visitor) {
+    // 현재 클래스를 인자로 방문자 함수 호출
     visitor.visit(this);
   }
 }
 
-// Directory class
+// 파일시스템 인터페이스를 적용한 폴더 클래스
 class Directory implements FileSystemElement {
   private String name;
+
+  // 폴더 내 요소 리스트 필드
   private List&lt;FileSystemElement&gt; elements;
 
   public Directory(String name) {
@@ -5499,68 +5539,89 @@ class Directory implements FileSystemElement {
 
   public String getName() { return name; }
 
+  // 폴더에 요소 추가 메서드
   public void addElement(FileSystemElement element) {
     elements.add(element);
   }
+
+  // 폴더에 요소 리스트 반환 메서드
   public List&lt;FileSystemElement&gt; getElements() {
     return elements;
   }
 
+  // 방문자 수용 함수 ★
   @Override
   public void accept(Visitor visitor) {
+    // 현재 클래스를 인자로 방문자 함수 호출
     visitor.visit(this);
   }
 }
 
-// Visitor interface
+// 방문자 인터페이스
 interface Visitor {
+  // 파일 방문 메서드 정의
   void visit(File file);
+
+  // 디렉토리 방문 메서드 정의
   void visit(Directory directory);
 }
 
-// Concrete visitors
+// 방문자 인터페이스를 적용한 전체 크기 측정 클래스
 class SizeCalculatorVisitor implements Visitor {
   private long totalSize = 0;
 
+  // 파일 방문하여 크기 측정
   @Override
   public void visit(File file) {
     totalSize += file.getSize();
   }
 
+  // 폴더 방문하여 폴더 내 요소들 크기 측정
   @Override
   public void visit(Directory directory) {
     for (FileSystemElement element : directory.getElements()) {
+      // 방문자 수용 함수를 호출하여 재귀적으로 방문
       element.accept(this);
     }
   }
 
+  // 측정된 전체 크기 반환
   public long getTotalSize() {
     return totalSize;
   }
 }
 
+// 방문자 인터페이스를 적용한 파일 찾기 클래스
 class FileSearchVisitor implements Visitor {
   private String searchFileName;
+
+  // 찾은 파일 저장 필드
   private File foundFile;
 
   public FileSearchVisitor(String searchFileName) {
     this.searchFileName = searchFileName;
   }
 
+  // 파일 방문하여 파일 찾기
   @Override
   public void visit(File file) {
+    // 현재 파일 이름과 찾는 파일 이름이 같으면,
     if (file.getName().equals(searchFileName)) {
+      // 찾은 파일로 저장
       foundFile = file;
     }
   }
 
+  // 폴더 내 요소들 방문하여 파일 찾기
   @Override
   public void visit(Directory directory) {
     for (FileSystemElement element : directory.getElements()) {
+      // 방문자 수용 함수를 호출하여 재귀적으로 방문
       element.accept(this);
     }
   }
 
+  // 찾은 파일 반환
   public File getFoundFile() {
     return foundFile;
   }
@@ -5569,33 +5630,44 @@ class FileSearchVisitor implements Visitor {
 // 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
-    // Create files
+    // 파일 인스턴스들 생성
     File file1 = new File("file1.txt", 100);
     File file2 = new File("file2.txt", 200);
     File file3 = new File("file3.txt", 300);
 
-    // Create directories and add files to them
+    // 폴더1 생성 후 파일1, 파일2 추가
     Directory dir1 = new Directory("Folder1");
     dir1.addElement(file1);
     dir1.addElement(file2);
 
+    // 폴더2 생성 후 파일3 추가
     Directory dir2 = new Directory("Folder2");
     dir2.addElement(file3);
 
+    // 루트 폴더 생성 후 폴더1, 폴더2 추가
     Directory rootDir = new Directory("Root");
     rootDir.addElement(dir1);
     rootDir.addElement(dir2);
 
+    // 크기 측정 방문자 생성
     SizeCalculatorVisitor sizeVisitor = new SizeCalculatorVisitor();
+    // 루트 폴더 방문하여 재귀적으로 파일 크기 합산
     rootDir.accept(sizeVisitor);
+    // 루트 폴더 내 모든 파일 크기 반환하여 출력
     System.out.println("Total size of file system: " + sizeVisitor.getTotalSize() + " bytes");
 
+    // 파일 찾기 방문자 생성
     FileSearchVisitor searchVisitor = new FileSearchVisitor("file3.txt");
+    // 루트 폴더 방문하여 재귀적으로 파일 찾기
     rootDir.accept(searchVisitor);
+    // 루트 폴더 내 찾은 파일 반환
     File foundFile = searchVisitor.getFoundFile();
+    // 찾은 파일이 있으면,
     if (foundFile != null) {
+      // 인스턴스 정보 출력
       System.out.println("File found: " + foundFile.getName() + ", Size: " + foundFile.getSize() + " bytes");
     } else {
+      // 찾은 파일이 없으면 메시지 출력
       System.out.println("File not found.");
     }
   }
