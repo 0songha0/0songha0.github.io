@@ -1238,47 +1238,72 @@ Closing PostgreSQL connection
 
 <h3 id="빌더-패턴-builder">빌더 패턴 (Builder)</h3>
 
+<p>복잡한 객체의 생성 과정과 구성 방법을 단계별로 분리하고 캡슐화하여<br />
+다양한 구성의 객체를 유연하게 생성할 수 있는 패턴입니다.</p>
+
+<p>선택적 매개변수가 많은 객체를 생성할 때 코드의 가독성과 유지보수성을 크게 향상시킬 수 있습니다.</p>
+
 <p><mark>빌더 패턴 예시 1</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Product class
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 제품 클래스 : 피자
 class Pizza {
   private String dough;
   private String sauce;
   private String topping;
 
-  // Private constructor to enforce the use of Builder
+  // private 생성자 ★ (외부 호출 불가)
   private Pizza(PizzaBuilder builder) {
+    // PizzaBuilder 인스턴스 정보로 Pizza 생성
     this.dough = builder.dough;
     this.sauce = builder.sauce;
     this.topping = builder.topping;
   }
 
+  // Pizza 인스턴스 출력 시 문자열 커스텀
   @Override
   public String toString() {
     return "Pizza with " + dough + " dough, "
       + sauce + " sauce, and " + topping + " topping.";
   }
 
+  // 제품 생성을 담당하는 정적 중첩 클래스 ★
   public static class PizzaBuilder {
     private String dough;
     private String sauce;
     private String topping;
 
+    // 생성자를 직접 선언하지 않았으므로,
+    // Java 컴파일러가 public 기본 생성자 자동 제공
+
+    // 현재 PizzaBuilder 인스턴스에 도우 값 할당
     public PizzaBuilder dough(String dough) {
       this.dough = dough;
+
+      // PizzaBuilder 인스턴스 반환 ★
+      // 호출부에서 메서드 체이닝 사용 가능
       return this;
     }
 
+    // 현재 PizzaBuilder 인스턴스에 소스 값 할당
     public PizzaBuilder sauce(String sauce) {
       this.sauce = sauce;
+
+      // PizzaBuilder 인스턴스 반환 ★
+      // 호출부에서 메서드 체이닝 사용 가능
       return this;
     }
     
+    // 현재 PizzaBuilder 인스턴스에 토핑 값 할당
     public PizzaBuilder topping(String topping) {
       this.topping = topping;
+
+      // PizzaBuilder 인스턴스 반환 ★
+      // 호출부에서 메서드 체이닝 사용 가능
       return this;
     }
 
+    // 제품 인스턴스 생성 및 반환 함수 ★
     public Pizza build() {
+      // PizzaBuilder 인스턴스 정보로 Pizza 인스턴스 생성
       return new Pizza(this);
     }
   }
@@ -1287,27 +1312,40 @@ class Pizza {
 // 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
+    // 예시 1 : 생성할 객체 정보가 준비된 경우
+
+    // Pizza 클래스 내부 PizzaBuilder 인스턴스 생성 후
+    // 메서드 체이닝 (메소드 연속 호출)
     Pizza myPizza = new Pizza.PizzaBuilder()
           .dough("Thin Crust")
           .sauce("Tomato")
           .topping("Cheese")
           .build();
 
+    // PizzaBuilder를 통해 생성된 Pizza 인스턴스 출력
     System.out.println(myPizza);
 
-    String orderType = "Veggie";
+    // 예시 2 : 생성할 객체 정보가 실행 중에 결정되는 경우
 
+    // PizzaBuilder 생성 후 도우 정보 할당
     Pizza.PizzaBuilder pizzaBuilder = new Pizza.PizzaBuilder().dough("Regular");
 
+    // PizzaBuilder에 소스 정보 할당
     pizzaBuilder.sauce("Pesto");
+    
+    String orderType = "Veggie";
 
+    // 채식 여부에 따라 토핑 정보 할당
     if (orderType.equals("Veggie")) {
       pizzaBuilder.topping("Vegetables");
     } else {
       pizzaBuilder.topping("Pepperoni");
     }
 
+    // PizzaBuilder를 통해 Pizza 인스턴스 생성
     Pizza customPizza = pizzaBuilder.build();
+
+    // Pizza 인스턴스 출력
     System.out.println(customPizza);
   }
 }
@@ -1318,7 +1356,7 @@ Pizza with Regular dough, Pesto sauce, and Vegetables topping.
 </code></pre></div></div>
 
 <p><mark>빌더 패턴 예시 2</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Product class
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 제품 클래스 : HTTP 요청
 public class HttpRequest {
   private String method;
   private String url;
@@ -1326,15 +1364,17 @@ public class HttpRequest {
   private Map&lt;String, String&gt; parameters;
   private String body;
   
-  // private constructor
+  // private 생성자 ★ (외부 호출 불가)
   private HttpRequest(Builder builder) {
+    // Builder가 참조하는 객체들을 동일하게 참조
+    this.body = builder.body;
     this.method = builder.method;
-    this.url = builder.url;
     this.headers = builder.headers;
     this.parameters = builder.parameters;
-    this.body = builder.body;
+    this.url = builder.url;
   }
   
+  // HttpRequest 인스턴스 출력 시 문자열 커스텀
   @Override
   public String toString() {
     return "HttpRequest [method=" + method + ", url=" + url + 
@@ -1342,32 +1382,55 @@ public class HttpRequest {
           ", body=" + body + "]";
   }
 
+  // 제품 생성을 담당하는 정적 중첩 클래스 ★
   public static class Builder {
+    // 필수 필드
     private String method;
     private String url;
+
+    // 선택적 필드
     private Map&lt;String, String&gt; headers = new HashMap&lt;&gt;();
     private Map&lt;String, String&gt; parameters = new HashMap&lt;&gt;();
     private String body;
 
+    // Builder 생성 시 제품 필수 데이터 할당
     public Builder(String method, String url) {
       this.method = method;
       this.url = url;
     }
 
+    // 현재 Builder 인스턴스에 헤더 값 추가
     public Builder addHeader(String key, String value) {
       this.headers.put(key, value);
-      return this; }
 
+      // Builder 인스턴스 반환 ★
+      // 호출부에서 메서드 체이닝 사용 가능
+      return this;
+    }
+
+    // 현재 Builder 인스턴스에 파라미터 값 추가
     public Builder addParameter(String key, String value) {
       this.parameters.put(key, value);
-      return this; }
 
+      // Builder 인스턴스 반환 ★
+      // 호출부에서 메서드 체이닝 사용 가능
+      return this;
+    }
+
+    // 현재 Builder 인스턴스에 바디 값 할당
     public Builder setBody(String body) {
       this.body = body;
-      return this; }
 
+      // Builder 인스턴스 반환 ★
+      // 호출부에서 메서드 체이닝 사용 가능
+      return this;
+    }
+
+    // 제품 인스턴스 생성 및 반환 함수 ★
     public HttpRequest build() {
-      return new HttpRequest(this); }
+      // Builder 인스턴스 정보로 HttpRequest 인스턴스 생성
+      return new HttpRequest(this);
+    }
   }
 }
 
@@ -1375,18 +1438,21 @@ public class HttpRequest {
 public class Main {
   public static void main(String[] args) {
   
+    // GET Request 인스턴스 생성
     HttpRequest getRequest = new HttpRequest.Builder(
       "GET", "https://example.com/api")
       .addHeader("Authorization", "Bearer token")
       .addParameter("query", "builder-pattern")
       .build();
 
+    // POST Request 인스턴스 생성
     HttpRequest postRequest = new HttpRequest.Builder(
       "POST", "https://example.com/api")
       .addHeader("Authorization", "Bearer token")
       .setBody("{ \"name\": \"John\", \"age\": 30 }")
       .build();
-      
+    
+    // 각 Request 인스턴스 출력
     System.out.println(getRequest);
     System.out.println(postRequest);
   }
