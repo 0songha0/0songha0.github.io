@@ -2304,14 +2304,19 @@ TextBox: Username
 
 <h3 id="데코레이터-패턴-decorator">데코레이터 패턴 (Decorator)</h3>
 
+<p>기존 객체 클래스를 수정하지 않고, 다른 객체로 감싸 새로운 책임 및 기능을 동적으로 추가하고 조합할 수 있는 패턴입니다.</p>
+
 <p><mark>데코레이터 패턴 예시 1</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Component interface
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 컴포넌트 인터페이스
 interface Coffee {
+  // 설명 반환 함수 선언
   String getDescription();
+
+  // 가격 반환 함수 선언
   double getCost();
 }
 
-// ConcreteComponent class
+// 데코레이팅 (기능 추가) 받을 원본 클래스
 class SimpleCoffee implements Coffee {
   @Override
   public String getDescription() {
@@ -2324,10 +2329,12 @@ class SimpleCoffee implements Coffee {
   }
 }
 
-// Decorator class
+// 기본 데코레이터 클래스
 class CoffeeDecorator implements Coffee {
+  // 현재 데코레이터가 감싸고 있는 데코레이션 대상 객체
   protected Coffee decoratedCoffee;
 
+  // 생성자에서 데코레이션 대상 저장
   public CoffeeDecorator(Coffee coffee) {
     this.decoratedCoffee = coffee;
   }
@@ -2343,12 +2350,14 @@ class CoffeeDecorator implements Coffee {
   }
 }
 
-// Concrete Decorators
+// 우유 데코레이터 클래스 (콘크리트 데코레이터 1)
 class MilkDecorator extends CoffeeDecorator {
+  // 생성자에서 부모 클래스 생성자 호출
   public MilkDecorator(Coffee coffee) {
     super(coffee);
   }
 
+  // 감싸고 있는 객체의 기존 기능에 새로운 기능 추가
   @Override
   public String getDescription() {
     return super.getDescription() + ", Milk";
@@ -2360,11 +2369,14 @@ class MilkDecorator extends CoffeeDecorator {
   }
 }
 
+// 설탕 데코레이터 클래스 (콘크리트 데코레이터 2)
 class SugarDecorator extends CoffeeDecorator {
+  // 생성자에서 부모 클래스 생성자 호출
   public SugarDecorator(Coffee coffee) {
     super(coffee);
   }
 
+  // 감싸고 있는 객체의 기존 기능에 새로운 기능 추가
   @Override
   public String getDescription() {
     return super.getDescription() + ", Sugar";
@@ -2380,12 +2392,17 @@ class SugarDecorator extends CoffeeDecorator {
 public class Main {
   public static void main(String[] args) {
   
+    // 원본 클래스 기능
     Coffee simpleCoffee = new SimpleCoffee();
+
     System.out.println(simpleCoffee.getDescription() + " $" + simpleCoffee.getCost());
     
+    // 데코레이션 대상 객체에 우유 데코레이터 기능 추가
     Coffee milkCoffee = new MilkDecorator(new SimpleCoffee());
+
     System.out.println(milkCoffee.getDescription() + " $" + milkCoffee.getCost());
 
+    // 데코레이션 대상 객체에 우유 및 설탕 데코레이터 기능 조합
     Coffee milkAndSugarCoffee = new SugarDecorator(new MilkDecorator(new SimpleCoffee()));
     
     System.out.println(milkAndSugarCoffee.getDescription() + " $" + milkAndSugarCoffee.getCost());
@@ -2399,12 +2416,12 @@ Simple coffee, Milk, Sugar $7.0
 </code></pre></div></div>
 
 <p><mark>데코레이터 패턴 예시 2</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Base Component
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 컴포넌트 인터페이스
 interface Text {
   String getContent();
 }
 
-// Concrete Component
+// 데코레이팅 (기능 추가) 받을 원본 클래스
 class PlainText implements Text {
   private String content;
 
@@ -2418,10 +2435,12 @@ class PlainText implements Text {
   }
 }
 
-// Base Decorator
+// 기본 데코레이터 클래스
 abstract class TextDecorator implements Text {
+  // 현재 데코레이터가 감싸고 있는 데코레이션 대상 객체
   protected Text decoratedText;
 
+  // 생성자에서 데코레이션 대상 저장
   public TextDecorator(Text text) {
     this.decoratedText = text;
   }
@@ -2432,34 +2451,42 @@ abstract class TextDecorator implements Text {
   }
 }
 
-// Concrete Decorators
+// 볼드 데코레이터 클래스 (콘크리트 데코레이터 1)
 class BoldDecorator extends TextDecorator {
+  // 생성자에서 부모 클래스 생성자 호출
   public BoldDecorator(Text text) {
     super(text);
   }
 
+  // 감싸고 있는 객체의 기존 기능에 새로운 기능 추가
   @Override
   public String getContent() {
     return "&lt;b&gt;" + super.getContent() + "&lt;/b&gt;";
   }
 }
 
+// 기울기 데코레이터 클래스 (콘크리트 데코레이터 2)
 class ItalicDecorator extends TextDecorator {
+  // 생성자에서 부모 클래스 생성자 호출
   public ItalicDecorator(Text text) {
     super(text);
   }
 
+  // 감싸고 있는 객체의 기존 기능에 새로운 기능 추가
   @Override
   public String getContent() {
     return "&lt;i&gt;" + super.getContent() + "&lt;/i&gt;";
   }
 }
 
+// 밑줄 데코레이터 클래스 (콘크리트 데코레이터 3)
 class UnderlineDecorator extends TextDecorator {
+  // 생성자에서 부모 클래스 생성자 호출
   public UnderlineDecorator(Text text) {
     super(text);
   }
 
+  // 감싸고 있는 객체의 기존 기능에 새로운 기능 추가
   @Override
   public String getContent() {
     return "&lt;u&gt;" + super.getContent() + "&lt;/u&gt;";
@@ -2469,19 +2496,23 @@ class UnderlineDecorator extends TextDecorator {
 // 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
-    // Create a plain text
+    // 데코레이션 대상 객체 생성
     Text text = new PlainText("Hello, Decorator Pattern!");
     System.out.println("Plain text: " + text.getContent());
 
+    // 데코레이션 대상 객체에 볼드 데코레이터 기능 추가
     text = new BoldDecorator(text);
     System.out.println("Bold text: " + text.getContent());
 
+    // 데코레이션 대상 객체에 기울기 데코레이터 기능 추가
     text = new ItalicDecorator(text);
     System.out.println("Bold and italic text: " + text.getContent());
 
+    // 데코레이션 대상 객체에 밑줄 데코레이터 기능 추가
     text = new UnderlineDecorator(text);
     System.out.println("Bold, italic, and underlined text: " + text.getContent());
 
+    // 다른 데코레이션 대상 객체에 기울기 및 밑줄 데코레이터 기능 추가
     Text anotherText = new UnderlineDecorator(new ItalicDecorator(new PlainText("Another example")));
     System.out.println("Underlined and italic text: " + anotherText.getContent());
   }
@@ -2491,8 +2522,7 @@ public class Main {
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Plain text: Hello, Decorator Pattern!
 Bold text: &lt;b&gt;Hello, Decorator Pattern!&lt;/b&gt;
 Bold and italic text: &lt;i&gt;&lt;b&gt;Hello, Decorator Pattern!&lt;/b&gt;&lt;/i&gt;
-Bold, italic, and underlined text:
- &lt;u&gt;&lt;i&gt;&lt;b&gt;Hello, Decorator Pattern!&lt;/b&gt;&lt;/i&gt;&lt;/u&gt;
+Bold, italic, and underlined text: &lt;u&gt;&lt;i&gt;&lt;b&gt;Hello, Decorator Pattern!&lt;/b&gt;&lt;/i&gt;&lt;/u&gt;
 Underlined and italic text: &lt;u&gt;&lt;i&gt;Another example&lt;/i&gt;&lt;/u&gt;
 </code></pre></div></div>
 
