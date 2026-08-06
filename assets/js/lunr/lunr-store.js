@@ -1558,4 +1558,10 @@ var store = [{
         "tags": [],
         "url": "/op/2026-05-12-1",
         "teaser": null
+      },{
+        "title": "DevOps, CI/CD 개념 정리",
+        "excerpt":"DevOps DevOps는 개발과 운영을 결합한 합성어입니다. 개발 팀과 IT 운영 팀 간 협업을 강화하여 지속적인 통합 및 배포 (CI/CD) 를 가능하게 하는 문화입니다. 개발자가 AWS RDS, ElastiCache 등 인프라 자원을 표준화된 방식으로 생성하면 자동으로 모니터링 시스템이 연동되도록 하는 내부 플랫폼을 구축하는 플랫폼 엔지니어링과 Observability가 높은 모니터링 환경을 구축하는 일도 DevOps의...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2026-08-04-1",
+        "teaser": null
       }]
