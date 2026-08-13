@@ -52,19 +52,21 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>| 0songha0 &#124; Page 3</title>
+<!-- begin _includes/seo.html --><title>Node.js, TypeScript 기반 NestJS 프로젝트 생성 방법 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
   <meta name="author" content="0songha0">
   
+  <meta property="article:author" content="0songha0">
+  
 
 
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="송하영 개발 블로그">
-<meta property="og:url" content="https://0songha0.github.io/page/3/">
+<meta property="og:title" content="Node.js, TypeScript 기반 NestJS 프로젝트 생성 방법">
+<meta property="og:url" content="https://0songha0.github.io/web-dev/2026-08-13-1">
 
 
   <meta property="og:description" content="송하영 개발 블로그">
@@ -75,7 +77,11 @@
 
 
 
+  <meta property="article:published_time" content="2026-08-13T00:00:00+00:00">
 
+
+
+  <meta property="article:modified_time" content="2026-08-13T00:00:00+00:00">
 
 
 
@@ -84,13 +90,9 @@
   
 
 
-<link rel="canonical" href="https://0songha0.github.io/page/3/">
+<link rel="canonical" href="https://0songha0.github.io/web-dev/2026-08-13-1">
 
 
-  <link rel="prev" href="https://0songha0.github.io/page/2/">
-
-
-  <link rel="next" href="https://0songha0.github.io/page/4/">
 
 
 <script type="application/ld+json">
@@ -165,7 +167,7 @@
     <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
   </head>
 
-  <body class="layout--home">
+  <body class="layout--single">
     <nav class="skip-links">
   <h2 class="screen-reader-text">Skip links</h2>
   <ul>
@@ -430,76 +432,161 @@
 
 
 
-  
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Node.js, TypeScript 기반 NestJS 프로젝트 생성 방법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2026-08-13T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2026-08-13T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Node.js, TypeScript 기반 NestJS 프로젝트 생성 방법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-08-13T00:00:00+00:00">2026-08-13</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Node.js, TypeScript 기반 NestJS 프로젝트 생성 방법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
+              <ul class="toc__menu"><li><a href="#nestjs-프로젝트-생성-방법">NestJS 프로젝트 생성 방법</a><ul><li><a href="#nest-cli-설치">Nest CLI 설치</a></li><li><a href="#nestjs-프로젝트-생성">NestJS 프로젝트 생성</a></li><li><a href="#nestjs-프로젝트-실행-방법">NestJS 프로젝트 실행 방법</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="nestjs-프로젝트-생성-방법">NestJS 프로젝트 생성 방법</h2>
+
+<p>Node.js 위에서 실행되는 TypeScript 서버 프레임워크인 NestJS 프로젝트 생성 방법입니다.<br />
+로컬에 Node.js와 npm이 설치되어 있어야 정상적으로 설치가 가능합니다.</p>
+
+<h3 id="nest-cli-설치">Nest CLI 설치</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm i -g @nestjs/cli
+</code></pre></div></div>
+
+<p><mark>Nest CLI 정상 설치 확인</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nest --version
+</code></pre></div></div>
+
+<h3 id="nestjs-프로젝트-생성">NestJS 프로젝트 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nest new 프로젝트명
+</code></pre></div></div>
+<p>설치 중 패키지 매니저는 npm을 선택하면 됩니다.</p>
+
+<p><mark>NestJS 프로젝트 구조</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>프로젝트명/
+├── src/
+│   ├── app.controller.spec.ts # app.controller.ts에 대한 단위테스트 파일
+│   ├── app.controller.ts # API 엔드 포인트 작성 파일 (요청을 처리하는 컨트롤러)
+│   ├── app.module.ts # 애플리케이션 모듈 구성 파일
+│   ├── app.service.ts # 서비스 로직 관리 파일
+│   └── main.ts # 애플리케이션 시작 파일
+├── test/ # E2E (End-to-End) 테스트 관련 파일 폴더
+│   ├── app.e2e-spec.ts
+│   └── jest-e2e.json
+├── package.json # 스크립트 및 라이브러리 의존성 관리 파일
+├── nest-cli.json # Nest CLI 설정 파일
+└── tsconfig.json # 타입스크립트 설정 파일
+</code></pre></div></div>
+<p>큰 틀에서는 위와 같은 구조로 NestJS 프로젝트가 생성됩니다.<br />
+E2E 테스트는 실제 사용자 요청부터 응답까지 전체 흐름이 정상인지 테스트합니다.</p>
+
+<h3 id="nestjs-프로젝트-실행-방법">NestJS 프로젝트 실행 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm run start
+</code></pre></div></div>
+
+<p><mark>프로젝트 정상 실행 확인 명령어</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl localhost:3000
+</code></pre></div></div>
+<p>NestJS 프로젝트 생성 직후에는 Hello World! 라는 문자열이 출력되어야 합니다.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
 
   
-    
-    
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
+
 
   
 
-
-  <div class="archive home_archive">
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
     
-      <h3 class="archive__subtitle"></h3>
+      
+      
+      <a href="/categories#web-dev" class="page__taxonomy-item" rel="tag">Web 개발</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2026-08-13">2026-08-13</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">❮</a>
     
     
+      <a href="/test/2026-08-13-2" class="pagination--pager" title="k6 부하테스트 툴 사용법 / EC2 서버에 k6 설치 방법
+">❯</a>
+    
+  </nav>
 
-<h3 class="archive__subtitle">전체 글</h3>
 
+    </div>
 
+    
+  </article>
 
-
-<div class="entries-list">
   
-    
+  
+    <div class="page__related">
+      <h4 class="page__related-title">최신 글</h4>
+      <div class="grid__wrapper">
+        
+          
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
-        <a href="/tool/2025-11-27-1" rel="permalink">윈도우 Claude AI 설치 및 Claude CLI 사용 방법
+        <a href="/test/2026-08-13-2" rel="permalink">k6 부하테스트 툴 사용법 / EC2 서버에 k6 설치 방법
 </a>
       
     </h2>
@@ -510,7 +597,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-11-27T00:00:00+00:00">2025-11-27</time>
+        <time datetime="2026-08-13T00:00:00+00:00">2026-08-13</time>
       </span>
     
 
@@ -525,17 +612,17 @@
   </article>
 </div>
 
-  
-    
+        
+          
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
-        <a href="/web-dev/2025-11-25-2" rel="permalink">VO ↔ DTO 변환 라이브러리 MapStruct 사용법
+        <a href="/test/2026-08-13-1" rel="permalink">부하테스트 개념 및 부하테스트 툴 종류
 </a>
       
     </h2>
@@ -546,7 +633,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-11-25T00:00:00+00:00">2025-11-25</time>
+        <time datetime="2026-08-13T00:00:00+00:00">2026-08-13</time>
       </span>
     
 
@@ -561,17 +648,17 @@
   </article>
 </div>
 
-  
-    
+        
+          
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
-        <a href="/web-dev/2025-11-25-1" rel="permalink">Spring Maven 프로젝트 lombok 라이브러리 추가 방법
+        <a href="/aws/2026-08-13-1" rel="permalink">간단한 AWS EC2 서버 생성 및 Node.js 기반 Express API 프로젝트 구축 방법
 </a>
       
     </h2>
@@ -582,7 +669,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-11-25T00:00:00+00:00">2025-11-25</time>
+        <time datetime="2026-08-13T00:00:00+00:00">2026-08-13</time>
       </span>
     
 
@@ -597,17 +684,17 @@
   </article>
 </div>
 
-  
-    
+        
+          
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
-        <a href="/web-dev/2025-11-12-1" rel="permalink">자주 쓰는 Mybatis 설정 정리
+        <a href="/op/2026-08-04-1" rel="permalink">GitHub Actions 사용하여 CI/CD 구현 방법
 </a>
       
     </h2>
@@ -618,7 +705,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-11-12T00:00:00+00:00">2025-11-12</time>
+        <time datetime="2026-08-07T00:00:00+00:00">2026-08-07</time>
       </span>
     
 
@@ -633,150 +720,13 @@
   </article>
 </div>
 
+        
+      </div>
+    </div>
   
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2025-11-05-1" rel="permalink">Git 블로그 에러 원인 및 해결 방법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-11-05T00:00:00+00:00">2025-11-05</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/plan-design-db/2025-11-04-1" rel="permalink">Spring + JSP 프로젝트 패키지 폴더 구조 설계
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2025-11-04T00:00:00+00:00">2025-11-04</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
   
 </div>
 
-
-<nav class="pagination">
-  
-  <ul>
-    
-    
-      
-        <li><a href="/page/2/">❮</a></li>
-      
-    
-
-    
-    
-      <li><a href="/">1</a></li>
-    
-
-    
-    
-
-    
-    
-    
-
-    
-      
-        
-        
-        
-        <li><a href="/page/2/">2</a></li>
-      
-    
-      
-        <li><a href="/page/3/" class="disabled current">3</a></li>
-      
-    
-      
-        
-        
-        
-        <li><a href="/page/4/">4</a></li>
-      
-    
-      
-        
-        
-        
-        <li><a href="/page/5/">5</a></li>
-      
-    
-
-    
-    
-      <li><a href="#" class="disabled">&hellip;</a></li>
-    
-
-    
-      <li><a href="/page/45/">45</a></li>
-    
-
-    
-    
-      <li><a href="/page/4/">❯</a></li>
-    
-  </ul>
-</nav>
-
-
-  </div>
-</div>
     </div>
 
     
@@ -832,6 +782,30 @@
 
 
 
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
 
 
 

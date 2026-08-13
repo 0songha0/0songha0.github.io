@@ -1588,4 +1588,10 @@ var store = [{
         "tags": [],
         "url": "/test/2026-08-13-2",
         "teaser": null
+      },{
+        "title": "Node.js, TypeScript 기반 NestJS 프로젝트 생성 방법",
+        "excerpt":"NestJS 프로젝트 생성 방법 Node.js 위에서 실행되는 TypeScript 서버 프레임워크인 NestJS 프로젝트 생성 방법입니다. 로컬에 Node.js와 npm이 설치되어 있어야 정상적으로 설치가 가능합니다. Nest CLI 설치 npm i -g @nestjs/cli Nest CLI 정상 설치 확인 nest --version NestJS 프로젝트 생성 nest new 프로젝트명 설치 중 패키지 매니저는 npm을 선택하면 됩니다. NestJS...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2026-08-13-1",
+        "teaser": null
       }]
