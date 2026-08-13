@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Node.js, TypeScript 기반 NestJS 프로젝트 생성 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#nestjs-프로젝트-생성-방법">NestJS 프로젝트 생성 방법</a><ul><li><a href="#nest-cli-설치">Nest CLI 설치</a></li><li><a href="#nestjs-프로젝트-생성">NestJS 프로젝트 생성</a></li><li><a href="#nestjs-프로젝트-실행-방법">NestJS 프로젝트 실행 방법</a></li></ul></li><li><a href="#pm2-라이브러리로-nestjs-프로젝트-실행-방법">PM2 라이브러리로 NestJS 프로젝트 실행 방법</a><ul><li><a href="#pm2-설치">PM2 설치</a></li><li><a href="#pm2-사용하여-nestjs-프로젝트-실행">PM2 사용하여 NestJS 프로젝트 실행</a></li><li><a href="#실행-중-프로세스-목록-확인">실행 중 프로세스 목록 확인</a></li><li><a href="#로그-확인">로그 확인</a></li><li><a href="#pm2-프로세스-중지-방법">PM2 프로세스 중지 방법</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#nestjs-프로젝트-생성-방법">NestJS 프로젝트 생성 방법</a><ul><li><a href="#nest-cli-설치">Nest CLI 설치</a></li><li><a href="#nestjs-프로젝트-생성">NestJS 프로젝트 생성</a></li><li><a href="#nestjs-프로젝트-실행-방법">NestJS 프로젝트 실행 방법</a></li></ul></li><li><a href="#리눅스-서버에서-pm2-라이브러리로-nestjs-프로젝트-실행-방법">리눅스 서버에서 PM2 라이브러리로 NestJS 프로젝트 실행 방법</a><ul><li><a href="#프로젝트-의존성-폴더-생성">프로젝트 의존성 폴더 생성</a></li><li><a href="#pm2-설치">PM2 설치</a></li><li><a href="#pm2-사용하여-nestjs-프로젝트-실행">PM2 사용하여 NestJS 프로젝트 실행</a></li><li><a href="#실행-중-프로세스-목록-확인">실행 중 프로세스 목록 확인</a></li><li><a href="#로그-확인">로그 확인</a></li><li><a href="#pm2-프로세스-중지-방법">PM2 프로세스 중지 방법</a></li><li><a href="#pm2-프로세스-중지-및-삭제-방법">PM2 프로세스 중지 및 삭제 방법</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -532,7 +532,13 @@ node dist/main.js # 빌드된 프로젝트 실행
 
 <hr />
 
-<h2 id="pm2-라이브러리로-nestjs-프로젝트-실행-방법">PM2 라이브러리로 NestJS 프로젝트 실행 방법</h2>
+<h2 id="리눅스-서버에서-pm2-라이브러리로-nestjs-프로젝트-실행-방법">리눅스 서버에서 PM2 라이브러리로 NestJS 프로젝트 실행 방법</h2>
+
+<h3 id="프로젝트-의존성-폴더-생성">프로젝트 의존성 폴더 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install # package.json 기준으로 의존성 설치 (package-lock.json이 있으면 함께 참고)
+npm ci # package-lock.json 기준으로 의존성 설치 (동일한 의존성 버전을 정확히 재현하여 배포 환경에서 권장)
+</code></pre></div></div>
+<p>프로젝트를 서버에 올린 뒤에는 의존성 패키지를 설치하여 node_modules 폴더를 생성해야 실행할 수 있습니다.</p>
 
 <h3 id="pm2-설치">PM2 설치</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm i -g pm2
@@ -560,7 +566,10 @@ pm2 start dist/main.js --name "프로세스명"
 <h3 id="pm2-프로세스-중지-방법">PM2 프로세스 중지 방법</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pm2 stop 프로세스명
 </code></pre></div></div>
-<p>프로세스를 중지하고 목록에서도 삭제하려면, pm2 delete 명령어로 변경하면 됩니다.</p>
+
+<h3 id="pm2-프로세스-중지-및-삭제-방법">PM2 프로세스 중지 및 삭제 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pm2 delete 프로세스명
+</code></pre></div></div>
 
         
       </section>
