@@ -31,6 +31,8 @@ categories:
     url: /aws
   - title: "리눅스 / 운영"
     url: /op
+  - title: "테스트"
+    url: /test
   - title: "윈도우 / Tool"
     url: /tool
   - title: "Python / Java"
