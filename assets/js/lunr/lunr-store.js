@@ -1559,16 +1559,16 @@ var store = [{
         "url": "/op/2026-05-12-1",
         "teaser": null
       },{
-        "title": "DevOps, CI/CD 개념 정리",
-        "excerpt":"DevOps DevOps는 개발과 운영을 결합한 합성어입니다. 개발 팀과 IT 운영 팀 간 협업을 강화하여 지속적인 통합 및 배포 (CI/CD) 를 가능하게 하는 문화입니다. 개발자가 AWS RDS, ElastiCache 등 인프라 자원을 표준화된 방식으로 생성하면 자동으로 모니터링 시스템이 연동되도록 하는 내부 플랫폼을 구축하는 플랫폼 엔지니어링과 Observability가 높은 모니터링 환경을 구축하는 일도 DevOps의...","categories": ["web-dev"],
+        "title": "DevOps 및 CI/CD 개념 정리",
+        "excerpt":"DevOps DevOps는 개발과 운영을 결합한 합성어입니다. 개발 팀과 IT 운영 팀 간 협업을 강화하여 지속적인 통합 및 배포 (CI/CD) 를 가능하게 하는 문화입니다. 개발자가 AWS RDS, ElastiCache 등 인프라 자원을 표준화된 방식으로 생성하면 자동으로 모니터링 시스템이 연동되도록 하는 내부 플랫폼을 구축하는 플랫폼 엔지니어링과 Observability가 높은 모니터링 환경을 구축하는 일도 DevOps의...","categories": ["op"],
         "tags": [],
-        "url": "/web-dev/2026-08-04-1",
+        "url": "/op/2026-08-04-1",
         "teaser": null
       },{
         "title": "GitHub Actions 사용하여 CI/CD 구현 방법",
-        "excerpt":"GitHub Actions GitHub 리포지토리에서 빌드, 테스트, 배포 등 CI/CD 파이프라인을 자동화할 수 있는 플랫폼입니다. CI/CD 작업을 수행할 Job과 Step을 정의한 워크플로는 .github/workflows 경로에 .yml 파일로 작성합니다. push/pull_request 이벤트, 스케줄, 외부 이벤트 등으로 워크플로를 자동 실행할 수 있습니다. 워크플로 작업은 GitHub에서 제공하는 가상 머신 또는 직접 등록한 Runner에서 실행됩니다. GitHub Actions...","categories": ["web-dev"],
+        "excerpt":"GitHub Actions GitHub 리포지토리에서 빌드, 테스트, 배포 등 CI/CD 파이프라인을 자동화할 수 있는 플랫폼입니다. CI/CD 작업을 수행할 Job과 Step을 정의한 워크플로는 .github/workflows 경로에 .yml 파일로 작성합니다. push/pull_request 이벤트, 스케줄, 외부 이벤트 등으로 워크플로를 자동 실행할 수 있습니다. 워크플로 작업은 GitHub에서 제공하는 가상 머신 또는 직접 등록한 Runner에서 실행됩니다. GitHub Actions...","categories": ["op"],
         "tags": [],
-        "url": "/web-dev/2026-08-04-1",
+        "url": "/op/2026-08-04-1",
         "teaser": null
       },{
         "title": "간단한 AWS EC2 서버 생성 및 Node.js 기반 Express API 프로젝트 구축 방법",
