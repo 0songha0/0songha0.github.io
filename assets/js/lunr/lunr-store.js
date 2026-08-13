@@ -1128,9 +1128,9 @@ var store = [{
         "teaser": null
       },{
         "title": "제이미터 부하테스트 방법 / 제이미터 사용법",
-        "excerpt":"제이미터 설치 https://jmeter.apache.org/download_jmeter.cgi Binaries의 zip 파일 다운로드 후 압축을 풀고, bin 폴더 내의 jmeter.bat 파일을 실행하여 설치합니다. 제이미터 부하테스트 방법 Thread Group 추가 좌측 Test Plan 우클릭 &gt; Add &gt; Threads (Users) &gt; Thread Group &gt; 속성 설정 &gt; Ctrl + S (저장) Thread Group 속성 Number of Threads (users)...","categories": ["tool"],
+        "excerpt":"제이미터 설치 https://jmeter.apache.org/download_jmeter.cgi Binaries의 zip 파일 다운로드 후 압축을 풀고, bin 폴더 내의 jmeter.bat 파일을 실행하여 설치합니다. 제이미터 부하테스트 방법 Thread Group 추가 좌측 Test Plan 우클릭 &gt; Add &gt; Threads (Users) &gt; Thread Group &gt; 속성 설정 &gt; Ctrl + S (저장) Thread Group 속성 Number of Threads (users)...","categories": ["test"],
         "tags": [],
-        "url": "/tool/2024-12-23-1",
+        "url": "/test/2024-12-23-1",
         "teaser": null
       },{
         "title": "MySQL DDL 쿼리 정리 / 테이블 생성 및 수정 방법",
@@ -1565,9 +1565,21 @@ var store = [{
         "url": "/web-dev/2026-08-04-1",
         "teaser": null
       },{
+        "title": "GitHub Actions 사용하여 CI/CD 구현 방법",
+        "excerpt":"GitHub Actions GitHub 리포지토리에서 빌드, 테스트, 배포 등 CI/CD 파이프라인을 자동화할 수 있는 플랫폼입니다. CI/CD 작업을 수행할 Job과 Step을 정의한 워크플로는 .github/workflows 경로에 .yml 파일로 작성합니다. push/pull_request 이벤트, 스케줄, 외부 이벤트 등으로 워크플로를 자동 실행할 수 있습니다. 워크플로 작업은 GitHub에서 제공하는 가상 머신 또는 직접 등록한 Runner에서 실행됩니다. GitHub Actions...","categories": ["web-dev"],
+        "tags": [],
+        "url": "/web-dev/2026-08-04-1",
+        "teaser": null
+      },{
+        "title": "간단한 AWS EC2 서버 생성 및 Node.js 기반 Express API 프로젝트 구축 방법",
+        "excerpt":"간단한 AWS EC2 서버 생성 및 제거 방법 간단한 AWS EC2 서버 생성 방법 AWS &gt; EC2 검색 &gt; 인스턴스 시작 버튼 &gt; 이름 : api-server 입력 &gt; Quick Start : Ubuntu 운영체제 선택 &gt; 인스턴스 유형 : t2.micro (프리 티어 사용 가능) 확인 &gt; 키 페어(로그인) : 키 페어...","categories": ["aws"],
+        "tags": [],
+        "url": "/aws/2026-08-13-1",
+        "teaser": null
+      },{
         "title": "부하테스트 개념 및 부하테스트 툴 종류",
         "excerpt":"부하테스트란? 시스템이 얼마나 많은 트래픽이나 요청을 안정적으로 처리할 수 있는 지 테스트 하는 것입니다. 서비스를 운영에 배포하기 전에 어느 정도의 사용자 요청을 견딜 수 있는지 미리 파악할 수 있습니다. 부하테스트 활용 사례 트래픽이 늘어나서 서버가 터져서 죽는 것을 미리 감지하고 대처할 수 있습니다. 예를 들어, 초당 100개의 사용자 요청만 감당...","categories": ["test"],
         "tags": [],
-        "url": "/plan-design-db/2026-08-13-1",
+        "url": "/test/2026-08-13-1",
         "teaser": null
       }]

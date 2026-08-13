@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 262</span>
+      <span class="nav__total">🌴 Total Posts: 264</span>
     </li> -->
     
     
@@ -2078,80 +2078,113 @@ Sending SMS with message: Encrypted Message: !dlroW olleH
 </code></pre></div></div>
 
 <h3 id="복합체-패턴-composite">복합체 패턴 (Composite)</h3>
+<p>객체 컴포넌트들을 트리 구조로 구성하여 부분-전체 계층 구조를 표현할 수 있는 패턴입니다.<br />
+클라이언트는 복합 객체와 개별 객체를 구분하지 않고 동일하게 다룰 수 있습니다.</p>
+
+<p>폴더처럼 다른 요소들을 하위로 포함할 수 있는 요소들은 복합체이고,<br />
+파일처럼 하위 요소를 갖지 못하는 요소들은 잎 (leaf) 입니다.</p>
 
 <p><mark>복합체 패턴 예시 1</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Component
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 파일 시스템 컴포넌트 인터페이스
 interface FileSystemComponent {
+  // 이름 출력 함수 선언
   void printName();
+
+  // 사이즈 반환 함수 선언
   int getSize();
+
+  // 이름 반환 함수 선언
   String getName();
 }
 
-// Leaf
+// 파일 시스템 컴포넌트 인터페이스를 구현한 Leaf 클래스 : 파일
 class File implements FileSystemComponent {
+  // 파일 이름, 사이즈 필드
   private String name;
   private int size;
 
+  // 생성자에서 매개변수로 받은 파일 이름, 사이즈 저장
   public File(String name, int size) {
     this.name = name;
     this.size = size;
   }
 
+  // 이름 출력 함수 구현
   @Override
   public void printName() {
     System.out.println("File: " + name);
   }
 
+  // 사이즈 반환 함수 구현
   @Override
   public int getSize() {
     return size;
   }
 
+  // 이름 반환 함수 구현
   @Override
   public String getName() {
     return name;
   }
 }
 
-// Composite
+// 파일 시스템 컴포넌트 인터페이스를 구현한 복합체 클래스 : 폴더
 class Directory implements FileSystemComponent {
+  // 폴더 이름 필드
   private String name;
-  private List&lt;FileSystemComponent&gt; components
-    = new ArrayList&lt;&gt;();
 
+  // 하위 파일 시스템 컴포넌트 리스트 필드
+  private List&lt;FileSystemComponent&gt; components = new ArrayList&lt;&gt;();
+
+  // 생성자에서 폴더 이름 저장
   public Directory(String name) {
     this.name = name;
   }
 
+  // 다른 컴포넌트를 받아 리스트에 추가하는 함수
   public void add(FileSystemComponent component) {
     components.add(component);
   }
 
+  // 컴포넌트를 참조받아 리스트에서 삭제하는 함수
   public void remove(FileSystemComponent component) {
     components.remove(component);
   }
 
+  // 이름에 해당하는 컴포넌트를 리스트에서 삭제하는 함수
   public void remove(String name) {
     components.removeIf(component -&gt; component.getName().equals(name));
   }
 
+  // 이름 출력 함수 구현
   @Override
   public void printName() {
     System.out.println("Directory: " + name);
+
+    // 폴더 내 모든 컴포넌트 요소 이름 출력
     for (FileSystemComponent component : components) {
+      // 컴포넌트 요소가 파일이면 이름을 출력하고,
+      // 폴더면 재귀적으로 모든 하위 폴더 및 파일 이름 출력
       component.printName();
     }
   }
 
+  // 사이즈 반환 함수 구현
   @Override
   public int getSize() {
     int totalSize = 0;
+
+    // 폴더 내 모든 컴포넌트 사이즈 구하기
     for (FileSystemComponent component : components) {
+      // 컴포넌트 요소가 파일이면 사이즈를 더하고,
+      // 폴더면 재귀적으로 모든 하위 폴더 및 파일 사이즈 누적
       totalSize += component.getSize();
     }
+
     return totalSize;
   }
 
+  // 이름 반환 함수 구현
   @Override
   public String getName() {
     return name;
@@ -2161,26 +2194,33 @@ class Directory implements FileSystemComponent {
 // 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
+    // 파일 인스턴스들 생성
     File file1 = new File("Document.txt", 100);
     File file2 = new File("Image.jpg", 200);
 
+    // 서브폴더 인스턴스 생성 후 서브파일 생성 및 추가
     Directory subDir = new Directory("SubFolder");
     subDir.add(new File("SubFile.txt", 50));
 
+    // 루트 폴더 인스턴스 생성 후 파일들 및 서브폴더 추가
     Directory rootDir = new Directory("RootFolder");
     rootDir.add(file1);
     rootDir.add(file2);
     rootDir.add(subDir);
 
     System.out.println("Initial structure:");
+    // 최상위 폴더에서 이름 출력 함수 호출 시 내부 모든 폴더 및 파일 이름 출력
     rootDir.printName();
+    // 최상위 폴더에서 사이즈 반환 함수 호출 시 내부 모든 폴더 및 파일 사이즈 누적
     System.out.println("Total size: " + rootDir.getSize() + " KB");
 
+    // Image.jpg 이름을 가진 컴포넌트 삭제 후 재출력
     System.out.println("\nRemoving Image.jpg:");
     rootDir.remove("Image.jpg");
     rootDir.printName();
     System.out.println("Total " + rootDir.getSize() + " KB");
 
+    // subDir 컴포넌트 삭제 후 재출력
     System.out.println("\nRemoving SubFolder:");
     rootDir.remove(subDir);
     rootDir.printName();
@@ -2211,104 +2251,146 @@ Total size: 100 KB
 </code></pre></div></div>
 
 <p><mark>복합체 패턴 예시 2</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interface UIComponent {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// UI 컴포넌트 인터페이스
+interface UIComponent {
+  // 컴포넌트 정보 출력 함수 선언
   void render();
+
+  // 컴포넌트 추가 함수 선언
   void add(UIComponent component);
+
+  // 컴포넌트 삭제 함수 선언
   void remove(UIComponent component);
 }
 
-// Leaves
+// UI 컴포넌트 인터페이스를 구현한 Leaf 클래스 1 : 버튼
 class Button implements UIComponent {
+  // 라벨 필드
   private String label;
 
+  // 생성자에서 라벨 필드 저장
   public Button(String label) {
     this.label = label;
   }
 
+  // 컴포넌트 정보 출력 함수 구현
   @Override
   public void render() {
     System.out.println("Button: " + label);
   }
 
+  // 컴포넌트 추가 함수 구현
   @Override
   public void add(UIComponent component) {
+    // 잎이니까 다른 컴포넌트 추가 시 예외 반환 (인터페이스 분리 원칙 위배)
     throw new UnsupportedOperationException();
   }
 
+  // 컴포넌트 삭제 함수 구현
   @Override
   public void remove(UIComponent component) {
+    // 잎이니까 다른 컴포넌트 삭제 시 예외 반환 (인터페이스 분리 원칙 위배)
     throw new UnsupportedOperationException();
   }
 }
 
+// UI 컴포넌트 인터페이스를 구현한 Leaf 클래스 2 : 텍스트 박스
 class TextBox implements UIComponent {
+  // 텍스트 필드
   private String text;
 
+  // 생성자에서 텍스트 필드 저장
   public TextBox(String text) {
     this.text = text;
   }
 
+  // 컴포넌트 정보 출력 함수 구현
   @Override
   public void render() {
     System.out.println("TextBox: " + text);
   }
 
+  // 컴포넌트 추가 함수 구현
   @Override
   public void add(UIComponent component) {
+    // 잎이니까 다른 컴포넌트 추가 시 예외 반환
     throw new UnsupportedOperationException();
   }
 
+  // 컴포넌트 삭제 함수 구현
   @Override
   public void remove(UIComponent component) {
+    // 잎이니까 다른 컴포넌트 삭제 시 예외 반환
     throw new UnsupportedOperationException();
   }
 }
 
-// Composites
+// UI 컴포넌트 인터페이스를 구현한 복합체 클래스 1 : 패널
 class Panel implements UIComponent {
+  // 패널 이름 필드
   private String name;
+
+  // 하위 UI 컴포넌트 리스트 필드
   private List&lt;UIComponent&gt; components = new ArrayList&lt;&gt;();
 
+  // 생성자에서 패널 이름 저장
   public Panel(String name) {
     this.name = name;
   }
 
+  // 컴포넌트 정보 출력 함수 구현 (재귀적으로 전체 하위 트리 렌더링)
   @Override
   public void render() {
+    // 현재 컴포넌트 정보 출력
     System.out.println("Panel: " + name);
+
+    // 하위 컴포넌트들 정보 출력 함수 호출
     components.forEach(UIComponent::render);
   }
 
+  // 컴포넌트 추가 함수 구현
   @Override
   public void add(UIComponent component) {
     components.add(component);
   }
 
+  // 컴포넌트 삭제 함수 구현
   @Override
   public void remove(UIComponent component) {
     components.remove(component);
   }
 }
 
+// UI 컴포넌트 인터페이스를 구현한 복합체 클래스 2 : 윈도우
 class Window implements UIComponent {
+  // 타이틀 필드
   private String title;
+
+  // 하위 UI 컴포넌트 리스트 필드
   private List&lt;UIComponent&gt; components = new ArrayList&lt;&gt;();
 
+  // 생성자에서 타이틀 저장
   public Window(String title) {
     this.title = title;
   }
 
+  // 컴포넌트 정보 출력 함수 구현 (재귀적으로 전체 하위 트리 렌더링)
   @Override
   public void render() {
+    // 현재 컴포넌트 정보 출력
     System.out.println("Window: " + title);
+
+    // 하위 컴포넌트들 정보 출력 함수 호출
     components.forEach(UIComponent::render);
   }
 
+  // 컴포넌트 추가 함수 구현
   @Override
   public void add(UIComponent component) {
     components.add(component);
   }
 
+  // 컴포넌트 삭제 함수 구현
   @Override
   public void remove(UIComponent component) {
     components.remove(component);
@@ -2318,21 +2400,27 @@ class Window implements UIComponent {
 // 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
+    // Leaf 컴포넌트 인스턴스들 생성
     Button submitButton = new Button("Submit");
     Button cancelButton = new Button("Cancel");
     TextBox usernameField = new TextBox("Username");
 
+    // 패널 컴포넌트 인스턴스 생성 후 Leaf 컴포넌트 요소들 추가
     Panel formPanel = new Panel("Form");
     formPanel.add(submitButton);
     formPanel.add(cancelButton);
     formPanel.add(usernameField);
 
+    // 윈도우 컴포넌트 인스턴스 생성 후 패널 컴포넌트 인스턴스 추가
     Window mainWindow = new Window("Main");
     mainWindow.add(formPanel);
+
+    // 윈도우 컴포넌트 정보 출력 함수 호출
     mainWindow.render();
 
     System.out.println();
 
+    // 패널에서 취소 버튼 삭제 후 윈도우 컴포넌트 정보 출력 함수 호출
     formPanel.remove(cancelButton);
     mainWindow.render();
   }
@@ -2350,6 +2438,9 @@ Panel: Form
 Button: Submit
 TextBox: Username
 </code></pre></div></div>
+<p>Composite 패턴의 투명성 중시 방식 예제입니다.<br />
+Leaf 클래스는 add 및 remove 기능이 필요하지 않지만, 공통 인터페이스에 정의되어 구현을 강제받습니다.<br />
+Leaf가 사용하지 않는 메서드에 의존하게 되므로 인터페이스 분리 원칙에는 위배될 수 있습니다.</p>
 
 <h3 id="데코레이터-패턴-decorator">데코레이터 패턴 (Decorator)</h3>
 
@@ -6281,7 +6372,7 @@ Smartphone - Electronics - $800.0 - Stock: 0
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
-        <a href="/plan-design-db/2026-08-13-1" rel="permalink">부하테스트 개념 및 부하테스트 툴 종류
+        <a href="/test/2026-08-13-1" rel="permalink">부하테스트 개념 및 부하테스트 툴 종류
 </a>
       
     </h2>
@@ -6293,6 +6384,78 @@ Smartphone - Electronics - $800.0 - Stock: 0
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2026-08-13T00:00:00+00:00">2026-08-13</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/aws/2026-08-13-1" rel="permalink">간단한 AWS EC2 서버 생성 및 Node.js 기반 Express API 프로젝트 구축 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-08-13T00:00:00+00:00">2026-08-13</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/web-dev/2026-08-04-1" rel="permalink">GitHub Actions 사용하여 CI/CD 구현 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-08-07T00:00:00+00:00">2026-08-07</time>
       </span>
     
 
@@ -6329,78 +6492,6 @@ Smartphone - Electronics - $800.0 - Stock: 0
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2026-08-04T00:00:00+00:00">2026-08-04</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/op/2026-05-12-1" rel="permalink">내부망에서 리눅스 MySQL 설치 및 설정 방법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2026-05-12T00:00:00+00:00">2026-05-12</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2026-04-23-1" rel="permalink">JWT 토큰 인증 개념 및 회원 플랫폼 프로젝트 분석
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2026-04-23T00:00:00+00:00">2026-04-23</time>
       </span>
     
 
