@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 부하테스트 개념 및 부하테스트 툴 종류</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#부하테스트란">부하테스트란?</a><ul><li><a href="#부하테스트-활용-사례">부하테스트 활용 사례</a></li><li><a href="#처리량-throughput">처리량 (Throughput)</a></li><li><a href="#지연시간-latency">지연시간 (Latency)</a></li></ul></li><li><a href="#부하테스트-툴-종류">부하테스트 툴 종류</a><ul><li><a href="#k6">k6</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#부하테스트란">부하테스트란?</a><ul><li><a href="#부하테스트-활용-사례">부하테스트 활용 사례</a></li><li><a href="#처리량-throughput">처리량 (Throughput)</a></li><li><a href="#지연시간-latency">지연시간 (Latency)</a></li><li><a href="#병목-지점-bottleneck-point">병목 지점 (Bottleneck Point)</a></li></ul></li><li><a href="#부하테스트-툴-종류">부하테스트 툴 종류</a><ul><li><a href="#k6">k6</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -495,11 +495,23 @@
 
 <p>시스템 전체 인프라에서 처리량이 가장 낮은 병목 구간에 의해 최대 처리량이 제한됩니다.</p>
 
+<p><mark>병목 지점의 최대 처리량이 전체 시스템의 최대 처리량을 제한하는 예시</mark><br />
+백엔드 서버가 초당 1,000개 요청, 병목 지점인 DB가 초당 300개 요청을 처리할 수 있는 경우<br />
+1초에 1,000개의 요청이 들어온다면, 700개의 초과 요청은 대기하거나 처리되지 못하므로<br />
+전체 시스템의 최대 처리량은 300 RPS로 제한됩니다.</p>
+
 <h3 id="지연시간-latency">지연시간 (Latency)</h3>
 <p>API에 요청을 보낸 시점부터 응답을 받을 때까지 걸리는 시간을 의미합니다.<br />
 부하테스트에서 평균 응답 시간이 2.5초면 평균 레이턴시가 2.5초라고 표현합니다.</p>
 
 <p>시스템 전체 인프라에서 순차 처리되는 각 구간의 지연시간이 누적되어 전체 레이턴시에 영향을 줍니다.</p>
+
+<h3 id="병목-지점-bottleneck-point">병목 지점 (Bottleneck Point)</h3>
+<p>전체 시스템의 처리량이나 응답 속도를 제한하여 전체 성능 저하에 가장 큰 영향을 주는 구간입니다.<br />
+DB 쿼리, 디스크 I/O, 네트워크, 커넥션 풀, 락 경합, 외부 API 등도 병목이 될 수 있습니다.<br />
+전체 시스템 성능을 효과적으로 개선하려면 정체가 발생한 병목 지점을 찾아 우선적으로 개선해야 합니다.</p>
+
+<p>특정 병목 지점을 해소하면 다른 곳에서 새로운 병목 지점이 발생할 수 있습니다.</p>
 
 <hr />
 
