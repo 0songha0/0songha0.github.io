@@ -1664,11 +1664,11 @@ public class Main {
   }
 }
 </code></pre></div></div>
-<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<p>복제된 사본 인스턴스를 변경해도 해시맵에 저장된 원본 템플릿은 변경되지 않습니다.<br />
+위 코드의 실행 결과는 아래와 같습니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Welcome document: Welcome, John Doe!
 Meeting document: Meeting scheduled on 2024-10-01 at 14:00
 </code></pre></div></div>
-<p>복제된 사본 인스턴스를 변경해도 해시맵에 저장된 원본 템플릿은 변경되지 않습니다.</p>
 
 <hr />
 
@@ -2426,7 +2426,10 @@ public class Main {
   }
 }
 </code></pre></div></div>
-<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<p>Composite 패턴의 투명성 중시 방식 예시입니다.<br />
+Leaf 클래스는 add 및 remove 기능이 필요하지 않지만, 공통 인터페이스에 정의되어 구현을 강제받습니다.<br />
+Leaf가 사용하지 않는 메서드에 의존하게 되므로 인터페이스 분리 원칙에는 위배될 수 있습니다.<br />
+위 코드의 실행 결과는 아래와 같습니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Window: Main
 Panel: Form
 Button: Submit
@@ -2438,9 +2441,6 @@ Panel: Form
 Button: Submit
 TextBox: Username
 </code></pre></div></div>
-<p>Composite 패턴의 투명성 중시 방식 예제입니다.<br />
-Leaf 클래스는 add 및 remove 기능이 필요하지 않지만, 공통 인터페이스에 정의되어 구현을 강제받습니다.<br />
-Leaf가 사용하지 않는 메서드에 의존하게 되므로 인터페이스 분리 원칙에는 위배될 수 있습니다.</p>
 
 <h3 id="데코레이터-패턴-decorator">데코레이터 패턴 (Decorator)</h3>
 
@@ -3445,7 +3445,8 @@ public class Main {
   }
 }
 </code></pre></div></div>
-<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<p>요청이 끝까지 전달되면서 조건을 만족하는 여러 핸들러가 모두 처리하는 책임 연쇄 변형 예시입니다.<br />
+위 코드의 실행 결과는 아래와 같습니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Console::Logger: This is an information.
 
 File::Logger: This is a debug level information.
@@ -3455,7 +3456,6 @@ Network::Logger: This is a warning information.
 File::Logger: This is a warning information.
 Console::Logger: This is a warning information.
 </code></pre></div></div>
-<p>요청이 끝까지 전달되면서 조건을 만족하는 여러 핸들러가 모두 처리하는 책임 연쇄 변형 예시입니다.</p>
 
 <h3 id="커맨드-패턴-command">커맨드 패턴 (Command)</h3>
 <p>명령을 객체로 캡슐화하여, 명령을 실행시키는 인보커 객체와<br />
@@ -3765,57 +3765,72 @@ Final text: Hello, World!
 </code></pre></div></div>
 
 <h3 id="인터프리터-패턴-interpreter">인터프리터 패턴 (Interpreter)</h3>
+<p>특정 언어의 문법을 객체 구조로 표현하고 해석하여 결과를 만들어내는 패턴입니다.</p>
+
+<p>텍스트의 키워드, 연산자, 변수 등 문법 요소를 객체로 표현하고 해석하여 연산을 수행합니다.<br />
+데이터베이스 쿼리, 스크립트 엔진, 파서, 수식 처리 프로그램 등에서 활용될 수 있습니다.</p>
 
 <p><mark>인터프리터 패턴 예시 1</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public interface Expression {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 표현식 인터페이스
+public interface Expression {
+  // 표현식이 나타내는 값을 반환하는 인터프리트 함수 정의
   int interpret();
 }
 
+// 표현식 인터페이스를 구현한 숫자 표현식 클래스
 public class Number implements Expression {
+  // 숫자 필드
   private int number;
 
+  // 생성자에서 숫자 저장
   public Number(int number) {
     this.number = number;
   }
 
+  // 표현식이 나타내는 값을 반환하는 인터프리트 함수 구현
   @Override
   public int interpret() {
+    // 숫자 반환
     return this.number;
   }
 }
 
+// 표현식 인터페이스를 구현한 더하기 표현식 클래스
 public class Add implements Expression {
+  // 양쪽 표현식 필드
   private Expression leftExpression;
   private Expression rightExpression;
 
-  public Add(
-    Expression leftExpression,
-    Expression rightExpression
-  ) {
+  // 생성자에서 양쪽 표현식 저장
+  public Add(Expression leftExpression, Expression rightExpression) {
     this.leftExpression = leftExpression;
     this.rightExpression = rightExpression;
   }
 
+  // 표현식이 나타내는 값을 반환하는 인터프리트 함수 구현
   @Override
   public int interpret() {
+      // 양쪽 표현식 결과 값을 더한 숫자 반환
       return leftExpression.interpret() + rightExpression.interpret();
   }
 }
 
+// 표현식 인터페이스를 구현한 빼기 표현식 클래스
 public class Subtract implements Expression {
+  // 양쪽 표현식 필드
   private Expression leftExpression;
   private Expression rightExpression;
 
-  public Subtract(
-    Expression leftExpression,
-    Expression rightExpression
-  ) {
+  // 생성자에서 양쪽 표현식 저장
+  public Subtract(Expression leftExpression, Expression rightExpression) {
     this.leftExpression = leftExpression;
     this.rightExpression = rightExpression;
   }
 
+  // 표현식이 나타내는 값을 반환하는 인터프리트 함수 구현
   @Override
   public int interpret() {
+    // 왼쪽 표현식 결과 값에서 오른쪽 표현식 결과 값을 뺀 숫자 반환
     return leftExpression.interpret() - rightExpression.interpret();
   }
 }
@@ -3823,20 +3838,25 @@ public class Subtract implements Expression {
 // 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
-  
+    // 숫자 표현식 인스턴스들 생성
     Expression five = new Number(5);
     Expression two = new Number(2);
     Expression three = new Number(3);
 
+    // 두 숫자 표현식을 더하는 더하기 표현식 생성
     Expression addExpression = new Add(five, two);
     
+    // 더하기 표현식에서 숫자 표현식 빼기 표현식 생성
     Expression subtractExpression = new Subtract(addExpression, three);
 
+    // 빼기 표현식 인터프리트 함수 호출하여 반환 값 출력
     System.out.println("(5 + 2) - 3 = " + subtractExpression.interpret());
   }
 }
 </code></pre></div></div>
-<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<p>숫자와 연산을 표현식 클래스로 구현하고,<br />
+각 표현식의 인터프리트 함수를 통해 값을 해석하는 인터프리터 패턴 예시입니다.<br />
+위 코드의 실행 결과는 아래와 같습니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(5 + 2) - 3 = 4
 </code></pre></div></div>
 
@@ -4011,7 +4031,8 @@ public class Main {
   }
 }
 </code></pre></div></div>
-<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<p>SQL 쿼리문을 처리하는 인터프리터 패턴 예시입니다.<br />
+위 코드의 실행 결과는 아래와 같습니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Result of query: SELECT * FROM users
 {name=John, id=1, age=30}
 {name=Jane, id=2, age=25}
