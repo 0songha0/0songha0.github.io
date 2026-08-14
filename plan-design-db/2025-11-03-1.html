@@ -6325,34 +6325,50 @@ File found: file3.txt, Size: 300 bytes
 </code></pre></div></div>
 
 <h3 id="명세-패턴-specification">명세 패턴 (Specification)</h3>
+<p>객체의 속성이나 동작이 특정 조건들을 만족하는지 여부를 확인할 때 유용한 패턴입니다.</p>
+
+<p>여러 조건들을 재사용 가능한 객체로 만들고, 조합해서 다양한 새로운 조건을 만들어낼 수 있습니다.</p>
 
 <p><mark>명세 패턴 예시 1</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public interface Specification {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 명세 인터페이스
+public interface Specification {
+  // 숫자가 특정 조건을 만족하는지 여부 반환 함수 정의
   boolean isSatisfiedBy(int number);
 
+  // 다른 명세 인스턴스를 조합하여 새로운 명세 인스턴스를 반환하는 함수
+  // default 메서드라서 인터페이스에서도 내부 구현 가능
   default Specification and(Specification other) {
+    // 숫자가 두 명세 조건을 모두 만족하는지 여부 반환
     return number -&gt; this.isSatisfiedBy(number) &amp;&amp; other.isSatisfiedBy(number);
   }
 }
 
+// 명세 인터페이스를 구현한 짝수 명세 클래스
 class EvenSpecification implements Specification {
+  // 숫자가 특정 조건을 만족하는지 여부 반환 함수 구현
   @Override
   public boolean isSatisfiedBy(int number) {
+    // 숫자가 2의 배수면 true 반환
     return number % 2 == 0;
   }
 }
 
+// 명세 인터페이스를 구현한 범위 명세 클래스
 class RangeSpecification implements Specification {
+  // 최소값, 최대값 필드
   private int min;
   private int max;
 
+  // 생성자에서 최소값, 최대값 저장
   public RangeSpecification(int min, int max) {
     this.min = min;
     this.max = max;
   }
 
+  // 숫자가 특정 조건을 만족하는지 여부 반환 함수 구현
   @Override
   public boolean isSatisfiedBy(int number) {
+    // 숫자가 최소값보다 크거나 같고, 최대값보다 작거나 같으면 true 반환
     return number &gt;= min &amp;&amp; number &lt;= max;
   }
 }
@@ -6360,34 +6376,44 @@ class RangeSpecification implements Specification {
 // 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
+    // 짝수 명세, 범위 명세 인스턴스 생성
     Specification evenSpec = new EvenSpecification();
     Specification rangeSpec = new RangeSpecification(10, 20);
 
+    // 짝수 명세 인스턴스에 범위 명세 인스턴스를 조합하여 새로운 명세 인스턴스 생성
     Specification evenAndInRangeSpec = evenSpec.and(rangeSpec);
 
+    // 주어진 숫자
     int number = 24;
 
+    // 주어진 숫자가 짝수 명세를 충족하는지 여부 출력
     System.out.println("Even: " + evenSpec.isSatisfiedBy(number));
         
+    // 주어진 숫자가 범위 명세를 충족하는지 여부 출력
     System.out.println("In range 10-20: " + rangeSpec.isSatisfiedBy(number));
         
+    // 주어진 숫자가 짝수 + 범위 명세를 충족하는지 여부 출력
     System.out.println("Even and in range 10-20: " + evenAndInRangeSpec.isSatisfiedBy(number));
   }
 }
 </code></pre></div></div>
-<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<p>주어진 숫자가 특정 기준을 만족하는지 여부를 확인하는 명세 패턴 예시입니다.<br />
+위 코드의 실행 결과는 아래와 같습니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Even: true
 In range 10-20: false
 Even and in range 10-20: false
 </code></pre></div></div>
 
 <p><mark>명세 패턴 예시 2</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Product {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 제품 클래스 (명세 평가 대상)
+public class Product {
+  // 이름, 카테고리, 가격, 재고수량 필드
   private String name;
   private String category;
   private int price;
   private int stock;
 
+  // 생성자에서 이름, 카테고리, 가격, 재고수량 저장
   public Product(String name, String category, int price, int stock) {
     this.name = name;
     this.category = category;
@@ -6395,80 +6421,132 @@ Even and in range 10-20: false
     this.stock = stock;
   }
 
+  // getter 함수들
   public String getName() { return name; }
   public String getCategory() { return category; }
-  public double getPrice() { return price; }
+  public int getPrice() { return price; }
   public int getStock() { return stock; }
 }
 
+// 명세 인터페이스
+public interface Specification {
+  // 주어진 제품이 특정 조건을 만족하는지 여부 반환 함수 정의
+  boolean isSatisfiedBy(Product item);
+}
+
+// 명세 인터페이스를 구현한 카테고리 명세 클래스
+public class CategorySpec implements Specification {
+  // 카테고리 필드
+  private String category;
+
+  // 생성자에서 카테고리 저장
+  public CategorySpec(String category) {
+    this.category = category;
+  }
+
+  // 주어진 제품이 특정 조건을 만족하는지 여부 반환 함수 구현
+  @Override
+  public boolean isSatisfiedBy(Product item) {
+    // 제품이 특정 카테고리에 속하면 true 반환
+    return item.getCategory().equals(category);
+  }
+}
+
+// 명세 인터페이스를 구현한 가격 명세 클래스
 public class PriceSpec implements Specification {
+  // 기준 가격 필드
   private int maxPrice;
 
+  // 생성자에서 기준 가격 저장
   public PriceSpec(int maxPrice) {
     this.maxPrice = maxPrice;
   }
 
+  // 주어진 제품이 특정 조건을 만족하는지 여부 반환 함수 구현
   @Override
   public boolean isSatisfiedBy(Product item) {
+    // 제품이 기준 가격 이하면 true 반환
     return item.getPrice() &lt;= maxPrice;
   }
 }
 
+// 명세 인터페이스를 구현한 재고 유무 클래스
 public class InStockSpec implements Specification {
+  // 주어진 제품이 특정 조건을 만족하는지 여부 반환 함수 구현
   @Override
   public boolean isSatisfiedBy(Product item) {
+    // 제품 재고가 남아있으면 true 반환
     return item.getStock() &gt; 0;
   }
 }
 
+// 명세 인터페이스를 구현한 명세 AND 조합 클래스
 public class AndSpec implements Specification {
+  // 두 명세 인스턴스 필드
   private Specification spec1;
   private Specification spec2;
 
+  // 생성자에서 두 명세 인스턴스 저장
   public AndSpec(Specification spec1, Specification spec2) {
     this.spec1 = spec1; this.spec2 = spec2;
   }
 
+  // 주어진 제품이 특정 조건을 만족하는지 여부 반환 함수 구현
   @Override
   public boolean isSatisfiedBy(Product item) {
+    // 제품이 두 명세 조건을 모두 만족하면 true 반환
     return spec1.isSatisfiedBy(item) &amp;&amp; spec2.isSatisfiedBy(item);
   }
 }
 
+// 명세 인터페이스를 구현한 명세 OR 조합 클래스
 public class OrSpec implements Specification {
+  // 두 명세 인스턴스 필드
   private Specification spec1;
   private Specification spec2;
 
+  // 생성자에서 두 명세 인스턴스 저장
   public OrSpec(Specification spec1, Specification spec2) {
     this.spec1 = spec1; this.spec2 = spec2;
   }
 
+  // 주어진 제품이 특정 조건을 만족하는지 여부 반환 함수 구현
   @Override
   public boolean isSatisfiedBy(Product item) {
+    // 제품이 두 명세 조건 중 하나라도 만족하면 true 반환
     return spec1.isSatisfiedBy(item) || spec2.isSatisfiedBy(item);
   }
 }
 
+// 명세 인터페이스를 구현한 명세 NOT 변형 클래스
 public class NotSpec implements Specification {
+  // 명세 인스턴스 필드
   private Specification spec;
 
+  // 생성자에서 명세 인스턴스 저장
   public NotSpec(Specification spec) {
     this.spec = spec;
   }
 
+  // 주어진 제품이 특정 조건을 만족하는지 여부 반환 함수 구현
   @Override
   public boolean isSatisfiedBy(Product item) {
+    // 제품이 명세 조건을 만족하지 않으면 true 반환
     return !spec.isSatisfiedBy(item);
   }
 }
 
+// 제품 필터 클래스
 public class ProductFilter {
+  // 제품 리스트 요소 중 명세에서 참을 반환하는 요소 필터 함수
   public static List&lt;Product&gt; filter(List&lt;Product&gt; items, Specification spec) {
+    // 조건을 만족하는 요소들로 신규 제품 리스트 생성 및 반환
     return items.stream()
                 .filter(spec::isSatisfiedBy)
                 .collect(Collectors.toList());
   }
 
+  // 매개변수로 받은 제품 리스트 내 요소들 출력 함수
   public static void printProducts(List&lt;Product&gt; products) {
     products.forEach(
       p -&gt; System.out.println(p.getName() + " - " + p.getCategory() + " - $" + p.getPrice() + " - Stock: " + p.getStock())
@@ -6479,6 +6557,7 @@ public class ProductFilter {
 // 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
+    // 제품 리스트 생성
     List&lt;Product&gt; products = Arrays.asList(
       new Product("Laptop", "Electronics", 1200, 5),
       new Product("Smartphone", "Electronics", 800, 0),
@@ -6486,39 +6565,46 @@ public class Main {
       new Product("Book", "Literature", 20, 50)
     );
 
+    // 카테고리 명세, 재고 유무, 가격 명세 인스턴스 생성
     Specification electronicsSpec = new CategorySpec("Electronics");
     Specification inStockSpec = new InStockSpec();
-    Specification expensiveSpec = new PriceSpec(500);
+    Specification affordableSpec = new PriceSpec(500);
 
+    // AND 조합 명세, OR 조합 명세, NOT 변형 명세 인스턴스 생성
     Specification electronicInStock = new AndSpec(electronicsSpec, inStockSpec);
     Specification electronicOrInStock = new OrSpec(electronicsSpec, inStockSpec);
-    Specification notExpensive = new NotSpec(expensiveSpec);
+    Specification expensiveSpec = new NotSpec(affordableSpec);
 
+    // 카테고리가 Electronics이고 재고가 남아있는 제품들 필터링 및 출력
     System.out.println("Electronics in stock:");
     ProductFilter.printProducts(ProductFilter.filter(products, electronicInStock));
 
+    // 카테고리가 Electronics이거나 재고가 남아있는 제품들 필터링 및 출력
     System.out.println("\nElectronics or items in stock:");
     ProductFilter.printProducts(ProductFilter.filter(products, electronicOrInStock));
 
-    System.out.println("\nNot expensive items:");
-    ProductFilter.printProducts(ProductFilter.filter(products, notExpensive));
+    // 기준 가격보다 높은 제품들 필터링 및 출력
+    System.out.println("\nExpensive items:");
+    ProductFilter.printProducts(ProductFilter.filter(products, expensiveSpec));
   }
 }
 </code></pre></div></div>
-<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<p>첫 번째 예시보다 다양한 조합이나 변형을 사용하는 명세 패턴 예시입니다.<br />
+조합 및 변형 클래스들을 분리해두면 다른 조합 연산들도 유연하게 추가할 수 있습니다.<br />
+위 코드의 실행 결과는 아래와 같습니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Electronics in stock:
-Laptop - Electronics - $1200.0 - Stock: 5
-Headphones - Electronics - $200.0 - Stock: 10
+Laptop - Electronics - $1200 - Stock: 5
+Headphones - Electronics - $200 - Stock: 10
 
 Electronics or items in stock:
-Laptop - Electronics - $1200.0 - Stock: 5
-Smartphone - Electronics - $800.0 - Stock: 0
-Headphones - Electronics - $200.0 - Stock: 10
-Book - Literature - $20.0 - Stock: 50
+Laptop - Electronics - $1200 - Stock: 5
+Smartphone - Electronics - $800 - Stock: 0
+Headphones - Electronics - $200 - Stock: 10
+Book - Literature - $20 - Stock: 50
 
-Not expensive items:
-Laptop - Electronics - $1200.0 - Stock: 5
-Smartphone - Electronics - $800.0 - Stock: 0
+Expensive items:
+Laptop - Electronics - $1200 - Stock: 5
+Smartphone - Electronics - $800 - Stock: 0
 </code></pre></div></div>
 
         
