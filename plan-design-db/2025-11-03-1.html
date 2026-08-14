@@ -4068,28 +4068,42 @@ Result of query: SELECT name,age FROM users WHERE age &gt; 27
 <p>HashMap은 순서를 보장하지 않아서 각 Map 내부 컬럼 출력 순서는 달라질 수 있습니다.</p>
 
 <h3 id="반복자-패턴-iterator">반복자 패턴 (Iterator)</h3>
+<p>컬렉션의 요소들을 순차적으로 탐색할 수 있도록 반복자를 제공하는 패턴입니다.<br />
+컬렉션의 내부 구조를 직접 노출하지 않는다는 장점이 있습니다.</p>
+
+<p>반복자 인터페이스를 활용하면 다양한 컬렉션을 공통된 방식으로 순회할 수 있습니다.<br />
+많은 프로그래밍 언어의 컬렉션 순회 문법이나 제너레이터 등에서 이터레이터 개념이 활용됩니다.</p>
 
 <p><mark>반복자 패턴 예시 1</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Iterator Interface
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 반복자 인터페이스
 interface MyIterator {
+  // 다음 요소가 있는지 확인하는 함수 정의
   boolean hasNext();
+
+  // 다음 요소를 반환하고, 다음 위치로 이동하는 함수 정의
   Object next();
 }
 
-// Aggregate Interface
+// 컬렉션 인터페이스
 interface Collection {
+  // 반복자 생성 및 반환 함수 정의
   MyIterator createIterator();
 }
 
-// Concrete Aggregate
+// 컬렉션 인터페이스를 구현한 리스트 클래스
 class MyList implements Collection {
+  // 리스트 요소 배열 필드
   private Object[] items;
+
+  // 리스트 사이즈 필드
   private int last = 0;
 
+  // 생성자에서 받은 사이즈 만큼의 리스트 배열 생성 및 저장
   public MyList(int size) {
     items = new Object[size];
   }
 
+  // 리스트에 요소 추가 함수
   public void add(Object item) {
     if (last &lt; items.length) {
       items[last] = item;
@@ -4097,40 +4111,54 @@ class MyList implements Collection {
     }
   }
 
+  // 리스트에서 인덱스 위치 요소 반환
   public Object get(int index) {
     return items[index];
   }
 
+  // 리스트 사이즈 반환 함수
   public int size() {
     return last;
   }
 
+  // 반복자 생성 및 반환 함수 구현
   @Override
   public MyIterator createIterator() {
+    // 리스트 반복자 생성 및 반환
     return new MyListIterator(this);
   }
 }
 
-// ConcreteIterator
+// 반복자 인터페이스를 구현한 리스트 반복자 클래스
 class MyListIterator implements MyIterator {
+  // 리스트 필드
   private MyList list;
+
+  // 현재 탐색 위치 인덱스 필드
   private int index;
 
+  // 생성자에서 리스트 및 초기 인덱스 저장
   public MyListIterator(MyList list) {
     this.list = list;
     this.index = 0;
   }
 
+  // 다음 요소가 있는지 확인하는 함수 구현
   @Override
   public boolean hasNext() {
+    // 현재 인덱스가 리스트 사이즈보다 작은지 여부 반환
     return index &lt; list.size();
   }
 
+  // 다음 요소를 반환하고, 다음 위치로 이동하는 함수 구현
   @Override
   public Object next() {
+    // 리스트에 다음 요소가 남아있으면,
     if (this.hasNext()) {
+      // 리스트에서 다음 요소 반환 후 그 다음 위치로 이동
       return list.get(index++);
     }
+
     return null;
   }
 }
@@ -4138,142 +4166,191 @@ class MyListIterator implements MyIterator {
 // 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
+    // 리스트 인스턴스 생성 후 요소 3개 추가
     MyList list = new MyList(3);
     list.add("A");
     list.add("B");
     list.add("C");
 
+    // 리스트 반복자 인스턴스 생성
     MyIterator iterator = list.createIterator();
+
+    // 반복자를 통해 리스트에 다음 요소가 있는지 확인하며, 요소가 남아있는 동안 반복
     while (iterator.hasNext()) {
+      // 다음 요소 출력
       System.out.println(iterator.next());
     }
   }
 }
 </code></pre></div></div>
-<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<p>반복자 객체를 통해 컬렉션 내부 요소를 순차적으로 탐색하는 반복자 패턴 예시입니다.<br />
+위 코드의 실행 결과는 아래와 같습니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A
 B
 C
 </code></pre></div></div>
 
 <p><mark>반복자 패턴 예시 2</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// FileSystemItem interface
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 파일시스템요소 인터페이스
 interface FileSystemItem {
+  // 이름 반환 함수 정의
   String getName();
 }
 
-// File class
+// 파일시스템요소 인터페이스를 구현한 파일 클래스
 class File implements FileSystemItem {
+  // 파일 이름 필드
   private String name;
 
+  // 생성자에서 받은 파일 이름 저장
   public File(String name) {
     this.name = name;
   }
 
+  // 이름 반환 함수 구현
   @Override
   public String getName() {
     return name;
   }
 }
 
-// Directory class
+// 파일시스템요소 인터페이스를 구현한 폴더 클래스
 class Directory implements FileSystemItem {
+  // 폴더 이름 필드
   private String name;
+  
+  // 폴더 내 파일시스템요소 리스트 생성
   private List&lt;FileSystemItem&gt; contents = new ArrayList&lt;&gt;();
 
+  // 생성자에서 폴더 이름 저장
   public Directory(String name) {
     this.name = name;
   }
 
+  // 폴더 내 파일시스템요소 리스트에 요소 추가 함수
   public void add(FileSystemItem item) {
     contents.add(item);
   }
 
+  // 폴더 내 파일시스템요소 반환 함수
   public List&lt;FileSystemItem&gt; getContents() {
     return contents;
   }
 
+  // 이름 반환 함수 구현
   @Override
   public String getName() {
     return name;
   }
 }
 
-// FileSystemIterator interface
+// 파일시스템요소 반복자 인터페이스
 interface FileSystemIterator {
+  // 다음 요소가 있는지 확인하는 함수 정의
   boolean hasNext();
+
+  // 다음 요소를 반환하고, 다음 위치로 이동하는 함수 정의
   FileSystemItem next();
 }
 
-// DepthFirstIterator class
+// 파일시스템요소 반복자 인터페이스를 구현한 깊이 우선 순회 반복자 클래스
 class DepthFirstIterator implements FileSystemIterator {
+  // 파일시스템요소를 담는 컬렉션으로 스택 사용
   private Stack&lt;FileSystemItem&gt; stack = new Stack&lt;&gt;();
 
+  // 생성자에서 받은 루트 폴더 인스턴스를 스택에 추가
   public DepthFirstIterator(Directory root) {
     stack.push(root);
   }
 
+  // 다음 요소가 있는지 확인하는 함수 구현
   @Override
   public boolean hasNext() {
+    // 스택이 비어있지 않은지 여부 반환
     return !stack.isEmpty();
   }
 
+  // 다음 요소를 반환하고, 다음 위치로 이동하는 함수 구현
   @Override
   public FileSystemItem next() {
+    // 다음 요소가 없으면 예외 발생
     if (!hasNext()) {
       throw new NoSuchElementException();
     }
 
+    // 파일시스템요소 스택에서 현재 요소 꺼내기
     FileSystemItem current = stack.pop();
+
+    // 현재 요소가 폴더면,
     if (current instanceof Directory) {
       List&lt;FileSystemItem&gt; contents = ((Directory) current).getContents();
+
+      // 폴더 내 파일시스템요소들을 역순으로 순회하며 스택에 추가
       for (int i = contents.size() - 1; i &gt;= 0; i--) {
         stack.push(contents.get(i));
       }
     }
+
+    // 스택에서 꺼낸 현재 요소 반환
     return current;
   }
 }
 
-// BreadthFirstIterator class
+// 파일시스템요소 반복자 인터페이스를 구현한 너비 우선 순회 반복자 클래스
 class BreadthFirstIterator implements FileSystemIterator {
+  // 파일시스템요소를 담는 컬렉션으로 큐 사용
   private Queue&lt;FileSystemItem&gt; queue = new LinkedList&lt;&gt;();
 
+  // 생성자에서 받은 루트 폴더 인스턴스를 큐에 추가
   public BreadthFirstIterator(Directory root) {
     queue.offer(root);
   }
 
+  // 다음 요소가 있는지 확인하는 함수 구현
   @Override
   public boolean hasNext() {
+    // 큐가 비어있지 않은지 여부 반환
     return !queue.isEmpty();
   }
 
+  // 다음 요소를 반환하고, 다음 위치로 이동하는 함수 구현
   @Override
   public FileSystemItem next() {
+    // 다음 요소가 없으면 예외 발생
     if (!hasNext()) {
       throw new NoSuchElementException();
     }
 
+    // 파일시스템요소 큐에서 현재 요소 꺼내기
     FileSystemItem current = queue.poll();
+
+    // 현재 요소가 폴더면,
     if (current instanceof Directory) {
+      // 폴더 내 파일시스템요소들을 순서대로 큐에 추가
       queue.addAll(((Directory) current).getContents());
     }
+
+    // 큐에서 꺼낸 현재 요소 반환
     return current;
   }
 }
 
-// FileSystem class
+// 파일시스템 클래스
 class FileSystem {
+  // 루트 폴더 필드
   private Directory root;
 
+  // 생성자에서 받은 루트 폴더 저장
   public FileSystem(Directory root) {
     this.root = root;
   }
 
+  // 깊이 우선 순회 반복자 생성 및 반환 함수
   public FileSystemIterator depthFirstIterator() {
     return new DepthFirstIterator(root);
   }
 
+  // 너비 우선 순회 반복자 생성 및 반환 함수
   public FileSystemIterator breadthFirstIterator() {
     return new BreadthFirstIterator(root);
   }
@@ -4282,6 +4359,7 @@ class FileSystem {
 // 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
+    // 디렉토리 및 파일들 생성
     Directory root = new Directory("root");
     Directory home = new Directory("home");
     Directory user = new Directory("user");
@@ -4289,14 +4367,17 @@ public class Main {
     File file2 = new File("file2.txt");
     File file3 = new File("file3.txt");
 
+    // 루트 폴더 내 폴더 및 파일 추가
     root.add(home);
     home.add(user);
     user.add(file1);
     user.add(file2);
     home.add(file3);
 
+    // 파일시스템 인스턴스 생성 및 루트 폴더 등록
     FileSystem fileSystem = new FileSystem(root);
 
+    // 깊이 우선 순회 반복자 인스턴스를 통해 탐색하며 루트 폴더 내부 요소들 이름 출력
     System.out.println("Depth-First Traversal:");
     FileSystemIterator depthIterator = fileSystem.depthFirstIterator();
     while (depthIterator.hasNext()) {
@@ -4304,6 +4385,8 @@ public class Main {
     }
 
     System.out.println("\nBreadth-First Traversal:");
+
+    // 너비 우선 순회 반복자 인스턴스를 통해 탐색하며 루트 폴더 내부 요소들 이름 출력
     FileSystemIterator breadthIterator = fileSystem.breadthFirstIterator();
     while (breadthIterator.hasNext()) {
       System.out.println(breadthIterator.next().getName());
@@ -4311,7 +4394,8 @@ public class Main {
   }
 }
 </code></pre></div></div>
-<p>위 코드의 실행 결과는 아래와 같습니다.</p>
+<p>파일시스템 요소를 서로 다른 방식으로 순회하는 반복자를 구현하는 반복자 패턴 예시입니다.<br />
+위 코드의 실행 결과는 아래와 같습니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Depth-First Traversal:
 root
 home
