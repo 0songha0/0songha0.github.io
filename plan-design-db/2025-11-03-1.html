@@ -3767,7 +3767,7 @@ Final text: Hello, World!
 <h3 id="인터프리터-패턴-interpreter">인터프리터 패턴 (Interpreter)</h3>
 <p>특정 언어의 문법을 객체 구조로 표현하고 해석하여 결과를 만들어내는 패턴입니다.</p>
 
-<p>텍스트의 키워드, 연산자, 변수 등 문법 요소를 객체로 표현하고 해석하여 연산을 수행합니다.<br />
+<p>복잡한 텍스트의 키워드, 연산자, 변수 등 문법 요소를 객체로 표현하고 해석하여 연산을 수행합니다.<br />
 데이터베이스 쿼리, 스크립트 엔진, 파서, 수식 처리 프로그램 등에서 활용될 수 있습니다.</p>
 
 <p><mark>인터프리터 패턴 예시 1</mark></p>
@@ -3861,111 +3861,121 @@ public class Main {
 </code></pre></div></div>
 
 <p><mark>인터프리터 패턴 예시 2</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Context
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 데이터베이스를 시뮬레이션하는 컨텍스트 클래스
 class Context {
+  // 데이터베이스 테이블 (맵, 리스트를 활용하여 구현)
   private Map&lt;String, List&lt;Map&lt;String, String&gt;&gt;&gt; tables;
 
+  // 생성자에서 초기 샘플 테이터 생성 및 저장
   public Context() {
     this.tables = new HashMap&lt;&gt;();
 
-    // Initialize sample data
     List&lt;Map&lt;String, String&gt;&gt; users = new ArrayList&lt;&gt;();
 
     users.add(new HashMap&lt;String, String&gt;() );
 
     users.add(new HashMap&lt;String, String&gt;() );
 
+    // 사용자 테이블에 데이터 리스트 저장
     tables.put("users", users);
   }
 
+  // 이름에 해당하는 테이블 반환 함수
   public List&lt;Map&lt;String, String&gt;&gt; getTable(String name) {
     return tables.get(name);
   }
 
-  public void setTable(
-    String name, List&lt;Map&lt;String, String&gt;&gt; table
-  ) {
+  // 신규 테이블 저장 함수
+  public void setTable(String name, List&lt;Map&lt;String, String&gt;&gt; table) {
     tables.put(name, table);
   }
 }
 
-// Abstract Expression
+// 추상 표현식 인터페이스
 interface Expression {
+  // 행 리스트를 반환하는 인터프리트 함수 정의
   List&lt;Map&lt;String, String&gt;&gt; interpret(Context context);
 }
 
-// WHERE clause expression
+// WHERE 표현식 클래스
 class WhereExpression implements Expression {
-  private String column;
-  private String operator;
+  // 컬럼, 연산자, 비교 값, 테이블명 필드
+  private String column; // id, name, age 등
+  private String operator; // &gt;, =, &lt; 등
   private String value;
   private String tableName;
 
-  public WhereExpression(
-    String tableName, String column,
-    String operator, String value
-  ) {
-    this.tableName = tableName;
+  // 생성자에서 받은 컬럼, 연산자, 비교 값, 테이블명 저장
+  public WhereExpression(String column, String operator, String value, String tableName) {
     this.column = column;
     this.operator = operator;
     this.value = value;
+    this.tableName = tableName;
   }
 
+  // WHERE 조건을 충족하는 행 리스트를 반환하는 인터프리트 함수 구현
   @Override
   public List&lt;Map&lt;String, String&gt;&gt; interpret(Context context) {
     List&lt;Map&lt;String, String&gt;&gt; result = new ArrayList&lt;&gt;();
     List&lt;Map&lt;String, String&gt;&gt; table = context.getTable(tableName);
+
+    // 테이블 행 순회
     for (Map&lt;String, String&gt; row : table) {
+      // 주어진 컬럼 값과 비교 값이 연산자 조건에 부합하면 결과 행 리스트에 추가
       if (evaluate(row.get(column), operator, value)) {
         result.add(row);
       }
     }
+
+    // WHERE 표현식 해석 결과 행 리스트 반환
     return result;
   }
 
-  private boolean evaluate(
-    String columnValue, String operator, String value
-  ) {
+  // 주어진 컬럼 값과 비교 값이 연산자 조건에 부합하는지 여부 반환 함수
+  private boolean evaluate(String columnValue, String operator, String value) {
     switch (operator) {
       case "=":
         return columnValue.equals(value);
       case "&gt;":
-        return Integer.parseInt(columnValue)
-          &gt; Integer.parseInt(value);
+        return Integer.parseInt(columnValue) &gt; Integer.parseInt(value);
       case "&lt;":
-        return Integer.parseInt(columnValue)
-          &lt; Integer.parseInt(value);
+        return Integer.parseInt(columnValue) &lt; Integer.parseInt(value);
       default:
         return false;
     }
   }
 }
 
-// SELECT statement expression
+// SELECT 표현식 클래스
 class SelectExpression implements Expression {
+  // 조회할 테이블명, SELECT 대상 컬럼 리스트, WHERE 표현식 필드
   private String tableName;
   private List&lt;String&gt; columns;
   private Expression whereClause;
 
+  // 생성자에서 받은 조회할 테이블명, SELECT 대상 컬럼 리스트, WHERE 표현식 저장
   public SelectExpression(String tableName, List&lt;String&gt; columns, Expression whereClause) {
     this.tableName = tableName;
     this.columns = columns;
     this.whereClause = whereClause;
   }
 
+  // WHERE 조건을 충족하는 행 리스트에 SELECT 대상 컬럼들만 추출하여 반환하는 인터프리트 함수 구현
   @Override
   public List&lt;Map&lt;String, String&gt;&gt; interpret(Context context) {
     List&lt;Map&lt;String, String&gt;&gt; table = context.getTable(tableName);
     List&lt;Map&lt;String, String&gt;&gt; result = new ArrayList&lt;&gt;();
 
+    // 테이블 행 순회
     for (Map&lt;String, String&gt; row : table) {
       Context rowContext = new Context();
-      rowContext.setTable(
-        tableName, Collections.singletonList(row));
+      rowContext.setTable(tableName, Collections.singletonList(row));
 
+      // WHERE 표현식이 없거나, WHERE 표현식 결과 행 리스트가 비어있지 않은 경우
       if (whereClause == null || !whereClause.interpret(rowContext).isEmpty()) {
         Map&lt;String, String&gt; newRow = new HashMap&lt;&gt;();
         
+        // SELECT 대상 컬럼들만 결과 행 리스트에 추가
         for (String column : columns) {
           if (column.equals("*")) {
             newRow.putAll(row);
@@ -3973,33 +3983,43 @@ class SelectExpression implements Expression {
             newRow.put(column, row.get(column));
           }
         }
+
         result.add(newRow);
       }
     }
 
+    // SELECT 표현식 해석 결과 행 리스트 반환
     return result;
   }
 }
 
-// SQL Parser
+// SQL 파서 클래스
 class SQLParser {
+  // 텍스트로 주어진 쿼리를 표현식 클래스들로 파싱하는 함수
   public static Expression parse(String query) {
+    // 스페이스를 기준으로 쿼리 문자열 분리
     String[] parts = query.split("\\s+");
+
+    // SELECT 문으로 시작하지 않는 경우, 예외 발생
     if (!parts[0].equalsIgnoreCase("SELECT")) {
-      throw new RuntimeException(
-        "Only SELECT statements are supported");
+      throw new RuntimeException("Only SELECT statements are supported");
     }
 
+    // SELECT 대상 컬럼 리스트 추출
     List&lt;String&gt; columns = Arrays.asList(parts[1].split(","));
+
+    // 조회할 테이블명 추출
     String tableName = parts[3];
 
     Expression whereClause = null;
-    if (parts.length &gt; 4 
-      &amp;&amp; parts[4].equalsIgnoreCase("WHERE")) {
-      whereClause = new WhereExpression(
-        tableName, parts[5], parts[6], parts[7]);
+    
+    // WHERE 조건문이 있는 경우
+    if (parts.length &gt; 4 &amp;&amp; parts[4].equalsIgnoreCase("WHERE")) {
+      // WHERE 조건문을 요소별로 분리하여 WHERE 표현식 인스턴스 생성
+      whereClause = new WhereExpression(parts[5], parts[6], parts[7], tableName);
     }
 
+    // SELECT 표현식 인스턴스 생성 후 반환
     return new SelectExpression(tableName, columns, whereClause);
   }
 }
@@ -4007,21 +4027,26 @@ class SQLParser {
 // 클라이언트 (호출부)
 public class Main {
   public static void main(String[] args) {
+    // 컨텍스트 인스턴스 생성 (데이터베이스 역할)
     Context context = new Context();
 
-    // Test query 1: Select all columns from users
+    // 조건문이 없는 쿼리문을 파싱하여 SELECT 표현식 인스턴스 생성
     String query1 = "SELECT * FROM users";
     Expression expr1 = SQLParser.parse(query1);
+
+    // 인터프리트 함수 호출하여 반환된 결과 행 리스트 출력
     List&lt;Map&lt;String, String&gt;&gt; result1 = expr1.interpret(context);
-    
+
     System.out.println("Result of query: " + query1);
     for (Map&lt;String, String&gt; row : result1) {
       System.out.println(row);
     }
 
-    // Test query 2: Select name and age of users older than 27
+    // 조건문이 있는 쿼리문을 파싱하여 SELECT 표현식 인스턴스 생성
     String query2 = "SELECT name,age FROM users WHERE age &gt; 27";
     Expression expr2 = SQLParser.parse(query2);
+
+    // 인터프리트 함수 호출하여 반환된 결과 행 리스트 출력
     List&lt;Map&lt;String, String&gt;&gt; result2 = expr2.interpret(context);
     
     System.out.println("\nResult of query: " + query2);
@@ -4031,7 +4056,7 @@ public class Main {
   }
 }
 </code></pre></div></div>
-<p>SQL 쿼리문을 처리하는 인터프리터 패턴 예시입니다.<br />
+<p>문자열로 주어진 SQL 쿼리를 파싱하고, 해석하여 처리하는 인터프리터 패턴 예시입니다.<br />
 위 코드의 실행 결과는 아래와 같습니다.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Result of query: SELECT * FROM users
 {name=John, id=1, age=30}
@@ -4040,6 +4065,7 @@ public class Main {
 Result of query: SELECT name,age FROM users WHERE age &gt; 27
 {name=John, age=30}
 </code></pre></div></div>
+<p>HashMap은 순서를 보장하지 않아서 각 Map 내부 컬럼 출력 순서는 달라질 수 있습니다.</p>
 
 <h3 id="반복자-패턴-iterator">반복자 패턴 (Iterator)</h3>
 
