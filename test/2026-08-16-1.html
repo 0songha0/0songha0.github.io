@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 부하테스트용 EC2 백엔드 서버 및 인프라 구축 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#부하테스트용-백엔드-인프라-구성-방법">부하테스트용 백엔드 인프라 구성 방법</a><ul><li><a href="#부하테스트용-ec2-백엔드-서버-생성-방법">부하테스트용 EC2 백엔드 서버 생성 방법</a></li><li><a href="#rds-db-전용-보안그룹-생성-">RDS DB 전용 보안그룹 생성 ★</a></li><li><a href="#aws-rds-생성-방법">AWS RDS 생성 방법</a></li><li><a href="#aws-alb-생성-방법">AWS ALB 생성 방법</a></li></ul></li><li><a href="#ec2-백엔드-서버에-스프링부트-애플리케이션-실행-방법">EC2 백엔드 서버에 스프링부트 애플리케이션 실행 방법</a><ul><li><a href="#ec2-서버-콘솔-접속">EC2 서버 콘솔 접속</a></li><li><a href="#jdk-설치">JDK 설치</a></li><li><a href="#스프링부트-프로젝트-클론-받기">스프링부트 프로젝트 클론 받기</a></li><li><a href="#스프링부트-프로젝트-구성-확인">스프링부트 프로젝트 구성 확인</a></li><li><a href="#생성한-rds-정보-입력">생성한 RDS 정보 입력</a></li><li><a href="#스프링부트-프로젝트-빌드">스프링부트 프로젝트 빌드</a></li><li><a href="#스프링부트-애플리케이션-실행">스프링부트 애플리케이션 실행</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#부하테스트용-백엔드-인프라-구성-방법">부하테스트용 백엔드 인프라 구성 방법</a><ul><li><a href="#부하테스트용-ec2-백엔드-서버-생성-방법">부하테스트용 EC2 백엔드 서버 생성 방법</a></li><li><a href="#rds-db-전용-보안그룹-생성-">RDS DB 전용 보안그룹 생성 ★</a></li><li><a href="#aws-rds-생성-방법">AWS RDS 생성 방법</a></li><li><a href="#aws-alb-생성-방법">AWS ALB 생성 방법</a></li></ul></li><li><a href="#ec2-백엔드-서버에-스프링부트-애플리케이션-실행-방법">EC2 백엔드 서버에 스프링부트 애플리케이션 실행 방법</a><ul><li><a href="#ec2-서버-콘솔-접속">EC2 서버 콘솔 접속</a></li><li><a href="#jdk-설치">JDK 설치</a></li><li><a href="#스프링부트-프로젝트-클론-받기">스프링부트 프로젝트 클론 받기</a></li><li><a href="#스프링부트-프로젝트-구성-확인">스프링부트 프로젝트 구성 확인</a></li><li><a href="#생성한-rds-정보-입력">생성한 RDS 정보 입력</a></li><li><a href="#스프링부트-프로젝트-빌드">스프링부트 프로젝트 빌드</a></li><li><a href="#스프링부트-애플리케이션-실행">스프링부트 애플리케이션 실행</a></li></ul></li><li><a href="#rds-db에-데이터-추가">RDS DB에 데이터 추가</a><ul><li><a href="#더미-데이터-100만개-생성-방법">더미 데이터 100만개 생성 방법</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -577,7 +577,8 @@ spring:
       ddl-auto: create
 </code></pre></div></div>
 <p>ddl-auto: create는 애플리케이션을 실행할 때마다 기존 테이블을 삭제하고 다시 만드는 설정입니다.<br />
-부하테스트 실습용 프로젝트이므로 테스트 환경을 초기화하기 위해 사용하였습니다.</p>
+부하테스트 실습용 프로젝트이므로 테스트 환경을 초기화하기 위해 사용하였습니다.<br />
+JPA로 정의한 엔티티 매핑 정보를 기반으로 데이터베이스 테이블을 자동 생성합니다.</p>
 
 <h3 id="스프링부트-프로젝트-빌드">스프링부트 프로젝트 빌드</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /프로젝트명
@@ -611,6 +612,34 @@ AWS &gt; EC2 검색 &gt; 로드 밸런싱 &gt; 로드밸런서 메뉴 &gt; 생�
 </code></pre></div></div>
 <p>ALB 로드밸런서 DNS 이름으로 /health API를 호출하면, 대상 그룹에 등록된 EC2 서버로 요청이 전달됩니다.<br />
 Success Health Check가 웹 화면에 정상 표시되는지 확인합니다.</p>
+
+<hr />
+
+<h2 id="rds-db에-데이터-추가">RDS DB에 데이터 추가</h2>
+
+<h3 id="더미-데이터-100만개-생성-방법">더미 데이터 100만개 생성 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-- 최대 밤복(재귀) 횟수를 기본값 1000이 아닌, 생성할 더미 데이터 개수보다 높거나 같게 설정
+SET SESSION cte_max_recursion_depth = 1000000;
+
+-- 더미 데이터 삽입 쿼리
+INSERT INTO boards (content, title, created_at)
+WITH RECURSIVE cte (n) AS
+(
+  SELECT 1
+  UNION ALL
+  SELECT n + 1 FROM cte WHERE n &lt; 1000000 -- 생성할 더미 데이터 개수
+)
+SELECT
+    CONCAT('Content', LPAD(n, 7, '0')), -- 'Content' + 7자리 숫자로 구성된 content 컬럼 데이터 생성
+    CONCAT('Title', LPAD(n, 7, '0')), -- 'Title' + 7자리 숫자로 구성된 title 컬럼 데이터 생성
+    TIMESTAMP(DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 3650) DAY) + INTERVAL FLOOR(RAND() * 86400) SECOND) AS created_at -- 최근 10년 내 임의의 날짜와 시간 생성
+FROM cte;
+
+-- 전체 데이터 개수 확인 (정상 생성 완료 시 1000000개 조회)
+SELECT COUNT(*) FROM boards;
+</code></pre></div></div>
+<p>운영 환경 데이터가 100만개라 가정하고, 비슷한 환경을 구성하기 위해서 더미 데이터 100만개를 생성합니다.</p>
+
 
         
       </section>

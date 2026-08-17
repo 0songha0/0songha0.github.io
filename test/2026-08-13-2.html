@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> K6 부하테스트 툴 사용법 / EC2 서버에 K6 설치 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#부하테스트-서버-생성-이유">부하테스트 서버 생성 이유</a></li><li><a href="#ec2-서버에-k6-설치-방법">EC2 서버에 K6 설치 방법</a><ul><li><a href="#k6-설치할-aws-ec2-서버-생성-방법">K6 설치할 AWS EC2 서버 생성 방법</a></li><li><a href="#aws-ec2-서버에-k6-설치-명령어">AWS EC2 서버에 K6 설치 명령어</a></li></ul></li><li><a href="#k6-부하테스트-방법">K6 부하테스트 방법</a><ul><li><a href="#k6-부하테스트-스크립트-파일-생성">K6 부하테스트 스크립트 파일 생성</a></li><li><a href="#k6-부하테스트-스크립트-실행-명령어">K6 부하테스트 스크립트 실행 명령어</a></li><li><a href="#k6-대시보드-웹페이지-접근">K6 대시보드 웹페이지 접근</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#부하테스트-서버-생성-이유">부하테스트 서버 생성 이유</a></li><li><a href="#ec2-서버에-k6-설치-방법">EC2 서버에 K6 설치 방법</a><ul><li><a href="#k6-설치할-aws-ec2-서버-생성-방법">K6 설치할 AWS EC2 서버 생성 방법</a></li><li><a href="#aws-ec2-서버에-k6-설치-명령어">AWS EC2 서버에 K6 설치 명령어</a></li></ul></li><li><a href="#k6-부하테스트-방법">K6 부하테스트 방법</a><ul><li><a href="#k6-부하테스트-스크립트-파일-생성">K6 부하테스트 스크립트 파일 생성</a></li><li><a href="#k6-부하테스트-스크립트-실행-명령어">K6 부하테스트 스크립트 실행 명령어</a></li><li><a href="#k6-웹-대시보드-결과-분석-방법">K6 웹 대시보드 결과 분석 방법</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -523,19 +523,57 @@ export const options = {
   stages: [
     // 지속시간 10분 동안
     // 동시에 실행되는 VUs (가상 유저수) 를 점진적으로 증가시켜,
-    // 마지막에 6000 VU에 도달할 때까지 부하를 점점 늘리도록 설정
+    // 마지막 6000 VU에 도달할 때까지 부하를 점점 늘리도록 설정
     { duration: '10m', target: 6000 }
   ],
 };
 
 export default function () {
-  // 각 유저가 서버 API 주소로 GET 요청
+  // 각 VU가 서버 API 주소로 GET 요청
   http.get('http://서버외부IP/boards');
 
   // 1초 휴식
   sleep(1);
 }
 </code></pre></div></div>
+
+<p><mark>운영 환경과 유사한 트래픽을 만드는 부하테스트 스크립트 작성 예시</mark></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import http from 'k6/http';
+import { sleep } from 'k6';
+
+export const options = {
+  // 부하를 생성하는 단계 설정
+  stages: [
+    // 지속시간 10분 동안
+    // 동시에 실행되는 VUs (가상 유저수) 를 점진적으로 증가시켜,
+    // 마지막 50 VU에 도달할 때까지 부하를 점점 늘리도록 설정
+    { duration: '10m', target: 50 }
+  ],
+};
+
+export default function () {
+  // 0~1 사이 랜덤 값 생성
+  let random = Math.random();
+
+  // 각 VU가 5% 확률로 로드밸런서에 게시글 작성 POST 요청 (약 100번 요청 중 5번)
+  if (random &lt; 0.05) {
+    const data = { title: '제목', content: '내용' };
+    http.post('http://ALB로드밸런서DNS이름/boards', JSON.stringify(data), {
+      headers: { 'Content-Type': 'application/json' },
+    });
+    
+  // 각 VU가 95% 확률로 로드밸런서에 게시글 조회 GET 요청 (약 100번 요청 중 95번)
+  } else {
+    http.get('http://ALB로드밸런서DNS이름/boards');
+  }
+  
+  // 1초 휴식
+  sleep(1);
+}
+</code></pre></div></div>
+<p>POST 5%, GET 95% 정도의 운영 트래픽 패턴을 흉내 내는 부하테스트 예시입니다.<br />
+실제 운영 환경에서 발생하는 트래픽과 최대한 비슷하게 부하를 구성해야,<br />
+운영 환경과의 차이를 줄이고 부하테스트 결과의 신뢰도를 높일 수 있습니다.</p>
 
 <h3 id="k6-부하테스트-스크립트-실행-명령어">K6 부하테스트 스크립트 실행 명령어</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>K6_WEB_DASHBOARD=true k6 run script.js
@@ -546,29 +584,33 @@ K6_WEB_DASHBOARD=true 환경변수를 설정하면,<br />
 
 <p>환경에 따라 외부 PC에서 대시보드 접근 시 K6_WEB_DASHBOARD_HOST=0.0.0.0 설정이 필요할 수 있습니다.</p>
 
-<h3 id="k6-대시보드-웹페이지-접근">K6 대시보드 웹페이지 접근</h3>
+<h3 id="k6-웹-대시보드-결과-분석-방법">K6 웹 대시보드 결과 분석 방법</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://부하테스트서버외부IP:5665
 </code></pre></div></div>
 <p>실시간 VU 수, HTTP 요청 수 (쓰루풋 = http_reqs), 평균 응답시간 (레이턴시 = HTTP Request Duration),<br />
-요청 실패율 (HTTP Request Failed) 등 다양한 부하테스트 지표를 확인할 수 있습니다.</p>
+요청 실패율 (HTTP Request Failed) 등 다양한 부하테스트 지표를 확인할 수 있습니다.<br />
+실시간으로 볼 수 있는 부하테스트 결과는 기본적으로 10초마다 업데이트됩니다.</p>
 
-<p>부하테스트가 많이 진행되어서 더이상 쓰루풋이 증가하지 않는 구간이 발생하는 것을 기다렸다가<br />
-부하테스트를 중단시키고 K6 웹 대시보드에서 결과 값을 해석하면 좋습니다.</p>
+<p>부하테스트를 진행하면서 쓰루풋이 증가하지 않는 정체 구간이 나타날 때까지 기다렸다가<br />
+부하테스트 중단 후 K6 웹 대시보드에서 결과 값을 해석하면 좋습니다.</p>
 
-<p><mark>최대 처리량 파악 방법</mark><br />
-가상 유저 수는 계속 증가하고 있는데 쓰루풋이 더이상 증가하지 않고,<br />
-레이턴시 증가 및 요청 실패율 상승이 함께 나타나면 시스템의 최대 쓰루풋에 가까워졌다고 볼 수 있습니다.<br />
-http_reqs가 2.7k/s인 경우 초당 약 2,700개의 HTTP 요청이 처리되고 있다는 의미이며,<br />
-현재 시스템의 최대 처리량은 2700 RPS라고 표현할 수 있습니다.</p>
+<p><mark>시스템 최대 처리량 파악 방법</mark><br />
+가상 유저 수는 계속 증가하고 있으나, 쓰루풋이 더 증가하지 않는 정체 구간이 확인되고 ★<br />
+레이턴시 증가 및 요청 실패율 상승이 함께 나타나면, 시스템의 최대 쓰루풋에 가까워졌다고 볼 수 있습니다.<br />
+시스템 병목 지점에 도달했기 때문에 초당 처리할 수 있는 요청 수가 더 이상 늘어나지 않는 것입니다.<br />
+정체 구간에서 http_reqs가 2.7k/s면 초당 약 2,700개의 HTTP 요청이 처리되고 있으며,<br />
+현재 시스템의 최대 쓰루풋은 2700 RPS 수준이라고 표현할 수 있습니다.</p>
 
 <p><mark>레이턴시 해석 방법</mark><br />
 가상 유저수가 점진적으로 올라가면서 서버가 처리할 수 있는 한계량에 가까워지면,<br />
-요청 처리 시간이나 대기 시간이 증가하면서 레이턴시가 높아지는 현상이 나타날 수 있습니다.<br />
-요청당 응답 시간이 비정상적으로 높을 때 문제가 있는지 확인해야 합니다.<br />
+대기 시간 및 요청 처리 시간이 증가하면서 레이턴시가 높아지는 현상이 나타날 수 있습니다.<br />
+요청당 응답 시간이 목표치보다 비정상적으로 높을 때 문제가 있는지 확인해야 합니다.<br />
 정상적인 응답 시간을 넘어가면 사용자가 이탈할 수 있기 때문에 응답 속도를 개선하는 것이 중요합니다.</p>
 
-<p><mark>요청 실패 해석 방법</mark><br />
+<p><mark>요청 실패 확인 방법</mark><br />
 HTTP Request Failed가 0/s이면 K6 기준으로 실패 판정된 HTTP 요청이 없다는 뜻입니다.</p>
+
+<p>11분 33초부터 다시 보기!!!! ㅠㅠㅠ</p>
 
 
         
