@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 266</span>
+      <span class="nav__total">🌴 Total Posts: 268</span>
     </li> -->
     
     
@@ -508,8 +508,6 @@ sudo apt-get install k6
 
 <h2 id="k6-부하테스트-방법">K6 부하테스트 방법</h2>
 
-<p>전체적인 트래픽 흐름을 한 눈에 파악할 수 있도록 인프라 전체 구성을 그림으로 그려둡니다.</p>
-
 <p>구성한 시스템이 1초당 몇 개의 요청을 견딜 수 있는지 알아보려면,<br />
 부하테스트 툴이 점진적으로 트래픽을 늘려가도록 세팅하는 것이 좋습니다.</p>
 
@@ -557,8 +555,8 @@ K6_WEB_DASHBOARD=true 환경변수를 설정하면,<br />
 <p>부하테스트가 많이 진행되어서 더이상 쓰루풋이 증가하지 않는 구간이 발생하는 것을 기다렸다가<br />
 부하테스트를 중단시키고 K6 웹 대시보드에서 결과 값을 해석하면 좋습니다.</p>
 
-<p><mark>처리량 해석 방법</mark><br />
-가상 유저 수는 계속 증가하고 있는데, 쓰루풋이 더이상 증가하지 않고,<br />
+<p><mark>최대 처리량 파악 방법</mark><br />
+가상 유저 수는 계속 증가하고 있는데 쓰루풋이 더이상 증가하지 않고,<br />
 레이턴시 증가 및 요청 실패율 상승이 함께 나타나면 시스템의 최대 쓰루풋에 가까워졌다고 볼 수 있습니다.<br />
 http_reqs가 2.7k/s인 경우 초당 약 2,700개의 HTTP 요청이 처리되고 있다는 의미이며,<br />
 현재 시스템의 최대 처리량은 2700 RPS라고 표현할 수 있습니다.</p>
@@ -639,6 +637,78 @@ HTTP Request Failed가 0/s이면 K6 기준으로 실패 판정된 HTTP 요청이
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
+        <a href="/tool/2026-08-17-1" rel="permalink">관계형 및 NoSQL DB 전용 IDE DataGrip 사용법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-08-17T00:00:00+00:00">2026-08-17</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/test/2026-08-16-1" rel="permalink">부하테스트용 EC2 백엔드 서버 및 인프라 구축 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-08-16T00:00:00+00:00">2026-08-16</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
         <a href="/web-dev/2026-08-13-1" rel="permalink">Node.js, TypeScript 기반 NestJS 프로젝트 생성 방법
 </a>
       
@@ -687,78 +757,6 @@ HTTP Request Failed가 0/s이면 K6 기준으로 실패 판정된 HTTP 요청이
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2026-08-13T00:00:00+00:00">2026-08-13</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/aws/2026-08-13-1" rel="permalink">간단한 AWS EC2 서버 생성 및 Node.js 기반 Express API 프로젝트 구축 방법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2026-08-13T00:00:00+00:00">2026-08-13</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/op/2026-08-04-1" rel="permalink">GitHub Actions 사용하여 CI/CD 구현 방법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2026-08-07T00:00:00+00:00">2026-08-07</time>
       </span>
     
 

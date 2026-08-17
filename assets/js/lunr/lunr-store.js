@@ -1578,7 +1578,7 @@ var store = [{
         "teaser": null
       },{
         "title": "부하테스트 개념 및 부하테스트 툴 종류",
-        "excerpt":"부하테스트란? 시스템이 얼마나 많은 트래픽이나 요청을 안정적으로 처리할 수 있는 지 테스트 하는 것입니다. 서비스를 운영에 배포하기 전에 어느 정도의 사용자 요청을 견딜 수 있는지 미리 파악할 수 있습니다. 부하테스트 활용 사례 트래픽이 늘어나서 서버가 터져서 죽는 것을 미리 감지하고 대처할 수 있습니다. 예를 들어, 초당 100개의 사용자 요청만 감당...","categories": ["test"],
+        "excerpt":"부하테스트란? 시스템이 얼마나 많은 트래픽이나 요청을 안정적으로 처리할 수 있는 지 테스트 하는 것입니다. 서비스를 운영에 배포하기 전이나 특정 이벤트를 앞두고 있을 때 부하테스트를 진행하면, 얼마나 많은 사용자 요청을 안정적으로 처리할 수 있는지 미리 파악할 수 있습니다. 부하테스트 활용 사례 트래픽이 늘어나서 서버가 터져서 죽는 것을 미리 감지하고 대처할 수...","categories": ["test"],
         "tags": [],
         "url": "/test/2026-08-13-1",
         "teaser": null
@@ -1593,5 +1593,17 @@ var store = [{
         "excerpt":"NestJS 프로젝트 생성 방법 Node.js 위에서 실행되는 TypeScript 서버 프레임워크인 NestJS 프로젝트 생성 방법입니다. 로컬에 Node.js 및 npm이 설치되어 있어야 정상적으로 설치가 가능합니다. Node.js 및 npm 설치 확인 node --version npm --version Nest CLI 설치 npm i -g @nestjs/cli Nest CLI 정상 설치 확인 nest --version NestJS 프로젝트 생성 nest...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2026-08-13-1",
+        "teaser": null
+      },{
+        "title": "부하테스트용 EC2 백엔드 서버 및 인프라 구축 방법",
+        "excerpt":"부하테스트용 백엔드 인프라 구성 방법 부하테스트용 EC2 백엔드 서버 생성 방법 AWS &gt; EC2 검색 &gt; 인스턴스 시작 버튼 &gt; 이름 : backend-server 입력 &gt; Quick Start : Ubuntu 운영체제 선택 &gt; 인스턴스 유형 : t3a.small (테스트용 스프링부트 애플리케이션의 사양에 맞는 인스턴스 유형 선택) 확인 &gt; 키 페어(로그인) : 키...","categories": ["test"],
+        "tags": [],
+        "url": "/test/2026-08-16-1",
+        "teaser": null
+      },{
+        "title": "관계형 및 NoSQL DB 전용 IDE DataGrip 사용법",
+        "excerpt":"DataGrip 관계형 데이터베이스 및 NoSQL 데이터베이스를 관리할 수 있는 DB 전용 IDE입니다. JetBrains에서 개발했으며 SQL 자동완성, 코드 분석, 객체 탐색 기능 등을 제공합니다. 회사 업무 등 상업적 용도로 사용하려면 유료 라이선스가 필요합니다. DB 연결 방법 좌측 Database Explorer &gt; New &gt; Data Source &gt; DB 유형 선택 &gt; Name :...","categories": ["tool"],
+        "tags": [],
+        "url": "/tool/2026-08-17-1",
         "teaser": null
       }]
