@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 268</span>
+      <span class="nav__total">🌴 Total Posts: 269</span>
     </li> -->
     
     
@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 리눅스 서버 컴퓨터 정보 확인 / 서버 상태 관리 명령어</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#서버-컴퓨터-사양-확인">서버 컴퓨터 사양 확인</a><ul><li><a href="#서버-비트-확인">서버 비트 확인</a></li><li><a href="#cpu-사양-확인">CPU 사양 확인</a></li><li><a href="#ram-메모리-사양-확인">RAM 메모리 사양 확인</a></li></ul></li><li><a href="#서버-os-확인">서버 OS 확인</a><ul><li><a href="#서버-os-종류-확인">서버 OS 종류 확인</a></li><li><a href="#서버-os-버전-확인">서버 OS 버전 확인</a></li></ul></li><li><a href="#서버-상태-관리">서버 상태 관리</a><ul><li><a href="#실행중-프로세스-cpu-사용률-확인">실행중 프로세스 CPU 사용률 확인</a></li><li><a href="#ram-메모리-용량-및-사용량-확인">RAM 메모리 용량 및 사용량 확인</a></li><li><a href="#디스크-용량-및-사용량-확인">디스크 용량 및 사용량 확인</a></li><li><a href="#리눅스-서버-재부팅">리눅스 서버 재부팅</a></li><li><a href="#프로세스-확인">프로세스 확인</a></li><li><a href="#프로세스-강제-종료">프로세스 강제 종료</a></li><li><a href="#프로세스-정상-종료">프로세스 정상 종료</a></li><li><a href="#포트-사용여부-확인">포트 사용여부 확인</a></li></ul></li><li><a href="#리눅스-서버-언어-변경">리눅스 서버 언어 변경</a><ul><li><a href="#로케일-설정-변경">로케일 설정 변경</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#서버-컴퓨터-사양-확인">서버 컴퓨터 사양 확인</a><ul><li><a href="#서버-비트-확인">서버 비트 확인</a></li><li><a href="#cpu-사양-확인">CPU 사양 확인</a></li><li><a href="#ram-메모리-사양-확인">RAM 메모리 사양 확인</a></li></ul></li><li><a href="#서버-os-확인">서버 OS 확인</a><ul><li><a href="#서버-os-종류-확인">서버 OS 종류 확인</a></li><li><a href="#서버-os-버전-확인">서버 OS 버전 확인</a></li></ul></li><li><a href="#서버-상태-관리">서버 상태 관리</a><ul><li><a href="#실행중-프로세스-및-서버-자원-실시간-확인-명령어">실행중 프로세스 및 서버 자원 실시간 확인 명령어</a></li><li><a href="#ram-메모리-용량-및-사용량-확인">RAM 메모리 용량 및 사용량 확인</a></li><li><a href="#디스크-용량-및-사용량-확인">디스크 용량 및 사용량 확인</a></li><li><a href="#리눅스-서버-재부팅">리눅스 서버 재부팅</a></li><li><a href="#프로세스-확인">프로세스 확인</a></li><li><a href="#프로세스-강제-종료">프로세스 강제 종료</a></li><li><a href="#프로세스-정상-종료">프로세스 정상 종료</a></li><li><a href="#포트-사용여부-확인">포트 사용여부 확인</a></li></ul></li><li><a href="#리눅스-서버-언어-변경">리눅스 서버 언어 변경</a><ul><li><a href="#로케일-설정-변경">로케일 설정 변경</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -511,9 +511,10 @@
 
 <h2 id="서버-상태-관리">서버 상태 관리</h2>
 
-<h3 id="실행중-프로세스-cpu-사용률-확인">실행중 프로세스 CPU 사용률 확인</h3>
+<h3 id="실행중-프로세스-및-서버-자원-실시간-확인-명령어">실행중 프로세스 및 서버 자원 실시간 확인 명령어</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>top
 </code></pre></div></div>
+<p>상단 %Cpu(s)가 현재 CPU 사용률이고, avail Mem이 사용 가능한 메모리입니다.</p>
 
 <h3 id="ram-메모리-용량-및-사용량-확인">RAM 메모리 용량 및 사용량 확인</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>free -h
@@ -652,6 +653,42 @@ nano 편집기 화면에 표시되는 ^O에서 ^는 Ctrl 입니다.</p>
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
+        <a href="/test/2026-08-19-1" rel="permalink">AWS EC2, RDS 모니터링 설정 및 CloudWatch 대시보드 사용법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-08-19T00:00:00+00:00">2026-08-19</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
         <a href="/tool/2026-08-17-1" rel="permalink">관계형 및 NoSQL DB 전용 IDE DataGrip 사용법
 </a>
       
@@ -725,42 +762,6 @@ nano 편집기 화면에 표시되는 ^O에서 ^는 Ctrl 입니다.</p>
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
         <a href="/web-dev/2026-08-13-1" rel="permalink">Node.js, TypeScript 기반 NestJS 프로젝트 생성 방법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2026-08-13T00:00:00+00:00">2026-08-13</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/test/2026-08-13-2" rel="permalink">K6 부하테스트 툴 사용법 / EC2 서버에 K6 설치 방법
 </a>
       
     </h2>
