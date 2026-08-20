@@ -1566,7 +1566,7 @@ var store = [{
         "teaser": null
       },{
         "title": "GitHub Actions 사용하여 CI/CD 구현 방법",
-        "excerpt":"GitHub Actions GitHub 리포지토리에서 빌드, 테스트, 배포 등 CI/CD 파이프라인을 자동화할 수 있는 플랫폼입니다. CI/CD 작업을 수행할 Job과 Step을 정의한 워크플로는 .github/workflows 경로에 .yml 파일로 작성합니다. push/pull_request 이벤트, 스케줄, 외부 이벤트 등으로 워크플로를 자동 실행할 수 있습니다. 워크플로 작업은 GitHub에서 제공하는 가상 머신 또는 직접 등록한 Runner에서 실행됩니다. GitHub Actions...","categories": ["op"],
+        "excerpt":"GitHub Actions를 사용하여 NestJS 프로젝트를 빌드 및 배포하는 과정을 작성하였습니다. 프로젝트 기술스택별로 패키지 관리 모듈, 의존성 및 빌드 결과물 위치가 달라서 변경이 필요합니다. GitHub Actions 사용하여 CI 구축 방법 GitHub 리포지토리에서 빌드, 테스트, 배포 등 CI/CD 파이프라인을 자동화할 수 있는 플랫폼입니다. CI/CD 작업을 수행할 Job과 Step을 정의한 워크플로는 .github/workflows 경로에...","categories": ["op"],
         "tags": [],
         "url": "/op/2026-08-04-1",
         "teaser": null
@@ -1589,8 +1589,8 @@ var store = [{
         "url": "/test/2026-08-13-2",
         "teaser": null
       },{
-        "title": "Node.js, TypeScript 기반 NestJS 프로젝트 생성 방법",
-        "excerpt":"NestJS 프로젝트 생성 방법 Node.js 위에서 실행되는 TypeScript 서버 프레임워크인 NestJS 프로젝트 생성 방법입니다. 로컬에 Node.js 및 npm이 설치되어 있어야 정상적으로 설치가 가능합니다. Node.js 및 npm 설치 확인 node --version npm --version Nest CLI 설치 npm i -g @nestjs/cli Nest CLI 정상 설치 확인 nest --version NestJS 프로젝트 생성 nest...","categories": ["web-dev"],
+        "title": "AWS EC2에 Node.js, TypeScript 기반 NestJS 프로젝트 구축 방법",
+        "excerpt":"NestJS 프로젝트 구축 방법 Node.js 위에서 실행되는 TypeScript 서버 프레임워크인 NestJS 프로젝트 생성 방법입니다. 로컬에 Node.js 및 npm이 설치되어 있어야 정상적으로 설치가 가능합니다. Node.js 및 npm 설치 확인 node --version npm --version Nest CLI 설치 npm i -g @nestjs/cli Nest CLI 정상 설치 확인 nest --version NestJS 프로젝트 생성 nest...","categories": ["web-dev"],
         "tags": [],
         "url": "/web-dev/2026-08-13-1",
         "teaser": null
