@@ -781,7 +781,7 @@ RDS CloudWatch 메트릭은 기본적으로 1분 간격으로 CloudWatch에 전�
 </code></pre></div></div>
 <p>EC2 서버에 연결해서 위 명령어를 입력하면, 상단 %Cpu(s)가 현재 CPU 사용률이고 avail Mem이 사용 가능한 메모리입니다.</p>
 
-<p><mark>RDS 자원 실시간 확인 방법</mark>
+<p><mark>RDS 자원 실시간 확인 방법</mark><br />
 AWS &gt; IAM 검색 &gt; 액세스 관리 &gt; 역할 메뉴 &gt; 역할 생성 &gt; 신뢰할 수 있는 엔티티 유형 : AWS 서비스 선택 &gt; 서비스 또는 사용 사례 : RDS 선택 &gt; 사용 사례 : RDS - Enhanced Monitoring 선택 &gt; 다음 &gt; 다음 &gt; 역할 이름 : rds-enhanced-monitoring &gt; 역할 생성 &gt;<br />
 AWS &gt; RDS 검색 &gt; 데이터베이스 메뉴 &gt; RDS 선택 &gt; 모니터링 탭 &gt; 상단 우측 수정 버튼 &gt; 모니터링 : 향상된 모니터링 활성화 체크 &gt; 세부 수준 : 1초 선택 &gt; 역할 모니터링 : 생성한 rds-enhanced-monitoring IAM 선택 (RDS가 OS 메트릭을 CloudWatch Logs로 전송할 수 있도록 IAM 역할 연결) &gt; 계속 &gt; 수정 예약 : 즉시 적용 체크 &gt; DB 인스턴스 수정 &gt;<br />
 AWS &gt; RDS 검색 &gt; 데이터베이스 메뉴 &gt; RDS 선택 &gt; 모니터링 탭 &gt; 우측 모니터링 버튼 &gt; 향상된 모니터링 선택 &gt; 최근 5분/15분/30분/1시간 이내 여유 메모리, CPU 합계, CPU 대기, 디스크 I/O 대기 시간, 평균 대기열 크기, 초당 읽기 I/O, 초당 쓰기 I/O 등 실시간 확인 가능<br />
