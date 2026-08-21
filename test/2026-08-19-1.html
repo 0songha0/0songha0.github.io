@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 269</span>
+      <span class="nav__total">🌴 Total Posts: 270</span>
     </li> -->
     
     
@@ -717,6 +717,7 @@ Program exits now.
 <h3 id="cloudwatch-agent-실행">CloudWatch Agent 실행</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json
 </code></pre></div></div>
+<p>현재 EC2 서버에서 CloudWatch Agent 실행 명령어를 입력하여 실행합니다.</p>
 
 <p><mark>CloudWatch Agent 정상 실행 확인</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -m ec2 -a status
@@ -779,7 +780,8 @@ RDS CloudWatch 메트릭은 기본적으로 1분 간격으로 CloudWatch에 전�
 <p><mark>EC2 서버 자원 실시간 확인 명령어</mark></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>top
 </code></pre></div></div>
-<p>EC2 서버에 연결해서 위 명령어를 입력하면, 상단 %Cpu(s)가 현재 CPU 사용률이고 avail Mem이 사용 가능한 메모리입니다.</p>
+<p>EC2 서버에 연결해서 위 명령어를 입력하면, 서버 자원을 실시간으로 확인할 수 있습니다.<br />
+상단 %Cpu(s)가 현재 CPU 사용률이고 avail Mem이 사용 가능한 메모리입니다.</p>
 
 <p><mark>RDS 자원 실시간 확인 방법</mark><br />
 AWS &gt; IAM 검색 &gt; 액세스 관리 &gt; 역할 메뉴 &gt; 역할 생성 &gt; 신뢰할 수 있는 엔티티 유형 : AWS 서비스 선택 &gt; 서비스 또는 사용 사례 : RDS 선택 &gt; 사용 사례 : RDS - Enhanced Monitoring 선택 &gt; 다음 &gt; 다음 &gt; 역할 이름 : rds-enhanced-monitoring &gt; 역할 생성 &gt;<br />
@@ -824,7 +826,8 @@ AWS &gt; RDS 검색 &gt; 데이터베이스 메뉴 &gt; RDS 선택 &gt; 모니�
       
   <nav class="pagination">
     
-      <a href="#" class="pagination--pager disabled">❮</a>
+      <a href="/aws/2026-08-21-1" class="pagination--pager" title="사용하지 않는 AWS 리소스 종료 및 AWS 비용 확인 방법
+">❮</a>
     
     
       <a href="/tool/2026-08-17-1" class="pagination--pager" title="관계형 및 NoSQL DB 전용 IDE DataGrip 사용법
@@ -843,6 +846,42 @@ AWS &gt; RDS 검색 &gt; 데이터베이스 메뉴 &gt; RDS 선택 &gt; 모니�
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/aws/2026-08-21-1" rel="permalink">사용하지 않는 AWS 리소스 종료 및 AWS 비용 확인 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-08-21T00:00:00+00:00">2026-08-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
         
           
 
@@ -926,42 +965,6 @@ AWS &gt; RDS 검색 &gt; 데이터베이스 메뉴 &gt; RDS 선택 &gt; 모니�
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
         <a href="/web-dev/2026-08-13-1" rel="permalink">AWS EC2에 Node.js, TypeScript 기반 NestJS 프로젝트 구축 방법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2026-08-13T00:00:00+00:00">2026-08-13</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/test/2026-08-13-2" rel="permalink">K6 부하테스트 툴 사용법 / EC2 서버에 K6 설치 방법
 </a>
       
     </h2>

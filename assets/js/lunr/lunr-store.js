@@ -1572,7 +1572,7 @@ var store = [{
         "teaser": null
       },{
         "title": "간단한 AWS EC2 서버 생성 및 Node.js 기반 Express API 프로젝트 구축 방법",
-        "excerpt":"간단한 AWS EC2 서버 생성 및 제거 방법 간단한 AWS EC2 서버 생성 방법 AWS &gt; EC2 검색 &gt; 인스턴스 시작 버튼 &gt; 이름 : api-server 입력 &gt; Quick Start : Ubuntu 운영체제 선택 &gt; 인스턴스 유형 : t2.micro (프리 티어 사용 가능) 확인 &gt; 키 페어(로그인) : 키 페어...","categories": ["aws"],
+        "excerpt":"간단한 AWS EC2 서버 생성 방법 간단한 AWS EC2 서버 생성 방법 AWS &gt; EC2 검색 &gt; 인스턴스 시작 버튼 &gt; 이름 : api-server 입력 &gt; Quick Start : Ubuntu 운영체제 선택 &gt; 인스턴스 유형 : t2.micro (프리 티어 사용 가능) 확인 &gt; 키 페어(로그인) : 키 페어 없이 계속...","categories": ["aws"],
         "tags": [],
         "url": "/aws/2026-08-13-1",
         "teaser": null
@@ -1611,5 +1611,11 @@ var store = [{
         "excerpt":"AWS EC2 모니터링 설정 방법 EC2 백엔드 서버 CPU 사용률, 메모리 사용률, 디스크 사용률 등 메트릭을 1분 간격으로 수집하도록 설정합니다. EC2 서버 CPU 모니터링 간격 변경 AWS &gt; EC2 검색 &gt; 인스턴스 메뉴 &gt; EC2 백엔드 서버 선택 &gt; 모니터링 탭 &gt; 세부 모니터링 관리 &gt; 세부 모니터링 : 활성화...","categories": ["test"],
         "tags": [],
         "url": "/test/2026-08-19-1",
+        "teaser": null
+      },{
+        "title": "사용하지 않는 AWS 리소스 종료 및 AWS 비용 확인 방법",
+        "excerpt":"AWS 리소스 종료 방법 사용하지 않는 AWS 리소스가 있으면 계속 비용이 부과되므로 삭제해두는 것이 좋습니다. EC2 서버 종료 방법 AWS &gt; EC2 검색 &gt; 인스턴스 메뉴 &gt; 인스턴스 목록에서 삭제할 EC2 서버 선택 &gt; 상단 인스턴스 상태 버튼 &gt; 인스턴스 종료(삭제) &gt; 종료(삭제) 사용하지 않는 EC2 서버는 비용이 많이 나갈...","categories": ["aws"],
+        "tags": [],
+        "url": "/aws/2026-08-21-1",
         "teaser": null
       }]

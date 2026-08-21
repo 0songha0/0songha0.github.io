@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 269</span>
+      <span class="nav__total">🌴 Total Posts: 270</span>
     </li> -->
     
     
@@ -470,24 +470,20 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 간단한 AWS EC2 서버 생성 및 Node.js 기반 Express API 프로젝트 구축 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#간단한-aws-ec2-서버-생성-및-제거-방법">간단한 AWS EC2 서버 생성 및 제거 방법</a><ul><li><a href="#간단한-aws-ec2-서버-생성-방법">간단한 AWS EC2 서버 생성 방법</a></li><li><a href="#aws-콘솔에서-ec2-서버-접속-방법">AWS 콘솔에서 EC2 서버 접속 방법</a></li><li><a href="#ec2-서버-종료-방법">EC2 서버 종료 방법</a></li></ul></li><li><a href="#ec2-서버에-nodejs-기반-express-프로젝트-구축-방법">EC2 서버에 Node.js 기반 Express 프로젝트 구축 방법</a><ul><li><a href="#루트-권한으로-변경">루트 권한으로 변경</a></li><li><a href="#nodejs-설치">Node.js 설치</a></li><li><a href="#express-프로젝트-생성">Express 프로젝트 생성</a></li><li><a href="#express-api-로직-작성">Express API 로직 작성</a></li><li><a href="#pm2-설치">PM2 설치</a></li><li><a href="#express-api-서버-실행">Express API 서버 실행</a></li><li><a href="#express-api-호출">Express API 호출</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#간단한-aws-ec2-서버-생성-방법">간단한 AWS EC2 서버 생성 방법</a><ul><li><a href="#간단한-aws-ec2-서버-생성-방법-1">간단한 AWS EC2 서버 생성 방법</a></li><li><a href="#aws-콘솔에서-ec2-서버-접속-방법">AWS 콘솔에서 EC2 서버 접속 방법</a></li></ul></li><li><a href="#ec2-서버에-nodejs-기반-express-프로젝트-구축-방법">EC2 서버에 Node.js 기반 Express 프로젝트 구축 방법</a><ul><li><a href="#루트-권한으로-변경">루트 권한으로 변경</a></li><li><a href="#nodejs-설치">Node.js 설치</a></li><li><a href="#express-프로젝트-생성">Express 프로젝트 생성</a></li><li><a href="#express-api-로직-작성">Express API 로직 작성</a></li><li><a href="#pm2-설치">PM2 설치</a></li><li><a href="#express-api-서버-실행">Express API 서버 실행</a></li><li><a href="#express-api-호출">Express API 호출</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h2 id="간단한-aws-ec2-서버-생성-및-제거-방법">간단한 AWS EC2 서버 생성 및 제거 방법</h2>
+        <h2 id="간단한-aws-ec2-서버-생성-방법">간단한 AWS EC2 서버 생성 방법</h2>
 
-<h3 id="간단한-aws-ec2-서버-생성-방법">간단한 AWS EC2 서버 생성 방법</h3>
+<h3 id="간단한-aws-ec2-서버-생성-방법-1">간단한 AWS EC2 서버 생성 방법</h3>
 <p>AWS &gt; EC2 검색 &gt; 인스턴스 시작 버튼 &gt; 이름 : api-server 입력 &gt; Quick Start : Ubuntu 운영체제 선택 &gt; 인스턴스 유형 : t2.micro (프리 티어 사용 가능) 확인 &gt; 키 페어(로그인) : 키 페어 없이 계속 진행 &gt; 네트워크 설정에서 방화벽(보안 그룹) : 다음에서 SSH 트래픽 허용 (0.0.0.0/0), 인터넷에서 HTTP 트래픽 허용 선택 (80번 포트로 서버와 통신 가능) &gt; 인스턴스 시작 &gt; 인스턴스 상태가 대기 중에서 실행 중으로 변경되면 서버 연결 가능<br />
 키 페어를 생성하는 것이 좋지만, 잠시 테스트 후 삭제할 서버이므로 키 페어 없이 생성하였습니다.<br />
 SSH 트래픽 허용도 보안상 0.0.0.0/0이 아니라 내 IP만 허용하는 것이 권장됩니다.</p>
 
 <h3 id="aws-콘솔에서-ec2-서버-접속-방법">AWS 콘솔에서 EC2 서버 접속 방법</h3>
 <p>AWS &gt; EC2 검색 &gt; 좌측 인스턴스 메뉴 &gt; 우측 인스턴스 목록에서 EC2 서버 선택 &gt; 상단 연결 버튼 &gt; Ec2 인스턴스 연결 탭 &gt; 우측 하단 연결 버튼</p>
-
-<h3 id="ec2-서버-종료-방법">EC2 서버 종료 방법</h3>
-<p>AWS &gt; EC2 검색 &gt; 좌측 인스턴스 메뉴 &gt; 우측 인스턴스 목록에서 EC2 서버 선택 &gt; 상단 인스턴스 상태 버튼 &gt; 인스턴스 종료(삭제) &gt; 종료(삭제)<br />
-사용하지 않는 EC2 서버는 비용이 많이 나갈 수 있으니 종료시켜주는 것이 좋습니다.</p>
 
 <hr />
 
@@ -642,6 +638,42 @@ app.listen(port, () =&gt; {
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
+        <a href="/aws/2026-08-21-1" rel="permalink">사용하지 않는 AWS 리소스 종료 및 AWS 비용 확인 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-08-21T00:00:00+00:00">2026-08-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
         <a href="/test/2026-08-19-1" rel="permalink">AWS EC2, RDS 모니터링 설정 및 CloudWatch 대시보드 사용법
 </a>
       
@@ -726,42 +758,6 @@ app.listen(port, () =&gt; {
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2026-08-16T00:00:00+00:00">2026-08-16</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/web-dev/2026-08-13-1" rel="permalink">AWS EC2에 Node.js, TypeScript 기반 NestJS 프로젝트 구축 방법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2026-08-13T00:00:00+00:00">2026-08-13</time>
       </span>
     
 
