@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 부하테스트 결과 EC2 병목 지점을 개선하기 위한 EC2 서버 이중화 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#aws-ec2-서버-이중화-방법-수동-확장">AWS EC2 서버 이중화 방법 (수동 확장)</a><ul><li><a href="#ec2-ami-이미지-생성">EC2 AMI 이미지 생성</a></li><li><a href="#ec2-인스턴스-복제">EC2 인스턴스 복제</a></li><li><a href="#인스턴스-확장-및-로드밸런서-연결">인스턴스 확장 및 로드밸런서 연결</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#aws-ec2-서버-이중화-방법-수동-확장">AWS EC2 서버 이중화 방법 (수동 확장)</a><ul><li><a href="#ec2-ami-이미지-생성">EC2 AMI 이미지 생성</a></li><li><a href="#ec2-인스턴스-복제">EC2 인스턴스 복제</a></li><li><a href="#신규-ec2-인스턴스-로드밸런서-연결">신규 EC2 인스턴스 로드밸런서 연결</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -502,7 +502,7 @@ sudo nohup java -jar jscode-0.0.1-SNAPSHOT.jar &gt; app.log 2&gt;&amp;1 &amp;
 </code></pre></div></div>
 <p>복제된 EC2 서버에서도 CloudWatch Agent 실행 명령어를 입력하여 실행합니다.</p>
 
-<h3 id="인스턴스-확장-및-로드밸런서-연결">인스턴스 확장 및 로드밸런서 연결</h3>
+<h3 id="신규-ec2-인스턴스-로드밸런서-연결">신규 EC2 인스턴스 로드밸런서 연결</h3>
 <p>AWS &gt; EC2 검색 &gt; 로드 밸런싱 &gt; 로드밸런서 메뉴 &gt; 기존 로드밸런서 클릭 &gt; 리스너 및 규칙 탭 &gt; HTTP:80 리스너 대상 그룹 클릭 &gt; 대상 탭 &gt; 대상 등록 &gt; 사용 가능한 인스턴스 &gt; 생성한 backend-server2 인스턴스 체크 &gt; 선택한 인스턴스를 위한 포트 : 80 확인 &gt; 아래에 보류 중인 것으로 포함 클릭 &gt; 보류 중인 대상 등록<br />
 AMI 이미지로 만든 신규 EC2 인스턴스를 기존 로드밸런서에 연결하여 트래픽을 분산합니다.</p>
 
