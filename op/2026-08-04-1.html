@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> GitHub Actions 사용하여 CI/CD 구현 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#github-actions-사용하여-ci-구축-방법">GitHub Actions 사용하여 CI 구축 방법</a><ul><li><a href="#github-actions-실행-테스트">GitHub Actions 실행 테스트</a></li><li><a href="#github-actions-실행-이력-및-결과-확인">GitHub Actions 실행 이력 및 결과 확인</a></li><li><a href="#github-actions-실행-시-자동-빌드-및-테스트-방법">GitHub Actions 실행 시 자동 빌드 및 테스트 방법</a></li></ul></li><li><a href="#github-actions-사용하여-cd-구축-방법">GitHub Actions 사용하여 CD 구축 방법</a><ul><li><a href="#nestjs-프로젝트-구축-방법">NestJS 프로젝트 구축 방법</a></li><li><a href="#github-actions-secret-등록">GitHub Actions Secret 등록</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#github-actions-사용하여-ci-구축-방법">GitHub Actions 사용하여 CI 구축 방법</a><ul><li><a href="#github-actions-실행-테스트">GitHub Actions 실행 테스트</a></li><li><a href="#github-actions-실행-이력-및-결과-확인">GitHub Actions 실행 이력 및 결과 확인</a></li><li><a href="#github-actions-실행-시-자동-빌드-및-테스트-방법">GitHub Actions 실행 시 자동 빌드 및 테스트 방법</a></li></ul></li><li><a href="#github-actions-사용하여-cd-구축-방법">GitHub Actions 사용하여 CD 구축 방법</a><ul><li><a href="#nestjs-프로젝트-구축-방법">NestJS 프로젝트 구축 방법</a></li><li><a href="#github-actions-secret-등록">GitHub Actions Secret 등록</a></li><li><a href="#github-actions-실행-시-자동-빌드-및-배포-방법">GitHub Actions 실행 시 자동 빌드 및 배포 방법</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -559,13 +559,12 @@ NestJS 프로젝트를 생성하고, EC2 서버에 배포 후 실행합니다.</
 GitHub &gt; 프로젝트 리포지토리 &gt; Settings 탭 &gt; Security &gt; Secrets and variables &gt; Actions 메뉴 &gt; Repository secrets 선택 (개발/운영 서버 분리 시에는 Environment secrets 사용) &gt; Name : AWS_SSH_KEY 입력 &gt; Secret : EC2 서버 생성 시 다운로드된 키 파일 (.pem) 전체 내용 복사 후 붙여넣기 &gt; Add secret<br />
 EC2 SSH 키처럼 민감한 인증정보는 커밋하지 않고, secret으로 관리하는 것이 GitHub 권장 방식입니다.</p>
 
-<markGitHub Actions="">Secret에 EC2 Public IP 등록&lt;/mark&gt;  
-GitHub &gt; 프로젝트 리포지토리 &gt; Settings 탭 &gt; Security &gt; Secrets and variables &gt; Actions 메뉴 &gt; Repository secrets 선택 (개발/운영 서버 분리 시에는 Environment secrets 사용) &gt; Name : EC2_PUBLIC_IP 입력 &gt; Secret : EC2 서버 Public IP 복사 후 붙여넣기 &gt; Add secret  
-EC2 Public IP는 민감정보가 아니므로 Repository Variable로 관리할 수도 있습니다.
+<p><mark>GitHub Actions &gt;Secret에 EC2 Public IP 등록</mark><br />
+GitHub &gt; 프로젝트 리포지토리 &gt; Settings 탭 &gt; Security &gt; Secrets and variables &gt; Actions 메뉴 &gt; Repository secrets 선택 (개발/운영 서버 분리 시에는 Environment secrets 사용) &gt; Name : EC2_PUBLIC_IP 입력 &gt; Secret : EC2 서버 Public IP 복사 후 붙여넣기 &gt; Add secret<br />
+EC2 Public IP는 민감정보가 아니므로 Repository Variable로 관리할 수도 있습니다.</p>
 
-### GitHub Actions 실행 시 자동 빌드 및 배포 방법
-```
-name: GitHub Actions Demo # GitHub Actions 워크플로명
+<h3 id="github-actions-실행-시-자동-빌드-및-배포-방법">GitHub Actions 실행 시 자동 빌드 및 배포 방법</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name: GitHub Actions Demo # GitHub Actions 워크플로명
 run-name: $ is testing out GitHub Actions # Actions 실행 기록에 표시되는 실행 이름
 
 on: [push] # GitHub 저장소에 push 이벤트 발생 시 워크플로 실행
@@ -619,10 +618,9 @@ jobs:
           ENDSSH
 
       - run: echo "🍏 This job's status is $." # Job 최종 실행 상태 출력
-```
-프로젝트폴더/.github/workflows 경로에 위와 같은 .yml 파일을 생성하고 커밋 후 Push 하면 자동 실행됩니다.  
-프로젝트 내부 코드를 변경하고 정상적으로 서버에 반영되었는지 확인하면 좋습니다.
-</markGitHub>
+</code></pre></div></div>
+<p>프로젝트폴더/.github/workflows 경로에 위와 같은 .yml 파일을 생성하고 커밋 후 Push 하면 자동 실행됩니다.<br />
+프로젝트 내부 코드를 변경하고 정상적으로 서버에 반영되었는지 확인하면 좋습니다.</p>
 
         
       </section>
