@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>AWS EC2, RDS 모니터링 설정 및 CloudWatch 대시보드 사용법 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>AWS EC2, RDS 모니터링 및 CloudWatch 대시보드 사용법 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,7 +65,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="AWS EC2, RDS 모니터링 설정 및 CloudWatch 대시보드 사용법">
+<meta property="og:title" content="AWS EC2, RDS 모니터링 및 CloudWatch 대시보드 사용법">
 <meta property="og:url" content="https://0songha0.github.io/test/2026-08-19-1">
 
 
@@ -433,7 +433,7 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="AWS EC2, RDS 모니터링 설정 및 CloudWatch 대시보드 사용법">
+    <meta itemprop="headline" content="AWS EC2, RDS 모니터링 및 CloudWatch 대시보드 사용법">
     <meta itemprop="description" content="">
     <meta itemprop="datePublished" content="2026-08-19T00:00:00+00:00">
     <meta itemprop="dateModified" content="2026-08-19T00:00:00+00:00">
@@ -441,7 +441,7 @@
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">AWS EC2, RDS 모니터링 설정 및 CloudWatch 대시보드 사용법
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">AWS EC2, RDS 모니터링 및 CloudWatch 대시보드 사용법
 </h1>
           
 
@@ -468,9 +468,9 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> AWS EC2, RDS 모니터링 설정 및 CloudWatch 대시보드 사용법</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> AWS EC2, RDS 모니터링 및 CloudWatch 대시보드 사용법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#aws-ec2-모니터링-설정-방법">AWS EC2 모니터링 설정 방법</a><ul><li><a href="#ec2-서버-cpu-모니터링-간격-변경">EC2 서버 CPU 모니터링 간격 변경</a></li><li><a href="#ec2-서버에-cloudwatch-agent가-사용할-iam-역할-연결">EC2 서버에 CloudWatch Agent가 사용할 IAM 역할 연결</a></li><li><a href="#ec2-서버에-cloudwatch-agent-설치">EC2 서버에 CloudWatch Agent 설치</a></li><li><a href="#cloudwatch-agent-설정-파일-생성">CloudWatch Agent 설정 파일 생성</a></li><li><a href="#cloudwatch-agent-실행">CloudWatch Agent 실행</a></li><li><a href="#cloudwatch-수집-지표-확인">CloudWatch 수집 지표 확인</a></li></ul></li><li><a href="#aws-rds-모니터링-확인-방법">AWS RDS 모니터링 확인 방법</a><ul><li><a href="#rds-cpu-메모리-그래프-집계-주기-변경">RDS CPU, 메모리 그래프 집계 주기 변경</a></li></ul></li><li><a href="#aws-alb-모니터링-확인-방법">AWS ALB 모니터링 확인 방법</a></li><li><a href="#aws-cloudwatch-사용법">AWS CloudWatch 사용법</a><ul><li><a href="#aws-cloudwatch-대시보드-생성-방법">AWS CloudWatch 대시보드 생성 방법</a></li><li><a href="#ec2-모니터링-위젯-추가-방법">EC2 모니터링 위젯 추가 방법</a></li><li><a href="#rds-모니터링-위젯-추가-방법">RDS 모니터링 위젯 추가 방법</a></li><li><a href="#aws-cloudwatch-대시보드-확인-방법-">AWS CloudWatch 대시보드 확인 방법 ★</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#aws-ec2-모니터링-설정-방법">AWS EC2 모니터링 설정 방법</a><ul><li><a href="#ec2-서버-cpu-모니터링-간격-변경">EC2 서버 CPU 모니터링 간격 변경</a></li><li><a href="#ec2-서버에-cloudwatch-agent가-사용할-iam-역할-연결">EC2 서버에 CloudWatch Agent가 사용할 IAM 역할 연결</a></li><li><a href="#ec2-서버에-cloudwatch-agent-설치">EC2 서버에 CloudWatch Agent 설치</a></li><li><a href="#cloudwatch-agent-설정-파일-생성">CloudWatch Agent 설정 파일 생성</a></li><li><a href="#cloudwatch-agent-실행">CloudWatch Agent 실행</a></li><li><a href="#cloudwatch-수집-지표-확인">CloudWatch 수집 지표 확인</a></li><li><a href="#ec2-서버-자원-실시간-확인-명령어-">EC2 서버 자원 실시간 확인 명령어 ★</a></li></ul></li><li><a href="#aws-rds-모니터링-확인-방법">AWS RDS 모니터링 확인 방법</a><ul><li><a href="#rds-cpu-메모리-그래프-집계-주기-변경">RDS CPU, 메모리 그래프 집계 주기 변경</a></li><li><a href="#rds-자원-실시간-확인-방법">RDS 자원 실시간 확인 방법</a></li></ul></li><li><a href="#aws-alb-모니터링-확인-방법">AWS ALB 모니터링 확인 방법</a></li><li><a href="#aws-cloudwatch-사용법">AWS CloudWatch 사용법</a><ul><li><a href="#aws-cloudwatch-대시보드-생성-방법">AWS CloudWatch 대시보드 생성 방법</a></li><li><a href="#ec2-모니터링-위젯-추가-방법">EC2 모니터링 위젯 추가 방법</a></li><li><a href="#ec2-모니터링-위젯에-이중화-서버-추가-방법">EC2 모니터링 위젯에 이중화 서버 추가 방법</a></li><li><a href="#rds-모니터링-위젯-추가-방법">RDS 모니터링 위젯 추가 방법</a></li><li><a href="#aws-cloudwatch-대시보드-확인-방법-">AWS CloudWatch 대시보드 확인 방법 ★</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -727,6 +727,12 @@ Program exits now.
 <h3 id="cloudwatch-수집-지표-확인">CloudWatch 수집 지표 확인</h3>
 <p>AWS &gt; CloudWatch 검색 &gt; 지표 &gt; 모든 지표 메뉴 &gt; 사용자 지정 네임스페이스 : CWAgent 클릭 &gt; InstanceId 클릭 &gt; EC2 백엔드 서버 InstanceId에 해당하는 메모리 사용률, 디스크 사용률 지표 확인</p>
 
+<h3 id="ec2-서버-자원-실시간-확인-명령어-">EC2 서버 자원 실시간 확인 명령어 ★</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>top
+</code></pre></div></div>
+<p>EC2 서버에 연결해서 위 명령어를 입력하면, 서버 자원을 실시간으로 확인할 수 있습니다.<br />
+상단 %Cpu(s)가 현재 CPU 사용률이고 avail Mem이 사용 가능한 메모리입니다.</p>
+
 <hr />
 
 <h2 id="aws-rds-모니터링-확인-방법">AWS RDS 모니터링 확인 방법</h2>
@@ -737,6 +743,12 @@ Program exits now.
 <p>AWS &gt; RDS 검색 &gt; 데이터베이스 메뉴 &gt; RDS DB 인스턴스 클릭 &gt; 모니터링 &gt; CPU 사용률(CPUUtilization) 그래프 확대 &gt; 상단 5분을 1분으로 변경 &gt; UTC 시간대에서 현지 시간대로 변경 &gt; 닫기 &gt; 사용 가능한 메모리(FreeableMemory) 그래프 확대 &gt; 상단 5분을 1분으로 변경 &gt; UTC 시간대에서 현지 시간대로 변경 &gt; 닫기<br />
 RDS CloudWatch 메트릭은 기본적으로 1분 간격으로 CloudWatch에 전송되므로,<br />
 위와 같이 그래프 집계 주기만 변경하면 됩니다.</p>
+
+<h3 id="rds-자원-실시간-확인-방법">RDS 자원 실시간 확인 방법</h3>
+<p>AWS &gt; IAM 검색 &gt; 액세스 관리 &gt; 역할 메뉴 &gt; 역할 생성 &gt; 신뢰할 수 있는 엔티티 유형 : AWS 서비스 선택 &gt; 서비스 또는 사용 사례 : RDS 선택 &gt; 사용 사례 : RDS - Enhanced Monitoring 선택 &gt; 다음 &gt; 다음 &gt; 역할 이름 : rds-enhanced-monitoring &gt; 역할 생성 &gt;<br />
+AWS &gt; RDS 검색 &gt; 데이터베이스 메뉴 &gt; RDS 선택 &gt; 모니터링 탭 &gt; 상단 우측 수정 버튼 &gt; 모니터링 : 향상된 모니터링 활성화 체크 &gt; 세부 수준 : 1초 선택 &gt; 역할 모니터링 : 생성한 rds-enhanced-monitoring IAM 선택 (RDS가 OS 메트릭을 CloudWatch Logs로 전송할 수 있도록 IAM 역할 연결) &gt; 계속 &gt; 수정 예약 : 즉시 적용 체크 &gt; DB 인스턴스 수정 &gt;<br />
+AWS &gt; RDS 검색 &gt; 데이터베이스 메뉴 &gt; RDS 선택 &gt; 모니터링 탭 &gt; 우측 모니터링 버튼 &gt; 향상된 모니터링 선택 &gt; 최근 5분/15분/30분/1시간 이내 여유 메모리, CPU 합계, CPU 대기, 디스크 I/O 대기 시간, 평균 대기열 크기, 초당 읽기 I/O, 초당 쓰기 I/O 등 실시간 확인 가능<br />
+1초 단위로 수집하면 로그 수집, 저장 비용이 증가하므로 테스트가 끝나면 비활성화하는 것이 좋습니다.</p>
 
 <hr />
 
@@ -765,6 +777,13 @@ RDS CloudWatch 메트릭은 기본적으로 1분 간격으로 CloudWatch에 전�
 <p><mark>EC2 메모리 사용률 위젯 추가</mark><br />
 우측 상단 + 버튼 &gt; 위젯 구성 : 행 (시간별 지표 비교) 선택 &gt; 다음 &gt; 찾아보기 탭에서 CWAgent 클릭 &gt; InstanceId 클릭 &gt; backend-server EC2 인스턴스 mem_used_percent 지표 체크 &gt; 그래프로 표시된 지표 탭에서 기간 : 1분 단위로 변경 &gt; 상단 좌측 그래프 이름 : EC2 메모리 사용률 입력 &gt; 적용 &gt; 위젯 생성 &gt; 저장</p>
 
+<h3 id="ec2-모니터링-위젯에-이중화-서버-추가-방법">EC2 모니터링 위젯에 이중화 서버 추가 방법</h3>
+<p><mark>EC2 CPU 사용률 위젯에 이중화 서버 추가</mark><br />
+AWS &gt; CloudWatch 검색 &gt; 대시보드 메뉴 &gt; 대시보드 선택 &gt; 기존 EC2 CPU 사용률 위젯 편집 &gt; 찾아보기 탭 &gt; CPUUtilization 검색 &gt; ‘EC2 &gt; 인스턴스별 지표’ 클릭 &gt; 기존 EC2 서버 기반으로 복제된 backend-server2 서버 추가 선택 &gt; 그래프로 표시된 지표 탭에서 기간 : 1분 확인 &gt; 업데이트 &gt; 저장</p>
+
+<p><mark>EC2 메모리 사용률 위젯에 이중화 서버 추가</mark><br />
+AWS &gt; CloudWatch 검색 &gt; 대시보드 메뉴 &gt; 대시보드 선택 &gt; 기존 EC2 메모리 사용률 위젯 편집 &gt; 찾아보기 탭 &gt; mem_used_percent 검색 &gt; ‘CWAgent &gt; InstanceId’ 클릭 &gt; 기존 EC2 서버 기반으로 복제된 backend-server2 서버 추가 선택 &gt; 그래프로 표시된 지표 탭에서 기간 : 1분 확인 &gt; 업데이트 &gt; 저장</p>
+
 <h3 id="rds-모니터링-위젯-추가-방법">RDS 모니터링 위젯 추가 방법</h3>
 <p><mark>RDS CPU 사용률 위젯 추가</mark><br />
 우측 상단 + 버튼 &gt; 위젯 구성 : 행 (시간별 지표 비교) 선택 &gt; 다음 &gt; 찾아보기 탭에서 RDS 클릭 &gt; DBInstanceIdentifier 클릭 &gt; CPUUtilization 검색 &gt; test-database RDS CPUUtilization 지표 체크 &gt; 그래프로 표시된 지표 탭에서 기간 : 1분 단위 확인 &gt; 상단 좌측 그래프 이름 : RDS CPU 사용률 입력 &gt; 적용 &gt; 위젯 생성 &gt; 저장</p>
@@ -776,19 +795,6 @@ RDS CloudWatch 메트릭은 기본적으로 1분 간격으로 CloudWatch에 전�
 <p>AWS &gt; CloudWatch 검색 &gt; 대시보드 메뉴 &gt; load-test-dashboard 선택 &gt; 시간 범위 : 사용자 지정 클릭 &gt; 5분 설정<br />
 최근 5분간 각 서버의 CPU 사용률, 메모리 사용률 등을 지속적으로 모니터링합니다.<br />
 부하테스트 진행 중 쓰루풋이 정체되는 시간대에 사용률이 한계에 가장 근접한 자원을 병목 지점으로 의심해볼 수 있습니다. ★</p>
-
-<p><mark>EC2 서버 자원 실시간 확인 명령어</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>top
-</code></pre></div></div>
-<p>EC2 서버에 연결해서 위 명령어를 입력하면, 서버 자원을 실시간으로 확인할 수 있습니다.<br />
-상단 %Cpu(s)가 현재 CPU 사용률이고 avail Mem이 사용 가능한 메모리입니다.</p>
-
-<p><mark>RDS 자원 실시간 확인 방법</mark><br />
-AWS &gt; IAM 검색 &gt; 액세스 관리 &gt; 역할 메뉴 &gt; 역할 생성 &gt; 신뢰할 수 있는 엔티티 유형 : AWS 서비스 선택 &gt; 서비스 또는 사용 사례 : RDS 선택 &gt; 사용 사례 : RDS - Enhanced Monitoring 선택 &gt; 다음 &gt; 다음 &gt; 역할 이름 : rds-enhanced-monitoring &gt; 역할 생성 &gt;<br />
-AWS &gt; RDS 검색 &gt; 데이터베이스 메뉴 &gt; RDS 선택 &gt; 모니터링 탭 &gt; 상단 우측 수정 버튼 &gt; 모니터링 : 향상된 모니터링 활성화 체크 &gt; 세부 수준 : 1초 선택 &gt; 역할 모니터링 : 생성한 rds-enhanced-monitoring IAM 선택 (RDS가 OS 메트릭을 CloudWatch Logs로 전송할 수 있도록 IAM 역할 연결) &gt; 계속 &gt; 수정 예약 : 즉시 적용 체크 &gt; DB 인스턴스 수정 &gt;<br />
-AWS &gt; RDS 검색 &gt; 데이터베이스 메뉴 &gt; RDS 선택 &gt; 모니터링 탭 &gt; 우측 모니터링 버튼 &gt; 향상된 모니터링 선택 &gt; 최근 5분/15분/30분/1시간 이내 여유 메모리, CPU 합계, CPU 대기, 디스크 I/O 대기 시간, 평균 대기열 크기, 초당 읽기 I/O, 초당 쓰기 I/O 등 실시간 확인 가능<br />
-1초 단위로 수집하면 로그 수집, 저장 비용이 증가하므로 테스트가 끝나면 비활성화하는 것이 좋습니다.</p>
-
 
         
       </section>

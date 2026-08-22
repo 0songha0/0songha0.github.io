@@ -470,7 +470,7 @@
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 부하테스트용 EC2 백엔드 서버 및 인프라 구축 방법</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#부하테스트용-백엔드-인프라-구성-방법">부하테스트용 백엔드 인프라 구성 방법</a><ul><li><a href="#부하테스트용-ec2-백엔드-서버-생성-방법">부하테스트용 EC2 백엔드 서버 생성 방법</a></li><li><a href="#rds-db-전용-보안그룹-생성-">RDS DB 전용 보안그룹 생성 ★</a></li><li><a href="#aws-rds-생성-방법">AWS RDS 생성 방법</a></li><li><a href="#aws-alb-생성-방법">AWS ALB 생성 방법</a></li></ul></li><li><a href="#ec2-백엔드-서버에-스프링부트-애플리케이션-실행-방법">EC2 백엔드 서버에 스프링부트 애플리케이션 실행 방법</a><ul><li><a href="#ec2-서버-콘솔-접속">EC2 서버 콘솔 접속</a></li><li><a href="#jdk-설치">JDK 설치</a></li><li><a href="#스프링부트-프로젝트-클론-받기">스프링부트 프로젝트 클론 받기</a></li><li><a href="#스프링부트-프로젝트-구성-확인">스프링부트 프로젝트 구성 확인</a></li><li><a href="#생성한-rds-정보-입력">생성한 RDS 정보 입력</a></li><li><a href="#스프링부트-프로젝트-빌드">스프링부트 프로젝트 빌드</a></li><li><a href="#스프링부트-애플리케이션-실행">스프링부트 애플리케이션 실행</a></li></ul></li><li><a href="#rds-db에-데이터-추가">RDS DB에 데이터 추가</a><ul><li><a href="#mysql-더미-데이터-100만개-생성-방법">MySQL 더미 데이터 100만개 생성 방법</a></li></ul></li><li><a href="#aws-ec2-서버-이중화-방법-수동-확장">AWS EC2 서버 이중화 방법 (수동 확장)</a><ul><li><a href="#ec2-ami-이미지-생성">EC2 AMI 이미지 생성</a></li><li><a href="#ec2-인스턴스-복제">EC2 인스턴스 복제</a></li><li><a href="#인스턴스-확장-및-로드밸런서-연결">인스턴스 확장 및 로드밸런서 연결</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#부하테스트용-백엔드-인프라-구성-방법">부하테스트용 백엔드 인프라 구성 방법</a><ul><li><a href="#부하테스트용-ec2-백엔드-서버-생성-방법">부하테스트용 EC2 백엔드 서버 생성 방법</a></li><li><a href="#rds-db-전용-보안그룹-생성-">RDS DB 전용 보안그룹 생성 ★</a></li><li><a href="#aws-rds-생성-방법">AWS RDS 생성 방법</a></li><li><a href="#aws-alb-생성-방법">AWS ALB 생성 방법</a></li></ul></li><li><a href="#ec2-백엔드-서버에-스프링부트-애플리케이션-실행-방법">EC2 백엔드 서버에 스프링부트 애플리케이션 실행 방법</a><ul><li><a href="#ec2-서버-콘솔-접속">EC2 서버 콘솔 접속</a></li><li><a href="#jdk-설치">JDK 설치</a></li><li><a href="#스프링부트-프로젝트-클론-받기">스프링부트 프로젝트 클론 받기</a></li><li><a href="#스프링부트-프로젝트-구성-확인">스프링부트 프로젝트 구성 확인</a></li><li><a href="#생성한-rds-정보-입력">생성한 RDS 정보 입력</a></li><li><a href="#스프링부트-프로젝트-빌드">스프링부트 프로젝트 빌드</a></li><li><a href="#스프링부트-애플리케이션-실행">스프링부트 애플리케이션 실행</a></li></ul></li><li><a href="#rds-db에-데이터-추가">RDS DB에 데이터 추가</a><ul><li><a href="#mysql-더미-데이터-100만개-생성-방법">MySQL 더미 데이터 100만개 생성 방법</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -641,38 +641,6 @@ SELECT COUNT(*) FROM boards;
 </code></pre></div></div>
 <p>운영 환경 데이터가 100만개라 가정하고, 비슷한 환경을 구성하기 위해서 더미 데이터 100만개를 생성합니다.</p>
 
-<hr />
-
-<h2 id="aws-ec2-서버-이중화-방법-수동-확장">AWS EC2 서버 이중화 방법 (수동 확장)</h2>
-
-<p>느린 DB 쿼리에서 사용하는 날짜 컬럼 인덱스를 생성하여 RDS 병목 지점을 개선했었습니다.<br />
-쓰루풋이 3RPS에서 4RPS로 증가했지만, 목표 쓰루풋을 달성하기 위해 EC2 병목 지점도 개선하려고 합니다.<br />
-내부에 비효율적인 로직이 없다는 가정 하에 EC2 서버 이중화를 통해 성능 개선을 해보겠습니다.</p>
-
-<p>AWS 오토 스케일링 기능을 사용하지 않고 수동으로 수평적 확장하는 방법입니다.</p>
-
-<h3 id="ec2-ami-이미지-생성">EC2 AMI 이미지 생성</h3>
-<p>AWS &gt; EC2 검색 &gt; 인스턴스 메뉴 &gt; 복제본 이미지를 만들 backend-server EC2 서버 체크 &gt; 작업 &gt; 이미지 및 템플릿 &gt; 이미지 생성 &gt; 이미지 이름 : backend-server-ami 입력 &gt; 인스턴스 재부팅 체크 해제 &gt; 이미지 생성<br />
-기존 서버 환경을 그대로 복제하기 위한 디스크 복제본으로 AMI 이미지를 생성합니다.</p>
-
-<h3 id="ec2-인스턴스-복제">EC2 인스턴스 복제</h3>
-<p>AWS &gt; EC2 검색 &gt; 이미지 &gt; AMI 메뉴 &gt; 생성한 AMI 이미지 체크 &gt; 세부 정보 탭에서 상태 : 사용 가능 상태 확인 &gt; AMI로 인스턴스 시작 &gt; 이름 : backend-server2 입력 &gt; 인스턴스 유형 : t3a.small (기존 인스턴스 유형과 동일하게 선택) &gt; 키 페어(로그인) : 키 페어 생성 &gt; 다운로드된 키 파일 보관 &gt; 네트워크 설정에서 방화벽(보안 그룹) : 다음에서 SSH 트래픽 허용 (0.0.0.0/0), 인터넷에서 HTTP 트래픽 허용 선택 (80번 포트로 서버와 통신 가능) &gt; 고급 세부 정보에서 세부 CloudWatch 모니터링 : 활성화 (1분 간격으로 모니터링 가능) &gt; 인스턴스 시작 &gt; 인스턴스 상태가 대기 중에서 실행 중으로 변경되면 서버 연결 가능</p>
-
-<p><mark>복제된 서버에서도 스프링부트 애플리케이션 실행</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /home/ubuntu/load-testing-server/build/libs
-sudo nohup java -jar jscode-0.0.1-SNAPSHOT.jar &gt; app.log 2&gt;&amp;1 &amp;
-</code></pre></div></div>
-<p>스프링부트 실행 후 http://복제된EC2서버IP/health에 접속하여 정상 실행 확인합니다.</p>
-
-<p><mark>복제된 서버에서도 CloudWatch Agent 실행</mark></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json
-</code></pre></div></div>
-<p>복제된 EC2 서버에서도 CloudWatch Agent 실행 명령어를 입력하여 실행합니다.</p>
-
-<h3 id="인스턴스-확장-및-로드밸런서-연결">인스턴스 확장 및 로드밸런서 연결</h3>
-
-<p>생성된 이미지로 새 인스턴스를 만들고, 기존 로드밸런서에 연결하여 트래픽을 분산합니다.</p>
-
         
       </section>
 
@@ -811,7 +779,7 @@ sudo nohup java -jar jscode-0.0.1-SNAPSHOT.jar &gt; app.log 2&gt;&amp;1 &amp;
     
     <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
       
-        <a href="/test/2026-08-19-1" rel="permalink">AWS EC2, RDS 모니터링 설정 및 CloudWatch 대시보드 사용법
+        <a href="/test/2026-08-19-1" rel="permalink">AWS EC2, RDS 모니터링 및 CloudWatch 대시보드 사용법
 </a>
       
     </h2>

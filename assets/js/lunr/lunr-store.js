@@ -1607,7 +1607,7 @@ var store = [{
         "url": "/tool/2026-08-17-1",
         "teaser": null
       },{
-        "title": "AWS EC2, RDS 모니터링 설정 및 CloudWatch 대시보드 사용법",
+        "title": "AWS EC2, RDS 모니터링 및 CloudWatch 대시보드 사용법",
         "excerpt":"AWS EC2 모니터링 설정 방법 EC2 백엔드 서버 CPU 사용률, 메모리 사용률, 디스크 사용률 등 메트릭을 1분 간격으로 수집하도록 설정합니다. EC2 서버 CPU 모니터링 간격 변경 AWS &gt; EC2 검색 &gt; 인스턴스 메뉴 &gt; EC2 백엔드 서버 선택 &gt; 모니터링 탭 &gt; 세부 모니터링 관리 &gt; 세부 모니터링 : 활성화...","categories": ["test"],
         "tags": [],
         "url": "/test/2026-08-19-1",
