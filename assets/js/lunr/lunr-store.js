@@ -42,7 +42,7 @@ var store = [{
         "teaser": null
       },{
         "title": "DB 설계 시 참고 / 테이블 설계 및 DB 성능 튜닝 방법",
-        "excerpt":"DB 테이블 설계 테이블 명명규칙 snake_case 사용하여 소문자로 작성 tb_ 등 prefix, suffix는 사용은 옛날 방식이므로 권장X 기존 테이블 명명 규칙이 있다면 따르기 (다중 규칙X) 컬럼 명명규칙 snake_case 사용하여 소문자로 작성 같은 테이블명 prefix는 가급적 생략하여 간결하게 작성 변수명 짓기 사이트 https://www.curioustore.com 변수명 짓기 사이트 이용 시 시간 단축 가능합니다....","categories": ["plan-design-db"],
+        "excerpt":"DB 테이블 설계 공통 명명규칙 snake_case를 사용하여 소문자로 작성 의미를 유추하기 어려운 축약어 사용을 지양하고 명확하게 작성 기존 명명 규칙이 있다면 따르기 테이블 명명규칙 tb_ 등 prefix, suffix 사용은 옛날 방식이므로 지양 컬럼 명명규칙 같은 테이블명의 prefix는 가급적 생략하여 간결하게 작성 변수명 짓기 사이트 https://www.curioustore.com 변수명 짓기 사이트 이용 시...","categories": ["plan-design-db"],
         "tags": [],
         "url": "/plan-design-db/2022-05-26-1",
         "teaser": null
