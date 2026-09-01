@@ -1624,4 +1624,10 @@ var store = [{
         "tags": [],
         "url": "/test/2026-08-21-1",
         "teaser": null
+      },{
+        "title": "Docker 튜토리얼 실습 및 도커 사용법 / 도커 허브 사용법",
+        "excerpt":"도커 튜토리얼 실습 Docker 공식 문서의 튜토리얼 실습을 따라하며 도커 기본 사용법을 익혀봅니다. 사전 환경 세팅 윈도우 환경에 Docker Desktop, Git Client, VS Code​를 설치하고 실습을 시작해야 합니다. Git Clone git clone https://github.com/docker/getting-started-app todo 리스트를 관리하는 JavaScript 기반 애플리케이션을 GitHub 저장소에서 내려받을 수 있습니다. Docker 설정 파일 생성 프로젝트 경로에...","categories": ["op"],
+        "tags": [],
+        "url": "/op/2026-09-01-1",
+        "teaser": null
       }]

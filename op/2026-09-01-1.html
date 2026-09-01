@@ -1,0 +1,862 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Docker 튜토리얼 실습 및 도커 사용법 / 도커 허브 사용법 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="Docker 튜토리얼 실습 및 도커 사용법 / 도커 허브 사용법">
+<meta property="og:url" content="https://0songha0.github.io/op/2026-09-01-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-09-01T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2026-09-01T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/op/2026-09-01-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 272</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/test"><span class="nav__sub-title">테스트</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">Python / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka-socket"><span class="nav__sub-title">Kafka / Socket</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Docker 튜토리얼 실습 및 도커 사용법 / 도커 허브 사용법">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2026-09-01T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2026-09-01T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Docker 튜토리얼 실습 및 도커 사용법 / 도커 허브 사용법
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-09-01T00:00:00+00:00">2026-09-01</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Docker 튜토리얼 실습 및 도커 사용법 / 도커 허브 사용법</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
+              <ul class="toc__menu"><li><a href="#도커-튜토리얼-실습">도커 튜토리얼 실습</a><ul><li><a href="#사전-환경-세팅">사전 환경 세팅</a></li><li><a href="#git-clone">Git Clone</a></li><li><a href="#docker-설정-파일-생성">Docker 설정 파일 생성</a></li><li><a href="#docker-이미지-빌드-명령어">Docker 이미지 빌드 명령어</a></li><li><a href="#docker-desktop-확인">Docker Desktop 확인</a></li><li><a href="#docker-컨테이너-실행">Docker 컨테이너 실행</a></li><li><a href="#실행-중인-docker-컨테이너-확인">실행 중인 Docker 컨테이너 확인</a></li><li><a href="#docker-컨테이너-종료">Docker 컨테이너 종료</a></li><li><a href="#docker-컨테이너-삭제">Docker 컨테이너 삭제</a></li></ul></li><li><a href="#도커-허브-사용법">도커 허브 사용법</a><ul><li><a href="#도커-허브-레포지토리-생성">도커 허브 레포지토리 생성</a></li><li><a href="#도커-허브-로그인">도커 허브 로그인</a></li><li><a href="#도커-이미지-태깅">도커 이미지 태깅</a></li><li><a href="#도커-이미지-공유">도커 이미지 공유</a></li><li><a href="#공유된-도커-이미지-확인">공유된 도커 이미지 확인</a></li><li><a href="#다른-cpu-아키텍처용으로-도커-이미지-빌드-명령어">다른 CPU 아키텍처용으로 도커 이미지 빌드 명령어</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="도커-튜토리얼-실습">도커 튜토리얼 실습</h2>
+
+<p>Docker 공식 문서의 튜토리얼 실습을 따라하며 도커 기본 사용법을 익혀봅니다.</p>
+
+<h3 id="사전-환경-세팅">사전 환경 세팅</h3>
+<p>윈도우 환경에 Docker Desktop, Git Client, VS Code​를 설치하고 실습을 시작해야 합니다.</p>
+
+<h3 id="git-clone">Git Clone</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/docker/getting-started-app
+</code></pre></div></div>
+<p>todo 리스트를 관리하는 JavaScript 기반 애플리케이션을 GitHub 저장소에서 내려받을 수 있습니다.</p>
+
+<h3 id="docker-설정-파일-생성">Docker 설정 파일 생성</h3>
+<p>프로젝트 경로에 Dockerfile 파일을 생성하고 아래와 같이 입력합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># syntax=docker/dockerfile:1
+
+FROM node:lts-alpine
+WORKDIR /app
+COPY . .
+RUN yarn install --production
+CMD ["node", "src/index.js"]
+EXPOSE 3000
+</code></pre></div></div>
+<p>Node.js가 설치된 경량 Alpine 이미지를 베이스 이미지로 사용하여 도커 이미지를 구성하는 설정입니다.<br />
+컨테이너 내부 /app 폴더로 프로젝트를 복사하고, yarn 패키지 매니저로 운영에 필요한 패키지를 설치합니다.<br />
+컨테이너 실행 시 src/index.js를 실행하고, 애플리케이션이 3000번 포트를 사용함을 명시합니다.</p>
+
+<h3 id="docker-이미지-빌드-명령어">Docker 이미지 빌드 명령어</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build -t 도커이미지명 .
+</code></pre></div></div>
+<p>프로젝트 폴더 내 Dockerfile을 기반으로 도커 이미지를 빌드합니다.<br />
+-t 옵션으로 도커 이미지명을 지정하고, 현재 폴더를 빌드 컨텍스트로 사용합니다.</p>
+
+<p>애플리케이션 코드 수정 후에는 도커 이미지를 다시 빌드하고,<br />
+기존 컨테이너 삭제 후 새 컨테이너를 실행하면 변경 사항을 반영할 수 있습니다.</p>
+
+<h3 id="docker-desktop-확인">Docker Desktop 확인</h3>
+<p>Docker Desktop에서 빌드된 도커 이미지를 확인할 수 있습니다.</p>
+
+<h3 id="docker-컨테이너-실행">Docker 컨테이너 실행</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -d -p 127.0.0.1:3000:3000 도커이미지명
+</code></pre></div></div>
+<p>Docker 컨테이너 런타임이 이미지를 기반으로 컨테이너를 생성하고,<br />
+격리된 환경에서 애플리케이션 프로세스를 백그라운드로 실행합니다.<br />
+호스트의 127.0.0.1:3000 포트를 컨테이너의 3000번 포트에 매핑하여<br />
+호스트 웹 브라우저에서 컨테이너 내부 애플리케이션에 접근할 수 있도록 합니다.</p>
+
+<h3 id="실행-중인-docker-컨테이너-확인">실행 중인 Docker 컨테이너 확인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker ps
+</code></pre></div></div>
+<p>웹브라우저에서 http://localhost:3000로 접속해도 확인할 수 있습니다.</p>
+
+<h3 id="docker-컨테이너-종료">Docker 컨테이너 종료</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stop 컨테이너ID
+</code></pre></div></div>
+<p>docker ps 명령어로 확인된 실행 중 컨테이너ID를 입력하여 도커 컨테이너를 종료할 수 있습니다.</p>
+
+<h3 id="docker-컨테이너-삭제">Docker 컨테이너 삭제</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker rm -f 컨테이너ID
+</code></pre></div></div>
+<p>실행 중인 도커 컨테이너도 강제로 종료하고 삭제합니다.</p>
+
+<hr />
+
+<h2 id="도커-허브-사용법">도커 허브 사용법</h2>
+
+<h3 id="도커-허브-레포지토리-생성">도커 허브 레포지토리 생성</h3>
+<p>Docker Hub 접속 &gt; My Hub &gt; Repositories 메뉴 &gt; Create a repository &gt; Namespace : DockerHub사용자명 확인 &gt; Repository Name : 레포지토리명 입력 &gt; Create</p>
+
+<h3 id="도커-허브-로그인">도커 허브 로그인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker login
+</code></pre></div></div>
+<p>로컬에서 도커 허브 로그인을 먼저 진행해야 합니다.</p>
+
+<h3 id="도커-이미지-태깅">도커 이미지 태깅</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker tag 도커이미지명 DockerHub사용자명/레포지토리명
+</code></pre></div></div>
+<p>도커 이미지에 도커 허브 레포지토리 주소 형식의 태그를 추가합니다.</p>
+
+<h3 id="도커-이미지-공유">도커 이미지 공유</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker push DockerHub사용자명/레포지토리명
+</code></pre></div></div>
+<p>태깅한 도커 이미지를 도커 허브 레포지토리에 업로드하여 다른 환경에서도 사용할 수 있도록 공유합니다.</p>
+
+<h3 id="공유된-도커-이미지-확인">공유된 도커 이미지 확인</h3>
+<p>Docker Hub 접속 &gt; My Hub &gt; Repositories 메뉴 &gt; 레포지토리 선택 &gt; Tags</p>
+
+<h3 id="다른-cpu-아키텍처용으로-도커-이미지-빌드-명령어">다른 CPU 아키텍처용으로 도커 이미지 빌드 명령어</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build --platform linux/amd64 -t DockerHub사용자명/레포지토리명 .
+</code></pre></div></div>
+<p>기본적으로 도커 이미지는 현재 빌드 환경의 CPU 아키텍처로 빌드되지만,<br />
+–platform 옵션을 사용하면 다른 CPU 아키텍처용 이미지로 빌드할 수도 있습니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories#op" class="page__taxonomy-item" rel="tag">리눅스 / 운영</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2026-09-01">2026-09-01</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">❮</a>
+    
+    
+      <a href="/test/2026-08-21-1" class="pagination--pager" title="부하테스트 결과 EC2 병목 지점을 개선하기 위한 EC2 서버 이중화 방법
+">❯</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">최신 글</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/test/2026-08-21-1" rel="permalink">부하테스트 결과 EC2 병목 지점을 개선하기 위한 EC2 서버 이중화 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-08-21T00:00:00+00:00">2026-08-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/aws/2026-08-21-1" rel="permalink">사용하지 않는 AWS 리소스 종료 및 AWS 비용 확인 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-08-21T00:00:00+00:00">2026-08-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/test/2026-08-19-1" rel="permalink">AWS EC2, RDS 모니터링 및 CloudWatch 대시보드 사용법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-08-19T00:00:00+00:00">2026-08-19</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/tool/2026-08-17-1" rel="permalink">관계형 및 NoSQL DB 전용 IDE DataGrip 사용법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-08-17T00:00:00+00:00">2026-08-17</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2026 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>
