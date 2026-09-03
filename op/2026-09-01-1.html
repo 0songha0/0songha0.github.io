@@ -52,7 +52,7 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Docker 튜토리얼 실습 및 도커 사용법 / 도커 허브 사용법 | 0songha0</title>
+<!-- begin _includes/seo.html --><title>Docker 개념 및 도커 핵심 기반 기술 | 0songha0</title>
 <meta name="description" content="송하영 개발 블로그">
 
 
@@ -65,7 +65,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="송하영 개발 블로그">
-<meta property="og:title" content="Docker 튜토리얼 실습 및 도커 사용법 / 도커 허브 사용법">
+<meta property="og:title" content="Docker 개념 및 도커 핵심 기반 기술">
 <meta property="og:url" content="https://0songha0.github.io/op/2026-09-01-1">
 
 
@@ -323,7 +323,7 @@
 
   <ul class="nav__items">
     <!-- <li>
-      <span class="nav__total">🌴 Total Posts: 272</span>
+      <span class="nav__total">🌴 Total Posts: 273</span>
     </li> -->
     
     
@@ -433,7 +433,7 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Docker 튜토리얼 실습 및 도커 사용법 / 도커 허브 사용법">
+    <meta itemprop="headline" content="Docker 개념 및 도커 핵심 기반 기술">
     <meta itemprop="description" content="">
     <meta itemprop="datePublished" content="2026-09-01T00:00:00+00:00">
     <meta itemprop="dateModified" content="2026-09-01T00:00:00+00:00">
@@ -441,7 +441,7 @@
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Docker 튜토리얼 실습 및 도커 사용법 / 도커 허브 사용법
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">Docker 개념 및 도커 핵심 기반 기술
 </h1>
           
 
@@ -468,105 +468,57 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
-              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Docker 튜토리얼 실습 및 도커 사용법 / 도커 허브 사용법</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Docker 개념 및 도커 핵심 기반 기술</h4></header> -->
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
-              <ul class="toc__menu"><li><a href="#도커-튜토리얼-실습">도커 튜토리얼 실습</a><ul><li><a href="#사전-환경-세팅">사전 환경 세팅</a></li><li><a href="#git-clone">Git Clone</a></li><li><a href="#docker-설정-파일-생성">Docker 설정 파일 생성</a></li><li><a href="#docker-이미지-빌드-명령어">Docker 이미지 빌드 명령어</a></li><li><a href="#docker-desktop-확인">Docker Desktop 확인</a></li><li><a href="#docker-컨테이너-실행">Docker 컨테이너 실행</a></li><li><a href="#실행-중인-docker-컨테이너-확인">실행 중인 Docker 컨테이너 확인</a></li><li><a href="#docker-컨테이너-종료">Docker 컨테이너 종료</a></li><li><a href="#docker-컨테이너-삭제">Docker 컨테이너 삭제</a></li></ul></li><li><a href="#도커-허브-사용법">도커 허브 사용법</a><ul><li><a href="#도커-허브-레포지토리-생성">도커 허브 레포지토리 생성</a></li><li><a href="#도커-허브-로그인">도커 허브 로그인</a></li><li><a href="#도커-이미지-태깅">도커 이미지 태깅</a></li><li><a href="#도커-이미지-공유">도커 이미지 공유</a></li><li><a href="#공유된-도커-이미지-확인">공유된 도커 이미지 확인</a></li><li><a href="#다른-cpu-아키텍처용으로-도커-이미지-빌드-명령어">다른 CPU 아키텍처용으로 도커 이미지 빌드 명령어</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#docker-개념">Docker 개념</a><ul><li><a href="#docker란">Docker란?</a></li><li><a href="#컨테이너화란">컨테이너화란?</a></li><li><a href="#vm-container-차이점">VM, Container 차이점</a></li></ul></li><li><a href="#docker-핵심-기반-기술">Docker 핵심 기반 기술</a><ul><li><a href="#cgroup">cgroup</a></li><li><a href="#namespace">Namespace</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h2 id="도커-튜토리얼-실습">도커 튜토리얼 실습</h2>
+        <h2 id="docker-개념">Docker 개념</h2>
 
-<p>Docker 공식 문서의 튜토리얼 실습을 따라하며 도커 기본 사용법을 익혀봅니다.</p>
+<h3 id="docker란">Docker란?</h3>
+<p>애플리케이션을 컨테이너화하고, 격리된 환경에서 실행할 수 있는 오픈 소스 컨테이너 플랫폼입니다.<br />
+도커 내부적으로 containerd라는 컨테이너 런타임이 사용됩니다.</p>
 
-<h3 id="사전-환경-세팅">사전 환경 세팅</h3>
-<p>윈도우 환경에 Docker Desktop, Git Client, VS Code​를 설치하고 실습을 시작해야 합니다.</p>
+<p>도커는 이미지라는 템플릿을 사용하여 컨테이너를 생성하고, 이를 저장하고 공유할 수 있는 레지스트리를 제공합니다.<br />
+도커 허브(Docker Hub)는 가장 잘 알려진 도커 레지스트리 중 하나입니다.</p>
 
-<h3 id="git-clone">Git Clone</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/docker/getting-started-app
-</code></pre></div></div>
-<p>todo 리스트를 관리하는 JavaScript 기반 애플리케이션을 GitHub 저장소에서 내려받을 수 있습니다.</p>
+<h3 id="컨테이너화란">컨테이너화란?</h3>
+<p>애플리케이션 실행에 필요한 코드와 라이브러리, 설정 파일 등 의존성을 하나의 컨테이너 이미지로<br />
+패키징하여 다양한 인프라 환경에서 일관되게 실행할 수 있도록 만드는 방식입니다.</p>
 
-<h3 id="docker-설정-파일-생성">Docker 설정 파일 생성</h3>
-<p>프로젝트 경로에 Dockerfile 파일을 생성하고 아래와 같이 입력합니다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># syntax=docker/dockerfile:1
+<p>컨테이너를 실행하기 위해서는 컨테이너 런타임이 필요합니다.<br />
+일반적으로 AWS EKS 등 쿠버네티스 환경에서는 containerd가 사용됩니다.</p>
 
-FROM node:lts-alpine
-WORKDIR /app
-COPY . .
-RUN yarn install --production
-CMD ["node", "src/index.js"]
-EXPOSE 3000
-</code></pre></div></div>
-<p>Node.js가 설치된 경량 Alpine 이미지를 베이스 이미지로 사용하여 도커 이미지를 구성하는 설정입니다.<br />
-컨테이너 내부 /app 폴더로 프로젝트를 복사하고, yarn 패키지 매니저로 운영에 필요한 패키지를 설치합니다.<br />
-컨테이너 실행 시 src/index.js를 실행하고, 애플리케이션이 3000번 포트를 사용함을 명시합니다.</p>
+<h3 id="vm-container-차이점">VM, Container 차이점</h3>
+<p>VM은 Hypervisor라는 소프트웨어가 CPU, 메모리, 디스크 등 하드웨어 자원을 가상화하고<br />
+각각의 VM이 독립된 OS를 격리된 환경에서 실행할 수 있도록 합니다.</p>
 
-<h3 id="docker-이미지-빌드-명령어">Docker 이미지 빌드 명령어</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build -t 도커이미지명 .
-</code></pre></div></div>
-<p>프로젝트 폴더 내 Dockerfile을 기반으로 도커 이미지를 빌드합니다.<br />
--t 옵션으로 도커 이미지명을 지정하고, 현재 폴더를 빌드 컨텍스트로 사용합니다.</p>
-
-<p>애플리케이션 코드 수정 후에는 도커 이미지를 다시 빌드하고,<br />
-기존 컨테이너 삭제 후 새 컨테이너를 실행하면 변경 사항을 반영할 수 있습니다.</p>
-
-<h3 id="docker-desktop-확인">Docker Desktop 확인</h3>
-<p>Docker Desktop에서 빌드된 도커 이미지를 확인할 수 있습니다.</p>
-
-<h3 id="docker-컨테이너-실행">Docker 컨테이너 실행</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -d -p 127.0.0.1:3000:3000 도커이미지명
-</code></pre></div></div>
-<p>Docker 컨테이너 런타임이 이미지를 기반으로 컨테이너를 생성하고,<br />
-격리된 환경에서 애플리케이션 프로세스를 백그라운드로 실행합니다.<br />
-호스트의 127.0.0.1:3000 포트를 컨테이너의 3000번 포트에 매핑하여<br />
-호스트 웹 브라우저에서 컨테이너 내부 애플리케이션에 접근할 수 있도록 합니다.</p>
-
-<h3 id="실행-중인-docker-컨테이너-확인">실행 중인 Docker 컨테이너 확인</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker ps
-</code></pre></div></div>
-<p>웹브라우저에서 http://localhost:3000로 접속해도 확인할 수 있습니다.</p>
-
-<h3 id="docker-컨테이너-종료">Docker 컨테이너 종료</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stop 컨테이너ID
-</code></pre></div></div>
-<p>docker ps 명령어로 확인된 실행 중 컨테이너ID를 입력하여 도커 컨테이너를 종료할 수 있습니다.</p>
-
-<h3 id="docker-컨테이너-삭제">Docker 컨테이너 삭제</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker rm -f 컨테이너ID
-</code></pre></div></div>
-<p>실행 중인 도커 컨테이너도 강제로 종료하고 삭제합니다.</p>
+<p>Container는 호스트 OS 커널을 공유하고, 컨테이너 엔진이 각 애플리케이션을 격리된 환경에서 실행합니다.<br />
+Windows, macOS에서는 Linux VM을 생성하고, Linux 커널을 이용해 Docker 컨테이너가 실행됩니다.</p>
 
 <hr />
 
-<h2 id="도커-허브-사용법">도커 허브 사용법</h2>
+<h2 id="docker-핵심-기반-기술">Docker 핵심 기반 기술</h2>
 
-<h3 id="도커-허브-레포지토리-생성">도커 허브 레포지토리 생성</h3>
-<p>Docker Hub 접속 &gt; My Hub &gt; Repositories 메뉴 &gt; Create a repository &gt; Namespace : DockerHub사용자명 확인 &gt; Repository Name : 레포지토리명 입력 &gt; Create</p>
+<p>도커 컨테이너 기술은 리눅스 운영체제 커널의 namespace, cgroup 기능을 사용하여<br />
+다른 프로세스에 영향을 주지 않도록 격리하고 CPU 시간, 메모리 등 자원 사용량을 제한 및 관리합니다.</p>
 
-<h3 id="도커-허브-로그인">도커 허브 로그인</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker login
-</code></pre></div></div>
-<p>로컬에서 도커 허브 로그인을 먼저 진행해야 합니다.</p>
+<h3 id="cgroup">cgroup</h3>
+<p>프로세스 그룹별로 CPU 시간, 메모리 등 자원 사용량을 제한하고 관리할 수 있는 리눅스 커널 기능입니다.</p>
 
-<h3 id="도커-이미지-태깅">도커 이미지 태깅</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker tag 도커이미지명 DockerHub사용자명/레포지토리명
-</code></pre></div></div>
-<p>도커 이미지에 도커 허브 레포지토리 주소 형식의 태그를 추가합니다.</p>
+<p>컨테이너별 자원 제한 설정 및 사용량은 /sys/fs/cgroup에 마운트된 cgroup 파일시스템에<br />
+파일 형태의 인터페이스로 표현되며, 리눅스 커널이 자원 사용을 제어하게 됩니다.</p>
 
-<h3 id="도커-이미지-공유">도커 이미지 공유</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker push DockerHub사용자명/레포지토리명
-</code></pre></div></div>
-<p>태깅한 도커 이미지를 도커 허브 레포지토리에 업로드하여 다른 환경에서도 사용할 수 있도록 공유합니다.</p>
+<h3 id="namespace">Namespace</h3>
+<p>프로세스가 볼 수 있는 시스템 자원을 서로 분리하는 리눅스 커널 기능입니다.</p>
 
-<h3 id="공유된-도커-이미지-확인">공유된 도커 이미지 확인</h3>
-<p>Docker Hub 접속 &gt; My Hub &gt; Repositories 메뉴 &gt; 레포지토리 선택 &gt; Tags</p>
+<p>도커는 각 컨테이너가 서로 독립된 환경처럼 동작하도록 별도의 Namespace를 사용하여<br />
+다른 컨테이너의 프로세스, 네트워크 자원, 파일시스템 등을 직접 볼 수 없도록 격리합니다.</p>
 
-<h3 id="다른-cpu-아키텍처용으로-도커-이미지-빌드-명령어">다른 CPU 아키텍처용으로 도커 이미지 빌드 명령어</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build --platform linux/amd64 -t DockerHub사용자명/레포지토리명 .
-</code></pre></div></div>
-<p>기본적으로 도커 이미지는 현재 빌드 환경의 CPU 아키텍처로 빌드되지만,<br />
-–platform 옵션을 사용하면 다른 CPU 아키텍처용 이미지로 빌드할 수도 있습니다.</p>
+<p>Network Namespace를 통해 각 컨테이너는 독립된 네트워크 스택을 가질 수 있습니다.</p>
+
 
         
       </section>
@@ -604,7 +556,8 @@ EXPOSE 3000
       
   <nav class="pagination">
     
-      <a href="#" class="pagination--pager disabled">❮</a>
+      <a href="/op/2026-09-02-1" class="pagination--pager" title="Docker 튜토리얼 실습 및 도커 사용법 / 도커 허브 사용법
+">❮</a>
     
     
       <a href="/test/2026-08-21-1" class="pagination--pager" title="부하테스트 결과 EC2 병목 지점을 개선하기 위한 EC2 서버 이중화 방법
@@ -623,6 +576,42 @@ EXPOSE 3000
     <div class="page__related">
       <h4 class="page__related-title">최신 글</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/op/2026-09-02-1" rel="permalink">Docker 튜토리얼 실습 및 도커 사용법 / 도커 허브 사용법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-09-02T00:00:00+00:00">2026-09-02</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
         
           
 
@@ -717,42 +706,6 @@ EXPOSE 3000
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
         <time datetime="2026-08-19T00:00:00+00:00">2026-08-19</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <!-- <p class="archive__item-excerpt" itemprop="description">
-</p> -->
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
-      
-        <a href="/tool/2026-08-17-1" rel="permalink">관계형 및 NoSQL DB 전용 IDE DataGrip 사용법
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
-        <time datetime="2026-08-17T00:00:00+00:00">2026-08-17</time>
       </span>
     
 

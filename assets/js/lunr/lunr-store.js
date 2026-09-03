@@ -156,7 +156,7 @@ var store = [{
         "teaser": null
       },{
         "title": "리눅스 네트워크 연결 테스트 명령어 / 네트워크 상태 확인",
-        "excerpt":"서버 IP 및 도메인 확인 서버 비공인 IP 확인 ifconfig 또는 ip addr eth0:의 inet 오른쪽에 내부 IP가 나옵니다. 서버 공인 IP 확인 curl ifconfig.me 인터넷 연결이 안 되는 서버에서는 Unknown Error가 나올 수 있습니다. 정상 응답 예시 211.188.35.IP[root@서버명 ~]# 해당 IP가 현재 서버의 공인 IP입니다. 보통 운영서버는 Private 망...","categories": ["op"],
+        "excerpt":"서버 IP 및 도메인 확인 서버 비공인 IP 확인 ifconfig 또는 ip addr 네트워크 인터페이스 (NIC) 목록 중 eth0:의 inet 오른쪽에 내부 IP가 나옵니다. 서버 공인 IP 확인 curl ifconfig.me 인터넷 연결이 안 되는 서버에서는 Unknown Error가 나올 수 있습니다. 정상 응답 예시 211.188.35.IP[root@서버명 ~]# 해당 IP가 현재 서버의 공인...","categories": ["op"],
         "tags": [],
         "url": "/op/2022-08-03-1",
         "teaser": null
@@ -1092,7 +1092,7 @@ var store = [{
         "teaser": null
       },{
         "title": "자주 보이는 프로젝트 기술스택 개념 정리",
-        "excerpt":"여러 기업 채용공고에 자주 보이는 기술스택 개념을 익히기 위해 정리한 글입니다. DevOps 기술 Docker 애플리케이션을 컨테이너화하고, 격리된 환경에서 실행할 수 있는 오픈 소스 컨테이너 플랫폼입니다. 도커 내부적으로 containerd라는 컨테이너 런타임이 사용됩니다. 도커는 이미지라는 템플릿을 사용하여 컨테이너를 생성하고, 이를 저장하고 공유할 수 있는 레지스트리를 제공합니다. 도커 허브(Docker Hub)는 가장 잘 알려진...","categories": ["it-tip"],
+        "excerpt":"여러 기업 채용공고에 자주 보이는 기술스택 개념을 익히기 위해 정리한 글입니다. DevOps 기술 Kubernetes 컨테이너화된 애플리케이션의 자동 배포, 스케일링, 자동 복구 기능을 제공하는 오픈 소스 플랫폼입니다. MSA(마이크로 서비스 아키텍처) 관리와 분산 시스템을 지원하기 위해 설계되었습니다. 클러스터 내부에서 서비스 간의 통신을 관리하고, 자동 로드 밸런싱을 수행하여 효율적인 네트워크 관리를 지원합니다. 서비스...","categories": ["it-tip"],
         "tags": [],
         "url": "/it-tip/2024-06-14-1",
         "teaser": null
@@ -1625,9 +1625,15 @@ var store = [{
         "url": "/test/2026-08-21-1",
         "teaser": null
       },{
-        "title": "Docker 튜토리얼 실습 및 도커 사용법 / 도커 허브 사용법",
-        "excerpt":"도커 튜토리얼 실습 Docker 공식 문서의 튜토리얼 실습을 따라하며 도커 기본 사용법을 익혀봅니다. 사전 환경 세팅 윈도우 환경에 Docker Desktop, Git Client, VS Code​를 설치하고 실습을 시작해야 합니다. Git Clone git clone https://github.com/docker/getting-started-app todo 리스트를 관리하는 JavaScript 기반 애플리케이션을 GitHub 저장소에서 내려받을 수 있습니다. Docker 설정 파일 생성 프로젝트 경로에...","categories": ["op"],
+        "title": "Docker 개념 및 도커 핵심 기반 기술",
+        "excerpt":"Docker 개념 Docker란? 애플리케이션을 컨테이너화하고, 격리된 환경에서 실행할 수 있는 오픈 소스 컨테이너 플랫폼입니다. 도커 내부적으로 containerd라는 컨테이너 런타임이 사용됩니다. 도커는 이미지라는 템플릿을 사용하여 컨테이너를 생성하고, 이를 저장하고 공유할 수 있는 레지스트리를 제공합니다. 도커 허브(Docker Hub)는 가장 잘 알려진 도커 레지스트리 중 하나입니다. 컨테이너화란? 애플리케이션 실행에 필요한 코드와 라이브러리, 설정...","categories": ["op"],
         "tags": [],
         "url": "/op/2026-09-01-1",
+        "teaser": null
+      },{
+        "title": "Docker 튜토리얼 실습 및 도커 사용법 / 도커 허브 사용법",
+        "excerpt":"도커 튜토리얼 실습 Docker 공식 문서의 튜토리얼 실습을 따라하며 도커 기본 사용법을 익혀봅니다. 사전 환경 세팅 윈도우 환경에 Docker Desktop, Git Client, VS Code​를 설치하고 실습을 시작해야 합니다. Git Clone git clone https://github.com/docker/getting-started-app todo 리스트를 관리하는 JavaScript 기반 애플리케이션을 GitHub 저장소에서 내려받을 수 있습니다. 도커 설정 파일 생성 프로젝트 경로에...","categories": ["op"],
+        "tags": [],
+        "url": "/op/2026-09-02-1",
         "teaser": null
       }]
