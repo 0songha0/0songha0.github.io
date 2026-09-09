@@ -1626,7 +1626,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Docker 개념 및 도커 핵심 기반 기술",
-        "excerpt":"Docker 개념 Docker란? 애플리케이션을 컨테이너화하고, 격리된 환경에서 실행할 수 있는 오픈 소스 컨테이너 플랫폼입니다. 도커 내부적으로 containerd라는 컨테이너 런타임이 사용됩니다. 도커는 이미지라는 템플릿을 사용하여 컨테이너를 생성하고, 이를 저장하고 공유할 수 있는 레지스트리를 제공합니다. 도커 허브(Docker Hub)는 가장 잘 알려진 도커 레지스트리 중 하나입니다. 컨테이너화란? 애플리케이션 실행에 필요한 코드와 라이브러리, 설정...","categories": ["op"],
+        "excerpt":"Docker 개념 Docker란? 애플리케이션을 컨테이너화하고, 격리된 환경에서 실행할 수 있는 오픈 소스 컨테이너 플랫폼입니다. 도커 내부적으로 containerd라는 컨테이너 런타임이 사용됩니다. ★ 도커는 이미지라는 읽기 전용 템플릿을 기반으로 컨테이너를 생성합니다. 컨테이너 이미지를 공유할 수 있는 레지스트리로 Docker Hub, Amazon ECR 등이 있습니다. 도커 이미지는 여러 개의 읽기 전용 레이어로 구성되며, 각...","categories": ["op"],
         "tags": [],
         "url": "/op/2026-09-01-1",
         "teaser": null
@@ -1635,5 +1635,11 @@ var store = [{
         "excerpt":"도커 튜토리얼 실습 Docker 공식 문서의 튜토리얼 실습을 따라하며 도커 기본 사용법을 익혀봅니다. 사전 환경 세팅 윈도우 환경에 Docker Desktop, Git Client, VS Code​를 설치하고 실습을 시작해야 합니다. Git Clone git clone https://github.com/docker/getting-started-app todo 리스트를 관리하는 JavaScript 기반 애플리케이션을 GitHub 저장소에서 내려받을 수 있습니다. 도커 설정 파일 생성 프로젝트 경로에...","categories": ["op"],
         "tags": [],
         "url": "/op/2026-09-02-1",
+        "teaser": null
+      },{
+        "title": "Docker 컨테이너 기반 GitHub Actions CI/CD 파이프라인 구축 방법",
+        "excerpt":"기존 서버 프로세스를 도커 컨테이너로 전환하는 과정입니다. 기존 서버 프로세스 도커 컨테이너 전환 도커 패키지 설치 sudo yum update -y sudo yum install docker -y 도커 서비스 시작 sudo service docker start 시스템 부팅 시 도커 자동 시작 설정 sudo systemctl enable docker 현재 사용자를 docker 그룹에 추가 sudo usermod...","categories": ["op"],
+        "tags": [],
+        "url": "/op/2026-09-03-1",
         "teaser": null
       }]
