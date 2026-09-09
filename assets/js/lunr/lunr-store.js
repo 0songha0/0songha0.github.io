@@ -1568,7 +1568,7 @@ var store = [{
         "title": "GitHub Actions 사용하여 CI/CD 구현 방법",
         "excerpt":"GitHub Actions를 사용하여 NestJS 프로젝트를 빌드 및 배포하는 과정을 작성하였습니다. 프로젝트 기술스택별로 패키지 관리 모듈, 의존성 및 빌드 결과물 위치가 달라서 변경이 필요합니다. GitHub Actions 사용하여 CI 구축 방법 GitHub 리포지토리에서 빌드, 테스트, 배포 등 CI/CD 파이프라인을 자동화할 수 있는 플랫폼입니다. CI/CD 작업을 수행할 Job과 Step을 정의한 워크플로는 .github/workflows 경로에...","categories": ["op"],
         "tags": [],
-        "url": "/op/2026-08-04-1",
+        "url": "/op/2026-08-07-1",
         "teaser": null
       },{
         "title": "간단한 AWS EC2 서버 생성 및 Node.js 기반 Express API 프로젝트 구축 방법",
