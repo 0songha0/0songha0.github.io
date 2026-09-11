@@ -1626,7 +1626,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Docker 개념 및 도커 핵심 기반 기술",
-        "excerpt":"Docker 개념 Docker란? 애플리케이션을 컨테이너화하고, 격리된 환경에서 실행할 수 있는 오픈 소스 컨테이너 플랫폼입니다. 도커 내부적으로 containerd라는 컨테이너 런타임이 사용됩니다. ★ 도커는 이미지라는 읽기 전용 템플릿을 기반으로 컨테이너를 생성합니다. 컨테이너 이미지를 공유할 수 있는 레지스트리로 Docker Hub, Amazon ECR 등이 있습니다. 도커 이미지는 여러 개의 읽기 전용 레이어로 구성되며, 각...","categories": ["op"],
+        "excerpt":"Docker 개념 Docker란? 애플리케이션을 컨테이너화하고, 격리된 환경에서 실행할 수 있는 오픈 소스 컨테이너 플랫폼입니다. 도커 내부적으로 containerd라는 컨테이너 런타임이 사용됩니다. ★ 도커는 이미지라는 읽기 전용 템플릿을 기반으로 컨테이너를 생성합니다. 컨테이너 이미지를 공유할 수 있는 레지스트리로 Docker Hub, Amazon ECR 등이 있습니다. 도커 이미지는 여러 개의 읽기 전용 레이어로 구성되며, 유니온...","categories": ["op"],
         "tags": [],
         "url": "/op/2026-09-01-1",
         "teaser": null
@@ -1641,5 +1641,11 @@ var store = [{
         "excerpt":"기존 서버 프로세스를 도커 컨테이너로 전환하는 과정입니다. 기존 서버 프로세스 도커 컨테이너 전환 도커 패키지 설치 sudo yum update -y sudo yum install docker -y 도커 서비스 시작 sudo service docker start 시스템 부팅 시 도커 자동 시작 설정 sudo systemctl enable docker 현재 사용자를 docker 그룹에 추가 sudo usermod...","categories": ["op"],
         "tags": [],
         "url": "/op/2026-09-03-1",
+        "teaser": null
+      },{
+        "title": "Docker Compose로 여러 도커 컨테이너 실행 및 최적화 방법",
+        "excerpt":"Docker Compose 기능을 이용하면, 여러 컨테이너를 하나로 묶어서 실행하고 관리할 수 있습니다. 멀티 컨테이너 별도 구성 방법 도커 네트워크 생성 docker network create 도커네트워크명 위 명령어를 실행하여 도커 네트워크를 생성합니다. MySQL 데이터베이스 컨테이너 실행 docker run -d \\ --network 도커네트워크명 --network-alias mysql \\ -v 호스트도커볼륨명:/var/lib/mysql \\ -e MYSQL_ROOT_PASSWORD=패스워드 \\ -e...","categories": ["op"],
+        "tags": [],
+        "url": "/op/2026-09-09-1",
         "teaser": null
       }]
