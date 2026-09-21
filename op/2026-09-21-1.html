@@ -1,0 +1,884 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>GitLab CI, Argo CD를 이용한 쿠버네티스 CI/CD 구축 개념 | 0songha0</title>
+<meta name="description" content="송하영 개발 블로그">
+
+
+  <meta name="author" content="0songha0">
+  
+  <meta property="article:author" content="0songha0">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="송하영 개발 블로그">
+<meta property="og:title" content="GitLab CI, Argo CD를 이용한 쿠버네티스 CI/CD 구축 개념">
+<meta property="og:url" content="https://0songha0.github.io/op/2026-09-21-1">
+
+
+  <meta property="og:description" content="송하영 개발 블로그">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-09-21T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2026-09-21T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://0songha0.github.io/op/2026-09-21-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "0songha0",
+      "url": "https://0songha0.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="송하영 개발 블로그 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- 목차 옆 아이콘, 글 폰트 등 -->
+<link rel="stylesheet" href="/assets/3rdparty/fontawesome-free-5.15.4-web/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="https://0songha0.github.io/assets/images/favicon/favicon.ico"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/assets/images/favicon/site.webmanifest"> -->
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="google-site-verification" content="LKDXdTbkqfYcDLaxd7-n3VyPtaYjoDXQ6axWfVew_VQ" />
+    <meta name="naver-site-verification" content="adf9ff31fdd5483be60c146ecf49f0bb5ffc89e7" />
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          송하영 개발 블로그
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/search">Search</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <!-- <span class="visually-hidden">Toggle menu</span> -->
+          <span class="visually-hidden">Categories</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="/">
+          <img src="/assets/images/hamster.png" alt="0songha0" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">0songha0</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">ALL</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!-- <label for="ac-toc">Toggle menu</label> -->
+  <label for="ac-toc">Categories</label>
+
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 280</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/plan-design-db"><span class="nav__sub-title">기획 / 설계 / DB</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/web-dev"><span class="nav__sub-title">Web 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/app-dev"><span class="nav__sub-title">App 개발</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/aws"><span class="nav__sub-title">AWS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/op"><span class="nav__sub-title">리눅스 / 운영</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/test"><span class="nav__sub-title">테스트</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/tool"><span class="nav__sub-title">윈도우 / Tool</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/python-java"><span class="nav__sub-title">Python / Java</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/network"><span class="nav__sub-title">네트워크 / 보안</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/elk"><span class="nav__sub-title">엘라스틱서치</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/kafka-socket"><span class="nav__sub-title">Kafka / Socket</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/it-tip"><span class="nav__sub-title">IT Tip</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="GitLab CI, Argo CD를 이용한 쿠버네티스 CI/CD 구축 개념">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2026-09-21T00:00:00+00:00">
+    <meta itemprop="dateModified" content="2026-09-21T00:00:00+00:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline" style="color: #fa6a02;">GitLab CI, Argo CD를 이용한 쿠버네티스 CI/CD 구축 개념
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-09-21T00:00:00+00:00">2026-09-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header> -->
+              <!-- <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> GitLab CI, Argo CD를 이용한 쿠버네티스 CI/CD 구축 개념</h4></header> -->
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i>목차</h4></header>
+              <ul class="toc__menu"><li><a href="#gitlab-ci를-이용한-ci-자동화">GitLab CI를 이용한 CI 자동화</a></li><li><a href="#쿠버네티스-배포-환경-구성">쿠버네티스 배포 환경 구성</a><ul><li><a href="#로컬-docker-aws-ecr-로그인">로컬 Docker AWS ECR 로그인</a></li><li><a href="#미니큐브-ecr-인증-정보-설정">미니큐브 ECR 인증 정보 설정</a></li><li><a href="#애드온-활성화">애드온 활성화</a></li><li><a href="#쿠버네티스-deployment-매니페스트-파일-생성">쿠버네티스 deployment 매니페스트 파일 생성</a></li><li><a href="#쿠버네티스에-애플리케이션-배포-테스트">쿠버네티스에 애플리케이션 배포 테스트</a></li></ul></li><li><a href="#argo-cd를-이용한-gitops-cd-자동화">Argo CD를 이용한 GitOps CD 자동화</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="gitlab-ci를-이용한-ci-자동화">GitLab CI를 이용한 CI 자동화</h2>
+
+<p>GitLab에 소스 코드를 Push하면 GitLab CI 파이프라인을 실행하여
+애플리케이션 빌드 및 테스트를 수행하고 Docker 이미지를 자동 생성합니다.</p>
+
+<p>생성된 Docker 이미지는 AWS ECR에 Push하여 저장하도록 합니다.</p>
+
+<p>GitLab CI를 이용해서 새로운 Docker 이미지가 생성되면,<br />
+Deployment 매니페스트의 이미지 태그를 새로운 버전으로 변경하고<br />
+해당 변경사항을 Git 저장소에 반영하도록 구성할 수 있습니다.</p>
+
+<hr />
+
+<h2 id="쿠버네티스-배포-환경-구성">쿠버네티스 배포 환경 구성</h2>
+
+<p>GitLab CI 파이프라인에서 Git Push를 트리거로 Docker 이미지를 빌드해 AWS ECR에 Push하면,<br />
+쿠버네티스 Deployment가 ECR 이미지를 사용하는 Pod를 배포할 수 있도록 환경을 구성해 보겠습니다.</p>
+
+<h3 id="로컬-docker-aws-ecr-로그인">로컬 Docker AWS ECR 로그인</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin AWS계정ID.dkr.ecr.ap-northeast-2.amazonaws.com
+</code></pre></div></div>
+<p>로컬 PC 도커가 AWS ECR Private 레지스트리에 접근할 수 있도록 인증합니다.</p>
+
+<h3 id="미니큐브-ecr-인증-정보-설정">미니큐브 ECR 인증 정보 설정</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minikube addons configure registry-creds
+</code></pre></div></div>
+<p>미니큐브 내부 쿠버네티스가 AWS ECR의 Private 이미지를 가져올 수 있도록 인증 정보를 설정합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Do you want to enable AWS Elastic Container Registry? [y/n]:
+</code></pre></div></div>
+<p>위와 같이 AWS ECR 인증 기능을 사용할 것인지 묻는 질문이 나오면 y를 입력하고,<br />
+AWS API에 접근할 때 사용하는 Access Key ID, AWS Secret Access Key를 차례로 입력합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(Optional) Enter AWS Session Token:
+</code></pre></div></div>
+<p>일반적인 IAM Access Key를 사용하는 경우 엔터를 눌러 넘어갑니다.<br />
+임시 자격 증명 사용 시에는 Session Token을 입력합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Enter AWS Region:
+</code></pre></div></div>
+<p>ap-northeast-2 (서울 리전) 을 입력합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Enter 12 digit AWS Account ID (Comma separated list):
+</code></pre></div></div>
+<p>AWS 계정 ID 12자리를 입력합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(Optional) Enter ARN of AWS role to assume:
+</code></pre></div></div>
+<p>AWS Role을 별도로 Assume하지 않는 경우, 엔터를 눌러 넘어갑니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Do you want to enable Google Container Registry? [y/n]:
+Do you want to enable Docker Registry? [y/n]:
+Do you want to enable Azure Container Registry? [y/n]:
+</code></pre></div></div>
+<p>AWS ECR만 사용하는 경우, 다른 Registry 항목에는 모두 n을 입력합니다.</p>
+
+<h3 id="애드온-활성화">애드온 활성화</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minikube addons enable registry-creds
+</code></pre></div></div>
+<p>인증 정보를 설정한 registry-creds 애드온을 활성화합니다.</p>
+
+<h3 id="쿠버네티스-deployment-매니페스트-파일-생성">쿠버네티스 deployment 매니페스트 파일 생성</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 애플리케이션명 # Deployment 이름 (생성되는 pod 이름 프리픽스)
+  labels:
+    app: 애플리케이션명 # Deployment 자체 라벨
+
+spec:
+  replicas: 3 # 유지할 pod 개수 (파드가 삭제되면 Deployment가 자동 생성하여 지정한 개수를 유지)
+  selector:
+    matchLabels:
+      app: 애플리케이션명 # Deployment가 관리할 Pod 라벨
+
+  template:
+    metadata:
+      labels:
+        app: 애플리케이션명 # 생성되는 Pod에 붙이는 라벨 (Deployment/Service selector와 매칭 필요)
+
+    spec:
+      containers:
+        - name: 애플리케이션명
+          image: 이미지명 (ECR URI 주소)
+          ports:
+            - containerPort: 3000
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+
+            limits:
+              cpu: "200m"
+              memory: "256Mi"
+</code></pre></div></div>
+<p>프로젝트폴더경로에 k8s 폴더를 만들고, deployment.yaml 파일을 생성합니다.<br />
+Deployment가 생성하는 Pod에서 사용할 컨테이너 이미지로 AWS ECR의 이미지 URI를 지정합니다.</p>
+
+<p>Pod가 생성될 때 쿠버네티스 큐블렛이 컨테이너 런타임에 컨테이너 실행을 요청하고,<br />
+필요한 경우 컨테이너 런타임이 이미지를 Pull하여 컨테이너를 실행합니다.</p>
+
+<h3 id="쿠버네티스에-애플리케이션-배포-테스트">쿠버네티스에 애플리케이션 배포 테스트</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply -f /프로젝트폴더경로/k8s/deployment.yaml
+</code></pre></div></div>
+<p>deployment.yaml에 정의한 Deployment 설정을 Kubernetes 클러스터에 적용합니다.</p>
+
+<p>Deployment가 지정한 수의 Pod를 생성하고 지속적으로 관리하며,<br />
+Deployment에 지정한 이미지를 기반으로 Pod 내부에서 컨테이너가 실행됩니다.</p>
+
+<hr />
+
+<h2 id="argo-cd를-이용한-gitops-cd-자동화">Argo CD를 이용한 GitOps CD 자동화</h2>
+
+<p>GitLab 등 Git 저장소에 Kubernetes Deployment 매니페스트 파일을 저장하여 관리합니다.</p>
+
+<p>Argo CD를 연동하고 Auto-Sync 기능을 활성화하면,<br />
+Git 저장소의 Deployment 매니페스트 변경사항을 감지하여<br />
+Kubernetes 클러스터에 자동으로 배포할 수 있습니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories#op" class="page__taxonomy-item" rel="tag">리눅스 / 운영</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2026-09-21">2026-09-21</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/op/2026-09-21-2" class="pagination--pager" title="쿠버네티스 패키지 매니저 Helm 사용 방법
+">❮</a>
+    
+    
+      <a href="/op/2026-09-17-1" class="pagination--pager" title="자주 사용하는 쿠버네티스 명령어 정리
+">❯</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">최신 글</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/op/2026-09-21-2" rel="permalink">쿠버네티스 패키지 매니저 Helm 사용 방법
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-09-21T00:00:00+00:00">2026-09-21</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/op/2026-09-17-1" rel="permalink">자주 사용하는 쿠버네티스 명령어 정리
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-09-17T00:00:00+00:00">2026-09-17</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/op/2026-09-12-1" rel="permalink">미니큐브로 쿠버네티스 컨테이너 오케스트레이션 실습
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-09-12T00:00:00+00:00">2026-09-12</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline" style="color: #FF6C02;">
+      
+        <a href="/op/2026-09-11-1" rel="permalink">컨테이너 오케스트레이션 핵심 기능 및 쿠버네티스 용어 정리
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true" style="padding-right: 3px;"></i>
+        <time datetime="2026-09-11T00:00:00+00:00">2026-09-11</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <!-- <p class="archive__item-excerpt" itemprop="description">
+</p> -->
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>ALL</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/categories">
+        <!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> -->Categories</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!--
+<div class="page__footer-copyright">&copy; 2026 0songha0. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+-->
+
+<div class="page__footer-copyright"><a href="https://0songha0.tistory.com" target="_blank">하영</a> 블로그 : 오늘도 행복한 하루 보내세요.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', '0songha0/0songha0.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

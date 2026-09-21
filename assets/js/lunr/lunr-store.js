@@ -1648,4 +1648,34 @@ var store = [{
         "tags": [],
         "url": "/op/2026-09-09-1",
         "teaser": null
+      },{
+        "title": "컨테이너 오케스트레이션 핵심 기능 및 쿠버네티스 용어 정리",
+        "excerpt":"컨테이너 오케스트레이션이란? 여러 컨테이너의 배포, 네트워킹, 확장, 상태 관리, 장애 복구 등을 자동화하는 기술입니다. 컨테이너 오케스트레이션 핵심 기능 ★ 비정상 컨테이너 감지 및 장애 발생 시 자동 재시작하거나 교체하여 복구하는 Self-healing 기능 트래픽이나 리소스 사용량에 따라 컨테이너 수를 조절하는 Auto-scaling 기능 다른 서비스 IP를 몰라도 서비스 이름으로 찾아 통신할 수...","categories": ["op"],
+        "tags": [],
+        "url": "/op/2026-09-11-1",
+        "teaser": null
+      },{
+        "title": "미니큐브로 쿠버네티스 컨테이너 오케스트레이션 실습",
+        "excerpt":"AWS EKS cluster를 생성하면 컨트롤 플레인을 관리형으로 구성해줍니다. 데이터 플레인은 Managed Node Group, EC2, Fargate 등을 이용해 별도로 구성합니다. EKS는 비용이 많이 발생하니 연습용 쿠버네티스 클러스터 미니큐브로 학습하는 것이 좋습니다. 쿠버네티스에서 제공하는 미니 큐브는 무료로 사용할 수 있는 로컬 쿠버네티스 환경입니다. 기본값으로 하나의 노드가 컨트롤 플레인 노드와 워커 노드 역할을...","categories": ["op"],
+        "tags": [],
+        "url": "/op/2026-09-12-1",
+        "teaser": null
+      },{
+        "title": "자주 사용하는 쿠버네티스 명령어 정리",
+        "excerpt":"쿠버네티스 명령어 네임스페이스 목록 확인 kubectl get namespaces 네임스페이스를 사용하면 Pod, Service, Deployment 등 쿠버네티스 리소스를 논리적으로 구분할 수 있습니다. 네임스페이스에 속한 Pod 목록 확인 kubectl get pods -n 네임스페이스명 네임스페이스에 속한 Pod 목록을 확인할 수 있습니다. kube-system 네임스페이스에는 kube-apiserver, kube-scheduler, kube-controller-manager, CoreDNS 등 쿠버네티스 시스템 관련 Pod들이 있습니다. k9s...","categories": ["op"],
+        "tags": [],
+        "url": "/op/2026-09-17-1",
+        "teaser": null
+      },{
+        "title": "GitLab CI, Argo CD를 이용한 쿠버네티스 CI/CD 구축 개념",
+        "excerpt":"GitLab CI를 이용한 CI 자동화 GitLab에 소스 코드를 Push하면 GitLab CI 파이프라인을 실행하여 애플리케이션 빌드 및 테스트를 수행하고 Docker 이미지를 자동 생성합니다. 생성된 Docker 이미지는 AWS ECR에 Push하여 저장하도록 합니다. GitLab CI를 이용해서 새로운 Docker 이미지가 생성되면, Deployment 매니페스트의 이미지 태그를 새로운 버전으로 변경하고 해당 변경사항을 Git 저장소에 반영하도록 구성할...","categories": ["op"],
+        "tags": [],
+        "url": "/op/2026-09-21-1",
+        "teaser": null
+      },{
+        "title": "쿠버네티스 패키지 매니저 Helm 사용 방법",
+        "excerpt":"Helm이란? 헬름은 다양한 쿠버네티스 리소스들의 YAML 설정을 Chart 형태로 묶어, 함께 배포하고 관리할 수 있도록 도와주는 쿠버네티스 패키지 매니저입니다. 윈도우 Helm 사용법 Helm CLI 설치 winget install Helm.Helm winget 패키지 매니저를 이용하여 Helm을 설치합니다. Helm 설치 확인 helm version 정상 설치되면 Helm 버전 정보가 출력됩니다. WordPress 차트를 위한 bitnami 레포지토리...","categories": ["op"],
+        "tags": [],
+        "url": "/op/2026-09-21-2",
+        "teaser": null
       }]
